@@ -1,6 +1,6 @@
 <?php
 /**
- * Blocks Initializer
+ * Enqueue assets
  *
  * Enqueue CSS/JS of all the blocks.
  *
@@ -11,8 +11,17 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class LLMS_Blocks_Assets() {
+/**
+ * Enqueue assets
+ */
+class LLMS_Blocks_Assets {
 
+	/**
+	 * Constructor
+	 *
+	 * @since   [version]
+	 * @version [version]
+	 */
 	public function __construct() {
 
 		add_action( 'enqueue_block_assets', 'block_assets' );
@@ -49,7 +58,7 @@ class LLMS_Blocks_Assets() {
 	 * @since   [version]
 	 * @version [version]
 	 */
-	function editor_assets() {
+	public function editor_assets() {
 
 		wp_enqueue_script(
 			'lifterlms_blocks-cgb-block-js',
@@ -62,7 +71,7 @@ class LLMS_Blocks_Assets() {
 		wp_enqueue_style(
 			'lifterlms_blocks-cgb-block-editor-css',
 			plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ),
-			array( 'wp-edit-blocks' )
+			array( 'wp-edit-blocks' ),
 			LLMS_BLOCKS_VERSION
 		);
 
