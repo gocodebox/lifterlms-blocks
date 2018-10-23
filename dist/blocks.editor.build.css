@@ -1,0 +1,34 @@
+/**
+ * Common SCSS
+ *
+ * Include variables and mixins that are used across the project.
+ *
+ * @since   [version]
+ * @version [version]
+ */
+/**
+ * Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ *
+ * @since   [version]
+ * @version [version]
+ */
+.wp-block-llms-course-progress {
+  display: -ms-flexbox;
+  display: flex; }
+  .wp-block-llms-course-progress .progress-bar {
+    background: #dedede;
+    border-radius: 4px;
+    -ms-flex: 1;
+        flex: 1;
+    margin: 10px 0;
+    overflow: hidden; }
+    .wp-block-llms-course-progress .progress-bar .progress--fill {
+      background: #2295ff;
+      height: 100%;
+      width: 50%; }
+  .wp-block-llms-course-progress span {
+    padding-left: 5px;
+    vertical-align: middle; }

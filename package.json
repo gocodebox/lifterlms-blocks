@@ -1,0 +1,12 @@
+{
+  "name": "lifterlms-blocks",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "cgb-scripts start",
+    "build": "cgb-scripts build",
+    "eject": "cgb-scripts eject"
+  },
+  "dependencies": {
+    "cgb-scripts": "1.11.0"
+  }
+}
