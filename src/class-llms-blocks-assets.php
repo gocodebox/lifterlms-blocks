@@ -24,8 +24,8 @@ class LLMS_Blocks_Assets {
 	 */
 	public function __construct() {
 
-		add_action( 'enqueue_block_assets', 'block_assets' );
-		add_action( 'enqueue_block_editor_assets', 'editor_assets' );
+		add_action( 'enqueue_block_assets', array( $this, 'block_assets' ) );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'editor_assets' ) );
 
 	}
 
