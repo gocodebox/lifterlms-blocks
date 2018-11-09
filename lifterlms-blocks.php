@@ -25,6 +25,8 @@ if ( ! defined( 'LLMS_BLOCKS_VERSION' ) ) {
 	define( 'LLMS_BLOCKS_VERSION', '0.0.1' );
 }
 
-// Initialize Assets.
+// Includes.
+require_once plugin_dir_path( __FILE__ ) . 'src/class-llms-blocks-abstract-block.php';
+require_once plugin_dir_path( __FILE__ ) . 'src/class-llms-blocks.php';
 require_once plugin_dir_path( __FILE__ ) . 'src/class-llms-blocks-assets.php';
 require_once plugin_dir_path( __FILE__ ) . 'src/class-llms-blocks-templates.php';

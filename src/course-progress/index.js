@@ -9,8 +9,10 @@
 import './style.scss';
 import './editor.scss';
 
-const { __ } = wp.i18n;
+const { __, setLocaleData } = wp.i18n;
 const { registerBlockType } = wp.blocks;
+
+// setLocaleData( window.LLMS.l10n.strings, 'lifterlms' );
 
 /**
  * Register: Course Progress Block
@@ -24,7 +26,10 @@ const { registerBlockType } = wp.blocks;
  */
 export default registerBlockType( 'llms/course-progress', {
 	title: __( 'Course Progress', 'lifterlms' ),
-	icon: 'chart-area',
+	icon: {
+		foreground: '#2295ff',
+		src: 'chart-area'
+	},
 	category: 'common', // common, formatting, layout widgets, embed. see https://wordpress.org/gutenberg/handbook/block-api/#category.
 	keywords: [
 		__( 'LifterLMS', 'lifterlms' ),

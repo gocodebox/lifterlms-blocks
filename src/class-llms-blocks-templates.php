@@ -22,10 +22,18 @@ class LLMS_Blocks_Post_Types {
 	 */
 	public function __construct() {
 
+		// Enable REST API for custom post types.
 		add_filter( 'lifterlms_register_post_type_course', array( $this, 'enable_rest' ), 5 );
 		add_filter( 'lifterlms_register_post_type_lesson', array( $this, 'enable_rest' ), 5 );
 		add_filter( 'lifterlms_register_post_type_membership', array( $this, 'enable_rest' ), 5 );
 
+		// Enable REST API for custom post taxonomies.
+		add_filter( 'lifterlms_register_taxonomy_args_course_cat', array( $this, 'enable_rest' ), 5 );
+		add_filter( 'lifterlms_register_taxonomy_args_course_tag', array( $this, 'enable_rest' ), 5 );
+		add_filter( 'lifterlms_register_taxonomy_args_course_track', array( $this, 'enable_rest' ), 5 );
+		add_filter( 'lifterlms_register_taxonomy_args_course_difficulty', array( $this, 'enable_rest' ), 5 );
+
+		// Setup course template.
 		add_filter( 'lifterlms_register_post_type_course', array( $this, 'add_course_template' ), 5 );
 
 	}
