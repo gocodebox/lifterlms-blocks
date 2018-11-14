@@ -12,12 +12,11 @@
  * @version [version]
  */
 
-// https://wordpress.org/gutenberg/handbook/extensibility/extending-blocks/
-// wp.hooks.addFilter( 'blocks.registerBlockType', 'arstarst', function( settings, name ) {
-// 	console.log( name, settings );
-// 	return settings;
-// } )
+// Import Blocks.
+import './blocks/course-information/'
+import './blocks/course-progress/'
 
-import './course-information/'
-import './course-progress/'
+// Add visibility filters.
+import './visibility/'
+
 

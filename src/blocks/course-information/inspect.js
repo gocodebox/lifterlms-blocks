@@ -11,7 +11,6 @@ const {
 	ToggleControl,
 } = wp.components
 
-
 export default class Inspector extends Component {
 
   render() {

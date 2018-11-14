@@ -18,6 +18,8 @@ class LLMS_Blocks {
 
 		add_action( 'init', array( $this, 'init' ) );
 
+		// add_filter( 'render_block', array( $this, 'maybe_filter_block' ), 10, 2 );
+
 	}
 
 	/**
@@ -29,8 +31,13 @@ class LLMS_Blocks {
 	 */
 	public function init() {
 
-		include 'course-information/class-llms-blocks-course-information-block.php';
+		include 'blocks/course-information/class-llms-blocks-course-information-block.php';
 
+	}
+
+	public function maybe_filter_block( $content, $block ) {
+		llms_log( $block );
+		return $content;
 	}
 
 }

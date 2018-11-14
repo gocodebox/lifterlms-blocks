@@ -94,10 +94,26 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 
 	}
 
+	/**
+	 * Filters the title of the course information headline per block settings.
+	 *
+	 * @param   string    $title default title
+	 * @return  void
+	 * @since   [version]
+	 * @version [version]
+	 */
 	public function filter_title( $title ) {
 		return $this->title;
 	}
 
+	/**
+	 * Filters the title headline element size of the course information headline per block settings.
+	 *
+	 * @param   string    $size default size
+	 * @return  void
+	 * @since   [version]
+	 * @version [version]
+	 */
 	public function filter_title_size( $size ) {
 		return $this->title_size;
 	}
@@ -123,6 +139,20 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 
 	}
 
+	/**
+	 * Meta field update authorization callback.
+	 *
+	 * @todo    finish this stub.
+	 * @param   [type]    $allowed   [description]
+	 * @param   [type]    $meta_key  [description]
+	 * @param   [type]    $object_id [description]
+	 * @param   [type]    $user_id   [description]
+	 * @param   [type]    $cap       [description]
+	 * @param   [type]    $caps      [description]
+	 * @return  [type]
+	 * @since   [version]
+	 * @version [version]
+	 */
 	public function meta_auth_callback( $allowed, $meta_key, $object_id, $user_id, $cap, $caps ) {
 		return true;
 	}

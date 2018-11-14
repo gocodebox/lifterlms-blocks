@@ -39,17 +39,18 @@ class LLMS_Blocks_Post_Types {
 	}
 
 	/**
-	 * Enable the rest API for custom post types
+	 * Enable the rest API for custom post types & taxonomies
 	 *
-	 * @param   array    $post_type post type data.
+	 * @param   array    $data post type / taxonomy data.
 	 * @return  array
 	 * @since   [version]
 	 * @version [version]
 	 */
-	public function enable_rest( $post_type ) {
+	public function enable_rest( $data ) {
 
-		$post_type['show_in_rest'] = true;
-		return $post_type;
+		$data['show_in_rest'] = true;
+
+		return $data;
 
 	}
 

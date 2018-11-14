@@ -73,7 +73,7 @@ export default registerBlockType( 'llms/course-progress', {
 	 */
 	save: function( props ) {
 		return (
-			<div>
+			<div className={ props.className }>
 				[lifterlms_course_progress]
 			</div>
 		);

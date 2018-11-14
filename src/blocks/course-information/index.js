@@ -1,5 +1,6 @@
 /**
- * BLOCK: Course Information
+ * Course Information Block.
+ *
  * @since   [version]
  * @version [version]
  */
