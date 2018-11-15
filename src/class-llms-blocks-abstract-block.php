@@ -105,8 +105,8 @@ abstract class LLMS_Blocks_Abstract_Block {
 		$this->add_hooks( $attributes, $content );
 
 		ob_start();
-		// EG: add_action( 'llms/name-block/render', 'my_func', 10, 1 )
-		do_action( sprintf( '%1$s-block/render', $this->get_block_id() ), $attributes, $content );
+		// EG: add_action( 'llms_name-block_render', 'my_func', 10, 1 ).
+		do_action( sprintf( '%1$s_block_render', $this->get_block_id() ), $attributes, $content );
 		$ret = ob_get_clean();
 
 		$this->remove_hooks();

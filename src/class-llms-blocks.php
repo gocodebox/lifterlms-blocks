@@ -1,11 +1,16 @@
 <?php
-defined( 'ABSPATH' ) || exit;
-
 /**
  * Serverside block compononent registration
  *
+ * @package  LifterLMS_Blocks/Classes
  * @since    [version]
  * @version  [version]
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * LLMS_Blocks class
  */
 class LLMS_Blocks {
 
@@ -19,7 +24,8 @@ class LLMS_Blocks {
 
 		add_action( 'init', array( $this, 'init' ) );
 
-		// add_filter( 'render_block', array( $this, 'maybe_filter_block' ), 10, 2 );
+		add_filter( 'render_block', array( $this, 'maybe_filter_block' ), 10, 2 );
+
 	}
 
 	/**
