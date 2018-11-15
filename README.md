@@ -5,6 +5,21 @@ WordPress Editor (Gutenberg) blocks for LifterLMS.
 
 ---
 
+## Installing
+
+**Via LifterLMS**
+
++ Since LifterLMS 3.24.0 this plugin is automatically included in the LifterLMS core codebase
+
+**Installation of the plugin via Zip file**
+
++ Download the zip file using the "Clone or download" button
++ On your WordPress admin panel navigate to Plugins -> Add New
++ Upload the zip file
++ Activate the plugin
+
+---
+
 This project was bootstrapped with [Create Guten Block](https://github.com/ahmadawais/create-guten-block).
 
 Below you will find some information on how to run scripts.
