@@ -45,9 +45,12 @@ abstract class LLMS_Blocks_Abstract_Block {
 
 		if ( $this->is_dynamic ) {
 
-			register_block_type( $this->get_block_id(), array(
-				'render_callback' => array( $this, 'render_callback' ),
-			) );
+			register_block_type(
+				$this->get_block_id(),
+				array(
+					'render_callback' => array( $this, 'render_callback' ),
+				)
+			);
 
 		}
 

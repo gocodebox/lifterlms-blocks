@@ -41,7 +41,7 @@ class LLMS_Blocks_Post_Types {
 	/**
 	 * Enable the rest API for custom post types & taxonomies
 	 *
-	 * @param   array    $data post type / taxonomy data.
+	 * @param   array $data post type / taxonomy data.
 	 * @return  array
 	 * @since   [version]
 	 * @version [version]
@@ -57,7 +57,7 @@ class LLMS_Blocks_Post_Types {
 	/**
 	 * Add an editor template for courses
 	 *
-	 * @param   array    $post_type post type data.
+	 * @param   array $post_type post type data.
 	 * @return  array
 	 * @since   [version]
 	 * @version [version]
@@ -65,9 +65,12 @@ class LLMS_Blocks_Post_Types {
 	public function add_course_template( $post_type ) {
 
 		$post_type['template'] = array(
-			array( 'core/paragraph', array(
-				'placeholder' => 'Add a short description of your course visible to all visitors...',
-			) ),
+			array(
+				'core/paragraph',
+				array(
+					'placeholder' => 'Add a short description of your course visible to all visitors...',
+				),
+			),
 			array( 'llms/course-progress' ),
 		);
 

@@ -41,15 +41,18 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 	 */
 	public function add_hooks( $attributes = array(), $content = '' ) {
 
-		$attributes = wp_parse_args( $attributes, array(
-			'title' => __( 'Course Information', 'lifterlms' ),
-			'title_size' => 'h3',
-			'show_length' => true,
-			'show_difficulty' => true,
-			'show_tracks' => true,
-			'show_cats' => true,
-			'show_tags' => true,
-		) );
+		$attributes = wp_parse_args(
+			$attributes,
+			array(
+				'title'           => __( 'Course Information', 'lifterlms' ),
+				'title_size'      => 'h3',
+				'show_length'     => true,
+				'show_difficulty' => true,
+				'show_tracks'     => true,
+				'show_cats'       => true,
+				'show_tags'       => true,
+			)
+		);
 
 		$show_wrappers = false;
 
@@ -80,7 +83,7 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 
 		if ( $show_wrappers ) {
 
-			$this->title = $attributes['title'];
+			$this->title      = $attributes['title'];
 			$this->title_size = $attributes['title_size'];
 
 			add_filter( 'llms_course_meta_info_title', array( $this, 'filter_title' ) );
@@ -97,7 +100,7 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 	/**
 	 * Filters the title of the course information headline per block settings.
 	 *
-	 * @param   string    $title default title
+	 * @param   string $title default title
 	 * @return  void
 	 * @since   [version]
 	 * @version [version]
@@ -109,7 +112,7 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 	/**
 	 * Filters the title headline element size of the course information headline per block settings.
 	 *
-	 * @param   string    $size default size
+	 * @param   string $size default size
 	 * @return  void
 	 * @since   [version]
 	 * @version [version]
@@ -129,13 +132,17 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 	 */
 	public function register_meta() {
 
-		register_meta( 'post', '_llms_length', array(
-			'sanitize_callback' => 'sanitize_text_field',
-			'auth_callback' => array( $this, 'meta_auth_callback' ),
-			'type' => 'string',
-			'single' => true,
-			'show_in_rest' => true,
-		) );
+		register_meta(
+			'post',
+			'_llms_length',
+			array(
+				'sanitize_callback' => 'sanitize_text_field',
+				'auth_callback'     => array( $this, 'meta_auth_callback' ),
+				'type'              => 'string',
+				'single'            => true,
+				'show_in_rest'      => true,
+			)
+		);
 
 	}
 
@@ -143,12 +150,12 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 	 * Meta field update authorization callback.
 	 *
 	 * @todo    finish this stub.
-	 * @param   [type]    $allowed   [description]
-	 * @param   [type]    $meta_key  [description]
-	 * @param   [type]    $object_id [description]
-	 * @param   [type]    $user_id   [description]
-	 * @param   [type]    $cap       [description]
-	 * @param   [type]    $caps      [description]
+	 * @param   [type] $allowed   [description]
+	 * @param   [type] $meta_key  [description]
+	 * @param   [type] $object_id [description]
+	 * @param   [type] $user_id   [description]
+	 * @param   [type] $cap       [description]
+	 * @param   [type] $caps      [description]
 	 * @return  [type]
 	 * @since   [version]
 	 * @version [version]

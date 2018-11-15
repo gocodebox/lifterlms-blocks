@@ -3,6 +3,7 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Serverside block compononent registration
+ *
  * @since    [version]
  * @version  [version]
  */
@@ -19,7 +20,6 @@ class LLMS_Blocks {
 		add_action( 'init', array( $this, 'init' ) );
 
 		// add_filter( 'render_block', array( $this, 'maybe_filter_block' ), 10, 2 );
-
 	}
 
 	/**
