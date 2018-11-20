@@ -24,12 +24,10 @@ class LLMS_Blocks {
 
 		add_action( 'init', array( $this, 'init' ) );
 
-		add_filter( 'render_block', array( $this, 'maybe_filter_block' ), 10, 2 );
-
 	}
 
 	/**
-	 * Register all blocks.
+	 * Register all blocks & components.
 	 *
 	 * @return  void
 	 * @since   [version]
@@ -37,13 +35,9 @@ class LLMS_Blocks {
 	 */
 	public function init() {
 
-		include 'blocks/course-information/class-llms-blocks-course-information-block.php';
+		require_once 'blocks/course-information/class-llms-blocks-course-information-block.php';
+		require_once 'visibility/class-llms-blocks-visibility.php';
 
-	}
-
-	public function maybe_filter_block( $content, $block ) {
-		llms_log( $block );
-		return $content;
 	}
 
 }
