@@ -1,5 +1,8 @@
 const { __ } = wp.i18n
-const { Component } = wp.element
+const {
+	Component,
+	Fragment,
+} = wp.element
 
 export default class Preview extends Component {
 
@@ -17,7 +20,7 @@ export default class Preview extends Component {
 		let link = currentPost._links[ 'wp:term' ].filter( term => term.taxonomy === taxonomy )[0].href;
 
 		wp.apiFetch( { url: wp.url.addQueryArgs( link, { per_page: -1 } ) } ).then( terms => {
-			this.setState( { terms: terms.map( term => term.name ) } );
+			this.setState( { terms: terms } );
 		} );
 
 	}
@@ -34,6 +37,25 @@ export default class Preview extends Component {
 		this.getTerms()
 	}
 
+	renderTerms( terms ) {
+		const last = terms.length - 1
+		return (
+			<Fragment>
+				{ !! terms ? terms.map( ( term, index ) => this.renderTerm( term, ( last === index ) ) ) : __( 'Loading...', 'lifterlms' ) }
+			</Fragment>
+		);
+	}
+
+	renderTerm( term, last ) {
+		console.log( last );
+		return (
+			<Fragment>
+				<a href={ term.link } target="_blank">{ term.name }</a>
+				{ last ? '' : ', ' }
+			</Fragment>
+		);
+	}
+
 	render() {
 
 		const { terms } = this.state
@@ -42,7 +64,7 @@ export default class Preview extends Component {
 		return (
 
 			Array.isArray( terms ) && ! terms.length ? '' : (
-				<li><strong>{ taxonomy_name }</strong>: { !! terms ? terms.join( ', ' ) : __( 'Loading...', 'lifterlms' ) }</li>
+				<li><strong>{ taxonomy_name }</strong>: { this.renderTerms( terms ) }</li>
 			)
 
 		)

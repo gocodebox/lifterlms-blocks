@@ -41,6 +41,15 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 	 */
 	public function add_hooks( $attributes = array(), $content = '' ) {
 
+		// Remove all the default LifterLMS template hooks.
+		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_meta_wrapper_start', 5 );
+		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_length', 10 );
+		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_difficulty', 20 );
+		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_course_tracks', 25 );
+		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_course_categories', 30 );
+		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_course_tags', 35 );
+		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_meta_wrapper_end', 50 );
+
 		$attributes = wp_parse_args(
 			$attributes,
 			array(
@@ -58,27 +67,27 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 
 		if ( $attributes['show_length'] ) {
 			$show_wrappers = true;
-			add_action( 'llms_course-information-block_render', 'lifterlms_template_single_length', 10 );
+			add_action( $this->get_render_hook(), 'lifterlms_template_single_length', 10 );
 		}
 
 		if ( $attributes['show_difficulty'] ) {
 			$show_wrappers = true;
-			add_action( 'llms_course-information-block_render', 'lifterlms_template_single_difficulty', 20 );
+			add_action( $this->get_render_hook(), 'lifterlms_template_single_difficulty', 20 );
 		}
 
 		if ( $attributes['show_tracks'] ) {
 			$show_wrappers = true;
-			add_action( 'llms_course-information-block_render', 'lifterlms_template_single_course_tracks', 25 );
+			add_action( $this->get_render_hook(), 'lifterlms_template_single_course_tracks', 25 );
 		}
 
 		if ( $attributes['show_cats'] ) {
 			$show_wrappers = true;
-			add_action( 'llms_course-information-block_render', 'lifterlms_template_single_course_categories', 30 );
+			add_action( $this->get_render_hook(), 'lifterlms_template_single_course_categories', 30 );
 		}
 
 		if ( $attributes['show_tags'] ) {
 			$show_wrappers = true;
-			add_action( 'llms_course-information-block_render', 'lifterlms_template_single_course_tags', 35 );
+			add_action( $this->get_render_hook(), 'lifterlms_template_single_course_tags', 35 );
 		}
 
 		if ( $show_wrappers ) {
@@ -89,9 +98,9 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 			add_filter( 'llms_course_meta_info_title', array( $this, 'filter_title' ) );
 			add_filter( 'llms_course_meta_info_title_size', array( $this, 'filter_title_size' ) );
 
-			add_action( 'llms_course-information-block_render', 'lifterlms_template_single_meta_wrapper_start', 5 );
-			// add_action( 'llms_course-information-block_render', 'lifterlms_template_course_author', 40 );
-			add_action( 'llms_course-information-block_render', 'lifterlms_template_single_meta_wrapper_end', 50 );
+			add_action( $this->get_render_hook(), 'lifterlms_template_single_meta_wrapper_start', 5 );
+			// add_action( $this->get_render_hook(), 'lifterlms_template_course_author', 40 );
+			add_action( $this->get_render_hook(), 'lifterlms_template_single_meta_wrapper_end', 50 );
 
 		}
 

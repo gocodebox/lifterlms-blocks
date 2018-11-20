@@ -82,6 +82,17 @@ abstract class LLMS_Blocks_Abstract_Block {
 	}
 
 	/**
+	 * Retrieve a string which can be used to render the block.
+	 *
+	 * @return  string
+	 * @since   [version]
+	 * @version [version]
+	 */
+	public function get_render_hook() {
+		return sprintf( '%1$s_%2$s_block_render', $this->vendor, $this->id );
+	}
+
+	/**
 	 * Removed hooks stub.
 	 * Extending classes can use this class to remove hooks attached to the render function action.
 	 *
@@ -105,13 +116,13 @@ abstract class LLMS_Blocks_Abstract_Block {
 		$this->add_hooks( $attributes, $content );
 
 		ob_start();
-		// EG: add_action( 'llms_name-block_render', 'my_func', 10, 1 ).
-		do_action( sprintf( '%1$s_block_render', $this->get_block_id() ), $attributes, $content );
+		do_action( $this->get_render_hook(), $attributes, $content );
 		$ret = ob_get_clean();
 
 		$this->remove_hooks();
 
 		return $ret;
+
 	}
 
 	/**
