@@ -1,13 +1,12 @@
 {
 	"package_name": "LifterLMS_Blocks",
 	"publish": {
-		"title": "LifterLMS Assignments",
+		"title": "LifterLMS Blocks",
 		"lifterlms": {
 			"make": {
 				"tags": [ 8 ]
 			}
 		},
-		"img": "https://lifterlms.com/wp-content/uploads/2018/03/lifterlms-assignments.png",
 		"svn": false
 	},
 	"slush": {
