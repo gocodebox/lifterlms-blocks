@@ -1,40 +1,48 @@
 {
-    "name": "lifterlms/lifterlms-blocks",
-    "description": "WordPress Editor (Gutenberg) blocks for LifterLMS.",
-    "type": "wordpress-plugin",
-    "license": "GPL-3.0",
-    "authors": [
-        {
-            "name": "Team LifterLMS",
-            "email": "team@lifterlms.com"
-        }
+  "name": "lifterlms/lifterlms-blocks",
+  "description": "WordPress Editor (Gutenberg) blocks for LifterLMS.",
+  "type": "wordpress-plugin",
+  "license": "GPL-3.0",
+  "authors": [
+    {
+      "name": "Team LifterLMS",
+      "email": "team@lifterlms.com"
+    }
+  ],
+  "require-dev": {
+    "lifterlms/lifterlms-cs": "dev-master",
+    "phpcompatibility/php-compatibility": "^9.0",
+    "roave/security-advisories": "dev-master",
+    "lifterlms/lifterlms-tests": "dev-master"
+  },
+  "minimum-stability": "dev",
+  "scripts": {
+    "config-cs": [
+      "\"vendor/bin/phpcs\" --config-set installed_paths ../../../vendor/wp-coding-standards/wpcs,../../../vendor/lifterlms/lifterlms-cs,../../../vendor/phpcompatibility/php-compatibility,../../../vendor/phpcompatibility/phpcompatibility-paragonie,../../../vendor/phpcompatibility/phpcompatibility-wp",
+      "\"vendor/bin/phpcs\" --config-set default_standard LifterLMS"
     ],
-    "require": {},
-    "require-dev": {
-        "lifterlms/lifterlms-cs": "dev-master",
-        "phpcompatibility/php-compatibility": "^9.0",
-        "roave/security-advisories": "dev-master"
-    },
-    "minimum-stability": "dev",
-    "scripts": {
-	    "config-cs": [
-	        "\"vendor/bin/phpcs\" --config-set installed_paths ../../../vendor/wp-coding-standards/wpcs,../../../vendor/lifterlms/lifterlms-cs,../../../vendor/phpcompatibility/php-compatibility,../../../vendor/phpcompatibility/phpcompatibility-paragonie,../../../vendor/phpcompatibility/phpcompatibility-wp",
-	        "\"vendor/bin/phpcs\" --config-set default_standard LifterLMS"
-	    ],
-	    "check-cs": [
-	        "\"vendor/bin/phpcs\" --colors"
-	    ],
-	    "check-cs-errors": [
-	        "\"vendor/bin/phpcs\" --colors --error-severity=1 --warning-severity=6"
-	    ],
-	    "fix-cs": [
-	        "\"vendor/bin/phpcbf\""
-	    ],
-	    "post-install-cmd": [
-	        "composer config-cs"
-	    ],
-	    "post-update-cmd": [
-	        "composer config-cs"
-	    ]
-	}
+    "check-cs": [
+      "\"vendor/bin/phpcs\" --colors"
+    ],
+    "check-cs-errors": [
+      "\"vendor/bin/phpcs\" --colors --error-severity=1 --warning-severity=6"
+    ],
+    "fix-cs": [
+      "\"vendor/bin/phpcbf\""
+    ],
+    "post-install-cmd": [
+      "composer config-cs"
+    ],
+    "post-update-cmd": [
+      "composer config-cs"
+    ],
+    "tests-install": [
+      "vendor/bin/llms-tests teardown llms_blocks_tests root password localhost",
+      "vendor/bin/llms-tests install llms_blocks_tests root password localhost 5.0-beta5",
+      "vendor/bin/llms-tests plugin lifterlms"
+    ],
+    "tests-run": [
+      "vendor/bin/phpunit"
+    ]
+  }
 }
