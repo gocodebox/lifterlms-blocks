@@ -16,7 +16,7 @@ const visibilityAttributes = ( settings, name ) => {
 		type: 'string',
 	}
 	settings.attributes.llms_visibility_in = {
-		default: 'any',
+		default: '',
 		type: 'string',
 	}
 	settings.attributes.llms_visibility_posts = {
