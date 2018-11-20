@@ -25,8 +25,28 @@ if ( ! defined( 'LLMS_BLOCKS_VERSION' ) ) {
 	define( 'LLMS_BLOCKS_VERSION', '0.0.1' );
 }
 
-// Includes.
-require_once plugin_dir_path( __FILE__ ) . 'src/class-llms-blocks-abstract-block.php';
-require_once plugin_dir_path( __FILE__ ) . 'src/class-llms-blocks.php';
-require_once plugin_dir_path( __FILE__ ) . 'src/class-llms-blocks-assets.php';
-require_once plugin_dir_path( __FILE__ ) . 'src/class-llms-blocks-post-types.php';
+/**
+ * @filter llms_load_blocks_plugin
+ *
+ * Allows disabling the blocks plugin & functionality.
+ *
+ * @since    [version]
+ * @version  [version]
+ *
+ * @param    boolean $load Whether the plugin should be loaded. Defaults to `true`.
+ */
+if ( ! apply_filters( 'llms_load_blocks_plugin', true ) ) {
+	return;
+}
+
+// Load only if Gutenberg exists.
+if ( function_exists( 'has_blocks' ) ) {
+
+	// Includes.
+	require_once plugin_dir_path( __FILE__ ) . 'src/class-llms-blocks-abstract-block.php';
+	require_once plugin_dir_path( __FILE__ ) . 'src/class-llms-blocks.php';
+	require_once plugin_dir_path( __FILE__ ) . 'src/class-llms-blocks-assets.php';
+	require_once plugin_dir_path( __FILE__ ) . 'src/class-llms-blocks-post-types.php';
+
+}
+
