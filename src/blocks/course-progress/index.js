@@ -10,9 +10,14 @@ import './style.scss';
 import './editor.scss';
 
 const { __, setLocaleData } = wp.i18n;
-const { registerBlockType } = wp.blocks;
 
 // setLocaleData( window.LLMS.l10n.strings, 'lifterlms' );
+
+/**
+ * Block Name
+ * @type {String}
+ */
+export const name = 'llms/course-progress';
 
 /**
  * Register: Course Progress Block
@@ -24,7 +29,7 @@ const { registerBlockType } = wp.blocks;
  * @since   [version]
  * @version [version]
  */
-export default registerBlockType( 'llms/course-progress', {
+export const settings = {
 	title: __( 'Course Progress', 'lifterlms' ),
 	icon: {
 		foreground: '#2295ff',
@@ -78,4 +83,4 @@ export default registerBlockType( 'llms/course-progress', {
 			</div>
 		);
 	},
-} );
+}

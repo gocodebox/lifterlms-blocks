@@ -1,3 +1,4 @@
+import assign from 'lodash/assign';
 import SearchPost from '../components/search-post'
 
 import './editor.scss'
@@ -18,6 +19,10 @@ const visibilityControls = createHigherOrderComponent( ( BlockEdit ) => {
 
 	return ( props ) => {
 
+		// const blockType = wp.blocks.getBlockType( props.name );
+		// console.log( blockType.attributes )
+		// console.log( props );
+
 		const { attributes: {
 			llms_visibility,
 			llms_visibility_in,
@@ -26,6 +31,10 @@ const visibilityControls = createHigherOrderComponent( ( BlockEdit ) => {
 		let {
 			llms_visibility_posts,
 		} = props.attributes;
+
+		if ( undefined === llms_visibility_posts ) {
+			llms_visibility_posts = '[]'
+		}
 
 		llms_visibility_posts = JSON.parse( llms_visibility_posts );
 		// console.log( llms_visibility_posts );

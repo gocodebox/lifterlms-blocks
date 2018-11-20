@@ -12,11 +12,36 @@
  * @version [version]
  */
 
+const { registerBlockType } = wp.blocks;
+
 // Import Blocks.
-import './blocks/course-information/'
-import './blocks/course-progress/'
+import * as information from './blocks/course-information/'
+import * as progress from './blocks/course-progress/'
 
 // Add visibility filters.
 import './visibility/'
+
+/**
+ * Register LifterLMS Core Blocks
+ * @return  void
+ * @since   [version]
+ * @version [version]
+ */
+const registerBlocks = () => {
+	[
+		information,
+		progress,
+	].forEach( ( block ) => {
+
+		const {
+			name,
+			settings,
+		} = block;
+
+		registerBlockType( name, settings );
+
+	} )
+}
+registerBlocks();
 
 

@@ -18,7 +18,12 @@ import PreviewTerms from './preview-terms'
 const { RichText } = wp.editor
 const { Fragment } = wp.element
 const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
+
+/**
+ * Block Name
+ * @type {String}
+ */
+export const name = 'llms/course-information'
 
 /**
  * Register: Course Information Block
@@ -26,11 +31,10 @@ const { registerBlockType } = wp.blocks;
  * @link https://wordpress.org/gutenberg/handbook/block-api/
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
- * @return {?WPBlock}          The block, if it has been successfully, registered; otherwise `undefined`.
  * @since   [version]
  * @version [version]
  */
-export default registerBlockType( 'llms/course-information', {
+export const settings = {
 	title: __( 'Course Information', 'lifterlms' ),
 	icon: {
 		foreground: '#2295ff',
@@ -169,4 +173,5 @@ export default registerBlockType( 'llms/course-information', {
 	save: () => {
 		return null;
 	}
-} );
+
+}
