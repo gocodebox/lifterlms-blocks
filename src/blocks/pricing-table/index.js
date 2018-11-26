@@ -1,5 +1,5 @@
 /**
- * BLOCK: llms/course-syllabus
+ * BLOCK: llms/pricing-table
  *
  * Renders a course syllabus
  */
@@ -11,13 +11,12 @@ const { __ } = wp.i18n;
 
 // Internal Deps.
 import './editor.scss';
-import Inspector from './inspect'
 
 /**
  * Block Name
  * @type {String}
  */
-export const name = 'llms/course-syllabus';
+export const name = 'llms/pricing-table';
 
 /**
  * Register Course Syllabus Block
@@ -31,17 +30,17 @@ export const name = 'llms/course-syllabus';
  */
 export const settings = {
 
-	title: __( 'Course Syllabus', 'lifterlms' ),
+	title: __( 'LifterLMS Pricing Table', 'lifterlms' ),
 	icon: {
 		foreground: '#2295ff',
-		src: 'grid-view'
+		src: 'cart',
 	},
 	category: 'common', // common, formatting, layout widgets, embed. see https://wordpress.org/gutenberg/handbook/block-api/#category.
 	keywords: [
 		__( 'LifterLMS', 'lifterlms' ),
 	],
 	attributes: {
-		course_id: {
+		post_id: {
 			type: 'int',
 			default: 0,
 		},
@@ -69,8 +68,6 @@ export const settings = {
 
 		return (
 			<Fragment>
-				<Inspector { ...{ attributes, setAttributes } } />
-
 				<ServerSideRender
 					block={ name }
 					attributes={ attributes }

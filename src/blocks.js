@@ -18,9 +18,10 @@ const { registerBlockType } = wp.blocks;
 import './sidebar/'
 
 // Import Blocks.
-import * as information from './blocks/course-information/'
-import * as progress from './blocks/course-progress/'
-import * as syllabus from './blocks/course-syllabus/'
+import * as courseInfo from './blocks/course-information/'
+import * as courseProgress from './blocks/course-progress/'
+import * as courseSyllabus from './blocks/course-syllabus/'
+import * as pricingTable from './blocks/pricing-table/'
 
 // Add visibility filters.
 import './visibility/'
@@ -33,9 +34,10 @@ import './visibility/'
  */
 const registerBlocks = () => {
 	[
-		information,
-		progress,
-		syllabus,
+		courseInfo,
+		courseProgress,
+		courseSyllabus,
+		pricingTable,
 	].forEach( ( block ) => {
 
 		const {

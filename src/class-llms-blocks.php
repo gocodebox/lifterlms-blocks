@@ -41,6 +41,7 @@ class LLMS_Blocks {
 		// Dynamic Blocks.
 		require_once 'blocks/course-information/class-llms-blocks-course-information-block.php';
 		require_once 'blocks/course-syllabus/class-llms-blocks-course-syllabus-block.php';
+		require_once 'blocks/pricing-table/class-llms-blocks-pricing-table-block.php';
 
 	}
 
