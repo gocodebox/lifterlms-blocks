@@ -24,6 +24,16 @@ class LLMS_Blocks {
 
 		add_action( 'init', array( $this, 'init' ) );
 
+		// Quick and dirty for webinar preview.
+		add_action( 'wp', function() {
+
+			if ( has_block( 'llms/course-continue-button' ) || has_block( 'llms/course-progress' ) ) {
+				remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_course_progress', 60 );
+			}
+
+		} );
+
+
 	}
 
 	/**

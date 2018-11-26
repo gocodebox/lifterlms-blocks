@@ -181,7 +181,8 @@
     height: 23px;
     width: 50px; }
   .llms-lesson-preview p {
-    margin-bottom: 0; }
+    margin-bottom: 0;
+    margin-top: 0; }
 /**
  * Common SCSS
  *

@@ -41,8 +41,6 @@ class LLMS_Blocks_Course_Syllabus_Block extends LLMS_Blocks_Abstract_Block {
 	 */
 	public function add_hooks( $attributes = array(), $content = '' ) {
 
-		llms_log( $_REQUEST );
-
 		// Remove all the default LifterLMS template hooks.
 		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_syllabus', 90 );
 

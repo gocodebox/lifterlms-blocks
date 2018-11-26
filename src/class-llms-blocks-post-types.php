@@ -73,7 +73,11 @@ class LLMS_Blocks_Post_Types {
 					'placeholder' => 'Add a short description of your course visible to all visitors...',
 				),
 			),
+			array( 'llms/course-information' ),
+			array( 'llms/pricing-table' ),
 			array( 'llms/course-progress' ),
+			array( 'llms/course-continue-button' ),
+			array( 'llms/course-syllabus' ),
 		);
 
 		return $post_type;

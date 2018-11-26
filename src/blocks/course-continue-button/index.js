@@ -73,7 +73,7 @@ export const settings = {
 	 */
 	save: function( props ) {
 		return (
-			<div className={ props.className }>
+			<div className={ props.className } style={ { textAlign: 'center' } }>
 				[lifterlms_course_continue_button]
 			</div>
 		);
