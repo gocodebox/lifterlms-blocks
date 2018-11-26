@@ -47,7 +47,6 @@ export default class Preview extends Component {
 	}
 
 	renderTerm( term, last ) {
-		console.log( last );
 		return (
 			<Fragment>
 				<a href={ term.link } target="_blank">{ term.name }</a>
