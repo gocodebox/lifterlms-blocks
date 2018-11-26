@@ -35,8 +35,12 @@ class LLMS_Blocks {
 	 */
 	public function init() {
 
-		require_once 'blocks/course-information/class-llms-blocks-course-information-block.php';
+		// Visibility Component.
 		require_once 'visibility/class-llms-blocks-visibility.php';
+
+		// Dynamic Blocks.
+		require_once 'blocks/course-information/class-llms-blocks-course-information-block.php';
+		require_once 'blocks/course-syllabus/class-llms-blocks-course-syllabus-block.php';
 
 	}
 

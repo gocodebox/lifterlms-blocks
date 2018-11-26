@@ -14,9 +14,13 @@
 
 const { registerBlockType } = wp.blocks;
 
+// Import Sidbear.
+import './sidebar/'
+
 // Import Blocks.
 import * as information from './blocks/course-information/'
 import * as progress from './blocks/course-progress/'
+import * as syllabus from './blocks/course-syllabus/'
 
 // Add visibility filters.
 import './visibility/'
@@ -31,6 +35,7 @@ const registerBlocks = () => {
 	[
 		information,
 		progress,
+		syllabus,
 	].forEach( ( block ) => {
 
 		const {
