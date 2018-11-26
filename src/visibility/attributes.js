@@ -7,8 +7,6 @@
 
 const visibilityAttributes = ( settings, name ) => {
 
-	console.log( name );
-
 	if ( ! settings.attributes ) {
 		settings.attributes = {};
 	}

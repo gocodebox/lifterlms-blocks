@@ -131,6 +131,7 @@ const visibilityControls = createHigherOrderComponent( ( BlockEdit ) => {
 
 							<div>
 								<SearchPost
+									isMulti
 									postType="course"
 									label={ __( 'Courses', 'lifterlms' ) }
 									placeholder={ __( 'Search by course title...', 'lifterlms' ) }
@@ -138,6 +139,7 @@ const visibilityControls = createHigherOrderComponent( ( BlockEdit ) => {
 									selected={ llms_visibility_posts.filter( post => 'course' === post.type ) }
 								/>
 								<SearchPost
+									isMulti
 									postType="llms_membership"
 									label={ __( 'Memberships', 'lifterlms' ) }
 									placeholder={ __( 'Search by memebership title...', 'lifterlms' ) }
