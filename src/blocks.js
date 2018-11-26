@@ -18,6 +18,7 @@ const { registerBlockType } = wp.blocks;
 import './sidebar/'
 
 // Import Blocks.
+import * as courseContinueButton from './blocks/course-continue-button/'
 import * as courseInfo from './blocks/course-information/'
 import * as courseProgress from './blocks/course-progress/'
 import * as courseSyllabus from './blocks/course-syllabus/'
@@ -34,6 +35,7 @@ import './visibility/'
  */
 const registerBlocks = () => {
 	[
+		courseContinueButton,
 		courseInfo,
 		courseProgress,
 		courseSyllabus,
