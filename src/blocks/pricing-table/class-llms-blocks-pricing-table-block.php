@@ -45,7 +45,7 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_pricing_table', 60 );
 		remove_action( 'lifterlms_single_membership_after_summary', 'lifterlms_template_pricing_table', 10 );
 
-		add_action( $this->get_render_hook(), 'lifterlms_template_pricing_table', 10 );
+		add_action( $this->get_render_hook(), array( $this, 'output' ), 10 );
 
 	}
 
@@ -66,6 +66,18 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 		) );
 	}
 
+	/**
+	 * Output the pricing table.
+	 * @param   array  $attributes Optional. Block attributes. Default empty array.
+	 * @return  void
+	 * @since   [version]
+	 * @version [version]
+	 */
+	public function output( $attributes = array() ) {
+
+		lifterlms_template_pricing_table( $attributes['post_id'] );
+
+	}
 }
 
 return new LLMS_Blocks_Pricing_Table_Block();
