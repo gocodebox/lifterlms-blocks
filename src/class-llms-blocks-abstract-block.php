@@ -48,6 +48,7 @@ abstract class LLMS_Blocks_Abstract_Block {
 			register_block_type(
 				$this->get_block_id(),
 				array(
+					'attributes' => $this->get_attributes(),
 					'render_callback' => array( $this, 'render_callback' ),
 				)
 			);
@@ -69,6 +70,18 @@ abstract class LLMS_Blocks_Abstract_Block {
 	 * @version [version]
 	 */
 	public function add_hooks( $attributes = array(), $content = '' ) {}
+
+	/**
+	 * Retrieve custom block attributes.
+	 * Necessary to override when creating ServerSideRender blocks.
+	 *
+	 * @return  array
+	 * @since   [version]
+	 * @version [version]
+	 */
+	public function get_attributes() {
+		return LLMS_Blocks_Visibility::get_attributes();
+	}
 
 	/**
 	 * Retrieve the ID/Name of the block.

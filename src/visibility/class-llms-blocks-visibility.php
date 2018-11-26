@@ -26,6 +26,31 @@ class LLMS_Blocks_Visibility {
 
 	}
 
+	/**
+	 * Retrieve visibility attributes.
+	 * Used when registering dynamic blocks via PHP.
+	 *
+	 * @return  array
+	 * @since   [version]
+	 * @version [version]
+	 */
+	public static function get_attributes() {
+		return array(
+			'llms_visibility' => array(
+				'default' => 'all',
+				'type' => 'string',
+			),
+			'llms_visibility_in' => array(
+				'default' => '',
+				'type' => 'string',
+			),
+			'llms_visibility_posts' => array(
+				'default' => '[]',
+				'type' => 'string',
+			),
+		);
+	}
+
 	private function get_enrollment_count_by_type( $uid, $type ) {
 
 		$found = 0;
