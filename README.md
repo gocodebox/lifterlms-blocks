@@ -9,7 +9,7 @@ WordPress Editor (Gutenberg) blocks for LifterLMS.
 
 **Via LifterLMS**
 
-+ Since LifterLMS 3.24.0 this plugin is automatically included in the LifterLMS core codebase
++ Since LifterLMS 3.25.0-alpha.1 this plugin is automatically included in the LifterLMS core codebase
 
 **Installation of the plugin via Zip file**
 
