@@ -36,6 +36,8 @@ class LLMS_Blocks_Post_Types {
 		// Setup course template.
 		add_filter( 'lifterlms_register_post_type_course', array( $this, 'add_course_template' ), 5 );
 
+		add_action( 'admin_footer', array( $this, 'editor_extra_data' ) );
+
 	}
 
 	/**
@@ -78,6 +80,24 @@ class LLMS_Blocks_Post_Types {
 
 	}
 
+
+	public function editor_extra_data() {
+
+		$screen = get_current_screen();
+		if ( 'course' === $screen->post_type && 'edit' === $screen->parent_base ) {
+			$course = llms_get_post( get_the_ID() );
+			$data = array(
+				'instructors' => $course->instructors()->get_instructors(),
+			);
+			?>
+			<script>
+				window.llms = window.llms || {};
+				window.llms.editorData = JSON.parse( '<?php echo json_encode( $data ); ?>' );
+			</script>
+			<?php
+		}
+
+	}
 
 }
 

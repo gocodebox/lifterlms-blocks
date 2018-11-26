@@ -7,6 +7,24 @@
  * @version [version]
  */
 /**
+ * Editor Styles for SearchPost Inpspector Component
+ *
+ * @since    [version]
+ * @version  [version]
+ */
+.edit-post-sidebar .components-panel__body .llms-search input,
+.edit-post-settings-sidebar__panel-block .components-panel__body .llms-search input {
+  -webkit-box-shadow: none;
+          box-shadow: none; }
+/**
+ * Common SCSS
+ *
+ * Include variables and mixins that are used across the project.
+ *
+ * @since   [version]
+ * @version [version]
+ */
+/**
  * Editor Styles
  *
  * CSS for just Backend enqueued after style.scss
@@ -62,14 +80,108 @@
  * @version [version]
  */
 /**
- * Editor Styles for SearchPost Inpspector Component
- *
- * @since    [version]
- * @version  [version]
+ * Block Editor Styles
  */
-.edit-post-settings-sidebar__panel-block .components-panel__body .llms-search-post input {
-  -webkit-box-shadow: none;
-          box-shadow: none; }
+.llms-syllabus-wrapper {
+  margin: 15px;
+  text-align: center; }
+  .llms-syllabus-wrapper .llms-section-title {
+    margin: 25px 0 0; }
+
+.llms-course-navigation:before, .llms-course-navigation:after {
+  content: " ";
+  display: table; }
+
+.llms-course-navigation:after {
+  clear: both; }
+
+.llms-course-navigation .llms-prev-lesson,
+.llms-course-navigation .llms-next-lesson,
+.llms-course-navigation .llms-back-to-course {
+  width: 49%; }
+
+.llms-course-navigation .llms-prev-lesson,
+.llms-course-navigation .llms-back-to-course {
+  float: left;
+  margin-right: 0.5%; }
+
+.llms-course-navigation .llms-next-lesson,
+.llms-course-navigation .llms-prev-lesson + .llms-back-to-course {
+  float: right;
+  margin-left: 0.5%; }
+
+.llms-lesson-preview {
+  display: inline-block;
+  margin-top: 15px;
+  max-width: 100%;
+  position: relative;
+  width: 480px; }
+  .llms-lesson-preview .llms-lesson-link {
+    background: #f1f1f1;
+    color: #212121;
+    display: block;
+    padding: 15px;
+    text-decoration: none; }
+    .llms-lesson-preview .llms-lesson-link:before, .llms-lesson-preview .llms-lesson-link:after {
+      content: " ";
+      display: table; }
+    .llms-lesson-preview .llms-lesson-link:after {
+      clear: both; }
+    .llms-lesson-preview .llms-lesson-link:hover {
+      background: #eaeaea; }
+    .llms-lesson-preview .llms-lesson-link:visited {
+      color: #212121; }
+  .llms-lesson-preview .llms-lesson-thumbnail {
+    margin-bottom: 10px; }
+    .llms-lesson-preview .llms-lesson-thumbnail img {
+      display: block;
+      width: 100%; }
+  .llms-lesson-preview .llms-pre-text {
+    text-align: left; }
+  .llms-lesson-preview .llms-lesson-title {
+    font-weight: 700;
+    margin: 0 auto 10px;
+    text-align: left; }
+    .llms-lesson-preview .llms-lesson-title:last-child {
+      margin-bottom: 0; }
+  .llms-lesson-preview .llms-lesson-excerpt {
+    text-align: left; }
+  .llms-lesson-preview .llms-main {
+    float: left;
+    width: 100%; }
+  .llms-lesson-preview .llms-extra {
+    float: right;
+    width: 15%; }
+  .llms-lesson-preview .llms-extra + .llms-main {
+    width: 85%; }
+  .llms-lesson-preview .llms-lesson-counter,
+  .llms-lesson-preview .llms-free-lesson-svg,
+  .llms-lesson-preview .llms-lesson-complete,
+  .llms-lesson-preview .llms-lesson-complete-placeholder {
+    display: block;
+    font-size: 32px;
+    margin-bottom: 15px; }
+  .llms-lesson-preview.is-free .llms-lesson-complete, .llms-lesson-preview.is-complete .llms-lesson-complete {
+    color: #2295ff; }
+  .llms-lesson-preview .llms-icon-free {
+    background: #2295ff;
+    border-radius: 4px;
+    color: #f1f1f1;
+    display: inline-block;
+    padding: 5px 6px 4px;
+    line-height: 1;
+    font-size: 14px; }
+  .llms-lesson-preview.is-incomplete .llms-lesson-complete {
+    color: #cacaca; }
+  .llms-lesson-preview .llms-lesson-counter {
+    font-size: 16px;
+    line-height: 1; }
+  .llms-lesson-preview .llms-free-lesson-svg {
+    fill: currentColor;
+    height: 23px;
+    width: 50px; }
+  .llms-lesson-preview p {
+    margin-bottom: 0; }
 /**
  * Common SCSS
  *
