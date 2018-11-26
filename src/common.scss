@@ -9,3 +9,14 @@
 
 $color-brand-blue: #2295ff;
 $color-grey-light: #dedede;
+
+@mixin clearfix() {
+	&:before,
+	&:after {
+	    content: " ";
+	    display: table;
+	}
+	&:after {
+	    clear: both;
+	}
+}
