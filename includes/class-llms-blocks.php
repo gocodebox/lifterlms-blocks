@@ -46,12 +46,12 @@ class LLMS_Blocks {
 	public function init() {
 
 		// Visibility Component.
-		require_once 'visibility/class-llms-blocks-visibility.php';
+		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-visibility.php';
 
 		// Dynamic Blocks.
-		require_once 'blocks/course-information/class-llms-blocks-course-information-block.php';
-		require_once 'blocks/course-syllabus/class-llms-blocks-course-syllabus-block.php';
-		require_once 'blocks/pricing-table/class-llms-blocks-pricing-table-block.php';
+		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-course-information-block.php';
+		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-course-syllabus-block.php';
+		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-pricing-table-block.php';
 
 	}
 

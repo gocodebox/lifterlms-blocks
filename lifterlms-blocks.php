@@ -42,11 +42,19 @@ if ( ! apply_filters( 'llms_load_blocks_plugin', true ) ) {
 // Load only if Gutenberg exists.
 if ( function_exists( 'has_blocks' ) ) {
 
+	if ( ! defined( 'LLMS_BLOCKS_PLUGIN_FILE' ) ) {
+		define( 'LLMS_BLOCKS_PLUGIN_FILE', __FILE__ );
+	}
+
+	if ( ! defined( 'LLMS_BLOCKS_PLUGIN_DIR' ) ) {
+		define( 'LLMS_BLOCKS_PLUGIN_DIR', dirname( LLMS_BLOCKS_PLUGIN_FILE ) );
+	}
+
 	// Includes.
-	require_once plugin_dir_path( __FILE__ ) . 'src/class-llms-blocks-abstract-block.php';
-	require_once plugin_dir_path( __FILE__ ) . 'src/class-llms-blocks.php';
-	require_once plugin_dir_path( __FILE__ ) . 'src/class-llms-blocks-assets.php';
-	require_once plugin_dir_path( __FILE__ ) . 'src/class-llms-blocks-post-types.php';
+	require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-abstract-block.php';
+	require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks.php';
+	require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-assets.php';
+	require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-types.php';
 
 }
 
