@@ -37,7 +37,7 @@ class LLMS_Blocks_Migrate {
 
 		global $pagenow, $post;
 
-		if ( 'post.php' !== $pagenow || ! is_object( $post ) || ! in_array( $post->post_type, array( 'course', 'lesson', 'llms_membership' ) ) ) {
+		if ( 'post.php' !== $pagenow || ! is_object( $post ) || ! in_array( $post->post_type, array( 'course', 'lesson' ) ) ) {
 			return;
 		}
 
@@ -101,6 +101,16 @@ class LLMS_Blocks_Migrate {
 
 			return ob_get_clean();
 
+		}
+
+		if ( 'lesson' === $post_type ) {
+			ob_start();
+
+			?><!-- wp:llms/lesson-progression /-->
+
+<!-- wp:llms/lesson-navigation /--><?php
+
+			return ob_get_clean();
 		}
 
 		return '';
