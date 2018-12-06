@@ -6,15 +6,13 @@ const { registerPlugin } = wp.plugins;
 import Instructors from './instructors'
 import LogomarkIcon from '../icons/logomark'
 
-
-const MyPlugin = ( wut ) => {
-	return (
-		<PluginSidebar>
-			Wutarst
-		</PluginSidebar>
-	);
-};
-
+// const MyPlugin = ( wut ) => {
+// 	return (
+// 		<PluginSidebar>
+// 			Wutarst
+// 		</PluginSidebar>
+// 	);
+// };
 
 // const { PluginPostStatusInfo } = wp.editPost;
 // const MyPlugin = () => {
@@ -25,8 +23,7 @@ const MyPlugin = ( wut ) => {
 // 	);
 // };
 
-const sidebar = ( wut ) => {
-	const currentPost = wp.data.select( 'core/editor' ).getCurrentPost()
+const sidebar = () => {
 	return (
 		<Fragment>
 			<PluginSidebarMoreMenuItem
@@ -39,14 +36,11 @@ const sidebar = ( wut ) => {
 				name="llms-sidebar"
 				title="LifterLMS"
 			>
-				<Instructors
-					currentPost={ currentPost }
-					/>
+				<Instructors />
 			</PluginSidebar>
 		</Fragment>
 	)
 }
-
 
 
 registerPlugin( 'llms', {

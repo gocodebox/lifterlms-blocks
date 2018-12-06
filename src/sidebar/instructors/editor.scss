@@ -1,0 +1,37 @@
+.llms-instructor-sort-helper {
+	border: 1px solid $color-grey-light;
+	height: auto !important;
+	padding: 10px;
+	z-index: 999;
+
+	.components-base-control:first-child {
+		margin-bottom: 0;
+		* {
+			margin-bottom: 0;
+		}
+	}
+	.components-base-control:nth-child( n+2 ) {
+		display:none;
+	}
+
+}
+
+.llms-instructor {
+
+	border-top: 1px solid $color-grey-light;
+	list-style-type: none;
+	padding-top: 10px;
+
+	.llms-drag-handle {
+		cursor: grab;
+	}
+
+	strong {
+		margin-left: 5px;
+		a {
+			margin-left: 5px;
+			font-size: 85%;
+		}
+	}
+
+}

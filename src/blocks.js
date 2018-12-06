@@ -22,6 +22,7 @@ import * as courseContinueButton from './blocks/course-continue-button/'
 import * as courseInfo from './blocks/course-information/'
 import * as courseProgress from './blocks/course-progress/'
 import * as courseSyllabus from './blocks/course-syllabus/'
+import * as instructors from './blocks/instructors/'
 import * as pricingTable from './blocks/pricing-table/'
 
 // Add visibility filters.
@@ -39,6 +40,7 @@ const registerBlocks = () => {
 		courseInfo,
 		courseProgress,
 		courseSyllabus,
+		instructors,
 		pricingTable,
 	].forEach( ( block ) => {
 
