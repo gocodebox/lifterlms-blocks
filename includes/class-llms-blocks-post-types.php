@@ -33,8 +33,9 @@ class LLMS_Blocks_Post_Types {
 		add_filter( 'lifterlms_register_taxonomy_args_course_track', array( $this, 'enable_rest' ), 5 );
 		add_filter( 'lifterlms_register_taxonomy_args_course_difficulty', array( $this, 'enable_rest' ), 5 );
 
-		// Setup course template.
+		// Setup block editor templates.
 		add_filter( 'lifterlms_register_post_type_course', array( $this, 'add_course_template' ), 5 );
+		add_filter( 'lifterlms_register_post_type_lesson', array( $this, 'add_lesson_template' ), 5 );
 
 	}
 
@@ -68,7 +69,7 @@ class LLMS_Blocks_Post_Types {
 			array(
 				'core/paragraph',
 				array(
-					'placeholder' => 'Add a short description of your course visible to all visitors...',
+					'placeholder' => __( 'Add a short description of your course visible to all visitors...', 'lifterlms' ),
 				),
 			),
 			array( 'llms/course-information' ),
@@ -77,6 +78,31 @@ class LLMS_Blocks_Post_Types {
 			array( 'llms/course-progress' ),
 			array( 'llms/course-continue-button' ),
 			array( 'llms/course-syllabus' ),
+		);
+
+		return $post_type;
+
+	}
+
+	/**
+	 * Add an editor template for lessons
+	 *
+	 * @param   array $post_type post type data.
+	 * @return  array
+	 * @since   [version]
+	 * @version [version]
+	 */
+	public function add_lesson_template( $post_type ) {
+
+		$post_type['template'] = array(
+			array(
+				'core/paragraph',
+				array(
+					'placeholder' => __( 'Add your lesson content...', 'lifterlms' ),
+				),
+			),
+			array( 'llms/lesson-progression' ),
+			array( 'llms/lesson-navigation' ),
 		);
 
 		return $post_type;
