@@ -22,7 +22,7 @@ class LLMS_Blocks {
 	 */
 	public function __construct() {
 
-		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'plugins_loaded', array( $this, 'init' ) );
 
 		// Quick and dirty for webinar preview.
 		add_action( 'wp', function() {
@@ -33,6 +33,7 @@ class LLMS_Blocks {
 
 		} );
 
+		add_action( 'add_meta_boxes', array( $this, 'remove_metaboxes' ), 999 );
 
 	}
 
@@ -45,13 +46,33 @@ class LLMS_Blocks {
 	 */
 	public function init() {
 
+		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-assets.php';
+		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-abstract-block.php';
+		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-instructors.php';
+		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-types.php';
+
 		// Visibility Component.
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-visibility.php';
 
 		// Dynamic Blocks.
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-course-information-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-course-syllabus-block.php';
+		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-instructors-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-pricing-table-block.php';
+
+	}
+
+	/**
+	 * Remove deprecated core metaboxes.
+	 *
+	 * @return  void
+	 * @since   [version]
+	 * @version [version]
+	 */
+	public function remove_metaboxes() {
+
+		remove_meta_box( 'llms-instructors', 'course', 'normal' );
+		remove_meta_box( 'llms-instructors', 'llms_membership', 'normal' );
 
 	}
 
