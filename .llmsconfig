@@ -4,7 +4,7 @@
 		"title": "LifterLMS Blocks",
 		"lifterlms": {
 			"make": {
-				"tags": [ 8 ]
+				"tags": [ 27 ]
 			}
 		},
 		"svn": false
@@ -16,7 +16,19 @@
 		"src": [ "./*.php", "./includes/**/*.php", "./tests/**/*.php", "./src/**/*.js" ]
 	},
 	"zip": {
-		"dest": "build/"
+		"dest": "build/",
+		"src": {
+			"default": [
+				"./**/*.*",
+				"!./src/**",
+				"!./deploy/**", "!./build/**", "!./tmp/**", "!./gulpfile.js/**", "!./gulpfile.js/**/*.*", "!./node_modules/**", "!./tests/**",
+				"!./**/*.yml",
+				"!./**/composer.json", "!./**/composer.lock",
+				"!./**/package.json", "!./**/package-lock.json",
+				"!./*.xml", "!./*.xml.dist",
+				"!./README.md"
+			]
+		}
 	}
 }
 
