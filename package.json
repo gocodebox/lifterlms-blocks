@@ -1,6 +1,13 @@
 {
   "name": "lifterlms-blocks",
   "version": "1.0.0",
+  "description": "blocks",
+  "author": "LifterLMS",
+  "homepage": "https://lifterlms.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gocodebox/lifterlms-blocks.git"
+  },
   "scripts": {
     "start": "cgb-scripts start",
     "build": "cgb-scripts build",
@@ -13,6 +20,7 @@
     "throttle-debounce": "^2.0.1"
   },
   "devDependencies": {
+    "gulp": "^4.0.0",
     "lifterlms-lib-tasks": "^3.0.8"
   }
 }
