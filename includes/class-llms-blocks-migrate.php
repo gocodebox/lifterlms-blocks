@@ -37,7 +37,7 @@ class LLMS_Blocks_Migrate {
 
 		global $pagenow, $post;
 
-		if ( 'post.php' !== $pagenow || ! is_object( $post ) || ! in_array( $post->post_type, array( 'course', 'lesson' ) ) ) {
+		if ( 'post.php' !== $pagenow || ! is_object( $post ) || ! in_array( $post->post_type, array( 'course', 'lesson' ), true ) ) {
 			return;
 		}
 

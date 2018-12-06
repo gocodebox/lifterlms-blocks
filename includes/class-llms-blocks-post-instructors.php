@@ -23,8 +23,7 @@ class LLMS_Blocks_Post_Instructors {
 	public function __construct() {
 
 		add_action( 'init', array( $this, 'register_meta' ) );
-		// add_action( 'save_post_course', array( $this, 'ensure_post_author' ), 25, 2 );
-		// add_action( 'save_post_llms_membership', array( $this, 'ensure_post_author' ), 25, 2 );
+
 	}
 
 	/**
@@ -33,28 +32,16 @@ class LLMS_Blocks_Post_Instructors {
 	 * @param   bool   $allowed   Is the update allowed.
 	 * @param   string $meta_key  Meta keyname.
 	 * @param   int    $object_id WP Object ID (post,comment,etc)...
-	 * @param   int    $user_id   WP User ID
-	 * @param   [type] $cap       [description]
-	 * @param   [type] $caps      [description]
-	 * @return  [type]
+	 * @param   int    $user_id   WP User ID.
+	 * @param   string $cap       requested capability.
+	 * @param   array  $caps      user capabilities.
+	 * @return  bool
 	 * @since   [version]
 	 * @version [version]
 	 */
 	public function authorize_callback( $allowed, $meta_key, $object_id, $user_id, $cap, $caps ) {
 		return user_can( $user_id, 'edit_post', $object_id );
 	}
-
-	// public function ensure_post_author( $post_id, $post ) {
-	// if ( ! $post->post_author ) {
-	// remove_action( 'save_post_' . $post->post_type, array( $this, 'ensure_post_author' ) );
-	// $obj = llms_get_post( $post );
-	// if ( $post ) {
-	// $instructors = $obj->instructors()->get_instructors( false );
-	// $obj->set( 'author', $instructors[0]['id'] );
-	// }
-	// add_action( 'save_post_' . $post->post_type, array( $this, 'ensure_post_author' ) );
-	// }
-	// }
 
 	/**
 	 * Retrieve instructor information for a give object.
@@ -116,7 +103,13 @@ class LLMS_Blocks_Post_Instructors {
 		return null;
 	}
 
-
+	/**
+	 * Register custom meta fields.
+	 *
+	 * @return  void
+	 * @since   [version]
+	 * @version [version]
+	 */
 	public function register_meta() {
 
 		foreach ( array( 'course', 'llms_membership' ) as $post_type ) {
@@ -128,7 +121,7 @@ class LLMS_Blocks_Post_Instructors {
 					'get_callback'    => array( $this, 'get_callback' ),
 					'update_callback' => array( $this, 'update_callback' ),
 					'schema'          => array(
-						'description' => __( 'Instructor fields.' ),
+						'description' => __( 'Instructor fields.', 'lifterlms' ),
 						'type'        => 'object',
 						'context'     => array( 'view', 'edit' ),
 						'properties'  => array(),
@@ -140,42 +133,8 @@ class LLMS_Blocks_Post_Instructors {
 				)
 			);
 
-			// register_meta( 'post', '_llms_instructors', array(
-			// 'type' => 'string',
-			// 'object_subtype' => 'course',
-			// 'single' => true,
-			// 'show_in_rest' => array(
-			// 'prepare_callback' => array( $this, 'prepare_value' ),
-			// ),
-			// 'auth_callback' => array( $this, 'authorize_callback' ),
-			// 'sanitize_callback' => array( $this, 'sanitize_callback' ),
-			// ) );
 		}
 
-	}
-
-	public function sanitize_callback( $meta_value, $meta_key ) {
-
-		if ( is_string( $meta_value ) ) {
-
-			$meta_value = json_decode( $meta_value, true );
-			$defaults   = llms_get_instructors_defaults();
-
-			foreach ( $meta_value as &$instructor ) {
-
-				$instructor = wp_parse_args( $instructor, $defaults );
-
-				// remove all non approved keys
-				foreach ( array_keys( $instructor ) as $key ) {
-
-					if ( ! in_array( $key, array_keys( $defaults ) ) ) {
-						unset( $instructor[ $key ] );
-					}
-				}
-			}
-		}
-
-		return $meta_value;
 	}
 
 }

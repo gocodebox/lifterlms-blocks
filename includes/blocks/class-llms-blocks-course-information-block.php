@@ -99,7 +99,6 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 			add_filter( 'llms_course_meta_info_title_size', array( $this, 'filter_title_size' ) );
 
 			add_action( $this->get_render_hook(), 'lifterlms_template_single_meta_wrapper_start', 5 );
-			// add_action( $this->get_render_hook(), 'lifterlms_template_course_author', 40 );
 			add_action( $this->get_render_hook(), 'lifterlms_template_single_meta_wrapper_end', 50 );
 
 		}
@@ -110,7 +109,7 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 	 * Filters the title of the course information headline per block settings.
 	 *
 	 * @param   string $title default title.
-	 * @return  void
+	 * @return  string
 	 * @since   [version]
 	 * @version [version]
 	 */
@@ -122,7 +121,7 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 	 * Filters the title headline element size of the course information headline per block settings.
 	 *
 	 * @param   string $size default size.
-	 * @return  void
+	 * @return  string
 	 * @since   [version]
 	 * @version [version]
 	 */
@@ -159,14 +158,13 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 	/**
 	 * Meta field update authorization callback.
 	 *
-	 * @todo    finish this stub.
-	 * @param   [type] $allowed   [description]
-	 * @param   [type] $meta_key  [description]
-	 * @param   [type] $object_id [description]
-	 * @param   [type] $user_id   [description]
-	 * @param   [type] $cap       [description]
-	 * @param   [type] $caps      [description]
-	 * @return  [type]
+	 * @param   bool   $allowed   Is the update allowed.
+	 * @param   string $meta_key  Meta keyname.
+	 * @param   int    $object_id WP Object ID (post,comment,etc)...
+	 * @param   int    $user_id   WP User ID.
+	 * @param   string $cap       requested capability.
+	 * @param   array  $caps      user capabilities.
+	 * @return  bool
 	 * @since   [version]
 	 * @version [version]
 	 */

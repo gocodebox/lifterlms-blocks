@@ -51,6 +51,15 @@ class LLMS_Blocks_Visibility {
 		);
 	}
 
+	/**
+	 * Get the number of enrollments for a user by post type.
+	 *
+	 * @param   int    $uid  WP_User ID.
+	 * @param   string $type post type.
+	 * @return  int
+	 * @since   [version]
+	 * @version [version]
+	 */
 	private function get_enrollment_count_by_type( $uid, $type ) {
 
 		$found   = 0;
@@ -72,6 +81,14 @@ class LLMS_Blocks_Visibility {
 
 	}
 
+	/**
+	 * Parse post ids from block visibility in attrs.
+	 *
+	 * @param   array $attrs block attrs.
+	 * @return  array
+	 * @since   [version]
+	 * @version [version]
+	 */
 	private function get_post_ids_from_block_attributes( $attrs ) {
 
 		$ids = array();
@@ -85,6 +102,15 @@ class LLMS_Blocks_Visibility {
 
 	}
 
+	/**
+	 * Filter block output.
+	 *
+	 * @param   string $content block inner content.
+	 * @param   array  $block   block info.
+	 * @return  string
+	 * @since   [version]
+	 * @version [version]
+	 */
 	public function maybe_filter_block( $content, $block ) {
 
 		// No attributes or no llms visibility settings (visibile to "all").
@@ -103,7 +129,7 @@ class LLMS_Blocks_Visibility {
 				$content = '';
 
 				// Checks for the "any" conditions.
-			} elseif ( in_array( $block['attrs']['llms_visibility_in'], array( 'any', 'any_course', 'any_membership' ) ) ) {
+			} elseif ( in_array( $block['attrs']['llms_visibility_in'], array( 'any', 'any_course', 'any_membership' ), true ) ) {
 
 				$found = $this->get_enrollment_count_by_type( $uid, $block['attrs']['llms_visibility_in'] );
 				if ( ! $found ) {
@@ -111,7 +137,7 @@ class LLMS_Blocks_Visibility {
 				}
 
 				// Checks for specifics.
-			} elseif ( in_array( $block['attrs']['llms_visibility_in'], array( 'this', 'list_all', 'list_any' ) ) ) {
+			} elseif ( in_array( $block['attrs']['llms_visibility_in'], array( 'this', 'list_all', 'list_any' ), true ) ) {
 
 				$relation = 'list_any' === $block['attrs']['llms_visibility_in'] ? 'any' : 'all'; // "this" becomes an "all" relationship
 				if ( ! llms_is_user_enrolled( $uid, $this->get_post_ids_from_block_attributes( $block['attrs'] ), $relation ) ) {
@@ -126,7 +152,7 @@ class LLMS_Blocks_Visibility {
 			if ( $uid ) {
 
 				// Checks for the "any" conditions.
-				if ( in_array( $block['attrs']['llms_visibility_in'], array( 'any', 'any_course', 'any_membership' ) ) ) {
+				if ( in_array( $block['attrs']['llms_visibility_in'], array( 'any', 'any_course', 'any_membership' ), true ) ) {
 
 					$found = $this->get_enrollment_count_by_type( $uid, $block['attrs']['llms_visibility_in'] );
 					if ( $found ) {
@@ -134,7 +160,7 @@ class LLMS_Blocks_Visibility {
 					}
 
 					// Checks for specifics.
-				} elseif ( in_array( $block['attrs']['llms_visibility_in'], array( 'this', 'list_all', 'list_any' ) ) ) {
+				} elseif ( in_array( $block['attrs']['llms_visibility_in'], array( 'this', 'list_all', 'list_any' ), true ) ) {
 
 					$relation = 'list_any' === $block['attrs']['llms_visibility_in'] ? 'any' : 'all'; // "this" becomes an "all" relationship
 					if ( llms_is_user_enrolled( $uid, $this->get_post_ids_from_block_attributes( $block['attrs'] ), $relation ) ) {
