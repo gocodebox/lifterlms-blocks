@@ -50,11 +50,8 @@ if ( function_exists( 'has_blocks' ) ) {
 		define( 'LLMS_BLOCKS_PLUGIN_DIR', dirname( LLMS_BLOCKS_PLUGIN_FILE ) );
 	}
 
-	// Includes.
-	require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-abstract-block.php';
+	// Start.
 	require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks.php';
-	require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-assets.php';
-	require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-types.php';
 
 }
 
