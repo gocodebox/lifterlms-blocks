@@ -3,8 +3,8 @@
  *
  * Renders instructor list
  *
- * @since   [version]
- * @version [version]
+ * @since   1.0.0
+ * @version 1.0.0
  */
 
 // WP Deps.
@@ -27,8 +27,8 @@ export const name = 'llms/instructors'
  * @param   {string}   name     Block name.
  * @param   {Object}   settings Block settings.
  * @return  {?WPBlock}          The block, if it has been successfully, registered; otherwise `undefined`.
- * @since   [version]
- * @version [version]
+ * @since   1.0.0
+ * @version 1.0.0
  */
 export const settings = {
 
@@ -61,8 +61,8 @@ export const settings = {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 * @param   {Object} props Block properties.
 	 * @return  {Function}
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	save: () => {
 		return null;

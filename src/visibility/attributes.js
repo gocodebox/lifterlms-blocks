@@ -1,8 +1,8 @@
 /**
  * Add visibility attributes to all blocks
  *
- * @since    [version]
- * @version  [version]
+ * @since    1.0.0
+ * @version  1.0.0
  */
 
 const visibilityAttributes = ( settings, name ) => {

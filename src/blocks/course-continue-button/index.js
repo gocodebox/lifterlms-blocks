@@ -23,8 +23,8 @@ export const name = 'llms/course-continue-button';
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully, registered; otherwise `undefined`.
- * @since   [version]
- * @version [version]
+ * @since   1.0.0
+ * @version 1.0.0
  */
 export const settings = {
 	title: __( 'Course Continue Button', 'lifterlms' ),
@@ -46,8 +46,8 @@ export const settings = {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 * @param   {Object} props Block properties.
 	 * @return  {Function}
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	edit: function( props ) {
 		return (
@@ -68,8 +68,8 @@ export const settings = {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 * @param   {Object} props Block properties.
 	 * @return  {Function}
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	save: function( props ) {
 		return (

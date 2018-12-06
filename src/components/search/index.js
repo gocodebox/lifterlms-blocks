@@ -3,8 +3,8 @@
  *
  * This component should not be used as is and instead should be exptended like "search-post" or "search-user"
  *
- * @since    [version]
- * @version  [version]
+ * @since    1.0.0
+ * @version  1.0.0
  */
 
 import { debounce } from 'throttle-debounce'

@@ -1,8 +1,8 @@
 /**
  * Block Attributes Inspector: Course Syllabus
  *
- * @since   [version]
- * @version [version]
+ * @since   1.0.0
+ * @version 1.0.0
  */
 
 // WP Deps.

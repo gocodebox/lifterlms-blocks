@@ -1,8 +1,8 @@
 /**
  * Course Information Block.
  *
- * @since   [version]
- * @version [version]
+ * @since   1.0.0
+ * @version 1.0.0
  */
 
 // Import CSS.
@@ -31,8 +31,8 @@ export const name = 'llms/course-information'
  * @link https://wordpress.org/gutenberg/handbook/block-api/
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
- * @since   [version]
- * @version [version]
+ * @since   1.0.0
+ * @version 1.0.0
  */
 export const settings = {
 	title: __( 'Course Information', 'lifterlms' ),
@@ -95,8 +95,8 @@ export const settings = {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 * @param   {Object} props Block properties.
 	 * @return  {Function}
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	edit: props => {
 
@@ -167,8 +167,8 @@ export const settings = {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 * @param   {Object} props Block properties.
 	 * @return  {Function}
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	save: () => {
 		return null;

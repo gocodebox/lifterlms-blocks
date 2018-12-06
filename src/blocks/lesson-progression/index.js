@@ -1,8 +1,8 @@
 /**
  * BLOCK: llms/lesson-progression
  *
- * @since   [version]
- * @version [version]
+ * @since   1.0.0
+ * @version 1.0.0
  */
 
 // WP Deps.
@@ -26,8 +26,8 @@ export const name = 'llms/lesson-progression';
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully, registered; otherwise `undefined`.
- * @since   [version]
- * @version [version]
+ * @since   1.0.0
+ * @version 1.0.0
  */
 export const settings = {
 	title: __( 'Lesson Progression (Mark Complete)', 'lifterlms' ),
@@ -49,8 +49,8 @@ export const settings = {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 * @param   {Object} props Block properties.
 	 * @return  {Function}
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	edit: function( props ) {
 		const currentPost = wp.data.select( 'core/editor' ).getCurrentPost()
@@ -81,8 +81,8 @@ export const settings = {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 * @param   {Object} props Block properties.
 	 * @return  {Function}
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	save: function( props ) {
 		return null

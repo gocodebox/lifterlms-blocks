@@ -8,8 +8,8 @@
  * All blocks should be included here since this is the file that
  * Webpack is compiling as the input file.
  *
- * @since   [version]
- * @version [version]
+ * @since   1.0.0
+ * @version 1.0.0
  */
 
 const { registerBlockType } = wp.blocks;
@@ -33,8 +33,8 @@ import './visibility/'
 /**
  * Register LifterLMS Core Blocks
  * @return  void
- * @since   [version]
- * @version [version]
+ * @since   1.0.0
+ * @version 1.0.0
  */
 const registerBlocks = () => {
 	[

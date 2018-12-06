@@ -13,7 +13,7 @@
 		"shortname": "Blocks"
 	},
 	"versioner": {
-		"custom": [ "src/**/*.js" ]
+		"src": [ "./*.php", "./includes/**/*.php", "./tests/**/*.php", "./src/**/*.js" ]
 	}
 }
 

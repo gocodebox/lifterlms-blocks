@@ -1,8 +1,8 @@
 /**
  * Inspector Control to search the WP database for posts
  *
- * @since    [version]
- * @version  [version]
+ * @since    1.0.0
+ * @version  1.0.0
  */
 
 import Search from '../search'
