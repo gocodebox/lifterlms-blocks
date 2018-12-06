@@ -6,7 +6,7 @@
  *
  * @package LifterLMS_Blocks/Main
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -35,13 +35,13 @@ class LLMS_Blocks_Assets {
 	 * `wp-blocks`: includes block type registration and related functions.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.0.1
 	 */
 	public function block_assets() {
 
 		wp_enqueue_style(
 			'llms-blocks',
-			plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ),
+			LLMS_BLOCKS_PLUGIN_DIR_URL . '/dist/blocks.style.build.css',
 			array( 'wp-blocks' ),
 			LLMS_BLOCKS_VERSION
 		);
@@ -56,13 +56,13 @@ class LLMS_Blocks_Assets {
 	 * `wp-i18n`: To internationalize the block's text.
 	 *
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.0.1
 	 */
 	public function editor_assets() {
 
 		wp_enqueue_script(
 			'lifterlms_blocks-cgb-block-js',
-			plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ),
+			LLMS_BLOCKS_PLUGIN_DIR_URL . '/dist/blocks.build.js',
 			array( 'wp-blocks', 'wp-i18n', 'wp-element' ),
 			LLMS_BLOCKS_VERSION,
 			true
@@ -70,7 +70,7 @@ class LLMS_Blocks_Assets {
 
 		wp_enqueue_style(
 			'lifterlms_blocks-cgb-block-editor-css',
-			plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ),
+			LLMS_BLOCKS_PLUGIN_DIR_URL . 'dist/blocks.editor.build.css',
 			array( 'wp-edit-blocks' ),
 			LLMS_BLOCKS_VERSION
 		);
