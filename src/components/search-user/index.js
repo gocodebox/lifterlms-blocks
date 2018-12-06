@@ -31,7 +31,7 @@ export default class SearchUser extends Search {
 			label: sprintf( '%s (ID# %d)', user.name, user.id ),
 			value: user.id,
 			id: user.id,
-			_link: user.link,
+			_user: user,
 		} ) )
 	)
 
