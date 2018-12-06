@@ -10,7 +10,6 @@
 		"svn": false
 	},
 	"slush": {
-		"includes_dir": "./src/",
 		"shortname": "Blocks"
 	}
 }
