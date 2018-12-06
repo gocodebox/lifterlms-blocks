@@ -36,7 +36,7 @@ export const settings = {
 		foreground: '#2295ff',
 		src: 'grid-view'
 	},
-	category: 'common', // common, formatting, layout widgets, embed. see https://wordpress.org/gutenberg/handbook/block-api/#category.
+	category: 'llms-blocks', // common, formatting, layout widgets, embed. see https://wordpress.org/gutenberg/handbook/block-api/#category.
 	keywords: [
 		__( 'LifterLMS', 'lifterlms' ),
 	],

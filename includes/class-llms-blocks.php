@@ -35,6 +35,28 @@ class LLMS_Blocks {
 
 		add_action( 'add_meta_boxes', array( $this, 'remove_metaboxes' ), 999 );
 
+		add_filter( 'block_categories', array( $this, 'add_block_category' ) );
+
+	}
+
+	/**
+	 * Add a custom LifterLMS block category
+	 *
+	 * @param   array    $categories existing block cats.
+	 * @return  array
+	 * @since   [version]
+	 * @version [version]
+	 */
+	public function add_block_category( $categories ) {
+		$categories[] = array(
+			'slug'  => 'llms-blocks',
+			'title' => sprintf(
+				// Translators: %1$s = LifterLMS.
+				__( '%1$s Blocks', 'lifterlms' ),
+				'LifterLMS'
+			),
+		);
+		return $categories;
 	}
 
 	/**

@@ -24,22 +24,25 @@ import LogomarkIcon from '../icons/logomark'
 // };
 
 const sidebar = () => {
-	return (
-		<Fragment>
-			<PluginSidebarMoreMenuItem
-				target="llms-sidebar"
-				icon={ <LogomarkIcon /> }
-			>
-				LifterLMS
-			</PluginSidebarMoreMenuItem>
-			<PluginSidebar
-				name="llms-sidebar"
-				title="LifterLMS"
-			>
-				<Instructors />
-			</PluginSidebar>
-		</Fragment>
-	)
+	if ( -1 !== [ 'course', 'llms_membership' ].indexOf( wp.data.select( 'core/editor' ).getCurrentPostType() ) ) {
+		return (
+			<Fragment>
+				<PluginSidebarMoreMenuItem
+					target="llms-sidebar"
+					icon={ <LogomarkIcon /> }
+				>
+					LifterLMS
+				</PluginSidebarMoreMenuItem>
+				<PluginSidebar
+					name="llms-sidebar"
+					title="LifterLMS"
+				>
+					<Instructors />
+				</PluginSidebar>
+			</Fragment>
+		)
+	}
+	return null;
 }
 
 
