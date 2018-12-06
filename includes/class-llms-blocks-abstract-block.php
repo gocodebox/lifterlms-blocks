@@ -95,6 +95,17 @@ abstract class LLMS_Blocks_Abstract_Block {
 	}
 
 	/**
+	 * Output a message when no HTML was rendered
+	 *
+	 * @return  string
+	 * @since   [version]
+	 * @version [version]
+	 */
+	public function get_empty_render_message() {
+		return __( 'No HTML was returned.', 'lifterlms' );
+	}
+
+	/**
 	 * Retrieve a string which can be used to render the block.
 	 *
 	 * @return  string
@@ -133,6 +144,10 @@ abstract class LLMS_Blocks_Abstract_Block {
 		$ret = ob_get_clean();
 
 		$this->remove_hooks();
+
+		if ( ! $ret ) {
+			$ret = $this->get_empty_render_message();
+		}
 
 		return $ret;
 
