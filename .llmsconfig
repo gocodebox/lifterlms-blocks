@@ -14,6 +14,9 @@
 	},
 	"versioner": {
 		"src": [ "./*.php", "./includes/**/*.php", "./tests/**/*.php", "./src/**/*.js" ]
+	},
+	"zip": {
+		"dest": "build/"
 	}
 }
 
