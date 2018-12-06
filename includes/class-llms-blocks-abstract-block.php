@@ -48,7 +48,7 @@ abstract class LLMS_Blocks_Abstract_Block {
 			register_block_type(
 				$this->get_block_id(),
 				array(
-					'attributes' => $this->get_attributes(),
+					'attributes'      => $this->get_attributes(),
 					'render_callback' => array( $this, 'render_callback' ),
 				)
 			);

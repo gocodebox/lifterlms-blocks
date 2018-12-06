@@ -57,12 +57,15 @@ class LLMS_Blocks_Lesson_Progression_Block extends LLMS_Blocks_Abstract_Block {
 	 * @version [version]
 	 */
 	public function get_attributes() {
-		return array_merge( parent::get_attributes(), array(
-			'post_id' => array(
-				'type' => 'int',
-				'default' => 0,
-			),
-		) );
+		return array_merge(
+			parent::get_attributes(),
+			array(
+				'post_id' => array(
+					'type'    => 'int',
+					'default' => 0,
+				),
+			)
+		);
 	}
 
 }

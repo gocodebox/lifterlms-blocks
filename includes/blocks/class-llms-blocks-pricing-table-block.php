@@ -58,17 +58,21 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 	 * @version [version]
 	 */
 	public function get_attributes() {
-		return array_merge( parent::get_attributes(), array(
-			'post_id' => array(
-				'type' => 'int',
-				'default' => 0,
-			),
-		) );
+		return array_merge(
+			parent::get_attributes(),
+			array(
+				'post_id' => array(
+					'type'    => 'int',
+					'default' => 0,
+				),
+			)
+		);
 	}
 
 	/**
 	 * Output the pricing table.
-	 * @param   array  $attributes Optional. Block attributes. Default empty array.
+	 *
+	 * @param   array $attributes Optional. Block attributes. Default empty array.
 	 * @return  void
 	 * @since   [version]
 	 * @version [version]

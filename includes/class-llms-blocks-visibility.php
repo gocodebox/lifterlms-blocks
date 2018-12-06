@@ -36,31 +36,31 @@ class LLMS_Blocks_Visibility {
 	 */
 	public static function get_attributes() {
 		return array(
-			'llms_visibility' => array(
+			'llms_visibility'       => array(
 				'default' => 'all',
-				'type' => 'string',
+				'type'    => 'string',
 			),
-			'llms_visibility_in' => array(
+			'llms_visibility_in'    => array(
 				'default' => '',
-				'type' => 'string',
+				'type'    => 'string',
 			),
 			'llms_visibility_posts' => array(
 				'default' => '[]',
-				'type' => 'string',
+				'type'    => 'string',
 			),
 		);
 	}
 
 	private function get_enrollment_count_by_type( $uid, $type ) {
 
-		$found = 0;
+		$found   = 0;
 		$student = llms_get_student( $uid );
 
 		$type = str_replace( 'any_', '', $type );
 
 		if ( 'course' === $type || 'membership' === $type ) {
 			$enrollments = $student->get_enrollments( $type, array( 'limit' => 1 ) );
-			$found = $enrollments['found'];
+			$found       = $enrollments['found'];
 		} elseif ( 'any' === $type ) {
 			$found = $this->get_enrollment_count_by_type( $uid, 'course' );
 			if ( ! $found ) {
@@ -102,7 +102,7 @@ class LLMS_Blocks_Visibility {
 
 				$content = '';
 
-			// Checks for the "any" conditions.
+				// Checks for the "any" conditions.
 			} elseif ( in_array( $block['attrs']['llms_visibility_in'], array( 'any', 'any_course', 'any_membership' ) ) ) {
 
 				$found = $this->get_enrollment_count_by_type( $uid, $block['attrs']['llms_visibility_in'] );
@@ -110,17 +110,16 @@ class LLMS_Blocks_Visibility {
 					$content = '';
 				}
 
-			// Checks for specifics.
+				// Checks for specifics.
 			} elseif ( in_array( $block['attrs']['llms_visibility_in'], array( 'this', 'list_all', 'list_any' ) ) ) {
 
 				$relation = 'list_any' === $block['attrs']['llms_visibility_in'] ? 'any' : 'all'; // "this" becomes an "all" relationship
 				if ( ! llms_is_user_enrolled( $uid, $this->get_post_ids_from_block_attributes( $block['attrs'] ), $relation ) ) {
 					$content = '';
 				}
-
 			}
 
-		// Not-Enrolled checks.
+			// Not-Enrolled checks.
 		} elseif ( 'not_enrolled' === $block['attrs']['llms_visibility'] && ! empty( $block['attrs']['llms_visibility_in'] ) ) {
 
 			// Only need to check logged in users.
@@ -134,18 +133,15 @@ class LLMS_Blocks_Visibility {
 						$content = '';
 					}
 
-				// Checks for specifics.
+					// Checks for specifics.
 				} elseif ( in_array( $block['attrs']['llms_visibility_in'], array( 'this', 'list_all', 'list_any' ) ) ) {
 
 					$relation = 'list_any' === $block['attrs']['llms_visibility_in'] ? 'any' : 'all'; // "this" becomes an "all" relationship
 					if ( llms_is_user_enrolled( $uid, $this->get_post_ids_from_block_attributes( $block['attrs'] ), $relation ) ) {
 						$content = '';
 					}
-
 				}
-
 			}
-
 		}
 
 		return apply_filters( 'llms_blocks_visibility_render_block', $content, $block );

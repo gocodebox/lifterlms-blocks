@@ -53,19 +53,26 @@ class LLMS_Blocks_Migrate {
 		}
 
 		// Update the post.
-		wp_update_post( array(
-			'ID' => $post->ID,
-			'post_content' => $post->post_content . "\r\r" . $this->get_template( $post->post_type ),
-			'meta_input' => array(
-				'_llms_blocks_migrated' => 'yes',
-			),
-		) );
+		wp_update_post(
+			array(
+				'ID'           => $post->ID,
+				'post_content' => $post->post_content . "\r\r" . $this->get_template( $post->post_type ),
+				'meta_input'   => array(
+					'_llms_blocks_migrated' => 'yes',
+				),
+			)
+		);
 
 		// Reload.
-		wp_safe_redirect( add_query_arg( array(
-			'post' => $post->ID,
-			'action' => 'edit',
-		), admin_url( 'post.php' ) ) );
+		wp_safe_redirect(
+			add_query_arg(
+				array(
+					'post'   => $post->ID,
+					'action' => 'edit',
+				),
+				admin_url( 'post.php' )
+			)
+		);
 		exit;
 
 	}
@@ -97,7 +104,8 @@ class LLMS_Blocks_Migrate {
 <div class="wp-block-llms-course-continue-button" style="text-align:center">[lifterlms_course_continue_button]</div>
 <!-- /wp:llms/course-continue-button -->
 
-<!-- wp:llms/course-syllabus /--><?php
+<!-- wp:llms/course-syllabus /-->
+			<?php
 
 			return ob_get_clean();
 
@@ -106,9 +114,11 @@ class LLMS_Blocks_Migrate {
 		if ( 'lesson' === $post_type ) {
 			ob_start();
 
-			?><!-- wp:llms/lesson-progression /-->
+			?>
+			<!-- wp:llms/lesson-progression /-->
 
-<!-- wp:llms/lesson-navigation /--><?php
+<!-- wp:llms/lesson-navigation /-->
+			<?php
 
 			return ob_get_clean();
 		}

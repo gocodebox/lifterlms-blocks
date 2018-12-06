@@ -25,13 +25,16 @@ class LLMS_Blocks {
 		add_action( 'plugins_loaded', array( $this, 'init' ) );
 
 		// Quick and dirty for webinar preview.
-		add_action( 'wp', function() {
+		add_action(
+			'wp',
+			function() {
 
-			if ( has_block( 'llms/course-continue-button' ) || has_block( 'llms/course-progress' ) ) {
-				remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_course_progress', 60 );
+				if ( has_block( 'llms/course-continue-button' ) || has_block( 'llms/course-progress' ) ) {
+					remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_course_progress', 60 );
+				}
+
 			}
-
-		} );
+		);
 
 		add_action( 'add_meta_boxes', array( $this, 'remove_metaboxes' ), 999 );
 
@@ -42,7 +45,7 @@ class LLMS_Blocks {
 	/**
 	 * Add a custom LifterLMS block category
 	 *
-	 * @param   array    $categories existing block cats.
+	 * @param   array $categories existing block cats.
 	 * @return  array
 	 * @since   [version]
 	 * @version [version]

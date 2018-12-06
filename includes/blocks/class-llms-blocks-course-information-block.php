@@ -145,7 +145,7 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 			'post',
 			'_llms_length',
 			array(
-				'object_subtype' => 'course',
+				'object_subtype'    => 'course',
 				'sanitize_callback' => 'sanitize_text_field',
 				'auth_callback'     => array( $this, 'meta_auth_callback' ),
 				'type'              => 'string',
