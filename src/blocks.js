@@ -23,6 +23,8 @@ import * as courseInfo from './blocks/course-information/'
 import * as courseProgress from './blocks/course-progress/'
 import * as courseSyllabus from './blocks/course-syllabus/'
 import * as instructors from './blocks/instructors/'
+import * as lessonNavigation from './blocks/lesson-navigation/'
+import * as lessonProgression from './blocks/lesson-progression/'
 import * as pricingTable from './blocks/pricing-table/'
 
 // Add visibility filters.
@@ -41,6 +43,8 @@ const registerBlocks = () => {
 		courseProgress,
 		courseSyllabus,
 		instructors,
+		lessonNavigation,
+		lessonProgression,
 		pricingTable,
 	].forEach( ( block ) => {
 
