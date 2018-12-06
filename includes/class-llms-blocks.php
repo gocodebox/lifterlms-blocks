@@ -3,8 +3,8 @@
  * Serverside block compononent registration
  *
  * @package  LifterLMS_Blocks/Classes
- * @since    [version]
- * @version  [version]
+ * @since    1.0.0
+ * @version  1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,8 +17,8 @@ class LLMS_Blocks {
 	/**
 	 * Constructor.
 	 *
-	 * @since    [version]
-	 * @version  [version]
+	 * @since    1.0.0
+	 * @version  1.0.0
 	 */
 	public function __construct() {
 
@@ -47,8 +47,8 @@ class LLMS_Blocks {
 	 *
 	 * @param   array $categories existing block cats.
 	 * @return  array
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function add_block_category( $categories ) {
 		$categories[] = array(
@@ -66,8 +66,8 @@ class LLMS_Blocks {
 	 * Register all blocks & components.
 	 *
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function init() {
 
@@ -94,8 +94,8 @@ class LLMS_Blocks {
 	 * Remove deprecated core metaboxes.
 	 *
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function remove_metaboxes() {
 

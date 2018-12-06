@@ -3,8 +3,8 @@
  * Handle post migration to the block editor.
  *
  * @package  LifterLMS_Blocks/Classes
- * @since    [version]
- * @version  [version]
+ * @since    1.0.0
+ * @version  1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,8 +17,8 @@ class LLMS_Blocks_Migrate {
 	/**
 	 * Constructor.
 	 *
-	 * @since    [version]
-	 * @version  [version]
+	 * @since    1.0.0
+	 * @version  1.0.0
 	 */
 	public function __construct() {
 
@@ -30,8 +30,8 @@ class LLMS_Blocks_Migrate {
 	 * Migrate posts created prior to the block editor to have default LifterLMS templates
 	 *
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function migrate_post() {
 
@@ -82,8 +82,8 @@ class LLMS_Blocks_Migrate {
 	 *
 	 * @param   string $post_type wp post type.
 	 * @return  string
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	private function get_template( $post_type ) {
 

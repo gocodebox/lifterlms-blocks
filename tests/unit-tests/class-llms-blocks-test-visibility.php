@@ -1,8 +1,8 @@
 <?php
 /**
  * Test LLMS_Blocks_Visibility class & methods.
- * @since   [version]
- * @version [version]
+ * @since   1.0.0
+ * @version 1.0.0
  */
 class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 
@@ -12,8 +12,8 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	 * @param   string    $expected    Expected content.
 	 * @param   string    $raw_content Raw content to check against, will be run through `the_content` filter.
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	private function assertPostContentEquals( $expected, $raw_content ) {
 
@@ -25,8 +25,8 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	 * Normalize content, used by assertPostContentEquals to strip spaces and newlines resulting from hidden content gaps.
 	 * @param   string    $content text/html content
 	 * @return  string
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	private function clean_content( $content ) {
 
@@ -40,8 +40,8 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	 * @param   array     $block_settings Desired block settings attributes.
 	 * @param   string    $post_type      Post type of the created post.
 	 * @return  WP_Post
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	private function create_post( $block_settings = array(), $post_type = 'post' ) {
 
@@ -69,8 +69,8 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	 *
 	 * @param   array    $array array of post data as returned by `get_posts_array()`.
 	 * @return  string
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	private function encode_posts_array( $array ) {
 		return str_replace( '"', '\u0022', json_encode( $array ) );
@@ -82,8 +82,8 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	 * @param   int       $count number of posts to create.
 	 * @param   string    $type  post type.
 	 * @return  array
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	private function get_posts_array( $count = 1, $type = 'course' ) {
 
@@ -114,8 +114,8 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	 * Test that blocks which have been run through `the_content` filter are displayed/hidden based on block visibility settings.
 	 *
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function test_visibility() {
 

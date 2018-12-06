@@ -8,7 +8,7 @@
  * Plugin Name: LifterLMS Blocks
  * Plugin URI: https://github.com/gocodebox/lifterlms-blocks
  * Description: WordPress Editor (Gutenberg) blocks for LifterLMS.
- * Version: 0.0.1
+ * Version: 1.0.0
  * Author: LifterLMS
  * Author URI: https://lifterlms.com/
  * License: GPLv3
@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
 
 // Define Constants.
 if ( ! defined( 'LLMS_BLOCKS_VERSION' ) ) {
-	define( 'LLMS_BLOCKS_VERSION', '0.0.1' );
+	define( 'LLMS_BLOCKS_VERSION', '1.0.0' );
 }
 
 /**
@@ -30,8 +30,8 @@ if ( ! defined( 'LLMS_BLOCKS_VERSION' ) ) {
  *
  * Allows disabling the blocks plugin & functionality.
  *
- * @since    [version]
- * @version  [version]
+ * @since    1.0.0
+ * @version  1.0.0
  *
  * @param    boolean $load Whether the plugin should be loaded. Defaults to `true`.
  */

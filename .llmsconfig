@@ -11,6 +11,9 @@
 	},
 	"slush": {
 		"shortname": "Blocks"
+	},
+	"versioner": {
+		"custom": [ "src/**/*.js" ]
 	}
 }
 

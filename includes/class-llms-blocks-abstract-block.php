@@ -3,8 +3,8 @@
  * Common block registration methods.
  *
  * @package  LifterLMS_Blocks/Abstracts
- * @since    [version]
- * @version  [version]
+ * @since    1.0.0
+ * @version  1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -38,8 +38,8 @@ abstract class LLMS_Blocks_Abstract_Block {
 	/**
 	 * Constructor.
 	 *
-	 * @since    [version]
-	 * @version  [version]
+	 * @since    1.0.0
+	 * @version  1.0.0
 	 */
 	public function __construct() {
 
@@ -66,8 +66,8 @@ abstract class LLMS_Blocks_Abstract_Block {
 	 * @param   array  $attributes Optional. Block attributes. Default empty array.
 	 * @param   string $content    Optional. Block content. Default empty string.
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function add_hooks( $attributes = array(), $content = '' ) {}
 
@@ -76,8 +76,8 @@ abstract class LLMS_Blocks_Abstract_Block {
 	 * Necessary to override when creating ServerSideRender blocks.
 	 *
 	 * @return  array
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function get_attributes() {
 		return LLMS_Blocks_Visibility::get_attributes();
@@ -87,8 +87,8 @@ abstract class LLMS_Blocks_Abstract_Block {
 	 * Retrieve the ID/Name of the block.
 	 *
 	 * @return  string
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function get_block_id() {
 		return sprintf( '%1$s/%2$s', $this->vendor, $this->id );
@@ -98,8 +98,8 @@ abstract class LLMS_Blocks_Abstract_Block {
 	 * Output a message when no HTML was rendered
 	 *
 	 * @return  string
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function get_empty_render_message() {
 		return __( 'No HTML was returned.', 'lifterlms' );
@@ -109,8 +109,8 @@ abstract class LLMS_Blocks_Abstract_Block {
 	 * Retrieve a string which can be used to render the block.
 	 *
 	 * @return  string
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function get_render_hook() {
 		return sprintf( '%1$s_%2$s_block_render', $this->vendor, $this->id );
@@ -121,8 +121,8 @@ abstract class LLMS_Blocks_Abstract_Block {
 	 * Extending classes can use this class to remove hooks attached to the render function action.
 	 *
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function remove_hooks() {}
 
@@ -132,8 +132,8 @@ abstract class LLMS_Blocks_Abstract_Block {
 	 * @param   array  $attributes Optional. Block attributes. Default empty array.
 	 * @param   string $content    Optional. Block content. Default empty string.
 	 * @return  string
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function render_callback( $attributes = array(), $content = '' ) {
 
@@ -159,8 +159,8 @@ abstract class LLMS_Blocks_Abstract_Block {
 	 * Called after registering the block type.
 	 *
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function register_meta() {}
 

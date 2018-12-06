@@ -3,8 +3,8 @@
  * Manage block visibilty options.
  *
  * @package  LifterLMS_Blocks/Classes
- * @since    [version]
- * @version  [version]
+ * @since    1.0.0
+ * @version  1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,8 +17,8 @@ class LLMS_Blocks_Visibility {
 	/**
 	 * Constructor.
 	 *
-	 * @since    [version]
-	 * @version  [version]
+	 * @since    1.0.0
+	 * @version  1.0.0
 	 */
 	public function __construct() {
 
@@ -31,8 +31,8 @@ class LLMS_Blocks_Visibility {
 	 * Used when registering dynamic blocks via PHP.
 	 *
 	 * @return  array
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public static function get_attributes() {
 		return array(
@@ -57,8 +57,8 @@ class LLMS_Blocks_Visibility {
 	 * @param   int    $uid  WP_User ID.
 	 * @param   string $type post type.
 	 * @return  int
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	private function get_enrollment_count_by_type( $uid, $type ) {
 
@@ -86,8 +86,8 @@ class LLMS_Blocks_Visibility {
 	 *
 	 * @param   array $attrs block attrs.
 	 * @return  array
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	private function get_post_ids_from_block_attributes( $attrs ) {
 
@@ -108,8 +108,8 @@ class LLMS_Blocks_Visibility {
 	 * @param   string $content block inner content.
 	 * @param   array  $block   block info.
 	 * @return  string
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function maybe_filter_block( $content, $block ) {
 

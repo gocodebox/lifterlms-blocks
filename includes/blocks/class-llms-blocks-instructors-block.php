@@ -3,8 +3,8 @@
  * Course syllabus block.
  *
  * @package  LifterLMS_Blocks/Abstracts
- * @since    [version]
- * @version  [version]
+ * @since    1.0.0
+ * @version  1.0.0
  *
  * @render_hook llms_course-syllabus-block_render
  */
@@ -36,8 +36,8 @@ class LLMS_Blocks_Instructors_Block extends LLMS_Blocks_Abstract_Block {
 	 * @param   array  $attributes Optional. Block attributes. Default empty array.
 	 * @param   string $content    Optional. Block content. Default empty string.
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function add_hooks( $attributes = array(), $content = '' ) {
 
@@ -53,8 +53,8 @@ class LLMS_Blocks_Instructors_Block extends LLMS_Blocks_Abstract_Block {
 	 * Necessary to override when creating ServerSideRender blocks.
 	 *
 	 * @return  array
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function get_attributes() {
 		return array_merge(
@@ -72,8 +72,8 @@ class LLMS_Blocks_Instructors_Block extends LLMS_Blocks_Abstract_Block {
 	 * Output a message when no HTML was rendered
 	 *
 	 * @return  string
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function get_empty_render_message() {
 		return __( 'No visibile instructors were found.', 'lifterlms' );

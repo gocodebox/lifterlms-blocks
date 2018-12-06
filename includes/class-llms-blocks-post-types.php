@@ -3,8 +3,8 @@
  * Modify LifterLMS Custom Post Types for Gutenberg editor compatibility
  *
  * @package  LifterLMS_Blocks/Main
- * @since    [version]
- * @version  [version]
+ * @since    1.0.0
+ * @version  1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,8 +17,8 @@ class LLMS_Blocks_Post_Types {
 	/**
 	 * Constructor
 	 *
-	 * @since    [version]
-	 * @version  [version]
+	 * @since    1.0.0
+	 * @version  1.0.0
 	 */
 	public function __construct() {
 
@@ -44,8 +44,8 @@ class LLMS_Blocks_Post_Types {
 	 *
 	 * @param   array $data post type / taxonomy data.
 	 * @return  array
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function enable_rest( $data ) {
 
@@ -60,8 +60,8 @@ class LLMS_Blocks_Post_Types {
 	 *
 	 * @param   array $post_type post type data.
 	 * @return  array
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function add_course_template( $post_type ) {
 
@@ -89,8 +89,8 @@ class LLMS_Blocks_Post_Types {
 	 *
 	 * @param   array $post_type post type data.
 	 * @return  array
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function add_lesson_template( $post_type ) {
 

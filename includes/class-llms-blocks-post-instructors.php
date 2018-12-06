@@ -3,8 +3,8 @@
  * Handle course & membership instructors data.
  *
  * @package  LifterLMS_Blocks/Classes
- * @since    [version]
- * @version  [version]
+ * @since    1.0.0
+ * @version  1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,8 +17,8 @@ class LLMS_Blocks_Post_Instructors {
 	/**
 	 * Constructor.
 	 *
-	 * @since    [version]
-	 * @version  [version]
+	 * @since    1.0.0
+	 * @version  1.0.0
 	 */
 	public function __construct() {
 
@@ -36,8 +36,8 @@ class LLMS_Blocks_Post_Instructors {
 	 * @param   string $cap       requested capability.
 	 * @param   array  $caps      user capabilities.
 	 * @return  bool
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function authorize_callback( $allowed, $meta_key, $object_id, $user_id, $cap, $caps ) {
 		return user_can( $user_id, 'edit_post', $object_id );
@@ -49,8 +49,8 @@ class LLMS_Blocks_Post_Instructors {
 	 * @param   array           $obj  Assoc. array of WP_Post data.
 	 * @param   WP_REST_Request $request   Full details about the request.
 	 * @return  WP_Error|object Object containing the meta values by name, otherwise WP_Error object.
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function get_callback( $obj, $request ) {
 
@@ -79,8 +79,8 @@ class LLMS_Blocks_Post_Instructors {
 	 * @param   WP_Post $object WP_Post object.
 	 * @param   string  $key    name of the field.
 	 * @return  null|WP_Error
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function update_callback( $value, $object, $key ) {
 
@@ -107,8 +107,8 @@ class LLMS_Blocks_Post_Instructors {
 	 * Register custom meta fields.
 	 *
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function register_meta() {
 

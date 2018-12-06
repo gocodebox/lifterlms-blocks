@@ -5,8 +5,8 @@
  * Enqueue CSS/JS of all the blocks.
  *
  * @package LifterLMS_Blocks/Main
- * @since   [version]
- * @version [version]
+ * @since   1.0.0
+ * @version 1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -19,8 +19,8 @@ class LLMS_Blocks_Assets {
 	/**
 	 * Constructor
 	 *
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function __construct() {
 
@@ -34,8 +34,8 @@ class LLMS_Blocks_Assets {
 	 *
 	 * `wp-blocks`: includes block type registration and related functions.
 	 *
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function block_assets() {
 
@@ -55,8 +55,8 @@ class LLMS_Blocks_Assets {
 	 * `wp-element`: includes the WordPress Element abstraction for describing the structure of your blocks.
 	 * `wp-i18n`: To internationalize the block's text.
 	 *
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function editor_assets() {
 

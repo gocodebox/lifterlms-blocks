@@ -3,8 +3,8 @@
  * Course information block.
  *
  * @package  LifterLMS_Blocks/Abstracts
- * @since    [version]
- * @version  [version]
+ * @since    1.0.0
+ * @version  1.0.0
  *
  * @render_hook llms_course-information-block_render
  */
@@ -36,8 +36,8 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 	 * @param   array  $attributes Optional. Block attributes. Default empty array.
 	 * @param   string $content    Optional. Block content. Default empty string.
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function add_hooks( $attributes = array(), $content = '' ) {
 
@@ -110,8 +110,8 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 	 *
 	 * @param   string $title default title.
 	 * @return  string
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function filter_title( $title ) {
 		return $this->title;
@@ -122,8 +122,8 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 	 *
 	 * @param   string $size default size.
 	 * @return  string
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function filter_title_size( $size ) {
 		return $this->title_size;
@@ -135,8 +135,8 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 	 * Called after registering the block type.
 	 *
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function register_meta() {
 
@@ -165,8 +165,8 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 	 * @param   string $cap       requested capability.
 	 * @param   array  $caps      user capabilities.
 	 * @return  bool
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function meta_auth_callback( $allowed, $meta_key, $object_id, $user_id, $cap, $caps ) {
 		return true;
