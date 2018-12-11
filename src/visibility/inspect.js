@@ -1,9 +1,12 @@
-import assign from 'lodash/assign';
-import SearchPost from '../components/search-post'
+/**
+ * Add visibility attributes to all blocks
+ *
+ * @since    1.0.0
+ * @version  1.0.0
+ */
 
-import './editor.scss'
-
-const { __ } = wp.i18n
+// WP Deps.
+const { __ } = wp.i18n;
 const { createHigherOrderComponent } = wp.compose;
 const { Fragment } = wp.element;
 const { InspectorControls } = wp.editor;
@@ -11,17 +14,18 @@ const {
 	PanelBody,
 	PanelRow,
 	SelectControl,
-	// TextControl,
-	// ToggleControl,
-} = wp.components
+} = wp.components;
 
-const visibilityControls = createHigherOrderComponent( ( BlockEdit ) => {
+// External Deps.
+import assign from 'lodash/assign';
+import SearchPost from '../components/search-post';
+
+// Internal Deps.
+import Preview from './preview';
+
+export default createHigherOrderComponent( ( BlockEdit ) => {
 
 	return ( props ) => {
-
-		// const blockType = wp.blocks.getBlockType( props.name );
-		// console.log( blockType.attributes )
-		// console.log( props );
 
 		const { attributes: {
 			llms_visibility,
@@ -37,7 +41,6 @@ const visibilityControls = createHigherOrderComponent( ( BlockEdit ) => {
 		}
 
 		llms_visibility_posts = JSON.parse( llms_visibility_posts );
-		// console.log( llms_visibility_posts );
 
 		const getVisibilityInOptions = () => {
 
@@ -99,8 +102,10 @@ const visibilityControls = createHigherOrderComponent( ( BlockEdit ) => {
 			setAttributes( { llms_visibility_posts: JSON.stringify( llms_visibility_posts ) } )
 		}
 
+
 		return (
 			<Fragment>
+				<Preview {...props} />
 				<BlockEdit { ...props } />
 				<InspectorControls>
 					<PanelBody
@@ -156,5 +161,3 @@ const visibilityControls = createHigherOrderComponent( ( BlockEdit ) => {
 		);
 	};
 }, 'withInspectorControl' );
-
-wp.hooks.addFilter( 'editor.BlockEdit', 'llms/visibility-controls', visibilityControls );

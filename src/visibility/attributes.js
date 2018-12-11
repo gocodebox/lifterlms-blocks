@@ -4,8 +4,7 @@
  * @since    1.0.0
  * @version  1.0.0
  */
-
-const visibilityAttributes = ( settings, name ) => {
+export default function visibilityAttributes( settings, name ) {
 
 	if ( ! settings.attributes ) {
 		settings.attributes = {};
@@ -27,5 +26,3 @@ const visibilityAttributes = ( settings, name ) => {
 	return settings
 
 }
-
-wp.hooks.addFilter( 'blocks.registerBlockType', 'llms/visibility-attributes', visibilityAttributes );
