@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Abstracts
  * @since    1.0.0
- * @version  1.0.0
+ * @version  [version]
  *
  * @render_hook llms_course-information-block_render
  */
@@ -37,18 +37,9 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 	 * @param   string $content    Optional. Block content. Default empty string.
 	 * @return  void
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version [version]
 	 */
 	public function add_hooks( $attributes = array(), $content = '' ) {
-
-		// Remove all the default LifterLMS template hooks.
-		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_meta_wrapper_start', 5 );
-		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_length', 10 );
-		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_difficulty', 20 );
-		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_course_tracks', 25 );
-		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_course_categories', 30 );
-		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_course_tags', 35 );
-		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_meta_wrapper_end', 50 );
 
 		$attributes = wp_parse_args(
 			$attributes,

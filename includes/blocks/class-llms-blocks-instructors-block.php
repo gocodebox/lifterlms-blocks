@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Abstracts
  * @since    1.0.0
- * @version  1.0.0
+ * @version  [version]
  *
  * @render_hook llms_course-syllabus-block_render
  */
@@ -37,12 +37,9 @@ class LLMS_Blocks_Instructors_Block extends LLMS_Blocks_Abstract_Block {
 	 * @param   string $content    Optional. Block content. Default empty string.
 	 * @return  void
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version [version]
 	 */
 	public function add_hooks( $attributes = array(), $content = '' ) {
-
-		// Remove all the default LifterLMS template hooks.
-		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_course_author', 40 );
 
 		add_action( $this->get_render_hook(), 'lifterlms_template_course_author', 10 );
 

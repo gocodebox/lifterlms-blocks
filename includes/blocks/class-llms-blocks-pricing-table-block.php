@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Blocks
  * @since    1.0.0
- * @version  1.0.0
+ * @version  [version]
  *
  * @render_hook llms_pricing-table-block_render
  */
@@ -37,13 +37,9 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 	 * @param   string $content    Optional. Block content. Default empty string.
 	 * @return  void
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version [version]
 	 */
 	public function add_hooks( $attributes = array(), $content = '' ) {
-
-		// Remove all the default LifterLMS template hooks.
-		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_pricing_table', 60 );
-		remove_action( 'lifterlms_single_membership_after_summary', 'lifterlms_template_pricing_table', 10 );
 
 		add_action( $this->get_render_hook(), array( $this, 'output' ), 10 );
 
