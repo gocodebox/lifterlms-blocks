@@ -99,7 +99,7 @@ class LLMS_Blocks_Migrate {
 
 		// Already Has blocks.
 		if ( has_blocks( $post->post_content ) ) {
-			update_post_meta( $post->ID, '_llms_blocks_migrated', 'yes' );
+			$this->update_migration_status( $post->ID );
 			return;
 		}
 
@@ -118,7 +118,7 @@ class LLMS_Blocks_Migrate {
 		);
 
 		// Save migration state.
-		update_post_meta( $post->ID, '_llms_blocks_migrated', 'yes' );
+		$this->update_migration_status( $post->ID );
 
 		// Reload.
 		wp_safe_redirect(
@@ -172,6 +172,19 @@ class LLMS_Blocks_Migrate {
 		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_pricing_table', 60 );
 		remove_action( 'lifterlms_single_membership_after_summary', 'lifterlms_template_pricing_table', 10 );
 
+	}
+
+	/**
+	 * Update post meta data to signal status of the editor migration.
+	 *
+	 * @param   int    $post_id WP_Post ID.
+	 * @param   string $status  Yes or no.
+	 * @return  void
+	 * @since   [version]
+	 * @version [version]
+	 */
+	private function update_migration_status( $post_id, $status = 'yes' ) {
+		update_post_meta( $post_id, '_llms_blocks_migrated', $status );
 	}
 
 }
