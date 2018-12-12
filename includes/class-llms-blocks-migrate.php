@@ -82,7 +82,7 @@ class LLMS_Blocks_Migrate {
 	 *
 	 * @return  void
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version [version]
 	 */
 	public function migrate_post() {
 
@@ -104,15 +104,21 @@ class LLMS_Blocks_Migrate {
 		}
 
 		// Update the post.
-		wp_update_post(
+		global $wpdb;
+		$wpdb->update(
+			$wpdb->posts,
 			array(
-				'ID'           => $post->ID,
 				'post_content' => $post->post_content . "\r\r" . $this->get_template( $post->post_type ),
-				'meta_input'   => array(
-					'_llms_blocks_migrated' => 'yes',
-				),
-			)
+			),
+			array(
+				'ID' => $post->ID,
+			),
+			array( '%s' ),
+			array( '%d' )
 		);
+
+		// Save migration state.
+		update_post_meta( $post->ID, '_llms_blocks_migrated', 'yes' );
 
 		// Reload.
 		wp_safe_redirect(
