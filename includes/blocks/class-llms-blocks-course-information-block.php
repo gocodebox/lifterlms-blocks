@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Abstracts
  * @since    1.0.0
- * @version  [version]
+ * @version  1.1.0
  *
  * @render_hook llms_course-information-block_render
  */
@@ -37,7 +37,7 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 	 * @param   string $content    Optional. Block content. Default empty string.
 	 * @return  void
 	 * @since   1.0.0
-	 * @version [version]
+	 * @version 1.1.0
 	 */
 	public function add_hooks( $attributes = array(), $content = '' ) {
 

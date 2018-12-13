@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Classes
  * @since    1.0.0
- * @version  [version]
+ * @version  1.1.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -18,7 +18,7 @@ class LLMS_Blocks_Migrate {
 	 * Constructor.
 	 *
 	 * @since    1.0.0
-	 * @version  [version]
+	 * @version  1.1.0
 	 */
 	public function __construct() {
 
@@ -82,7 +82,7 @@ class LLMS_Blocks_Migrate {
 	 *
 	 * @return  void
 	 * @since   1.0.0
-	 * @version [version]
+	 * @version 1.1.0
 	 */
 	public function migrate_post() {
 
@@ -138,8 +138,8 @@ class LLMS_Blocks_Migrate {
 	 * Removes core template action hooks from posts which have been migrated to the block editor
 	 *
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.1.0
+	 * @version 1.1.0
 	 */
 	public function remove_template_hooks() {
 
@@ -180,8 +180,8 @@ class LLMS_Blocks_Migrate {
 	 * @param   int    $post_id WP_Post ID.
 	 * @param   string $status  Yes or no.
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.1.0
+	 * @version 1.1.0
 	 */
 	private function update_migration_status( $post_id, $status = 'yes' ) {
 		update_post_meta( $post_id, '_llms_blocks_migrated', $status );

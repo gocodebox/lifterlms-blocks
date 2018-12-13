@@ -2,7 +2,7 @@
  * Add visibility attributes to all blocks
  *
  * @since    1.0.0
- * @version  [version]
+ * @version  1.1.0
  */
 
 // WP Deps.
@@ -26,7 +26,7 @@ import Preview from './preview';
 /**
  * Block edit inspector controls for visibility settings
  * @since   1.0.0
- * @version [version]
+ * @version 1.1.0
  */
 export default createHigherOrderComponent( ( BlockEdit ) => {
 
@@ -123,8 +123,8 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 		 *
 		 * @param   string  value setting value.
 		 * @return  void
-		 * @since   [version]
-		 * @version [version]
+		 * @since   1.1.0
+		 * @version 1.1.0
 		 */
 		const onChangeVisibility = ( value ) => {
 

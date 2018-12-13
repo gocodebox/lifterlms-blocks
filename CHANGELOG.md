@@ -1,7 +1,7 @@
 LifterLMS Blocks Changelog
 ==========================
 
-v1.1.0 - 2018-12-??
+v1.1.0 - 2018-12-12
 -------------------
 
 + Editor blocks now display a lock icon when hovering/selecting a block which corresponds to the enrollment visibility settings of the block.

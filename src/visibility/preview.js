@@ -1,8 +1,8 @@
 /**
  * Preview area for visibility settings on the block list
  *
- * @since    [version]
- * @version  [version]
+ * @since    1.1.0
+ * @version  1.1.0
  */
 
 // WP Deps.
