@@ -28,6 +28,24 @@ class LLMS_Blocks_Migrate {
 	}
 
 	/**
+	 * Determine if a post has been successfully migrated to the block editor.
+	 * @param   int    $post_id WP_Post ID
+	 * @return  bool
+	 * @since   1.1.1
+	 * @version 1.1.1
+	 */
+	private function is_post_migrated( $post_id ) {
+
+		// Classic editor is being used for this post.
+		if ( class_exists( 'Classic_Editor' ) && 'classic-editor' === get_post_meta( $post_id, 'classic-editor-remember', true ) ) {
+			return false;
+		}
+
+		return llms_parse_bool( get_post_meta( get_the_ID(), '_llms_blocks_migrated', true ) );
+
+	}
+
+	/**
 	 * Retrieve the block template by post type.
 	 *
 	 * @param   string $post_type wp post type.
@@ -143,7 +161,7 @@ class LLMS_Blocks_Migrate {
 	 */
 	public function remove_template_hooks() {
 
-		if ( ! llms_parse_bool( get_post_meta( get_the_ID(), '_llms_blocks_migrated', true ) ) || 'classic-editor' === get_post_meta( get_the_ID(), 'classic-editor-remember', true ) ) {
+		if ( ! $this->is_post_migrated( get_the_ID() ) ) {
 			return;
 		}
 
