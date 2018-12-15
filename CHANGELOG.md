@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.1.1 - 2018-12-14
+-------------------
+
++ Fix issue causing LifterLMS Core Actions to be removed when using the Classic Editor plugin.
+
+
 v1.1.0 - 2018-12-12
 -------------------
 

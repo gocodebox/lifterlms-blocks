@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Classes
  * @since    1.0.0
- * @version  1.1.0
+ * @version  1.1.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -139,11 +139,11 @@ class LLMS_Blocks_Migrate {
 	 *
 	 * @return  void
 	 * @since   1.1.0
-	 * @version 1.1.0
+	 * @version 1.1.1
 	 */
 	public function remove_template_hooks() {
 
-		if ( ! llms_parse_bool( get_post_meta( get_the_ID(), '_llms_blocks_migrated', true ) ) ) {
+		if ( ! llms_parse_bool( get_post_meta( get_the_ID(), '_llms_blocks_migrated', true ) ) || 'classic-editor' === get_post_meta( get_the_ID(), 'classic-editor-remember', true ) ) {
 			return;
 		}
 
