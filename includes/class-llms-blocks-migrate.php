@@ -29,7 +29,8 @@ class LLMS_Blocks_Migrate {
 
 	/**
 	 * Determine if a post has been successfully migrated to the block editor.
-	 * @param   int    $post_id WP_Post ID
+	 *
+	 * @param   int $post_id WP_Post ID.
 	 * @return  bool
 	 * @since   1.1.1
 	 * @version 1.1.2
