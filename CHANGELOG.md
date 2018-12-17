@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.1.2 - 2018-12-17
+-------------------
+
++ Add a filter to the migration check on lessons & courses.
+
+
 v1.1.1 - 2018-12-14
 -------------------
 
