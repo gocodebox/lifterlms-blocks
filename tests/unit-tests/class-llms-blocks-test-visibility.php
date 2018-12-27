@@ -1,8 +1,10 @@
 <?php
 /**
  * Test LLMS_Blocks_Visibility class & methods.
+ *
+ * @package LifterLMS_Blocks/Tests
  * @since   1.0.0
- * @version 1.0.0
+ * @version [version]
  */
 class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 
@@ -41,7 +43,7 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	 * @param   string    $post_type      Post type of the created post.
 	 * @return  WP_Post
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version [version]
 	 */
 	private function create_post( $block_settings = array(), $post_type = 'post' ) {
 
@@ -59,6 +61,8 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 			'post_content' => $content,
 			'post_type' => $post_type,
 		) );
+
+		update_post_meta( $post->ID, '_llms_blocks_migrated', 'yes' );
 
 		return $post;
 
@@ -115,9 +119,13 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	 *
 	 * @return  void
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version [version]
 	 */
 	public function test_visibility() {
+
+		// Make no template hooks are attached.
+		remove_all_actions( 'lifterlms_single_course_before_summary' );
+		remove_all_actions( 'lifterlms_single_course_after_summary' );
 
 		global $current_user;
 
