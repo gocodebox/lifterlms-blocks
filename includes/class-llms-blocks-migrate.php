@@ -33,7 +33,7 @@ class LLMS_Blocks_Migrate {
 	 * Don't remove core template actions when a sales page is enabled and the page is restricted.
 	 *
 	 * @param   bool $ret Default migration status.
-	 * @param   int $post_id WP_Post ID.
+	 * @param   int  $post_id WP_Post ID.
 	 * @return  bool
 	 * @since   [version]
 	 * @version [version]
@@ -43,7 +43,7 @@ class LLMS_Blocks_Migrate {
 		$page_restricted = llms_page_restricted( $post_id );
 		if ( $page_restricted['is_restricted'] ) {
 			$sales_page = get_post_meta( $post_id, '_llms_sales_page_content_type', true );
-		 	if ( '' === $sales_page || 'content' === $sales_page ) {
+			if ( '' === $sales_page || 'content' === $sales_page ) {
 				$ret = false;
 			}
 		}
@@ -187,7 +187,7 @@ class LLMS_Blocks_Migrate {
 	 *
 	 * @return  void
 	 * @since   1.1.0
-	 * @version 1.1.1
+	 * @version [version]
 	 */
 	public function remove_template_hooks() {
 
@@ -203,6 +203,9 @@ class LLMS_Blocks_Migrate {
 		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_course_categories', 30 );
 		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_course_tags', 35 );
 		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_meta_wrapper_end', 50 );
+
+		// Remove Course Progress.
+		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_course_progress', 60 );
 
 		// Course Syllabus.
 		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_syllabus', 90 );
