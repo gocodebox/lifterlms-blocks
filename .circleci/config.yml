@@ -13,9 +13,9 @@ references:
       - CC_TEST_REPORTER_ID: d529fcb852509f7a8f0f37a8606226e3c68cb9efbedccf070feda329faf7a047
 
   common_filters: &common_filters
+    filters:
       branches:
-        ignore:
-          - trunk
+        ignore: trunk
 
   common: &common
     working_directory: ~/repo
