@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Classes
  * @since    1.0.0
- * @version  1.1.2
+ * @version  [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -18,12 +18,37 @@ class LLMS_Blocks_Migrate {
 	 * Constructor.
 	 *
 	 * @since    1.0.0
-	 * @version  1.1.0
+	 * @version  [version]
 	 */
 	public function __construct() {
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'migrate_post' ), 2 );
 		add_action( 'wp', array( $this, 'remove_template_hooks' ) );
+
+		add_filter( 'llms_blocks_is_post_migrated', array( $this, 'check_sales_page' ), 15, 2 );
+
+	}
+
+	/**
+	 * Don't remove core template actions when a sales page is enabled and the page is restricted.
+	 *
+	 * @param   bool $ret Default migration status.
+	 * @param   int $post_id WP_Post ID.
+	 * @return  bool
+	 * @since   [version]
+	 * @version [version]
+	 */
+	public function check_sales_page( $ret, $post_id ) {
+
+		$page_restricted = llms_page_restricted( $post_id );
+		if ( $page_restricted['is_restricted'] ) {
+			$sales_page = get_post_meta( $post_id, '_llms_sales_page_content_type', true );
+		 	if ( '' === $sales_page || 'content' === $sales_page ) {
+				$ret = false;
+			}
+		}
+
+		return $ret;
 
 	}
 
