@@ -12,11 +12,10 @@ references:
       - MYSQL_ROOT_PASSWORD: password
       - CC_TEST_REPORTER_ID: d529fcb852509f7a8f0f37a8606226e3c68cb9efbedccf070feda329faf7a047
 
-  common_filters: &common_filters
-    filters:
-      branches:
-        ignore:
-          - trunk
+  ignore_branches: &ignore_branches
+    branches:
+      ignore:
+        - trunk
 
   common: &common
     working_directory: ~/repo
@@ -132,8 +131,8 @@ workflows:
   test:
     jobs:
       - test-php-71:
-          <<: [ *common_filters ]
+          <<: [ *ignore_branches ]
       - test-php-72:
-          <<: [ *common_filters ]
+          <<: [ *ignore_branches ]
       - test-php-73:
-          <<: [ *common_filters ]
+          <<: [ *ignore_branches ]
