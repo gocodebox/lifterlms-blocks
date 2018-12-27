@@ -2,8 +2,8 @@ LifterLMS Blocks
 ================
 
 [![CircleCI](https://circleci.com/gh/gocodebox/lifterlms-blocks.svg?style=svg)](https://circleci.com/gh/gocodebox/lifterlms-blocks)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/49df50fa2a04ab1f8e55/test_coverage)](https://codeclimate.com/github/gocodebox/lifterlms-blocks/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/49df50fa2a04ab1f8e55/maintainability)](https://codeclimate.com/github/gocodebox/lifterlms-blocks/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/49df50fa2a04ab1f8e55/test_coverage)](https://codeclimate.com/github/gocodebox/lifterlms-blocks/test_coverage)
 
 WordPress Editor (Gutenberg) blocks for LifterLMS.
 
