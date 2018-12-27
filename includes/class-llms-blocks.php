@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Classes
  * @since    1.0.0
- * @version  1.0.0
+ * @version  [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -67,13 +67,14 @@ class LLMS_Blocks {
 	 *
 	 * @return  void
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version [version]
 	 */
 	public function init() {
 
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-assets.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-abstract-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-migrate.php';
+		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-page-builders.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-instructors.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-types.php';
 
