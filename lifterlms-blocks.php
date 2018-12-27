@@ -26,9 +26,9 @@ if ( ! defined( 'LLMS_BLOCKS_VERSION' ) ) {
 }
 
 /**
- * @filter llms_load_blocks_plugin
- *
  * Allows disabling the blocks plugin & functionality.
+ *
+ * @filter llms_load_blocks_plugin
  *
  * @since    1.0.0
  * @version  1.0.0
