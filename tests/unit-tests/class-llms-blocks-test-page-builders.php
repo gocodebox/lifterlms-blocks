@@ -3,8 +3,8 @@
  * Test LLMS_Blocks_Page_Builders class & methods.
  *
  * @package LifterLMS_Blocks/Tests
- * @since   [version]
- * @version [version]
+ * @since   1.2.0
+ * @version 1.2.0
  */
 class LLMS_Blocks_Test_Page_Builders extends LLMS_Blocks_Unit_Test_Case {
 
@@ -12,8 +12,8 @@ class LLMS_Blocks_Test_Page_Builders extends LLMS_Blocks_Unit_Test_Case {
 	 * Test whether or not filters are properly added based on the presence of the page builder.
 	 *
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.2.0
+	 * @version 1.2.0
 	 */
 	public function test_add_filters() {
 
@@ -47,8 +47,8 @@ class LLMS_Blocks_Test_Page_Builders extends LLMS_Blocks_Unit_Test_Case {
 	 * Check the status of a the Divi page builder.
 	 *
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.2.0
+	 * @version 1.2.0
 	 */
 	public function test_check_for_divi() {
 

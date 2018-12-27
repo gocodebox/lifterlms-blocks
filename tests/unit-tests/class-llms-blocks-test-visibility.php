@@ -4,7 +4,7 @@
  *
  * @package LifterLMS_Blocks/Tests
  * @since   1.0.0
- * @version [version]
+ * @version 1.2.0
  */
 class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 
@@ -43,7 +43,7 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	 * @param   string    $post_type      Post type of the created post.
 	 * @return  WP_Post
 	 * @since   1.0.0
-	 * @version [version]
+	 * @version 1.2.0
 	 */
 	private function create_post( $block_settings = array(), $post_type = 'post' ) {
 
@@ -119,7 +119,7 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	 *
 	 * @return  void
 	 * @since   1.0.0
-	 * @version [version]
+	 * @version 1.2.0
 	 */
 	public function test_visibility() {
 

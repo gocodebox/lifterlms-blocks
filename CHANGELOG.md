@@ -5,6 +5,7 @@ v1.2.0 - 2018-12-27
 -------------------
 
 + Add conditional support for page builders: Beaver Builder, Divi Builder, and Elementor.
++ Fixed issue causing LifterLMS core sales pages from outputting automatic content (like pricing tables) on migrated posts.
 
 
 v1.1.2 - 2018-12-17

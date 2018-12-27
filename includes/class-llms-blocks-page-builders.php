@@ -3,8 +3,8 @@
  * Adds support for page builder plugins..
  *
  * @package  LifterLMS_Blocks/Classes
- * @since    [version]
- * @version  [version]
+ * @since    1.2.0
+ * @version  1.2.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,8 +17,8 @@ class LLMS_Blocks_Page_Builders {
 	/**
 	 * Constructor.
 	 *
-	 * @since    [version]
-	 * @version  [version]
+	 * @since    1.2.0
+	 * @version  1.2.0
 	 */
 	public static function init() {
 
@@ -30,8 +30,8 @@ class LLMS_Blocks_Page_Builders {
 	 * Add filters to support various page builder plugins.
 	 *
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.2.0
+	 * @version 1.2.0
 	 */
 	public static function add_filters() {
 
@@ -52,8 +52,8 @@ class LLMS_Blocks_Page_Builders {
 	 * @param   bool $val default value of the migration status.
 	 * @param   int  $post_id WP_Post ID.
 	 * @return  bool
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.2.0
+	 * @version 1.2.0
 	 */
 	public static function check_for_beaver( $val, $post_id ) {
 
@@ -73,8 +73,8 @@ class LLMS_Blocks_Page_Builders {
 	 * @param   bool $val default value of the migration status.
 	 * @param   int  $post_id WP_Post ID.
 	 * @return  bool
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.2.0
+	 * @version 1.2.0
 	 */
 	public static function check_for_elementor( $val, $post_id ) {
 
@@ -94,8 +94,8 @@ class LLMS_Blocks_Page_Builders {
 	 * @param   bool $val default value of the migration status.
 	 * @param   int  $post_id WP_Post ID.
 	 * @return  bool
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.2.0
+	 * @version 1.2.0
 	 */
 	public static function check_for_divi( $val, $post_id ) {
 
