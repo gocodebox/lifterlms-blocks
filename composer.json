@@ -37,8 +37,8 @@
       "composer config-cs"
     ],
     "tests-install": [
-      "vendor/bin/llms-tests teardown llms_blocks_tests root password localhost",
-      "vendor/bin/llms-tests install llms_blocks_tests root password localhost 5.0-beta5",
+      "vendor/bin/llms-tests teardown llms_blocks_tests root password 127.0.0.1",
+      "vendor/bin/llms-tests install llms_blocks_tests root password 127.0.0.1",
       "vendor/bin/llms-tests plugin lifterlms"
     ],
     "tests-run": [
