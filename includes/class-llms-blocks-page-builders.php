@@ -50,7 +50,7 @@ class LLMS_Blocks_Page_Builders {
 	 * If the builder is enabled for the post LifterLMS should treat the post as not migrated (actions are not removed).
 	 *
 	 * @param   bool $val default value of the migration status.
-	 * @param   int $post_id WP_Post ID.
+	 * @param   int  $post_id WP_Post ID.
 	 * @return  bool
 	 * @since   [version]
 	 * @version [version]
@@ -71,7 +71,7 @@ class LLMS_Blocks_Page_Builders {
 	 * If the builder is enabled for the post LifterLMS should treat the post as not migrated (actions are not removed).
 	 *
 	 * @param   bool $val default value of the migration status.
-	 * @param   int $post_id WP_Post ID.
+	 * @param   int  $post_id WP_Post ID.
 	 * @return  bool
 	 * @since   [version]
 	 * @version [version]
@@ -92,7 +92,7 @@ class LLMS_Blocks_Page_Builders {
 	 * If the builder is enabled for the post LifterLMS should treat the post as not migrated (actions are not removed).
 	 *
 	 * @param   bool $val default value of the migration status.
-	 * @param   int $post_id WP_Post ID.
+	 * @param   int  $post_id WP_Post ID.
 	 * @return  bool
 	 * @since   [version]
 	 * @version [version]
