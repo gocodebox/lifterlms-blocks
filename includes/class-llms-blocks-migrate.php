@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Classes
  * @since    1.0.0
- * @version  1.2.0
+ * @version  [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -58,14 +58,14 @@ class LLMS_Blocks_Migrate {
 	 * @param   int $post_id WP_Post ID.
 	 * @return  bool
 	 * @since   1.1.1
-	 * @version 1.1.2
+	 * @version [version]
 	 */
 	private function is_post_migrated( $post_id ) {
 
 		$ret = false;
 
 		// Classic editor is being used for this post.
-		if ( class_exists( 'Classic_Editor' ) && 'classic-editor' === get_post_meta( $post_id, 'classic-editor-remember', true ) ) {
+		if ( llms_blocks_is_classic_enabled_for_post( $post_id ) ) {
 			$ret = false;
 		} else {
 			$ret = llms_parse_bool( get_post_meta( $post_id, '_llms_blocks_migrated', true ) );

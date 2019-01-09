@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Classes
  * @since    1.0.0
- * @version  1.2.0
+ * @version  [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -18,13 +18,13 @@ class LLMS_Blocks {
 	 * Constructor.
 	 *
 	 * @since    1.0.0
-	 * @version  1.2.0
+	 * @version  [version]
 	 */
 	public function __construct() {
 
 		add_action( 'plugins_loaded', array( $this, 'init' ) );
 
-		add_action( 'add_meta_boxes', array( $this, 'remove_metaboxes' ), 999 );
+		add_action( 'add_meta_boxes', array( $this, 'remove_metaboxes' ), 999, 2 );
 
 		add_filter( 'block_categories', array( $this, 'add_block_category' ) );
 
@@ -59,6 +59,10 @@ class LLMS_Blocks {
 	 */
 	public function init() {
 
+		// Functions.
+		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/functions-llms-blocks.php';
+
+		// Classes.
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-assets.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-abstract-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-migrate.php';
@@ -82,14 +86,21 @@ class LLMS_Blocks {
 	/**
 	 * Remove deprecated core metaboxes.
 	 *
+	 * @param string $post_type WP post type of the current post.
+	 * @param string $post WP_Post.
 	 * @return  void
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version [version]
 	 */
-	public function remove_metaboxes() {
+	public function remove_metaboxes( $post_type, $post ) {
 
-		remove_meta_box( 'llms-instructors', 'course', 'normal' );
-		remove_meta_box( 'llms-instructors', 'llms_membership', 'normal' );
+		if ( ! llms_blocks_is_classic_enabled_for_post( $post ) ) {
+
+			remove_meta_box( 'llms-instructors', 'course', 'normal' );
+			remove_meta_box( 'llms-instructors', 'llms_membership', 'normal' );
+
+		}
+
 
 	}
 
