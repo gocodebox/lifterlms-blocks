@@ -14,15 +14,6 @@ import LogomarkIcon from '../icons/logomark'
 // 	);
 // };
 
-// const { PluginPostStatusInfo } = wp.editPost;
-// const MyPlugin = () => {
-// 	return (
-// 		<PluginPostStatusInfo>
-// 			Wut
-// 		</PluginPostStatusInfo>
-// 	);
-// };
-
 const sidebar = () => {
 	if ( -1 !== [ 'course', 'llms_membership' ].indexOf( wp.data.select( 'core/editor' ).getCurrentPostType() ) ) {
 		return (
