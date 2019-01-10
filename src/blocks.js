@@ -9,7 +9,7 @@
  * Webpack is compiling as the input file.
  *
  * @since   1.0.0
- * @version [version]
+ * @version 1.3.0
  */
 
 const { registerBlockType } = wp.blocks;

@@ -1,8 +1,8 @@
 /**
  * Define LifterLMS Course and Membership Visibility Options
  *
- * @since   [version]
- * @version [version]
+ * @since   1.3.0
+ * @version 1.3.0
  */
 
 // WP Deps.

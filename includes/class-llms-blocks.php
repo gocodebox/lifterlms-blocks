@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Classes
  * @since    1.0.0
- * @version  [version]
+ * @version  1.3.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -18,7 +18,7 @@ class LLMS_Blocks {
 	 * Constructor.
 	 *
 	 * @since    1.0.0
-	 * @version  [version]
+	 * @version  1.3.0
 	 */
 	public function __construct() {
 
@@ -55,7 +55,7 @@ class LLMS_Blocks {
 	 *
 	 * @return  void
 	 * @since   1.0.0
-	 * @version [version]
+	 * @version 1.3.0
 	 */
 	public function init() {
 
@@ -91,7 +91,7 @@ class LLMS_Blocks {
 	 * @param string $post WP_Post.
 	 * @return  void
 	 * @since   1.0.0
-	 * @version [version]
+	 * @version 1.3.0
 	 */
 	public function remove_metaboxes( $post_type, $post ) {
 

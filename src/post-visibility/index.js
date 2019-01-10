@@ -1,8 +1,8 @@
 /**
  * Post Visibility settings for courses & memberships
  *
- * @since    [version]
- * @version  [version]
+ * @since    1.3.0
+ * @version  1.3.0
  */
 
 // WP Deps.

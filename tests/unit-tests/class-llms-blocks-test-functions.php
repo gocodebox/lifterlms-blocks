@@ -3,8 +3,8 @@
  * Test LLMS_Blocks_Page_Builders class & methods.
  *
  * @package LifterLMS_Blocks/Tests
- * @since   [version]
- * @version [version]
+ * @since   1.3.0
+ * @version 1.3.0
  */
 class LLMS_Blocks_Test_Functions extends LLMS_Blocks_Unit_Test_Case {
 
@@ -12,8 +12,8 @@ class LLMS_Blocks_Test_Functions extends LLMS_Blocks_Unit_Test_Case {
 	 * Test the classic editor enabled check function.
 	 *
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.3.0
+	 * @version 1.3.0
 	 */
 	public function test_llms_blocks_is_classic_enabled_for_post() {
 

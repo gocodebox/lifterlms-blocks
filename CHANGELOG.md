@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.3.0 - 2019-01-09
+-------------------
+
++ Add course and membership catalog visibility settings into the block editor.
++ Fixed issue preventing the course instructors metabox from displaying when using the classic editor plugin.
+
 v1.2.0 - 2018-12-27
 -------------------
 

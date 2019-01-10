@@ -3,8 +3,8 @@
  * Handle course & membership catalog visibility data data.
  *
  * @package  LifterLMS_Blocks/Classes
- * @since    [version]
- * @version  [version]
+ * @since    1.3.0
+ * @version  1.3.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,8 +17,8 @@ class LLMS_Blocks_Post_Visibility {
 	/**
 	 * Constructor.
 	 *
-	 * @since   [version]
-	 * @version  [version]
+	 * @since   1.3.0
+	 * @version  1.3.0
 	 */
 	public function __construct() {
 
@@ -36,8 +36,8 @@ class LLMS_Blocks_Post_Visibility {
 	 * @param   string $cap       requested capability.
 	 * @param   array  $caps      user capabilities.
 	 * @return  bool
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.3.0
+	 * @version 1.3.0
 	 */
 	public function authorize_callback( $allowed, $meta_key, $object_id, $user_id, $cap, $caps ) {
 		return user_can( $user_id, 'edit_post', $object_id );
@@ -49,8 +49,8 @@ class LLMS_Blocks_Post_Visibility {
 	 * @param   array           $obj  Assoc. array of WP_Post data.
 	 * @param   WP_REST_Request $request   Full details about the request.
 	 * @return  WP_Error|string Visibility term slug or WP_Error object.
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.3.0
+	 * @version 1.3.0
 	 */
 	public function get_callback( $obj, $request ) {
 
@@ -71,8 +71,8 @@ class LLMS_Blocks_Post_Visibility {
 	 * @param   WP_Post $object WP_Post object.
 	 * @param   string  $key    name of the field.
 	 * @return  null|WP_Error
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.3.0
+	 * @version 1.3.0
 	 */
 	public function update_callback( $value, $object, $key ) {
 
@@ -99,8 +99,8 @@ class LLMS_Blocks_Post_Visibility {
 	 * Register custom meta fields.
 	 *
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.3.0
+	 * @version 1.3.0
 	 */
 	public function register_meta() {
 

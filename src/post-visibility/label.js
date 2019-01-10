@@ -1,8 +1,8 @@
 /**
  * Displays a "label" for the post visibility.
  *
- * @since    [version]
- * @version  [version]
+ * @since    1.3.0
+ * @version  1.3.0
  */
 
 // WP Deps.

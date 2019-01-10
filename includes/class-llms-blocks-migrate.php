@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Classes
  * @since    1.0.0
- * @version  [version]
+ * @version  1.3.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -58,7 +58,7 @@ class LLMS_Blocks_Migrate {
 	 * @param   int $post_id WP_Post ID.
 	 * @return  bool
 	 * @since   1.1.1
-	 * @version [version]
+	 * @version 1.3.0
 	 */
 	private function is_post_migrated( $post_id ) {
 
