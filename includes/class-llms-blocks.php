@@ -55,7 +55,7 @@ class LLMS_Blocks {
 	 *
 	 * @return  void
 	 * @since   1.0.0
-	 * @version 1.2.0
+	 * @version [version]
 	 */
 	public function init() {
 
@@ -69,8 +69,9 @@ class LLMS_Blocks {
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-page-builders.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-instructors.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-types.php';
+		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-visibility.php';
 
-		// Visibility Component.
+		// Block Visibility Component.
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-visibility.php';
 
 		// Dynamic Blocks.

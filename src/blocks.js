@@ -9,7 +9,7 @@
  * Webpack is compiling as the input file.
  *
  * @since   1.0.0
- * @version 1.0.0
+ * @version [version]
  */
 
 const { registerBlockType } = wp.blocks;
@@ -27,8 +27,11 @@ import * as lessonNavigation from './blocks/lesson-navigation/'
 import * as lessonProgression from './blocks/lesson-progression/'
 import * as pricingTable from './blocks/pricing-table/'
 
-// Add visibility filters.
-import './visibility/'
+// Add block visibility filters.
+import './block-visibility/'
+
+// Add block visibility filters.
+import './post-visibility/'
 
 /**
  * Register LifterLMS Core Blocks
