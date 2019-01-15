@@ -18,14 +18,14 @@ class LLMS_Blocks_Migrate {
 	 * Constructor.
 	 *
 	 * @since    1.0.0
-	 * @version  1.2.0
+	 * @version  [version]
 	 */
 	public function __construct() {
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'migrate_post' ), 2 );
 		add_action( 'wp', array( $this, 'remove_template_hooks' ) );
 
-		add_filter( 'llms_blocks_is_post_migrated', array( $this, 'check_sales_page' ), 15, 2 );
+		add_filter( 'llms_blocks_is_post_migrated', array( __CLASS__, 'check_sales_page' ), 15, 2 );
 
 	}
 
@@ -36,9 +36,9 @@ class LLMS_Blocks_Migrate {
 	 * @param   int  $post_id WP_Post ID.
 	 * @return  bool
 	 * @since   1.2.0
-	 * @version 1.2.0
+	 * @version [version]
 	 */
-	public function check_sales_page( $ret, $post_id ) {
+	public static function check_sales_page( $ret, $post_id ) {
 
 		$page_restricted = llms_page_restricted( $post_id );
 		if ( $page_restricted['is_restricted'] ) {
