@@ -33,7 +33,7 @@ function llms_blocks_is_classic_enabled_for_post( $post ) {
 
 }
 
-/**q
+/**
  * Determine if a post is migrated
  *
  * @param   mixed $post WP_Post or WP_Post ID.
@@ -44,7 +44,7 @@ function llms_blocks_is_classic_enabled_for_post( $post ) {
 function llms_blocks_is_post_migrated( $post ) {
 
 	$post_id = null;
-	$ret = false;
+	$ret     = false;
 
 	$post = get_post( $post );
 	if ( $post ) {
@@ -57,7 +57,6 @@ function llms_blocks_is_post_migrated( $post ) {
 		} else {
 			$ret = llms_parse_bool( get_post_meta( $post_id, '_llms_blocks_migrated', true ) );
 		}
-
 	}
 
 	return apply_filters( 'llms_blocks_is_post_migrated', $ret, $post_id );
