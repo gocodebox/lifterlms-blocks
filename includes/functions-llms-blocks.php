@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Functions
  * @since    1.3.0
- * @version  1.3.0
+ * @version  [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -30,5 +30,36 @@ function llms_blocks_is_classic_enabled_for_post( $post ) {
 	}
 
 	return apply_filters( 'llms_blocks_is_classic_enabled_for_post', $ret, $post );
+
+}
+
+/**q
+ * Determine if a post is migrated
+ *
+ * @param   mixed $post WP_Post or WP_Post ID.
+ * @return  boolean
+ * @since   [version]
+ * @version [version]
+ */
+function llms_blocks_is_post_migrated( $post ) {
+
+	$post_id = null;
+	$ret = false;
+
+	$post = get_post( $post );
+	if ( $post ) {
+
+		$post_id = $post->ID;
+
+		// Classic editor is being used for this post.
+		if ( llms_blocks_is_classic_enabled_for_post( $post_id ) ) {
+			$ret = false;
+		} else {
+			$ret = llms_parse_bool( get_post_meta( $post_id, '_llms_blocks_migrated', true ) );
+		}
+
+	}
+
+	return apply_filters( 'llms_blocks_is_post_migrated', $ret, $post_id );
 
 }
