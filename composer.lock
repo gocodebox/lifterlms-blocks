@@ -1019,12 +1019,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6e6fb0c091539efb0289490dbf2b4a073bb043ec"
+                "reference": "6050504ca5fb73f3c737ff566526c4e03573de6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6e6fb0c091539efb0289490dbf2b4a073bb043ec",
-                "reference": "6e6fb0c091539efb0289490dbf2b4a073bb043ec",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6050504ca5fb73f3c737ff566526c4e03573de6e",
+                "reference": "6050504ca5fb73f3c737ff566526c4e03573de6e",
                 "shasum": ""
             },
             "require": {
@@ -1095,7 +1095,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-01-02T16:21:38+00:00"
+            "time": "2019-01-11T06:11:03+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1211,12 +1211,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "5f3e0c82ada2d16fdd637b24e095888f4abac43f"
+                "reference": "d155baccb43ba2542941fbcba258b85ce7786419"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/5f3e0c82ada2d16fdd637b24e095888f4abac43f",
-                "reference": "5f3e0c82ada2d16fdd637b24e095888f4abac43f",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/d155baccb43ba2542941fbcba258b85ce7786419",
+                "reference": "d155baccb43ba2542941fbcba258b85ce7786419",
                 "shasum": ""
             },
             "conflict": {
@@ -1225,6 +1225,7 @@
                 "alterphp/easyadmin-extension-bundle": ">=1.2,<1.2.11|>=1.3,<1.3.1",
                 "amphp/artax": "<1.0.6|>=2,<2.0.6",
                 "amphp/http": "<1.0.1",
+                "api-platform/core": ">=2.2,<2.2.10|>=2.3,<2.3.6",
                 "asymmetricrypt/asymmetricrypt": ">=0,<9.9.99",
                 "aws/aws-sdk-php": ">=3,<3.2.1",
                 "brightlocal/phpwhois": "<=4.2.5",
@@ -1253,7 +1254,6 @@
                 "drupal/core": ">=7,<7.60|>=8,<8.5.8|>=8.6,<8.6.2",
                 "drupal/drupal": ">=7,<7.60|>=8,<8.5.8|>=8.6,<8.6.2",
                 "erusev/parsedown": "<1.7",
-                "ezsystems/ezplatform": "<1.7.8.1|>=1.8,<1.13.4.1|>=2,<2.2.3.1|>=2.3,<2.3.2.1",
                 "ezsystems/ezpublish-kernel": ">=5.3,<5.3.12.1|>=5.4,<5.4.13.1|>=6,<6.7.9.1|>=6.8,<6.13.5.1|>=7,<7.2.4.1|>=7.3,<7.3.2.1",
                 "ezsystems/ezpublish-legacy": ">=5.3,<5.3.12.6|>=5.4,<5.4.12.3|>=2011,<2017.12.4.3|>=2018.6,<2018.6.1.4|>=2018.9,<2018.9.1.3",
                 "ezsystems/repository-forms": ">=2.3,<2.3.2.1",
@@ -1294,6 +1294,7 @@
                 "pagarme/pagarme-php": ">=0,<3",
                 "paragonie/random_compat": "<2",
                 "paypal/merchant-sdk-php": "<3.12",
+                "pear/archive_tar": "<1.4.4",
                 "phpmailer/phpmailer": ">=5,<5.2.27|>=6,<6.0.6",
                 "phpoffice/phpexcel": "<=1.8.1",
                 "phpoffice/phpspreadsheet": "<=1.5",
@@ -1348,7 +1349,7 @@
                 "symfony/yaml": ">=2,<2.0.22|>=2.1,<2.1.7",
                 "tecnickcom/tcpdf": "<6.2.22",
                 "thelia/backoffice-default-template": ">=2.1,<2.1.2",
-                "thelia/thelia": ">=2.1,<2.1.2|>=2.1.0-beta1,<2.1.3",
+                "thelia/thelia": ">=2.1.0-beta1,<2.1.3|>=2.1,<2.1.2",
                 "theonedemon/phpwhois": "<=4.2.5",
                 "titon/framework": ">=0,<9.9.99",
                 "truckersmp/phpwhois": "<=4.3.1",
@@ -1406,7 +1407,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2018-12-30T13:00:21+00:00"
+            "time": "2019-01-15T19:39:37+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -1975,12 +1976,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "390bffe2265aac8184fdf86400c0d0841e65bc4b"
+                "reference": "d86ad3c3d8a6cb40f45a377695d8f35b592ca821"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/390bffe2265aac8184fdf86400c0d0841e65bc4b",
-                "reference": "390bffe2265aac8184fdf86400c0d0841e65bc4b",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/d86ad3c3d8a6cb40f45a377695d8f35b592ca821",
+                "reference": "d86ad3c3d8a6cb40f45a377695d8f35b592ca821",
                 "shasum": ""
             },
             "require": {
@@ -2018,7 +2019,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2018-12-21T04:12:30+00:00"
+            "time": "2019-01-14T05:30:36+00:00"
         },
         {
             "name": "symfony/config",
@@ -2026,12 +2027,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "146066db59780be05577aec68dfa77d8c9197f81"
+                "reference": "67bf83b27ec0afc7a4b16eb0cc85f44ddf3f1674"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/146066db59780be05577aec68dfa77d8c9197f81",
-                "reference": "146066db59780be05577aec68dfa77d8c9197f81",
+                "url": "https://api.github.com/repos/symfony/config/zipball/67bf83b27ec0afc7a4b16eb0cc85f44ddf3f1674",
+                "reference": "67bf83b27ec0afc7a4b16eb0cc85f44ddf3f1674",
                 "shasum": ""
             },
             "require": {
@@ -2081,7 +2082,7 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2018-12-24T10:03:37+00:00"
+            "time": "2019-01-03T09:16:58+00:00"
         },
         {
             "name": "symfony/contracts",
@@ -2157,12 +2158,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "50af6d3c2758677cec34765e9a3d7305a8471b2c"
+                "reference": "56da018d2587c2bce6daf3a6cfe102ccb350e6b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/50af6d3c2758677cec34765e9a3d7305a8471b2c",
-                "reference": "50af6d3c2758677cec34765e9a3d7305a8471b2c",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/56da018d2587c2bce6daf3a6cfe102ccb350e6b8",
+                "reference": "56da018d2587c2bce6daf3a6cfe102ccb350e6b8",
                 "shasum": ""
             },
             "require": {
@@ -2222,7 +2223,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2018-12-24T10:03:37+00:00"
+            "time": "2019-01-15T06:11:48+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -2230,12 +2231,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "c754e7d6b709768a7fa873d536b2475105caf701"
+                "reference": "b12244c29ced470fba69e20da3db97e53a6a918a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/c754e7d6b709768a7fa873d536b2475105caf701",
-                "reference": "c754e7d6b709768a7fa873d536b2475105caf701",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/b12244c29ced470fba69e20da3db97e53a6a918a",
+                "reference": "b12244c29ced470fba69e20da3db97e53a6a918a",
                 "shasum": ""
             },
             "require": {
@@ -2272,7 +2273,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2018-11-26T16:19:01+00:00"
+            "time": "2019-01-03T09:16:58+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
