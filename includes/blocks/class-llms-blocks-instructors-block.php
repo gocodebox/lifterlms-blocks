@@ -1,12 +1,12 @@
 <?php
 /**
- * Course syllabus block.
+ * Instructors block.
  *
  * @package  LifterLMS_Blocks/Abstracts
  * @since    1.0.0
  * @version  1.1.0
  *
- * @render_hook llms_course-syllabus-block_render
+ * @render_hook llms_instructors-block_render
  */
 
 defined( 'ABSPATH' ) || exit;

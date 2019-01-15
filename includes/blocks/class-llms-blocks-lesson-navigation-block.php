@@ -1,6 +1,6 @@
 <?php
 /**
- * Course syllabus block.
+ * Lesson Navigation block.
  *
  * @package  LifterLMS_Blocks/Abstracts
  * @since    1.0.0
