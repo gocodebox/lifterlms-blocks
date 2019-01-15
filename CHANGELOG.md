@@ -1,7 +1,7 @@
 LifterLMS Blocks Changelog
 ==========================
 
-v1.3.1 - 2019-01-??
+v1.3.1 - 2019-01-15
 -------------------
 
 + Move post migration checks to a callable function `llms_blocks_is_post_migrated()`
