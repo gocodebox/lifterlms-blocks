@@ -78,7 +78,7 @@ class LLMS_Blocks_Page_Builders {
 	 */
 	public static function check_for_elementor( $val, $post_id ) {
 
-		// If Divi builder is enabled for the post, don't remove actions.
+		// If Elementor builder is enabled for the post, don't remove actions.
 		if ( 'builder' === get_post_meta( $post_id, '_elementor_edit_mode', true ) ) {
 			$val = false;
 		}
