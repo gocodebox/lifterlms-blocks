@@ -4,7 +4,7 @@
  *
  * @package LifterLMS_Blocks/Tests
  * @since   1.2.0
- * @version [version]
+ * @version 1.3.1
  */
 class LLMS_Blocks_Test_Page_Builders extends LLMS_Blocks_Unit_Test_Case {
 
@@ -14,7 +14,7 @@ class LLMS_Blocks_Test_Page_Builders extends LLMS_Blocks_Unit_Test_Case {
 	 * @runInSeparateProcess
 	 * @return  void
 	 * @since   1.2.0
-	 * @version [version]
+	 * @version 1.3.1
 	 */
 	public function test_add_filters() {
 
@@ -80,8 +80,8 @@ class LLMS_Blocks_Test_Page_Builders extends LLMS_Blocks_Unit_Test_Case {
 	 * Check the status of a the Elementor page builder.
 	 *
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.3.1
+	 * @version 1.3.1
 	 */
 	public function test_check_for_elementor() {
 

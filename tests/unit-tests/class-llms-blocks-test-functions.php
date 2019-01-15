@@ -4,7 +4,7 @@
  *
  * @package LifterLMS_Blocks/Tests
  * @since   1.3.0
- * @version [version]
+ * @version 1.3.1
  */
 class LLMS_Blocks_Test_Functions extends LLMS_Blocks_Unit_Test_Case {
 
@@ -45,8 +45,8 @@ class LLMS_Blocks_Test_Functions extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test the llms_blocks_is_post_migrated() method
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.3.1
+	 * @version 1.3.1
 	 */
 	public function test_llms_blocks_is_post_migrated() {
 

@@ -1,5 +1,9 @@
 {
 	"package_name": "LifterLMS_Blocks",
+	"pot": {
+		"domain": "lifterlms",
+		"js": false
+	},
 	"publish": {
 		"title": "LifterLMS Blocks",
 		"lifterlms": {

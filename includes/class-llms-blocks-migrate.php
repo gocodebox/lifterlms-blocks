@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Classes
  * @since    1.0.0
- * @version  [version]
+ * @version  1.3.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -18,7 +18,7 @@ class LLMS_Blocks_Migrate {
 	 * Constructor.
 	 *
 	 * @since    1.0.0
-	 * @version  [version]
+	 * @version  1.3.1
 	 */
 	public function __construct() {
 
@@ -36,7 +36,7 @@ class LLMS_Blocks_Migrate {
 	 * @param   int  $post_id WP_Post ID.
 	 * @return  bool
 	 * @since   1.2.0
-	 * @version [version]
+	 * @version 1.3.1
 	 */
 	public static function check_sales_page( $ret, $post_id ) {
 
@@ -164,7 +164,7 @@ class LLMS_Blocks_Migrate {
 	 *
 	 * @return  void
 	 * @since   1.1.0
-	 * @version [version]
+	 * @version 1.3.1
 	 */
 	public function remove_template_hooks() {
 

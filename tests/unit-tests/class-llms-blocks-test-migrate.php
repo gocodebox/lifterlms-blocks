@@ -3,8 +3,8 @@
  * Test LLMS_Blocks_Migrate class & methods.
  *
  * @package LifterLMS_Blocks/Tests
- * @since   [version]
- * @version [version]
+ * @since   1.3.1
+ * @version 1.3.1
  */
 class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 
@@ -12,8 +12,8 @@ class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 	 * Test the check_sales_page() method
 	 *
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.3.1
+	 * @version 1.3.1
 	 */
 	public function test_check_sales_page() {
 

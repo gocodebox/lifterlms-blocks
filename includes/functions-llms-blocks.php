@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Functions
  * @since    1.3.0
- * @version  [version]
+ * @version  1.3.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -38,8 +38,8 @@ function llms_blocks_is_classic_enabled_for_post( $post ) {
  *
  * @param   mixed $post WP_Post or WP_Post ID.
  * @return  boolean
- * @since   [version]
- * @version [version]
+ * @since   1.3.1
+ * @version 1.3.1
  */
 function llms_blocks_is_post_migrated( $post ) {
 
