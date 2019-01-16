@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.3.2 - 2019-01-16
+-------------------
+
++ Fix issue preventing template actions from being removed from migrated courses & lessons.
+
+
 v1.3.1 - 2019-01-15
 -------------------
 
