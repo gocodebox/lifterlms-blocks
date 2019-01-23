@@ -1020,12 +1020,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6050504ca5fb73f3c737ff566526c4e03573de6e"
+                "reference": "706c004625b4b3e69f5e9718fac8157f6f5a8bed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6050504ca5fb73f3c737ff566526c4e03573de6e",
-                "reference": "6050504ca5fb73f3c737ff566526c4e03573de6e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/706c004625b4b3e69f5e9718fac8157f6f5a8bed",
+                "reference": "706c004625b4b3e69f5e9718fac8157f6f5a8bed",
                 "shasum": ""
             },
             "require": {
@@ -1096,7 +1096,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-01-11T06:11:03+00:00"
+            "time": "2019-01-17T11:26:01+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1212,12 +1212,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "d155baccb43ba2542941fbcba258b85ce7786419"
+                "reference": "db876706aacd4ffbd1c253358d19a651e50e65c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/d155baccb43ba2542941fbcba258b85ce7786419",
-                "reference": "d155baccb43ba2542941fbcba258b85ce7786419",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/db876706aacd4ffbd1c253358d19a651e50e65c2",
+                "reference": "db876706aacd4ffbd1c253358d19a651e50e65c2",
                 "shasum": ""
             },
             "conflict": {
@@ -1355,8 +1355,8 @@
                 "titon/framework": ">=0,<9.9.99",
                 "truckersmp/phpwhois": "<=4.3.1",
                 "twig/twig": "<1.20",
-                "typo3/cms": ">=6.2,<6.2.30|>=7,<7.6.32|>=8,<8.7.21|>=9,<9.5.2",
-                "typo3/cms-core": ">=8,<8.7.21|>=9,<9.5.2",
+                "typo3/cms": ">=6.2,<6.2.30|>=7,<7.6.32|>=8,<8.7.23|>=9,<9.5.4",
+                "typo3/cms-core": ">=8,<8.7.23|>=9,<9.5.4",
                 "typo3/flow": ">=1,<1.0.4|>=1.1,<1.1.1|>=2,<2.0.1|>=2.3,<2.3.16|>=3,<3.0.10|>=3.1,<3.1.7|>=3.2,<3.2.7|>=3.3,<3.3.5",
                 "typo3/neos": ">=1.1,<1.1.3|>=1.2,<1.2.13|>=2,<2.0.4",
                 "ua-parser/uap-php": "<3.8",
@@ -1408,7 +1408,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2019-01-15T19:39:37+00:00"
+            "time": "2019-01-22T18:37:22+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -1977,12 +1977,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "d86ad3c3d8a6cb40f45a377695d8f35b592ca821"
+                "reference": "8c94cf9231dc70e8cb45c52a8f3a34501e271da0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/d86ad3c3d8a6cb40f45a377695d8f35b592ca821",
-                "reference": "d86ad3c3d8a6cb40f45a377695d8f35b592ca821",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/8c94cf9231dc70e8cb45c52a8f3a34501e271da0",
+                "reference": "8c94cf9231dc70e8cb45c52a8f3a34501e271da0",
                 "shasum": ""
             },
             "require": {
@@ -2020,7 +2020,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2019-01-14T05:30:36+00:00"
+            "time": "2019-01-23T00:15:48+00:00"
         },
         {
             "name": "symfony/config",
@@ -2028,12 +2028,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "67bf83b27ec0afc7a4b16eb0cc85f44ddf3f1674"
+                "reference": "5432eefd40c9e0c9287fab90a57670478ca2ce60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/67bf83b27ec0afc7a4b16eb0cc85f44ddf3f1674",
-                "reference": "67bf83b27ec0afc7a4b16eb0cc85f44ddf3f1674",
+                "url": "https://api.github.com/repos/symfony/config/zipball/5432eefd40c9e0c9287fab90a57670478ca2ce60",
+                "reference": "5432eefd40c9e0c9287fab90a57670478ca2ce60",
                 "shasum": ""
             },
             "require": {
@@ -2083,7 +2083,7 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2019-01-03T09:16:58+00:00"
+            "time": "2019-01-16T21:53:39+00:00"
         },
         {
             "name": "symfony/contracts",
@@ -2159,12 +2159,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "56da018d2587c2bce6daf3a6cfe102ccb350e6b8"
+                "reference": "4b1b18013071f160931154867b675cba75b411a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/56da018d2587c2bce6daf3a6cfe102ccb350e6b8",
-                "reference": "56da018d2587c2bce6daf3a6cfe102ccb350e6b8",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/4b1b18013071f160931154867b675cba75b411a5",
+                "reference": "4b1b18013071f160931154867b675cba75b411a5",
                 "shasum": ""
             },
             "require": {
@@ -2224,7 +2224,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2019-01-15T06:11:48+00:00"
+            "time": "2019-01-16T22:37:52+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -2232,12 +2232,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "b12244c29ced470fba69e20da3db97e53a6a918a"
+                "reference": "5c14d91d54e01b68aff804bd055a265cf82e2284"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/b12244c29ced470fba69e20da3db97e53a6a918a",
-                "reference": "b12244c29ced470fba69e20da3db97e53a6a918a",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/5c14d91d54e01b68aff804bd055a265cf82e2284",
+                "reference": "5c14d91d54e01b68aff804bd055a265cf82e2284",
                 "shasum": ""
             },
             "require": {
@@ -2274,7 +2274,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2019-01-03T09:16:58+00:00"
+            "time": "2019-01-16T21:53:39+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
