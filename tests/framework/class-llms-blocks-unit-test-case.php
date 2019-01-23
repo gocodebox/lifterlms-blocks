@@ -1,6 +1,6 @@
 <?php
 /**
- * LifterLMS Add-On Testing Bootstrap
+ * LifterLMS Blocks Unit Test Case
  *
  * @package LifterLMS_Blocks/Tests/Framework
  * @since   1.0.0
