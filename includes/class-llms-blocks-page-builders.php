@@ -112,8 +112,8 @@ class LLMS_Blocks_Page_Builders {
 	/**
 	 * If the Divi "Enable Classic Editor" builder setting is enabled then classic is enabled for our purposes.
 	 *
-	 * @param   bool    $val  default value
-	 * @param   mixed   $post WP_Post or WP_Post ID.
+	 * @param   bool  $val  default value.
+	 * @param   mixed $post WP_Post or WP_Post ID.
 	 * @return  bool
 	 * @since   [version]
 	 * @version [version]
