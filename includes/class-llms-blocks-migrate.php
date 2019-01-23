@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Classes
  * @since    1.0.0
- * @version  1.3.2
+ * @version  [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -50,6 +50,17 @@ class LLMS_Blocks_Migrate {
 
 		return $ret;
 
+	}
+
+	/**
+	 * Get an array of post types which can be migrated.
+	 *
+	 * @return  array
+	 * @since   [version]
+	 * @version [version]
+	 */
+	public function get_migrateable_post_types() {
+		return apply_filters( 'llms_blocks_migrateable_post_types', array( 'course', 'lesson' ) );
 	}
 
 	/**
@@ -107,18 +118,17 @@ class LLMS_Blocks_Migrate {
 	 *
 	 * @return  void
 	 * @since   1.0.0
-	 * @version 1.1.0
+	 * @version [version]
 	 */
 	public function migrate_post() {
 
 		global $pagenow, $post;
 
-		if ( 'post.php' !== $pagenow || ! is_object( $post ) || ! in_array( $post->post_type, array( 'course', 'lesson' ), true ) ) {
+		if ( 'post.php' !== $pagenow || ! is_object( $post ) ) {
 			return;
 		}
 
-		// Already Migrated.
-		if ( llms_parse_bool( get_post_meta( $post->ID, '_llms_blocks_migrated', true ) ) ) {
+		if ( ! $this->should_migrate_post( $post->ID ) ) {
 			return;
 		}
 
@@ -199,6 +209,39 @@ class LLMS_Blocks_Migrate {
 		// Pricing Table.
 		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_pricing_table', 60 );
 		remove_action( 'lifterlms_single_membership_after_summary', 'lifterlms_template_pricing_table', 10 );
+
+	}
+
+	/**
+	 * Determine if a post should be migrated.
+	 *
+	 * @param   int    $post_id WP_Post ID.
+	 * @return  bool
+	 * @since   [version]
+	 * @version [version]
+	 */
+	public function should_migrate_post( $post_id ) {
+
+		$ret = true;
+
+		// Not a valid post type
+		if ( ! in_array( get_post_type( $post_id ), $this->get_migrateable_post_types(), true ) ) {
+
+			$ret = false;
+
+		// Classic is enabled, don't migrate.
+		} elseif ( llms_blocks_is_classic_enabled_for_post( $post_id ) ) {
+
+			$ret = false;
+
+		// Already Migrated.
+		} elseif ( llms_parse_bool( get_post_meta( $post_id, '_llms_blocks_migrated', true ) ) ) {
+
+			$ret = false;
+
+		}
+
+		return apply_filters( 'llms_blocks_should_migrate_post', $ret, $post_id );
 
 	}
 
