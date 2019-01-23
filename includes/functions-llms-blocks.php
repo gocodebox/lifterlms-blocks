@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Functions
  * @since    1.3.0
- * @version  1.3.1
+ * @version  [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
  * @param   mixed $post WP_Post or WP_Post ID.
  * @return  boolean
  * @since   1.3.0
- * @version 1.3.0
+ * @version [version]
  */
 function llms_blocks_is_classic_enabled_for_post( $post ) {
 
@@ -23,10 +23,22 @@ function llms_blocks_is_classic_enabled_for_post( $post ) {
 
 	if ( class_exists( 'Classic_Editor' ) ) {
 
-		$post = get_post( $post );
-		if ( $post ) {
-			$ret = ( 'classic-editor' === get_post_meta( $post->ID, 'classic-editor-remember', true ) );
+		// Users can choose which editor.
+		if ( 'allow' === get_option( 'classic-editor-allow-users', 'disallow' ) ) {
+
+			// check the postmeta to determine which editor we're using.
+			$post = get_post( $post );
+			if ( $post ) {
+				$ret = ( 'classic-editor' === get_post_meta( $post->ID, 'classic-editor-remember', true ) );
+			}
+
+		// Uses same editor for all posts.
+		} else {
+
+			$ret = ( 'classic' === get_option( 'classic-editor-replace', 'classic' ) );
+
 		}
+
 	}
 
 	return apply_filters( 'llms_blocks_is_classic_enabled_for_post', $ret, $post );
