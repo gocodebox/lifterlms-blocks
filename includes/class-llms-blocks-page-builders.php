@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Classes
  * @since    1.2.0
- * @version  1.2.0
+ * @version  [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -31,7 +31,7 @@ class LLMS_Blocks_Page_Builders {
 	 *
 	 * @return  void
 	 * @since   1.2.0
-	 * @version 1.2.0
+	 * @version [version]
 	 */
 	public static function add_filters() {
 
@@ -40,6 +40,7 @@ class LLMS_Blocks_Page_Builders {
 		} elseif ( defined( 'ELEMENTOR_VERSION' ) ) {
 			add_filter( 'llms_blocks_is_post_migrated', array( __CLASS__, 'check_for_elementor' ), 15, 2 );
 		} elseif ( defined( 'ET_BUILDER_VERSION' ) ) {
+			add_filter( 'llms_blocks_is_classic_enabled_for_post', array( __CLASS__, 'check_for_divi_classic' ), 15, 2 );
 			add_filter( 'llms_blocks_is_post_migrated', array( __CLASS__, 'check_for_divi' ), 15, 2 );
 		}
 
@@ -102,6 +103,25 @@ class LLMS_Blocks_Page_Builders {
 		// If Divi builder is enabled for the post, don't remove actions.
 		if ( 'on' === get_post_meta( $post_id, '_et_pb_use_builder', true ) ) {
 			$val = false;
+		}
+
+		return $val;
+
+	}
+
+	/**
+	 * If the Divi "Enable Classic Editor" builder setting is enabled then classic is enabled for our purposes.
+	 *
+	 * @param   bool    $val  default value
+	 * @param   mixed   $post WP_Post or WP_Post ID.
+	 * @return  bool
+	 * @since   [version]
+	 * @version [version]
+	 */
+	public static function check_for_divi_classic( $val, $post ) {
+
+		if ( 'on' === et_get_option( 'et_enable_classic_editor', 'off' ) ) {
+			$val = true;
 		}
 
 		return $val;
