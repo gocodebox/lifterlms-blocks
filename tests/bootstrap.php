@@ -4,7 +4,7 @@
  *
  * @package LifterLMS_Blocks/Tests
  * @since   1.0.0
- * @version 1.2.0
+ * @version [version]
  */
 
 require_once './vendor/lifterlms/lifterlms-tests/bootstrap.php';
@@ -37,7 +37,7 @@ class LLMS_Blocks_Tests_Bootstrap extends LLMS_Tests_Bootstrap {
 	 *
 	 * @return  void
 	 * @since   1.2.0
-	 * @version 1.2.0
+	 * @version [version]
 	 */
 	public function load() {
 
@@ -50,6 +50,8 @@ class LLMS_Blocks_Tests_Bootstrap extends LLMS_Tests_Bootstrap {
 			define( 'LLMS_PLUGIN_DIR', WP_PLUGIN_DIR . '/lifterlms/' );
 			$this->load_plugin( 'lifterlms', 'lifterlms.php' );
 		}
+
+		$this->load_plugin( 'classic-editor', 'classic-editor.php' );
 
 	}
 
