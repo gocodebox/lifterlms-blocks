@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Classes
  * @since    1.0.0
- * @version  [version]
+ * @version  1.3.3
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -56,8 +56,8 @@ class LLMS_Blocks_Migrate {
 	 * Get an array of post types which can be migrated.
 	 *
 	 * @return  array
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.3.3
+	 * @version 1.3.3
 	 */
 	public function get_migrateable_post_types() {
 		return apply_filters( 'llms_blocks_migrateable_post_types', array( 'course', 'lesson' ) );
@@ -118,7 +118,7 @@ class LLMS_Blocks_Migrate {
 	 *
 	 * @return  void
 	 * @since   1.0.0
-	 * @version [version]
+	 * @version 1.3.3
 	 */
 	public function migrate_post() {
 
@@ -217,8 +217,8 @@ class LLMS_Blocks_Migrate {
 	 *
 	 * @param   int $post_id WP_Post ID.
 	 * @return  bool
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.3.3
+	 * @version 1.3.3
 	 */
 	public function should_migrate_post( $post_id ) {
 

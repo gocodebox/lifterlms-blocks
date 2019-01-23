@@ -4,7 +4,7 @@
  *
  * @package LifterLMS_Blocks/Tests/Framework
  * @since   1.0.0
- * @version [version]
+ * @version 1.3.3
  */
 class LLMS_Blocks_Unit_Test_Case extends LLMS_Unit_Test_Case {
 
@@ -12,8 +12,8 @@ class LLMS_Blocks_Unit_Test_Case extends LLMS_Unit_Test_Case {
 	 * Enable / Disable classic editor plugin settings
 	 * @param   array     $settings array of settings.
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.3.3
+	 * @version 1.3.3
 	 */
 	protected function update_classic_settings( $settings = array() ) {
 

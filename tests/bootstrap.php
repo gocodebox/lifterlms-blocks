@@ -4,7 +4,7 @@
  *
  * @package LifterLMS_Blocks/Tests
  * @since   1.0.0
- * @version [version]
+ * @version 1.3.3
  */
 
 require_once './vendor/lifterlms/lifterlms-tests/bootstrap.php';
@@ -37,7 +37,7 @@ class LLMS_Blocks_Tests_Bootstrap extends LLMS_Tests_Bootstrap {
 	 *
 	 * @return  void
 	 * @since   1.2.0
-	 * @version [version]
+	 * @version 1.3.3
 	 */
 	public function load() {
 

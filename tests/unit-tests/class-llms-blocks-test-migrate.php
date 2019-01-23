@@ -4,7 +4,7 @@
  *
  * @package LifterLMS_Blocks/Tests
  * @since   1.3.1
- * @version [version]
+ * @version 1.3.3
  */
 class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 
@@ -55,8 +55,8 @@ class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 	 * Test get_migrateable_post_types() method
 	 *
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.3.3
+	 * @version 1.3.3
 	 */
 	public function test_get_migrateable_post_types() {
 
@@ -69,8 +69,8 @@ class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 	 * Test should_migrate_post() method
 	 *
 	 * @return  void
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.3.3
+	 * @version 1.3.3
 	 */
 	public function test_should_migrate_post() {
 

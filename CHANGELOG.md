@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.3.3 - 2019-01-23
+-------------------
+
++ Add conditions to check for Classic Editor settings configured to enforce classic/block for all posts.
+
+
 v1.3.2 - 2019-01-16
 -------------------
 
