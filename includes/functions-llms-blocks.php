@@ -32,13 +32,12 @@ function llms_blocks_is_classic_enabled_for_post( $post ) {
 				$ret = ( 'classic-editor' === get_post_meta( $post->ID, 'classic-editor-remember', true ) );
 			}
 
-		// Uses same editor for all posts.
+			// Uses same editor for all posts.
 		} else {
 
 			$ret = ( 'classic' === get_option( 'classic-editor-replace', 'classic' ) );
 
 		}
-
 	}
 
 	return apply_filters( 'llms_blocks_is_classic_enabled_for_post', $ret, $post );

@@ -215,7 +215,7 @@ class LLMS_Blocks_Migrate {
 	/**
 	 * Determine if a post should be migrated.
 	 *
-	 * @param   int    $post_id WP_Post ID.
+	 * @param   int $post_id WP_Post ID.
 	 * @return  bool
 	 * @since   [version]
 	 * @version [version]
@@ -224,17 +224,17 @@ class LLMS_Blocks_Migrate {
 
 		$ret = true;
 
-		// Not a valid post type
+		// Not a valid post type.
 		if ( ! in_array( get_post_type( $post_id ), $this->get_migrateable_post_types(), true ) ) {
 
 			$ret = false;
 
-		// Classic is enabled, don't migrate.
+			// Classic is enabled, don't migrate.
 		} elseif ( llms_blocks_is_classic_enabled_for_post( $post_id ) ) {
 
 			$ret = false;
 
-		// Already Migrated.
+			// Already Migrated.
 		} elseif ( llms_parse_bool( get_post_meta( $post_id, '_llms_blocks_migrated', true ) ) ) {
 
 			$ret = false;
