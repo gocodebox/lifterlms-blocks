@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Classes
  * @since    1.2.0
- * @version  [version]
+ * @version  1.3.4
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -31,7 +31,7 @@ class LLMS_Blocks_Page_Builders {
 	 *
 	 * @return  void
 	 * @since   1.2.0
-	 * @version [version]
+	 * @version 1.3.4
 	 */
 	public static function add_filters() {
 
@@ -115,8 +115,8 @@ class LLMS_Blocks_Page_Builders {
 	 * @param   bool  $val  default value.
 	 * @param   mixed $post WP_Post or WP_Post ID.
 	 * @return  bool
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.3.4
+	 * @version 1.3.4
 	 */
 	public static function check_for_divi_classic( $val, $post ) {
 

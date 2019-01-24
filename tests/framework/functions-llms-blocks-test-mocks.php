@@ -3,13 +3,13 @@
  * LifterLMS Blocks Testing mock functions & classes
  *
  * @package LifterLMS_Blocks/Tests/Framework
- * @since   [version]
- * @version [version]
+ * @since   1.3.4
+ * @version 1.3.4
  */
 
 /**
  * Toggle to a bool to determine if BB is enabled for a post.
- * @since   [version]
+ * @since   1.3.4
  */
 global $llms_blocks_mock_fl_builder_enabled;
 $llms_blocks_mock_fl_builder_enabled = null;
@@ -17,8 +17,8 @@ if ( ! class_exists( 'FLBuilderModel' ) ) {
 
 	/**
 	 * Mock the FLBuilderModel Class
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.3.4
+	 * @version 1.3.4
 	 */
 	class FLBuilderModel {
 
@@ -26,8 +26,8 @@ if ( ! class_exists( 'FLBuilderModel' ) ) {
 		 * Determine if BB is enabled for a given post.
 		 * @param   int    $post_id WP_Post ID.
 		 * @return  bool
-		 * @since   [version]
-		 * @version [version]
+		 * @since   1.3.4
+		 * @version 1.3.4
 		 */
 		public static function is_builder_enabled( $post_id ) {
 
@@ -42,7 +42,7 @@ if ( ! class_exists( 'FLBuilderModel' ) ) {
 
 /**
  * Add key=>val pairs to the global to manage options retrieved by et_get_option()
- * @since   [version]
+ * @since   1.3.4
  */
 global $llms_blocks_mock_et_options;
 $llms_blocks_mock_et_options = array();
@@ -54,8 +54,8 @@ if ( ! function_exists( 'et_get_option' ) ) {
 	 * @param   string    $option_name option key.
 	 * @param   string    $default     default value when option not set.
 	 * @return  mixed
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.3.4
+	 * @version 1.3.4
 	 */
 	function et_get_option( $option_name, $default = '' ) {
 

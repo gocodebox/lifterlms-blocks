@@ -1,6 +1,13 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.3.4 - 2019-01-24
+-------------------
+
++ Add support for the Divi Builder's "Classic Editor" mode
++ Skip post migration when "Classic" mode is enabled
+
+
 v1.3.3 - 2019-01-23
 -------------------
 
