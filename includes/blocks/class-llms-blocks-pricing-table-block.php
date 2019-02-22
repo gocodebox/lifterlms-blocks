@@ -61,8 +61,8 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 					'type'    => 'int',
 					'default' => 0,
 				),
-				'ver' => array(
-					'type' => 'int',
+				'ver'     => array(
+					'type'    => 'int',
 					'default' => 0,
 				),
 			)
