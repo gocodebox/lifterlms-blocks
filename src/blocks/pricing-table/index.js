@@ -26,7 +26,7 @@ export const name = 'llms/pricing-table';
  * @param   {Object}   settings Block settings.
  * @return  {?WPBlock}          The block, if it has been successfully, registered; otherwise `undefined`.
  * @since   1.0.0
- * @version [version]
+ * @version 1.3.5
  */
 export const settings = {
 
@@ -60,7 +60,7 @@ export const settings = {
 	 * @param   {Object} props Block properties.
 	 * @return  {Function}
 	 * @since   1.0.0
-	 * @version [version]
+	 * @version 1.3.5
 	 */
 	edit: props => {
 
