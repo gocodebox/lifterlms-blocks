@@ -26,7 +26,7 @@ export const name = 'llms/pricing-table';
  * @param   {Object}   settings Block settings.
  * @return  {?WPBlock}          The block, if it has been successfully, registered; otherwise `undefined`.
  * @since   1.0.0
- * @version 1.0.0
+ * @version [version]
  */
 export const settings = {
 
@@ -44,6 +44,10 @@ export const settings = {
 			type: 'int',
 			default: 0,
 		},
+		ver: {
+			type: 'int',
+			default: 0,
+		},
 	},
 
 	/**
@@ -56,7 +60,7 @@ export const settings = {
 	 * @param   {Object} props Block properties.
 	 * @return  {Function}
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version [version]
 	 */
 	edit: props => {
 
@@ -65,6 +69,11 @@ export const settings = {
 			attributes,
 			setAttributes,
 		} = props
+
+		// Hacky hack hack to re-render the block when an AJAX save in the access plan metabox is completed.
+		$( document ).one( 'llms-access-plans-updated', function() {
+			setAttributes( { ver: Date.now() } );
+		} );
 
 		return (
 			<Fragment>

@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.3.5 - 2019-02-21
+-------------------
+
++ Automatically re-renders Pricing Table blocks when access plans are saved or deleted via the course / membership access plan metabox.
+
+
 v1.3.4 - 2019-01-30
 -------------------
 
