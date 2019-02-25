@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.3.6 - 2019-02-22
+-------------------
+
++ Change method for Pricing Table block re-rendering to prevent an issue resulting it always appearing that the post has unsaved data.
+
+
 v1.3.5 - 2019-02-21
 -------------------
 

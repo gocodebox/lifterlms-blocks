@@ -1,8 +1,8 @@
 /**
  * WP Data Subscription for the llms/pricing-table block
  *
- * @since   [version]
- * @version [version]
+ * @since   1.3.6
+ * @version 1.3.6
  */
 
 // WP Deps.
@@ -21,8 +21,8 @@ let lastRevision = null;
 
 /**
  * Watch core data to manually save Access Plan data when the post is updated or published.
- * @since   [version]
- * @version [version]
+ * @since   1.3.6
+ * @version 1.3.6
  */
 const watchForChanges = subscribe( () => {
 
@@ -49,8 +49,8 @@ const watchForChanges = subscribe( () => {
 	/**
 	 * Determine if the button is disabled (already saving, for example).
 	 * @return  {Boolean}
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.3.6
+	 * @version 1.3.6
 	 */
 	const isBtnDisabled = function() {
 		return ( 'disabled' === $btn.attr( 'disabled' ) )
@@ -59,8 +59,8 @@ const watchForChanges = subscribe( () => {
 	/**
 	 * Determine if the post revision ID has changed, if it has we need to update our plans.
 	 * @return  {Boolean}
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.3.6
+	 * @version 1.3.6
 	 */
 	const hasRevisionChanged = function() {
 		return lastRevision !== getCurrentPostLastRevisionId();
