@@ -1,16 +1,26 @@
 /**
  * BLOCK: llms/pricing-table
  *
- * Renders a course syllabus
+ * @since   1.0.0
+ * @version [version]
  */
 
 // WP Deps.
+const {
+	createBlock,
+} = wp.blocks;
 const { ServerSideRender } = wp.components;
-const { Fragment } = wp.element
+const {
+	dispatch,
+	select,
+} = wp.data;
+const { Fragment } = wp.element;
 const { __ } = wp.i18n;
+
 
 // Internal Deps.
 import './editor.scss';
+import './subscribe';
 
 /**
  * Block Name
@@ -26,7 +36,7 @@ export const name = 'llms/pricing-table';
  * @param   {Object}   settings Block settings.
  * @return  {?WPBlock}          The block, if it has been successfully, registered; otherwise `undefined`.
  * @since   1.0.0
- * @version 1.3.5
+ * @version [version]
  */
 export const settings = {
 
@@ -44,10 +54,6 @@ export const settings = {
 			type: 'int',
 			default: 0,
 		},
-		ver: {
-			type: 'int',
-			default: 0,
-		},
 	},
 
 	/**
@@ -60,19 +66,18 @@ export const settings = {
 	 * @param   {Object} props Block properties.
 	 * @return  {Function}
 	 * @since   1.0.0
-	 * @version 1.3.5
+	 * @version [version]
 	 */
 	edit: props => {
 
-		const currentPost = wp.data.select( 'core/editor' ).getCurrentPost()
 		const {
 			attributes,
 			setAttributes,
-		} = props
+		} = props;
 
-		// Hacky hack hack to re-render the block when an AJAX save in the access plan metabox is completed.
+		// Reload when changes are made to access plans.
 		$( document ).one( 'llms-access-plans-updated', function() {
-			setAttributes( { ver: Date.now() } );
+			dispatch( 'core/editor' ).replaceBlock( props.clientId, createBlock( name ) );
 		} );
 
 		return (
@@ -81,7 +86,7 @@ export const settings = {
 					block={ name }
 					attributes={ attributes }
 					urlQueryArgs={ {
-						post_id: currentPost.id
+						post_id: select( 'core/editor' ).getCurrentPostId(),
 					} }
 				/>
 			</Fragment>
