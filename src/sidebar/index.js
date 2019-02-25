@@ -4,15 +4,7 @@ const { PluginSidebar, PluginSidebarMoreMenuItem } = wp.editPost;
 const { registerPlugin } = wp.plugins;
 
 import Instructors from './instructors'
-import LogomarkIcon from '../icons/logomark'
-
-// const MyPlugin = ( wut ) => {
-// 	return (
-// 		<PluginSidebar>
-// 			Wutarst
-// 		</PluginSidebar>
-// 	);
-// };
+import LifterLMSIcon from '../icons/lifterlms-icon'
 
 const sidebar = () => {
 	if ( -1 !== [ 'course', 'llms_membership' ].indexOf( wp.data.select( 'core/editor' ).getCurrentPostType() ) ) {
@@ -20,7 +12,7 @@ const sidebar = () => {
 			<Fragment>
 				<PluginSidebarMoreMenuItem
 					target="llms-sidebar"
-					icon={ <LogomarkIcon /> }
+					icon={ <LifterLMSIcon /> }
 				>
 					LifterLMS
 				</PluginSidebarMoreMenuItem>
@@ -36,13 +28,7 @@ const sidebar = () => {
 	return null;
 }
 
-
 registerPlugin( 'llms', {
 	render: sidebar,
-	icon: <LogomarkIcon />
+	icon: <LifterLMSIcon />
 } )
-
-// wp.hooks.addFilter( 'plugins.registerPlugin', 'llms/modify-sidebar', ( settings, name ) => {
-	// console.log( name, settings );
-	// return settings
-// } );

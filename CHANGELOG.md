@@ -4,6 +4,7 @@ LifterLMS Blocks Changelog
 v1.3.6 - 2019-02-22
 -------------------
 
++ Updated the editor icons to use the new LifterLMS Icon
 + Change method for Pricing Table block re-rendering to prevent an issue resulting it always appearing that the post has unsaved data.
 
 
