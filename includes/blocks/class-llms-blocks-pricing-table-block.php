@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Blocks
  * @since    1.0.0
- * @version  [verson]
+ * @version  [version]
  *
  * @render_hook llms_pricing-table-block_render
  */
@@ -51,17 +51,13 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 	 *
 	 * @return  array
 	 * @since   1.0.0
-	 * @version 1.3.5
+	 * @version [version]
 	 */
 	public function get_attributes() {
 		return array_merge(
 			parent::get_attributes(),
 			array(
 				'post_id' => array(
-					'type'    => 'int',
-					'default' => 0,
-				),
-				'ver'     => array(
 					'type'    => 'int',
 					'default' => 0,
 				),
