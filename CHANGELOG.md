@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.3.7 - 2019-02-27
+-------------------
+
++ Fixed an issue preventing "Pricing Table" blocks from displaying on the admin panel when the current user was enrolled in the course or no payment gateways were enabled on the site.
+
+
 v1.3.6 - 2019-02-22
 -------------------
 

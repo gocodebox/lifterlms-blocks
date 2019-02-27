@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Blocks
  * @since    1.0.0
- * @version  1.3.6
+ * @version  1.3.7
  *
  * @render_hook llms_pricing-table-block_render
  */
@@ -71,7 +71,7 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 	 * @param   array $attributes Optional. Block attributes. Default empty array.
 	 * @return  void
 	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @version 1.3.7
 	 */
 	public function output( $attributes = array() ) {
 
@@ -83,9 +83,17 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 					echo '<p>' . __( 'No access plans found.', 'lifterlms' ) . '</p>';
 				}
 			}
+
+			// force display of the table on the admin panel.
+			add_filter( 'llms_product_pricing_table_enrollment_status', '__return_false' );
+			add_filter( 'llms_product_is_purchasable', '__return_true' );
+
 		}
 
 		lifterlms_template_pricing_table( $attributes['post_id'] );
+
+		remove_filter( 'llms_product_pricing_table_enrollment_status', '__return_false' );
+		remove_filter( 'llms_product_is_purchasable', '__return_true' );
 
 	}
 }
