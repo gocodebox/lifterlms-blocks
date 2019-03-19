@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.3.8 - 2019-03-19
+-------------------
+
++ Explicitly import jQuery when used within blocks.
+
+
 v1.3.7 - 2019-02-27
 -------------------
 

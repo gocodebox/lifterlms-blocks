@@ -2,8 +2,8 @@
  * BLOCK: llms/pricing-table
  *
  * @since 1.0.0
- * @since [version] Explicitly import jQuery.
- * @version [version]
+ * @since 1.3.8 Explicitly import jQuery.
+ * @version 1.3.8
  */
 
 // WP Deps.
