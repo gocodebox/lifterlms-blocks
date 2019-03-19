@@ -2,6 +2,7 @@
  * WP Data Subscription for the llms/pricing-table block
  *
  * @since   1.3.6
+ * @since [version] Explicitly import jQuery.
  * @version [version]
  */
 

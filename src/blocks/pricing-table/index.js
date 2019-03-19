@@ -1,7 +1,8 @@
 /**
  * BLOCK: llms/pricing-table
  *
- * @since   1.0.0
+ * @since 1.0.0
+ * @since [version] Explicitly import jQuery.
  * @version [version]
  */
 
