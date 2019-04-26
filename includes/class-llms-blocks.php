@@ -1,16 +1,20 @@
 <?php
 /**
- * Serverside block compononent registration
+ * Plugin Initialization.
  *
  * @package  LifterLMS_Blocks/Classes
- * @since    1.0.0
- * @version  1.3.0
+ *
+ * @since 1.0.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * LLMS_Blocks class
+ *
+ * @since 1.0.0
+ * @since [version] Add status tools class.
  */
 class LLMS_Blocks {
 
@@ -53,9 +57,10 @@ class LLMS_Blocks {
 	/**
 	 * Register all blocks & components.
 	 *
+	 * @since 1.0.0
+	 * @since [version] Add status tools class.
+	 *
 	 * @return  void
-	 * @since   1.0.0
-	 * @version 1.3.0
 	 */
 	public function init() {
 
@@ -70,6 +75,7 @@ class LLMS_Blocks {
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-instructors.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-types.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-visibility.php';
+		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-status-tools.php';
 
 		// Block Visibility Component.
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-visibility.php';

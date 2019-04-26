@@ -2,30 +2,56 @@
 /**
  * Handle post migration to the block editor.
  *
- * @package  LifterLMS_Blocks/Classes
- * @since    1.0.0
- * @version  1.3.3
+ * @package LifterLMS_Blocks/Classes
+ *
+ * @since 1.0.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Handle post migration to the block editor.
+ *
+ * @since 1.0.0
+ * @since [version] Add post unmigrator, improve migration script.
  */
 class LLMS_Blocks_Migrate {
 
 	/**
 	 * Constructor.
 	 *
-	 * @since    1.0.0
-	 * @version  1.3.1
+	 * @since 1.0.0
+	 * @since [version] Add action for unmigrating posts from the Tools & Utilities status screen.
 	 */
 	public function __construct() {
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'migrate_post' ), 2 );
 		add_action( 'wp', array( $this, 'remove_template_hooks' ) );
+		add_action( 'llms_blocks_unmigrate_posts', array( $this, 'unmigrate_posts' ) );
 
 		add_filter( 'llms_blocks_is_post_migrated', array( __CLASS__, 'check_sales_page' ), 15, 2 );
+
+	}
+
+	/**
+	 * Add a template to a post & save migration status in postmeta.
+	 *
+	 * @since [version]
+	 *
+	 * @param WP_Post $post Post object.
+	 * @return bool
+	 */
+	private function add_template_to_post( $post ) {
+
+		// Update the post.
+		if ( $this->update_post_content( $post->ID, $post->post_content . "\r\r" . $this->get_template( $post->post_type ) ) ) {
+			// Save migration state.
+			$this->update_migration_status( $post->ID );
+			return true;
+		}
+
+		return false;
 
 	}
 
@@ -61,6 +87,28 @@ class LLMS_Blocks_Migrate {
 	 */
 	public function get_migrateable_post_types() {
 		return apply_filters( 'llms_blocks_migrateable_post_types', array( 'course', 'lesson' ) );
+	}
+
+	/**
+	 * Retrieve a WP_Query for posts which have already been migrated.
+	 *
+	 * @since [version]
+	 *
+	 * @param array $args Optional query arguments to pass to WP_Query.
+	 * @return WP_Query
+	 */
+	public function get_migrated_posts( $args = array() ) {
+
+		return new WP_Query( wp_parse_args( $args, array(
+			'post_type' => $this->get_migrateable_post_types(),
+			'meta_query' => array(
+				array(
+					'key' => '_llms_blocks_migrated',
+					'value' => 'yes',
+				),
+			),
+		) ) );
+
 	}
 
 	/**
@@ -116,9 +164,10 @@ class LLMS_Blocks_Migrate {
 	/**
 	 * Migrate posts created prior to the block editor to have default LifterLMS templates
 	 *
+	 * @since 1.0.0
+	 * @since [version] Moves content updating methods to it's own function.
+	 *
 	 * @return  void
-	 * @since   1.0.0
-	 * @version 1.3.3
 	 */
 	public function migrate_post() {
 
@@ -138,22 +187,7 @@ class LLMS_Blocks_Migrate {
 			return;
 		}
 
-		// Update the post.
-		global $wpdb;
-		$wpdb->update(
-			$wpdb->posts,
-			array(
-				'post_content' => $post->post_content . "\r\r" . $this->get_template( $post->post_type ),
-			),
-			array(
-				'ID' => $post->ID,
-			),
-			array( '%s' ),
-			array( '%d' )
-		);
-
-		// Save migration state.
-		$this->update_migration_status( $post->ID );
+		$this->add_template_to_post( $post );
 
 		// Reload.
 		wp_safe_redirect(
@@ -170,6 +204,37 @@ class LLMS_Blocks_Migrate {
 	}
 
 	/**
+	 * Remove post type templates and any LifterLMS Blocks from a given post.
+	 *
+	 * @since [version]
+	 *
+	 * @param WP_Post $post Post object.
+	 * @return bool
+	 */
+	private function remove_template_from_post( $post ) {
+
+		$template = $this->get_template( $post->post_type );
+		if ( ! $template ) {
+			return;
+		}
+
+		// explicitly remove template pieces.
+		$parts = array_filter( array_map( 'trim', explode( "\n", $template ) ) );
+		$content = str_replace( $parts, '', $post->post_content );
+
+		// replace any remaining LLMS blocks not found in the template (also grabs any openers that have block settings JSON).
+		$content = trim( preg_replace( '#<!-- \/?wp:llms\/.* \/?-->#', '', $content ) );
+
+		if ( $this->update_post_content( $post->ID, $content ) ) {
+			$this->update_migration_status( $post->ID, 'no' );
+			return true;
+		}
+
+		return false;
+
+	}
+
+	/**
 	 * Removes core template action hooks from posts which have been migrated to the block editor
 	 *
 	 * @return  void
@@ -182,7 +247,7 @@ class LLMS_Blocks_Migrate {
 			return;
 		}
 
-		// Coure Information.
+		// Course Information.
 		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_meta_wrapper_start', 5 );
 		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_length', 10 );
 		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_single_difficulty', 20 );
@@ -246,6 +311,25 @@ class LLMS_Blocks_Migrate {
 	}
 
 	/**
+	 * Unmigrates migrated posts.
+	 *
+	 * @since [version]
+	 *
+	 * @return void.
+	 */
+	public function unmigrate_posts() {
+
+		$posts = $this->get_migrated_posts( array( 'posts_per_page' => 250 ) );
+
+		if ( $posts->posts ) {
+			foreach( $posts->posts as $post ) {
+				$this->remove_template_from_post( $post );
+			}
+		}
+
+	}
+
+	/**
 	 * Update post meta data to signal status of the editor migration.
 	 *
 	 * @param   int    $post_id WP_Post ID.
@@ -258,6 +342,36 @@ class LLMS_Blocks_Migrate {
 		update_post_meta( $post_id, '_llms_blocks_migrated', $status );
 	}
 
+	/**
+	 * Update the post content for a given post.
+	 *
+	 * @since [version]
+	 *
+	 * @param int $id WP_Post ID.
+	 * @param string $content Post content to update.
+	 * @return bool
+	 */
+	private function update_post_content( $id, $content ) {
+
+		global $wpdb;
+		$update = $wpdb->update(
+			$wpdb->posts,
+			array(
+				'post_content' => $content,
+			),
+			array(
+				'ID' => $id,
+			),
+			array( '%s' ),
+			array( '%d' )
+		);
+
+		return false === $update ? false : true;
+
+	}
+
 }
 
-return new LLMS_Blocks_Migrate();
+global $llms_blocks_migrate;
+$llms_blocks_migrate = new LLMS_Blocks_Migrate();
+return $llms_blocks_migrate;
