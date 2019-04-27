@@ -21,6 +21,6 @@
   },
   "devDependencies": {
     "gulp": "^4.0.0",
-    "lifterlms-lib-tasks": "^3.1.0"
+    "lifterlms-lib-tasks": "^3.5.0"
   }
 }
