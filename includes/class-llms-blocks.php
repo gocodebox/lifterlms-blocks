@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.4.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
  * LLMS_Blocks class
  *
  * @since 1.0.0
- * @since [version] Add status tools class.
+ * @since 1.4.0 Add status tools class.
  */
 class LLMS_Blocks {
 
@@ -58,7 +58,7 @@ class LLMS_Blocks {
 	 * Register all blocks & components.
 	 *
 	 * @since 1.0.0
-	 * @since [version] Add status tools class.
+	 * @since 1.4.0 Add status tools class.
 	 *
 	 * @return  void
 	 */

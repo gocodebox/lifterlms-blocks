@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.4.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
  * Handle post migration to the block editor.
  *
  * @since 1.0.0
- * @since [version] Add post unmigrator, improve migration script.
+ * @since 1.4.0 Add post unmigrator, improve migration script.
  */
 class LLMS_Blocks_Migrate {
 
@@ -22,7 +22,7 @@ class LLMS_Blocks_Migrate {
 	 * Constructor.
 	 *
 	 * @since 1.0.0
-	 * @since [version] Add action for unmigrating posts from the Tools & Utilities status screen.
+	 * @since 1.4.0 Add action for unmigrating posts from the Tools & Utilities status screen.
 	 */
 	public function __construct() {
 
@@ -37,7 +37,7 @@ class LLMS_Blocks_Migrate {
 	/**
 	 * Add a template to a post & save migration status in postmeta.
 	 *
-	 * @since [version]
+	 * @since 1.4.0
 	 *
 	 * @param WP_Post $post Post object.
 	 * @return bool
@@ -92,7 +92,7 @@ class LLMS_Blocks_Migrate {
 	/**
 	 * Retrieve a WP_Query for posts which have already been migrated.
 	 *
-	 * @since [version]
+	 * @since 1.4.0
 	 *
 	 * @param array $args Optional query arguments to pass to WP_Query.
 	 * @return WP_Query
@@ -170,7 +170,7 @@ class LLMS_Blocks_Migrate {
 	 * Migrate posts created prior to the block editor to have default LifterLMS templates
 	 *
 	 * @since 1.0.0
-	 * @since [version] Moves content updating methods to it's own function.
+	 * @since 1.4.0 Moves content updating methods to it's own function.
 	 *
 	 * @return  void
 	 */
@@ -211,7 +211,7 @@ class LLMS_Blocks_Migrate {
 	/**
 	 * Remove post type templates and any LifterLMS Blocks from a given post.
 	 *
-	 * @since [version]
+	 * @since 1.4.0
 	 *
 	 * @param WP_Post $post Post object.
 	 * @return bool
@@ -318,7 +318,7 @@ class LLMS_Blocks_Migrate {
 	/**
 	 * Unmigrates migrated posts.
 	 *
-	 * @since [version]
+	 * @since 1.4.0
 	 *
 	 * @return void.
 	 */
@@ -350,7 +350,7 @@ class LLMS_Blocks_Migrate {
 	/**
 	 * Update the post content for a given post.
 	 *
-	 * @since [version]
+	 * @since 1.4.0
 	 *
 	 * @param int    $id WP_Post ID.
 	 * @param string $content Post content to update.

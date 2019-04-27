@@ -4,8 +4,8 @@
  *
  * @package  LifterLMS_Blocks/Admin/Classes
  *
- * @since [version]
- * @version [version]
+ * @since 1.4.0
+ * @version 1.4.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -13,14 +13,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * LLMS_Blocks_Status_Tools class.
  *
- * @since [version]
+ * @since 1.4.0
  */
 class LLMS_Blocks_Status_Tools {
 
 	/**
 	 * Constructor.
 	 *
-	 * @since [version]
+	 * @since 1.4.0
 	 */
 	public function __construct() {
 
@@ -36,7 +36,7 @@ class LLMS_Blocks_Status_Tools {
 	/**
 	 * Add status page tools
 	 *
-	 * @since [version]
+	 * @since 1.4.0
 	 *
 	 * @param array $tools array of tools.
 	 * @return array
@@ -68,7 +68,7 @@ class LLMS_Blocks_Status_Tools {
 	/**
 	 * Run tool actions on tool page form submission.
 	 *
-	 * @since [version]
+	 * @since 1.4.0
 	 *
 	 * @param string $tool ID of the tool being run.
 	 * @return void

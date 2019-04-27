@@ -5,14 +5,14 @@
  * @package LifterLMS_Blocks/Tests
  *
  * @since 1.3.1
- * @since [version] Add tests for `add_template_to_post()` and `remove_template_from_post()` methods.
+ * @since 1.4.0 Add tests for `add_template_to_post()` and `remove_template_from_post()` methods.
  */
 class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 
 	/**
 	 * Assertion to compare post content while removing all returns and tabs.
 	 *
-	 * @since [version]
+	 * @since 1.4.0
 	 *
 	 * @param string $expected Expected string.
 	 * @param string $actual Actual string.
@@ -33,7 +33,7 @@ class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test the add_template_to_post() and remove_template_from_post() methods.
 	 *
-	 * @since [version]
+	 * @since 1.4.0
 	 *
 	 * @return void
 	 */
