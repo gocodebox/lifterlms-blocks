@@ -2,7 +2,7 @@
 /**
  * Plugin Initialization.
  *
- * @package  LifterLMS_Blocks/Classes
+ * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
  * @version [version]

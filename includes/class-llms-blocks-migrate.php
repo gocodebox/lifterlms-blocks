@@ -99,15 +99,20 @@ class LLMS_Blocks_Migrate {
 	 */
 	public function get_migrated_posts( $args = array() ) {
 
-		return new WP_Query( wp_parse_args( $args, array(
-			'post_type' => $this->get_migrateable_post_types(),
-			'meta_query' => array(
+		return new WP_Query(
+			wp_parse_args(
+				$args,
 				array(
-					'key' => '_llms_blocks_migrated',
-					'value' => 'yes',
-				),
-			),
-		) ) );
+					'post_type'  => $this->get_migrateable_post_types(),
+					'meta_query' => array(
+						array(
+							'key'   => '_llms_blocks_migrated',
+							'value' => 'yes',
+						),
+					),
+				)
+			)
+		);
 
 	}
 
@@ -219,7 +224,7 @@ class LLMS_Blocks_Migrate {
 		}
 
 		// explicitly remove template pieces.
-		$parts = array_filter( array_map( 'trim', explode( "\n", $template ) ) );
+		$parts   = array_filter( array_map( 'trim', explode( "\n", $template ) ) );
 		$content = str_replace( $parts, '', $post->post_content );
 
 		// replace any remaining LLMS blocks not found in the template (also grabs any openers that have block settings JSON).
@@ -322,7 +327,7 @@ class LLMS_Blocks_Migrate {
 		$posts = $this->get_migrated_posts( array( 'posts_per_page' => 250 ) );
 
 		if ( $posts->posts ) {
-			foreach( $posts->posts as $post ) {
+			foreach ( $posts->posts as $post ) {
 				$this->remove_template_from_post( $post );
 			}
 		}
@@ -347,7 +352,7 @@ class LLMS_Blocks_Migrate {
 	 *
 	 * @since [version]
 	 *
-	 * @param int $id WP_Post ID.
+	 * @param int    $id WP_Post ID.
 	 * @param string $content Post content to update.
 	 * @return bool
 	 */

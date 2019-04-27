@@ -4,6 +4,9 @@
  *
  * @package LifterLMS_Blocks/Main
  *
+ * @since 1.0.0
+ * @version 1.0.0
+ *
  * @wordpress-plugin
  * Plugin Name: LifterLMS Blocks
  * Plugin URI: https://github.com/gocodebox/lifterlms-blocks

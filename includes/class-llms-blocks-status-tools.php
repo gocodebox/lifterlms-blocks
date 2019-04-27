@@ -48,14 +48,18 @@ class LLMS_Blocks_Status_Tools {
 
 		if ( $posts->found_posts ) {
 
+			$desc  = __( 'Removes block editor code from all courses and lessons which were migrated to the block editor during an upgrade to WordPress 5.0 or later. If you installed the Classic Editor plugin after upgrading and see duplicate content items (such as the course syllabus or lesson mark complete button) this tool will remove the duplicates.', 'lifterlms' );
+			$desc .= '<br><br>';
+			// Translators: %d = number of affected courses/lessons.
+			$desc .= sprintf( __( 'Currently %d courses and/or lessons are affected.', 'lifterlms' ), $posts->found_posts );
+
 			$tools['blocks-unmigrate'] = array(
-				'description' => __( 'Removes block editor code from all courses and lessons which were migrated to the block editor during an upgrade to WordPress 5.0 or later. If you installed the Classic Editor plugin after upgrading and see duplicate content items (such as the course syllabus or lesson mark complete button) this tool will remove the duplicates.', 'lifterlms' ) . '<br><br>' . sprintf( __( 'Currently %d courses and/or lessons are affected.', 'lifterlms' ), $posts->found_posts ),
+				'description' => $desc,
 				'label'       => __( 'Remove LifterLMS Block Code', 'lifterlms' ),
 				'text'        => __( 'Remove Block Code', 'lifterlms' ),
 			);
 
 		}
-
 
 		return $tools;
 
