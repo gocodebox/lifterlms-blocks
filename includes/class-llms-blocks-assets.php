@@ -42,7 +42,7 @@ class LLMS_Blocks_Assets {
 		wp_enqueue_style(
 			'llms-blocks',
 			LLMS_BLOCKS_PLUGIN_DIR_URL . '/dist/blocks.style.build.css',
-			array( 'wp-blocks' ),
+			array( 'wp-block-library' ),
 			LLMS_BLOCKS_VERSION
 		);
 
