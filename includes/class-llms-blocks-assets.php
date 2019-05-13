@@ -41,7 +41,7 @@ class LLMS_Blocks_Assets {
 
 		wp_enqueue_style(
 			'llms-blocks',
-			LLMS_BLOCKS_PLUGIN_DIR_URL . '/dist/blocks.style.build.css',
+			LLMS_BLOCKS_PLUGIN_DIR_URL . 'dist/blocks.style.build.css',
 			array( 'wp-blocks' ),
 			LLMS_BLOCKS_VERSION
 		);
@@ -62,7 +62,7 @@ class LLMS_Blocks_Assets {
 
 		wp_enqueue_script(
 			'lifterlms_blocks-cgb-block-js',
-			LLMS_BLOCKS_PLUGIN_DIR_URL . '/dist/blocks.build.js',
+			LLMS_BLOCKS_PLUGIN_DIR_URL . 'dist/blocks.build.js',
 			array( 'wp-blocks', 'wp-i18n', 'wp-element' ),
 			LLMS_BLOCKS_VERSION,
 			true
