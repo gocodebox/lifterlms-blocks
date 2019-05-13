@@ -7,7 +7,7 @@
  * @package LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.4.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
  * Enqueue assets
  *
  * @since 1.0.0
- * @since [version] Fix double slash in asset path; remove invalid frontend css dependency.
+ * @since 1.4.1 Fix double slash in asset path; remove invalid frontend css dependency.
  */
 class LLMS_Blocks_Assets {
 
@@ -40,7 +40,7 @@ class LLMS_Blocks_Assets {
 	 * `wp-blocks`: includes block type registration and related functions.
 	 *
 	 * @since 1.0.0
-	 * @since [version] Fix double slash in asset path & remove invalid dependency.
+	 * @since 1.4.1 Fix double slash in asset path & remove invalid dependency.
 	 *
 	 * @return void
 	 */
@@ -63,7 +63,7 @@ class LLMS_Blocks_Assets {
 	 * `wp-i18n`: To internationalize the block's text.
 	 *
 	 * @since 1.0.0
-	 * @since [version] Fix double slash in asset path.
+	 * @since 1.4.1 Fix double slash in asset path.
 	 *
 	 * @return void
 	 */
