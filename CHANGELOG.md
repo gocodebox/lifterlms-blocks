@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.4.1 - 2019-05-13
+-------------------
+
++ Fixed double slashes in asset path of CSS and JS files, thanks [@pondermatic](https://github.com/pondermatic)!
+
+
 v1.4.0 - 2019-04-26
 -------------------
 

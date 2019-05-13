@@ -5,22 +5,27 @@
  * Enqueue CSS/JS of all the blocks.
  *
  * @package LifterLMS_Blocks/Main
- * @since   1.0.0
- * @version 1.0.1
+ *
+ * @since 1.0.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Enqueue assets
+ *
+ * @since 1.0.0
+ * @since [version] Fix double slash in asset path; remove invalid frontend css dependency.
  */
 class LLMS_Blocks_Assets {
 
 	/**
 	 * Constructor
 	 *
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @since 1.0.0
+	 *
+	 * @return void
 	 */
 	public function __construct() {
 
@@ -34,15 +39,17 @@ class LLMS_Blocks_Assets {
 	 *
 	 * `wp-blocks`: includes block type registration and related functions.
 	 *
-	 * @since   1.0.0
-	 * @version 1.0.1
+	 * @since 1.0.0
+	 * @since [version] Fix double slash in asset path & remove invalid dependency.
+	 *
+	 * @return void
 	 */
 	public function block_assets() {
 
 		wp_enqueue_style(
 			'llms-blocks',
 			LLMS_BLOCKS_PLUGIN_DIR_URL . 'dist/blocks.style.build.css',
-			array( 'wp-blocks' ),
+			array(),
 			LLMS_BLOCKS_VERSION
 		);
 
@@ -55,8 +62,10 @@ class LLMS_Blocks_Assets {
 	 * `wp-element`: includes the WordPress Element abstraction for describing the structure of your blocks.
 	 * `wp-i18n`: To internationalize the block's text.
 	 *
-	 * @since   1.0.0
-	 * @version 1.0.1
+	 * @since 1.0.0
+	 * @since [version] Fix double slash in asset path.
+	 *
+	 * @return void
 	 */
 	public function editor_assets() {
 
