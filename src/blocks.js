@@ -8,8 +8,8 @@
  * All blocks should be included here since this is the file that
  * Webpack is compiling as the input file.
  *
- * @since   1.0.0
- * @version 1.3.0
+ * @since 1.0.0
+ * @since [version] Register blocks conditionally based on post type.
  */
 
 const { registerBlockType } = wp.blocks;
@@ -34,12 +34,33 @@ import './block-visibility/'
 import './post-visibility/'
 
 /**
+ * Retrieve the current post type from LifterLMS script data.
+ *
+ * @since [version]
+ *
+ * @return string|false
+ */
+const get_current_post_type = () => {
+
+	if ( window.llms && window.llms.post && window.llms.post.post_type ) {
+		return window.llms.post.post_type;
+	}
+
+	return false;
+}
+
+/**
  * Register LifterLMS Core Blocks
+ *
+ * @since 1.0.0
+ * @since [version] Only register blocks for supported post types.
+ *
  * @return  void
- * @since   1.0.0
- * @version 1.0.0
  */
 const registerBlocks = () => {
+
+	const post_type = get_current_post_type();
+
 	[
 		courseContinueButton,
 		courseInfo,
@@ -53,13 +74,14 @@ const registerBlocks = () => {
 
 		const {
 			name,
+			post_types,
 			settings,
 		} = block;
 
-		registerBlockType( name, settings );
+		if ( ! post_types || -1 !== post_types.indexOf( post_type ) ) {
+			registerBlockType( name, settings );
+		}
 
-	} )
+	} );
 }
 registerBlocks();
-
-

@@ -2,6 +2,9 @@
  * BLOCK: llms/course-syllabus
  *
  * Renders a course syllabus
+ *
+ * @since 1.0.0
+ * @since [version] Add supported post type settings.
  */
 
 // WP Deps.
@@ -18,6 +21,13 @@ import Inspector from './inspect'
  * @type {String}
  */
 export const name = 'llms/course-syllabus';
+
+/**
+ * Array of supported post types.
+ *
+ * @type {Array}
+ */
+export const post_types = [ 'course' ];
 
 /**
  * Register Course Syllabus Block

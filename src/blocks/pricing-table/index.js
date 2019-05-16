@@ -3,7 +3,7 @@
  *
  * @since 1.0.0
  * @since 1.3.8 Explicitly import jQuery.
- * @version 1.3.8
+ * @since [version] Add supported post type settings.
  */
 
 // WP Deps.
@@ -31,6 +31,13 @@ import $ from 'jquery';
  * @type {String}
  */
 export const name = 'llms/pricing-table';
+
+/**
+ * Array of supported post types.
+ *
+ * @type {Array}
+ */
+export const post_types = [ 'course', 'llms_membership' ];
 
 /**
  * Register Course Syllabus Block

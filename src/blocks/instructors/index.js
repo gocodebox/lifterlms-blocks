@@ -3,8 +3,8 @@
  *
  * Renders instructor list
  *
- * @since   1.0.0
- * @version 1.0.0
+ * @since 1.0.0
+* @since [version] Add supported post type settings.
  */
 
 // WP Deps.
@@ -19,6 +19,13 @@ import './editor.scss'
  * @type {String}
  */
 export const name = 'llms/instructors'
+
+/**
+ * Array of supported post types.
+ *
+ * @type {Array}
+ */
+export const post_types = [ 'course' ];
 
 /**
  * Register Block.

@@ -1,8 +1,8 @@
 /**
- * BLOCK: lifterlms-blocks
+ * BLOCK: llms/course-progress
  *
- * Registering a basic block with Gutenberg.
- * Simple block, renders and saves the same content without any interactivity.
+ * @since 1.0.0
+ * @since [version] Add supported post type settings.
  */
 
 // Import CSS.
@@ -12,6 +12,13 @@ import './editor.scss';
 const { __, setLocaleData } = wp.i18n;
 
 // setLocaleData( window.LLMS.l10n.strings, 'lifterlms' );
+
+/**
+ * Array of supported post types.
+ *
+ * @type {Array}
+ */
+export const post_types = [ 'course' ];
 
 /**
  * Block Name

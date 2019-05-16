@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.5.0 - 2019-05-16
+-------------------
+
++ All blocks are now registered only for post types where they can actually be used.
+
+
 v1.4.1 - 2019-05-13
 -------------------
 

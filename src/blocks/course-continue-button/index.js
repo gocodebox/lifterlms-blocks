@@ -1,8 +1,8 @@
 /**
  * BLOCK: llms/course-continue-button
  *
- * Registering a basic block with Gutenberg.
- * Simple block, renders and saves the same content without any interactivity.
+ * @since 1.0.0
+ * @since [version] Add supported post type settings.
  */
 
 // WP Deps.
@@ -15,6 +15,13 @@ const { __ } = wp.i18n;
  * @type {String}
  */
 export const name = 'llms/course-continue-button';
+
+/**
+ * Array of supported post types.
+ *
+ * @type {Array}
+ */
+export const post_types = [ 'course' ];
 
 /**
  * Register: Course Continue Button Block
