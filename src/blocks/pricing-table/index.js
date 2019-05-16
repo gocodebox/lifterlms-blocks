@@ -3,7 +3,7 @@
  *
  * @since 1.0.0
  * @since 1.3.8 Explicitly import jQuery.
- * @since [version] Add supported post type settings.
+ * @since 1.5.0 Add supported post type settings.
  */
 
 // WP Deps.

@@ -2,7 +2,7 @@
  * BLOCK: llms/course-continue-button
  *
  * @since 1.0.0
- * @since [version] Add supported post type settings.
+ * @since 1.5.0 Add supported post type settings.
  */
 
 // WP Deps.

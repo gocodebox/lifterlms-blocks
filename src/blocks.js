@@ -9,7 +9,7 @@
  * Webpack is compiling as the input file.
  *
  * @since 1.0.0
- * @since [version] Register blocks conditionally based on post type.
+ * @since 1.5.0 Register blocks conditionally based on post type.
  */
 
 const { registerBlockType } = wp.blocks;
@@ -36,7 +36,7 @@ import './post-visibility/'
 /**
  * Retrieve the current post type from LifterLMS script data.
  *
- * @since [version]
+ * @since 1.5.0
  *
  * @return string|false
  */
@@ -53,7 +53,7 @@ const get_current_post_type = () => {
  * Register LifterLMS Core Blocks
  *
  * @since 1.0.0
- * @since [version] Only register blocks for supported post types.
+ * @since 1.5.0 Only register blocks for supported post types.
  *
  * @return  void
  */
