@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.5.1 - 2019-05-17
+-------------------
+
++ Only register block visibility settings on static blocks. Fixes an issue causing core (or 3rd party) dynamic blocks from being managed within the block editor.
+
+
 v1.5.0 - 2019-05-16
 -------------------
 

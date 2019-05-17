@@ -2,7 +2,7 @@
  * Add visibility attributes to all blocks
  *
  * @since 1.0.0
- * @since [version] Exits early for non LifterLMS dynamic blocks.
+ * @since 1.5.1 Exits early for non LifterLMS dynamic blocks.
  */
 export default function visibilityAttributes( settings, name ) {
 

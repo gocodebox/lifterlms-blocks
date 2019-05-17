@@ -4,15 +4,15 @@
  *
  * @package  LifterLMS_Blocks/Tests
  *
- * @since [version]
- * @version [version]
+ * @since 1.5.1
+ * @version 1.5.1
  */
 class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 
 	/**
 	 * Test the add_block_category() method
 	 *
-	 * @since [version]
+	 * @since 1.5.1
 	 *
 	 * @return void
 	 */
@@ -38,7 +38,7 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Ensure the WP core method get_block_categories() results in the `llms-blocks` category being added.
 	 *
-	 * @since [version]
+	 * @since 1.5.1
 	 *
 	 * @return void
 	 */
@@ -52,7 +52,7 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test the admin_print_scripts() method.
 	 *
-	 * @since [version]
+	 * @since 1.5.1
 	 *
 	 * @return void
 	 */
@@ -80,7 +80,7 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test the get_dynamic_block_names() method.
 	 *
-	 * @since [version]
+	 * @since 1.5.1
 	 *
 	 * @return void
 	 */

@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.5.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  * @since 1.4.0 Add status tools class.
- * @since [version] Output
+ * @since 1.5.1 Output
  */
 class LLMS_Blocks {
 
@@ -24,7 +24,7 @@ class LLMS_Blocks {
 	 *
 	 * @since 1.0.0
 	 * @since 1.3.0 Updated.
-	 * @since [version] Add `admin_print_scripts` hook to handle outputting dynamic block information.
+	 * @since 1.5.1 Add `admin_print_scripts` hook to handle outputting dynamic block information.
 	 */
 	public function __construct() {
 
@@ -64,7 +64,7 @@ class LLMS_Blocks {
 	 *
 	 * @link https://github.com/gocodebox/lifterlms-blocks/issues/30
 	 *
-	 * @since [version]
+	 * @since 1.5.1
 	 *
 	 * @return void
 	 */
@@ -82,7 +82,7 @@ class LLMS_Blocks {
 	/**
 	 * Retrieve a list of dynamic block names registered with WordPress (excluding LifterLMS blocks).
 	 *
-	 * @since [version]
+	 * @since 1.5.1
 	 *
 	 * @return array
 	 */

@@ -2,7 +2,7 @@
  * Add visibility attribute inspect and preview interfaces to qualifying blocks
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.5.1
  */
 
 // WP Deps.
@@ -27,7 +27,7 @@ import Preview from './preview';
  * Block edit inspector controls for visibility settings
  * @since 1.0.0
  * @since 1.1.0 Updated.
- * @since [version] Exits early for non LifterLMS dynamic blocks.
+ * @since 1.5.1 Exits early for non LifterLMS dynamic blocks.
  */
 export default createHigherOrderComponent( ( BlockEdit ) => {
 
