@@ -88,7 +88,7 @@ class LLMS_Blocks {
 	 */
 	private function get_dynamic_block_names() {
 		$blocks = array();
-		foreach( get_dynamic_block_names() as $name ) {
+		foreach ( get_dynamic_block_names() as $name ) {
 			if ( 0 !== strpos( $name, 'llms/' ) ) {
 				$blocks[] = $name;
 			}
