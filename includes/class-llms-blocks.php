@@ -38,10 +38,10 @@ class LLMS_Blocks {
 	/**
 	 * Add a custom LifterLMS block category
 	 *
-	 * @param   array $categories existing block cats.
-	 * @return  array
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @since 1.0.0
+	 *
+	 * @param array $categories existing block cats.
+	 * @return array
 	 */
 	public function add_block_category( $categories ) {
 		$categories[] = array(
@@ -135,11 +135,12 @@ class LLMS_Blocks {
 	/**
 	 * Remove deprecated core metaboxes.
 	 *
+	 * @since 1.0.0
+	 * @since 1.3.0 Updated.
+	 *
 	 * @param string $post_type WP post type of the current post.
 	 * @param string $post WP_Post.
-	 * @return  void
-	 * @since   1.0.0
-	 * @version 1.3.0
+	 * @return void
 	 */
 	public function remove_metaboxes( $post_type, $post ) {
 
