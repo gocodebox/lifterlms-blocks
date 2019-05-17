@@ -1,8 +1,8 @@
 /**
- * Add visibility attributes to all blocks
+ * Add visibility attribute inspect and preview interfaces to qualifying blocks
  *
- * @since    1.0.0
- * @version  1.1.0
+ * @since 1.0.0
+ * @version [version]
  */
 
 // WP Deps.
@@ -25,12 +25,22 @@ import Preview from './preview';
 
 /**
  * Block edit inspector controls for visibility settings
- * @since   1.0.0
- * @version 1.1.0
+ * @since 1.0.0
+ * @since 1.1.0 Updated.
+ * @since [version] Exits early for non LifterLMS dynamic blocks.
  */
 export default createHigherOrderComponent( ( BlockEdit ) => {
 
 	return ( props ) => {
+
+		// Exit early for dynamic blocks.
+		if ( -1 !== window.llms.dynamic_blocks.indexOf( props.name ) ) {
+			return (
+				<Fragment>
+					<BlockEdit { ...props } />
+				</Fragment>
+			);
+		}
 
 		const { attributes: {
 			llms_visibility,

@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version 1.4.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -15,22 +15,23 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  * @since 1.4.0 Add status tools class.
+ * @since [version] Output
  */
 class LLMS_Blocks {
 
 	/**
 	 * Constructor.
 	 *
-	 * @since    1.0.0
-	 * @version  1.3.0
+	 * @since 1.0.0
+	 * @since 1.3.0 Updated.
+	 * @since [version] Add `admin_print_scripts` hook to handle outputting dynamic block information.
 	 */
 	public function __construct() {
 
 		add_action( 'plugins_loaded', array( $this, 'init' ) );
-
 		add_action( 'add_meta_boxes', array( $this, 'remove_metaboxes' ), 999, 2 );
-
 		add_filter( 'block_categories', array( $this, 'add_block_category' ) );
+		add_action( 'admin_print_scripts', array( $this, 'admin_print_scripts' ), 15 );
 
 	}
 
@@ -52,6 +53,33 @@ class LLMS_Blocks {
 			),
 		);
 		return $categories;
+	}
+
+	/**
+	 * Print dynamic block information as a JS variable
+	 *
+	 * Allows us to ensure we only add visibility attributes to static blocks.
+	 * Prevents an issue causing rest api validation issues during attribute validation
+	 * because it's impossible to register custom attributes on a block.
+	 *
+	 * @since [version]
+	 *
+	 * @return void
+	 */
+	public function admin_print_scripts() {
+
+		$screen = get_current_screen();
+		if ( 'post' !== $screen->base ) {
+			return;
+		}
+
+		$blocks = array();
+		foreach( get_dynamic_block_names() as $name ) {
+			if ( 0 !== strpos( $name, 'llms/' ) ) {
+				$blocks[] = $name;
+			}
+		}
+		echo '<script>llms.dynamic_blocks = ' . wp_json_encode( $blocks ) . ';</script>';
 	}
 
 	/**
