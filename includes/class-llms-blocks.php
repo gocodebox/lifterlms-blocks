@@ -62,6 +62,8 @@ class LLMS_Blocks {
 	 * Prevents an issue causing rest api validation issues during attribute validation
 	 * because it's impossible to register custom attributes on a block.
 	 *
+	 * @link https://github.com/gocodebox/lifterlms-blocks/issues/30
+	 *
 	 * @since [version]
 	 *
 	 * @return void
@@ -69,17 +71,29 @@ class LLMS_Blocks {
 	public function admin_print_scripts() {
 
 		$screen = get_current_screen();
-		if ( 'post' !== $screen->base ) {
+		if ( ! $screen || 'post' !== $screen->base ) {
 			return;
 		}
 
+		echo '<script>window.llms.dynamic_blocks = ' . wp_json_encode( $this->get_dynamic_block_names() ) . ';</script>';
+
+	}
+
+	/**
+	 * Retrieve a list of dynamic block names registered with WordPress (excluding LifterLMS blocks).
+	 *
+	 * @since [version]
+	 *
+	 * @return array
+	 */
+	private function get_dynamic_block_names() {
 		$blocks = array();
 		foreach( get_dynamic_block_names() as $name ) {
 			if ( 0 !== strpos( $name, 'llms/' ) ) {
 				$blocks[] = $name;
 			}
 		}
-		echo '<script>llms.dynamic_blocks = ' . wp_json_encode( $blocks ) . ';</script>';
+		return apply_filters( 'llms_blocks_get_dynamic_block_names', $blocks );
 	}
 
 	/**
