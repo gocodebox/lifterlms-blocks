@@ -3,14 +3,18 @@
  * Modify LifterLMS Custom Post Types for Gutenberg editor compatibility
  *
  * @package  LifterLMS_Blocks/Main
- * @since    1.0.0
- * @version  1.0.0
+ *
+ * @since 1.0.0
+ * @version 1.5.2
  */
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Setup editor templates for LifterLMS custom Post Types
+ *
+ * @since  .0.0
+ * @since 1.5.2 Only `show_in_rest` for authenticated users with the `lifterls_instructor` capability.
  */
 class LLMS_Blocks_Post_Types {
 
@@ -42,14 +46,17 @@ class LLMS_Blocks_Post_Types {
 	/**
 	 * Enable the rest API for custom post types & taxonomies
 	 *
-	 * @param   array $data post type / taxonomy data.
-	 * @return  array
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @since 1.0.0
+	 * @since 1.5.2 Only `show_in_rest` for authenticated users with the `lifterls_instructor` capability.
+	 *
+	 * @param array $data post type / taxonomy data.
+	 * @return array
 	 */
 	public function enable_rest( $data ) {
 
-		$data['show_in_rest'] = true;
+		if ( current_user_can( 'lifterlms_instructor' ) ) {
+			$data['show_in_rest'] = true;
+		}
 
 		return $data;
 

@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.5.2 - 2019-08-14
+-------------------
+
++ Only enable REST for authenticated users with the `lifterlms_instructor` capability.
+
+
 v1.5.1 - 2019-05-17
 -------------------
 
