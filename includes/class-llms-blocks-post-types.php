@@ -36,6 +36,8 @@ class LLMS_Blocks_Post_Types {
 		add_filter( 'lifterlms_register_taxonomy_args_course_tag', array( $this, 'enable_rest' ), 5 );
 		add_filter( 'lifterlms_register_taxonomy_args_course_track', array( $this, 'enable_rest' ), 5 );
 		add_filter( 'lifterlms_register_taxonomy_args_course_difficulty', array( $this, 'enable_rest' ), 5 );
+		add_filter( 'lifterlms_register_taxonomy_args_membership_cat', array( $this, 'enable_rest' ), 5 );
+		add_filter( 'lifterlms_register_taxonomy_args_membership_tag', array( $this, 'enable_rest' ), 5 );
 
 		// Setup block editor templates.
 		add_filter( 'lifterlms_register_post_type_course', array( $this, 'add_course_template' ), 5 );
