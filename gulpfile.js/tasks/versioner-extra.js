@@ -1,11 +1,11 @@
 /**
  * -----------------------------------------------------------
- * versioner:extra
+ * versioner-extra
  * -----------------------------------------------------------
  *
  * Updates the version constant in the plugin main file.
  *
- * Usage: gulp versioner:extra -V 9.9.9
+ * Usage: gulp versioner-extra -V 9.9.9
  */
 
 var   gulp    = require( 'gulp' )
@@ -16,7 +16,7 @@ var   gulp    = require( 'gulp' )
 	, pkg = require( process.cwd() + '/package.json' )
 ;
 
-gulp.task( 'versioner:extra', function( cb ) {
+gulp.task( 'versioner-extra', function( cb ) {
 
     let the_version = argv.V;
 

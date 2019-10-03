@@ -17,7 +17,7 @@
 		"shortname": "Blocks"
 	},
 	"versioner": {
-		"custom": [ "versioner:extra" ],
+		"custom": [ "versioner-extra" ],
 		"src": [ "./*.php", "./includes/**/*.php", "./tests/**/*.php", "./src/**/*.js" ]
 	},
 	"zip": {
