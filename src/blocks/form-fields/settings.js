@@ -179,14 +179,10 @@ const settings = {
 			block = getBlockType( name ),
 			{
 				clientId,
-				blockSettings,
 				setAttributes,
 			} = props,
-			inspectorSupports = blockSettings.supports.llms_field_inspector,
-			{
-				fillInspectorControls,
-				fillAdvancedInspectorControls,
-			} = blockSettings;
+			inspectorSupports = block.supports.llms_field_inspector,
+			{ fillInspectorControls } = block;
 
 		let { attributes } = props;
 		attributes = setup_atts( attributes, block.attributes );
