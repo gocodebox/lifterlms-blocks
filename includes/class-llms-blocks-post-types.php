@@ -5,7 +5,7 @@
  * @package  LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @version 1.5.2
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -15,6 +15,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since  .0.0
  * @since 1.5.2 Only `show_in_rest` for authenticated users with the `lifterls_instructor` capability.
+ * @since [version] Add membership categories and tags to WordPress REST API.
  */
 class LLMS_Blocks_Post_Types {
 
@@ -22,6 +23,7 @@ class LLMS_Blocks_Post_Types {
 	 * Constructor
 	 *
 	 * @since    1.0.0
+	 * @since    [version] Add membership categories and tags to WordPress REST API.
 	 * @version  1.0.0
 	 */
 	public function __construct() {
