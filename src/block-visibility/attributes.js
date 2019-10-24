@@ -3,10 +3,26 @@
  *
  * @since 1.0.0
  * @since 1.5.1 Exits early for non LifterLMS dynamic blocks.
+ * @since [version] Setup visibility support checking as a module.
+ * @version [version]
+ */
+
+import check from './check';
+
+/**
+ * Add visibility settings to qualifying blocks.
+ *
+ * Block registration filter callback.
+ *
+ * @since 1.0.0
+ *
+ * @param {object} settings Block settings object.
+ * @param {string} name Block name, eg "core/paragraph".
+ * @return {object}
  */
 export default function visibilityAttributes( settings, name ) {
 
-	if ( -1 !== window.llms.dynamic_blocks.indexOf( name ) ) {
+	if ( ! check( settings, name ) ) {
 		return settings;
 	}
 
@@ -29,4 +45,4 @@ export default function visibilityAttributes( settings, name ) {
 
 	return settings
 
-}
+};

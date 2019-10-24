@@ -2,39 +2,45 @@
  * Add visibility attribute inspect and preview interfaces to qualifying blocks
  *
  * @since 1.0.0
- * @version 1.5.1
+ * @since [version] Import `InspectorControls` from `wp.blockEditor` in favor of deprecated `wp.editor`
+ * @version [version]
  */
 
 // WP Deps.
-const { __ } = wp.i18n;
-const { createHigherOrderComponent } = wp.compose;
-const { Fragment } = wp.element;
-const { InspectorControls } = wp.editor;
-const {
-	PanelBody,
-	PanelRow,
-	SelectControl,
-} = wp.components;
+const
+	{ __ }                         = wp.i18n,
+	{ createHigherOrderComponent } = wp.compose,
+	{ Fragment }                   = wp.element,
+	{ InspectorControls }          = wp.blockEditor,
+	{
+		PanelBody,
+		PanelRow,
+		SelectControl,
+	}                              = wp.components;
 
 // External Deps.
 import assign from 'lodash/assign';
-import SearchPost from '../components/search-post';
 
 // Internal Deps.
+import check from './check';
 import Preview from './preview';
+import SearchPost from '../components/search-post';
 
 /**
  * Block edit inspector controls for visibility settings
+ *
  * @since 1.0.0
  * @since 1.1.0 Updated.
  * @since 1.5.1 Exits early for non LifterLMS dynamic blocks.
+ * @since [version] Use `check()` helper to determine if the block supports visibility.
+ *              Add "logged in" and "logged out" block visibility options.
  */
 export default createHigherOrderComponent( ( BlockEdit ) => {
 
 	return ( props ) => {
 
-		// Exit early for dynamic blocks.
-		if ( -1 !== window.llms.dynamic_blocks.indexOf( props.name ) ) {
+		// Exit early if the block doesn't support visibility.
+		if ( ! check( wp.blocks.getBlockType( props.name ), name ) ) {
 			return (
 				<Fragment>
 					<BlockEdit { ...props } />
@@ -200,40 +206,44 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 								{ value: 'all', label: __( 'everyone', 'lifterlms' ) },
 								{ value: 'enrolled', label: __( 'enrolled users', 'lifterlms' ) },
 								{ value: 'not_enrolled', label: __( 'non-enrolled users or visitors', 'lifterlms' ) },
+								{ value: 'logged_in', label: __( 'logged in users', 'lifterlms' ) },
+								{ value: 'logged_out', label: __( 'logged out users', 'lifterlms' ) },
 							] }
 						/>
 
-
-						{ 'all' !== llms_visibility && (
-							<SelectControl
-								label={ getVisibilityInLabel( llms_visibility ) }
-								value={ llms_visibility_in }
-								onChange={ value => setAttributes( { llms_visibility_in: value } ) }
-								options={ getVisibilityInOptions() }
-							/>
-						) }
-
-						{ 'all' !== llms_visibility && ( 'list_all' === llms_visibility_in || 'list_any' === llms_visibility_in ) && (
-
-							<div>
-								<SearchPost
-									isMulti
-									postType="course"
-									label={ __( 'Courses', 'lifterlms' ) }
-									placeholder={ __( 'Search by course title...', 'lifterlms' ) }
-									onChange={ onChange }
-									selected={ llms_visibility_posts.filter( post => 'course' === post.type ) }
+						{ -1 === [ 'all', 'logged_in', 'logged_out' ].indexOf( llms_visibility ) && (
+							<Fragment>
+								<SelectControl
+									label={ getVisibilityInLabel( llms_visibility ) }
+									value={ llms_visibility_in }
+									onChange={ value => setAttributes( { llms_visibility_in: value } ) }
+									options={ getVisibilityInOptions() }
 								/>
-								<SearchPost
-									isMulti
-									postType="llms_membership"
-									label={ __( 'Memberships', 'lifterlms' ) }
-									placeholder={ __( 'Search by memebership title...', 'lifterlms' ) }
-									onChange={ onChange }
-									selected={ llms_visibility_posts.filter( post => 'llms_membership' === post.type ) }
-								/>
-							</div>
 
+								{ ( 'list_all' === llms_visibility_in || 'list_any' === llms_visibility_in ) && (
+
+									<div>
+										<SearchPost
+											isMulti
+											postType="course"
+											label={ __( 'Courses', 'lifterlms' ) }
+											placeholder={ __( 'Search by course title...', 'lifterlms' ) }
+											onChange={ onChange }
+											selected={ llms_visibility_posts.filter( post => 'course' === post.type ) }
+										/>
+										<SearchPost
+											isMulti
+											postType="llms_membership"
+											label={ __( 'Memberships', 'lifterlms' ) }
+											placeholder={ __( 'Search by memebership title...', 'lifterlms' ) }
+											onChange={ onChange }
+											selected={ llms_visibility_posts.filter( post => 'llms_membership' === post.type ) }
+										/>
+									</div>
+
+								) }
+
+							</Fragment>
 						) }
 
 					</PanelBody>
