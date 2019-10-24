@@ -1,15 +1,22 @@
-const { __ } = wp.i18n
-const { Component } = wp.element
-const {
-	InspectorControls,
-} = wp.editor
-const {
-	PanelBody,
-	PanelRow,
-	SelectControl,
-	TextControl,
-	ToggleControl,
-} = wp.components
+/**
+ * Inspector settings for the Course Information Block.
+ *
+ * @since 1.0.0
+ * @since [version] Import `InspectorControls` from `wp.blockEditor` in favor of deprecated `wp.editor`
+ * @version [version]
+ */
+
+const
+	{ __ }                = wp.i18n,
+	{ Component }         = wp.element,
+	{ InspectorControls } = wp.blockEditor,
+	{
+		PanelBody,
+		PanelRow,
+		SelectControl,
+		TextControl,
+		ToggleControl,
+	}                     = wp.components;
 
 export default class Inspector extends Component {
 
