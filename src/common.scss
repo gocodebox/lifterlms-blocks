@@ -64,3 +64,10 @@ $color-editor-text: #555d66;
 	}
 
 }
+
+@media (min-width: 600px) {
+  .edit-post-visual-editor .editor-block-list__block .editor-block-list__block-edit {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
