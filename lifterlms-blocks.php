@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
 
 // Define Constants.
 if ( ! defined( 'LLMS_BLOCKS_VERSION' ) ) {
-	define( 'LLMS_BLOCKS_VERSION', '1.5.2' );
+	define( 'LLMS_BLOCKS_VERSION', '1.6.0' );
 }
 
 /**
