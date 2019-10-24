@@ -1,8 +1,8 @@
 /**
  * Preview area for visibility settings on the block list
  *
- * @since    1.1.0
- * @version  1.1.0
+ * @since 1.1.0
+ * @version [version]
  */
 
 // WP Deps.
@@ -18,6 +18,17 @@ const {
 // Internal Deps.
 import './editor.scss';
 
+/**
+ * Preview component.
+ *
+ * Displays a lock icon on the block editor preview area for each block which indicates whether or not the block
+ * is open to all or has visibility settings enabled.
+ *
+ * @since 1.1.0
+ * @since [version] Use camelCase `className` in favor of `class`.
+ *
+ * @return {Class}
+ */
 export default class Preview extends Component {
 
 	render() {
@@ -28,7 +39,7 @@ export default class Preview extends Component {
 
 		return (
 			<Fragment>
-				<div class="llms-block-enrollment-visibility">
+				<div className="llms-block-enrollment-visibility">
 					{ 'all' !== llms_visibility && (
 						<Dashicon icon="lock" />
 					) }
