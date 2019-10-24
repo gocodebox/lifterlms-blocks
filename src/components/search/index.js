@@ -4,7 +4,7 @@
  * This component should not be used as is and instead should be exptended like "search-post" or "search-user"
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.6.0
  */
 
 // External Deps.
