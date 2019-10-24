@@ -5,7 +5,7 @@
  * @package  LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @version 1.5.2
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -15,6 +15,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since  .0.0
  * @since 1.5.2 Only `show_in_rest` for authenticated users with the `lifterls_instructor` capability.
+ * @since [version] Add membership categories and tags to WordPress REST API.
  */
 class LLMS_Blocks_Post_Types {
 
@@ -22,6 +23,7 @@ class LLMS_Blocks_Post_Types {
 	 * Constructor
 	 *
 	 * @since    1.0.0
+	 * @since    [version] Add membership categories and tags to WordPress REST API.
 	 * @version  1.0.0
 	 */
 	public function __construct() {
@@ -36,6 +38,8 @@ class LLMS_Blocks_Post_Types {
 		add_filter( 'lifterlms_register_taxonomy_args_course_tag', array( $this, 'enable_rest' ), 5 );
 		add_filter( 'lifterlms_register_taxonomy_args_course_track', array( $this, 'enable_rest' ), 5 );
 		add_filter( 'lifterlms_register_taxonomy_args_course_difficulty', array( $this, 'enable_rest' ), 5 );
+		add_filter( 'lifterlms_register_taxonomy_args_membership_cat', array( $this, 'enable_rest' ), 5 );
+		add_filter( 'lifterlms_register_taxonomy_args_membership_tag', array( $this, 'enable_rest' ), 5 );
 
 		// Setup block editor templates.
 		add_filter( 'lifterlms_register_post_type_course', array( $this, 'add_course_template' ), 5 );
