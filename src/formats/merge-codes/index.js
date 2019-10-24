@@ -3,8 +3,8 @@
  *
  * @link https://developer.wordpress.org/block-editor/tutorials/format-api/
  *
- * @since [version]
- * @version [version]
+ * @since 1.6.0
+ * @version 1.6.0
  */
 
 // Local deps.

@@ -1,8 +1,8 @@
 /**
  * Default settings for registering a field block.
  *
- * @since [version]
- * @version [version]
+ * @since 1.6.0
+ * @version 1.6.0
  */
 
 // WP Deps.
@@ -150,7 +150,7 @@ const settings = {
 	 * This stub can be overwritten when registering a new field block. It should return
 	 * a <Fragment> containing controls any custom controls and HTML for the block.
 	 *
-	 * @since [version]
+	 * @since 1.6.0
 	 *
 	 * @param {Object} attributes Block attributes.
 	 * @param {Function} setAttributes Reference to the block's setAttributes() function.

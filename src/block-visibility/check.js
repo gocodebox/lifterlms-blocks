@@ -1,7 +1,7 @@
 /**
  * Determine if a block should have visibility settings added to it.
  *
- * @since [version]
+ * @since 1.6.0
  *
  * @param {Object} settings Block settings object.
  * @param {String} name Block name, eg "core/paragraph".

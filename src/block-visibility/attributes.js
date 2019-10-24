@@ -3,8 +3,8 @@
  *
  * @since 1.0.0
  * @since 1.5.1 Exits early for non LifterLMS dynamic blocks.
- * @since [version] Setup visibility support checking as a module.
- * @version [version]
+ * @since 1.6.0 Setup visibility support checking as a module.
+ * @version 1.6.0
  */
 
 import check from './check';

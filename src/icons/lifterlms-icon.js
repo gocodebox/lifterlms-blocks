@@ -2,8 +2,8 @@
  * LifterLMS Rocket Icon
  *
  * @since 1.0.0
- * @since [version] Pass style rules as camelCase.
- * @version [version]
+ * @since 1.6.0 Pass style rules as camelCase.
+ * @version 1.6.0
  */
 
 const

@@ -5,8 +5,8 @@
  * @package LifterLMS_Blocks/Tests
  *
  * @since 1.0.0
- * @since [version] Add tests for `logged_out` and `logged_in` visiblity settings.
- * @version [version]
+ * @since 1.6.0 Add tests for `logged_out` and `logged_in` visiblity settings.
+ * @version 1.6.0
  */
 class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 
@@ -610,7 +610,7 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test block visibility for the "logged_in" setting
 	 *
-	 * @since [version]
+	 * @since 1.6.0
 	 *
 	 * @return  void
 	 */
@@ -633,7 +633,7 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test block visibility for the "logged_out" setting
 	 *
-	 * @since [version]
+	 * @since 1.6.0
 	 *
 	 * @return  void
 	 */

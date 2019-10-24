@@ -1,8 +1,8 @@
 /**
  * BLOCK: llms/form-field-select-state-l10n
  *
- * @since [version]
- * @version [version]
+ * @since 1.6.0
+ * @version 1.6.0
  */
 
 // WP Deps.

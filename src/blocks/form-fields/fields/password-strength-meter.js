@@ -1,8 +1,8 @@
 /**
  * BLOCK: llms/form-field-password-strength-meter
  *
- * @since [version]
- * @version [version]
+ * @since 1.6.0
+ * @version 1.6.0
  */
 
 // WP Deps.
@@ -78,7 +78,7 @@ settings.attributes.min_length = {
 /**
  * Fill the controls slot with additional controls specific to this field.
  *
- * @since [version]
+ * @since 1.6.0
  *
  * @param {Object} attributes Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
@@ -124,7 +124,7 @@ settings.fillInspectorControls = ( attributes, setAttributes, props ) => {
  *
  * The "save" property must be specified and must be a valid function.
  *
- * @since [version]
+ * @since 1.6.0
  *
  * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
  *

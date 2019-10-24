@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.6.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.0.0
  * @since 1.4.0 Add status tools class.
  * @since 1.5.1 Output dynamic block information for JS consumption.
- * @since [version] Add form field block category
+ * @since 1.6.0 Add form field block category
  */
 class LLMS_Blocks {
 
@@ -40,7 +40,7 @@ class LLMS_Blocks {
 	 * Add a custom LifterLMS block category
 	 *
 	 * @since 1.0.0
-	 * @since [version] Add Form Fields category.
+	 * @since 1.6.0 Add Form Fields category.
 	 *
 	 * @param array $categories existing block cats.
 	 * @return array

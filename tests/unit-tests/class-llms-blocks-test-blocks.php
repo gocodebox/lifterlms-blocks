@@ -5,7 +5,7 @@
  * @package  LifterLMS_Blocks/Tests
  *
  * @since 1.5.1
- * @version [version]
+ * @version 1.6.0
  */
 class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 
@@ -13,7 +13,7 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 	 * Test the add_block_category() method
 	 *
 	 * @since 1.5.1
-	 * @since [version] Update test to accommodate form fields cat.
+	 * @since 1.6.0 Update test to accommodate form fields cat.
 	 *
 	 * @return void
 	 */

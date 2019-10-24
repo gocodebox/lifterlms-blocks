@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.6.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
  * LLMS_Blocks_Visibility class.
  *
  * @since 1.0.0
- * @since [version] Add logic for `logged_in` and `logged_out` block visibility options.
+ * @since 1.6.0 Add logic for `logged_in` and `logged_out` block visibility options.
  *               Adjusted priority of `render_block` filter to 20.
  */
 class LLMS_Blocks_Visibility {
@@ -23,7 +23,7 @@ class LLMS_Blocks_Visibility {
 	 * Constructor.
 	 *
 	 * @since 1.0.0
-	 * @since [version] Adjusted priority of `render_block` filter to 20.
+	 * @since 1.6.0 Adjusted priority of `render_block` filter to 20.
 	 *
 	 * @return void
 	 */
@@ -114,7 +114,7 @@ class LLMS_Blocks_Visibility {
 	 * Filter block output.
 	 *
 	 * @since 1.0.0
-	 * @since [version] Add logic for `logged_in` and `logged_out` block visibility options.
+	 * @since 1.6.0 Add logic for `logged_in` and `logged_out` block visibility options.
 	 *
 	 * @param   string $content block inner content.
 	 * @param   array  $block   block info.

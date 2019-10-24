@@ -4,8 +4,8 @@
  * Recursively loops through all nested blocks and returns
  * a flat array of every block in the layout.
  *
- * @since [version]
- * @version [version]
+ * @since 1.6.0
+ * @version 1.6.0
  */
 
 // WP Deps.

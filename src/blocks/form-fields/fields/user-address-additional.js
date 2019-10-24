@@ -1,8 +1,8 @@
 /**
  * BLOCK: llms/form-field-user-address-additional
  *
- * @since [version]
- * @version [version]
+ * @since 1.6.0
+ * @version 1.6.0
  */
 
 // WP Deps.

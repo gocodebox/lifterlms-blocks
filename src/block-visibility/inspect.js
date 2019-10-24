@@ -2,8 +2,8 @@
  * Add visibility attribute inspect and preview interfaces to qualifying blocks
  *
  * @since 1.0.0
- * @since [version] Import `InspectorControls` from `wp.blockEditor` in favor of deprecated `wp.editor`
- * @version [version]
+ * @since 1.6.0 Import `InspectorControls` from `wp.blockEditor` in favor of deprecated `wp.editor`
+ * @version 1.6.0
  */
 
 // WP Deps.
@@ -32,7 +32,7 @@ import SearchPost from '../components/search-post';
  * @since 1.0.0
  * @since 1.1.0 Updated.
  * @since 1.5.1 Exits early for non LifterLMS dynamic blocks.
- * @since [version] Use `check()` helper to determine if the block supports visibility.
+ * @since 1.6.0 Use `check()` helper to determine if the block supports visibility.
  *              Add "logged in" and "logged out" block visibility options.
  */
 export default createHigherOrderComponent( ( BlockEdit ) => {

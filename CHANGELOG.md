@@ -1,6 +1,18 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.6.0 - 2019-10-24
+-------------------
+
++ Feature: Added form field blocks for use on the Forms manager.
++ Feature: Add logic for `logged_in` and `logged_out` block visibility options.
++ Update: Added isDisabled property to Search component.
++ Update: Adjusted priority of `render_block` filter to 20.
++ Bug fix: Import `InspectorControls` from `wp.blockEditor` in favor of deprecated `wp.editor`
++ Bug fix: Automatically store course/membership instructor with `post_author` data when the post is created.
++ Bug fix: Pass style rules as camelCase.
+
+
 v1.5.2 - 2019-08-14
 -------------------
 

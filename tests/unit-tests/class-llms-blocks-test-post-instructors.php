@@ -6,15 +6,15 @@
  *
  * @group post_instructors
  *
- * @since [version]
- * @version [version]
+ * @since 1.6.0
+ * @version 1.6.0
  */
 class LLMS_Blocks_Test_Post_Instructors extends LLMS_Blocks_Unit_Test_Case {
 
 	/**
 	 * Setup the test case.
 	 *
-	 * @since [version]
+	 * @since 1.6.0
 	 *
 	 * @return void
 	 */
@@ -26,7 +26,7 @@ class LLMS_Blocks_Test_Post_Instructors extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Don't set an instructor during a post update.
 	 *
-	 * @since [version]
+	 * @since 1.6.0
 	 *
 	 * @return void
 	 */
@@ -40,7 +40,7 @@ class LLMS_Blocks_Test_Post_Instructors extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Don't set an instructor if the post doesn't have an author.
 	 *
-	 * @since [version]
+	 * @since 1.6.0
 	 *
 	 * @return void
 	 */
@@ -54,7 +54,7 @@ class LLMS_Blocks_Test_Post_Instructors extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Don't set an instructor if the post isn't a LifterLMS post type
 	 *
-	 * @since [version]
+	 * @since 1.6.0
 	 *
 	 * @return void
 	 */
@@ -68,7 +68,7 @@ class LLMS_Blocks_Test_Post_Instructors extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Don't set an instructor if the post isn't a support LifterLMS post type
 	 *
-	 * @since [version]
+	 * @since 1.6.0
 	 *
 	 * @return void
 	 */
@@ -85,7 +85,7 @@ class LLMS_Blocks_Test_Post_Instructors extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Setting instructor works.
 	 *
-	 * @since [version]
+	 * @since 1.6.0
 	 *
 	 * @return [type]
 	 */
@@ -107,7 +107,7 @@ class LLMS_Blocks_Test_Post_Instructors extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test setting default instructor via hooks.
 	 *
-	 * @since [version]
+	 * @since 1.6.0
 	 *
 	 * @return void
 	 */

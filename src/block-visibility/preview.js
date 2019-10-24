@@ -2,7 +2,7 @@
  * Preview area for visibility settings on the block list
  *
  * @since 1.1.0
- * @version [version]
+ * @version 1.6.0
  */
 
 // WP Deps.
@@ -25,7 +25,7 @@ import './editor.scss';
  * is open to all or has visibility settings enabled.
  *
  * @since 1.1.0
- * @since [version] Use camelCase `className` in favor of `class`.
+ * @since 1.6.0 Use camelCase `className` in favor of `class`.
  *
  * @return {Class}
  */

@@ -2,7 +2,7 @@
  * Editor Sidebar Plugins
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.6.0
  */
 
 // WP Deps.
@@ -57,7 +57,7 @@ registerPlugin( 'llms', {
 /**
  * Register the forms post type document settings sidebar plugin.
  *
- * @since [version]
+ * @since 1.6.0
  */
 registerPlugin( 'llms-forms-doc-settings',  {
 	render: FormDocumentSettings,

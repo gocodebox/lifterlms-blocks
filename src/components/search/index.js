@@ -32,7 +32,7 @@ const
  * Async Search Component
  *
  * @since 1.0.0
- * @since [version] Added isDisabled property.
+ * @since 1.6.0 Added isDisabled property.
  */
 export default class Search extends Component {
 

@@ -2,8 +2,8 @@
  * Inspector settings for the Course Information Block.
  *
  * @since 1.0.0
- * @since [version] Import `InspectorControls` from `wp.blockEditor` in favor of deprecated `wp.editor`
- * @version [version]
+ * @since 1.6.0 Import `InspectorControls` from `wp.blockEditor` in favor of deprecated `wp.editor`
+ * @version 1.6.0
  */
 
 const

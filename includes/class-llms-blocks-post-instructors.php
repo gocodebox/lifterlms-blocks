@@ -5,7 +5,7 @@
  * @package  LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.6.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
  * Handle course & membership instructors data.
  *
  * @since 1.0.0
- * @since [version] Automatically store course/membership instructor with `post_author` data when the post is created.
+ * @since 1.6.0 Automatically store course/membership instructor with `post_author` data when the post is created.
  */
 class LLMS_Blocks_Post_Instructors {
 
@@ -89,7 +89,7 @@ class LLMS_Blocks_Post_Instructors {
 	/**
 	 * Automatically sets instructor data when a new course/membership is created.
 	 *
-	 * @since [version]
+	 * @since 1.6.0
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/save_post_post-post_type/
 	 *
@@ -151,7 +151,7 @@ class LLMS_Blocks_Post_Instructors {
 	 * Register custom meta fields.
 	 *
 	 * @since 1.0.0
-	 * @since [version] Use `$this->post_types` for loop.
+	 * @since 1.6.0 Use `$this->post_types` for loop.
 	 *
 	 * @return  void
 	 */

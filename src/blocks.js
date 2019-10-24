@@ -3,7 +3,7 @@
  *
  * @since 1.0.0
  * @since 1.5.0 Register blocks conditionally based on post type.
- * @since [version] Register form field blocks.
+ * @since 1.6.0 Register form field blocks.
  */
 
 // WP Deps.
@@ -71,7 +71,7 @@ const get_current_post_type = () => {
  *
  * @since 1.0.0
  * @since 1.5.0 Only register blocks for supported post types.
- * @since [version] Add form field blocks.
+ * @since 1.6.0 Add form field blocks.
  *
  * @return  void
  */
@@ -119,7 +119,7 @@ registerBlocks();
 /**
  * Deregister all blocks no on a whitelist on the forms post type.
  *
- * @since [version]
+ * @since 1.6.0
  *
  * @return {void}
  */
@@ -138,7 +138,7 @@ const deregisterBlocksForForms = () => {
 /**
  * On editor dom ready.
  *
- * @since [version]
+ * @since 1.6.0
  *
  * @return {void}
  */

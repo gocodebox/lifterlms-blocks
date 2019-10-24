@@ -1,8 +1,8 @@
 /**
  * BLOCK: llms/form-field-redeem-voucher
  *
- * @since [version]
- * @version [version]
+ * @since 1.6.0
+ * @version 1.6.0
  */
 
 // WP Deps.
@@ -72,7 +72,7 @@ settings.attributes.toggleable = {
 /**
  * Fill the controls slot with additional controls specific to this field.
  *
- * @since [version]
+ * @since 1.6.0
  *
  * @param {Object} attributes Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.

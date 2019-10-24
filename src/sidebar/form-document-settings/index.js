@@ -3,8 +3,8 @@
  *
  * Displays only on `llms_form` post types.
  *
- * @since [version]
- * @version [version]
+ * @since 1.6.0
+ * @version 1.6.0
  */
 
 // WP Deps.
@@ -39,14 +39,14 @@ window.llms.plugins.LLMSFormDocSettings = LLMSFormDocSettings;
 /**
  * Render the "Form Settings" metabox in the "PluginDocumentSettingPanel" slot.
  *
- * @since [version]
+ * @since 1.6.0
  */
 class FormDocumentSettings extends Component {
 
 	/**
 	 * Constructor.
 	 *
-	 * @since [version]
+	 * @since 1.6.0
 	 *
 	 * @return {Void}
 	 */
@@ -59,7 +59,7 @@ class FormDocumentSettings extends Component {
 	/**
 	 * Render the Sidebar.
 	 *
-	 * @since [version]
+	 * @since 1.6.0
 	 *
 	 * @return {Fragment}
 	 */
@@ -121,7 +121,7 @@ class FormDocumentSettings extends Component {
 /**
  * Retrieve custom meta information when retrieving posts.
  *
- * @since [version]
+ * @since 1.6.0
  */
 const applyWithSelect = withSelect( ( select ) => {
 	const { getEditedPostAttribute } = select( 'core/editor' );
@@ -134,7 +134,7 @@ const applyWithSelect = withSelect( ( select ) => {
 /**
  * Save custom meta information when saving posts.
  *
- * @since [version]
+ * @since 1.6.0
  */
 const applyWithDispatch = withDispatch( ( dispatch, { _llms_form_location } ) => {
 
