@@ -3,8 +3,10 @@
  * Test LLMS_Blocks_Visibility class & methods.
  *
  * @package LifterLMS_Blocks/Tests
- * @since   1.0.0
- * @version 1.2.0
+ *
+ * @since 1.0.0
+ * @since [version] Add tests for `logged_out` and `logged_in` visiblity settings.
+ * @version [version]
  */
 class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 
@@ -602,6 +604,53 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 
 		// Log out & start over.
 		wp_set_current_user( null );
+
+	}
+
+	/**
+	 * Test block visibility for the "logged_in" setting
+	 *
+	 * @since [version]
+	 *
+	 * @return  void
+	 */
+	public function test_visibility_show_to_logged_in_only() {
+
+		$post = $this->create_post( array(
+			'llms_visibility' => 'logged_in',
+		) );
+
+		// empty with no logged in user.
+		wp_set_current_user( null );
+		$this->assertPostContentEquals( '', $post->post_content );
+
+		// displays to logged in user.
+		wp_set_current_user( $this->factory->student->create() );
+		$this->assertPostContentEquals( $post->post_content, $post->post_content );
+
+	}
+
+	/**
+	 * Test block visibility for the "logged_out" setting
+	 *
+	 * @since [version]
+	 *
+	 * @return  void
+	 */
+	public function test_visibility_show_to_logged_out_only() {
+
+		$post = $this->create_post( array(
+			'llms_visibility' => 'logged_out',
+		) );
+
+		// displays content when no user.
+		wp_set_current_user( null );
+		$this->assertPostContentEquals( $post->post_content, $post->post_content );
+
+		// show nothing to logged in user.
+		wp_set_current_user( $this->factory->student->create() );
+		$this->assertPostContentEquals( '', $post->post_content );
+
 
 	}
 

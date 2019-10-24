@@ -5,7 +5,7 @@
  * @package  LifterLMS_Blocks/Tests
  *
  * @since 1.5.1
- * @version 1.5.1
+ * @version [version]
  */
 class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 
@@ -13,6 +13,7 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 	 * Test the add_block_category() method
 	 *
 	 * @since 1.5.1
+	 * @since [version] Update test to accommodate form fields cat.
 	 *
 	 * @return void
 	 */
@@ -20,9 +21,15 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 
 		$obj = new LLMS_Blocks();
 
-		$our_cat = array(
-			'slug'  => 'llms-blocks',
-			'title' => 'LifterLMS Blocks',
+		$our_cats = array(
+			array(
+				'slug'  => 'llms-blocks',
+				'title' => 'LifterLMS Blocks',
+			),
+			array(
+				'slug'  => 'llms-fields',
+				'title' => 'LifterLMS Form Fields',
+			),
 		);
 
 		$existing = array(
@@ -30,8 +37,8 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 			'title' => 'Fake Cat Title',
 		);
 
-		$this->assertSame( array( $our_cat ), $obj->add_block_category( array() ) );
-		$this->assertSame( array( $existing, $our_cat ), $obj->add_block_category( array( $existing ) ) );
+		$this->assertSame( $our_cats, $obj->add_block_category( array() ) );
+		$this->assertSame( array( $existing, $our_cats[0], $our_cats[1] ), $obj->add_block_category( array( $existing ) ) );
 
 	}
 
