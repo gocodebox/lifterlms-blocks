@@ -1,38 +1,46 @@
 <?php
 /**
- * Manage block visibilty options.
+ * Manage block visibility options.
  *
- * @package  LifterLMS_Blocks/Classes
- * @since    1.0.0
- * @version  1.0.0
+ * @package LifterLMS_Blocks/Classes
+ *
+ * @since 1.0.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * LLMS_Blocks_Visibility class.
+ *
+ * @since 1.0.0
+ * @since [version] Add logic for `logged_in` and `logged_out` block visibility options.
+ *               Adjusted priority of `render_block` filter to 20.
  */
 class LLMS_Blocks_Visibility {
 
 	/**
 	 * Constructor.
 	 *
-	 * @since    1.0.0
-	 * @version  1.0.0
+	 * @since 1.0.0
+	 * @since [version] Adjusted priority of `render_block` filter to 20.
+	 *
+	 * @return void
 	 */
 	public function __construct() {
 
-		add_filter( 'render_block', array( $this, 'maybe_filter_block' ), 10, 2 );
+		add_filter( 'render_block', array( $this, 'maybe_filter_block' ), 20, 2 );
 
 	}
 
 	/**
 	 * Retrieve visibility attributes.
+	 *
 	 * Used when registering dynamic blocks via PHP.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return  array
-	 * @since   1.0.0
-	 * @version 1.0.0
 	 */
 	public static function get_attributes() {
 		return array(
@@ -54,11 +62,11 @@ class LLMS_Blocks_Visibility {
 	/**
 	 * Get the number of enrollments for a user by post type.
 	 *
+	 * @since   1.0.0
+	 *
 	 * @param   int    $uid  WP_User ID.
 	 * @param   string $type post type.
 	 * @return  int
-	 * @since   1.0.0
-	 * @version 1.0.0
 	 */
 	private function get_enrollment_count_by_type( $uid, $type ) {
 
@@ -84,10 +92,10 @@ class LLMS_Blocks_Visibility {
 	/**
 	 * Parse post ids from block visibility in attrs.
 	 *
+	 * @since   1.0.0
+	 *
 	 * @param   array $attrs block attrs.
 	 * @return  array
-	 * @since   1.0.0
-	 * @version 1.0.0
 	 */
 	private function get_post_ids_from_block_attributes( $attrs ) {
 
@@ -105,11 +113,12 @@ class LLMS_Blocks_Visibility {
 	/**
 	 * Filter block output.
 	 *
+	 * @since 1.0.0
+	 * @since [version] Add logic for `logged_in` and `logged_out` block visibility options.
+	 *
 	 * @param   string $content block inner content.
 	 * @param   array  $block   block info.
 	 * @return  string
-	 * @since   1.0.0
-	 * @version 1.0.0
 	 */
 	public function maybe_filter_block( $content, $block ) {
 
@@ -120,8 +129,17 @@ class LLMS_Blocks_Visibility {
 
 		$uid = get_current_user_id();
 
-		// Enrolled checks.
-		if ( 'enrolled' === $block['attrs']['llms_visibility'] && ! empty( $block['attrs']['llms_visibility_in'] ) ) {
+		// Show only to logged in users.
+		if ( 'logged_in' === $block['attrs']['llms_visibility'] && ! $uid  ) {
+
+			$content = '';
+
+			// Show only to logged out users.
+		} elseif ( 'logged_out' === $block['attrs']['llms_visibility'] && $uid ) {
+			$content = '';
+
+			// Enrolled checks.
+		} elseif ( 'enrolled' === $block['attrs']['llms_visibility'] && ! empty( $block['attrs']['llms_visibility_in'] ) ) {
 
 			// Don't have to run any further checks if we don't have a user.
 			if ( ! $uid ) {
@@ -173,7 +191,6 @@ class LLMS_Blocks_Visibility {
 		return apply_filters( 'llms_blocks_visibility_render_block', $content, $block );
 
 	}
-
 
 }
 
