@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version 1.5.1
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -15,7 +15,8 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  * @since 1.4.0 Add status tools class.
- * @since 1.5.1 Output
+ * @since 1.5.1 Output dynamic block information for JS consumption.
+ * @since [version] Add form field block category
  */
 class LLMS_Blocks {
 
@@ -39,6 +40,7 @@ class LLMS_Blocks {
 	 * Add a custom LifterLMS block category
 	 *
 	 * @since 1.0.0
+	 * @since [version] Add Form Fields category.
 	 *
 	 * @param array $categories existing block cats.
 	 * @return array
@@ -46,11 +48,11 @@ class LLMS_Blocks {
 	public function add_block_category( $categories ) {
 		$categories[] = array(
 			'slug'  => 'llms-blocks',
-			'title' => sprintf(
-				// Translators: %1$s = LifterLMS.
-				__( '%1$s Blocks', 'lifterlms' ),
-				'LifterLMS'
-			),
+			'title' => __( 'LifterLMS Blocks', 'lifterlms' ),
+		);
+		$categories[] = array(
+			'slug'  => 'llms-fields',
+			'title' => __( 'LifterLMS Form Fields', 'lifterlms' ),
 		);
 		return $categories;
 	}
