@@ -3,27 +3,37 @@
  *
  * This component should not be used as is and instead should be exptended like "search-post" or "search-user"
  *
- * @since    1.0.0
- * @version  1.0.0
+ * @since 1.0.0
+ * @version[version]
  */
 
+// External Deps.
 import { debounce } from 'throttle-debounce'
 import AsyncSelect from 'react-select/lib/Async';
 
+// Internal Deps.
 import './editor.scss';
 
-const {
-	__,
-	sprintf,
-} = wp.i18n
-const {
-	Component,
-	Fragment,
-} = wp.element
-const {
-	BaseControl
-} = wp.components
+// WP Deps.
+const
+	{
+		__,
+		sprintf,
+	} = wp.i18n,
+	{
+		Component,
+		Fragment,
+	} = wp.element,
+	{
+		BaseControl
+	} = wp.components;
 
+/**
+ * Async Search Component
+ *
+ * @since 1.0.0
+ * @since [version] Added isDisabled property.
+ */
 export default class Search extends Component {
 
 	getSearchUrl = ( search, per_page ) => (
@@ -54,6 +64,7 @@ export default class Search extends Component {
 		const {
 			label,
 			isMulti,
+			isDisabled,
 			onChange,
 			placeholder,
 			postTypes,
@@ -69,6 +80,7 @@ export default class Search extends Component {
 					<AsyncSelect
 						className="llms-search"
 						isMulti={ isMulti }
+						isDisabled={ isDisabled }
 						value={ selected }
 						defaultOptions={ selected }
 						placeholder={ placeholder }
