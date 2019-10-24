@@ -1,13 +1,35 @@
-const { Fragment } = wp.element
-const { Slot } = wp.components;
-const { PluginSidebar, PluginSidebarMoreMenuItem } = wp.editPost;
-const { registerPlugin } = wp.plugins;
+/**
+ * Editor Sidebar Plugins
+ *
+ * @since 1.0.0
+ * @version [version]
+ */
 
-import Instructors from './instructors'
-import LifterLMSIcon from '../icons/lifterlms-icon'
+// WP Deps.
+const
+	{ Slot }           = wp.components,
+	{ select }         = wp.data,
+	{
+		PluginSidebar,
+		PluginSidebarMoreMenuItem,
+	}                  = wp.editPost,
+	{ Fragment }       = wp.element,
+	{ registerPlugin } = wp.plugins;
 
-const sidebar = () => {
-	if ( -1 !== [ 'course', 'llms_membership' ].indexOf( wp.data.select( 'core/editor' ).getCurrentPostType() ) ) {
+// Internal Deps.
+import Instructors from './instructors';
+import FormDocumentSettings from './form-document-settings';
+import LifterLMSIcon from '../icons/lifterlms-icon';
+
+/**
+ * Registers the sidebar plugin for Courses and Memberships
+ *
+ * @since 1.0.0
+ *
+ * @return {?Fragment}
+ */
+const Sidebar = () => {
+	if ( -1 !== [ 'course', 'llms_membership' ].indexOf( select( 'core/editor' ).getCurrentPostType() ) ) {
 		return (
 			<Fragment>
 				<PluginSidebarMoreMenuItem
@@ -27,8 +49,17 @@ const sidebar = () => {
 	}
 	return null;
 }
-
 registerPlugin( 'llms', {
-	render: sidebar,
+	render: Sidebar,
 	icon: <LifterLMSIcon />
 } )
+
+/**
+ * Register the forms post type document settings sidebar plugin.
+ *
+ * @since [version]
+ */
+registerPlugin( 'llms-forms-doc-settings',  {
+	render: FormDocumentSettings,
+	icon: '',
+} );
