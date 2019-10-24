@@ -1,11 +1,19 @@
-const { Fragment } = wp.element
+/**
+ * LifterLMS Rocket Icon
+ *
+ * @since 1.0.0
+ * @since [version] Pass style rules as camelCase.
+ * @version [version]
+ */
 
-const style = {
-	'fill-rule': 'evenodd',
-	'clip-rule': 'evenodd',
-	'stroke-linejoin': 'round',
-	'stroke-miterlimit': 1.41421,
-};
+const
+	{ Fragment } = wp.element,
+	style = {
+		'fillRule': 'evenodd',
+		'clipRule': 'evenodd',
+		'strokeLinejoin': 'round',
+		'strokeMiterlimit': 1.41421,
+	};
 
 export default () => (
 	<Fragment>
@@ -17,4 +25,4 @@ export default () => (
 			</g>
 		</svg>
 	</Fragment>
-)
+);
