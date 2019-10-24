@@ -1,0 +1,89 @@
+//
+// Editor Styles for Admin Panel
+//
+// @since [version]
+// @version [version]
+//
+
+.llms-pwd-meter {
+	border: 1px solid #e35b5b;
+	margin-top: 5px;
+	border-radius: 4px;
+	overflow: hidden;
+	> div {
+		background: rgba( 227, 91, 91, 0.25 );
+		font-size: 75%;
+		padding: 0 5px;
+		width: 25%;
+	}
+}
+
+.llms-fields {
+
+	input {
+		border: 1px solid #999;
+		border-radius: 4px;
+		padding: 4px 8px;
+		&:focus::placeholder {
+			opacity: 0;
+		}
+	}
+
+	.llms-field {
+
+		label.llms-is-required {
+			> div { display: inline; }
+			&:after {
+				content: '\00a0*';
+				color: #dc5757;
+			}
+		}
+
+	}
+
+}
+
+
+li.llms-field-option {
+	display: flex;
+
+	&.llms-sort-helper {
+		background: #fff;
+		border: 1px solid $color-grey-light;
+		height: auto !important;
+		padding: 5px 10px;
+		z-index: 999;
+	}
+
+	.llms-field-opt-default {
+		margin-top: 6px;
+		.components-radio-control__input {
+			margin-right: 0;
+		}
+	}
+
+	.llms-field-opt-default,
+	.llms-field-opt-text,
+	.llms-field-opt-text .components-base-control__field {
+		margin-bottom: 0 !important;
+	}
+
+	.llms-drag-handle {
+		flex: 0.8;
+		padding-top: 6px;
+	}
+
+	.llms-field-opt-default,
+	.llms-del-field-opt-wrap {
+		flex: 1;
+	}
+
+	.llms-del-field-opt-wrap {
+		margin: -2px 0 0 4px;
+	}
+
+	.llms-field-opt-text-wrap {
+		flex: 7;
+	}
+
+}
