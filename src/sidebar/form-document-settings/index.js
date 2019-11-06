@@ -24,7 +24,6 @@ const
 	{ Component, Fragment }        = wp.element,
 	{ __ }                         = wp.i18n;
 
-
 const { Fill, Slot } = createSlotFill( 'LLMSFormDocSettings' );
 
 const LLMSFormDocSettings = ( { children } ) => (
@@ -40,6 +39,7 @@ window.llms.plugins.LLMSFormDocSettings = LLMSFormDocSettings;
  * Render the "Form Settings" metabox in the "PluginDocumentSettingPanel" slot.
  *
  * @since 1.6.0
+ * @since [version] Return early during renders on WP Core 5.2 and earlier where the `PluginDocumentSettingPanel` doesn't exist.
  */
 class FormDocumentSettings extends Component {
 
@@ -54,18 +54,22 @@ class FormDocumentSettings extends Component {
 		super( ...arguments );
 	};
 
-	// updateLocation = ( newLoc ) => {};
-
 	/**
 	 * Render the Sidebar.
 	 *
 	 * @since 1.6.0
+	 * @since [version] Add early return for WP Core 5.2 and earlier where the `PluginDocumentSettingPanel` doesn't exist.
 	 *
 	 * @return {Fragment}
 	 */
 	render = () => {
 
-		if ( 'llms_form' !== select( 'core/editor' ).getCurrentPostType() ) {
+		// This slot doesn't exist until WordPress 5.3.
+		if ( 'undefined' === typeof PluginDocumentSettingPanel ) {
+			return null;
+		}
+
+		else if ( 'llms_form' !== select( 'core/editor' ).getCurrentPostType() ) {
 			return null;
 		}
 
