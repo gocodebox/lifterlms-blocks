@@ -130,7 +130,7 @@ class LLMS_Blocks_Visibility {
 		$uid = get_current_user_id();
 
 		// Show only to logged in users.
-		if ( 'logged_in' === $block['attrs']['llms_visibility'] && ! $uid  ) {
+		if ( 'logged_in' === $block['attrs']['llms_visibility'] && ! $uid ) {
 
 			$content = '';
 
