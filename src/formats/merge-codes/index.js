@@ -4,6 +4,7 @@
  * @link https://developer.wordpress.org/block-editor/tutorials/format-api/
  *
  * @since 1.6.0
+ * @since [version] Import from `wp.editor` when `wp.blockEditor` is not available.
  * @version 1.6.0
  */
 
@@ -12,7 +13,7 @@ import LifterLMSIcon from '../../icons/lifterlms-icon';
 
 // WP Deps.
 const
-	{ RichTextToolbarButton } = wp.blockEditor,
+	{ RichTextToolbarButton } = wp.blockEditor || wp.editor,
 	{
 		Button,
 		ClipboardButton,

@@ -3,6 +3,7 @@
  *
  * @since 1.0.0
  * @since 1.6.0 Import `InspectorControls` from `wp.blockEditor` in favor of deprecated `wp.editor`
+ * @since [version] Import `InspectorControls` from `wp.blockEditor` and fallback to `wp.editor` to maintain backwards compatibility.
  * @version 1.6.0
  */
 
@@ -11,7 +12,7 @@ const
 	{ __ }                         = wp.i18n,
 	{ createHigherOrderComponent } = wp.compose,
 	{ Fragment }                   = wp.element,
-	{ InspectorControls }          = wp.blockEditor,
+	{ InspectorControls }          = wp.blockEditor || wp.editor,
 	{
 		PanelBody,
 		PanelRow,

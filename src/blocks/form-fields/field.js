@@ -2,11 +2,12 @@
  * Generic Field component
  *
  * @since 1.6.0
+ * @since [version] Fall back to `wp.editor` for `RichText` import when `wp.blockEditor` is not found.
  * @version 1.6.0
  */
 
 const
-	{ RichText } = wp.blockEditor,
+	{ RichText } = wp.blockEditor || wp.editor,
 	{ __ }       = wp.i18n,
 	{
 		RawHTML,

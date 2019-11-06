@@ -2,6 +2,7 @@
  * Inspector settings for the Course Information Block.
  *
  * @since 1.6.0
+ * @since [version] Import from `wp.editor` when `wp.blockEditor` is not available.
  * @version 1.6.0
  */
 
@@ -10,7 +11,7 @@ const
 	{
 		InspectorControls,
 		InspectorAdvancedControls,
-	}                     = wp.blockEditor,
+	}                     = wp.blockEditor || wp.editor,
 	{
 		PanelBody,
 		PanelRow,
