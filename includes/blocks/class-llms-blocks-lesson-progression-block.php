@@ -2,9 +2,10 @@
 /**
  * Lesson Progression block.
  *
- * @package  LifterLMS_Blocks/Abstracts
- * @since    1.0.0
- * @version  1.1.0
+ * @package  LifterLMS_Blocks/Blocks
+ *
+ * @since 1.0.0
+ * @version [version]
  *
  * @render_hook llms_lesson-progression-block_render
  */
@@ -12,7 +13,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Course syllabus block class.
+ * Lesson progression block
+ *
+ * @since 1.0.0
+ * @since 1.1.0 Unknown
+ * @since [version] Don't output an empty render message for free lessons.
  */
 class LLMS_Blocks_Lesson_Progression_Block extends LLMS_Blocks_Abstract_Block {
 
@@ -43,6 +48,21 @@ class LLMS_Blocks_Lesson_Progression_Block extends LLMS_Blocks_Abstract_Block {
 
 		add_action( $this->get_render_hook(), 'lifterlms_template_complete_lesson_link', 10 );
 
+	}
+
+	/**
+	 * Output a message when no HTML was rendered
+	 *
+	 * @since [version]
+	 *
+	 * @return string
+	 */
+	public function get_empty_render_message() {
+		$lesson = llms_get_post( get_the_ID() );
+		if ( $lesson && $lesson->is_free() ) {
+			return '';
+		}
+		return parent::get_empty_render_message();
 	}
 
 	/**
