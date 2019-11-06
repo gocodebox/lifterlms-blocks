@@ -2,7 +2,8 @@
 /**
  * Instructors block.
  *
- * @package  LifterLMS_Blocks/Abstracts
+ * @package  LifterLMS_Blocks/Blocks
+ *
  * @since    1.0.0
  * @version  1.1.0
  *

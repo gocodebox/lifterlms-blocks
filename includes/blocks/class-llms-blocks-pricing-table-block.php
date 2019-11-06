@@ -3,6 +3,7 @@
  * Course pricing table block.
  *
  * @package  LifterLMS_Blocks/Blocks
+ *
  * @since    1.0.0
  * @version  1.3.7
  *
