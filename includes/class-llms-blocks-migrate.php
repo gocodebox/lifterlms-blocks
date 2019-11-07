@@ -14,7 +14,8 @@ defined( 'ABSPATH' ) || exit;
  * Handle post migration to the block editor.
  *
  * @since 1.0.0
- * @since 1.4.0 Add post unmigrator, improve migration script.
+ * @since [version] Perform migrations on `current_screen` instead of `admin_enqueue_scripts`.
+ *              Migrate membership post types to use pricing table blocks.
  */
 class LLMS_Blocks_Migrate {
 
@@ -23,10 +24,11 @@ class LLMS_Blocks_Migrate {
 	 *
 	 * @since 1.0.0
 	 * @since 1.4.0 Add action for unmigrating posts from the Tools & Utilities status screen.
+	 * @since [version] Perform migrations on `current_screen` instead of `admin_enqueue_scripts`.
 	 */
 	public function __construct() {
 
-		add_action( 'admin_enqueue_scripts', array( $this, 'migrate_post' ), 2 );
+		add_action( 'current_screen', array( $this, 'migrate_post' ) );
 		add_action( 'wp', array( $this, 'remove_template_hooks' ) );
 		add_action( 'llms_blocks_unmigrate_posts', array( $this, 'unmigrate_posts' ) );
 
@@ -81,12 +83,13 @@ class LLMS_Blocks_Migrate {
 	/**
 	 * Get an array of post types which can be migrated.
 	 *
+	 * @since 1.3.3
+	 * @since [version] Memberships are migrateable.
+	 *
 	 * @return  array
-	 * @since   1.3.3
-	 * @version 1.3.3
 	 */
 	public function get_migrateable_post_types() {
-		return apply_filters( 'llms_blocks_migrateable_post_types', array( 'course', 'lesson' ) );
+		return apply_filters( 'llms_blocks_migrateable_post_types', array( 'course', 'lesson', 'llms_membership' ) );
 	}
 
 	/**
@@ -119,10 +122,11 @@ class LLMS_Blocks_Migrate {
 	/**
 	 * Retrieve the block template by post type.
 	 *
+	 * @since 1.0.0
+	 * @since [version] Add membership template.
+	 *
 	 * @param   string $post_type wp post type.
 	 * @return  string
-	 * @since   1.0.0
-	 * @version 1.0.0
 	 */
 	private function get_template( $post_type ) {
 
@@ -152,7 +156,6 @@ class LLMS_Blocks_Migrate {
 
 		if ( 'lesson' === $post_type ) {
 			ob_start();
-
 			?>
 			<!-- wp:llms/lesson-progression /-->
 
@@ -160,6 +163,16 @@ class LLMS_Blocks_Migrate {
 			<?php
 
 			return ob_get_clean();
+		}
+
+		if ( 'llms_membership' ) {
+
+			ob_start();
+			?>
+			<!-- wp:llms/pricing-table /-->
+			<?php
+			return ob_get_clean();
+
 		}
 
 		return '';
@@ -171,23 +184,32 @@ class LLMS_Blocks_Migrate {
 	 *
 	 * @since 1.0.0
 	 * @since 1.4.0 Moves content updating methods to it's own function.
+	 * @since [version] Add Membership post type support.
+	 *              Update to handle being triggered by hook `current_screen` instead of `admin_enqueue_scripts`.
 	 *
 	 * @return  void
 	 */
 	public function migrate_post() {
 
-		global $pagenow, $post;
+		global $pagenow;
 
-		if ( 'post.php' !== $pagenow || ! is_object( $post ) ) {
+		if ( 'post.php' !== $pagenow ) {
 			return;
 		}
 
-		if ( ! $this->should_migrate_post( $post->ID ) ) {
+		$post_id = llms_filter_input( INPUT_GET, 'post', FILTER_SANITIZE_NUMBER_INT );
+		$post = $post_id ? get_post( $post_id ) : false;
+
+		if ( ! $post || ! $this->should_migrate_post( $post->ID ) ) {
 			return;
 		}
 
-		// Already Has blocks.
-		if ( has_blocks( $post->post_content ) ) {
+		if ( 'llms_membership' === $post->post_type ) {
+			if ( has_block( 'llms/pricing-table', $post->post_content ) ) {
+				$this->update_migration_status( $post->ID );
+				return;
+			}
+		} elseif ( has_blocks( $post->post_content ) ) {
 			$this->update_migration_status( $post->ID );
 			return;
 		}
@@ -198,8 +220,8 @@ class LLMS_Blocks_Migrate {
 		wp_safe_redirect(
 			add_query_arg(
 				array(
-					'post'   => $post->ID,
-					'action' => 'edit',
+					'post'         => $post->ID,
+					'action'       => 'edit',
 				),
 				admin_url( 'post.php' )
 			)
