@@ -6,6 +6,7 @@
  *
  * @since 1.3.1
  * @since 1.4.0 Add tests for `add_template_to_post()` and `remove_template_from_post()` methods.
+ * @since [version] Add tests for membership post type migrations.
  */
 class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 
@@ -41,6 +42,14 @@ class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 
 		$migrate = new LLMS_Blocks_Migrate();
 
+		$blocks = '<!-- wp:heading -->
+<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hoc enim constituto in philosophia constituta sunt omnia.</p>
+<!-- /wp:paragraph -->';
+
 		// Posts to create and test against.
 		$args = array(
 			array(
@@ -48,26 +57,21 @@ class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 			),
 			array(
 				'post_type' => 'course',
-				'post_content' => '<!-- wp:heading -->
-<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hoc enim constituto in philosophia constituta sunt omnia.</p>
-<!-- /wp:paragraph -->',
+				'post_content' => $blocks,
 			),
 			array(
 				'post_type' => 'lesson',
 			),
 			array(
 				'post_type' => 'lesson',
-				'post_content' => '<!-- wp:heading {"level":3} -->
-<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hoc enim constituto in philosophia constituta sunt omnia.</p>
-<!-- /wp:paragraph -->',
+				'post_content' => $blocks,
+			),
+			array(
+				'post_type' => 'llms_membership',
+			),
+			array(
+				'post_type' => 'llms_membership',
+				'post_content' => $blocks,
 			),
 		);
 		foreach ( $args as $args ) {
@@ -102,6 +106,16 @@ class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 <!-- /wp:paragraph -->';
 			} elseif ( 'lesson' === $args['post_type'] ) {
 				$content = str_replace( '<!-- wp:llms/lesson-progression /-->', '<!-- wp:llms/lesson-progression {"llms_visibility":"enrolled","llms_visibility_in":"this"} /-->', $this->get_post_content( $post->ID ) );
+				$content .= '
+<!-- wp:paragraph -->
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hoc enim constituto in philosophia constituta sunt omnia.</p>
+<!-- /wp:paragraph -->';
+				$expect = $orig_content . '
+<!-- wp:paragraph -->
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hoc enim constituto in philosophia constituta sunt omnia.</p>
+<!-- /wp:paragraph -->';
+			} elseif ( 'llms_membership' === $args['post_type'] ) {
+				$content = str_replace( '<!-- wp:llms/pricing-table /-->', '<!-- wp:llms/pricing-table {"llms_visibility":"enrolled","llms_visibility_in":"this"} /-->', $this->get_post_content( $post->ID ) );
 				$content .= '
 <!-- wp:paragraph -->
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hoc enim constituto in philosophia constituta sunt omnia.</p>
@@ -168,23 +182,25 @@ class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test get_migrateable_post_types() method
 	 *
+	 * @since 1.3.3
+	 * @since [version] Memberships are migrateable.
+	 *
 	 * @return  void
-	 * @since   1.3.3
-	 * @version 1.3.3
 	 */
 	public function test_get_migrateable_post_types() {
 
 		$class = new LLMS_Blocks_Migrate();
-		$this->assertEquals( array( 'course', 'lesson' ), $class->get_migrateable_post_types() );
+		$this->assertEquals( array( 'course', 'lesson', 'llms_membership' ), $class->get_migrateable_post_types() );
 
 	}
 
 	/**
 	 * Test should_migrate_post() method
 	 *
+	 * @since 1.3.3
+	 * @since [version] Memberships should migrate.
+	 *
 	 * @return  void
-	 * @since   1.3.3
-	 * @version 1.3.3
 	 */
 	public function test_should_migrate_post() {
 
@@ -197,7 +213,8 @@ class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 			'page' => false,
 			'course' => true,
 			'lesson' => true,
-			'llms_membership' => false,
+			'section' => false,
+			'llms_membership' => true,
 		);
 		foreach ( $types as $type => $expect ) {
 
