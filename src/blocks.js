@@ -165,11 +165,8 @@ wp.domReady( () => {
 
 		} );
 
-	}
-
-	// Expose the fields module.
-	if ( 'llms_form' === get_current_post_type() ) {
 		doAction( 'llms_form_fields_ready', formFields );
+
 	}
 
 } );
