@@ -4,7 +4,8 @@
  * Renders instructor list
  *
  * @since 1.0.0
-* @since 1.5.0 Add supported post type settings.
+ * @since 1.5.0 Add supported post type settings.
+ * @since [version] Add membership post type support.
  */
 
 // WP Deps.
@@ -25,7 +26,7 @@ export const name = 'llms/instructors'
  *
  * @type {Array}
  */
-export const post_types = [ 'course' ];
+export const post_types = [ 'course', 'llms_membership' ];
 
 /**
  * Register Block.
