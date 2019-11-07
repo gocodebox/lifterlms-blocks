@@ -13,18 +13,21 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Setup editor templates for LifterLMS custom Post Types
  *
- * @since  .0.0
+ * @since 1.0.0
  * @since 1.5.2 Only `show_in_rest` for authenticated users with the `lifterls_instructor` capability.
  * @since [version] Add membership categories and tags to WordPress REST API.
+ *              Add membership post type editor template.
  */
 class LLMS_Blocks_Post_Types {
 
 	/**
 	 * Constructor
 	 *
-	 * @since    1.0.0
-	 * @since    [version] Add membership categories and tags to WordPress REST API.
-	 * @version  1.0.0
+	 * @since 1.0.0
+	 * @since [version] Add membership categories and tags to WordPress REST API.
+	 *               Add membership post type editor template.
+	 *
+	 * @return void
 	 */
 	public function __construct() {
 
@@ -43,6 +46,7 @@ class LLMS_Blocks_Post_Types {
 
 		// Setup block editor templates.
 		add_filter( 'lifterlms_register_post_type_course', array( $this, 'add_course_template' ), 5 );
+		add_filter( 'lifterlms_register_post_type_membership', array( $this, 'add_membership_template' ), 5 );
 		add_filter( 'lifterlms_register_post_type_lesson', array( $this, 'add_lesson_template' ), 5 );
 
 	}
@@ -89,6 +93,31 @@ class LLMS_Blocks_Post_Types {
 			array( 'llms/course-progress' ),
 			array( 'llms/course-continue-button' ),
 			array( 'llms/course-syllabus' ),
+		);
+
+		return $post_type;
+
+	}
+
+	/**
+	 * Add an editor template for memberships.
+	 *
+	 * @since [version]
+	 *
+	 * @param array $post_type Post type registration data.
+	 * @return array
+	 */
+	public function add_membership_template( $post_type ) {
+
+		$post_type['template'] = array(
+			array(
+				'core/paragraph',
+				array(
+					'placeholder' => __( 'Add a short description of your membership visible to all visitors...', 'lifterlms' ),
+				),
+			),
+			array( 'llms/instructors' ),
+			array( 'llms/pricing-table' ),
 		);
 
 		return $post_type;
