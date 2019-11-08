@@ -6,7 +6,7 @@
  *
  * @since 1.3.1
  * @since 1.4.0 Add tests for `add_template_to_post()` and `remove_template_from_post()` methods.
- * @since [version] Add tests for membership post type migrations.
+ * @since 1.7.0 Add tests for membership post type migrations.
  */
 class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 
@@ -183,7 +183,7 @@ class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 	 * Test get_migrateable_post_types() method
 	 *
 	 * @since 1.3.3
-	 * @since [version] Memberships are migrateable.
+	 * @since 1.7.0 Memberships are migrateable.
 	 *
 	 * @return  void
 	 */
@@ -198,7 +198,7 @@ class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 	 * Test should_migrate_post() method
 	 *
 	 * @since 1.3.3
-	 * @since [version] Memberships should migrate.
+	 * @since 1.7.0 Memberships should migrate.
 	 *
 	 * @return  void
 	 */

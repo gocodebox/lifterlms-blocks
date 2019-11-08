@@ -4,7 +4,7 @@
  * Displays only on `llms_form` post types.
  *
  * @since 1.6.0
- * @version [version]
+ * @version 1.7.0
  */
 
 // WP Deps.
@@ -40,7 +40,7 @@ window.llms.plugins.LLMSFormDocSettings = LLMSFormDocSettings;
  * Render the "Form Settings" metabox in the "PluginDocumentSettingPanel" slot.
  *
  * @since 1.6.0
- * @since [version] Return early during renders on WP Core 5.2 and earlier where the `PluginDocumentSettingPanel` doesn't exist.
+ * @since 1.7.0 Return early during renders on WP Core 5.2 and earlier where the `PluginDocumentSettingPanel` doesn't exist.
  */
 class FormDocumentSettings extends Component {
 
@@ -59,7 +59,7 @@ class FormDocumentSettings extends Component {
 	 * Render the Sidebar.
 	 *
 	 * @since 1.6.0
-	 * @since [version] Add early return for WP Core 5.2 and earlier where the `PluginDocumentSettingPanel` doesn't exist.
+	 * @since 1.7.0 Add early return for WP Core 5.2 and earlier where the `PluginDocumentSettingPanel` doesn't exist.
 	 *              Add link to form location on frontend if available.
 	 *
 	 * @return {Fragment}
@@ -139,7 +139,7 @@ class FormDocumentSettings extends Component {
  * Retrieve custom meta information when retrieving posts.
  *
  * @since 1.6.0
- * @since [version] Retrieve form link attribute.
+ * @since 1.7.0 Retrieve form link attribute.
  */
 const applyWithSelect = withSelect( ( select ) => {
 	const {

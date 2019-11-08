@@ -1,8 +1,8 @@
 /**
  * Handle DOM Ready Events.
  *
- * @since [version]
- * @version [version]
+ * @since 1.7.0
+ * @version 1.7.0
  */
 
 // WP Deps.
@@ -18,7 +18,7 @@ import { getCurrentPostType } from '../util/';
  * On editor DOM ready.
  *
  * @since 1.6.0
- * @since [version] Refactor for simplicity.
+ * @since 1.7.0 Refactor for simplicity.
  *
  * @return {void}
  */

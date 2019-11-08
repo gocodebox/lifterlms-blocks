@@ -2,7 +2,7 @@
  * Generic Field component
  *
  * @since 1.6.0
- * @since [version] Fall back to `wp.editor` for `RichText` import when `wp.blockEditor` is not found.
+ * @since 1.7.0 Fall back to `wp.editor` for `RichText` import when `wp.blockEditor` is not found.
  * @version 1.6.0
  */
 

@@ -39,7 +39,7 @@ export const flattenBlocks = ( blocks ) => {
  * Retrieve an array of flattened blocks from the block editor.
  *
  * @since 1.6.0
- * @since [version] Backwards compat fix: fallback to `core/editor` if `core/block-editor` isn't available
+ * @since 1.7.0 Backwards compat fix: fallback to `core/editor` if `core/block-editor` isn't available
  *
  * @return {Array}
  */

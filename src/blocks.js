@@ -4,7 +4,7 @@
  * @since 1.0.0
  * @since 1.5.0 Register blocks conditionally based on post type.
  * @since 1.6.0 Register form field blocks.
- * @since [version] Refactor into multiple files for clarity and organization.
+ * @since 1.7.0 Refactor into multiple files for clarity and organization.
  */
 
 // Internal Deps.

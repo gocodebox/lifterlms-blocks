@@ -1,8 +1,8 @@
 /**
  * Utilities
  *
- * @since [version]
- * @version [version]
+ * @since 1.7.0
+ * @version 1.7.0
  */
 
 import { flattenBlocks } from './get-blocks-flat';

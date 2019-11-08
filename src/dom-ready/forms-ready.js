@@ -1,8 +1,8 @@
 /**
  * DOM Ready Events for LifterLMS Forms (llms_forms) Post Type
  *
- * @since [version]
- * @version [version]
+ * @since 1.7.0
+ * @version 1.7.0
  */
 
 // WP Deps.
@@ -29,7 +29,7 @@ import { getBlocksFlat } from '../util/';
  *
  * Because forms don't have drafts.
  *
- * @since [version]
+ * @since 1.7.0
  *
  * @return {void}
  */
@@ -58,7 +58,7 @@ const hideDraftButton = () => {
  *
  * Watches editor data and if the field is removed throw an error notice.
  *
- * @since [version]
+ * @since 1.7.0
  *
  * @return {void}
  */
@@ -109,7 +109,7 @@ const ensureEmailFieldExists = () => {
 /**
  * Default Function, runs all methods and events.
  *
- * @since [version]
+ * @since 1.7.0
  *
  * @return {void}
  */

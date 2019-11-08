@@ -2,7 +2,7 @@
  * Default settings for registering a field block.
  *
  * @since 1.6.0
- * @version [version]
+ * @version 1.7.0
  */
 
 // WP Deps.
@@ -166,7 +166,7 @@ const settings = {
 	 * The "edit" property must be a valid function.
 	 *
 	 * @since 1.6.0
-	 * @since [version] Backwards compatibility fixes for WP Core 5.2 and earlier.
+	 * @since 1.7.0 Backwards compatibility fixes for WP Core 5.2 and earlier.
 	 *
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 *

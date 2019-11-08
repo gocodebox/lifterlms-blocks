@@ -5,7 +5,7 @@
  * @package  LifterLMS_Blocks/Blocks
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.7.0
  *
  * @render_hook llms_lesson-progression-block_render
  */
@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  * @since 1.1.0 Unknown
- * @since [version] Don't output an empty render message for free lessons.
+ * @since 1.7.0 Don't output an empty render message for free lessons.
  */
 class LLMS_Blocks_Lesson_Progression_Block extends LLMS_Blocks_Abstract_Block {
 
@@ -53,7 +53,7 @@ class LLMS_Blocks_Lesson_Progression_Block extends LLMS_Blocks_Abstract_Block {
 	/**
 	 * Output a message when no HTML was rendered
 	 *
-	 * @since [version]
+	 * @since 1.7.0
 	 *
 	 * @return string
 	 */

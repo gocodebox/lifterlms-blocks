@@ -1,8 +1,8 @@
 /**
  * LifterLMS Block Library.
  *
- * @since [version]
- * @version [version]
+ * @since 1.7.0
+ * @version 1.7.0
  */
 
 // WP Deps.
@@ -34,7 +34,7 @@ import * as formFields from './form-fields/';
  * Deregister all blocks no on a whitelist on the forms post type.
  *
  * @since 1.6.0
- * @since [version] Block 'llms/form-field-redeem-voucher' only available on registration forms.
+ * @since 1.7.0 Block 'llms/form-field-redeem-voucher' only available on registration forms.
  *
  * @return {void}
  */
@@ -43,7 +43,7 @@ export const deregisterBlocksForForms = () => {
 	/**
 	 * Determine if a block should be deregistered from form posts.
 	 *
-	 * @since [version]
+	 * @since 1.7.0
 	 *
 	 * @param {String} name Block name.
 	 * @return {Boolean}

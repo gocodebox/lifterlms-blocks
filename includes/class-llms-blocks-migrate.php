@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
  * Handle post migration to the block editor.
  *
  * @since 1.0.0
- * @since [version] Perform migrations on `current_screen` instead of `admin_enqueue_scripts`.
+ * @since 1.7.0 Perform migrations on `current_screen` instead of `admin_enqueue_scripts`.
  *              Migrate membership post types to use pricing table blocks.
  */
 class LLMS_Blocks_Migrate {
@@ -24,7 +24,7 @@ class LLMS_Blocks_Migrate {
 	 *
 	 * @since 1.0.0
 	 * @since 1.4.0 Add action for unmigrating posts from the Tools & Utilities status screen.
-	 * @since [version] Perform migrations on `current_screen` instead of `admin_enqueue_scripts`.
+	 * @since 1.7.0 Perform migrations on `current_screen` instead of `admin_enqueue_scripts`.
 	 */
 	public function __construct() {
 
@@ -84,7 +84,7 @@ class LLMS_Blocks_Migrate {
 	 * Get an array of post types which can be migrated.
 	 *
 	 * @since 1.3.3
-	 * @since [version] Memberships are migrateable.
+	 * @since 1.7.0 Memberships are migrateable.
 	 *
 	 * @return  array
 	 */
@@ -123,7 +123,7 @@ class LLMS_Blocks_Migrate {
 	 * Retrieve the block template by post type.
 	 *
 	 * @since 1.0.0
-	 * @since [version] Add membership template.
+	 * @since 1.7.0 Add membership template.
 	 *
 	 * @param   string $post_type wp post type.
 	 * @return  string
@@ -184,7 +184,7 @@ class LLMS_Blocks_Migrate {
 	 *
 	 * @since 1.0.0
 	 * @since 1.4.0 Moves content updating methods to it's own function.
-	 * @since [version] Add Membership post type support.
+	 * @since 1.7.0 Add Membership post type support.
 	 *              Update to handle being triggered by hook `current_screen` instead of `admin_enqueue_scripts`.
 	 *
 	 * @return  void

@@ -4,7 +4,7 @@
  * @link https://developer.wordpress.org/block-editor/tutorials/format-api/
  *
  * @since 1.6.0
- * @since [version] Import from `wp.editor` when `wp.blockEditor` is not available.
+ * @since 1.7.0 Import from `wp.editor` when `wp.blockEditor` is not available.
  * @version 1.6.0
  */
 
