@@ -10,9 +10,10 @@
 // WP Deps.
 const
 	{
+		createSlotFill,
+		ExternalLink,
 		PanelRow,
 		ToggleControl,
-		createSlotFill
 	}                              = wp.components,
 	{ compose }                    = wp.compose,
 	{
@@ -59,6 +60,7 @@ class FormDocumentSettings extends Component {
 	 *
 	 * @since 1.6.0
 	 * @since [version] Add early return for WP Core 5.2 and earlier where the `PluginDocumentSettingPanel` doesn't exist.
+	 *              Add link to form location on frontend if available.
 	 *
 	 * @return {Fragment}
 	 */
@@ -76,11 +78,14 @@ class FormDocumentSettings extends Component {
 		const
 			{
 				location,
+				link,
 				showTitle,
 				setFormMetas,
 			} = this.props,
 			{ formLocations } = window.llms,
 			currentLoc = formLocations[ location ];
+
+		console.log( link );
 
 		// Set default value.
 		if ( '' === showTitle ) {
@@ -88,34 +93,42 @@ class FormDocumentSettings extends Component {
 		}
 
 		return (
-			<PluginDocumentSettingPanel
-				name="llms-forms-doc-settings"
-				title={ __( 'Form Settings', 'lifterlms' ) }
-				opened={ true }
-			>
+			<Fragment>
+				<PluginDocumentSettingPanel
+					name="llms-forms-doc-settings"
+					title={ __( 'Form Settings', 'lifterlms' ) }
+					opened={ true }
+				>
+		            <LLMSFormDocSettings.Slot>
+		                { ( fills ) => (
+		                    <Fragment>
+								<PanelRow>
+									<strong>{ __( 'Location', 'lifterlms' ) }</strong>
+									{ ! link && (
+										<strong>{ currentLoc.name }</strong>
+									) }
+									{ link && (
+										<ExternalLink href={ link }>{ currentLoc.name }</ExternalLink>
+									) }
+								</PanelRow>
+								<p style={ { marginTop: '5px' } }><em>{ currentLoc.description }</em></p>
+								<PanelRow>
+								</PanelRow>
+								{ fills }
+								<br />
+								<ToggleControl
+									label={ __( 'Display Form Title', 'lifterlms' ) }
+									checked={ 'yes' === showTitle }
+									help={ 'yes' === showTitle ? __( 'Displaying form title.', 'lifterlms' ) : __( 'Not displaying form title.', 'lifterlms' ) }
+									onChange={ val => setFormMetas( { _llms_form_show_title: val ? 'yes' : 'no' } ) }
+								/>
+		                    </Fragment>
+		                ) }
+		            </LLMSFormDocSettings.Slot>
 
-	            <LLMSFormDocSettings.Slot>
-	                { ( fills ) => (
-	                    <Fragment>
-							<PanelRow>
-								<strong>{ __( 'Location', 'lifterlms' ) }</strong>
-								<strong>{ currentLoc.name }</strong>
-							</PanelRow>
-							<p style={ { marginTop: '5px' } }><em>{ currentLoc.description }</em></p>
-							{ fills }
-							<br />
-							<ToggleControl
-								label={ __( 'Display Form Title', 'lifterlms' ) }
-								checked={ 'yes' === showTitle }
-								help={ 'yes' === showTitle ? __( 'Displaying form title.', 'lifterlms' ) : __( 'Not displaying form title.', 'lifterlms' ) }
-								onChange={ val => setFormMetas( { _llms_form_show_title: val ? 'yes' : 'no' } ) }
-							/>
-	                    </Fragment>
-	                ) }
-	            </LLMSFormDocSettings.Slot>
 
-
-			</PluginDocumentSettingPanel>
+				</PluginDocumentSettingPanel>
+			</Fragment>
 		);
 
     };
@@ -126,10 +139,15 @@ class FormDocumentSettings extends Component {
  * Retrieve custom meta information when retrieving posts.
  *
  * @since 1.6.0
+ * @since [version] Retrieve form link attribute.
  */
 const applyWithSelect = withSelect( ( select ) => {
-	const { getEditedPostAttribute } = select( 'core/editor' );
+	const {
+		getCurrentPost,
+		getEditedPostAttribute,
+	} = select( 'core/editor' );
 	return {
+		link: getCurrentPost().link,
 		location: getEditedPostAttribute( 'meta' )._llms_form_location,
 		showTitle: getEditedPostAttribute( 'meta' )._llms_form_show_title,
 	};
