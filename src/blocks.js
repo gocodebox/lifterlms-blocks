@@ -120,15 +120,46 @@ registerBlocks();
  * Deregister all blocks no on a whitelist on the forms post type.
  *
  * @since 1.6.0
+ * @since [version] Block 'llms/form-field-redeem-voucher' only available on registration forms.
  *
  * @return {void}
  */
 const deregisterBlocksForForms = () => {
 
-	const whitelist = [ 'core/paragraph', 'core/heading', 'core/html', 'core/column', 'core/columns', 'core/group', 'core/separator', 'core/spacer' ];
+	/**
+	 * Determine if a block should be deregistered from form posts.
+	 *
+	 * @since [version]
+	 *
+	 * @param {String} name Block name.
+	 * @return {Boolean}
+	 */
+	const shouldUnregisterBlock = ( name ) => {
+
+		const whitelist = [ 'core/paragraph', 'core/heading', 'core/html', 'core/column', 'core/columns', 'core/group', 'core/separator', 'core/spacer' ];
+
+		// Allow whitelisted blocks.
+		if ( -1 !== whitelist.indexOf( name ) ) {
+			return false;
+
+			// Vouchers can only be used on registration forms.
+		} else if ( 0 === name.indexOf( 'llms/form-field-redeem-voucher' ) ) {
+
+			const { _llms_form_location } = select( 'core/editor' ).getCurrentPost().meta;
+			return 'registration' === _llms_form_location ? false : true;
+
+			// Allow all other form field blocks.
+		} else if ( -1 !== name.indexOf( 'llms/form-field' ) ) {
+			return false;
+		}
+
+		// unregister everything else.
+		return true;
+
+	};
 
 	getBlockTypes().forEach( ( { name } ) => {
-		if ( -1 === whitelist.indexOf( name ) && -1 === name.indexOf( 'llms/form-field' ) ) {
+		if ( shouldUnregisterBlock( name ) ) {
 			unregisterBlockType( name );
 		}
 	} );
