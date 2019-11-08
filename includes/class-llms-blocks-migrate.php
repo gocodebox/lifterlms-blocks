@@ -198,7 +198,7 @@ class LLMS_Blocks_Migrate {
 		}
 
 		$post_id = llms_filter_input( INPUT_GET, 'post', FILTER_SANITIZE_NUMBER_INT );
-		$post = $post_id ? get_post( $post_id ) : false;
+		$post    = $post_id ? get_post( $post_id ) : false;
 
 		if ( ! $post || ! $this->should_migrate_post( $post->ID ) ) {
 			return;
@@ -220,8 +220,8 @@ class LLMS_Blocks_Migrate {
 		wp_safe_redirect(
 			add_query_arg(
 				array(
-					'post'         => $post->ID,
-					'action'       => 'edit',
+					'post'   => $post->ID,
+					'action' => 'edit',
 				),
 				admin_url( 'post.php' )
 			)
