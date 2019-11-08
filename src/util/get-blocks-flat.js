@@ -1,5 +1,5 @@
 /**
- * Retrieve a flattened array of blocks.
+ * Block List Flattening Utilities.
  *
  * Recursively loops through all nested blocks and returns
  * a flat array of every block in the layout.
@@ -9,9 +9,16 @@
  */
 
 // WP Deps.
-const
-	{ select } = wp.data;
+const { select } = wp.data;
 
+/**
+ * Recursively pulls inner/nested blocks to return a flat array of blocks.
+ *
+ * @since 1.6.0
+ *
+ * @param {Array} blocks Array of WP Blocks.
+ * @return {Array}
+ */
 export const flattenBlocks = ( blocks ) => {
 
 	let flat = [];
@@ -28,8 +35,18 @@ export const flattenBlocks = ( blocks ) => {
 
 };
 
+/**
+ * Retrieve an array of flattened blocks from the block editor.
+ *
+ * @since 1.6.0
+ * @since [version] Backwards compat fix: fallback to `core/editor` if `core/block-editor` isn't available
+ *
+ * @return {Array}
+ */
 export default () => {
 
-	return flattenBlocks( select( 'core/block-editor' ).getBlocks() );
+	const editor = select( 'core/block-editor') || select ( 'core/editor' );
+
+	return flattenBlocks( editor.getBlocks() );
 
 };
