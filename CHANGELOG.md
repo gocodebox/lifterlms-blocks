@@ -1,6 +1,27 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.7.0 - 2019-11-08
+-------------------
+
+##### Updates
+
++ Membership post types can now use the LifterLMS Pricing Table block.
++ Membership post types are automatically migrated to the block editor (use the pricing table block instead of the pricing table action).
++ Added a block editor template for the Membership post type.
++ The block 'llms/form-field-redeem-voucher' is now only available on registration forms.
+
+##### Bug Fixes
+
++ Backwards compatibility fixes for WP Core 5.2 and earlier.
++ Perform post migrations on `current_screen` instead of `admin_enqueue_scripts`.
++ Fix an issue causing "No HTML Returned" to be displayed in place of the Lesson Progression block on free lessons when viewed by a logged-out user.
++ Import `InspectorControls` from `wp.blockEditor` and fallback to `wp.editor` to maintain backwards compatibility.
++ Fall back to `wp.editor` for `RichText` import when `wp.blockEditor` is not found.
++ Import from `wp.editor` when `wp.blockEditor` is not available.
++ Return early during renders on WP Core 5.2 and earlier where the `PluginDocumentSettingPanel` doesn't exist.
+
+
 v1.6.0 - 2019-10-24
 -------------------
 
