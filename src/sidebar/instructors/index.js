@@ -125,6 +125,7 @@ const InstructorsItem = SortableElement( ( { instructor, i, onChange, onRemove }
  * Instructors Sidebar Plugin Component
  *
  * @since 1.0.0
+ * @since [version] Fix WordPress 5.3 issues with JSON data.
  */
 class Instructors extends Component {
 
@@ -132,6 +133,7 @@ class Instructors extends Component {
 	 * Constructor.
 	 *
 	 * @since 1.0.0
+	 * @since [version] Parse instructor data if it's stored as a JSON string.
 	 *
 	 * @return {void}
 	 */
@@ -139,8 +141,11 @@ class Instructors extends Component {
 
 		super( ...arguments );
 
+		let { instructors } = this.props;
+		instructors = 'string' === typeof instructors ? JSON.parse( instructors ) : instructors;
+
 		this.state = {
-			instructors: this.props.instructors || [],
+			instructors: instructors || [],
 			search: '',
 		}
 
