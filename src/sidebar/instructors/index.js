@@ -1,8 +1,8 @@
 /**
- * Instructors Area
+ * Instructors Sidebar Plugin
  *
- * @since   1.0.0
- * @version 1.0.0
+ * @since 1.0.0
+ * @version [version]
  */
 
 // WP deps.
@@ -46,8 +46,23 @@ import {
 	SortableHandle,
 } from 'react-sortable-hoc';
 
-const DragHandle = SortableHandle( () => <span class="llms-drag-handle">:::</span> )
+/**
+ * Output a Drag Handle.
+ *
+ * @since 1.0.0
+ * @since 1.0.0 Use `className` instead of `class`.
+ *
+ * @return {Object} HTML Fragment.
+ */
+const DragHandle = SortableHandle( () => <span className="llms-drag-handle">:::</span> )
 
+/**
+ * Output a sortable list of instructors
+ *
+ * @since 1.0.0
+ *
+ * @return {Object} HTML Fragment.
+ */
 const InstructorsList = SortableContainer( ( { items, onChange, onRemove } ) => {
 	return (
 		<ul>
@@ -65,6 +80,13 @@ const InstructorsList = SortableContainer( ( { items, onChange, onRemove } ) => 
 	)
 } )
 
+/**
+ * Output a single instructor list item.
+ *
+ * @since 1.0.0
+ *
+ * @return {Object} HTML Fragment.
+ */
 const InstructorsItem = SortableElement( ( { instructor, i, onChange, onRemove } ) => {
 	const visible = ( 'visible' === instructor.visibility );
 	return (
@@ -99,19 +121,43 @@ const InstructorsItem = SortableElement( ( { instructor, i, onChange, onRemove }
 	)
 } )
 
+/**
+ * Instructors Sidebar Plugin Component
+ *
+ * @since 1.0.0
+ * @since [version] Fix WordPress 5.3 issues with JSON data.
+ */
 class Instructors extends Component {
 
+	/**
+	 * Constructor.
+	 *
+	 * @since 1.0.0
+	 * @since [version] Parse instructor data if it's stored as a JSON string.
+	 *
+	 * @return {void}
+	 */
 	constructor() {
 
 		super( ...arguments );
 
+		let { instructors } = this.props;
+		instructors = 'string' === typeof instructors ? JSON.parse( instructors ) : instructors;
+
 		this.state = {
-			instructors: this.props.instructors || [],
+			instructors: instructors || [],
 			search: '',
 		}
 
 	}
 
+	/**
+	 * Retrieve a list of WordPress roles that are allowed to be listed as an instructor.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return {Array}
+	 */
 	getRoles() {
 		return wp.hooks.applyFilters( 'llms_instructor_roles', [
 			'administrator',
@@ -121,14 +167,29 @@ class Instructors extends Component {
 		] )
 	}
 
+	/**
+	 * Change event for the search box.
+	 *
+	 * Updates the "search" state parameter with search results.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param {Array} result Array of instructor data objects.
+	 * @return {void}
+	 */
 	onSearchChange = ( result ) => {
-
 		this.setState( {
 			search: result,
 		} );
-
 	}
 
+	/**
+	 * Retrieve default instructor information.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return {Object}
+	 */
 	getInstructorDefaults() {
 		return wp.hooks.applyFilters( 'llms_instructor_defaults', {
 			label: __( 'Author', 'lifterlms' ),
@@ -136,6 +197,14 @@ class Instructors extends Component {
 		} )
 	}
 
+	/**
+	 * Update instructors list in the state and persist to the database via WP core data dispatcher.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param {Array} newInstructors Array of instructor data objects.
+	 * @return {void}
+	 */
 	updateInstructors = ( newInstructors ) => {
 		this.setState( {
 			instructors: newInstructors,
@@ -143,6 +212,13 @@ class Instructors extends Component {
 		this.props.updateInstructors( newInstructors );
 	}
 
+	/**
+	 * Add a new instructor from the selected search result.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return {void}
+	 */
 	addInstructor = () => {
 
 		const { search } = this.state
@@ -161,6 +237,14 @@ class Instructors extends Component {
 
 	}
 
+	/**
+	 * Remove an instructor
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param {Object} toRemove Instructor data object of the instructor to remove.
+	 * @return {void}
+	 */
 	removeInstructor = ( toRemove ) => {
 
 		let { instructors } = this.state;
@@ -173,6 +257,17 @@ class Instructors extends Component {
 
 	}
 
+	/**
+	 * Change event when an individual instructor property changes.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param {String} key Property key.
+	 * @param {mixed} val Property value.
+	 * @param {Integer} index Index of the instructor that's being updated.
+	 * @param {Object} instructor Instructor data object.
+	 * @return {void}
+	 */
 	onFieldChange = ( key, val, index, instructor ) => {
 
 		let { instructors } = this.state;
@@ -183,12 +278,26 @@ class Instructors extends Component {
 
 	}
 
+	/**
+	 * Callback function when instructor sortable list finishes being sorted.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param {Integer} oldIndex Previous index.
+	 * @param {Integer} newIndex New index.
+	 * @return {void}
+	 */
 	onSortEnd = ( { oldIndex, newIndex } ) => {
-
 		this.updateInstructors( arrayMove( this.state.instructors, oldIndex, newIndex ) )
-
 	};
 
+	/**
+	 * Render the component.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return {Object} HTML Fragment.
+	 */
 	render = () => (
 		<PanelBody
 			title={ __( 'Instructors', 'lifterlms' ) }
@@ -221,7 +330,14 @@ class Instructors extends Component {
 	)
 }
 
-// Get instructor data.
+/**
+ * Add instructors property to the post during data selection.
+ *
+ * @since 1.0.0
+ *
+ * @param {Object} select Reference to wp.data.select.
+ * @return {Object}
+ */
 const applyWithSelect = withSelect( ( select ) => {
 	const { getEditedPostAttribute } = select( 'core/editor' );
 	return {
@@ -229,18 +345,32 @@ const applyWithSelect = withSelect( ( select ) => {
 	};
 } );
 
-// Update instructor data.
+/**
+ * Add instructors property to the post durinp data selection.
+ *
+ * @since 1.0.0
+ * @since [version] Dispatch instructors list as a JSON string.
+ *
+ * @param {Object} dispatch Reference to wp.data.dispatch.
+ * @param {Array} instructors Array of instructor data objects.
+ * @return {Object}
+ */
 const applyWithDispatch = withDispatch( ( dispatch, { instructors } ) => {
 
 	const { editPost } = dispatch( 'core/editor' );
 	return {
 		updateInstructors( instructors ) {
-			editPost( { instructors: instructors } );
+			editPost( { instructors: JSON.stringify( instructors ) } );
 		},
 	};
 
 } );
 
+/**
+ * Compose the component with the data select and dispatch properties.
+ *
+ * @since 1.0.0
+ */
 export default compose( [
 	applyWithSelect,
 	applyWithDispatch
