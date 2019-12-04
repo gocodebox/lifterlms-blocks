@@ -2,7 +2,7 @@
  * Export all fields in the fields library.
  *
  * @since 1.6.0
- * @version 1.6.0
+ * @version [version]
  */
 
 // Default Fields.
@@ -30,6 +30,7 @@ import * as userEmail from './fields/user-email';
 import * as userEmailConfirm from './fields/user-email-confirm';
 import * as userPassword from './fields/user-password';
 import * as userPasswordConfirm from './fields/user-password-confirm';
+import * as userPasswordCurrent from './fields/user-password-current';
 import * as userFirstName from './fields/user-first-name';
 import * as userLastName from './fields/user-last-name';
 import * as userAddress from './fields/user-address';
@@ -64,6 +65,7 @@ export {
 	userEmailConfirm,
 	userPassword,
 	userPasswordConfirm,
+	userPasswordCurrent,
 	userFirstName,
 	userLastName,
 	userAddress,
