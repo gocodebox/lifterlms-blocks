@@ -2,7 +2,6 @@
  * Generic Field component
  *
  * @since 1.6.0
- * @since 1.7.0 Fall back to `wp.editor` for `RichText` import when `wp.blockEditor` is not found.
  * @version 1.6.0
  */
 
@@ -17,6 +16,15 @@ const
 
 import './editor.scss';
 
+/**
+ * Output a list of options for an input group field (checkbox/radio).
+ *
+ * @since 1.6.0
+ *
+ * @param {Object[]} options Array of options objects.
+ * @param {String} fieldType Field node type (eg "checkbox" or "radio").
+ * @return {Object} HTML Fragment.
+ */
 const InputGroupOptions = ( { options, fieldType } ) => {
 
 	return (
@@ -30,8 +38,21 @@ const InputGroupOptions = ( { options, fieldType } ) => {
 	);
 }
 
+/**
+ * Render a field in the block editor
+ *
+ * @since 1.6.0
+ * @since [version] Add block editor rendering for password type fields.
+ */
 export default class Field extends Component {
 
+	/**
+	 * Determine the type of field.
+	 *
+	 * @since [version]
+	 *
+	 * @return {String}
+	 */
 	getFieldType() {
 
 		const {
@@ -48,6 +69,14 @@ export default class Field extends Component {
 
 	};
 
+	/**
+	 * Render the field.
+	 *
+	 * @since 1.6.0
+	 * @since [version] Add rendering for password type fields.
+	 *
+	 * @return {Object} HTML Fragment.
+	 */
   	render() {
 
 		const
@@ -72,6 +101,13 @@ export default class Field extends Component {
 
 		const fieldType = this.getFieldType();
 
+		/**
+		 * Get the default option for a select field.
+		 *
+		 * @since 1.6.0
+		 *
+		 * @return {String}
+		 */
 		const getDefaultOption = () => {
 
 			if ( placeholder ) {
@@ -119,6 +155,14 @@ export default class Field extends Component {
 								onChange={ event => setAttributes( { placeholder: event.target.value } ) }
 								value={ placeholder }
 								placeholder={ __( 'Add optional placeholder text', 'lifterlms' ) }
+							/>
+						) }
+						{ 'password' === fieldType && (
+							<input
+								disabled="disabed"
+								type="password"
+								style={ { width: '100%' } }
+								value="F4K3p4$50Rd"
 							/>
 						) }
 						{ 'textarea' === fieldType && (
