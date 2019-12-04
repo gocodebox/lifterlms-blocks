@@ -50,7 +50,9 @@ export const deregisterBlocksForForms = () => {
 	 */
 	const shouldUnregisterBlock = ( name ) => {
 
-		const whitelist = [ 'core/paragraph', 'core/heading', 'core/html', 'core/column', 'core/columns', 'core/group', 'core/separator', 'core/spacer' ];
+		const
+			whitelist = [ 'core/paragraph', 'core/heading', 'core/html', 'core/column', 'core/columns', 'core/group', 'core/separator', 'core/spacer' ],
+			{ _llms_form_location } = select( 'core/editor' ).getCurrentPost().meta;
 
 		// Allow whitelisted blocks.
 		if ( -1 !== whitelist.indexOf( name ) ) {
@@ -59,8 +61,12 @@ export const deregisterBlocksForForms = () => {
 			// Vouchers can only be used on registration forms.
 		} else if ( 0 === name.indexOf( 'llms/form-field-redeem-voucher' ) ) {
 
-			const { _llms_form_location } = select( 'core/editor' ).getCurrentPost().meta;
 			return 'registration' === _llms_form_location ? false : true;
+
+			// Current user password can only be used on the account edit form.
+		} else if ( 0 === name.indexOf( 'llms/form-field-user-password-current' ) ) {
+
+			return 'account' === _llms_form_location ? false : true;
 
 			// Allow all other form field blocks.
 		} else if ( -1 !== name.indexOf( 'llms/form-field' ) ) {
