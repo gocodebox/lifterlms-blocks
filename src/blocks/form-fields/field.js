@@ -42,14 +42,14 @@ const InputGroupOptions = ( { options, fieldType } ) => {
  * Render a field in the block editor
  *
  * @since 1.6.0
- * @since [version] Add block editor rendering for password type fields.
+ * @since 1.7.1 Add block editor rendering for password type fields.
  */
 export default class Field extends Component {
 
 	/**
 	 * Determine the type of field.
 	 *
-	 * @since [version]
+	 * @since 1.7.1
 	 *
 	 * @return {String}
 	 */
@@ -73,7 +73,7 @@ export default class Field extends Component {
 	 * Render the field.
 	 *
 	 * @since 1.6.0
-	 * @since [version] Add rendering for password type fields.
+	 * @since 1.7.1 Add rendering for password type fields.
 	 *
 	 * @return {Object} HTML Fragment.
 	 */

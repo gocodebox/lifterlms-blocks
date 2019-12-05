@@ -5,7 +5,7 @@
  * @package  LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.7.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  * @since 1.6.0 Automatically store course/membership instructor with `post_author` data when the post is created.
- * @since [version] Fix Core 5.3 compatibility issues with the `instructors` rest field.
+ * @since 1.7.1 Fix Core 5.3 compatibility issues with the `instructors` rest field.
  */
 class LLMS_Blocks_Post_Instructors {
 
@@ -121,7 +121,7 @@ class LLMS_Blocks_Post_Instructors {
 	 * Update instructor information for a given object.
 	 *
 	 * @since 1.0.0
-	 * @since [version] Decode JSON prior to saving.
+	 * @since 1.7.1 Decode JSON prior to saving.
 	 *
 	 * @param   string  $value  Instructor data to add to the object (JSON).
 	 * @param   WP_Post $object WP_Post object.
@@ -156,7 +156,7 @@ class LLMS_Blocks_Post_Instructors {
 	 *
 	 * @since 1.0.0
 	 * @since 1.6.0 Use `$this->post_types` for loop.
-	 * @since [version] Don't define a schema.
+	 * @since 1.7.1 Don't define a schema.
 	 *
 	 * @return void
 	 */

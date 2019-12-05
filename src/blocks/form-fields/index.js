@@ -2,7 +2,7 @@
  * Export all fields in the fields library.
  *
  * @since 1.6.0
- * @version [version]
+ * @version 1.7.1
  */
 
 // Default Fields.

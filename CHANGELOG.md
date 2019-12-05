@@ -1,6 +1,15 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.7.1 - 2019-12-05
+-------------------
+
++ Bug fix: Fixed a WordPress 5.3 issues with JSON data affecting the ability to save course/membership instructors.
++ Update: Added filter, `llms_block_supports_visibility` to allow modification of the return of the check.
++ Update: Disabled block visibility on registration & account forms to prevent a potentially confusing form creation experience.
++ Update: Added block editor rendering for password type fields.
+
+
 v1.7.0 - 2019-11-08
 -------------------
 

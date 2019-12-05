@@ -1,8 +1,8 @@
 /**
  * BLOCK: llms/form-field-user-password-current
  *
- * @since [version]
- * @version [version]
+ * @since 1.7.1
+ * @version 1.7.1
  */
 
 // WP Deps.

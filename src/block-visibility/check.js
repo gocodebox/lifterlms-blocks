@@ -2,7 +2,7 @@
  * Determine if a block should have visibility settings added to it.
  *
  * @since 1.6.0
- * @since [version] Add filter, `llms_block_supports_visibility` to allow modification of the return of the check.
+ * @since 1.7.1 Add filter, `llms_block_supports_visibility` to allow modification of the return of the check.
  *
  * @param {Object} settings Block settings object.
  * @param {String} name Block name, eg "core/paragraph".

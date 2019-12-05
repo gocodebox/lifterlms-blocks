@@ -2,7 +2,7 @@
  * DOM Ready Events for LifterLMS Forms (llms_forms) Post Type
  *
  * @since 1.7.0
- * @version [version]
+ * @version 1.7.1
  */
 
 // WP Deps.
@@ -113,7 +113,7 @@ const ensureEmailFieldExists = () => {
  * Default Function, runs all methods and events.
  *
  * @since 1.7.0
- * @since [version] Disable block visibility on registration & account forms to prevent a potentially confusing form creation experience.
+ * @since 1.7.1 Disable block visibility on registration & account forms to prevent a potentially confusing form creation experience.
  *
  * @return {void}
  */

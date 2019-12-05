@@ -2,7 +2,7 @@
  * Instructors Sidebar Plugin
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.7.1
  */
 
 // WP deps.
@@ -125,7 +125,7 @@ const InstructorsItem = SortableElement( ( { instructor, i, onChange, onRemove }
  * Instructors Sidebar Plugin Component
  *
  * @since 1.0.0
- * @since [version] Fix WordPress 5.3 issues with JSON data.
+ * @since 1.7.1 Fix WordPress 5.3 issues with JSON data.
  */
 class Instructors extends Component {
 
@@ -133,7 +133,7 @@ class Instructors extends Component {
 	 * Constructor.
 	 *
 	 * @since 1.0.0
-	 * @since [version] Parse instructor data if it's stored as a JSON string.
+	 * @since 1.7.1 Parse instructor data if it's stored as a JSON string.
 	 *
 	 * @return {void}
 	 */
@@ -349,7 +349,7 @@ const applyWithSelect = withSelect( ( select ) => {
  * Add instructors property to the post durinp data selection.
  *
  * @since 1.0.0
- * @since [version] Dispatch instructors list as a JSON string.
+ * @since 1.7.1 Dispatch instructors list as a JSON string.
  *
  * @param {Object} dispatch Reference to wp.data.dispatch.
  * @param {Array} instructors Array of instructor data objects.
