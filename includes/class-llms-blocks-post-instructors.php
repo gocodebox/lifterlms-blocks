@@ -170,7 +170,7 @@ class LLMS_Blocks_Post_Instructors {
 				array(
 					'get_callback'    => array( $this, 'get_callback' ),
 					'update_callback' => array( $this, 'update_callback' ),
-					'schema' => null,
+					'schema'          => null,
 				)
 			);
 
