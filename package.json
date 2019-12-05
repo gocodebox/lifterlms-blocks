@@ -14,7 +14,7 @@
     "eject": "cgb-scripts eject"
   },
   "dependencies": {
-    "cgb-scripts": "^1.17.0",
+    "cgb-scripts": "^1.22.0",
     "react-select": "^2.1.1",
     "react-sortable-hoc": "^1.10.1",
     "throttle-debounce": "^2.0.1"
