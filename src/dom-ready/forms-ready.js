@@ -2,7 +2,7 @@
  * DOM Ready Events for LifterLMS Forms (llms_forms) Post Type
  *
  * @since 1.7.0
- * @version 1.7.0
+ * @version [version]
  */
 
 // WP Deps.
@@ -13,8 +13,11 @@ const
 		subscribe,
 		select,
 	} = wp.data,
-	{ doAction } = wp.hooks,
-	{ __ }       = wp.i18n;
+	{
+		addFilter,
+		doAction,
+	} = wp.hooks,
+	{ __ } = wp.i18n;
 
 // External Deps.
 import $ from 'jquery';
@@ -110,10 +113,20 @@ const ensureEmailFieldExists = () => {
  * Default Function, runs all methods and events.
  *
  * @since 1.7.0
+ * @since [version] Disable block visibility on registration & account forms to prevent a potentially confusing form creation experience.
  *
  * @return {void}
  */
 export default () => {
+
+	const { _llms_form_location } = select( 'core/editor' ).getEditedPostAttribute( 'meta' );
+
+	// Disabled visibility settings for all blocks when viewing a registration or account form.
+	if ( -1 !== [ 'registration', 'account' ].indexOf( _llms_form_location ) ) {
+		addFilter( 'llms_block_supports_visibility', 'llms/form-block-visibility', function( supports, settings, name ) {
+			return false;
+		} );
+	}
 
 	deregisterBlocksForForms();
 	hideDraftButton();
