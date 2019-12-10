@@ -4,7 +4,7 @@
  * Displays only on `llms_form` post types.
  *
  * @since 1.6.0
- * @version [version]
+ * @version 1.7.2
  */
 
 // WP Deps.
@@ -138,7 +138,7 @@ class FormDocumentSettings extends Component {
  *
  * @since 1.6.0
  * @since 1.7.0 Retrieve form link attribute.
- * @since [version] Only modify select when working with an `llms_form` post type.
+ * @since 1.7.2 Only modify select when working with an `llms_form` post type.
  */
 const applyWithSelect = withSelect( ( select ) => {
 

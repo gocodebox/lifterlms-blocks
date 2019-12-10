@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.7.2 - 2019-12-09
+-------------------
+
++ Bug fix: fix issue causing the block editor to encounter a fatal error when using custom post types that don't support custom fields.
+
+
 v1.7.1 - 2019-12-05
 -------------------
 
