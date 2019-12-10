@@ -4,7 +4,7 @@
  * Displays only on `llms_form` post types.
  *
  * @since 1.6.0
- * @version 1.7.0
+ * @version [version]
  */
 
 // WP Deps.
@@ -85,8 +85,6 @@ class FormDocumentSettings extends Component {
 			{ formLocations } = window.llms,
 			currentLoc = formLocations[ location ];
 
-		console.log( link );
-
 		// Set default value.
 		if ( '' === showTitle ) {
 			setFormMetas( { _llms_form_show_title: 'yes' } );
@@ -140,12 +138,20 @@ class FormDocumentSettings extends Component {
  *
  * @since 1.6.0
  * @since 1.7.0 Retrieve form link attribute.
+ * @since [version] Only modify select when working with an `llms_form` post type.
  */
 const applyWithSelect = withSelect( ( select ) => {
+
 	const {
 		getCurrentPost,
+		getCurrentPostType,
 		getEditedPostAttribute,
 	} = select( 'core/editor' );
+
+	if ( 'llms_form' !== getCurrentPostType() ) {
+		return {};
+	}
+
 	return {
 		link: getCurrentPost().link,
 		location: getEditedPostAttribute( 'meta' )._llms_form_location,
