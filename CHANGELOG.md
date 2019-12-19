@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.7.3 - 2019-12-19
+-------------------
+
++ Move form ready event from domReady to block registration to ensure blocks are exposed before blocks are parsed.
+
+
 v1.7.2 - 2019-12-09
 -------------------
 
