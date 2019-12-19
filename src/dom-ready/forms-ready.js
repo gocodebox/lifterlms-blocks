@@ -2,7 +2,7 @@
  * DOM Ready Events for LifterLMS Forms (llms_forms) Post Type
  *
  * @since 1.7.0
- * @version 1.7.1
+ * @version [version]
  */
 
 // WP Deps.
@@ -15,7 +15,6 @@ const
 	} = wp.data,
 	{
 		addFilter,
-		doAction,
 	} = wp.hooks,
 	{ __ } = wp.i18n;
 
@@ -114,6 +113,7 @@ const ensureEmailFieldExists = () => {
  *
  * @since 1.7.0
  * @since 1.7.1 Disable block visibility on registration & account forms to prevent a potentially confusing form creation experience.
+ * @since [version] Move forms ready event to block registration file to ensure blocks are registered during editor init.
  *
  * @return {void}
  */
@@ -131,14 +131,5 @@ export default () => {
 	deregisterBlocksForForms();
 	hideDraftButton();
 	ensureEmailFieldExists();
-
-	/**
-	 * Expose all form field blocks, regardless of their registration status, for 3rd parties to utilize.
-	 *
-	 * @since 1.6.0
-	 *
-	 * @param {Array} formFields Array of form field block data objects.
-	 */
-	doAction( 'llms_form_fields_ready', formFields );
 
 };

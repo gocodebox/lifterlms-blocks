@@ -2,7 +2,7 @@
  * LifterLMS Block Library.
  *
  * @since 1.7.0
- * @version 1.7.0
+ * @version [version]
  */
 
 // WP Deps.
@@ -12,6 +12,7 @@ const
 		registerBlockType,
 		unregisterBlockType,
 	} = wp.blocks,
+	{ doAction } = wp.hooks,
 	{ select } = wp.data;
 
 // Internal Deps.
@@ -92,6 +93,7 @@ export const deregisterBlocksForForms = () => {
  * @since 1.0.0
  * @since 1.5.0 Only register blocks for supported post types.
  * @since 1.6.0 Add form field blocks.
+ * @since [version] Move form ready event from domReady to here to ensure blocks are exposed before blocks are parsed.
  *
  * @return  void
  */
@@ -120,6 +122,20 @@ export default () => {
 
 	} );
 
+	if ( 'llms_form' === post_type ) {
+
+		/**
+		 * Expose all form field blocks, regardless of their registration status, for 3rd parties to utilize.
+		 *
+		 * @since 1.6.0
+		 * @since [version] Moved from domReady to JS initialization.
+		 *
+		 * @param {Array} formFields Array of form field block data objects.
+		 */
+		doAction( 'llms_form_fields_ready', formFields );
+
+	}
+
 	blocks.forEach( ( block ) => {
 
 		const {
@@ -133,4 +149,5 @@ export default () => {
 		}
 
 	} );
+
 };
