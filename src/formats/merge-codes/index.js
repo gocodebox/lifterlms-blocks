@@ -5,6 +5,8 @@
  *
  * @since 1.6.0
  * @since 1.7.0 Import from `wp.editor` when `wp.blockEditor` is not available.
+ * @since [version] Wrap the rendered content into a `<Fragment>` rather than a `<div>`
+ *              to fix issues with Table block.
  * @version 1.6.0
  */
 
@@ -21,7 +23,7 @@ const
 		Tooltip,
 	}                         = wp.components,
 	{ withState }             = wp.compose,
-	{ Component }             = wp.element,
+	{ Component, Fragment }   = wp.element,
 	{ __ }                    = wp.i18n,
 	{
 		insert,
@@ -64,7 +66,7 @@ registerFormatType(
 				const { value, onChange } = this.props;
 
 				return (
-					<div>
+					<Fragment>
 						<RichTextToolbarButton
 							icon={ <LifterLMSIcon /> }
 							title={ __( 'Merge Codes', 'lifterlms' ) }
@@ -102,7 +104,7 @@ registerFormatType(
 							</table>
 
 						</Modal> }
-					</div>
+					</Fragment>
 				);
 			}
 		},
