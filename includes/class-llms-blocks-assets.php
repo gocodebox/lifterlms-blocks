@@ -7,7 +7,7 @@
  * @package LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @version 1.4.1
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,6 +17,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  * @since 1.4.1 Fix double slash in asset path; remove invalid frontend css dependency.
+ * @since [version] Update asset paths & remove redundant CSS from frontend.
  */
 class LLMS_Blocks_Assets {
 
@@ -24,64 +25,40 @@ class LLMS_Blocks_Assets {
 	 * Constructor
 	 *
 	 * @since 1.0.0
+	 * @since [version] Stop outputting editor CSS on the frontend.
 	 *
 	 * @return void
 	 */
 	public function __construct() {
-
-		add_action( 'enqueue_block_assets', array( $this, 'block_assets' ) );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'editor_assets' ), 999 );
-
-	}
-
-	/**
-	 * Enqueue Gutenberg block assets for both frontend + backend.
-	 *
-	 * `wp-blocks`: includes block type registration and related functions.
-	 *
-	 * @since 1.0.0
-	 * @since 1.4.1 Fix double slash in asset path & remove invalid dependency.
-	 *
-	 * @return void
-	 */
-	public function block_assets() {
-
-		wp_enqueue_style(
-			'llms-blocks',
-			LLMS_BLOCKS_PLUGIN_DIR_URL . 'dist/blocks.style.build.css',
-			array(),
-			LLMS_BLOCKS_VERSION
-		);
-
 	}
 
 	/**
 	 * Enqueue Gutenberg block assets for backend editor.
 	 *
-	 * `wp-blocks`: includes block type registration and related functions.
-	 * `wp-element`: includes the WordPress Element abstraction for describing the structure of your blocks.
-	 * `wp-i18n`: To internationalize the block's text.
-	 *
 	 * @since 1.0.0
 	 * @since 1.4.1 Fix double slash in asset path.
+	 * @since [version] Update asset paths and improve script dependencies.
 	 *
 	 * @return void
 	 */
 	public function editor_assets() {
 
+		$asset = include LLMS_BLOCKS_PLUGIN_DIR . '/assets/js/llms-blocks.asset.php';
+
 		wp_enqueue_script(
-			'lifterlms_blocks-cgb-block-js',
-			LLMS_BLOCKS_PLUGIN_DIR_URL . 'dist/blocks.build.js',
-			array( 'wp-blocks', 'wp-i18n', 'wp-element' ),
-			LLMS_BLOCKS_VERSION,
+			'llms-blocks-editor',
+			LLMS_BLOCKS_PLUGIN_DIR_URL . 'assets/js/llms-blocks.js',
+			$asset['dependencies'],
+			$asset['version'],
 			true
 		);
 
 		wp_enqueue_style(
-			'lifterlms_blocks-cgb-block-editor-css',
-			LLMS_BLOCKS_PLUGIN_DIR_URL . 'dist/blocks.editor.build.css',
+			'llms-blocks-editor',
+			LLMS_BLOCKS_PLUGIN_DIR_URL . 'assets/css/llms-blocks.css',
 			array( 'wp-edit-blocks' ),
-			LLMS_BLOCKS_VERSION
+			$asset['version']
 		);
 
 	}
