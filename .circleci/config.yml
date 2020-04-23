@@ -39,7 +39,7 @@ references:
       - run:
           name: Run PHP Unit Tests
           command: |
-            if [ "test-php-73" == "${CIRCLE_JOB}" ]; then
+            if [ "test-php-74" == "${CIRCLE_JOB}" ]; then
                 /cc-test-reporter before-build
                 composer run-script tests-run -- --coverage-clover clover.xml
                 /cc-test-reporter after-build --coverage-input-type clover --exit-code $?
@@ -48,15 +48,9 @@ references:
             fi
 
 jobs:
-  test-php-71:
+  test-php-74:
     docker:
-      - image: thomasplevy/llms-testing-env:php71
-        <<: [ *common_env_vars ]
-    <<: [ *common ]
-
-  test-php-72:
-    docker:
-      - image: thomasplevy/llms-testing-env:php72
+      - image: thomasplevy/llms-testing-env:php74
         <<: [ *common_env_vars ]
     <<: [ *common ]
 
@@ -66,10 +60,16 @@ jobs:
         <<: [ *common_env_vars ]
     <<: [ *common ]
 
+  test-php-72:
+    docker:
+      - image: thomasplevy/llms-testing-env:php72
+        <<: [ *common_env_vars ]
+    <<: [ *common ]
+
 workflows:
   version: 2
   test:
     jobs:
-      - test-php-71
-      - test-php-72
+      - test-php-74
       - test-php-73
+      - test-php-72
