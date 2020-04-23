@@ -1,4 +1,4 @@
 node_modules
 tmp
 vendor
-build
+assets/**/*.map
