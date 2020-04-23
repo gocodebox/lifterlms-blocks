@@ -11,11 +11,12 @@
   ],
   "require-dev": {
     "lifterlms/lifterlms-cs": "dev-master",
-    "phpcompatibility/php-compatibility": "^9.0",
-    "roave/security-advisories": "dev-master",
     "lifterlms/lifterlms-tests": "dev-master"
   },
   "minimum-stability": "dev",
+  "require": {
+    "php": "^7.1"
+  },
   "scripts": {
     "config-cs": [
       "\"vendor/bin/phpcs\" --config-set installed_paths ../../../vendor/wp-coding-standards/wpcs,../../../vendor/lifterlms/lifterlms-cs,../../../vendor/phpcompatibility/php-compatibility,../../../vendor/phpcompatibility/phpcompatibility-paragonie,../../../vendor/phpcompatibility/phpcompatibility-wp",
