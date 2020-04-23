@@ -4,6 +4,8 @@
  * @since 1.0.0
  * @since 1.5.0 Add supported post type settings.
  * @since [version] Remove import of empty CSS file.
+ *              Fix UX issues when all information options are disabled.
+ *              Use import instead of require.
  */
 
 // Import CSS.
@@ -15,12 +17,14 @@ import Inspector from './inspect'
 // Import Previews.
 import PreviewTerms from './preview-terms'
 
-const { RichText } = wp.editor
-const { Fragment } = wp.element
-const { __ } = wp.i18n;
+// External Deps.
+import { RichText } from '@wordpress/editor';
+import { Fragment } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Block Name
+ *
  * @type {String}
  */
 export const name = 'llms/course-information'
@@ -35,11 +39,7 @@ export const post_types = [ 'course' ];
 /**
  * Register: Course Information Block
  *
- * @link https://wordpress.org/gutenberg/handbook/block-api/
- * @param  {string}   name     Block name.
- * @param  {Object}   settings Block settings.
- * @since   1.0.0
- * @version 1.0.0
+ * @type {Object}
  */
 export const settings = {
 	title: __( 'Course Information', 'lifterlms' ),
@@ -47,7 +47,7 @@ export const settings = {
 		foreground: '#2295ff',
 		src: 'list-view',
 	},
-	category: 'llms-blocks', // common, formatting, layout widgets, embed. see https://wordpress.org/gutenberg/handbook/block-api/#category.
+	category: 'llms-blocks',
 	keywords: [
 		__( 'LifterLMS', 'lifterlms' ),
 	],
@@ -94,20 +94,17 @@ export const settings = {
 	},
 
 	/**
-	 * The edit function describes the structure of your block in the context of the editor.
-	 * This represents what the editor will render when the block is used.
+	 * Block Editor
 	 *
-	 * The "edit" property must be a valid function.
+	 * @since 1.0.0
+	 * @since [version] Always show the block "title" in the editor.
 	 *
-	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-	 * @param   {Object} props Block properties.
-	 * @return  {Function}
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @param {Object} props Block properties.
+	 * @return {Function}
 	 */
 	edit: props => {
 
-		const { attributes, setAttributes } = props
+		const { attributes, setAttributes } = props;
 		const {
 			length,
 			show_cats,
@@ -117,48 +114,50 @@ export const settings = {
 			show_tracks,
 			title,
 			title_size,
-		} = attributes
+		} = attributes;
 
-		const currentPost = wp.data.select( 'core/editor' ).getCurrentPost()
+		const currentPost = wp.data.select( 'core/editor' ).getCurrentPost();
 
-		const showTitle = ( show_length || show_difficulty || show_tracks || show_cats || show_tags )
+		const hasContent = ( show_length || show_difficulty || show_tracks || show_cats || show_tags );
 
 		return (
 			<Fragment>
 				<Inspector { ...{ attributes, setAttributes } } />
 				<div className={ props.className }>
-					{ showTitle && (
-						<RichText
-							tagName={ title_size }
-							value={ title }
-							onChange={ value => setAttributes( { title: value } ) }
-						/>
+					<RichText
+						tagName={ title_size }
+						value={ title }
+						onChange={ value => setAttributes( { title: value } ) }
+					/>
+					{ hasContent && (
+						<Fragment>
+							<ul>
+								{ show_length && length && (
+									<li><strong>{ __( 'Estimated Time', 'lifterlms' ) }</strong>: { length }</li>
+								) }
+								{ show_difficulty && ( <PreviewTerms { ...{
+									currentPost,
+									taxonomy: 'course_difficulty',
+									taxonomy_name: __( 'Difficulty', 'lifterlms' ),
+								} } /> ) }
+								{ show_tracks && ( <PreviewTerms { ...{
+									currentPost,
+									taxonomy: 'course_track',
+									taxonomy_name: __( 'Tracks', 'lifterlms' ),
+								} } /> ) }
+								{ show_cats && ( <PreviewTerms { ...{
+									currentPost,
+									taxonomy: 'course_cat',
+									taxonomy_name: __( 'Categories', 'lifterlms' ),
+								} } /> ) }
+								{ show_tags && ( <PreviewTerms { ...{
+									currentPost,
+									taxonomy: 'course_tag',
+									taxonomy_name: __( 'Tags', 'lifterlms' ),
+								} } /> ) }
+							</ul>
+						</Fragment>
 					) }
-					<ul>
-						{ show_length && length && (
-							<li><strong>{ __( 'Estimated Time', 'lifterlms' ) }</strong>: { length }</li>
-						) }
-						{ show_difficulty && ( <PreviewTerms { ...{
-							currentPost,
-							taxonomy: 'course_difficulty',
-							taxonomy_name: __( 'Difficulty', 'lifterlms' ),
-						} } /> ) }
-						{ show_tracks && ( <PreviewTerms { ...{
-							currentPost,
-							taxonomy: 'course_track',
-							taxonomy_name: __( 'Tracks', 'lifterlms' ),
-						} } /> ) }
-						{ show_cats && ( <PreviewTerms { ...{
-							currentPost,
-							taxonomy: 'course_cat',
-							taxonomy_name: __( 'Categories', 'lifterlms' ),
-						} } /> ) }
-						{ show_tags && ( <PreviewTerms { ...{
-							currentPost,
-							taxonomy: 'course_tag',
-							taxonomy_name: __( 'Tags', 'lifterlms' ),
-						} } /> ) }
-					</ul>
 				</div>
 			</Fragment>
 		);
@@ -166,16 +165,13 @@ export const settings = {
 	},
 
 	/**
-	 * The save function defines the way in which the different attributes should be combined
-	 * into the final markup, which is then serialized by Gutenberg into post_content.
+	 * Block Editor Save
 	 *
-	 * The "save" property must be specified and must be a valid function.
+	 * Does nothing since it's a dynamic block.
 	 *
-	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-	 * @param   {Object} props Block properties.
-	 * @return  {Function}
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @since 1.0.0
+	 *
+	 * @return {Function}
 	 */
 	save: () => {
 		return null;
