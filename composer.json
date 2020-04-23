@@ -11,8 +11,6 @@
   ],
   "require-dev": {
     "lifterlms/lifterlms-cs": "dev-master",
-    "phpcompatibility/php-compatibility": "^9.0",
-    "roave/security-advisories": "dev-master",
     "lifterlms/lifterlms-tests": "dev-master"
   },
   "minimum-stability": "dev",
