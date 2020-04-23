@@ -23,6 +23,7 @@ import check from './check';
 export default function visibilityAttributes( settings, name ) {
 
 	if ( ! check( settings, name ) ) {
+		console.log( name );
 		return settings;
 	}
 
