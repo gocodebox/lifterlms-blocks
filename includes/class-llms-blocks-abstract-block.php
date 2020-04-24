@@ -2,15 +2,19 @@
 /**
  * Common block registration methods.
  *
- * @package  LifterLMS_Blocks/Abstracts
- * @since    1.0.0
- * @version  1.0.0
+ * @package LifterLMS_Blocks/Abstracts
+ *
+ * @since 1.0.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Abstract Block class.
+ *
+ * @since 1.0.0
+ * @since [version] Don't output empty render messages on the frontend.
  */
 abstract class LLMS_Blocks_Abstract_Block {
 
@@ -97,11 +101,15 @@ abstract class LLMS_Blocks_Abstract_Block {
 	/**
 	 * Output a message when no HTML was rendered
 	 *
+	 * @since 1.0.0
+	 * @since [version] Don't output empty render messages on the frontend.
+	 *
 	 * @return  string
-	 * @since   1.0.0
-	 * @version 1.0.0
 	 */
 	public function get_empty_render_message() {
+		if ( ! is_admin() ) {
+			return '';
+		}
 		return __( 'No HTML was returned.', 'lifterlms' );
 	}
 
