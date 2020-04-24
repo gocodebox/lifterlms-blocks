@@ -4,14 +4,14 @@
  * @since 1.0.0
  * @since 1.5.0 Add supported post type settings.
  * @since [version] Remove import of empty CSS file.
+ *              Use `import` in favor of "wp." constants.
  */
 
-// Import CSS.
+// WP deps.
+import { __ } from '@wordpress/i18n';
+
+// CSS.
 import './editor.scss';
-
-const { __, setLocaleData } = wp.i18n;
-
-// setLocaleData( window.LLMS.l10n.strings, 'lifterlms' );
 
 /**
  * Array of supported post types.
@@ -22,6 +22,7 @@ export const post_types = [ 'course' ];
 
 /**
  * Block Name
+ *
  * @type {String}
  */
 export const name = 'llms/course-progress';
@@ -29,42 +30,34 @@ export const name = 'llms/course-progress';
 /**
  * Register: Course Progress Block
  *
- * @link https://wordpress.org/gutenberg/handbook/block-api/
- * @param  {string}   name     Block name.
- * @param  {Object}   settings Block settings.
- * @return {?WPBlock}          The block, if it has been successfully, registered; otherwise `undefined`.
- * @since   1.0.0
- * @version 1.0.0
+ * @type {String}
  */
 export const settings = {
+
 	title: __( 'Course Progress', 'lifterlms' ),
 	icon: {
 		foreground: '#2295ff',
 		src: 'chart-area'
 	},
-	category: 'llms-blocks', // common, formatting, layout widgets, embed. see https://wordpress.org/gutenberg/handbook/block-api/#category.
+	category: 'llms-blocks',
 	keywords: [
 		__( 'LifterLMS', 'lifterlms' ),
 	],
 
 	/**
-	 * The edit function describes the structure of your block in the context of the editor.
-	 * This represents what the editor will render when the block is used.
+	 * Block edit method
 	 *
-	 * The "edit" property must be a valid function.
+	 * @since 1.0.0
+	 * @since [version] Use `className` in favor of `class`.
 	 *
-	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-	 * @param   {Object} props Block properties.
-	 * @return  {Function}
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @param {Object} props Block properties.
+	 * @return {Function}
 	 */
 	edit: function( props ) {
-		// Creates a <div class='wp-block-llms-course-progress'></div>.
 		return (
 			<div className={ props.className }>
-				<div class="progress-bar" value="50" max="100">
-					<div class="progress--fill"></div>
+				<div className="progress-bar" value="50" max="100">
+					<div className="progress--fill"></div>
 				</div>
 				<span>50%</span>
 			</div>
@@ -72,16 +65,12 @@ export const settings = {
 	},
 
 	/**
-	 * The save function defines the way in which the different attributes should be combined
-	 * into the final markup, which is then serialized by Gutenberg into post_content.
+	 * Save block content
 	 *
-	 * The "save" property must be specified and must be a valid function.
+	 * @since 1.0.0
 	 *
-	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-	 * @param   {Object} props Block properties.
-	 * @return  {Function}
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @param {Object} props Block properties.
+	 * @return {Function}
 	 */
 	save: function( props ) {
 		return (

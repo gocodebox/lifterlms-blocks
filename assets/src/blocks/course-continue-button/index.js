@@ -3,12 +3,13 @@
  *
  * @since 1.0.0
  * @since 1.5.0 Add supported post type settings.
+ * @since [version] Use imports in favor of "wp." variables.
  */
 
 // WP Deps.
-const { Button } = wp.components
-const { Fragment } = wp.element
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
+import { Button } from '@wordpress/components';
+import { Fragment } from '@wordpress/element';
 
 /**
  * Block Name

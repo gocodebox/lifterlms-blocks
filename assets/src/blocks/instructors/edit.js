@@ -1,30 +1,35 @@
 /**
  * Instructors Block edit
  *
- * @since   1.0.0
- * @version 1.0.0
+ * @since 1.0.0
+ * @since [version] Use imports in favor of "wp." variables.
+ *              Use @wordpress/server-side-render in favor of wp.components.ServerSideRender.
  */
 
 // WP deps.
-const {
-	ServerSideRender,
-} = wp.components;
-const {
-	compose,
-} = wp.compose
-const {
-	withSelect,
-} = wp.data;
-const {
+import { __ } from '@wordpress/i18n';
+import {
 	Component,
-	Fragment
-} = wp.element
-const {
-	__,
-} = wp.i18n;
+	Fragment,
+} from '@wordpress/element';
+import { compose } from '@wordpress/compose';
+import { withSelect } from '@wordpress/data';
+import ServerSideRender from '@wordpress/server-side-render';
 
+/**
+ * Instructors Block edit component.
+ *
+ * @since 1.0.0
+ */
 class InstructorsEdit extends Component {
 
+	/**
+	 * Constructor
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return {Void}
+	 */
 	constructor() {
 
 		super( ...arguments )
@@ -35,6 +40,13 @@ class InstructorsEdit extends Component {
 
 	}
 
+	/**
+	 * Render component
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return {Fragment}
+	 */
 	render = () => {
 
 		const {
@@ -58,6 +70,13 @@ class InstructorsEdit extends Component {
 
 }
 
+/**
+ * Compose the component with data select
+ *
+ * @since [version]
+ *
+ * @return {InstructorsEdit}
+ */
 export default compose( [
 	withSelect( ( select, props ) => {
 		const {

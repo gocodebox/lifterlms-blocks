@@ -6,6 +6,7 @@
  * @since [version] Remove import of empty CSS file.
  *              Fix UX issues when all information options are disabled.
  *              Use import instead of require.
+ *              Import RichText from @wordpress/blockEditor in favor of @wordpress/editor
  */
 
 // Import CSS.
@@ -18,7 +19,7 @@ import Inspector from './inspect'
 import PreviewTerms from './preview-terms'
 
 // External Deps.
-import { RichText } from '@wordpress/editor';
+import { RichText } from '@wordpress/block-editor';
 import { Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 

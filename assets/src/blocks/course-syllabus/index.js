@@ -5,12 +5,14 @@
  *
  * @since 1.0.0
  * @since 1.5.0 Add supported post type settings.
+ * @since [version] Use imports in favor of "wp." variables.
+ *              Use @wordpress/server-side-render in favor of wp.components.ServerSideRender.
  */
 
 // WP Deps.
-const { ServerSideRender } = wp.components;
-const { Fragment } = wp.element
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
+import { Fragment } from '@wordpress/element';
+import ServerSideRender from '@wordpress/server-side-render';
 
 // Internal Deps.
 import './editor.scss';
