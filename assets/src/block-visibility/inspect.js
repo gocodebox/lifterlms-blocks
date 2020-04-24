@@ -237,7 +237,7 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 											isMulti
 											postType="llms_membership"
 											label={ __( 'Memberships', 'lifterlms' ) }
-											placeholder={ __( 'Search by memebership title...', 'lifterlms' ) }
+											placeholder={ __( 'Search by membership title...', 'lifterlms' ) }
 											onChange={ onChange }
 											selected={ llms_visibility_posts.filter( post => 'llms_membership' === post.type ) }
 										/>
