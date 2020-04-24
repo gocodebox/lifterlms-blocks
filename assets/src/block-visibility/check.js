@@ -43,7 +43,7 @@ export default function supportsVisibility( settings, name ) {
 const getBlacklist = () => {
 	return [
 		/**
-		 * Otherwise know as the "Classic" block
+		 * Otherwise known as the "Classic" block.
 		 *
 		 * @link https://github.com/gocodebox/lifterlms-blocks/issues/41
 		 */
