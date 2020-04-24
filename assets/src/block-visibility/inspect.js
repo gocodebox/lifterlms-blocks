@@ -4,7 +4,7 @@
  * @since 1.0.0
  * @since 1.6.0 Import `InspectorControls` from `wp.blockEditor` in favor of deprecated `wp.editor`
  * @since 1.7.0 Import `InspectorControls` from `wp.blockEditor` and fallback to `wp.editor` to maintain backwards compatibility.
- * @version 1.6.0
+ * @version [version]
  */
 
 // WP Deps.
@@ -35,14 +35,14 @@ import SearchPost from '../components/search-post';
  * @since 1.5.1 Exits early for non LifterLMS dynamic blocks.
  * @since 1.6.0 Use `check()` helper to determine if the block supports visibility.
  *              Add "logged in" and "logged out" block visibility options.
- * @since [version] Fix typo.
+ * @since [version] Fix issue causing visibility attributes to render on blocks that don't support them.
  */
 export default createHigherOrderComponent( ( BlockEdit ) => {
 
 	return ( props ) => {
 
 		// Exit early if the block doesn't support visibility.
-		if ( ! check( wp.blocks.getBlockType( props.name ), name ) ) {
+		if ( ! check( wp.blocks.getBlockType( props.name ), props.name ) ) {
 			return (
 				<Fragment>
 					<BlockEdit { ...props } />
