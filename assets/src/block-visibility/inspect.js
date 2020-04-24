@@ -35,6 +35,7 @@ import SearchPost from '../components/search-post';
  * @since 1.5.1 Exits early for non LifterLMS dynamic blocks.
  * @since 1.6.0 Use `check()` helper to determine if the block supports visibility.
  *              Add "logged in" and "logged out" block visibility options.
+ * @since [version] Fix typo.
  */
 export default createHigherOrderComponent( ( BlockEdit ) => {
 
@@ -236,7 +237,7 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 											isMulti
 											postType="llms_membership"
 											label={ __( 'Memberships', 'lifterlms' ) }
-											placeholder={ __( 'Search by memebership title...', 'lifterlms' ) }
+											placeholder={ __( 'Search by membership title...', 'lifterlms' ) }
 											onChange={ onChange }
 											selected={ llms_visibility_posts.filter( post => 'llms_membership' === post.type ) }
 										/>
