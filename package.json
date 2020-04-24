@@ -32,8 +32,8 @@
     "build:scripts": "wp-scripts build",
     "build:pot": "llms-dev pot --json",
     "clean": "rm -f assets/js/*.js.map && rm -f assets/css/*.css.map",
-    "format:js": "wp-scripts format-js ./assets/src/js",
-    "lint:js": "wp-scripts lint-js ./assets/src/js",
+    "lint:js": "wp-scripts lint-js ./assets/src/",
+    "fix:js": "wp-scripts lint-js ./assets/src/ --fix",
     "start": "wp-scripts start"
   }
 }
