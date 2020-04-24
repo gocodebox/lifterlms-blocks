@@ -2,12 +2,12 @@
 /**
  * Lesson Progression block.
  *
+ * Render hook: llms_lesson-progression-block_render
+ *
  * @package  LifterLMS_Blocks/Blocks
  *
  * @since 1.0.0
- * @version 1.7.0
- *
- * @render_hook llms_lesson-progression-block_render
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.0.0
  * @since 1.1.0 Unknown
  * @since 1.7.0 Don't output an empty render message for free lessons.
+ * @since [version] Register meta data used by the block editor.
  */
 class LLMS_Blocks_Lesson_Progression_Block extends LLMS_Blocks_Abstract_Block {
 
@@ -38,11 +39,12 @@ class LLMS_Blocks_Lesson_Progression_Block extends LLMS_Blocks_Abstract_Block {
 	/**
 	 * Add actions attached to the render function action.
 	 *
-	 * @param   array  $attributes Optional. Block attributes. Default empty array.
-	 * @param   string $content    Optional. Block content. Default empty string.
-	 * @return  void
-	 * @since   1.0.0
-	 * @version 1.1.0
+	 * @since 1.0.0
+	 * @since 1.1.0 Unknown.
+	 *
+	 * @param array  $attributes Optional. Block attributes. Default empty array.
+	 * @param string $content    Optional. Block content. Default empty string.
+	 * @return void
 	 */
 	public function add_hooks( $attributes = array(), $content = '' ) {
 
@@ -69,9 +71,9 @@ class LLMS_Blocks_Lesson_Progression_Block extends LLMS_Blocks_Abstract_Block {
 	 * Retrieve custom block attributes.
 	 * Necessary to override when creating ServerSideRender blocks.
 	 *
-	 * @return  array
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @since 1.0.0
+	 *
+	 * @return array
 	 */
 	public function get_attributes() {
 		return array_merge(
@@ -83,6 +85,32 @@ class LLMS_Blocks_Lesson_Progression_Block extends LLMS_Blocks_Abstract_Block {
 				),
 			)
 		);
+	}
+
+	/**
+	 * Register meta attributes.
+	 *
+	 * Called after registering the block type.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	public function register_meta() {
+
+		register_meta(
+			'post',
+			'_llms_quiz',
+			array(
+				'object_subtype'    => 'lesson',
+				'sanitize_callback' => 'absint',
+				'auth_callback'     => '__return_true',
+				'type'              => 'string',
+				'single'            => true,
+				'show_in_rest'      => true,
+			)
+		);
+
 	}
 
 }
