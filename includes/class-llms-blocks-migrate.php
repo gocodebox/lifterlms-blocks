@@ -256,7 +256,7 @@ class LLMS_Blocks_Migrate {
 	 */
 	private function remove_template_from_post( $post ) {
 
-		$template = $this->get_template( $post->post_type, $merge_deprecated_versions = true );
+		$template = $this->get_template( $post->post_type, true );
 		if ( ! $template ) {
 			return;
 		}
