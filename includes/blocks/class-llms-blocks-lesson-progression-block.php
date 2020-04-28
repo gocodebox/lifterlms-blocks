@@ -69,7 +69,7 @@ class LLMS_Blocks_Lesson_Progression_Block extends LLMS_Blocks_Abstract_Block {
 
 	/**
 	 * Retrieve custom block attributes.
-	 * 
+	 *
 	 * Necessary to override when creating ServerSideRender blocks.
 	 *
 	 * @since 1.0.0

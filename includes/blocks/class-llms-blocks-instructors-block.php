@@ -2,18 +2,22 @@
 /**
  * Instructors block.
  *
- * @package  LifterLMS_Blocks/Blocks
+ * Render hook: llms_instructors-block_render
  *
- * @since    1.0.0
- * @version  1.1.0
+ * @package LifterLMS_Blocks/Blocks
  *
- * @render_hook llms_instructors-block_render
+ * @since 1.0.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Course syllabus block class.
+ *
+ * @since 1.0.0
+ * @since 1.1.0 Unknown.
+ * @since [version] Fixed a spelling error.
  */
 class LLMS_Blocks_Instructors_Block extends LLMS_Blocks_Abstract_Block {
 
@@ -34,11 +38,12 @@ class LLMS_Blocks_Instructors_Block extends LLMS_Blocks_Abstract_Block {
 	/**
 	 * Add actions attached to the render function action.
 	 *
-	 * @param   array  $attributes Optional. Block attributes. Default empty array.
-	 * @param   string $content    Optional. Block content. Default empty string.
-	 * @return  void
-	 * @since   1.0.0
-	 * @version 1.1.0
+	 * @since 1.0.0
+	 * @since 1.1.0 Unknown.
+	 *
+	 * @param array  $attributes Optional. Block attributes. Default empty array.
+	 * @param string $content    Optional. Block content. Default empty string.
+	 * @return void
 	 */
 	public function add_hooks( $attributes = array(), $content = '' ) {
 
@@ -48,11 +53,12 @@ class LLMS_Blocks_Instructors_Block extends LLMS_Blocks_Abstract_Block {
 
 	/**
 	 * Retrieve custom block attributes.
+	 *
 	 * Necessary to override when creating ServerSideRender blocks.
 	 *
-	 * @return  array
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @since 1.0.0
+	 *
+	 * @return array
 	 */
 	public function get_attributes() {
 		return array_merge(
@@ -69,12 +75,13 @@ class LLMS_Blocks_Instructors_Block extends LLMS_Blocks_Abstract_Block {
 	/**
 	 * Output a message when no HTML was rendered
 	 *
-	 * @return  string
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @since 1.0.0
+	 * @since [version] Fixed spelling error.
+	 *
+	 * @return string
 	 */
 	public function get_empty_render_message() {
-		return __( 'No visibile instructors were found.', 'lifterlms' );
+		return __( 'No visible instructors were found.', 'lifterlms' );
 	}
 
 }
