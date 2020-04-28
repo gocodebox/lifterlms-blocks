@@ -29,3 +29,20 @@ WordPress Editor (Gutenberg) blocks for LifterLMS.
 2. Update versions: `llms-dev ver:update`
 3. Build assets and remove dev files: `npm run build`
 4. Build dist archive: `llms-dev archive`
+
+
+## Development
+
+While developing Javascript within this plugin you can watch changes in the assets and (optionally) automatically reload using LiveReload
+
+To watch changes in the `assets/src` directory, run `npm start`.
+
+To use LiveReload, add the following to a mu-plugin to automatically reload during development:
+
+```php
+// add_action( 'wp_head', 'add_live_reload' ); // Auto-reload frontend.
+// add_action( 'admin_head', 'add_live_reload' ); // Auto-reload admin panel.
+function add_live_reload() {
+  echo '<script src="http://localhost:35729/livereload.js"></script>';
+}
+```
