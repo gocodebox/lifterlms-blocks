@@ -2,7 +2,7 @@
  * BLOCK: llms/form-field-user-phone
  *
  * @since 1.6.0
- * @since [version] Updated lodash imports.
+ * @since 1.8.0 Updated lodash imports.
  */
 
 // WP Deps.

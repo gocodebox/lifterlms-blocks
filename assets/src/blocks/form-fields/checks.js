@@ -2,7 +2,7 @@
  * ??
  *
  * @since Unknown
- * @since [version] Updated lodash imports.
+ * @since 1.8.0 Updated lodash imports.
  */
 
 const { select } = wp.data;

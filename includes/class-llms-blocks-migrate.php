@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.8.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.4.0 Added action for unmigrating posts from the Tools & Utilities status screen.
  * @since 1.7.0 Perform migrations on `current_screen` instead of `admin_enqueue_scripts`.
  *              Migrate membership post types to use pricing table blocks.
- * @since [version] Update course progress bar shortcode in the course block template.
+ * @since 1.8.0 Update course progress bar shortcode in the course block template.
  */
 class LLMS_Blocks_Migrate {
 
@@ -134,7 +134,7 @@ class LLMS_Blocks_Migrate {
 	 *
 	 * @since 1.0.0
 	 * @since 1.7.0 Add membership template.
-	 * @since [version] Updated course progress shortcode and added the `$merge_deprecated_versions` param.
+	 * @since 1.8.0 Updated course progress shortcode and added the `$merge_deprecated_versions` param.
 	 *
 	 * @param string  $post_type     WP post type.
 	 * @param boolean $merge_deprecated_versions Optional. Whether or not getting the deprecated blocks merged, useful when removing templates. Default `false`.
@@ -249,7 +249,7 @@ class LLMS_Blocks_Migrate {
 	 * Remove post type templates and any LifterLMS Blocks from a given post.
 	 *
 	 * @since 1.4.0
-	 * @since [version] Get all post type's template with deprecated blocks versions merged.
+	 * @since 1.8.0 Get all post type's template with deprecated blocks versions merged.
 	 *
 	 * @param WP_Post $post Post object.
 	 * @return bool

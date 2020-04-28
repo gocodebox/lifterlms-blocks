@@ -3,7 +3,7 @@
  *
  * @since 1.6.0
  * @since 1.7.0 Unknown.
- * @since [version] Updated lodash imports.
+ * @since 1.8.0 Updated lodash imports.
  */
 
 // WP Deps.

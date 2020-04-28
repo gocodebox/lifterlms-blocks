@@ -7,7 +7,7 @@
  * @package  LifterLMS_Blocks/Blocks
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.8.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.0.0
  * @since 1.1.0 Unknown
  * @since 1.7.0 Don't output an empty render message for free lessons.
- * @since [version] Register meta data used by the block editor.
+ * @since 1.8.0 Register meta data used by the block editor.
  */
 class LLMS_Blocks_Lesson_Progression_Block extends LLMS_Blocks_Abstract_Block {
 

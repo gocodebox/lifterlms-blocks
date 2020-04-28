@@ -4,7 +4,7 @@
  * @since 1.0.0
  * @since 1.5.1 Exits early for non LifterLMS dynamic blocks.
  * @since 1.6.0 Setup visibility support checking as a module.
- * @since [version] Merge default values into block settings.
+ * @since 1.8.0 Merge default values into block settings.
  */
 
 // Internal deps.
@@ -19,7 +19,7 @@ import check from './check';
  * Note: the attribute *type* will always be overwritten even if it's defined in the block.
  * This is done to ensure that our internal logic for handling enrollment data isn't broken.
  *
- * @since [version]
+ * @since 1.8.0
  *
  * @param {Object} attributes    Block settings.attributes object.
  * @param {String} attributeName Visibility attribute name.
@@ -46,7 +46,7 @@ const setAttribute = ( attributes, attributeName, defaults ) => {
  * Block registration filter callback.
  *
  * @since 1.0.0
- * @since [version] Merge default values into block settings.
+ * @since 1.8.0 Merge default values into block settings.
  *
  * @param {object} settings Block settings object.
  * @param {string} name Block name, eg "core/paragraph".

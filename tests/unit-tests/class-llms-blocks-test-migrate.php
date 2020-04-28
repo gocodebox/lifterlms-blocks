@@ -7,7 +7,7 @@
  * @since 1.3.1
  * @since 1.4.0 Add tests for `add_template_to_post()` and `remove_template_from_post()` methods.
  * @since 1.7.0 Add tests for membership post type migrations.
- * @since [version] Add test on old course progress bar block removal.
+ * @since 1.8.0 Add test on old course progress bar block removal.
  */
 class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 
@@ -36,7 +36,7 @@ class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 	 * Test the add_template_to_post() and remove_template_from_post() methods.
 	 *
 	 * @since 1.4.0
-	 * @since [version] Add test on old course progress bar block removal.
+	 * @since 1.8.0 Add test on old course progress bar block removal.
 	 *
 	 * @return void
 	 */

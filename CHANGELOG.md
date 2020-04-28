@@ -1,6 +1,35 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.8.0 - 2020-04-28
+-------------------
+
+##### Updates
+
++ Improved script dependencies definitions.
++ Updated asset paths for consistency with other LifterLMS projects.
++ Updated various WP Core references that have been deprecated (maintains backwards compatibility).
++ The Lesson Progression block is no longer rendered server-side in the block editor (minor performance improvement).
+
+##### Changes to the Classic Editor Block
+
++ The classic editor block will no longer show block visibility settings because it is impossible to use those settings to filter the block on the frontend.
++ In order to apply visibility settings to the classic editor block, place the Classic Editor within a "Group" block and apply visibility settings to the Group.
+
+##### Bug fixes
+
++ Fixed an issue encountered when using the WP Core "Table" block.
++ Fixed a few areas where `class` was being used instead of `className` to define CSS classes on elements in the block editor.
++ Fixed a user-experience issues encountered on the Course Information block when all possible information is disabled.
++ Fixed an issue causing visibility attributes to render on blocks that don't support them.
++ Fixed an issue preventing 3rd party blocks from modifying default block visibility settings.
++ Fixed a spelling error visible inside the block editor.
++ Fixed an issue causing the "Course Progress" block to be shown to non-enrolled students and visitors.
++ Removed redundant CSS from frontend.
++ Stop outputting editor CSS on the frontend.
++ Dynamic blocks with no content to render will now only output their empty render messages inside the block editor, not on the frontend.
+
+
 v1.7.3 - 2019-12-19
 -------------------
 

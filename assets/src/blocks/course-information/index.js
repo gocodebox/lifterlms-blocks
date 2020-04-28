@@ -3,7 +3,7 @@
  *
  * @since 1.0.0
  * @since 1.5.0 Add supported post type settings.
- * @since [version] Remove import of empty CSS file.
+ * @since 1.8.0 Remove import of empty CSS file.
  *              Fix UX issues when all information options are disabled.
  *              Use import instead of require.
  *              Import RichText from @wordpress/blockEditor in favor of @wordpress/editor.
@@ -98,7 +98,7 @@ export const settings = {
 	 * Block Editor
 	 *
 	 * @since 1.0.0
-	 * @since [version] Always show the block "title" in the editor.
+	 * @since 1.8.0 Always show the block "title" in the editor.
 	 *
 	 * @param {Object} props Block properties.
 	 * @return {Function}

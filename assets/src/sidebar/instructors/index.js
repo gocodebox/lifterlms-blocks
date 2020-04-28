@@ -2,7 +2,7 @@
  * Instructors Sidebar Plugin
  *
  * @since 1.0.0
- * @since [version] Use `className` in favor of `class`.
+ * @since 1.8.0 Use `className` in favor of `class`.
  */
 
 // WP deps.
@@ -84,7 +84,7 @@ const InstructorsList = SortableContainer( ( { items, onChange, onRemove } ) => 
  * Output a single instructor list item.
  *
  * @since 1.0.0
- * @since [version] Use `className` in favor of `class`.
+ * @since 1.8.0 Use `className` in favor of `class`.
  *
  * @return {Object} HTML Fragment.
  */

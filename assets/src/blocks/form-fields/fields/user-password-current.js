@@ -2,7 +2,7 @@
  * BLOCK: llms/form-field-user-password-current
  *
  * @since 1.7.1
- * @since [version] Updated lodash imports.
+ * @since 1.8.0 Updated lodash imports.
  */
 
 // WP Deps.

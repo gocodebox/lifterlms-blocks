@@ -5,7 +5,7 @@
  *
  * @since 1.6.0
  * @since 1.7.0 Import from `wp.editor` when `wp.blockEditor` is not available.
- * @since [version] Wrap the rendered content into a `<Fragment>` rather than a `<div>`
+ * @since 1.8.0 Wrap the rendered content into a `<Fragment>` rather than a `<div>`
  *              to fix issues with Table block.
  * @version 1.6.0
  */

@@ -4,7 +4,7 @@
  * @since 1.0.0
  * @since 1.3.8 Explicitly import jQuery.
  * @since 1.5.0 Add supported post type settings.
- * @since [version] Use imports in favor of "wp." variables.
+ * @since 1.8.0 Use imports in favor of "wp." variables.
  *              Use @wordpress/server-side-render in favor of wp.components.ServerSideRender.
  */
 

@@ -3,7 +3,7 @@
  *
  * @since 1.0.0
  * @since 1.5.0 Add supported post type settings.
- * @since [version] Remove import of empty CSS file.
+ * @since 1.8.0 Remove import of empty CSS file.
  *              Use `import` in favor of "wp." constants.
  *              Set shortcode attribute check_enrollment to true(1) so to display the progress to enrolled users only.
  *              Do not support llms_visibility.
@@ -53,7 +53,7 @@ export const settings = {
 	 * Block edit method
 	 *
 	 * @since 1.0.0
-	 * @since [version] Use `className` in favor of `class`.
+	 * @since 1.8.0 Use `className` in favor of `class`.
 	 *
 	 * @param {Object} props Block properties.
 	 * @return {Function}
@@ -73,7 +73,7 @@ export const settings = {
 	 * Save block content
 	 *
 	 * @since 1.0.0
-	 * @since [version] Set shortcode attribute check_enrollment to true (1) so to display the progress to enrolled users only.
+	 * @since 1.8.0 Set shortcode attribute check_enrollment to true (1) so to display the progress to enrolled users only.
 	 *
 	 * @param {Object} props Block properties.
 	 * @return {Function}
@@ -91,7 +91,7 @@ export const settings = {
 			 * Block Editor Save
 			 *
 			 * @since 1.0.0
-			 * @deprecated [version]
+			 * @deprecated 1.8.0
 			 *
 			 * @return {Function}
 			 */

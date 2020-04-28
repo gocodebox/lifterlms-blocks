@@ -3,7 +3,7 @@
  *
  * @since 1.0.0
  * @since 1.5.0 Add supported post type settings.
- * @since [version] Use imports in favor of "wp." variables.
+ * @since 1.8.0 Use imports in favor of "wp." variables.
  *              Convert "edit" function from using ServerSideRender.
  */
 
@@ -73,7 +73,7 @@ export const settings = {
 		/**
 		 * Determine whether or not to show the "Mark Complete" button in the lesson progression block editor "edit" view.
 		 *
-		 * @since [version]
+		 * @since 1.8.0
 		 *
 		 * @param {Boolean} showMainBtn Determines whether or not to display the main button.
 		 */

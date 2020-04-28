@@ -3,7 +3,7 @@
  *
  * @since 1.6.0
  * @since 1.7.1 Add filter, `llms_block_supports_visibility` to allow modification of the return of the check.
- * @since [version] Add a "blacklist" of blocks that don't support visibility.
+ * @since 1.8.0 Add a "blacklist" of blocks that don't support visibility.
  *
  * @param {Object} settings Block settings object.
  * @param {String} name Block name, eg "core/paragraph".
@@ -36,7 +36,7 @@ export default function supportsVisibility( settings, name ) {
 /**
  * Returns a list of blocks that we've decided should not support block visibility
  *
- * @since [version]
+ * @since 1.8.0
  *
  * @return {Array} List of block names.
  */

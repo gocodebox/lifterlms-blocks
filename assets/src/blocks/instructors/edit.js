@@ -2,7 +2,7 @@
  * Instructors Block edit
  *
  * @since 1.0.0
- * @since [version] Use imports in favor of "wp." variables.
+ * @since 1.8.0 Use imports in favor of "wp." variables.
  *              Use @wordpress/server-side-render in favor of wp.components.ServerSideRender.
  */
 
@@ -73,7 +73,7 @@ class InstructorsEdit extends Component {
 /**
  * Compose the component with data select
  *
- * @since [version]
+ * @since 1.8.0
  *
  * @return {InstructorsEdit}
  */

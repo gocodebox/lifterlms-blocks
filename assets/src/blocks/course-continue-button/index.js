@@ -3,7 +3,7 @@
  *
  * @since 1.0.0
  * @since 1.5.0 Add supported post type settings.
- * @since [version] Use imports in favor of "wp." variables.
+ * @since 1.8.0 Use imports in favor of "wp." variables.
  */
 
 // WP Deps.

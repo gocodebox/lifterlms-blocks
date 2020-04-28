@@ -7,7 +7,7 @@
  * @package LifterLMS_Blocks/Blocks
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.8.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  * @since 1.1.0 Unknown.
- * @since [version] Fixed a spelling error.
+ * @since 1.8.0 Fixed a spelling error.
  */
 class LLMS_Blocks_Instructors_Block extends LLMS_Blocks_Abstract_Block {
 
@@ -76,7 +76,7 @@ class LLMS_Blocks_Instructors_Block extends LLMS_Blocks_Abstract_Block {
 	 * Output a message when no HTML was rendered
 	 *
 	 * @since 1.0.0
-	 * @since [version] Fixed spelling error.
+	 * @since 1.8.0 Fixed spelling error.
 	 *
 	 * @return string
 	 */

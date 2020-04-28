@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Abstracts
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.8.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
  * Abstract Block class.
  *
  * @since 1.0.0
- * @since [version] Don't output empty render messages on the frontend.
+ * @since 1.8.0 Don't output empty render messages on the frontend.
  */
 abstract class LLMS_Blocks_Abstract_Block {
 
@@ -102,7 +102,7 @@ abstract class LLMS_Blocks_Abstract_Block {
 	 * Output a message when no HTML was rendered
 	 *
 	 * @since 1.0.0
-	 * @since [version] Don't output empty render messages on the frontend.
+	 * @since 1.8.0 Don't output empty render messages on the frontend.
 	 *
 	 * @return  string
 	 */
