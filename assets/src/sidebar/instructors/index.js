@@ -2,7 +2,7 @@
  * Instructors Sidebar Plugin
  *
  * @since 1.0.0
- * @version 1.7.1
+ * @since [version] Use `className` in favor of `class`.
  */
 
 // WP deps.
@@ -84,13 +84,14 @@ const InstructorsList = SortableContainer( ( { items, onChange, onRemove } ) => 
  * Output a single instructor list item.
  *
  * @since 1.0.0
+ * @since [version] Use `className` in favor of `class`.
  *
  * @return {Object} HTML Fragment.
  */
 const InstructorsItem = SortableElement( ( { instructor, i, onChange, onRemove } ) => {
 	const visible = ( 'visible' === instructor.visibility );
 	return (
-		<li class="llms-instructor">
+		<li className="llms-instructor">
 			<BaseControl>
 				<DragHandle />
 				<strong>

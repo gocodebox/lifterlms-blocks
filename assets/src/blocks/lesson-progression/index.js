@@ -7,15 +7,16 @@
  *              Convert "edit" function from using ServerSideRender.
  */
 
-// CSS.
-import './editor.scss';
-
 // WP Deps.
 import { Button } from '@wordpress/components';
 import { select } from '@wordpress/data';
 import { applyFilters } from '@wordpress/hooks';
 import { Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+
+// CSS.
+import './editor.scss';
+
 
 /**
  * Block Name
