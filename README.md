@@ -21,3 +21,11 @@ WordPress Editor (Gutenberg) blocks for LifterLMS.
 + On your WordPress admin panel navigate to Plugins -> Add New
 + Upload the zip file
 + Activate the plugin
+
+
+## Building
+
+1. Update changelog: `llms-dev log:write`
+2. Update versions: `llms-dev ver:update`
+3. Build assets and remove dev files: `npm run build`
+4. Build dist archive: `llms-dev archive`
