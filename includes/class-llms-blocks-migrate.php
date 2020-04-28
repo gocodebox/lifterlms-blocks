@@ -153,13 +153,9 @@ class LLMS_Blocks_Migrate {
 
 <!-- wp:llms/course-progress -->
 <div class="wp-block-llms-course-progress">[lifterlms_course_progress check_enrollment=1]</div>
-			<?php
-			if ( $merge_deprecated_versions ):
-			?>
+			<?php if ( $merge_deprecated_versions ) : ?>
 <div class="wp-block-llms-course-progress">[lifterlms_course_progress]</div>
-			<?php
-			endif;
-			?>
+			<?php endif; ?>
 <!-- /wp:llms/course-progress -->
 
 <!-- wp:llms/course-continue-button -->

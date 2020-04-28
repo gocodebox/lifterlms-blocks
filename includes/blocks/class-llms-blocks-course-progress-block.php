@@ -63,7 +63,7 @@ class LLMS_Blocks_Course_Progress_Block extends LLMS_Blocks_Abstract_Block {
 				'<div class="wp-block-llms-%1$s%2$s">%3$s</div>',
 				$this->id,
 				// Take into account the custom class attribute.
-				empty( $attributes['className'] ) ? '' : ' ' . esc_attr($attributes['className']),
+				empty( $attributes['className'] ) ? '' : ' ' . esc_attr( $attributes['className'] ),
 				$progress
 			);
 		}
