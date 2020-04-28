@@ -48,6 +48,5 @@ const getBlacklist = () => {
 		 * @link https://github.com/gocodebox/lifterlms-blocks/issues/41
 		 */
 		'core/freeform',
-		'llms/course-progress'
 	];
 };
