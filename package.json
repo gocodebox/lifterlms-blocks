@@ -28,9 +28,8 @@
     "webpack": "^4.43.0"
   },
   "scripts": {
-    "build": "npm run clean && npm run build:scripts && npm run build:pot",
+    "build": "npm run clean && npm run build:scripts",
     "build:scripts": "wp-scripts build",
-    "build:pot": "llms-dev pot --json",
     "clean": "rm -f assets/js/*.js.map && rm -f assets/css/*.css.map",
     "lint:js": "wp-scripts lint-js ./assets/src/",
     "fix:js": "wp-scripts lint-js ./assets/src/ --fix",
