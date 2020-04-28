@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version 1.4.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -14,8 +14,10 @@ defined( 'ABSPATH' ) || exit;
  * Handle post migration to the block editor.
  *
  * @since 1.0.0
+ * @since 1.4.0 Added action for unmigrating posts from the Tools & Utilities status screen.
  * @since 1.7.0 Perform migrations on `current_screen` instead of `admin_enqueue_scripts`.
  *              Migrate membership post types to use pricing table blocks.
+ * @since [version] Update course progress bar shortcode in the course block template.
  */
 class LLMS_Blocks_Migrate {
 
@@ -59,12 +61,13 @@ class LLMS_Blocks_Migrate {
 
 	/**
 	 * Don't remove core template actions when a sales page is enabled and the page is restricted.
+
+	 * @since 1.2.0
+	 * @since 1.3.1 Unknown.
 	 *
-	 * @param   bool $ret Default migration status.
-	 * @param   int  $post_id WP_Post ID.
-	 * @return  bool
-	 * @since   1.2.0
-	 * @version 1.3.1
+	 * @param bool $ret     Default migration status.
+	 * @param int  $post_id WP_Post ID.
+	 * @return bool
 	 */
 	public static function check_sales_page( $ret, $post_id ) {
 
@@ -89,6 +92,13 @@ class LLMS_Blocks_Migrate {
 	 * @return  array
 	 */
 	public function get_migrateable_post_types() {
+		/**
+		 * Filters the post types that can be migrated
+		 *
+		 * @since 1.3.3
+		 *
+		 * @param string[] $post_types An array of string representing the post types that can be migrated.
+		 */
 		return apply_filters( 'llms_blocks_migrateable_post_types', array( 'course', 'lesson', 'llms_membership' ) );
 	}
 
@@ -124,11 +134,13 @@ class LLMS_Blocks_Migrate {
 	 *
 	 * @since 1.0.0
 	 * @since 1.7.0 Add membership template.
+	 * @since [version] Updated course progress shortcode and added the `$merge_deprecated_versions` param.
 	 *
-	 * @param   string $post_type wp post type.
-	 * @return  string
+	 * @param string  $post_type     WP post type.
+	 * @param boolean $merge_deprecated_versions Optional. Whether or not getting the deprecated blocks merged, useful when removing templates. Default `false`.
+	 * @return string
 	 */
-	private function get_template( $post_type ) {
+	private function get_template( $post_type, $merge_deprecated_versions = false ) {
 
 		if ( 'course' === $post_type ) {
 			ob_start();
@@ -140,7 +152,14 @@ class LLMS_Blocks_Migrate {
 <!-- wp:llms/pricing-table /-->
 
 <!-- wp:llms/course-progress -->
+<div class="wp-block-llms-course-progress">[lifterlms_course_progress check_enrollment=1]</div>
+			<?php
+			if ( $merge_deprecated_versions ):
+			?>
 <div class="wp-block-llms-course-progress">[lifterlms_course_progress]</div>
+			<?php
+			endif;
+			?>
 <!-- /wp:llms/course-progress -->
 
 <!-- wp:llms/course-continue-button -->
@@ -234,13 +253,14 @@ class LLMS_Blocks_Migrate {
 	 * Remove post type templates and any LifterLMS Blocks from a given post.
 	 *
 	 * @since 1.4.0
+	 * @since [version] Get all post type's template with deprecated blocks versions merged.
 	 *
 	 * @param WP_Post $post Post object.
 	 * @return bool
 	 */
 	private function remove_template_from_post( $post ) {
 
-		$template = $this->get_template( $post->post_type );
+		$template = $this->get_template( $post->post_type, $merge_deprecated_versions = true );
 		if ( ! $template ) {
 			return;
 		}
@@ -264,9 +284,10 @@ class LLMS_Blocks_Migrate {
 	/**
 	 * Removes core template action hooks from posts which have been migrated to the block editor
 	 *
-	 * @return  void
-	 * @since   1.1.0
-	 * @version 1.3.2
+	 * @since 1.3.2 Unknown.
+	 *
+	 * @return void
+	 * @since 1.1.0
 	 */
 	public function remove_template_hooks() {
 
@@ -307,10 +328,10 @@ class LLMS_Blocks_Migrate {
 	/**
 	 * Determine if a post should be migrated.
 	 *
-	 * @param   int $post_id WP_Post ID.
-	 * @return  bool
-	 * @since   1.3.3
-	 * @version 1.3.3
+	 * @since 1.3.3
+	 *
+	 * @param int $post_id WP_Post ID.
+	 * @return bool
 	 */
 	public function should_migrate_post( $post_id ) {
 
@@ -333,6 +354,14 @@ class LLMS_Blocks_Migrate {
 
 		}
 
+		/**
+		 * Filters whether or not a post should be migrated
+		 *
+		 * @since 1.3.3
+		 *
+		 * @param bool $migrate Whether or not a post should be migrated.
+		 * @param int  $post_id WP_Post ID.
+		 */
 		return apply_filters( 'llms_blocks_should_migrate_post', $ret, $post_id );
 
 	}
@@ -359,11 +388,11 @@ class LLMS_Blocks_Migrate {
 	/**
 	 * Update post meta data to signal status of the editor migration.
 	 *
-	 * @param   int    $post_id WP_Post ID.
-	 * @param   string $status  Yes or no.
-	 * @return  void
-	 * @since   1.1.0
-	 * @version 1.1.0
+	 * @since 1.1.0
+	 *
+	 * @param int    $post_id WP_Post ID.
+	 * @param string $status  Yes or no.
+	 * @return void
 	 */
 	private function update_migration_status( $post_id, $status = 'yes' ) {
 		update_post_meta( $post_id, '_llms_blocks_migrated', $status );

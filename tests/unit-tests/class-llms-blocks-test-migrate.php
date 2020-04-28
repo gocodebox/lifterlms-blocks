@@ -7,6 +7,7 @@
  * @since 1.3.1
  * @since 1.4.0 Add tests for `add_template_to_post()` and `remove_template_from_post()` methods.
  * @since 1.7.0 Add tests for membership post type migrations.
+ * @since [version] Add test on old course progress bar block removal.
  */
 class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 
@@ -35,6 +36,7 @@ class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 	 * Test the add_template_to_post() and remove_template_from_post() methods.
 	 *
 	 * @since 1.4.0
+	 * @since [version] Add test on old course progress bar block removal.
 	 *
 	 * @return void
 	 */
@@ -95,7 +97,18 @@ class LLMS_Blocks_Test_Migrate extends LLMS_Blocks_Unit_Test_Case {
 			$orig_content = $post->post_content;
 			$this->assertTrue( LLMS_Unit_Test_Util::call_method( $migrate, 'add_template_to_post', array( $post ) ) );
 			if ( 'course' === $args['post_type'] ) {
-				$content = str_replace( '<!-- wp:llms/course-information /-->', '<!-- wp:llms/course-information {"show_cats":false,"show_difficulty":false,"llms_visibility":"enrolled","llms_visibility_in":"this"} /-->', $this->get_post_content( $post->ID ) );
+				$content = str_replace(
+					array(
+						'<!-- wp:llms/course-information /-->',
+						'[lifterlms_course_progress check_enrollment=1]' // replace the current course progress shortcode usage with the old one.
+					),
+					array(
+						'<!-- wp:llms/course-information {"show_cats":false,"show_difficulty":false,"llms_visibility":"enrolled","llms_visibility_in":"this"} /-->',
+						'[lifterlms_course_progress]' // old progress shortcode usage.
+					),
+					$this->get_post_content( $post->ID )
+				);
+
 				$content .= '
 <!-- wp:paragraph -->
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hoc enim constituto in philosophia constituta sunt omnia.</p>

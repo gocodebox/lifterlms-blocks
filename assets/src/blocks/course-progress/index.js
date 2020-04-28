@@ -72,11 +72,26 @@ export const settings = {
 	 * @param {Object} props Block properties.
 	 * @return {Function}
 	 */
-	save: function( props ) {
-		return (
-			<div className={ props.className }>
-				[lifterlms_course_progress]
-			</div>
-		);
+	save: function() {
+		return null;
 	},
+	deprecated: [
+		{
+			/**
+			 * Block Editor Save
+			 *
+			 * @since 1.0.0
+			 * @deprecated [version]
+			 *
+			 * @return {Function}
+			 */
+			save: function( props ) {
+				return (
+					<div className={ props.className }>
+						[lifterlms_course_progress]
+					</div>
+				);
+			},
+		},
+	]
 }

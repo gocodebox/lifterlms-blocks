@@ -2,10 +2,12 @@
 /**
  * Test main plugin file.
  *
- * @package  LifterLMS_Blocks/Tests
+ * @package LifterLMS_Blocks/Tests
  *
  * @since 1.5.1
- * @version 1.6.0
+ * @since 1.6.0 Update `test_add_block_category` test to accommodate form fields cat.
+ * @since [version] llms/course-progress is now a dynamic block check it's not taken into account when using `LLMS_Unit_Test_Util::get_dynamic_block_names()`
+ * @version [version]
  */
 class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 
@@ -88,6 +90,7 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 	 * Test the get_dynamic_block_names() method.
 	 *
 	 * @since 1.5.1
+	 * @since [version] llms/course-progress is now a dynamic block check it's excluded.
 	 *
 	 * @return void
 	 */
@@ -101,6 +104,7 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 		$this->assertTrue( in_array( 'core/search', $res, true ) );
 		$this->assertFalse( in_array( 'llms/course-information', $res, true ) );
 		$this->assertFalse( in_array( 'llms/pricing-table', $res, true ) );
+		$this->assertFalse( in_array( 'llms/course-progress', $res, true ) );
 
 	}
 
