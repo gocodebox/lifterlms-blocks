@@ -6,7 +6,7 @@
  * @since [version] Remove import of empty CSS file.
  *              Fix UX issues when all information options are disabled.
  *              Use import instead of require.
- *              Import RichText from @wordpress/blockEditor in favor of @wordpress/editor
+ *              Import RichText from @wordpress/blockEditor in favor of @wordpress/editor.
  */
 
 // Import CSS.
