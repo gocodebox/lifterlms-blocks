@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.9.1 - 2020-04-29
+-------------------
+
++ Fix course progress block template used when migrating a course to the block editor.
+
+
 v1.9.0 - 2020-04-29
 -------------------
 
