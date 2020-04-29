@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version 1.6.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -16,7 +16,8 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.0.0
  * @since 1.4.0 Add status tools class.
  * @since 1.5.1 Output dynamic block information for JS consumption.
- * @since 1.6.0 Add form field block category
+ * @since 1.6.0 Add form field block category.
+ * @since [version] Add course progress block class.
  */
 class LLMS_Blocks {
 
@@ -103,6 +104,7 @@ class LLMS_Blocks {
 	 *
 	 * @since 1.0.0
 	 * @since 1.4.0 Add status tools class.
+	 * @since [version] Added course progress block class.
 	 *
 	 * @return  void
 	 */
@@ -127,6 +129,7 @@ class LLMS_Blocks {
 		// Dynamic Blocks.
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-course-information-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-course-syllabus-block.php';
+		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-course-progress-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-instructors-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-lesson-navigation-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-lesson-progression-block.php';

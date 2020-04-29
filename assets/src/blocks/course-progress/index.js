@@ -7,6 +7,7 @@
  *              Use `import` in favor of "wp." constants.
  *              Set shortcode attribute check_enrollment to true(1) so to display the progress to enrolled users only.
  *              Do not support llms_visibility.
+ * @since [version] Turned into a dynamic block.
  */
 
 // WP deps.
@@ -74,16 +75,12 @@ export const settings = {
 	 *
 	 * @since 1.0.0
 	 * @since 1.8.0 Set shortcode attribute check_enrollment to true (1) so to display the progress to enrolled users only.
+	 * @since [version] Turned into a dynamic block.
 	 *
-	 * @param {Object} props Block properties.
-	 * @return {Function}
+	 * @return {null}
 	 */
-	save: function( props ) {
-		return (
-			<div className={ props.className }>
-				[lifterlms_course_progress check_enrollment=1]
-			</div>
-		);
+	save: function() {
+		return null;
 	},
 	deprecated: [
 		{
