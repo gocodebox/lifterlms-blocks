@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.9.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.4.0 Add status tools class.
  * @since 1.5.1 Output dynamic block information for JS consumption.
  * @since 1.6.0 Add form field block category.
- * @since [version] Add course progress block class.
+ * @since 1.9.0 Add course progress block class.
  */
 class LLMS_Blocks {
 
@@ -104,7 +104,7 @@ class LLMS_Blocks {
 	 *
 	 * @since 1.0.0
 	 * @since 1.4.0 Add status tools class.
-	 * @since [version] Added course progress block class.
+	 * @since 1.9.0 Added course progress block class.
 	 *
 	 * @return  void
 	 */

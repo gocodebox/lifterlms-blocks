@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Blocks
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.9.0
  *
  * @render_hook llms_pricing-table-block_render
  */
@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  * @since 1.3.7 Unknown.
- * @since [version] Added `llms_blocks_render_pricing_table_block` filter.
+ * @since 1.9.0 Added `llms_blocks_render_pricing_table_block` filter.
  */
 class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 
@@ -78,7 +78,7 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 	 *
 	 * @since 1.0.0
 	 * @since 1.3.7 Unknown.
-	 * @since [version] Added `llms_blocks_render_pricing_table_block` filter.
+	 * @since 1.9.0 Added `llms_blocks_render_pricing_table_block` filter.
 	 *
 	 * @param array $attributes Optional. Block attributes. Default empty array.
 	 * @return void
@@ -108,7 +108,7 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 		/**
 		 * Filters the block html
 		 *
-		 * @since [version]
+		 * @since 1.9.0
 		 *
 		 * @param string                          $block_content The block's html.
 		 * @param array                           $attributes    The block's array of attributes.

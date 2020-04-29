@@ -4,8 +4,8 @@
  *
  * @package LifterLMS_Blocks/Blocks
  *
- * @since [version]
- * @version [version]
+ * @since 1.9.0
+ * @version 1.9.0
  *
  * @render_hook llms_course-progress_block_render
  */
@@ -34,7 +34,7 @@ class LLMS_Blocks_Course_Progress_Block extends LLMS_Blocks_Abstract_Block {
 	/**
 	 * Add actions attached to the render function action.
 	 *
-	 * @since [version]
+	 * @since 1.9.0
 	 *
 	 * @param array  $attributes Optional. Block attributes. Default empty array.
 	 * @param string $content    Optional. Block content. Default empty string.
@@ -49,7 +49,7 @@ class LLMS_Blocks_Course_Progress_Block extends LLMS_Blocks_Abstract_Block {
 	/**
 	 * Output the course progress bar
 	 *
-	 * @since [version]
+	 * @since 1.9.0
 	 *
 	 * @param array $attributes Optional. Block attributes. Default empty array.
 	 * @return void
@@ -74,7 +74,7 @@ class LLMS_Blocks_Course_Progress_Block extends LLMS_Blocks_Abstract_Block {
 		/**
 		 * Filters the block html
 		 *
-		 * @since [version]
+		 * @since 1.9.0
 		 *
 		 * @param string                            $block_content The block's html.
 		 * @param array                             $attributes    The block's array of attributes.

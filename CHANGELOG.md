@@ -1,6 +1,13 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.9.0 - 2020-04-29
+-------------------
+
++ Converted the course progress block into a dynamic block. Fixes an issue allowing the progress block to be visible to non-enrolled students.
++ Added a filter on the output of the Pricing Table block: `llms_blocks_render_pricing_table_block`.
+
+
 v1.8.0 - 2020-04-28
 -------------------
 
