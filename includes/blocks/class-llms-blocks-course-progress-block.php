@@ -72,7 +72,9 @@ class LLMS_Blocks_Course_Progress_Block extends LLMS_Blocks_Abstract_Block {
 		}
 
 		/**
-		 * Filters the block html.
+		 * Filters the block html
+		 *
+		 * @since [version]
 		 *
 		 * @param string                            $block_content The block's html.
 		 * @param array                             $attributes    The block's array of attributes.
