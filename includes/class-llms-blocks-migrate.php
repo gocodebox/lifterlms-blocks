@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version 1.8.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -18,6 +18,7 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.7.0 Perform migrations on `current_screen` instead of `admin_enqueue_scripts`.
  *              Migrate membership post types to use pricing table blocks.
  * @since 1.8.0 Update course progress bar shortcode in the course block template.
+ * @since [version] Fix course progress block.
  */
 class LLMS_Blocks_Migrate {
 
@@ -135,6 +136,7 @@ class LLMS_Blocks_Migrate {
 	 * @since 1.0.0
 	 * @since 1.7.0 Add membership template.
 	 * @since 1.8.0 Updated course progress shortcode and added the `$merge_deprecated_versions` param.
+	 * @since [version] Fix course progress block.
 	 *
 	 * @param string  $post_type     WP post type.
 	 * @param boolean $merge_deprecated_versions Optional. Whether or not getting the deprecated blocks merged, useful when removing templates. Default `false`.
@@ -151,12 +153,14 @@ class LLMS_Blocks_Migrate {
 
 <!-- wp:llms/pricing-table /-->
 
+<!-- wp:llms/course-progress /-->
+			<?php if ( $merge_deprecated_versions ) : ?>
+
 <!-- wp:llms/course-progress -->
 <div class="wp-block-llms-course-progress">[lifterlms_course_progress check_enrollment=1]</div>
-			<?php if ( $merge_deprecated_versions ) : ?>
 <div class="wp-block-llms-course-progress">[lifterlms_course_progress]</div>
-			<?php endif; ?>
 <!-- /wp:llms/course-progress -->
+			<?php endif; ?>
 
 <!-- wp:llms/course-continue-button -->
 <div class="wp-block-llms-course-continue-button" style="text-align:center">[lifterlms_course_continue_button]</div>
