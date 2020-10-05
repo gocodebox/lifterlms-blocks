@@ -6,7 +6,7 @@
  *
  * @since 1.5.1
  * @since 1.6.0 Update `test_add_block_category` test to accommodate form fields cat.
- * @version 1.6.0
+ * @since [version] Update `test_get_dynamic_block_names` to test against core blocks available in 5.1.
  */
 class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 
@@ -89,6 +89,7 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 	 * Test the get_dynamic_block_names() method.
 	 *
 	 * @since 1.5.1
+	 * @since [version] Replace core/search with core/shortcode because search wasn't available in 5.1.
 	 *
 	 * @return void
 	 */
@@ -98,8 +99,10 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 
 		$res = LLMS_Unit_Test_Util::call_method( $obj, 'get_dynamic_block_names' );
 
+		var_dump( $res );
+
 		$this->assertTrue( in_array( 'core/archives', $res, true ) );
-		$this->assertTrue( in_array( 'core/search', $res, true ) );
+		$this->assertTrue( in_array( 'core/shortcode', $res, true ) );
 		$this->assertFalse( in_array( 'llms/course-information', $res, true ) );
 		$this->assertFalse( in_array( 'llms/pricing-table', $res, true ) );
 
