@@ -3,8 +3,9 @@
  * Test LLMS_Blocks_Page_Builders class & methods.
  *
  * @package LifterLMS_Blocks/Tests
- * @since   1.2.0
- * @version 1.3.4
+ *
+ * @since 1.2.0
+ * @since 1.3.4 Unknown
  */
 class LLMS_Blocks_Test_Page_Builders extends LLMS_Blocks_Unit_Test_Case {
 
@@ -12,9 +13,12 @@ class LLMS_Blocks_Test_Page_Builders extends LLMS_Blocks_Unit_Test_Case {
 	 * Test whether or not filters are properly added based on the presence of the page builder.
 	 *
 	 * @runInSeparateProcess
-	 * @return  void
-	 * @since   1.2.0
-	 * @version 1.3.4
+	 * @preserveGlobalState disabled
+	 *
+	 * @since 1.2.0
+	 * @since 1.3.4 Unknown
+	 *
+	 * @return void
 	 */
 	public function test_add_filters() {
 
