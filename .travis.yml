@@ -1,0 +1,17 @@
+import:
+  - gocodebox/lifterlms:.config/travis/main.yml
+  # - gocodebox/lifterlms:.config/travis/e2e.yml
+
+install:
+  - ./vendor/bin/llms-tests plugin lifterlms
+
+jobs:
+  include:
+  - name: "ES Lint"
+    language: node_js
+    node_js: lts/*
+    before_install:
+    install:
+      - npm ci
+    script:
+      - npm run lint
