@@ -4,3 +4,4 @@ import:
 
 install:
   - ./vendor/bin/llms-tests plugin lifterlms
+  - ./vendor/bin/llms-tests plugin classic-editor
