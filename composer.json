@@ -11,7 +11,7 @@
   ],
   "require-dev": {
     "lifterlms/lifterlms-cs": "dev-master",
-    "lifterlms/lifterlms-tests": "dev-master"
+    "lifterlms/lifterlms-tests": "dev-trunk"
   },
   "minimum-stability": "dev",
   "require": {
