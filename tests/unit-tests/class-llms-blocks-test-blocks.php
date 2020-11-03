@@ -99,8 +99,6 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 
 		$res = LLMS_Unit_Test_Util::call_method( $obj, 'get_dynamic_block_names' );
 
-		var_dump( $res );
-
 		$this->assertTrue( in_array( 'core/archives', $res, true ) );
 		$this->assertTrue( in_array( 'core/shortcode', $res, true ) );
 		$this->assertFalse( in_array( 'llms/course-information', $res, true ) );
