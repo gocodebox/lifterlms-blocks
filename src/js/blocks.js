@@ -8,7 +8,7 @@
  */
 
 // SCSS.
-import './blocks.scss';
+import '../scss/blocks.scss';
 
 // Internal Deps.
 import './block-visibility/'
