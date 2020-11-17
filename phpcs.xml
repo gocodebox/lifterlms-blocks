@@ -17,6 +17,7 @@
 
 	<!-- Exclude JS -->
 	<exclude-pattern>assets/*</exclude-pattern>
+	<exclude-pattern>src/*</exclude-pattern>
 
 	<!-- ESlint handles this better -->
 	<rule ref="Generic.WhiteSpace.ScopeIndent.IncorrectExact">
