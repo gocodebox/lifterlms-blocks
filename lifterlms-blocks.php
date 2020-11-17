@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @version 1.0.0
+ * @version [version]
  *
  * @wordpress-plugin
  * Plugin Name: LifterLMS Blocks
@@ -14,6 +14,8 @@
  * Version: 1.9.1
  * Author: LifterLMS
  * Author URI: https://lifterlms.com/
+ * Text Domain: lifterlms
+ * Domain Path: /i18n
  * License: GPLv3
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  * Requires at least: 4.9.9
@@ -31,12 +33,9 @@ if ( ! defined( 'LLMS_BLOCKS_VERSION' ) ) {
 /**
  * Allows disabling the blocks plugin & functionality.
  *
- * @filter llms_load_blocks_plugin
+ * @since 1.0.0
  *
- * @since    1.0.0
- * @version  1.0.0
- *
- * @param    boolean $load Whether the plugin should be loaded. Defaults to `true`.
+ * @param  boolean $load Whether the plugin should be loaded. Defaults to `true`.
  */
 if ( ! apply_filters( 'llms_load_blocks_plugin', true ) ) {
 	return;
