@@ -39,7 +39,7 @@ class LLMS_Blocks_Assets {
 	 * @since 1.0.0
 	 * @since 1.4.1 Fix double slash in asset path.
 	 * @since 1.8.0 Update asset paths and improve script dependencies.
-	 * @since [version] Load script translations.
+	 * @since [version] Load script translations & add RTL css.
 	 *
 	 * @return void
 	 */
@@ -64,6 +64,7 @@ class LLMS_Blocks_Assets {
 			array( 'wp-edit-blocks' ),
 			$asset['version']
 		);
+		wp_style_add_data( 'llms-blocks-editor', 'rtl', 'replace' );
 
 	}
 
