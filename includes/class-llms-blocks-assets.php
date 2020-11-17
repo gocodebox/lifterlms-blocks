@@ -7,7 +7,7 @@
  * @package LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @version 1.8.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -39,6 +39,7 @@ class LLMS_Blocks_Assets {
 	 * @since 1.0.0
 	 * @since 1.4.1 Fix double slash in asset path.
 	 * @since 1.8.0 Update asset paths and improve script dependencies.
+	 * @since [version] Load script translations.
 	 *
 	 * @return void
 	 */
@@ -53,6 +54,9 @@ class LLMS_Blocks_Assets {
 			$asset['version'],
 			true
 		);
+
+		$i18n_dir = defined( 'LLMS_BLOCKS_LIB' ) && LLMS_BLOCKS_LIB ? LLMS_PLUGIN_DIR . '/languages' : LLMS_BLOCKS_PLUGIN_DIR . '/i18n';
+		wp_set_script_translations( 'llms-blocks-editor', 'lifterlms', $i18n_dir );
 
 		wp_enqueue_style(
 			'llms-blocks-editor',
