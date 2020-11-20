@@ -150,11 +150,19 @@ class LLMS_Blocks {
 	/**
 	 * Load l10n files.
 	 *
-	 * The first loaded file takes priority.
+	 * This method is only used when the plugin is loaded as a standalone plugin (for development purposes),
+	 * otherwise (when loaded as a library from within the LifterLMS core plugin) the localization
+	 * strings are included into the LifterLMS Core plugin's po/mo files and are localized by the LifterLMS
+	 * core plugin.
 	 *
-	 * Files can be found in the following order:
-	 *      WP_LANG_DIR/lifterlms/lifterlms-blocks-LOCALE.mo
-	 *      WP_LANG_DIR/plugins/lifterlms-blocks-LOCALE.mo
+	 * Files can be found in the following order (The first loaded file takes priority):
+	 *   1. WP_LANG_DIR/lifterlms/lifterlms-blocks-LOCALE.mo
+	 *   2. WP_LANG_DIR/plugins/lifterlms-blocks-LOCALE.mo
+	 *   3. WP_CONTENT_DIR/plugins/lifterlms-blocks/i18n/lifterlms-blocks-LOCALE.mo
+	 *
+	 * Note: The function `load_plugin_textdomain()` is not used because the same textdomain as the LifterLMS core
+	 * is used for this plugin but the file is named `lifterlms-blocks` in order to allow using a separate language
+	 * file for each codebase.
 	 *
 	 * @since [version]
 	 *
@@ -162,14 +170,17 @@ class LLMS_Blocks {
 	 */
 	public function load_textdomain() {
 
-		// Load locale.
+		// load locale.
 		$locale = apply_filters( 'plugin_locale', get_locale(), 'lifterlms' );
 
-		// Load from the LifterLMS "safe" language directory if a translation file exists.
-		load_textdomain( 'lifterlms', WP_LANG_DIR . '/lifterlms/lifterlms-blocks' . $locale . '.mo' );
+		// Load from the LifterLMS "safe" directory if it exists.
+		load_textdomain( 'lifterlms', WP_LANG_DIR . '/lifterlms/lifterlms-blocks-' . $locale . '.mo' );
 
-		// Load localization files.
-		load_plugin_textdomain( 'lifterlms', false, LLMS_BLOCKS_PLUGIN_DIR . '/i18n' );
+		// Load from the default plugins language file directory.
+		load_textdomain( 'lifterlms', WP_LANG_DIR . '/plugins/lifterlms-blocks-' . $locale . '.mo' );
+
+		// Load from the plugin's language file directory.
+		load_textdomain( 'lifterlms', LLMS_BLOCKS_PLUGIN_DIR . '/i18n/lifterlms-blocks-' . $locale . '.mo' );
 
 	}
 
