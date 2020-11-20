@@ -35,7 +35,7 @@ if ( ! defined( 'LLMS_BLOCKS_VERSION' ) ) {
  *
  * @since 1.0.0
  *
- * @param  boolean $load Whether the plugin should be loaded. Defaults to `true`.
+ * @param boolean $load Whether the plugin should be loaded. Defaults to `true`.
  */
 if ( ! apply_filters( 'llms_load_blocks_plugin', true ) ) {
 	return;
@@ -60,4 +60,3 @@ if ( function_exists( 'has_blocks' ) ) {
 	require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks.php';
 
 }
-
