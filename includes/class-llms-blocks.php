@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version 1.9.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -27,6 +27,7 @@ class LLMS_Blocks {
 	 * @since 1.0.0
 	 * @since 1.3.0 Updated.
 	 * @since 1.5.1 Add `admin_print_scripts` hook to handle outputting dynamic block information.
+	 * @since [version] Load localization files when running as an independent plugin.
 	 */
 	public function __construct() {
 
@@ -34,6 +35,15 @@ class LLMS_Blocks {
 		add_action( 'add_meta_boxes', array( $this, 'remove_metaboxes' ), 999, 2 );
 		add_filter( 'block_categories', array( $this, 'add_block_category' ) );
 		add_action( 'admin_print_scripts', array( $this, 'admin_print_scripts' ), 15 );
+
+		/**
+		 * When loaded as a library included by the LifterLMS core localization is handled by the LifterLMS core.
+		 *
+		 * When the plugin is loaded by itself as a plugin, we must localize it independently.
+		 */
+		if ( ! defined( 'LLMS_BLOCKS_LIB' ) || ! LLMS_BLOCKS_LIB ) {
+			add_action( 'init', array( $this, 'load_textdomain' ), 0 );
+		}
 
 	}
 
@@ -134,6 +144,43 @@ class LLMS_Blocks {
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-lesson-navigation-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-lesson-progression-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-pricing-table-block.php';
+
+	}
+
+	/**
+	 * Load l10n files.
+	 *
+	 * This method is only used when the plugin is loaded as a standalone plugin (for development purposes),
+	 * otherwise (when loaded as a library from within the LifterLMS core plugin) the localization
+	 * strings are included into the LifterLMS Core plugin's po/mo files and are localized by the LifterLMS
+	 * core plugin.
+	 *
+	 * Files can be found in the following order (The first loaded file takes priority):
+	 *   1. WP_LANG_DIR/lifterlms/lifterlms-blocks-LOCALE.mo
+	 *   2. WP_LANG_DIR/plugins/lifterlms-blocks-LOCALE.mo
+	 *   3. WP_CONTENT_DIR/plugins/lifterlms-blocks/i18n/lifterlms-blocks-LOCALE.mo
+	 *
+	 * Note: The function `load_plugin_textdomain()` is not used because the same textdomain as the LifterLMS core
+	 * is used for this plugin but the file is named `lifterlms-blocks` in order to allow using a separate language
+	 * file for each codebase.
+	 *
+	 * @since [version]
+	 *
+	 * @return void
+	 */
+	public function load_textdomain() {
+
+		// load locale.
+		$locale = apply_filters( 'plugin_locale', get_locale(), 'lifterlms' );
+
+		// Load from the LifterLMS "safe" directory if it exists.
+		load_textdomain( 'lifterlms', WP_LANG_DIR . '/lifterlms/lifterlms-blocks-' . $locale . '.mo' );
+
+		// Load from the default plugins language file directory.
+		load_textdomain( 'lifterlms', WP_LANG_DIR . '/plugins/lifterlms-blocks-' . $locale . '.mo' );
+
+		// Load from the plugin's language file directory.
+		load_textdomain( 'lifterlms', LLMS_BLOCKS_PLUGIN_DIR . '/i18n/lifterlms-blocks-' . $locale . '.mo' );
 
 	}
 

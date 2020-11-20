@@ -56,4 +56,7 @@ class LLMS_Blocks_Tests_Bootstrap extends LLMS_Tests_Bootstrap {
 	}
 
 }
-return new LLMS_Blocks_Tests_Bootstrap();
+
+global $llms_tests_bootstrap;
+$llms_tests_bootstrap = new LLMS_Blocks_Tests_Bootstrap();
+return $llms_tests_bootstrap;
