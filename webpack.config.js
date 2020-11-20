@@ -14,7 +14,12 @@ const
 		js: [ 'blocks' ],
 	} );
 
+config.module.rules.forEach( rule => {
 
-config.module.rules[3].use[3].options.prependData = '@import "./src/scss/_vars.scss";\n';
+	if ( '\\.(sc|sa)ss$' === rule.test.source ) {
+		rule.use[ 3 ].options.prependData = '@import "./src/scss/_vars.scss";\n';
+	}
+
+} );
 
 module.exports = config;
