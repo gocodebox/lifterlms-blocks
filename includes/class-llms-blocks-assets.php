@@ -63,6 +63,18 @@ class LLMS_Blocks_Assets {
 			$l10n_dir   = null;
 			$plugin_dir = null;
 		}
+
+		/**
+		 * Load script translations.
+		 *
+		 * Language files files can be found in the following locations (The first loaded file takes priority):
+		 *
+		 *   1. wp-content/languages/lifterlms/lifterlms-{$locale}-{md5($handle)}.json
+		 *   2. wp-content/languages/plugins/lifterlms-{$locale}-{md5($handle)}.json
+		 *   3. wp-content/plugins/lifterlms/languages/lifterlms-{$locale}-{md5($handle)}.json
+		 *
+		 * See `llms_set_script_translations()` for more information.
+		 */
 		llms_set_script_translations( 'llms-blocks-editor', 'lifterlms', $plugin_dir, $l10n_dir );
 
 		wp_enqueue_style(
