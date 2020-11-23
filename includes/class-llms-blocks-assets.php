@@ -55,8 +55,27 @@ class LLMS_Blocks_Assets {
 			true
 		);
 
-		$i18n_dir = defined( 'LLMS_BLOCKS_LIB' ) && LLMS_BLOCKS_LIB ? LLMS_PLUGIN_DIR . '/languages' : LLMS_BLOCKS_PLUGIN_DIR . '/i18n';
-		wp_set_script_translations( 'llms-blocks-editor', 'lifterlms', $i18n_dir );
+		$l10n_dir   = 'i18n';
+		$plugin_dir = LLMS_BLOCKS_PLUGIN_DIR;
+
+		// If the plugin is being loaded as a library, use the files included in the core plugin.
+		if ( defined( 'LLMS_BLOCKS_LIB' ) && LLMS_BLOCKS_LIB ) {
+			$l10n_dir   = null;
+			$plugin_dir = null;
+		}
+
+		/**
+		 * Load script translations.
+		 *
+		 * Language files files can be found in the following locations (The first loaded file takes priority):
+		 *
+		 *   1. wp-content/languages/lifterlms/lifterlms-{$locale}-{md5($handle)}.json
+		 *   2. wp-content/languages/plugins/lifterlms-{$locale}-{md5($handle)}.json
+		 *   3. wp-content/plugins/lifterlms/languages/lifterlms-{$locale}-{md5($handle)}.json
+		 *
+		 * See `llms_set_script_translations()` for more information.
+		 */
+		llms_set_script_translations( 'llms-blocks-editor', 'lifterlms', $plugin_dir, $l10n_dir );
 
 		wp_enqueue_style(
 			'llms-blocks-editor',
