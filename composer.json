@@ -11,11 +11,11 @@
   ],
   "require-dev": {
     "lifterlms/lifterlms-cs": "dev-master",
-    "lifterlms/lifterlms-tests": "dev-master"
+    "lifterlms/lifterlms-tests": "dev-trunk"
   },
   "minimum-stability": "dev",
   "require": {
-    "php": "^7.1"
+    "php": "^7.2 || ^8.0"
   },
   "archive": {
     "exclude": [
