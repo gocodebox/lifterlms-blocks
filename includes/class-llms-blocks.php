@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.10.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -27,7 +27,7 @@ class LLMS_Blocks {
 	 * @since 1.0.0
 	 * @since 1.3.0 Updated.
 	 * @since 1.5.1 Add `admin_print_scripts` hook to handle outputting dynamic block information.
-	 * @since [version] Load localization files when running as an independent plugin.
+	 * @since 1.10.0 Load localization files when running as an independent plugin.
 	 */
 	public function __construct() {
 
@@ -164,7 +164,7 @@ class LLMS_Blocks {
 	 * is used for this plugin but the file is named `lifterlms-blocks` in order to allow using a separate language
 	 * file for each codebase.
 	 *
-	 * @since [version]
+	 * @since 1.10.0
 	 *
 	 * @return void
 	 */

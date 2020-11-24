@@ -6,14 +6,14 @@
  *
  * @group assets
  *
- * @since [version]
+ * @since 1.10.0
  */
 class LLMS_Blocks_Test_Assets extends LLMS_Blocks_Unit_Test_Case {
 
 	/**
 	 * Deregister assets registered during tests.
 	 *
-	 * @since [version]
+	 * @since 1.10.0
 	 *
 	 * @return void
 	 */
@@ -27,7 +27,7 @@ class LLMS_Blocks_Test_Assets extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test the constructor
 	 *
-	 * @since [version]
+	 * @since 1.10.0
 	 *
 	 * @return void
 	 */
@@ -50,7 +50,7 @@ class LLMS_Blocks_Test_Assets extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test editor_assets()
 	 *
-	 * @since [version]
+	 * @since 1.10.0
 	 *
 	 * @return void
 	 */
