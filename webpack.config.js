@@ -4,7 +4,7 @@
  * @package LifterLMS_Blocks/Scripts/Dev
  *
  * @since 1.8.0
- * @version [version]
+ * @version 1.10.0
  */
 
 const

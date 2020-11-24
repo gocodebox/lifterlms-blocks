@@ -6,7 +6,7 @@
  *
  * @since 1.5.1
  * @since 1.6.0 Update `test_add_block_category` test to accommodate form fields cat.
- * @since [version] Update `test_get_dynamic_block_names` to test against core blocks available in 5.1.
+ * @since 1.10.0 Update `test_get_dynamic_block_names` to test against core blocks available in 5.1.
  */
 class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 
@@ -89,7 +89,7 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 	 * Test the get_dynamic_block_names() method.
 	 *
 	 * @since 1.5.1
-	 * @since [version] Replace core/search with core/shortcode because search wasn't available in 5.1.
+	 * @since 1.10.0 Replace core/search with core/shortcode because search wasn't available in 5.1.
 	 *
 	 * @return void
 	 */
@@ -109,7 +109,7 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test load_textdomain()
 	 *
-	 * @since [version]
+	 * @since 1.10.0
 	 *
 	 * @return void
 	 */

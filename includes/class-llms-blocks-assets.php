@@ -7,7 +7,7 @@
  * @package LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.10.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.0.0
  * @since 1.4.1 Fix double slash in asset path; remove invalid frontend css dependency.
  * @since 1.8.0 Update asset paths & remove redundant CSS from frontend.
- * @since [version] Use the `LLMS_Assets` class to define, register, and enqueue plugin assets.
+ * @since 1.10.0 Use the `LLMS_Assets` class to define, register, and enqueue plugin assets.
  */
 class LLMS_Blocks_Assets {
 
@@ -34,7 +34,7 @@ class LLMS_Blocks_Assets {
 	 *
 	 * @since 1.0.0
 	 * @since 1.8.0 Stop outputting editor CSS on the frontend.
-	 * @since [version] Load `LLMS_Assets` and define plugin assets.
+	 * @since 1.10.0 Load `LLMS_Assets` and define plugin assets.
 	 *
 	 * @return void
 	 */
@@ -69,7 +69,7 @@ class LLMS_Blocks_Assets {
 	/**
 	 * Define block plugin assets.
 	 *
-	 * @since [version]
+	 * @since 1.10.0
 	 *
 	 * @return void
 	 */
@@ -107,7 +107,7 @@ class LLMS_Blocks_Assets {
 	 * @since 1.0.0
 	 * @since 1.4.1 Fix double slash in asset path.
 	 * @since 1.8.0 Update asset paths and improve script dependencies.
-	 * @since [version] Use `LLMS_Assets` class methods for asset enqueues.
+	 * @since 1.10.0 Use `LLMS_Assets` class methods for asset enqueues.
 	 *
 	 * @return void
 	 */

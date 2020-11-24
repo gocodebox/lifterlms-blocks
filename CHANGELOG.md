@@ -1,6 +1,13 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.10.0 - 2020-11-24
+--------------------
+
++ Use the `LLMS_Assets` class to define, register, and enqueue plugin assets.
++ Added Javascript localization for block editor scripts.
+
+
 v1.9.1 - 2020-04-29
 -------------------
 
