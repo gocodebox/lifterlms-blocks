@@ -29,7 +29,7 @@
 
       "README.md",
 
-      "/assets/src",
+      "/src",
 
       "dist",
       "node_modules",
@@ -37,7 +37,8 @@
       "tmp",
       "vendor",
 
-      "!/composer.json"
+      "!/composer.json",
+      "!/i18n/*.json"
     ]
   },
   "scripts": {
