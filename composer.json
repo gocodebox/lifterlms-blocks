@@ -10,12 +10,12 @@
     }
   ],
   "require-dev": {
-    "lifterlms/lifterlms-cs": "dev-master",
+    "lifterlms/lifterlms-cs": "dev-trunk",
     "lifterlms/lifterlms-tests": "dev-trunk"
   },
   "minimum-stability": "dev",
   "require": {
-    "php": "^7.2 || ^8.0"
+    "php": ">=7.2"
   },
   "archive": {
     "exclude": [
