@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Admin/FormsReady should deregister most WP core blocks 1`] = `
+Array [
+  "Columns",
+  "Custom HTML",
+  "Group",
+  "Heading",
+  "Paragraph",
+  "Password Strength Meter",
+  "Separator",
+  "Spacer",
+  "User Address",
+  "User Address (Line 2)",
+  "User City",
+  "User Country",
+  "User Email",
+  "User Email (confirmation)",
+  "User First Name",
+  "User Last Name",
+  "User Password",
+  "User Password (confirmation)",
+  "User Phone",
+  "User State",
+  "User Zip Code",
+  "Username",
+  "Voucher Redemption",
+]
+`;
