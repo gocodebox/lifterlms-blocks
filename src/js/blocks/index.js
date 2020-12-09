@@ -2,7 +2,7 @@
  * LifterLMS Block Library.
  *
  * @since 1.7.0
- * @version 1.7.3
+ * @version [version]
  */
 
 // WP Deps.
@@ -32,7 +32,7 @@ import * as pricingTable from './pricing-table/'
 import * as formFields from './form-fields/';
 
 /**
- * Deregister all blocks no on a whitelist on the forms post type.
+ * Deregister all blocks no on a safelist on the forms post type.
  *
  * @since 1.6.0
  * @since 1.7.0 Block 'llms/form-field-redeem-voucher' only available on registration forms.
@@ -45,6 +45,7 @@ export const deregisterBlocksForForms = () => {
 	 * Determine if a block should be deregistered from form posts.
 	 *
 	 * @since 1.7.0
+	 * @since [version] Use `safelist` in favor of `whitelist`.`
 	 *
 	 * @param {String} name Block name.
 	 * @return {Boolean}
@@ -52,11 +53,11 @@ export const deregisterBlocksForForms = () => {
 	const shouldUnregisterBlock = ( name ) => {
 
 		const
-			whitelist = [ 'core/paragraph', 'core/heading', 'core/html', 'core/column', 'core/columns', 'core/group', 'core/separator', 'core/spacer' ],
+			safelist = [ 'core/paragraph', 'core/heading', 'core/image', 'core/html', 'core/column', 'core/columns', 'core/group', 'core/separator', 'core/spacer' ],
 			{ _llms_form_location } = select( 'core/editor' ).getCurrentPost().meta;
 
-		// Allow whitelisted blocks.
-		if ( -1 !== whitelist.indexOf( name ) ) {
+		// Allow safelisted blocks.
+		if ( -1 !== safelist.indexOf( name ) ) {
 			return false;
 
 			// Vouchers can only be used on registration forms.
