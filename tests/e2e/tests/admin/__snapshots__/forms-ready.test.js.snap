@@ -1,11 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Admin/FormsReady should add a notice and disable post updating when user email field is deleted 1`] = `"User Email is a required field.<button type=\\"button\\" class=\\"components-button components-notice__action is-secondary\\">Restore user email field?</button>"`;
+
 exports[`Admin/FormsReady should deregister most WP core blocks 1`] = `
 Array [
   "Columns",
   "Custom HTML",
   "Group",
   "Heading",
+  "Image",
   "Paragraph",
   "Password Strength Meter",
   "Separator",
