@@ -4,7 +4,7 @@
  * Displays only on `llms_form` post types.
  *
  * @since 1.6.0
- * @version 1.7.2
+ * @version [version]
  */
 
 // WP Deps.
@@ -61,6 +61,7 @@ class FormDocumentSettings extends Component {
 	 * @since 1.6.0
 	 * @since 1.7.0 Add early return for WP Core 5.2 and earlier where the `PluginDocumentSettingPanel` doesn't exist.
 	 *              Add link to form location on frontend if available.
+	 * @since [version] Add a class name to the document sidebar.
 	 *
 	 * @return {Fragment}
 	 */
@@ -93,6 +94,7 @@ class FormDocumentSettings extends Component {
 		return (
 			<Fragment>
 				<PluginDocumentSettingPanel
+					className="llms-forms-doc-settings"
 					name="llms-forms-doc-settings"
 					title={ __( 'Form Settings', 'lifterlms' ) }
 					opened={ true }
