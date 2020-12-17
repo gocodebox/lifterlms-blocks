@@ -34,7 +34,6 @@ async function removeUserEmailBlock() {
 
 }
 
-
 describe( 'Admin/FormsReady', () => {
 
 	it ( 'should disable the use of the "Draft" button', async () => {
@@ -116,6 +115,39 @@ describe( 'Admin/FormsReady', () => {
 
 		await openGlobalBlockInserter();
 		expect( await getAllBlockInserterItemTitles() ).toMatchSnapshot();
+
+	} );
+
+	it ( 'should disable block-level visibility settings on the registration form', async () => {
+
+		await visitForm( 'Register' );
+
+		const blocks = await getAllBlocks();
+		await selectBlockByClientId( blocks[0].clientId );
+
+		expect( await page.$eval( '.components-panel .block-editor-block-inspector div:nth-child(3) .components-panel__body-title', el => el.textContent ) ).toBe( 'Advanced' );
+
+	} );
+
+	it ( 'should disable block-level visibility settings on the account edit form', async () => {
+
+		await visitForm( 'Edit Account Information' );
+
+		const blocks = await getAllBlocks();
+		await selectBlockByClientId( blocks[0].clientId );
+
+		expect( await page.$eval( '.components-panel .block-editor-block-inspector div:nth-child(3) .components-panel__body-title', el => el.textContent ) ).toBe( 'Advanced' );
+
+	} );
+
+	it ( 'should disable allow block-level visibility settings on the checkout form', async () => {
+
+		await visitForm( 'Billing Information' );
+
+		const blocks = await getAllBlocks();
+		await selectBlockByClientId( blocks[0].clientId );
+
+		expect( await page.$eval( '.components-panel .block-editor-block-inspector div:nth-child(2) .components-panel__body-title', el => el.textContent ) ).toBe( 'Enrollment Visibility' );
 
 	} );
 
