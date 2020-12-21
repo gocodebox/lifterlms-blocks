@@ -127,7 +127,7 @@ const attributes = {
 const settings = {
 
 	icon: {
-		foreground: '#2295ff',
+		foreground: '#466dd8',
 	},
 	category: 'llms-fields',
 	keywords: [
