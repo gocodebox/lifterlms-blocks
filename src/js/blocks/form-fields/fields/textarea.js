@@ -58,9 +58,11 @@ settings.icon.src = 'editor-paragraph';
 
 settings.attributes.field.__default = 'textarea';
 
-settings.attributes.rows = {
-	type: 'number',
-	__default: 4,
+settings.attributes.attributes = {
+	type: 'object',
+	__default: {
+		rows: 4,
+	}
 };
 
 /**
@@ -80,9 +82,9 @@ settings.fillInspectorControls = ( attributes, setAttributes, props ) => {
 			<TextControl
 				label={ __( 'Rows', 'lifterlms' ) }
 				help={ __( 'Specify the number of text rows for the textarea input.', 'lifterlms' ) }
-				value={ attributes.rows }
+				value={ attributes.attributes.rows }
 				type="number"
-				onChange={ rows => setAttributes( { rows } ) }
+				onChange={ rows => setAttributes( { attributes: { rows } } ) }
 				min="2"
 				step="1"
 			/>
