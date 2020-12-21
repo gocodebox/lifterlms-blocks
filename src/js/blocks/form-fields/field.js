@@ -167,7 +167,8 @@ export default class Field extends Component {
 						) }
 						{ 'textarea' === fieldType && (
 							<textarea
-								style={ { width: '100%' } }
+								style={ { width: '100%', resize: 'none' } }
+								rows={ this.props.attributes.rows }
 								onChange={ event => setAttributes( { placeholder: event.target.value } ) }
 								value={ placeholder }
 								placeholder={ __( 'Add optional placeholder text', 'lifterlms' ) }

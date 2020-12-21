@@ -6,7 +6,15 @@
  */
 
 // WP Deps.
-const { __ } = wp.i18n;
+const
+	{
+		TextControl,
+	}               = wp.components,
+	{
+		Component,
+		Fragment,
+	}               = wp.element,
+	{ __, sprintf } = wp.i18n;
 
 // Internal Deps.
 import getDefaultSettings from '../settings';
@@ -44,9 +52,44 @@ let settings = getDefaultSettings();
 settings.title       = __( 'Paragraph Text', 'lifterlms' );
 settings.description = __( 'A textarea input.', 'lifterlms' );
 
+settings.supports.llms_field_inspector.customFill = 'fieldTextarea';
+
 settings.icon.src = 'editor-paragraph';
 
 settings.attributes.field.__default = 'textarea';
+
+settings.attributes.rows = {
+	type: 'number',
+	__default: 4,
+};
+
+/**
+ * Fill the controls slot with additional controls specific to this field.
+ *
+ * @since [version]
+ *
+ * @param {Object}   attributes    Block attributes.
+ * @param {Function} setAttributes Reference to the block's setAttributes() function.
+ * @param {Object}   props         Original properties object passed to the block's edit() function.
+ * @return {Fragment}
+ */
+settings.fillInspectorControls = ( attributes, setAttributes, props ) => {
+
+	return (
+		<Fragment>
+			<TextControl
+				label={ __( 'Rows', 'lifterlms' ) }
+				help={ __( 'Specify the number of text rows for the textarea input.', 'lifterlms' ) }
+				value={ attributes.rows }
+				type="number"
+				onChange={ rows => setAttributes( { rows } ) }
+				min="2"
+				step="1"
+			/>
+		</Fragment>
+	);
+
+};
 
 export {
 	name,
