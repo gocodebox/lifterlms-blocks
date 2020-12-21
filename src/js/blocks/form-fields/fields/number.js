@@ -6,7 +6,6 @@
  */
 
 // WP Deps.
-// WP Deps.
 const
 	{
 		TextControl,
