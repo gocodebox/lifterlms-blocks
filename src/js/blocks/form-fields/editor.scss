@@ -31,6 +31,10 @@
 
 	.llms-field {
 
+		.block-editor-rich-text__editable {
+			display: block;
+		}
+
 		label.llms-is-required {
 			> div { display: inline; }
 			&:after {
