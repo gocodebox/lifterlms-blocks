@@ -116,6 +116,7 @@ class LLMS_Blocks_Post_Types {
 					'placeholder' => __( 'Add a short description of your membership visible to all visitors...', 'lifterlms' ),
 				),
 			),
+			array( 'llms/instructors' ),
 			array( 'llms/pricing-table' ),
 		);
 

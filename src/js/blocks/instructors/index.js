@@ -25,7 +25,7 @@ export const name = 'llms/instructors'
  *
  * @type {Array}
  */
-export const post_types = [ 'course' ];
+export const post_types = [ 'course', 'llms_membership' ];
 
 /**
  * Register Block.
