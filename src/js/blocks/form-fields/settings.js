@@ -4,7 +4,7 @@
  * @since 1.6.0
  * @since 1.7.0 Unknown.
  * @since 1.8.0 Updated lodash imports.
- * @since [version] Add support for data stores.
+ * @since [version] Add support for data stores & default examples object.
  */
 
 // WP Deps.
@@ -188,6 +188,7 @@ const settings = {
 			storage: true,
 		},
 	},
+	example: {},
 
 	/**
 	 * Render controls to be rendered into the LLMSFieldInspectorControls slot.
