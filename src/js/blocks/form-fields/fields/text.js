@@ -6,7 +6,9 @@
  */
 
 // WP Deps.
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
+import { createBlock } from '@wordpress/blocks';
+
 
 // Internal Deps.
 import getDefaultSettings from '../settings';
@@ -46,6 +48,23 @@ settings.title       = __( 'Text', 'lifterlms' );
 settings.description = __( 'A simple text input field.', 'lifterlms' );
 
 settings.icon.src = icon;
+
+settings.transforms = {
+	from: [
+		{
+			type: 'block',
+			blocks: [
+				'llms/form-field-email',
+				'llms/form-field-password',
+				'llms/form-field-phone',
+				'llms/form-field-number',
+				'llms/form-field-textarea',
+				'llms/form-field-url'
+			],
+			transform: ( attributes ) => createBlock( name, { ...attributes, field: settings.attributes.field.__default } ),
+		},
+	],
+};
 
 export {
 	name,

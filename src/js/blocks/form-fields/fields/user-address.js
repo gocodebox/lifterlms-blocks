@@ -62,6 +62,8 @@ settings.attributes.label.__default    = __( 'Address', 'lifterlms' );
 settings.attributes.name.__default     = 'llms_billing_address_1';
 settings.attributes.required.__default = true;
 
+delete settings.transforms;
+
 export {
 	name,
 	post_types,

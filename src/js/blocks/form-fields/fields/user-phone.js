@@ -59,6 +59,8 @@ settings.attributes.id.__default       = 'llms_phone';
 settings.attributes.label.__default    = __( 'Phone Number', 'lifterlms' );
 settings.attributes.name.__default     = 'llms_phone';
 
+delete settings.transforms;
+
 export {
 	name,
 	post_types,

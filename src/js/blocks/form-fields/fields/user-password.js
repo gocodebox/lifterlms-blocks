@@ -64,6 +64,8 @@ settings.attributes.match.__default          = 'password_confirm';
 settings.attributes.data_store.__default     = 'users';
 settings.attributes.data_store_key.__default = 'user_pass';
 
+delete settings.transforms;
+
 export {
 	name,
 	post_types,

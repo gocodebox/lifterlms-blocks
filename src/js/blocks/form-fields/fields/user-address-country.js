@@ -62,6 +62,8 @@ settings.attributes.name.__default        = 'llms_billing_country';
 settings.attributes.required.__default    = true;
 settings.attributes.placeholder.__default = '';
 
+delete settings.transforms;
+
 export {
 	name,
 	post_types,

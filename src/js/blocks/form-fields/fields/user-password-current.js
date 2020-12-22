@@ -53,7 +53,6 @@ settings.attributes.label.__default      = __( 'Current Password', 'lifterlms' )
 settings.attributes.name.__default       = 'password_current';
 settings.attributes.data_store.__default = false;
 
-
 delete settings.attributes.match.__default;
 
 export {

@@ -64,6 +64,8 @@ settings.attributes.match.__default          = 'email_address_confirm';
 settings.attributes.data_store.__default     = 'users';
 settings.attributes.data_store_key.__default = 'user_email';
 
+delete settings.transforms;
+
 export {
 	name,
 	post_types,

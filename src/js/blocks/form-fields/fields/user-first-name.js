@@ -62,6 +62,8 @@ settings.attributes.label.__default    = __( 'First Name', 'lifterlms' );
 settings.attributes.name.__default     = 'first_name';
 settings.attributes.required.__default = true;
 
+delete settings.transforms;
+
 export {
 	name,
 	post_types,

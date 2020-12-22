@@ -57,11 +57,12 @@ settings.supports.llms_field_inspector.name    = false;
 settings.supports.llms_field_inspector.match   = false;
 settings.supports.llms_field_inspector.storage = false;
 
-
 settings.attributes.id.__default       = 'llms_billing_city';
 settings.attributes.label.__default    = __( 'City', 'lifterlms' );
 settings.attributes.name.__default     = 'llms_billing_city';
 settings.attributes.required.__default = true;
+
+delete settings.transforms;
 
 export {
 	name,

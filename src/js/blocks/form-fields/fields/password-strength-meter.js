@@ -77,6 +77,8 @@ settings.attributes.min_length = {
 	__default: 6,
 };
 
+delete settings.transforms;
+
 /**
  * Fill the controls slot with additional controls specific to this field.
  *

@@ -193,6 +193,7 @@ export default class Inspector extends Component {
 			{
 				attributes,
 				setAttributes,
+				clientId,
 			} = this.props,
 			{
 				id,
@@ -204,9 +205,6 @@ export default class Inspector extends Component {
 				data_store,
 				data_store_key,
 			} = attributes;
-
-
-		console.log( id, data_store, data_store_key );
 
 		// Return early if there's no inspector options to display.
 		if ( ! this.hasInspectorSupport() ) {
@@ -245,7 +243,7 @@ export default class Inspector extends Component {
 						) }
 
 						{ this.hasInspectorControlSupport( 'customFill' ) && (
-							<Slot name={ `llmsInspectorControlsFill.${ this.hasInspectorControlSupport( 'customFill' ) }` } />
+							<Slot name={ `llmsInspectorControlsFill.${ this.hasInspectorControlSupport( 'customFill' ) }.${ clientId }` } />
 						) }
 
 					</PanelBody>

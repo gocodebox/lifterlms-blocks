@@ -63,6 +63,7 @@ settings.attributes.placeholder.__default      = __( 'Apartment, suite, or unit'
 settings.attributes.name.__default             = 'llms_billing_address_2';
 settings.attributes.label_show_empty.__default = true;
 
+delete settings.transforms;
 
 export {
 	name,

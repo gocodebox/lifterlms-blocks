@@ -6,7 +6,9 @@
  */
 
 // WP Deps.
-const { __, sprintf } = wp.i18n;
+// WP Deps.
+import { __, sprintf } from '@wordpress/i18n';
+import { createBlock } from '@wordpress/blocks';
 
 // Internal Deps.
 import getDefaultSettings from '../settings';
@@ -47,6 +49,23 @@ settings.description = __( 'A password input field.', 'lifterlms' );
 settings.icon.src = 'lock';
 
 settings.attributes.field.__default = 'password';
+
+settings.transforms = {
+	from: [
+		{
+			type: 'block',
+			blocks: [
+				'llms/form-field-email',
+				'llms/form-field-number',
+				'llms/form-field-phone',
+				'llms/form-field-text',
+				'llms/form-field-textarea',
+				'llms/form-field-url'
+			],
+			transform: ( attributes ) => createBlock( name, { ...attributes, field: settings.attributes.field.__default } ),
+		},
+	],
+};
 
 export {
 	name,

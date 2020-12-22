@@ -62,6 +62,8 @@ settings.attributes.label.__default    = __( 'Zip / Postal Code', 'lifterlms' );
 settings.attributes.name.__default     = 'llms_billing_zip';
 settings.attributes.required.__default = true;
 
+delete settings.transforms;
+
 export {
 	name,
 	post_types,

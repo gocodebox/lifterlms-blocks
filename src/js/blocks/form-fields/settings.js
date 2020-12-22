@@ -170,11 +170,15 @@ const settings = {
 	icon: {
 		foreground: '#466dd8',
 	},
+
 	category: 'llms-fields',
+
 	keywords: [
 		__( 'LifterLMS', 'lifterlms' ),
 	],
+
 	attributes: attributes,
+
 	supports: {
 		llms_visibility: true,
 		llms_field_inspector: {
@@ -188,6 +192,7 @@ const settings = {
 			storage: true,
 		},
 	},
+
 	example: {},
 
 	/**
@@ -239,7 +244,7 @@ const settings = {
 				<Inspector { ...{ attributes, clientId, name, setAttributes, inspectorSupports } } />
 				<Field { ...{ attributes, setAttributes } } />
 				{ inspectorSupports.customFill && (
-					<Fill name={ `llmsInspectorControlsFill.${ inspectorSupports.customFill }` }>{ fillInspectorControls( attributes, setAttributes, props ) }</Fill>
+					<Fill name={ `llmsInspectorControlsFill.${ inspectorSupports.customFill }.${ clientId }` }>{ fillInspectorControls( attributes, setAttributes, props ) }</Fill>
 				) }
 			</Fragment>
 		);

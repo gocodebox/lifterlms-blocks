@@ -64,6 +64,8 @@ settings.attributes.name.__default           = 'user_login';
 settings.attributes.required.__default       = true;
 settings.attributes.data_store.__default     = 'users';
 
+delete settings.transforms;
+
 export {
 	name,
 	post_types,
