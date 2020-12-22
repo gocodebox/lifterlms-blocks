@@ -6,7 +6,7 @@
  */
 
 // WP Deps.
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 // External Deps.
 import { cloneDeep } from 'lodash';
@@ -53,6 +53,8 @@ settings.attributes.options_preset.__default = 'countries';
 settings.attributes.placeholder.__default    = __( 'Select a Country', 'lifterlms' );
 
 settings.supports.llms_field_inspector.options = false;
+
+delete settings.transforms;
 
 export {
 	name,

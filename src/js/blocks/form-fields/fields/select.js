@@ -2,11 +2,13 @@
  * BLOCK: llms/form-field-select
  *
  * @since 1.6.0
- * @version 1.6.0
+ * @since [version] Add transform support.
+ * @since [version] Add transform support.
  */
 
 // WP Deps.
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
+import { createBlock } from '@wordpress/blocks';
 
 // Internal Deps.
 import getDefaultSettings from '../settings';
@@ -51,6 +53,19 @@ settings.attributes.field.__default = 'select';
 
 settings.supports.llms_field_inspector.options     = true;
 settings.supports.llms_field_inspector.placeholder = true;
+
+settings.transforms = {
+	from: [
+		{
+			type: 'block',
+			blocks: [
+				'llms/form-field-checkboxes',
+				'llms/form-field-radio',
+			],
+			transform: ( attributes ) => createBlock( name, { ...attributes, field: settings.attributes.field.__default } ),
+		},
+	],
+};
 
 export {
 	name,

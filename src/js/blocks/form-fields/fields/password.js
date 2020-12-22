@@ -2,13 +2,12 @@
  * BLOCK: llms/form-field-password
  *
  * @since 1.6.0
- * @version 1.6.0
+ * @since [version] Add transform support.
  */
 
 // WP Deps.
-// WP Deps.
-import { __, sprintf } from '@wordpress/i18n';
 import { createBlock } from '@wordpress/blocks';
+import { __, sprintf } from '@wordpress/i18n';
 
 // Internal Deps.
 import getDefaultSettings from '../settings';

@@ -2,19 +2,15 @@
  * BLOCK: llms/form-field-number
  *
  * @since 1.6.0
- * @version 1.6.0
+ * @since [version] Add transform support.
  */
 
 // WP Deps.
-const
-	{
-		TextControl,
-	}               = wp.components,
-	{
-		Component,
-		Fragment,
-	}               = wp.element;
-
+import { TextControl } from '@wordpress/components';
+import {
+	Component,
+	Fragment,
+} from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { createBlock } from '@wordpress/blocks';
 

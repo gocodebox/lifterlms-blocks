@@ -2,11 +2,12 @@
  * BLOCK: llms/form-field-radio
  *
  * @since 1.6.0
- * @version 1.6.0
+ * @since [version] Add transform support.
  */
 
 // WP Deps.
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
+import { createBlock } from '@wordpress/blocks';
 
 // Internal Deps.
 import getDefaultSettings from '../settings';
@@ -49,7 +50,20 @@ settings.icon.src = icon;
 
 settings.attributes.field.__default = 'radio';
 
-settings.supports.llms_field_inspector.options     = true;
+settings.supports.llms_field_inspector.options = true;
+
+settings.transforms = {
+	from: [
+		{
+			type: 'block',
+			blocks: [
+				'llms/form-field-radio',
+				'llms/form-field-select',
+			],
+			transform: ( attributes ) => createBlock( name, { ...attributes, field: settings.attributes.field.__default } ),
+		},
+	],
+};
 
 export {
 	name,

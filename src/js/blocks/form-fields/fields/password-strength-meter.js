@@ -6,15 +6,12 @@
  */
 
 // WP Deps.
-const
-	{
-		SelectControl,
-		TextControl,
-	}               = wp.components,
-	{
-		Fragment,
-	}               = wp.element,
-	{ __, sprintf } = wp.i18n;
+import {
+	SelectControl,
+	TextControl
+} from '@wordpress/components';
+import { Fragment } from '@wordpress/element';
+import { __, sprintf } from '@wordpress/i18n';
 
 // Internal Deps.
 import getDefaultSettings from '../settings';
