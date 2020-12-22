@@ -3,10 +3,11 @@
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
+ * @since [version] Add data store support.
  */
 
 // WP Deps.
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 // External Deps.
 import { cloneDeep } from 'lodash';
@@ -49,16 +50,19 @@ settings.description = __( 'A special field used to collect a user\'s account em
 
 settings.supports.multiple = false;
 
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
+settings.supports.llms_field_inspector.id       = false;
+settings.supports.llms_field_inspector.name     = false;
 settings.supports.llms_field_inspector.required = false;
-settings.supports.llms_field_inspector.match = false;
+settings.supports.llms_field_inspector.match    = false;
+settings.supports.llms_field_inspector.storage  = false;
 
-settings.attributes.id.__default       = 'password';
-settings.attributes.label.__default    = __( 'Password', 'lifterlms' );
-settings.attributes.name.__default     = 'password';
-settings.attributes.required.__default = true;
-settings.attributes.match.__default    = 'password_confirm';
+settings.attributes.id.__default             = 'password';
+settings.attributes.label.__default          = __( 'Password', 'lifterlms' );
+settings.attributes.name.__default           = 'password';
+settings.attributes.required.__default       = true;
+settings.attributes.match.__default          = 'password_confirm';
+settings.attributes.data_store.__default     = 'users';
+settings.attributes.data_store_key.__default = 'user_pass';
 
 export {
 	name,

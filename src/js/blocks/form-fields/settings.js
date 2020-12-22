@@ -4,6 +4,7 @@
  * @since 1.6.0
  * @since 1.7.0 Unknown.
  * @since 1.8.0 Updated lodash imports.
+ * @since [version] Add support for data stores.
  */
 
 // WP Deps.
@@ -27,18 +28,44 @@ import Field from './field';
 import Inspector from './inspect';
 import { isUnique } from './checks';
 
+/**
+ * Generate a unique "name" attribute.
+ *
+ * @since 1.6.0
+ *
+ * @param {String} name Base name, generally the field's "field" attribute. EG: "text".
+ * @return {String} A unique name, in snake case, suitable to be used as a field's "name" attribute.
+ */
 const generateName = ( name ) => {
 	return snakeCase( uniqueId( `${name}_field_` ) );
 }
 
+/**
+ * Generate a unique "id" attribute.
+ *
+ * @since 1.6.0
+ *
+ * @param {String} name Base name, generally the field's "name" attribute. EG: "text_field_1".
+ * @return {String} A unique name, in kebab case, suitable to be used as a field's "id" attribute.
+ */
 const generateId = ( name ) => {
 	return kebabCase( name );
 }
 
-const setup_atts = ( atts, block_atts ) => {
+/**
+ * Sets up block attributes, filling defaults and generating unique values.
+ *
+ * @since 1.6.0
+ * @since [version] Add data_store_key generation.
+ *
+ * @param {Object} atts      Default block attributes object.
+ * @param {Object} blockAtts Actual WP_Block attributes object.
+ * @return {Object} Attribute object suitable for use when registering the block.
+ */
+const setupAtts = ( atts, blockAtts ) => {
 
-	Object.keys( block_atts ).forEach( ( key ) => {
-		const default_val = block_atts[ key ].__default;
+	Object.keys( blockAtts ).forEach( ( key ) => {
+		const default_val = blockAtts[ key ].__default;
 		if ( 'undefined' !== typeof default_val && 'undefined' === typeof atts[ key ] ) {
 			atts[ key ] = default_val;
 		}
@@ -59,6 +86,10 @@ const setup_atts = ( atts, block_atts ) => {
 		};
 		atts.id = id;
 
+	}
+
+	if ( ! atts.data_store_key ) {
+		atts.data_store_key = atts.name;
 	}
 
 	return atts;
@@ -122,6 +153,16 @@ const attributes = {
 		__default: '',
 	},
 
+	data_store: {
+		type: 'string',
+		__default: 'usermeta'
+	},
+
+	data_store_key: {
+		type: 'string',
+		__default: '',
+	},
+
 };
 
 const settings = {
@@ -144,6 +185,7 @@ const settings = {
 			placeholder: false,
 			required: true,
 			customFill: false,
+			storage: true,
 		},
 	},
 
@@ -173,8 +215,8 @@ const settings = {
 	 *
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 *
-	 * @param   {Object} props Block properties.
-	 * @return  {Function}
+	 * @param {Object} props Block properties.
+	 * @return {Function}
 	 */
 	edit: function( props ) {
 
@@ -189,7 +231,7 @@ const settings = {
 			{ fillInspectorControls } = block;
 
 		let { attributes } = props;
-		attributes = setup_atts( attributes, block.attributes );
+		attributes = setupAtts( attributes, block.attributes );
 
 		return (
 			<Fragment>
@@ -208,12 +250,12 @@ const settings = {
 	 *
 	 * The "save" property must be specified and must be a valid function.
 	 *
-	 * @since   1.0.0
+	 * @since 1.6.0
 	 *
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 *
-	 * @param   {Object} props Block properties.
-	 * @return  {Function}
+	 * @param {Object} props Block properties.
+	 * @return {Function}
 	 */
 	save: function( props ) {
 

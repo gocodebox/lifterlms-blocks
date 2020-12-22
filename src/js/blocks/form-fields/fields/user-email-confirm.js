@@ -3,10 +3,11 @@
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
+ * @since [version] Add data store support.
  */
 
 // WP Deps.
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 // External Deps.
 import { cloneDeep } from 'lodash';
@@ -47,10 +48,12 @@ let settings = cloneDeep( userEmailSettings );
 settings.title       = __( 'User Email (confirmation)', 'lifterlms' );
 settings.description = __( 'A special field used to confirm a user\'s account email address.', 'lifterlms' );
 
-settings.attributes.id.__default    = 'email_address_confirm';
-settings.attributes.label.__default = __( 'Confirm Email Address', 'lifterlms' );
-settings.attributes.name.__default  = 'email_address_confirm';
-settings.attributes.match.__default = 'email_address';
+settings.attributes.id.__default         = 'email_address_confirm';
+settings.attributes.label.__default      = __( 'Confirm Email Address', 'lifterlms' );
+settings.attributes.name.__default       = 'email_address_confirm';
+settings.attributes.match.__default      = 'email_address';
+settings.attributes.data_store.__default = false;
+
 
 export {
 	name,
