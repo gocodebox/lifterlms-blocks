@@ -5,7 +5,8 @@
  * @package  LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @version 1.7.0
+ * @since [version] Add instructors block to membership editor template.
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
