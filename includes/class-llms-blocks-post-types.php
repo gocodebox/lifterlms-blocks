@@ -17,6 +17,7 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.5.2 Only `show_in_rest` for authenticated users with the `lifterls_instructor` capability.
  * @since 1.7.0 Add membership categories and tags to WordPress REST API.
  *              Add membership post type editor template.
+ * @since [version] Add instructors block to membership editor template.
  */
 class LLMS_Blocks_Post_Types {
 
@@ -103,6 +104,7 @@ class LLMS_Blocks_Post_Types {
 	 * Add an editor template for memberships.
 	 *
 	 * @since 1.7.0
+	 * @since [version] Add instructors block.
 	 *
 	 * @param array $post_type Post type registration data.
 	 * @return array
