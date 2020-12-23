@@ -2,8 +2,7 @@
  * BLOCK: llms/form-field-select
  *
  * @since 1.6.0
- * @since [version] Add transform support.
- * @since [version] Add transform support.
+ * @since [version] Add transform support and default options.
  */
 
 // WP Deps.
@@ -49,7 +48,17 @@ settings.description = __( 'A select field which can be populated with any numbe
 
 settings.icon.src = icon;
 
-settings.attributes.field.__default = 'select';
+settings.attributes.field.__default   = 'select';
+settings.attributes.options.__default = [
+	{
+		default: 'yes',
+		text: __( 'Option 1', 'lifterlms' ),
+	},
+	{
+		default: 'no',
+		text: __( 'Option 2', 'lifterlms' ),
+	},
+];
 
 settings.supports.llms_field_inspector.options     = true;
 settings.supports.llms_field_inspector.placeholder = true;
