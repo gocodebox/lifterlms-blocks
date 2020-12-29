@@ -5,7 +5,6 @@
  * @package  LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @since [version] Add instructors block to membership editor template.
  * @version [version]
  */
 
@@ -18,7 +17,6 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.5.2 Only `show_in_rest` for authenticated users with the `lifterls_instructor` capability.
  * @since 1.7.0 Add membership categories and tags to WordPress REST API.
  *              Add membership post type editor template.
- * @since [version] Add instructors block to membership editor template.
  */
 class LLMS_Blocks_Post_Types {
 
