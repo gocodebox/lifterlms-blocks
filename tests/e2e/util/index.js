@@ -7,6 +7,10 @@
  * @version [version]
  */
 
+import clearBlocks from './clear-blocks';
 import visitForm from './visit-form';
 
-export { visitForm };
+export {
+	clearBlocks,
+	visitForm,
+};
