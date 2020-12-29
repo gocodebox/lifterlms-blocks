@@ -9,7 +9,6 @@ import {
 	getAllBlocks,
 	insertBlock,
 	openDocumentSettingsSidebar,
-	// publishPostWithPrePublishChecksDisabled,
 	selectBlockByClientId,
 } from '@wordpress/e2e-test-utils';
 
