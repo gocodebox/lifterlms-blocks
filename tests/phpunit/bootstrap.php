@@ -41,6 +41,9 @@ class LLMS_Blocks_Tests_Bootstrap extends LLMS_Tests_Bootstrap {
 	 */
 	public function load() {
 
+		// Assets are shared between phpunit and e2e tests.
+		$this->assets_dir = dirname( $this->tests_dir ) . '/assets/';
+
 		if ( $this->plugin_main ) {
 			require_once( $this->plugin_dir . '/' . $this->plugin_main );
 		}

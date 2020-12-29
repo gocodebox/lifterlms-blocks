@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.11.0 - 2020-12-29
+--------------------
+
++ Allow the "Instructors" block to be used for memberships, thanks [@alaa-alshamy](https://github.com/alaa-alshamy)!
+
+
 v1.10.0 - 2020-11-24
 --------------------
 
