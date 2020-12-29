@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Blocks/FormFields/UserEmail Editor can be created by typing "/user_email" 1`] = `"<!-- wp:llms/form-field-user-email {\\"description\\":\\"\\",\\"field\\":\\"email\\",\\"required\\":true,\\"label\\":\\"Email Address\\",\\"label_show_empty\\":false,\\"match\\":\\"email_address_confirm\\",\\"options\\":[],\\"options_preset\\":\\"\\",\\"placeholder\\":\\"\\",\\"name\\":\\"email_address\\",\\"id\\":\\"email_address\\",\\"data_store\\":\\"users\\",\\"data_store_key\\":\\"user_email\\"} /-->"`;
+
+exports[`Blocks/FormFields/UserEmail Editor can be created using the block inserter 1`] = `"<!-- wp:llms/form-field-user-email {\\"description\\":\\"\\",\\"field\\":\\"email\\",\\"required\\":true,\\"label\\":\\"Email Address\\",\\"label_show_empty\\":false,\\"match\\":\\"email_address_confirm\\",\\"options\\":[],\\"options_preset\\":\\"\\",\\"placeholder\\":\\"\\",\\"name\\":\\"email_address\\",\\"id\\":\\"email_address\\",\\"data_store\\":\\"users\\",\\"data_store_key\\":\\"user_email\\"} /-->"`;
+
+exports[`Blocks/FormFields/UserEmail Frontend shows a user email field on the frontend 1`] = `"<div class=\\"llms-form-field type-email llms-cols-12 llms-cols-last llms-is-required\\"><label for=\\"email_address\\">Email Address<span class=\\"llms-required\\">*</span></label><input class=\\"llms-field-input\\" data-match=\\"email_address_confirm\\" id=\\"email_address\\" name=\\"email_address\\" required=\\"required\\" type=\\"email\\"></div>"`;
