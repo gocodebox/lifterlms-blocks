@@ -3,8 +3,8 @@
  *
  * Runs the LifterLMS Setup Wizard.
  *
- * @since [version]
- * @version [version]
+ * @since 1.11.0
+ * @version 1.11.0
  */
 
 import { runSetupWizard } from '@lifterlms/llms-e2e-test-utils';

@@ -3,3 +3,4 @@ services:
   wordpress:
     volumes:
       - ./:/var/www/html/wp-content/plugins/lifterlms-blocks:rw
+      - ../lifterlms:/var/www/html/wp-content/plugins/lifterlms:rw

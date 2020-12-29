@@ -5,7 +5,7 @@
  *
  * @since 1.0.0
  * @since 1.5.0 Add supported post type settings.
- * @since [version] Add membership to supported post types settings.
+ * @since 1.11.0 Add membership to supported post types settings.
  */
 
 // WP Deps.
