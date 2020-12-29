@@ -48,6 +48,12 @@
       "\"vendor/bin/phpcs\" --config-set installed_paths ../../../vendor/wp-coding-standards/wpcs,../../../vendor/lifterlms/lifterlms-cs,../../../vendor/phpcompatibility/php-compatibility,../../../vendor/phpcompatibility/phpcompatibility-paragonie,../../../vendor/phpcompatibility/phpcompatibility-wp",
       "\"vendor/bin/phpcs\" --config-set default_standard 'LifterLMS Core'"
     ],
+    "env": "\"vendor/bin/llms-env\"",
+    "env:setup": [
+      "\"vendor/bin/llms-env\" wp plugin install lifterlms --activate",
+      "\"vendor/bin/llms-env\" wp plugin update lifterlms",
+      "\"vendor/bin/llms-env\" wp plugin activate lifterlms-blocks"
+    ],
     "fix-cs": "\"vendor/bin/phpcbf\"",
     "post-install-cmd": "@config-cs",
     "post-update-cmd": "@config-cs",

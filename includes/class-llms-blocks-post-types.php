@@ -5,7 +5,7 @@
  * @package  LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @version 1.7.0
+ * @version 1.11.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -103,6 +103,7 @@ class LLMS_Blocks_Post_Types {
 	 * Add an editor template for memberships.
 	 *
 	 * @since 1.7.0
+	 * @since 1.11.0 Add instructors block.
 	 *
 	 * @param array $post_type Post type registration data.
 	 * @return array
@@ -116,6 +117,7 @@ class LLMS_Blocks_Post_Types {
 					'placeholder' => __( 'Add a short description of your membership visible to all visitors...', 'lifterlms' ),
 				),
 			),
+			array( 'llms/instructors' ),
 			array( 'llms/pricing-table' ),
 		);
 
