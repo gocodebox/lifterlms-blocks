@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.11.1 - 2021-01-05
+--------------------
+
++ Update the hook used for the Instructors block when displayed on membership post types.
+
+
 v1.11.0 - 2020-12-29
 --------------------
 
