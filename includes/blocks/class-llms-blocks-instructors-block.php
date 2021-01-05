@@ -7,7 +7,7 @@
  * @package LifterLMS_Blocks/Blocks
  *
  * @since 1.0.0
- * @version [version]
+ * @version 1.11.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -38,7 +38,7 @@ class LLMS_Blocks_Instructors_Block extends LLMS_Blocks_Abstract_Block {
 	 *
 	 * @since 1.0.0
 	 * @since 1.1.0 Unknown.
-	 * @since [version] Add support for memberships.
+	 * @since 1.11.1 Add support for memberships.
 	 *
 	 * @param array  $attributes Optional. Block attributes. Default empty array.
 	 * @param string $content    Optional. Block content. Default empty string.
