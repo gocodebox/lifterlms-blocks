@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v1.12.0 - 2021-01-07
+--------------------
+
++ Various form and field updates in preparation for LifterLMS 5.0.0.
+
+
 v1.11.1 - 2021-01-05
 --------------------
 
