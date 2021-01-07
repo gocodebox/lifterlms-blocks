@@ -2,7 +2,7 @@
  * BLOCK: llms/form-field-textarea
  *
  * @since 1.6.0
- * @since [version] Add transform support.
+ * @since 1.12.0 Add transform support.
  */
 
 // WP Deps.
@@ -63,7 +63,7 @@ settings.attributes.attributes = {
 /**
  * Fill the controls slot with additional controls specific to this field.
  *
- * @since [version]
+ * @since 1.12.0
  *
  * @param {Object}   attributes    Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.

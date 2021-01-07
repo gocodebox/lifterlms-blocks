@@ -2,7 +2,7 @@
  * Inspector settings for the Course Information Block.
  *
  * @since 1.6.0
- * @version [version]
+ * @version 1.12.0
  */
 
 // WP Deps.
@@ -41,7 +41,7 @@ export default class Inspector extends Component {
 	/**
 	 * Constructor
 	 *
-	 * @since [version]
+	 * @since 1.12.0
 	 *
 	 * @return {Void}
 	 */
@@ -56,7 +56,7 @@ export default class Inspector extends Component {
 	/**
 	 * Retrieve an array of objects to be used in data store related Select controls
 	 *
-	 * @since [version]
+	 * @since 1.12.0
 	 *
 	 * @param {String}   key         Describes which Select control to retrieve data for.
 	 * @param {String}   location    When retrieving for the "keys" list control, additionally provide the location to provide keys for.
@@ -183,7 +183,7 @@ export default class Inspector extends Component {
 	 * Render the Block Inspector
 	 *
 	 * @since 1.6.0
-	 * @since [version] Add inspector controls for data store mapping.
+	 * @since 1.12.0 Add inspector controls for data store mapping.
 	 *
 	 * @return {Fragment}
 	 */

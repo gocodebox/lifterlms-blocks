@@ -2,7 +2,7 @@
  * DOM Ready Events for LifterLMS Forms (llms_forms) Post Type
  *
  * @since 1.7.0
- * @version [version]
+ * @version 1.12.0
  */
 
 // WP Deps.
@@ -27,7 +27,7 @@ import { getBlocksFlat } from '../util/';
  * + Disables the "Status & Visibility" sidebar, we don't want to make our forms private, password
  *   protected, or published in the future.
  *
- * @since [version]
+ * @since 1.12.0
  *
  * @return {void}
  */
@@ -48,7 +48,7 @@ function hideCoreUI() {
 /**
  * Disable visibility settings when viewing registration and account forms.
  *
- * @since [version]
+ * @since 1.12.0
  *
  * @return {void}
  */
@@ -70,7 +70,7 @@ function maybeDisableVisibility() {
  * Watches editor data and if the field is removed throw an error notice.
  *
  * @since 1.7.0
- * @since [version] Wait for the editor to be fully initialized before dispatching a notice.
+ * @since 1.12.0 Wait for the editor to be fully initialized before dispatching a notice.
  *
  * @return {void}
  */
@@ -118,7 +118,7 @@ function ensureEmailFieldExists() {
 						 *
 						 * Inserts the user email field as the first block in the form.
 						 *
-						 * @since [version]
+						 * @since 1.12.0
 						 *
 						 * @return {void}
 						 */
@@ -155,7 +155,7 @@ function ensureEmailFieldExists() {
  * @since 1.7.0
  * @since 1.7.1 Disable block visibility on registration & account forms to prevent a potentially confusing form creation experience.
  * @since 1.7.3 Move forms ready event to block registration file to ensure blocks are registered during editor init.
- * @since [version] Move UI disabling functionality into it's own function.
+ * @since 1.12.0 Move UI disabling functionality into it's own function.
  *
  * @return {void}
  */

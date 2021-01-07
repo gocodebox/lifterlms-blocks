@@ -3,8 +3,8 @@
  *
  * @package LifterLMS_Blocks/Tests/E2E/Utils
  *
- * @since [version]
- * @version [version]
+ * @since 1.12.0
+ * @version 1.12.0
  */
 
 import clearBlocks from './clear-blocks';

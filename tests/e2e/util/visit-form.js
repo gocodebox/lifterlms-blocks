@@ -8,7 +8,7 @@ import { visitAdminPage } from '@wordpress/e2e-test-utils';
 /**
  * Visit the block editor for a requested form
  *
- * @since [version]
+ * @since 1.12.0
  *
  * @param {String|Number} form The title or WP_Post ID of a form.
  * @return {void}

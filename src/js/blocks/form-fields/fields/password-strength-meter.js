@@ -2,7 +2,7 @@
  * BLOCK: llms/form-field-password-strength-meter
  *
  * @since 1.6.0
- * @since [version] Add data store support.
+ * @since 1.12.0 Add data store support.
  */
 
 // WP Deps.

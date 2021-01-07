@@ -4,7 +4,7 @@
  * Displays only on `llms_form` post types.
  *
  * @since 1.6.0
- * @version [version]
+ * @version 1.12.0
  */
 
 import { parse } from '@wordpress/blocks';
@@ -55,7 +55,7 @@ class FormDocumentSettings extends Component {
 	 * @since 1.6.0
 	 * @since 1.7.0 Add early return for WP Core 5.2 and earlier where the `PluginDocumentSettingPanel` doesn't exist.
 	 *              Add link to form location on frontend if available.
-	 * @since [version] Add a class name to the document sidebar.
+	 * @since 1.12.0 Add a class name to the document sidebar.
 	 *              Add default template restoration.
 	 *
 	 * @return {Fragment}
@@ -92,7 +92,7 @@ class FormDocumentSettings extends Component {
 		/**
 		 * Replace all blocks in the current form with the blocks from a template string
 		 *
-		 * @since [version]
+		 * @since 1.12.0
 		 *
 		 * @param {String} template A block template (in the form of the content stored in the `post_content` field).
 		 * @return {Void}
@@ -112,7 +112,7 @@ class FormDocumentSettings extends Component {
 		 * This function will temporarily store the current layout (prior to reversion) so that it can
 		 * be restored immediately following reversion.
 		 *
-		 * @since [version]
+		 * @since 1.12.0
 		 *
 		 * @return {Void}
 		 */
@@ -139,7 +139,7 @@ class FormDocumentSettings extends Component {
 					/**
 					 * Restore the temporary backup and clear the notice.
 					 *
-					 * @since [version]
+					 * @since 1.12.0
 					 *
 					 * @return {void}
 					 */
@@ -204,7 +204,7 @@ class FormDocumentSettings extends Component {
  * @since 1.6.0
  * @since 1.7.0 Retrieve form link attribute.
  * @since 1.7.2 Only modify select when working with an `llms_form` post type.
- * @since [version] Load the default template meta field.
+ * @since 1.12.0 Load the default template meta field.
  */
 const applyWithSelect = withSelect( ( select ) => {
 

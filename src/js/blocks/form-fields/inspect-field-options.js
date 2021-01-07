@@ -87,7 +87,7 @@ const OptionsList = SortableContainer( ( { items, onChange, onRemove, showKeys }
  * Each element represents a single option.
  *
  * @since 1.6.0
- * @since [version] Added tooltip for the "Make Default" radio control & updated the icon used for item deletion.
+ * @since 1.12.0 Added tooltip for the "Make Default" radio control & updated the icon used for item deletion.
  *
  * @return {Fragment}
  */
@@ -225,7 +225,7 @@ export default class InspectorFieldOptions extends Component {
 		 * Add a new option.
 		 *
 		 * @since 1.6.0
-		 * @since [version] Newly created options will be the default for radio and selects.
+		 * @since 1.12.0 Newly created options will be the default for radio and selects.
 		 *              Added default text and keys when adding a new option.
 		 *
 		 * @return {Void}
@@ -254,7 +254,7 @@ export default class InspectorFieldOptions extends Component {
 		 * Delete an existing option
 		 *
 		 * @since 1.6.0
-		 * @since [version] When deleting a default option, set the first item as the new default.
+		 * @since 1.12.0 When deleting a default option, set the first item as the new default.
 		 *
 		 * @param {Integer} index Index of the deleted option.
 		 * @return {Void}

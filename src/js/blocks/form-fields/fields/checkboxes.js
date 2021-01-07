@@ -2,7 +2,7 @@
  * BLOCK: llms/form-field-checkboxes
  *
  * @since 1.6.0
- * @since [version] Add transform support and default options.
+ * @since 1.12.0 Add transform support and default options.
  */
 
 // WP Deps.

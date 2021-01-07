@@ -1,8 +1,8 @@
 /**
  * Test formsReady() events run on domReady()
  *
- * @since [version]
- * @version [version]
+ * @since 1.12.0
+ * @version 1.12.0
  */
 
 import {

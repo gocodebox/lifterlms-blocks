@@ -2,7 +2,7 @@
  * LifterLMS Block Library.
  *
  * @since 1.7.0
- * @version [version]
+ * @version 1.12.0
  */
 
 // WP Deps.
@@ -45,7 +45,7 @@ export const deregisterBlocksForForms = () => {
 	 * Determine if a block should be deregistered from form posts.
 	 *
 	 * @since 1.7.0
-	 * @since [version] Use `safelist` in favor of `whitelist`.`
+	 * @since 1.12.0 Use `safelist` in favor of `whitelist`.`
 	 *
 	 * @param {String} name Block name.
 	 * @return {Boolean}

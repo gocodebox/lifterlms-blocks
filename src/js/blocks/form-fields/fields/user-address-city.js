@@ -3,7 +3,7 @@
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
- * @since [version] Add data store support.
+ * @since 1.12.0 Add data store support.
  */
 
 // WP Deps.

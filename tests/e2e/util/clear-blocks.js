@@ -3,7 +3,7 @@ import { pressKeyWithModifier } from '@wordpress/e2e-test-utils';
 /**
  * Select all blocks in the editor and then delete them
  *
- * @since [version]
+ * @since 1.12.0
  *
  * @return {Void}
  */

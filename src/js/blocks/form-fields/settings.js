@@ -4,7 +4,7 @@
  * @since 1.6.0
  * @since 1.7.0 Unknown.
  * @since 1.8.0 Updated lodash imports.
- * @since [version] Add support for data stores & default examples object.
+ * @since 1.12.0 Add support for data stores & default examples object.
  */
 
 // WP Deps.
@@ -56,7 +56,7 @@ const generateId = ( name ) => {
  * Sets up block attributes, filling defaults and generating unique values.
  *
  * @since 1.6.0
- * @since [version] Add data_store_key generation.
+ * @since 1.12.0 Add data_store_key generation.
  *
  * @param {Object} atts      Default block attributes object.
  * @param {Object} blockAtts Actual WP_Block attributes object.

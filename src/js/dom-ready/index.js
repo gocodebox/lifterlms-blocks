@@ -2,7 +2,7 @@
  * Handle DOM Ready Events.
  *
  * @since 1.7.0
- * @version [version]
+ * @version 1.12.0
  */
 
 // WP Deps.
@@ -20,7 +20,7 @@ import formsReady from './forms-ready';
  *
  * @since 1.6.0
  * @since 1.7.0 Refactor for simplicity.
- * @since [version] Wait for current post to be setup before dispatching ready event.
+ * @since 1.12.0 Wait for current post to be setup before dispatching ready event.
  *
  * @return {void}
  */

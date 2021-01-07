@@ -3,8 +3,8 @@
  *
  * Allows 3rd party access to the form document settings sidebar plugin
  *
- * @since [version]
- * @version [version]
+ * @since 1.12.0
+ * @version 1.12.0
  */
 
 import { createSlotFill} from '@wordpress/components';
