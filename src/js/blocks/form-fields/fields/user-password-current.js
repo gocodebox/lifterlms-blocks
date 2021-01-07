@@ -3,10 +3,11 @@
  *
  * @since 1.7.1
  * @since 1.8.0 Updated lodash imports.
+ * @since [version] Add data store support.
  */
 
 // WP Deps.
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 // External Deps.
 import { cloneDeep } from 'lodash';
@@ -47,9 +48,10 @@ let settings = cloneDeep( userPasswordSettings );
 settings.title       = __( 'User Password (current)', 'lifterlms' );
 settings.description = __( 'A special field used to validate the user\'s current password during a password change attempt.', 'lifterlms' );
 
-settings.attributes.id.__default    = 'password_current';
-settings.attributes.label.__default = __( 'Current Password', 'lifterlms' );
-settings.attributes.name.__default  = 'password_current';
+settings.attributes.id.__default         = 'password_current';
+settings.attributes.label.__default      = __( 'Current Password', 'lifterlms' );
+settings.attributes.name.__default       = 'password_current';
+settings.attributes.data_store.__default = false;
 
 delete settings.attributes.match.__default;
 

@@ -2,11 +2,12 @@
  * BLOCK: llms/form-field-select
  *
  * @since 1.6.0
- * @version 1.6.0
+ * @since [version] Add transform support and default options.
  */
 
 // WP Deps.
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
+import { createBlock } from '@wordpress/blocks';
 
 // Internal Deps.
 import getDefaultSettings from '../settings';
@@ -47,10 +48,33 @@ settings.description = __( 'A select field which can be populated with any numbe
 
 settings.icon.src = icon;
 
-settings.attributes.field.__default = 'select';
+settings.attributes.field.__default   = 'select';
+settings.attributes.options.__default = [
+	{
+		default: 'yes',
+		text: __( 'Option 1', 'lifterlms' ),
+	},
+	{
+		default: 'no',
+		text: __( 'Option 2', 'lifterlms' ),
+	},
+];
 
 settings.supports.llms_field_inspector.options     = true;
 settings.supports.llms_field_inspector.placeholder = true;
+
+settings.transforms = {
+	from: [
+		{
+			type: 'block',
+			blocks: [
+				'llms/form-field-checkboxes',
+				'llms/form-field-radio',
+			],
+			transform: ( attributes ) => createBlock( name, { ...attributes, field: settings.attributes.field.__default } ),
+		},
+	],
+};
 
 export {
 	name,

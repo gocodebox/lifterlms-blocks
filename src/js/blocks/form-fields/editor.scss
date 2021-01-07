@@ -31,6 +31,10 @@
 
 	.llms-field {
 
+		.block-editor-rich-text__editable {
+			display: block;
+		}
+
 		label.llms-is-required {
 			> div { display: inline; }
 			&:after {
@@ -73,13 +77,19 @@ li.llms-field-option {
 		padding-top: 6px;
 	}
 
-	.llms-field-opt-default,
+	.llms-field-opt-default-wrap,
 	.llms-del-field-opt-wrap {
 		flex: 1;
 	}
 
 	.llms-del-field-opt-wrap {
-		margin: -2px 0 0 4px;
+		margin-left: 4px;
+		button {
+			margin-top: 3px;
+			&[aria-expanded="true"], &:hover {
+				color: #cc1818;
+			}
+		}
 	}
 
 	.llms-field-opt-text-wrap {

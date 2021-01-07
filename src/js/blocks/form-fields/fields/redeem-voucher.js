@@ -6,10 +6,9 @@
  */
 
 // WP Deps.
-const
-	{ ToggleControl } = wp.components,
-	{ Fragment }      = wp.element,
-	{ __, sprintf }   = wp.i18n;
+import { ToggleControl } from '@wordpress/components';
+import { Fragment } from '@wordpress/element';
+import { __, sprintf } from '@wordpress/i18n';
 
 // External Deps.
 import { cloneDeep } from 'lodash';

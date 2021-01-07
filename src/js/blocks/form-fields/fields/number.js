@@ -2,20 +2,17 @@
  * BLOCK: llms/form-field-number
  *
  * @since 1.6.0
- * @version 1.6.0
+ * @since [version] Add transform support.
  */
 
 // WP Deps.
-// WP Deps.
-const
-	{
-		TextControl,
-	}               = wp.components,
-	{
-		Component,
-		Fragment,
-	}               = wp.element,
-	{ __, sprintf } = wp.i18n;
+import { TextControl } from '@wordpress/components';
+import {
+	Component,
+	Fragment,
+} from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
+import { createBlock } from '@wordpress/blocks';
 
 // Internal Deps.
 import getDefaultSettings from '../settings';
@@ -104,6 +101,23 @@ settings.fillInspectorControls = ( attributes, setAttributes, props ) => {
 		</Fragment>
 	);
 
+};
+
+settings.transforms = {
+	from: [
+		{
+			type: 'block',
+			blocks: [
+				'llms/form-field-email',
+				'llms/form-field-password',
+				'llms/form-field-phone',
+				'llms/form-field-text',
+				'llms/form-field-textarea',
+				'llms/form-field-url'
+			],
+			transform: ( attributes ) => createBlock( name, { ...attributes, field: settings.attributes.field.__default } ),
+		},
+	],
 };
 
 export {

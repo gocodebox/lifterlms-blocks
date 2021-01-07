@@ -3,10 +3,11 @@
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
+ * @since [version] Add data store support.
  */
 
 // WP Deps.
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 // External Deps.
 import { cloneDeep } from 'lodash';
@@ -45,20 +46,25 @@ const composed = true;
 let settings = cloneDeep( emailSettings );
 
 settings.title       = __( 'User Email', 'lifterlms' );
-settings.description = __( 'A special field used to collect a user\'s account email address.', 'lifterlms' );
+settings.description = __( "A special field used to collect a user's account email address.", 'lifterlms' );
 
 settings.supports.multiple = false; // Can only have a single email address field.
 
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
+settings.supports.llms_field_inspector.id       = false;
+settings.supports.llms_field_inspector.name     = false;
 settings.supports.llms_field_inspector.required = false;
-settings.supports.llms_field_inspector.match = false;
+settings.supports.llms_field_inspector.match    = false;
+settings.supports.llms_field_inspector.storage  = false;
 
-settings.attributes.id.__default       = 'email_address';
-settings.attributes.label.__default    = __( 'Email Address', 'lifterlms' );
-settings.attributes.name.__default     = 'email_address';
-settings.attributes.required.__default = true;
-settings.attributes.match.__default    = 'email_address_confirm';
+settings.attributes.id.__default             = 'email_address';
+settings.attributes.label.__default          = __( 'Email Address', 'lifterlms' );
+settings.attributes.name.__default           = 'email_address';
+settings.attributes.required.__default       = true;
+settings.attributes.match.__default          = 'email_address_confirm';
+settings.attributes.data_store.__default     = 'users';
+settings.attributes.data_store_key.__default = 'user_email';
+
+delete settings.transforms;
 
 export {
 	name,

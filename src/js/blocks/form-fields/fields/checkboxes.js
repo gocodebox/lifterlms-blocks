@@ -2,11 +2,12 @@
  * BLOCK: llms/form-field-checkboxes
  *
  * @since 1.6.0
- * @version 1.6.0
+ * @since [version] Add transform support and default options.
  */
 
 // WP Deps.
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
+import { createBlock } from '@wordpress/blocks';
 
 // Internal Deps.
 import getDefaultSettings from '../settings';
@@ -47,9 +48,32 @@ settings.description = __( 'A single checkbox toggle or a group of multiple chec
 
 settings.icon.src = icon;
 
-settings.attributes.field.__default = 'checkbox';
+settings.attributes.field.__default   = 'checkbox';
+settings.attributes.options.__default = [
+	{
+		default: 'no',
+		text: __( 'Option 1', 'lifterlms' ),
+	},
+	{
+		default: 'no',
+		text: __( 'Option 2', 'lifterlms' ),
+	},
+];
 
 settings.supports.llms_field_inspector.options = true;
+
+settings.transforms = {
+	from: [
+		{
+			type: 'block',
+			blocks: [
+				'llms/form-field-radio',
+				'llms/form-field-select',
+			],
+			transform: ( attributes ) => createBlock( name, { ...attributes, field: settings.attributes.field.__default } ),
+		},
+	],
+};
 
 export {
 	name,

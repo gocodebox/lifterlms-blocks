@@ -3,10 +3,11 @@
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
+ * @since [version] Add data store support.
  */
 
 // WP Deps.
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 // External Deps.
 import { cloneDeep } from 'lodash';
@@ -51,15 +52,19 @@ settings.icon.src = 'admin-users';
 
 settings.supports.multiple = false; // Can only have a single email address field.
 
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
+settings.supports.llms_field_inspector.id       = false;
+settings.supports.llms_field_inspector.name     = false;
 settings.supports.llms_field_inspector.required = false;
-settings.supports.llms_field_inspector.match = false;
+settings.supports.llms_field_inspector.match    = false;
+settings.supports.llms_field_inspector.storage  = false;
 
-settings.attributes.id.__default       = 'user_login';
-settings.attributes.label.__default    = __( 'Username', 'lifterlms' );
-settings.attributes.name.__default     = 'user_login';
-settings.attributes.required.__default = true;
+settings.attributes.id.__default             = 'user_login';
+settings.attributes.label.__default          = __( 'Username', 'lifterlms' );
+settings.attributes.name.__default           = 'user_login';
+settings.attributes.required.__default       = true;
+settings.attributes.data_store.__default     = 'users';
+
+delete settings.transforms;
 
 export {
 	name,

@@ -8,8 +8,8 @@
  * @version 1.6.0
  */
 
-// WP Deps.
-const { select } = wp.data;
+// External Deps.
+import { select } from '@wordpress/data';
 
 /**
  * Recursively pulls inner/nested blocks to return a flat array of blocks.
@@ -46,7 +46,6 @@ export const flattenBlocks = ( blocks ) => {
 export default () => {
 
 	const editor = select( 'core/block-editor') || select ( 'core/editor' );
-
 	return flattenBlocks( editor.getBlocks() );
 
 };

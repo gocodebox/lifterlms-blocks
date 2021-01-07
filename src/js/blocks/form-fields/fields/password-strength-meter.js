@@ -2,19 +2,16 @@
  * BLOCK: llms/form-field-password-strength-meter
  *
  * @since 1.6.0
- * @version 1.6.0
+ * @since [version] Add data store support.
  */
 
 // WP Deps.
-const
-	{
-		SelectControl,
-		TextControl,
-	}               = wp.components,
-	{
-		Fragment,
-	}               = wp.element,
-	{ __, sprintf } = wp.i18n;
+import {
+	SelectControl,
+	TextControl
+} from '@wordpress/components';
+import { Fragment } from '@wordpress/element';
+import { __, sprintf } from '@wordpress/i18n';
 
 // Internal Deps.
 import getDefaultSettings from '../settings';
@@ -56,15 +53,17 @@ settings.icon.src = 'dashboard';
 
 settings.supports.multiple = false;
 
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
-settings.supports.llms_field_inspector.match = false;
-settings.supports.llms_field_inspector.required = false;
+settings.supports.llms_field_inspector.id         = false;
+settings.supports.llms_field_inspector.name       = false;
+settings.supports.llms_field_inspector.match      = false;
+settings.supports.llms_field_inspector.required   = false;
 settings.supports.llms_field_inspector.customFill = 'passwordStrengthMeter';
+settings.supports.llms_field_inspector.storage    = false;
 
-settings.attributes.field.__default = 'html';
-settings.attributes.id.__default = 'llms-password-strength-meter';
-settings.attributes.description.__default = sprintf( __( 'A %1$s password is required. The password must be at least %2$s characters in length. Consider adding letters, numbers, and symbols to increase the password strength.', 'lifterlms' ), '{min_strength}', '{min_length}' );
+settings.attributes.field.__default          = 'html';
+settings.attributes.id.__default             = 'llms-password-strength-meter';
+settings.attributes.description.__default    = sprintf( __( 'A %1$s password is required. The password must be at least %2$s characters in length. Consider adding letters, numbers, and symbols to increase the password strength.', 'lifterlms' ), '{min_strength}', '{min_length}' );
+settings.attributes.data_store.__default     = false;
 
 settings.attributes.min_strength = {
 	type: 'string',
@@ -74,6 +73,8 @@ settings.attributes.min_length = {
 	type: 'integer',
 	__default: 6,
 };
+
+delete settings.transforms;
 
 /**
  * Fill the controls slot with additional controls specific to this field.

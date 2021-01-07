@@ -2,37 +2,109 @@
  * Inspector settings for the Course Information Block.
  *
  * @since 1.6.0
- * @since 1.7.0 Import from `wp.editor` when `wp.blockEditor` is not available.
- * @version 1.6.0
+ * @version [version]
  */
 
 // WP Deps.
-const
-	{
-		InspectorControls,
-		InspectorAdvancedControls,
-	}                     = wp.blockEditor || wp.editor,
-	{
+import {
+	InspectorControls,
+	InspectorAdvancedControls,
+} from '@wordpress/block-editor';
+import {
+		Button,
 		PanelBody,
 		PanelRow,
 		SelectControl,
 		Slot,
 		TextControl,
 		ToggleControl,
-	}                     = wp.components,
-	{ dispatch }          = wp.data,
-	{
-		Component,
-		Fragment,
-	}                     = wp.element,
-	{ __ }                = wp.i18n;
+} from '@wordpress/components';
+import { dispatch } from '@wordpress/data';
+import { addFilter, applyFilters } from '@wordpress/hooks';
+import {
+	Component,
+	Fragment,
+} from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 
 // Internal Deps.
 import InspectorFieldOptions from './inspect-field-options';
 import getBlocksFlat from '../../util/get-blocks-flat';
 
+/**
+ * Block Inspector for Field blocks
+ *
+ * @since 1.6.0
+ */
 export default class Inspector extends Component {
 
+	/**
+	 * Constructor
+	 *
+	 * @since [version]
+	 *
+	 * @return {Void}
+	 */
+	constructor() {
+		super( ...arguments );
+		this.state = {
+			addingKey: '',
+			addingKeys: false,
+		};
+	};
+
+	/**
+	 * Retrieve an array of objects to be used in data store related Select controls
+	 *
+	 * @since [version]
+	 *
+	 * @param {String}   key         Describes which Select control to retrieve data for.
+	 * @param {String}   location    When retrieving for the "keys" list control, additionally provide the location to provide keys for.
+	 * @param {String[]} currentKeys Array of keys to add to the keys list control. Should include the default key (equal to the fields "name") as well as the currently selected key.
+	 * @return {Object[]} Array of objects to be used for the options of a Select control.
+	 */
+	getDataStoreOptions( key, location = null, currentKeys = [] ) {
+
+		const opts = applyFilters( 'llms.blockFields.dataStoreOptions', {
+			users: {
+				label: __( 'Users Table', 'lifterlms' ),
+				keys: [
+					'user_url',
+					'display_name',
+				],
+			},
+			usermeta: {
+				label: __( 'User Meta Table', 'lifterlms' ),
+				keys: [
+					'nickname',
+					'description',
+				],
+			},
+		} );
+
+		if ( 'locations' === key ) {
+			return Object.keys( opts ).map( ( value ) => { return { value, label: opts[ value ].label }; } );
+		} else if ( 'keys' === key ) {
+			let keys = opts[ location ].keys;
+			if ( currentKeys.length ) {
+				keys = keys.concat( currentKeys );
+			}
+			keys = [ ... new Set( keys ) ];
+			return keys.map( value => { return { value, label: value }; } )
+		}
+
+		return [];
+
+	};
+
+	/**
+	 * Retrieve a specific block by it's ID attribute.
+	 *
+	 * @since 1.6.0
+	 *
+	 * @param {String} fieldId The field ID.
+	 * @return {Object|Boolean} A block object or false if not found.
+	 */
 	getBlockByFieldId( fieldId ) {
 
 		const blocks = getBlocksFlat().filter( block => fieldId === block.attributes.id );
@@ -44,6 +116,13 @@ export default class Inspector extends Component {
 
 	};
 
+	/**
+	 * Retrieve an array of objects to be used in the Matching Field select control.
+	 *
+	 * @since 1.6.0
+	 *
+	 * @return {Object[]} Array of objects for the select control options list.
+	 */
 	getMatchFieldOptions() {
 
 		const {
@@ -69,6 +148,15 @@ export default class Inspector extends Component {
 
 	};
 
+	/**
+	 * Determine if the block has inspector support
+	 *
+	 * The block must have support for at least one inspector control.
+	 *
+	 * @since 1.6.0
+	 *
+	 * @return {Boolean}
+	 */
 	hasInspectorSupport() {
 
 		const { inspectorSupports } = this.props;
@@ -76,6 +164,14 @@ export default class Inspector extends Component {
 
 	};
 
+	/**
+	 * Determine if the block has inspector support for a specific control
+	 *
+	 * @since 1.6.0
+	 *
+	 * @param {String} control Control ID.
+	 * @return {Boolean}
+	 */
 	hasInspectorControlSupport( control ) {
 
 		const { inspectorSupports } = this.props;
@@ -83,12 +179,21 @@ export default class Inspector extends Component {
 
 	};
 
+	/**
+	 * Render the Block Inspector
+	 *
+	 * @since 1.6.0
+	 * @since [version] Add inspector controls for data store mapping.
+	 *
+	 * @return {Fragment}
+	 */
 	render() {
 
 		const
 			{
 				attributes,
 				setAttributes,
+				clientId,
 			} = this.props,
 			{
 				id,
@@ -97,8 +202,9 @@ export default class Inspector extends Component {
 				required,
 				options,
 				placeholder,
+				data_store,
+				data_store_key,
 			} = attributes;
-
 
 		// Return early if there's no inspector options to display.
 		if ( ! this.hasInspectorSupport() ) {
@@ -137,10 +243,71 @@ export default class Inspector extends Component {
 						) }
 
 						{ this.hasInspectorControlSupport( 'customFill' ) && (
-							<Slot name={ `llmsInspectorControlsFill.${ this.hasInspectorControlSupport( 'customFill' ) }` } />
+							<Slot name={ `llmsInspectorControlsFill.${ this.hasInspectorControlSupport( 'customFill' ) }.${ clientId }` } />
 						) }
 
 					</PanelBody>
+
+					{ this.hasInspectorControlSupport( 'storage' ) && (
+						<PanelBody title={ __( 'Data Storage', 'lifterlms' ) }>
+
+							<SelectControl
+								label={ __( 'Location', 'lifterlms' ) }
+								onChange={ data_store => setAttributes( { data_store } ) }
+								help={ __( 'Database table where field data will be stored for a user completing the form.', 'lifterlms' ) }
+								value={ data_store }
+								options={ this.getDataStoreOptions( 'locations' ) }
+							/>
+
+							<SelectControl
+								label={ __( 'Key', 'lifterlms' ) }
+								onChange={ data_store_key => setAttributes( { data_store_key } ) }
+								help={ __( 'Name of the field where data is stored.', 'lifterlms' ) }
+								value={ data_store_key }
+								options={ this.getDataStoreOptions( 'keys', data_store, 'users' === data_store ? [] : [ name, data_store_key ] ) }
+							/>
+
+							{ 'users' !== data_store && (
+								<Button
+									isLink
+									onClick={ () => this.setState( {
+										addingKeys: !this.state.addingKeys,
+									} ) }
+								>{ __( 'Add New Key', 'lifterlms' ) }</Button>
+
+							) }
+
+							{ 'users' !== data_store && this.state.addingKeys && (
+								<Fragment>
+									<PanelRow>
+										<TextControl
+											label={ __( 'New Key Name', 'lifterlms' ) }
+											onChange={ value => this.setState( {
+												addingKey: value.replace( /[^0-9a-zA-Z_-]/g, '' ),
+											} ) }
+											help={ __( 'Database field key name. Only accepts alphanumeric characters, hyphens, and underscores.', 'lifterlms' ) }
+											value={ this.state.addingKey }
+										/>
+									</PanelRow>
+
+									<Button
+										isSecondary
+										onClick={ () => {
+											// Select the newly added key.
+											setAttributes( { data_store_key: this.state.addingKey } )
+
+											// Clear the state.
+											this.setState( {
+												addingKeys: false,
+												addingKey: '',
+											} );
+										} }
+									>{ __( 'Add New Key', 'lifterlms' ) }</Button>
+								</Fragment>
+
+							) }
+						</PanelBody>
+					) }
 
 				</InspectorControls>
 

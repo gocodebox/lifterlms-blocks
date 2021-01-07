@@ -3,10 +3,11 @@
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
+ * @since [version] Add data store support.
  */
 
 // WP Deps.
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
 
 // External Deps.
 import { cloneDeep } from 'lodash';
@@ -48,16 +49,19 @@ settings.title = __( 'User State', 'lifterlms' );
 
 settings.supports.multiple = false;
 
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
+settings.supports.llms_field_inspector.id       = false;
+settings.supports.llms_field_inspector.name     = false;
 settings.supports.llms_field_inspector.required = false;
-settings.supports.llms_field_inspector.match = false;
+settings.supports.llms_field_inspector.match    = false;
+settings.supports.llms_field_inspector.storage  = false;
 
 settings.attributes.id.__default          = 'llms_billing_state';
 settings.attributes.label.__default       = __( 'State / Province', 'lifterlms' );
 settings.attributes.name.__default        = 'llms_billing_state';
 settings.attributes.required.__default    = true;
 settings.attributes.placeholder.__default = '';
+
+delete settings.transforms;
 
 export {
 	name,

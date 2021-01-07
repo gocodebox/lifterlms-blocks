@@ -2,11 +2,12 @@
  * BLOCK: llms/form-field-url
  *
  * @since 1.6.0
- * @version 1.6.0
+ * @since [version] Add transform support.
  */
 
 // WP Deps.
-const { __ } = wp.i18n;
+import { __ } from '@wordpress/i18n';
+import { createBlock } from '@wordpress/blocks';
 
 // Internal Deps.
 import getDefaultSettings from '../settings';
@@ -47,6 +48,23 @@ settings.description = __( 'An input field which accepts and web addresses.', 'l
 settings.icon.src = 'admin-links';
 
 settings.attributes.field.__default = 'url';
+
+settings.transforms = {
+	from: [
+		{
+			type: 'block',
+			blocks: [
+				'llms/form-field-password',
+				'llms/form-field-email',
+				'llms/form-field-number',
+				'llms/form-field-phone',
+				'llms/form-field-text',
+				'llms/form-field-textarea',
+			],
+			transform: ( attributes ) => createBlock( name, { ...attributes, field: settings.attributes.field.__default } ),
+		},
+	],
+}
 
 export {
 	name,
