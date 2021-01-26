@@ -46,7 +46,7 @@ const composed = true;
 let settings = cloneDeep( passwordSettings );
 
 settings.title       = __( 'User Password', 'lifterlms' );
-settings.description = __( 'A special field used to collect a user\'s account email address.', 'lifterlms' );
+settings.description = __( 'A special field used to collect a user\'s account password.', 'lifterlms' );
 
 settings.supports.multiple = false;
 
