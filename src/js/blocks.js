@@ -5,6 +5,7 @@
  * @since 1.5.0 Register blocks conditionally based on post type.
  * @since 1.6.0 Register form field blocks.
  * @since 1.7.0 Refactor into multiple files for clarity and organization.
+ * @since [version] Disable import of incomplete modue `./formats/merge-codes`;
  */
 
 // SCSS.
@@ -14,7 +15,7 @@ import '../scss/blocks.scss';
 import './block-visibility/'
 import './dom-ready/';
 import './post-visibility/'
-import './formats/merge-codes/';
+// import './formats/merge-codes/';
 import './sidebar/'
 
 // Register all Core Blocks.
