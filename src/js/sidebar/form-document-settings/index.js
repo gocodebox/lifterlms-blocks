@@ -4,7 +4,7 @@
  * Displays only on `llms_form` post types.
  *
  * @since 1.6.0
- * @version 1.12.0
+ * @version [version]
  */
 
 import { parse } from '@wordpress/blocks';
@@ -56,7 +56,8 @@ class FormDocumentSettings extends Component {
 	 * @since 1.7.0 Add early return for WP Core 5.2 and earlier where the `PluginDocumentSettingPanel` doesn't exist.
 	 *              Add link to form location on frontend if available.
 	 * @since 1.12.0 Add a class name to the document sidebar.
-	 *              Add default template restoration.
+	 *               Add default template restoration.
+	 * @since [version] Use default template from location definition in favor of from metadata.
 	 *
 	 * @return {Fragment}
 	 */
@@ -71,7 +72,6 @@ class FormDocumentSettings extends Component {
 
 		const
 			{
-				defaultTemplate,
 				backupTemplate,
 				location,
 				link,
@@ -113,6 +113,7 @@ class FormDocumentSettings extends Component {
 		 * be restored immediately following reversion.
 		 *
 		 * @since 1.12.0
+		 * @since [version] Use default template from location definition.
 		 *
 		 * @return {Void}
 		 */
@@ -128,7 +129,7 @@ class FormDocumentSettings extends Component {
 				} = dispatch( 'core/notices' );
 
 			// Replace blocks.
-			replaceAllBlocks( defaultTemplate );
+			replaceAllBlocks( currentLoc.template );
 
 			// Pop a success notice and allow undoing.
 			createSuccessNotice( __( 'The form has been restored to the default template.', 'lifterlms' ), {
@@ -205,6 +206,7 @@ class FormDocumentSettings extends Component {
  * @since 1.7.0 Retrieve form link attribute.
  * @since 1.7.2 Only modify select when working with an `llms_form` post type.
  * @since 1.12.0 Load the default template meta field.
+ * @since [version] Don't load default template from metadata.
  */
 const applyWithSelect = withSelect( ( select ) => {
 
@@ -224,7 +226,6 @@ const applyWithSelect = withSelect( ( select ) => {
 		link: getCurrentPost().link,
 		location: meta._llms_form_location,
 		showTitle: meta._llms_form_show_title,
-		defaultTemplate: meta._llms_form_default_template,
 	};
 } );
 
