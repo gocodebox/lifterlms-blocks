@@ -13,7 +13,7 @@ import { __ } from '@wordpress/i18n';
 import { cloneDeep } from 'lodash';
 
 // Internal Deps.
-import { settings as emailSettings } from './phone';
+import { settings as phoneSettings } from './phone';
 
 /**
  * Block Name
@@ -43,7 +43,7 @@ const post_types = [ 'llms_form' ];
 const composed = true;
 
 // Setup the field settings.
-let settings = cloneDeep( emailSettings );
+let settings = cloneDeep( phoneSettings );
 
 settings.title       = __( 'User Phone', 'lifterlms' );
 settings.description = __( 'A special field used to collect a user\'s phone number.', 'lifterlms' );
