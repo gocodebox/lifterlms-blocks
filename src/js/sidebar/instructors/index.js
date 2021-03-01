@@ -2,11 +2,11 @@
  * Instructors Sidebar Plugin
  *
  * @since 1.0.0
- * @since 1.8.0 Use `className` in favor of `class`.
+ * @version [version]
  */
 
 // WP deps.
-const {
+import {
 	BaseControl,
 	Button,
 	IconButton,
@@ -14,29 +14,26 @@ const {
 	PanelRow,
 	TextControl,
 	ToggleControl,
-} = wp.components
-const {
+} from '@wordpress/components';
+import {
 	compose,
-} = wp.compose
-const {
+} from '@wordpress/compose';
+import {
 	withDispatch,
 	withSelect,
-} = wp.data;
-const {
+} from '@wordpress/data';;
+import {
 	Component,
 	Fragment
-} = wp.element
-const {
+} from '@wordpress/element';
+import {
 	__,
 	sprintf,
-} = wp.i18n;
-const {
+} from '@wordpress/i18n';;
+import {
 	addQueryArgs,
-} = wp.url
+} from '@wordpress/url';
 
-// Internal Deps.
-import SearchUser from '../../components/search-user'
-import './editor.scss'
 
 // External Deps.
 import {
@@ -45,6 +42,10 @@ import {
 	SortableElement,
 	SortableHandle,
 } from 'react-sortable-hoc';
+
+// Internal Deps.
+import SearchUser from '../../components/search-user'
+import './editor.scss'
 
 /**
  * Output a Drag Handle.
@@ -217,6 +218,7 @@ class Instructors extends Component {
 	 * Add a new instructor from the selected search result.
 	 *
 	 * @since 1.0.0
+	 * @since [version] Don't use data from removed `_users` property.
 	 *
 	 * @return {void}
 	 */
@@ -227,7 +229,7 @@ class Instructors extends Component {
 
 		instructors.push( Object.assign( this.getInstructorDefaults(), {
 			id: search.id,
-			name: search._user.name,
+			name: search.name,
 		} ) );
 
 		this.updateInstructors( instructors );
@@ -296,6 +298,7 @@ class Instructors extends Component {
 	 * Render the component.
 	 *
 	 * @since 1.0.0
+	 * @since [version] Exclude currently selected users from search query.
 	 *
 	 * @return {Object} HTML Fragment.
 	 */
@@ -308,6 +311,9 @@ class Instructors extends Component {
 					<SearchUser
 						roles={ this.getRoles() }
 						placeholder={ __( 'Search...', 'lifterlms' ) }
+						searchArgs={ {
+							exclude: this.state.instructors.map( res => res.id ),
+						} }
 						onChange={ this.onSearchChange }
 					/>
 				</div>
