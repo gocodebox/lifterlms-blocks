@@ -8,16 +8,15 @@
  */
 
 // WP Deps.
-const
-	{ __ }                         = wp.i18n,
-	{ createHigherOrderComponent } = wp.compose,
-	{ Fragment }                   = wp.element,
-	{ InspectorControls }          = wp.blockEditor || wp.editor,
-	{
-		PanelBody,
-		PanelRow,
-		SelectControl,
-	}                              = wp.components;
+import { __ } from '@wordpress/i18n';
+import { createHigherOrderComponent }from '@wordpress/compose';
+import { Fragment } from '@wordpress/element';
+import { InspectorControls } from '@wordpress/blockEditor';
+import {
+	PanelBody,
+	PanelRow,
+	SelectControl,
+} from '@wordpress/components';
 
 // External Deps.
 import assign from 'lodash/assign';
@@ -26,6 +25,7 @@ import assign from 'lodash/assign';
 import check from './check';
 import Preview from './preview';
 import SearchPost from '../components/search-post';
+import { options as visibilityOptions } from './settings'
 
 /**
  * Block edit inspector controls for visibility settings
@@ -44,9 +44,7 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 		// Exit early if the block doesn't support visibility.
 		if ( ! check( wp.blocks.getBlockType( props.name ), props.name ) ) {
 			return (
-				<Fragment>
-					<BlockEdit { ...props } />
-				</Fragment>
+				<BlockEdit { ...props } />
 			);
 		}
 
@@ -194,28 +192,25 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 
 		return (
 			<Fragment>
-				<Preview {...props} />
-				<BlockEdit { ...props } />
+				<Preview { ...props }>
+					<BlockEdit { ...props } />
+				</Preview>
 				<InspectorControls>
 					<PanelBody
 						title={ __( 'Enrollment Visibility', 'lifterlms' ) }>
 
 						<SelectControl
+							className="llms-visibility-select"
 							label={ __( 'Display to', 'lifterlms' ) }
 							value={ llms_visibility }
 							onChange={ onChangeVisibility }
-							options={ [
-								{ value: 'all', label: __( 'everyone', 'lifterlms' ) },
-								{ value: 'enrolled', label: __( 'enrolled users', 'lifterlms' ) },
-								{ value: 'not_enrolled', label: __( 'non-enrolled users or visitors', 'lifterlms' ) },
-								{ value: 'logged_in', label: __( 'logged in users', 'lifterlms' ) },
-								{ value: 'logged_out', label: __( 'logged out users', 'lifterlms' ) },
-							] }
+							options={ visibilityOptions }
 						/>
 
 						{ -1 === [ 'all', 'logged_in', 'logged_out' ].indexOf( llms_visibility ) && (
 							<Fragment>
 								<SelectControl
+									className="llms-visibility-select--in"
 									label={ getVisibilityInLabel( llms_visibility ) }
 									value={ llms_visibility_in }
 									onChange={ value => setAttributes( { llms_visibility_in: value } ) }
