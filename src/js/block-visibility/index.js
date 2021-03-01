@@ -1,14 +1,12 @@
 /**
  * Visibility settings for all blocks
  *
- * @since    1.0.0
- * @version  1.0.0
+ * @since 1.0.0
+ * @version [version]
  */
 
 // WP Deps.
-const {
-	addFilter,
-} = wp.hooks;
+import { addFilter } from '@wordpress/hooks';
 
 // Internal Deps.
 import visibilityAttributes from './attributes';
