@@ -5,15 +5,16 @@
  * @version 1.6.0
  */
 
-const
-	{ RichText } = wp.blockEditor || wp.editor,
-	{ __ }       = wp.i18n,
-	{
-		RawHTML,
-		Component,
-		Fragment
-	} = wp.element;
+// WP deps.
+import { RichText } from '@wordpress/block-editor';
+import { __ }       from '@wordpress/i18n';
+import {
+	RawHTML,
+	Component,
+	Fragment
+} from '@wordpress/element';
 
+// Intern deps.
 import './editor.scss';
 
 /**

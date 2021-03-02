@@ -6,7 +6,7 @@
  */
 
 // WP Deps.
-const { registerPlugin } = wp.plugins;
+import { registerPlugin } from '@wordpress/plugins';
 
 // Internal Deps.
 import { default as PostVisibility } from './component';

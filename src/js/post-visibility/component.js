@@ -6,25 +6,25 @@
  */
 
 // WP Deps.
-const {
+import {
 	Button,
 	Dropdown,
 	RadioControl,
-} = wp.components
-const {
+} from '@wordpress/components';
+import {
 	compose,
 	ifCondition,
 	withInstanceId,
-} = wp.compose;
-const {
+} from '@wordpress/compose';
+import {
 	withDispatch,
 	withSelect,
-} = wp.data;
-const {
+} from '@wordpress/data';
+import {
 	Component,
-} = wp.element
-const { PluginPostStatusInfo } = wp.editPost;
-const { __ } = wp.i18n;
+} from '@wordpress/element';
+import { PluginPostStatusInfo } from '@wordpress/edit-post';
+import { __ } from '@wordpress/i18n';
 
 // Internal Deps.
 import { visibilityOptions } from './options';

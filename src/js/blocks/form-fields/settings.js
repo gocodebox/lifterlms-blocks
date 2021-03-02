@@ -8,12 +8,11 @@
  */
 
 // WP Deps.
-const
-	{ getBlockType } = wp.blocks,
-	{ Fill }         = wp.components,
-	{ Fragment }     = wp.element,
-	{ doAction }     = wp.hooks,
-	{ __ }           = wp.i18n;
+import { getBlockType } from '@wordpress/blocks';
+import { Fill } from '@wordpress/components';
+import { Fragment } from '@wordpress/element';
+import { doAction } from '@wordpress/hooks';
+import { __ } from '@wordpress/i18n';
 
 // External Deps.
 import {

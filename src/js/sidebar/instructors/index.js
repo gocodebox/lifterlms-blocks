@@ -6,7 +6,7 @@
  */
 
 // WP deps.
-const {
+import {
 	BaseControl,
 	Button,
 	IconButton,
@@ -14,25 +14,25 @@ const {
 	PanelRow,
 	TextControl,
 	ToggleControl,
-} = wp.components
-const {
+} from '@wordpress/components';
+import {
 	compose,
-} = wp.compose
-const {
+} from '@wordpress/compose';
+import {
 	withDispatch,
 	withSelect,
-} = wp.data;
-const {
+} from '@wordpress/data';
+import {
 	Component,
 	Fragment
-} = wp.element
-const {
+} from '@wordpress/element';
+import {
 	__,
 	sprintf,
-} = wp.i18n;
-const {
+} from '@wordpress/i18n';
+import {
 	addQueryArgs,
-} = wp.url
+} from '@wordpress/url';
 
 // Internal Deps.
 import SearchUser from '../../components/search-user'

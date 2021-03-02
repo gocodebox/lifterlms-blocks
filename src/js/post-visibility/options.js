@@ -6,8 +6,8 @@
  */
 
 // WP Deps.
-const { __ } = wp.i18n;
-const { applyFilters } = wp.hooks;
+import { __ } from '@wordpress/i18n';
+import { applyFilters } from '@wordpress/hooks';
 
 export const visibilityOptions = applyFilters( 'llms_blocks_post_visibility_options', [
 	{

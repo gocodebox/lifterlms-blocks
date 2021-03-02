@@ -6,15 +6,14 @@
  */
 
 // WP Deps.
-const
-	{ Slot }           = wp.components,
-	{ select }         = wp.data,
-	{
-		PluginSidebar,
-		PluginSidebarMoreMenuItem,
-	}                  = wp.editPost,
-	{ Fragment }       = wp.element,
-	{ registerPlugin } = wp.plugins;
+import { Slot } from '@wordpress/components';
+import { select } from '@wordpress/data';
+import {
+	PluginSidebar,
+	PluginSidebarMoreMenuItem,
+} from '@wordpress/editPost';
+import { Fragment } from '@wordpress/element';
+import { registerPlugin } from '@wordpress/plugins';
 
 // Internal Deps.
 import Instructors from './instructors';
