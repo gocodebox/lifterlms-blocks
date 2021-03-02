@@ -58,7 +58,7 @@ export default class Search extends Component {
 	 * @since [version]
 	 *
 	 * @param {String} search Search string, this will be included in the arguments as the `search` property.
-	 * @return {String} Full API request string.
+	 * @return {Object} Object of arguments to add to the search API request.
 	 */
 	getSearchArgs( search ) {
 		return Object.assign(
