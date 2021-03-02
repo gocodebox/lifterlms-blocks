@@ -4,9 +4,7 @@
  * Renders a course syllabus
  *
  * @since 1.0.0
- * @since 1.5.0 Add supported post type settings.
- * @since 1.8.0 Use imports in favor of "wp." variables.
- *              Use @wordpress/server-side-render in favor of wp.components.ServerSideRender.
+ * @version [version]
  */
 
 // WP Deps.
@@ -33,12 +31,7 @@ export const post_types = [ 'course' ];
 /**
  * Register Course Syllabus Block
  *
- * @link https://wordpress.org/gutenberg/handbook/block-api/
- * @param   {string}   name     Block name.
- * @param   {Object}   settings Block settings.
- * @return  {?WPBlock}          The block, if it has been successfully, registered; otherwise `undefined`.
- * @since   1.0.0
- * @version 1.0.0
+ * @since 1.0.0
  */
 export const settings = {
 
@@ -47,7 +40,7 @@ export const settings = {
 		foreground: '#2295ff',
 		src: 'grid-view'
 	},
-	category: 'llms-blocks', // common, formatting, layout widgets, embed. see https://wordpress.org/gutenberg/handbook/block-api/#category.
+	category: 'llms-blocks',
 	keywords: [
 		__( 'LifterLMS', 'lifterlms' ),
 	],
@@ -64,11 +57,11 @@ export const settings = {
 	 *
 	 * The "edit" property must be a valid function.
 	 *
-	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-	 * @param   {Object} props Block properties.
-	 * @return  {Function}
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @since 1.0.0
+	 * @since [version] Don't render InspectorControls since the block doesn't have any actual settings.
+	 *
+	 * @param {Object} props Block properties.
+	 * @return {Fragment}
 	 */
 	edit: props => {
 
@@ -80,8 +73,6 @@ export const settings = {
 
 		return (
 			<Fragment>
-				<Inspector { ...{ attributes, setAttributes } } />
-
 				<ServerSideRender
 					block={ name }
 					attributes={ attributes }
@@ -99,11 +90,9 @@ export const settings = {
 	 *
 	 * The "save" property must be specified and must be a valid function.
 	 *
-	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-	 * @param   {Object} props Block properties.
-	 * @return  {Function}
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @since 1.0.0
+	 *
+	 * @return {Null}
 	 */
 	save: () => {
 		return null;
