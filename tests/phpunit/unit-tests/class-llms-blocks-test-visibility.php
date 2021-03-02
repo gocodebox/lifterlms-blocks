@@ -670,7 +670,6 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 		// Not REST.
 		$this->assertTrue( LLMS_Unit_Test_Util::call_method( $main, 'should_filter_block', array( array() ) ) );
 
-
 		define( 'REST_REQUEST', true );
 
 		// Is REST but no context, user, etc...
