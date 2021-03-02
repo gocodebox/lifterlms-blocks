@@ -1,8 +1,8 @@
-const { __ } = wp.i18n
-const {
+import { __ } from '@wordpress/i18n';
+import {
 	Component,
 	Fragment,
-} = wp.element
+} from '@wordpress/element';
 
 export default class Preview extends Component {
 

@@ -16,7 +16,6 @@ import ServerSideRender from '@wordpress/server-side-render';
 
 // Internal Deps.
 import './editor.scss';
-import Inspector from './inspect'
 
 /**
  * Block Name

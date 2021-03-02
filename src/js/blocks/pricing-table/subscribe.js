@@ -7,12 +7,12 @@
  */
 
 // WP Deps.
-const {
+import {
 	dispatch,
 	select,
 	subscribe,
-} = wp.data;
-const { __ } = wp.i18n;
+} from '@wordpress/data';
+import { __ } from '@wordpress/i18n';
 
 // Import jQuery.
 import $ from 'jquery';
