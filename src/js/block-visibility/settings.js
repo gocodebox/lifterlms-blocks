@@ -26,7 +26,7 @@ const settings = {
  *
  * @since [version]
  *
- * @param {String} setting Setting value
+ * @param {String} setting Setting value.
  * @return {String} Setting label.
  */
 export const getSetting = ( setting ) =>  settings[ setting ] || setting;
