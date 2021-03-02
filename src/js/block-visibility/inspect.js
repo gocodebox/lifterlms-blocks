@@ -11,7 +11,7 @@
 import { __ } from '@wordpress/i18n';
 import { createHigherOrderComponent }from '@wordpress/compose';
 import { Fragment } from '@wordpress/element';
-import { InspectorControls } from '@wordpress/blockEditor';
+import { InspectorControls } from '@wordpress/block-editor';
 import {
 	PanelBody,
 	PanelRow,
