@@ -19538,6 +19538,7 @@ var deregisterBlocksForForms = function deregisterBlocksForForms() {
     var name = block.name,
         post_types = block.post_types,
         settings = block.settings;
+    console.log(block);
 
     if (!post_types || -1 !== post_types.indexOf(post_type)) {
       registerBlockType(name, settings);
@@ -21119,7 +21120,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _wordpress_edit_post__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/edit-post */ "@wordpress/editPost");
+/* harmony import */ var _wordpress_edit_post__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/edit-post */ "@wordpress/edit-post");
 /* harmony import */ var _wordpress_edit_post__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_edit_post__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_10__);
@@ -21410,7 +21411,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _wordpress_edit_post__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/edit-post */ "@wordpress/editPost");
+/* harmony import */ var _wordpress_edit_post__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/edit-post */ "@wordpress/edit-post");
 /* harmony import */ var _wordpress_edit_post__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_wordpress_edit_post__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__);
@@ -21699,8 +21700,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_editPost__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/editPost */ "@wordpress/editPost");
-/* harmony import */ var _wordpress_editPost__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editPost__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_edit_post__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/edit-post */ "@wordpress/edit-post");
+/* harmony import */ var _wordpress_edit_post__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_edit_post__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_plugins__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/plugins */ "@wordpress/plugins");
 /* harmony import */ var _wordpress_plugins__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_plugins__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _instructors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./instructors */ "./src/js/sidebar/instructors/index.js");
@@ -21734,10 +21735,10 @@ __webpack_require__.r(__webpack_exports__);
 
 var Sidebar = function Sidebar() {
   if (-1 !== ['course', 'llms_membership'].indexOf(Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__["select"])('core/editor').getCurrentPostType())) {
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_editPost__WEBPACK_IMPORTED_MODULE_3__["PluginSidebarMoreMenuItem"], {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_edit_post__WEBPACK_IMPORTED_MODULE_3__["PluginSidebarMoreMenuItem"], {
       target: "llms-sidebar",
       icon: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_icons_lifterlms_icon__WEBPACK_IMPORTED_MODULE_7__["default"], null)
-    }, "LifterLMS"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_editPost__WEBPACK_IMPORTED_MODULE_3__["PluginSidebar"], {
+    }, "LifterLMS"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_edit_post__WEBPACK_IMPORTED_MODULE_3__["PluginSidebar"], {
       name: "llms-sidebar",
       title: "LifterLMS"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_instructors__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
@@ -22348,7 +22349,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "@wordpress/editPost":
+/***/ "@wordpress/edit-post":
 /*!*******************************************!*\
   !*** external {"this":["wp","editPost"]} ***!
   \*******************************************/
