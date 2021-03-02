@@ -6,18 +6,17 @@
  *
  * @since 1.0.0
  * @since 1.6.0 Add tests for `logged_out` and `logged_in` visiblity settings.
- * @version 1.6.0
  */
 class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 
 	/**
 	 * Custom assertion for this test case
 	 *
-	 * @param   string    $expected    Expected content.
-	 * @param   string    $raw_content Raw content to check against, will be run through `the_content` filter.
-	 * @return  void
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @since 1.0.0
+	 *
+	 * @param string $expected    Expected content.
+	 * @param string $raw_content Raw content to check against, will be run through `the_content` filter.
+	 * @return void
 	 */
 	private function assertPostContentEquals( $expected, $raw_content ) {
 
@@ -27,25 +26,25 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 
 	/**
 	 * Normalize content, used by assertPostContentEquals to strip spaces and newlines resulting from hidden content gaps.
-	 * @param   string    $content text/html content
-	 * @return  string
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $content Text/html content.
+	 * @return string
 	 */
 	private function clean_content( $content ) {
-
 		return trim( preg_replace( '/<!--(.|\s)*?-->/', '', $content ) );
-
 	}
 
 	/**
 	 * Creates a new post with a paragaph block configured with the desired visibility settings.
 	 *
-	 * @param   array     $block_settings Desired block settings attributes.
-	 * @param   string    $post_type      Post type of the created post.
-	 * @return  WP_Post
-	 * @since   1.0.0
-	 * @version 1.2.0
+	 * @since 1.0.0
+	 * @since 1.2.0 Unknown.
+	 *
+	 * @param array $block_settings Desired block settings attributes.
+	 * @param string $post_type     Post type of the created post.
+	 * @return WP_Post
 	 */
 	private function create_post( $block_settings = array(), $post_type = 'post' ) {
 
@@ -73,10 +72,10 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Encode and stringify posts array used in block settings.
 	 *
-	 * @param   array    $array array of post data as returned by `get_posts_array()`.
-	 * @return  string
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @since 1.0.0
+	 *
+	 * @param array $array Array of post data as returned by `get_posts_array()`.
+	 * @return string
 	 */
 	private function encode_posts_array( $array ) {
 		return str_replace( '"', '\u0022', json_encode( $array ) );
@@ -85,11 +84,11 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Create a number of posts and return an array of data to be used in block settings.
 	 *
-	 * @param   int       $count number of posts to create.
-	 * @param   string    $type  post type.
-	 * @return  array
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @since 1.0.0
+	 *
+	 * @param int    $count Number of posts to create.
+	 * @param string $type  Post type.
+	 * @return array
 	 */
 	private function get_posts_array( $count = 1, $type = 'course' ) {
 
@@ -119,9 +118,10 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test that blocks which have been run through `the_content` filter are displayed/hidden based on block visibility settings.
 	 *
-	 * @return  void
-	 * @since   1.0.0
-	 * @version 1.2.0
+	 * @since 1.0.0
+	 * @since 1.2.0 Unknown.
+	 *
+	 * @return void
 	 */
 	public function test_visibility() {
 
@@ -612,7 +612,7 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	 *
 	 * @since 1.6.0
 	 *
-	 * @return  void
+	 * @return void
 	 */
 	public function test_visibility_show_to_logged_in_only() {
 
@@ -635,7 +635,7 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	 *
 	 * @since 1.6.0
 	 *
-	 * @return  void
+	 * @return void
 	 */
 	public function test_visibility_show_to_logged_out_only() {
 
