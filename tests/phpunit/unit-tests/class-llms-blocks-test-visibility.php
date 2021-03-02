@@ -651,6 +651,49 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 		wp_set_current_user( $this->factory->student->create() );
 		$this->assertPostContentEquals( '', $post->post_content );
 
+	}
+
+	/**
+	 * Test summary
+	 *
+	 * @since [version]
+	 *
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
+	 *
+	 * @return void
+	 */
+	public function test_should_filter_block() {
+
+		$main = new LLMS_Blocks_Visibility();
+
+		// Not REST.
+		$this->assertTrue( LLMS_Unit_Test_Util::call_method( $main, 'should_filter_block', array( array() ) ) );
+
+
+		define( 'REST_REQUEST', true );
+
+		// Is REST but no context, user, etc...
+		$this->assertTrue( LLMS_Unit_Test_Util::call_method( $main, 'should_filter_block', array( array() ) ) );
+
+		$this->mockGetRequest( array(
+			'context' => 'edit',
+			// 'post_id' => $this->factory->post->create(),
+		) );
+
+		// Context exists but no post.
+		$this->assertTrue( LLMS_Unit_Test_Util::call_method( $main, 'should_filter_block', array( array() ) ) );
+
+		// All required params but no user to validate.
+		$this->mockGetRequest( array(
+			'context' => 'edit',
+			'post_id' => $this->factory->post->create(),
+		) );
+		$this->assertTrue( LLMS_Unit_Test_Util::call_method( $main, 'should_filter_block', array( array() ) ) );
+
+		// We have a valid user now.
+		wp_set_current_user( $this->factory->user->create( array( 'role' => 'administrator' ) ) );
+		$this->assertFalse( LLMS_Unit_Test_Util::call_method( $main, 'should_filter_block', array( array() ) ) );
 
 	}
 
