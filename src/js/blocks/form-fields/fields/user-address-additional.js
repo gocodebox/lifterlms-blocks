@@ -18,7 +18,7 @@ import { settings as textSettings } from './text';
 /**
  * Block Name
  *
- * @type {String}
+ * @type {string}
  */
 const name = 'llms/form-field-user-address-additional';
 
@@ -27,7 +27,7 @@ const name = 'llms/form-field-user-address-additional';
  *
  * @type {Array}
  */
-const post_types = [ 'llms_form' ];
+const postTypes = [ 'llms_form' ];
 
 /**
  * Is this a default or composed field?
@@ -38,36 +38,36 @@ const post_types = [ 'llms_form' ];
  * Default (non-composed) fields can be added by developers to perform custom functions
  * and are not registered as a block by default
  *
- * @type {String}
+ * @type {string}
  */
 const composed = true;
 
 // Setup the field settings.
-let settings = cloneDeep( textSettings );
+const settings = cloneDeep( textSettings );
 
-settings.title       = __( 'User Address (Line 2)', 'lifterlms' );
-settings.description = __( 'A special field used to collect a user\'s billing address additional information.', 'lifterlms' );
+settings.title = __( 'User Address (Line 2)', 'lifterlms' );
+settings.description = __(
+	"A special field used to collect a user's billing address additional information.",
+	'lifterlms'
+);
 
 settings.icon.src = 'location';
 
 settings.supports.multiple = false;
 
-settings.supports.llms_field_inspector.id      = false;
-settings.supports.llms_field_inspector.name    = false;
-settings.supports.llms_field_inspector.match   = false;
+settings.supports.llms_field_inspector.id = false;
+settings.supports.llms_field_inspector.name = false;
+settings.supports.llms_field_inspector.match = false;
 settings.supports.llms_field_inspector.storage = false;
 
-
-settings.attributes.id.__default               = 'llms_billing_address_2';
-settings.attributes.placeholder.__default      = __( 'Apartment, suite, or unit', 'lifterlms' );
-settings.attributes.name.__default             = 'llms_billing_address_2';
+settings.attributes.id.__default = 'llms_billing_address_2';
+settings.attributes.placeholder.__default = __(
+	'Apartment, suite, or unit',
+	'lifterlms'
+);
+settings.attributes.name.__default = 'llms_billing_address_2';
 settings.attributes.label_show_empty.__default = true;
 
 delete settings.transforms;
 
-export {
-	name,
-	post_types,
-	composed,
-	settings,
-};
+export { name, postTypes, composed, settings };

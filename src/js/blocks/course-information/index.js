@@ -13,10 +13,10 @@
 import './editor.scss';
 
 // Import Inspector.
-import Inspector from './inspect'
+import Inspector from './inspect';
 
 // Import Previews.
-import PreviewTerms from './preview-terms'
+import PreviewTerms from './preview-terms';
 
 // External Deps.
 import { RichText } from '@wordpress/block-editor';
@@ -26,16 +26,16 @@ import { __ } from '@wordpress/i18n';
 /**
  * Block Name
  *
- * @type {String}
+ * @type {string}
  */
-export const name = 'llms/course-information'
+export const name = 'llms/course-information';
 
 /**
  * Array of supported post types.
  *
  * @type {Array}
  */
-export const post_types = [ 'course' ];
+export const postTypes = [ 'course' ];
 
 /**
  * Register: Course Information Block
@@ -49,9 +49,7 @@ export const settings = {
 		src: 'list-view',
 	},
 	category: 'llms-blocks',
-	keywords: [
-		__( 'LifterLMS', 'lifterlms' ),
-	],
+	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 
 	attributes: {
 		title: {
@@ -103,8 +101,7 @@ export const settings = {
 	 * @param {Object} props Block properties.
 	 * @return {Function}
 	 */
-	edit: props => {
-
+	edit: ( props ) => {
 		const { attributes, setAttributes } = props;
 		const {
 			length,
@@ -119,7 +116,12 @@ export const settings = {
 
 		const currentPost = wp.data.select( 'core/editor' ).getCurrentPost();
 
-		const hasContent = ( show_length || show_difficulty || show_tracks || show_cats || show_tags );
+		const hasContent =
+			show_length ||
+			show_difficulty ||
+			show_tracks ||
+			show_cats ||
+			show_tags;
 
 		return (
 			<Fragment>
@@ -128,41 +130,78 @@ export const settings = {
 					<RichText
 						tagName={ title_size }
 						value={ title }
-						onChange={ value => setAttributes( { title: value } ) }
+						onChange={ ( value ) =>
+							setAttributes( { title: value } )
+						}
 					/>
 					{ hasContent && (
 						<Fragment>
 							<ul>
 								{ show_length && length && (
-									<li><strong>{ __( 'Estimated Time', 'lifterlms' ) }</strong>: { length }</li>
+									<li>
+										<strong>
+											{ __(
+												'Estimated Time',
+												'lifterlms'
+											) }
+										</strong>
+										: { length }
+									</li>
 								) }
-								{ show_difficulty && ( <PreviewTerms { ...{
-									currentPost,
-									taxonomy: 'course_difficulty',
-									taxonomy_name: __( 'Difficulty', 'lifterlms' ),
-								} } /> ) }
-								{ show_tracks && ( <PreviewTerms { ...{
-									currentPost,
-									taxonomy: 'course_track',
-									taxonomy_name: __( 'Tracks', 'lifterlms' ),
-								} } /> ) }
-								{ show_cats && ( <PreviewTerms { ...{
-									currentPost,
-									taxonomy: 'course_cat',
-									taxonomy_name: __( 'Categories', 'lifterlms' ),
-								} } /> ) }
-								{ show_tags && ( <PreviewTerms { ...{
-									currentPost,
-									taxonomy: 'course_tag',
-									taxonomy_name: __( 'Tags', 'lifterlms' ),
-								} } /> ) }
+								{ show_difficulty && (
+									<PreviewTerms
+										{ ...{
+											currentPost,
+											taxonomy: 'course_difficulty',
+											taxonomy_name: __(
+												'Difficulty',
+												'lifterlms'
+											),
+										} }
+									/>
+								) }
+								{ show_tracks && (
+									<PreviewTerms
+										{ ...{
+											currentPost,
+											taxonomy: 'course_track',
+											taxonomy_name: __(
+												'Tracks',
+												'lifterlms'
+											),
+										} }
+									/>
+								) }
+								{ show_cats && (
+									<PreviewTerms
+										{ ...{
+											currentPost,
+											taxonomy: 'course_cat',
+											taxonomy_name: __(
+												'Categories',
+												'lifterlms'
+											),
+										} }
+									/>
+								) }
+								{ show_tags && (
+									<PreviewTerms
+										{ ...{
+											currentPost,
+											taxonomy: 'course_tag',
+											taxonomy_name: __(
+												'Tags',
+												'lifterlms'
+											),
+										} }
+									/>
+								) }
 							</ul>
 						</Fragment>
 					) }
 				</div>
 			</Fragment>
 		);
-
 	},
 
 	/**
@@ -176,6 +215,5 @@ export const settings = {
 	 */
 	save: () => {
 		return null;
-	}
-
-}
+	},
+};

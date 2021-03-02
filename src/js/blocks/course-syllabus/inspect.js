@@ -8,9 +8,8 @@
  */
 
 // WP Deps.
-const
-	{ __ }                = wp.i18n,
-	{ Component }         = wp.element,
+const { __ } = wp.i18n,
+	{ Component } = wp.element,
 	{ InspectorControls } = wp.blockEditor || wp.editor,
 	{
 		PanelBody,
@@ -18,21 +17,21 @@ const
 		SelectControl,
 		TextControl,
 		ToggleControl,
-	}                      = wp.components;
+	} = wp.components;
 
 export default class Inspector extends Component {
+	render() {
+		const {
+			attributes: { course_id },
+			setAttributes,
+		} = this.props;
 
-  render() {
-
-	const { attributes: {
-		course_id
-	}, setAttributes } = this.props;
-
-	return (
-		<InspectorControls>
-			<PanelBody title={ __( 'Course Syllabus Options', 'lifterlms' ) }>
-			</PanelBody>
-		</InspectorControls>
-	)
-  }
+		return (
+			<InspectorControls>
+				<PanelBody
+					title={ __( 'Course Syllabus Options', 'lifterlms' ) }
+				></PanelBody>
+			</InspectorControls>
+		);
+	}
 }

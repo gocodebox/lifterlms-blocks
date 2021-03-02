@@ -13,7 +13,8 @@ import { Fragment } from '@wordpress/element';
 
 /**
  * Block Name
- * @type {String}
+ *
+ * @type {string}
  */
 export const name = 'llms/course-continue-button';
 
@@ -22,7 +23,7 @@ export const name = 'llms/course-continue-button';
  *
  * @type {Array}
  */
-export const post_types = [ 'course' ];
+export const postTypes = [ 'course' ];
 
 /**
  * Register: Course Continue Button Block
@@ -38,12 +39,10 @@ export const settings = {
 	title: __( 'Course Continue Button', 'lifterlms' ),
 	icon: {
 		foreground: '#2295ff',
-		src: 'migrate'
+		src: 'migrate',
 	},
 	category: 'llms-blocks', // common, formatting, layout widgets, embed. see https://wordpress.org/gutenberg/handbook/block-api/#category.
-	keywords: [
-		__( 'LifterLMS', 'lifterlms' ),
-	],
+	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 
 	/**
 	 * The edit function describes the structure of your block in the context of the editor.
@@ -57,11 +56,13 @@ export const settings = {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 */
-	edit: function( props ) {
+	edit( props ) {
 		return (
 			<div className={ props.className }>
 				<p style={ { textAlign: 'center' } }>
-					<Button isPrimary isLarge>{ __( 'Continue', 'lifterlms' ) }</Button>
+					<Button isPrimary isLarge>
+						{ __( 'Continue', 'lifterlms' ) }
+					</Button>
 				</p>
 			</div>
 		);
@@ -79,11 +80,14 @@ export const settings = {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 */
-	save: function( props ) {
+	save( props ) {
 		return (
-			<div className={ props.className } style={ { textAlign: 'center' } }>
+			<div
+				className={ props.className }
+				style={ { textAlign: 'center' } }
+			>
 				[lifterlms_course_continue_button]
 			</div>
 		);
 	},
-}
+};

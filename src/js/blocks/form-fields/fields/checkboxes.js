@@ -16,7 +16,7 @@ import icon from '../../../icons/field-checkbox';
 /**
  * Block Name
  *
- * @type {String}
+ * @type {string}
  */
 const name = 'llms/form-field-checkboxes';
 
@@ -25,7 +25,7 @@ const name = 'llms/form-field-checkboxes';
  *
  * @type {Array}
  */
-const post_types = [ 'llms_form' ];
+const postTypes = [ 'llms_form' ];
 
 /**
  * Is this a default or composed field?
@@ -36,19 +36,22 @@ const post_types = [ 'llms_form' ];
  * Default (non-composed) fields can be added by developers to perform custom functions
  * and are not registered as a block by default.
  *
- * @type {String}
+ * @type {string}
  */
 const composed = false;
 
 // Setup the field settings.
-let settings = getDefaultSettings();
+const settings = getDefaultSettings();
 
-settings.title       = __( 'Checkboxes', 'lifterlms' );
-settings.description = __( 'A single checkbox toggle or a group of multiple checkboxes.', 'lifterlms' );
+settings.title = __( 'Checkboxes', 'lifterlms' );
+settings.description = __(
+	'A single checkbox toggle or a group of multiple checkboxes.',
+	'lifterlms'
+);
 
 settings.icon.src = icon;
 
-settings.attributes.field.__default   = 'checkbox';
+settings.attributes.field.__default = 'checkbox';
 settings.attributes.options.__default = [
 	{
 		default: 'no',
@@ -66,18 +69,14 @@ settings.transforms = {
 	from: [
 		{
 			type: 'block',
-			blocks: [
-				'llms/form-field-radio',
-				'llms/form-field-select',
-			],
-			transform: ( attributes ) => createBlock( name, { ...attributes, field: settings.attributes.field.__default } ),
+			blocks: [ 'llms/form-field-radio', 'llms/form-field-select' ],
+			transform: ( attributes ) =>
+				createBlock( name, {
+					...attributes,
+					field: settings.attributes.field.__default,
+				} ),
 		},
 	],
 };
 
-export {
-	name,
-	post_types,
-	composed,
-	settings,
-};
+export { name, postTypes, composed, settings };

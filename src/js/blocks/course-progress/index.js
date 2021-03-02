@@ -21,12 +21,12 @@ import './editor.scss';
  *
  * @type {Array}
  */
-export const post_types = [ 'course' ];
+export const postTypes = [ 'course' ];
 
 /**
  * Block Name
  *
- * @type {String}
+ * @type {string}
  */
 export const name = 'llms/course-progress';
 
@@ -36,16 +36,13 @@ export const name = 'llms/course-progress';
  * @type {Object}
  */
 export const settings = {
-
 	title: __( 'Course Progress', 'lifterlms' ),
 	icon: {
 		foreground: '#2295ff',
-		src: 'chart-area'
+		src: 'chart-area',
 	},
 	category: 'llms-blocks',
-	keywords: [
-		__( 'LifterLMS', 'lifterlms' ),
-	],
+	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 	supports: {
 		llms_visibility: false,
 	},
@@ -59,7 +56,7 @@ export const settings = {
 	 * @param {Object} props Block properties.
 	 * @return {Function}
 	 */
-	edit: function( props ) {
+	edit( props ) {
 		return (
 			<div className={ props.className }>
 				<div className="progress-bar" value="50" max="100">
@@ -79,7 +76,7 @@ export const settings = {
 	 *
 	 * @return {null}
 	 */
-	save: function() {
+	save() {
 		return null;
 	},
 	deprecated: [
@@ -87,12 +84,12 @@ export const settings = {
 			/**
 			 * Block Editor Save
 			 *
+			 * @param props
 			 * @since 1.0.0
 			 * @deprecated 1.8.0
-			 *
 			 * @return {Function}
 			 */
-			save: function( props ) {
+			save( props ) {
 				return (
 					<div className={ props.className }>
 						[lifterlms_course_progress]
@@ -100,5 +97,5 @@ export const settings = {
 				);
 			},
 		},
-	]
-}
+	],
+};

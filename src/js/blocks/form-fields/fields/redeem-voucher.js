@@ -19,7 +19,7 @@ import { settings as textSettings } from './text';
 /**
  * Block Name
  *
- * @type {String}
+ * @type {string}
  */
 const name = 'llms/form-field-redeem-voucher';
 
@@ -28,7 +28,7 @@ const name = 'llms/form-field-redeem-voucher';
  *
  * @type {Array}
  */
-const post_types = [ 'llms_form' ];
+const postTypes = [ 'llms_form' ];
 
 /**
  * Is this a default or composed field?
@@ -39,15 +39,18 @@ const post_types = [ 'llms_form' ];
  * Default (non-composed) fields can be added by developers to perform custom functions
  * and are not registered as a block by default
  *
- * @type {String}
+ * @type {string}
  */
 const composed = true;
 
 // Setup the field settings.
-let settings = cloneDeep( textSettings );
+const settings = cloneDeep( textSettings );
 
-settings.title       = __( 'Voucher Redemption', 'lifterlms' );
-settings.description = __( 'A special field used to redeem a voucher code.', 'lifterlms' );
+settings.title = __( 'Voucher Redemption', 'lifterlms' );
+settings.description = __(
+	'A special field used to redeem a voucher code.',
+	'lifterlms'
+);
 
 settings.icon.src = 'tickets-alt';
 
@@ -58,9 +61,9 @@ settings.supports.llms_field_inspector.name = false;
 settings.supports.llms_field_inspector.match = false;
 settings.supports.llms_field_inspector.customFill = 'redeemVoucher';
 
-settings.attributes.id.__default          = 'llms_voucher';
-settings.attributes.label.__default       = __( 'Have a voucher?', 'lifterlms' );
-settings.attributes.name.__default        = 'llms_voucher';
+settings.attributes.id.__default = 'llms_voucher';
+settings.attributes.label.__default = __( 'Have a voucher?', 'lifterlms' );
+settings.attributes.name.__default = 'llms_voucher';
 settings.attributes.placeholder.__default = __( 'Voucher Code', 'lifterlms' );
 
 settings.attributes.toggleable = {
@@ -79,7 +82,6 @@ settings.attributes.toggleable = {
  * @return {Fragment}
  */
 settings.fillInspectorControls = ( attributes, setAttributes, props ) => {
-
 	const { toggleable, required } = attributes;
 
 	if ( required ) {
@@ -88,22 +90,23 @@ settings.fillInspectorControls = ( attributes, setAttributes, props ) => {
 
 	return (
 		<Fragment>
-
 			<ToggleControl
 				label={ __( 'Toggleable', 'lifterlms' ) }
 				checked={ !! toggleable }
-				onChange={ value => setAttributes( { toggleable: ! toggleable } ) }
-				help={ !! toggleable ? __( 'Field is revealed when the toggle is clicked.', 'lifterlms' ) : __( 'Field is always visible.', 'lifterlms' ) }
+				onChange={ ( value ) =>
+					setAttributes( { toggleable: ! toggleable } )
+				}
+				help={
+					!! toggleable
+						? __(
+								'Field is revealed when the toggle is clicked.',
+								'lifterlms'
+						  )
+						: __( 'Field is always visible.', 'lifterlms' )
+				}
 			/>
-
 		</Fragment>
 	);
-
 };
 
-export {
-	name,
-	post_types,
-	composed,
-	settings,
-};
+export { name, postTypes, composed, settings };

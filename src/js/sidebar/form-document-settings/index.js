@@ -15,17 +15,9 @@ import {
 	ToggleControl,
 } from '@wordpress/components';
 import { compose } from '@wordpress/compose';
-import {
-	dispatch,
-	select,
-	withDispatch,
-	withSelect,
-} from '@wordpress/data';
+import { dispatch, select, withDispatch, withSelect } from '@wordpress/data';
 import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
-import {
-	Component,
-	Fragment
-} from '@wordpress/element';
+import { Component, Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 import LLMSFormDocSettings from './slot-fill';
@@ -37,18 +29,6 @@ import LLMSFormDocSettings from './slot-fill';
  * @since 1.7.0 Return early during renders on WP Core 5.2 and earlier where the `PluginDocumentSettingPanel` doesn't exist.
  */
 class FormDocumentSettings extends Component {
-
-	/**
-	 * Constructor.
-	 *
-	 * @since 1.6.0
-	 *
-	 * @return {Void}
-	 */
-	constructor() {
-		super( ...arguments );
-	};
-
 	/**
 	 * Render the Sidebar.
 	 *
@@ -59,29 +39,20 @@ class FormDocumentSettings extends Component {
 	 *               Add default template restoration.
 	 * @since [version] Use default template from location definition in favor of from metadata.
 	 *
-	 * @return {Fragment}
+	 * @return {?Fragment} Component HTML fragment or null when not supported.
 	 */
 	render = () => {
-
 		// This slot doesn't exist until WordPress 5.3.
 		if ( 'undefined' === typeof PluginDocumentSettingPanel ) {
 			return null;
-		} else if ( 'llms_form' !== select( 'core/editor' ).getCurrentPostType() ) {
+		} else if (
+			'llms_form' !== select( 'core/editor' ).getCurrentPostType()
+		) {
 			return null;
 		}
 
-		const
-			{
-				backupTemplate,
-				location,
-				link,
-				showTitle,
-				setFormMetas,
-			} = this.props,
-			{
-				admin_url,
-				formLocations
-			} = window.llms,
+		const { location, link, showTitle, setFormMetas } = this.props,
+			{ formLocations } = window.llms,
 			currentLoc = formLocations[ location ];
 
 		// Set default value.
@@ -94,17 +65,17 @@ class FormDocumentSettings extends Component {
 		 *
 		 * @since 1.12.0
 		 *
-		 * @param {String} template A block template (in the form of the content stored in the `post_content` field).
-		 * @return {Void}
+		 * @param {string} template A block template (in the form of the content stored in the `post_content` field).
+		 * @return {void}
 		 */
 		function replaceAllBlocks( template ) {
-
 			dispatch( 'core/block-editor' ).replaceBlocks(
-				select( 'core/block-editor' ).getBlocks().map( block => block.clientId ),
+				select( 'core/block-editor' )
+					.getBlocks()
+					.map( ( block ) => block.clientId ),
 				parse( template )
 			);
-
-		};
+		}
 
 		/**
 		 * Revert the current form to the default template for the form's location
@@ -115,43 +86,49 @@ class FormDocumentSettings extends Component {
 		 * @since 1.12.0
 		 * @since [version] Use default template from location definition.
 		 *
-		 * @return {Void}
+		 * @return {void}
 		 */
 		function revertToDefault() {
-
-			const
-				id = 'llms-form-restore-default',
+			const id = 'llms-form-restore-default',
 				// Save temp content for reverting in the notice action.
-				tempContent = select( 'core/editor' ).getEditedPostAttribute( 'content' ),
-				{
-					createSuccessNotice,
-					removeNotice
-				} = dispatch( 'core/notices' );
+				tempContent = select( 'core/editor' ).getEditedPostAttribute(
+					'content'
+				),
+				{ createSuccessNotice, removeNotice } = dispatch(
+					'core/notices'
+				);
 
 			// Replace blocks.
 			replaceAllBlocks( currentLoc.template );
 
 			// Pop a success notice and allow undoing.
-			createSuccessNotice( __( 'The form has been restored to the default template.', 'lifterlms' ), {
-				id,
-				actions: [ {
-					label: __( 'Undo', 'lifterlms' ),
+			createSuccessNotice(
+				__(
+					'The form has been restored to the default template.',
+					'lifterlms'
+				),
+				{
+					id,
+					actions: [
+						{
+							label: __( 'Undo', 'lifterlms' ),
 
-					/**
-					 * Restore the temporary backup and clear the notice.
-					 *
-					 * @since 1.12.0
-					 *
-					 * @return {void}
-					 */
-					onClick: () => {
-						replaceAllBlocks( tempContent );
-						removeNotice( id );
-					},
-				} ]
-			} );
-
-		};
+							/**
+							 * Restore the temporary backup and clear the notice.
+							 *
+							 * @since 1.12.0
+							 *
+							 * @return {void}
+							 */
+							onClick: () => {
+								replaceAllBlocks( tempContent );
+								removeNotice( id );
+							},
+						},
+					],
+				}
+			);
+		}
 
 		return (
 			<Fragment>
@@ -161,43 +138,80 @@ class FormDocumentSettings extends Component {
 					title={ __( 'Form Settings', 'lifterlms' ) }
 					opened={ true }
 				>
-		            <LLMSFormDocSettings.Slot>
-		                { ( fills ) => (
-		                    <Fragment>
+					<LLMSFormDocSettings.Slot>
+						{ ( fills ) => (
+							<Fragment>
 								<PanelRow>
-									<strong>{ __( 'Location', 'lifterlms' ) }</strong>
+									<strong>
+										{ __( 'Location', 'lifterlms' ) }
+									</strong>
 									{ ! link && (
 										<strong>{ currentLoc.name }</strong>
 									) }
 									{ link && (
-										<ExternalLink href={ link }>{ currentLoc.name }</ExternalLink>
+										<ExternalLink href={ link }>
+											{ currentLoc.name }
+										</ExternalLink>
 									) }
 								</PanelRow>
-								<p style={ { marginTop: '5px' } }><em>{ currentLoc.description }</em></p>
+								<p style={ { marginTop: '5px' } }>
+									<em>{ currentLoc.description }</em>
+								</p>
 								{ fills }
 								<br />
 								<ToggleControl
-									label={ __( 'Display Form Title', 'lifterlms' ) }
+									label={ __(
+										'Display Form Title',
+										'lifterlms'
+									) }
 									checked={ 'yes' === showTitle }
-									help={ 'yes' === showTitle ? __( 'Displaying form title.', 'lifterlms' ) : __( 'Not displaying form title.', 'lifterlms' ) }
-									onChange={ val => setFormMetas( { _llms_form_show_title: val ? 'yes' : 'no' } ) }
+									help={
+										'yes' === showTitle
+											? __(
+													'Displaying form title.',
+													'lifterlms'
+											  )
+											: __(
+													'Not displaying form title.',
+													'lifterlms'
+											  )
+									}
+									onChange={ ( val ) =>
+										setFormMetas( {
+											_llms_form_show_title: val
+												? 'yes'
+												: 'no',
+										} )
+									}
 								/>
 								<br />
 								<PanelRow>
-									<Button isDestructive onClick={ revertToDefault }>{ __( 'Revert to Default', 'lifterlms' ) }</Button>
+									<Button
+										isDestructive
+										onClick={ revertToDefault }
+									>
+										{ __(
+											'Revert to Default',
+											'lifterlms'
+										) }
+									</Button>
 								</PanelRow>
-								<p style={ { marginTop: '5px' } }><em>{ __( 'Replace the existing content of the form with the original default content.', 'lifterlms' ) }</em></p>
-		                    </Fragment>
-		                ) }
-		            </LLMSFormDocSettings.Slot>
-
+								<p style={ { marginTop: '5px' } }>
+									<em>
+										{ __(
+											'Replace the existing content of the form with the original default content.',
+											'lifterlms'
+										) }
+									</em>
+								</p>
+							</Fragment>
+						) }
+					</LLMSFormDocSettings.Slot>
 				</PluginDocumentSettingPanel>
 			</Fragment>
 		);
-
-    };
-
-};
+	};
+}
 
 /**
  * Retrieve custom meta information when retrieving posts.
@@ -209,7 +223,6 @@ class FormDocumentSettings extends Component {
  * @since [version] Don't load default template from metadata.
  */
 const applyWithSelect = withSelect( ( select ) => {
-
 	const {
 		getCurrentPost,
 		getCurrentPostType,
@@ -235,18 +248,15 @@ const applyWithSelect = withSelect( ( select ) => {
  * @since 1.6.0
  */
 const applyWithDispatch = withDispatch( ( dispatch ) => {
-
 	const { editPost } = dispatch( 'core/editor' );
 	return {
 		setFormMetas( metas ) {
 			editPost( { meta: metas } );
 		},
 	};
-
 } );
 
 // Export.
-export default compose( [
-	applyWithSelect,
-	applyWithDispatch
-] )( FormDocumentSettings );
+export default compose( [ applyWithSelect, applyWithDispatch ] )(
+	FormDocumentSettings
+);

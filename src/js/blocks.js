@@ -12,11 +12,11 @@
 import '../scss/blocks.scss';
 
 // Internal Deps.
-import './block-visibility/'
+import './block-visibility/';
 import './dom-ready/';
-import './post-visibility/'
+import './post-visibility/';
 // import './formats/merge-codes/';
-import './sidebar/'
+import './sidebar/';
 
 // Register all Core Blocks.
 import registerBlocks from './blocks/';

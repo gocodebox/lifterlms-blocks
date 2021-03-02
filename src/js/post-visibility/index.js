@@ -11,8 +11,6 @@ const { registerPlugin } = wp.plugins;
 // Internal Deps.
 import { default as PostVisibility } from './component';
 
-registerPlugin(
-	'llms-post-visibility', {
-		render: PostVisibility,
-	}
-);
+registerPlugin( 'llms-post-visibility', {
+	render: PostVisibility,
+} );

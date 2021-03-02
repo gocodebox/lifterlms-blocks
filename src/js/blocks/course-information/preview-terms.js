@@ -1,47 +1,47 @@
-const { __ } = wp.i18n
-const {
-	Component,
-	Fragment,
-} = wp.element
+const { __ } = wp.i18n;
+const { Component, Fragment } = wp.element;
 
 export default class Preview extends Component {
-
 	state = {
 		terms: false,
-	}
+	};
 
 	getTerms() {
+		const { currentPost, taxonomy } = this.props;
 
-		const {
-			currentPost,
-			taxonomy,
-		} = this.props
+		const link = currentPost._links[ 'wp:term' ].filter(
+			( term ) => term.taxonomy === taxonomy
+		)[ 0 ].href;
 
-		let link = currentPost._links[ 'wp:term' ].filter( term => term.taxonomy === taxonomy )[0].href;
-
-		wp.apiFetch( { url: wp.url.addQueryArgs( link, { per_page: -1 } ) } ).then( terms => {
-			this.setState( { terms: terms } );
+		wp.apiFetch( {
+			url: wp.url.addQueryArgs( link, { per_page: -1 } ),
+		} ).then( ( terms ) => {
+			this.setState( { terms } );
 		} );
-
 	}
 
 	componentDidUpdate( lastProps, lastStates ) {
-
-		if ( lastProps.currentPost[ this.props.taxonomy ] !== this.props.currentPost[ this.props.taxonomy ] ) {
+		if (
+			lastProps.currentPost[ this.props.taxonomy ] !==
+			this.props.currentPost[ this.props.taxonomy ]
+		) {
 			this.getTerms();
 		}
-
 	}
 
 	componentWillMount() {
-		this.getTerms()
+		this.getTerms();
 	}
 
 	renderTerms( terms ) {
-		const last = terms.length - 1
+		const last = terms.length - 1;
 		return (
 			<Fragment>
-				{ !! terms ? terms.map( ( term, index ) => this.renderTerm( term, ( last === index ) ) ) : __( 'Loading...', 'lifterlms' ) }
+				{ !! terms
+					? terms.map( ( term, index ) =>
+							this.renderTerm( term, last === index )
+					  )
+					: __( 'Loading…', 'lifterlms' ) }
 			</Fragment>
 		);
 	}
@@ -49,25 +49,25 @@ export default class Preview extends Component {
 	renderTerm( term, last ) {
 		return (
 			<Fragment>
-				<a href={ term.link } target="_blank">{ term.name }</a>
+				<a href={ term.link } target="_blank">
+					{ term.name }
+				</a>
 				{ last ? '' : ', ' }
 			</Fragment>
 		);
 	}
 
 	render() {
+		const { terms } = this.state;
+		const { taxonomy_name } = this.props;
 
-		const { terms } = this.state
-		const { taxonomy_name } = this.props
-
-		return (
-
-			Array.isArray( terms ) && ! terms.length ? '' : (
-				<li><strong>{ taxonomy_name }</strong>: { this.renderTerms( terms ) }</li>
-			)
-
-		)
-
+		return Array.isArray( terms ) && ! terms.length ? (
+			''
+		) : (
+			<li>
+				<strong>{ taxonomy_name }</strong>:{ ' ' }
+				{ this.renderTerms( terms ) }
+			</li>
+		);
 	}
-
 }

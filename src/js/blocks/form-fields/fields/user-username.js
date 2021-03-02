@@ -18,7 +18,7 @@ import { settings as textSettings } from './text';
 /**
  * Block Name
  *
- * @type {String}
+ * @type {string}
  */
 const name = 'llms/form-field-user-username';
 
@@ -27,7 +27,7 @@ const name = 'llms/form-field-user-username';
  *
  * @type {Array}
  */
-const post_types = [ 'llms_form' ];
+const postTypes = [ 'llms_form' ];
 
 /**
  * Is this a default or composed field?
@@ -38,37 +38,35 @@ const post_types = [ 'llms_form' ];
  * Default (non-composed) fields can be added by developers to perform custom functions
  * and are not registered as a block by default
  *
- * @type {String}
+ * @type {string}
  */
 const composed = true;
 
 // Setup the field settings.
-let settings = cloneDeep( textSettings );
+const settings = cloneDeep( textSettings );
 
-settings.title       = __( 'Username', 'lifterlms' );
-settings.description = __( 'A special field used to collect a user\'s account username. If this field is omitted a username will be automatically generated based off their email address. Users can always login using either their email address or username.', 'lifterlms' );
+settings.title = __( 'Username', 'lifterlms' );
+settings.description = __(
+	"A special field used to collect a user's account username. If this field is omitted a username will be automatically generated based off their email address. Users can always login using either their email address or username.",
+	'lifterlms'
+);
 
 settings.icon.src = 'admin-users';
 
 settings.supports.multiple = false; // Can only have a single email address field.
 
-settings.supports.llms_field_inspector.id       = false;
-settings.supports.llms_field_inspector.name     = false;
+settings.supports.llms_field_inspector.id = false;
+settings.supports.llms_field_inspector.name = false;
 settings.supports.llms_field_inspector.required = false;
-settings.supports.llms_field_inspector.match    = false;
-settings.supports.llms_field_inspector.storage  = false;
+settings.supports.llms_field_inspector.match = false;
+settings.supports.llms_field_inspector.storage = false;
 
-settings.attributes.id.__default             = 'user_login';
-settings.attributes.label.__default          = __( 'Username', 'lifterlms' );
-settings.attributes.name.__default           = 'user_login';
-settings.attributes.required.__default       = true;
-settings.attributes.data_store.__default     = 'users';
+settings.attributes.id.__default = 'user_login';
+settings.attributes.label.__default = __( 'Username', 'lifterlms' );
+settings.attributes.name.__default = 'user_login';
+settings.attributes.required.__default = true;
+settings.attributes.data_store.__default = 'users';
 
 delete settings.transforms;
 
-export {
-	name,
-	post_types,
-	composed,
-	settings,
-};
+export { name, postTypes, composed, settings };

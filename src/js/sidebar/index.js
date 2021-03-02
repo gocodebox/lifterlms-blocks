@@ -6,14 +6,10 @@
  */
 
 // WP Deps.
-const
-	{ Slot }           = wp.components,
-	{ select }         = wp.data,
-	{
-		PluginSidebar,
-		PluginSidebarMoreMenuItem,
-	}                  = wp.editPost,
-	{ Fragment }       = wp.element,
+const { Slot } = wp.components,
+	{ select } = wp.data,
+	{ PluginSidebar, PluginSidebarMoreMenuItem } = wp.editPost,
+	{ Fragment } = wp.element,
 	{ registerPlugin } = wp.plugins;
 
 // Internal Deps.
@@ -26,10 +22,15 @@ import LifterLMSIcon from '../icons/lifterlms-icon';
  *
  * @since 1.0.0
  *
- * @return {?Fragment}
+ * @return {?Fragment} Component fragment or null when instructors aren't supported for the given post type.
  */
 const Sidebar = () => {
-	if ( -1 !== [ 'course', 'llms_membership' ].indexOf( select( 'core/editor' ).getCurrentPostType() ) ) {
+	if (
+		-1 !==
+		[ 'course', 'llms_membership' ].indexOf(
+			select( 'core/editor' ).getCurrentPostType()
+		)
+	) {
 		return (
 			<Fragment>
 				<PluginSidebarMoreMenuItem
@@ -38,28 +39,25 @@ const Sidebar = () => {
 				>
 					LifterLMS
 				</PluginSidebarMoreMenuItem>
-				<PluginSidebar
-					name="llms-sidebar"
-					title="LifterLMS"
-				>
+				<PluginSidebar name="llms-sidebar" title="LifterLMS">
 					<Instructors />
 				</PluginSidebar>
 			</Fragment>
-		)
+		);
 	}
 	return null;
-}
+};
 registerPlugin( 'llms', {
 	render: Sidebar,
-	icon: <LifterLMSIcon />
-} )
+	icon: <LifterLMSIcon />,
+} );
 
 /**
  * Register the forms post type document settings sidebar plugin.
  *
  * @since 1.6.0
  */
-registerPlugin( 'llms-forms-doc-settings',  {
+registerPlugin( 'llms-forms-doc-settings', {
 	render: FormDocumentSettings,
 	icon: '',
 } );

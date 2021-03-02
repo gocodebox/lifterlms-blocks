@@ -8,18 +8,12 @@
  */
 
 // External Deps.
-import { debounce } from 'throttle-debounce'
+import { debounce } from 'throttle-debounce';
 import Select from 'react-select/async';
 
 // WP deps.
-import {
-	__,
-	sprintf,
-} from '@wordpress/i18n';
-import {
-	Component,
-	Fragment,
-} from '@wordpress/element';
+import { __, sprintf } from '@wordpress/i18n';
+import { Component, Fragment } from '@wordpress/element';
 
 import { BaseControl } from '@wordpress/components';
 
@@ -33,7 +27,6 @@ import './editor.scss';
  * @since 1.6.0 Added isDisabled property.
  */
 export default class Search extends Component {
-
 	/**
 	 * Holds a reference to the base Select component.
 	 *
@@ -46,7 +39,7 @@ export default class Search extends Component {
 	 *
 	 * @since [version]
 	 *
-	 * @return {String} Class name to be used.
+	 * @return {string} Class name to be used.
 	 */
 	getDefaultClassName = () => 'llms-search';
 
@@ -57,7 +50,7 @@ export default class Search extends Component {
 	 *
 	 * @since [version]
 	 *
-	 * @param {String} search Search string, this will be included in the arguments as the `search` property.
+	 * @param {string} search Search string, this will be included in the arguments as the `search` property.
 	 * @return {Object} Object of arguments to add to the search API request.
 	 */
 	getSearchArgs( search ) {
@@ -78,7 +71,7 @@ export default class Search extends Component {
 	 *
 	 * @since [version]
 	 *
-	 * @return {String} API request path.
+	 * @return {string} API request path.
 	 */
 	getSearchPath = () => this.props.searchPath;
 
@@ -88,11 +81,15 @@ export default class Search extends Component {
 	 * The searchPath should be passed in as a component property or child classes should
 	 * override this method to implement their own searchPath logic.
 	 *
+	 * @param search
 	 * @since [version]
-	 *
-	 * @return {String} API request path.
+	 * @return {string} API request path.
 	 */
-	getSearchUrl = search => wp.url.addQueryArgs( this.getSearchPath(), this.getSearchArgs( search ) );
+	getSearchUrl = ( search ) =>
+		wp.url.addQueryArgs(
+			this.getSearchPath(),
+			this.getSearchArgs( search )
+		);
 
 	/**
 	 * Generate the label used for an individual search result item.
@@ -102,7 +99,7 @@ export default class Search extends Component {
 	 * @since [version]
 	 *
 	 * @param {Object} result API response object from the search API.
-	 * @return {String} Formatted search result label.
+	 * @return {string} Formatted search result label.
 	 */
 	formatSearchResultLabel = ( result ) => result.id;
 
@@ -115,7 +112,7 @@ export default class Search extends Component {
 	 * @since [version]
 	 *
 	 * @param {Object} result API response object from the search API.
-	 * @return {Number} Search result value.
+	 * @return {number} Search result value.
 	 */
 	formatSearchResultValue = ( result ) => result.id;
 
@@ -129,12 +126,12 @@ export default class Search extends Component {
 	 * @return {Object[]} Array of api response objects with the required `label` and `value` props added to each item.
 	 */
 	formatSearchResults( results ) {
-		return results.map( result => ( {
+		return results.map( ( result ) => ( {
 			...result,
 			label: this.formatSearchResultLabel( result ),
 			value: this.formatSearchResultValue( result ),
 		} ) );
-	};
+	}
 
 	/**
 	 * Perform the search.
@@ -144,12 +141,11 @@ export default class Search extends Component {
 	 * @return {Promise} API response promise.
 	 */
 	onSearch = debounce( 300, ( search, callback ) => {
-
-		wp.apiFetch( { path: this.getSearchUrl( search ) } )
-			.then( results => {
-				callback( this.formatSearchResults( results ) )
-			} );
-
+		wp.apiFetch( { path: this.getSearchUrl( search ) } ).then(
+			( results ) => {
+				callback( this.formatSearchResults( results ) );
+			}
+		);
 	} );
 
 	/**
@@ -160,7 +156,6 @@ export default class Search extends Component {
 	 * @return {Fragment}
 	 */
 	render() {
-
 		const {
 			className,
 			classNamePrefix,
@@ -170,12 +165,12 @@ export default class Search extends Component {
 			onChange,
 			placeholder,
 			selected,
-		} = this.props
+		} = this.props;
 
 		return (
 			<BaseControl label={ label }>
 				<Select
-					ref={ ref => this.selectRef = ref }
+					ref={ ( ref ) => ( this.selectRef = ref ) }
 					className={ className || this.getDefaultClassName() }
 					classNamePrefix="llms-search"
 					isMulti={ isMulti }
@@ -195,7 +190,7 @@ export default class Search extends Component {
 							},
 						} ),
 					} }
-					theme={ theme => ( {
+					theme={ ( theme ) => ( {
 						...theme,
 						colors: {
 							...theme.colors,
@@ -209,12 +204,10 @@ export default class Search extends Component {
 							baseUnit: 2,
 							controlHeight: 28,
 							menuGutter: 4,
-						}
+						},
 					} ) }
 				/>
 			</BaseControl>
-		)
-
+		);
 	}
-
 }

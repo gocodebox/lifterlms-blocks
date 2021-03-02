@@ -12,21 +12,22 @@
 const { __ } = wp.i18n;
 
 // Internal Deps.
-import edit from './edit'
-import './editor.scss'
+import edit from './edit';
+import './editor.scss';
 
 /**
  * Block Name
- * @type {String}
+ *
+ * @type {string}
  */
-export const name = 'llms/instructors'
+export const name = 'llms/instructors';
 
 /**
  * Array of supported post types.
  *
  * @type {Array}
  */
-export const post_types = [ 'course', 'llms_membership' ];
+export const postTypes = [ 'course', 'llms_membership' ];
 
 /**
  * Register Block.
@@ -39,7 +40,6 @@ export const post_types = [ 'course', 'llms_membership' ];
  * @version 1.0.0
  */
 export const settings = {
-
 	title: __( 'Instructors', 'lifterlms' ),
 	icon: {
 		foreground: '#2295ff',
@@ -75,5 +75,4 @@ export const settings = {
 	save: () => {
 		return null;
 	},
-
-}
+};

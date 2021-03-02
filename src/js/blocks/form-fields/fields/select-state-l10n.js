@@ -17,7 +17,7 @@ import { settings as selectSettings } from './select';
 /**
  * Block Name
  *
- * @type {String}
+ * @type {string}
  */
 const name = 'llms/form-field-select-state-l10n';
 
@@ -26,7 +26,7 @@ const name = 'llms/form-field-select-state-l10n';
  *
  * @type {Array}
  */
-const post_types = [ 'llms_form' ];
+const postTypes = [ 'llms_form' ];
 
 /**
  * Is this a default or composed field?
@@ -37,29 +37,26 @@ const post_types = [ 'llms_form' ];
  * Default (non-composed) fields can be added by developers to perform custom functions
  * and are not registered as a block by default.
  *
- * @type {String}
+ * @type {string}
  */
 const composed = false;
 
 // Setup the field settings.
-let settings = cloneDeep( selectSettings );
+const settings = cloneDeep( selectSettings );
 
-settings.title       = __( 'Dropdown States', 'lifterlms' );
-settings.description = __( 'A searchable select field prepopulated with a country states / regions. When combined with a "Dropdown Countries" field, this field will automatically update to display options for the currently selected country.', 'lifterlms' );
+settings.title = __( 'Dropdown States', 'lifterlms' );
+settings.description = __(
+	'A searchable select field prepopulated with a country states / regions. When combined with a "Dropdown Countries" field, this field will automatically update to display options for the currently selected country.',
+	'lifterlms'
+);
 
 settings.icon.src = 'admin-site-alt';
 
 settings.attributes.options_preset.__default = 'states';
-settings.attributes.placeholder.__default    = __( 'Select a State', 'lifterlms' );
+settings.attributes.placeholder.__default = __( 'Select a State', 'lifterlms' );
 
 settings.supports.llms_field_inspector.options = false;
 
 delete settings.transforms;
 
-export {
-	name,
-	post_types,
-	composed,
-	settings,
-};
-
+export { name, postTypes, composed, settings };

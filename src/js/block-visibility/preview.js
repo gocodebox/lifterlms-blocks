@@ -6,17 +6,9 @@
  */
 
 // WP Deps.
-import {
-	__,
-	sprintf,
-} from '@wordpress/i18n';
-import {
-	Component,
-	Fragment,
-} from '@wordpress/element';
-import {
-	Dashicon
-} from '@wordpress/components';
+import { __, sprintf } from '@wordpress/i18n';
+import { Component, Fragment } from '@wordpress/element';
+import { Dashicon } from '@wordpress/components';
 
 // Internal Deps.
 import './editor.scss';
@@ -33,7 +25,6 @@ import { getSetting } from './settings';
  * @return {Class}
  */
 export default class Preview extends Component {
-
 	/**
 	 * Render component
 	 *
@@ -44,14 +35,12 @@ export default class Preview extends Component {
 	 * @return {Fragment}
 	 */
 	render() {
-
-		const
-			{ llms_visibility } = this.props.attributes,
-			{ children }        = this.props;
+		const { llms_visibility } = this.props.attributes,
+			{ children } = this.props;
 
 		// Return early for defaults.
 		if ( 'all' === llms_visibility ) {
-			return ( children );
+			return children;
 		}
 
 		return (
@@ -59,11 +48,17 @@ export default class Preview extends Component {
 				{ children }
 				<div className="llms-block-visibility--indicator">
 					<Dashicon icon="visibility" />
-					<span className="llms-block-visibility--msg">{ sprintf( __( 'This block is only visible to %s', 'lifterlms' ), getSetting( llms_visibility ) ) }</span>
+					<span className="llms-block-visibility--msg">
+						{ sprintf(
+							__(
+								'This block is only visible to %s',
+								'lifterlms'
+							),
+							getSetting( llms_visibility )
+						) }
+					</span>
 				</div>
 			</div>
 		);
-
-	};
-
-};
+	}
+}

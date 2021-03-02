@@ -17,13 +17,12 @@ import { select } from '@wordpress/data';
  * @since 1.6.0
  *
  * @param {Array} blocks Array of WP Blocks.
- * @return {Array}
+ * @return {Array} Array of WP Blocks.
  */
 export const flattenBlocks = ( blocks ) => {
-
 	let flat = [];
 
-	blocks.forEach( block => {
+	blocks.forEach( ( block ) => {
 		if ( block.innerBlocks.length ) {
 			flat = flat.concat( flattenBlocks( block.innerBlocks ) );
 		} else {
@@ -32,7 +31,6 @@ export const flattenBlocks = ( blocks ) => {
 	} );
 
 	return flat;
-
 };
 
 /**
@@ -41,11 +39,9 @@ export const flattenBlocks = ( blocks ) => {
  * @since 1.6.0
  * @since 1.7.0 Backwards compat fix: fallback to `core/editor` if `core/block-editor` isn't available
  *
- * @return {Array}
+ * @return {Array} Flattened array of blocks.
  */
 export default () => {
-
-	const editor = select( 'core/block-editor') || select ( 'core/editor' );
+	const editor = select( 'core/block-editor' ) || select( 'core/editor' );
 	return flattenBlocks( editor.getBlocks() );
-
 };

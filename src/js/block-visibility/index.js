@@ -12,5 +12,9 @@ import { addFilter } from '@wordpress/hooks';
 import visibilityAttributes from './attributes';
 import visibilityControls from './inspect';
 
-addFilter( 'blocks.registerBlockType', 'llms/visibility-attributes', visibilityAttributes );
+addFilter(
+	'blocks.registerBlockType',
+	'llms/visibility-attributes',
+	visibilityAttributes
+);
 addFilter( 'editor.BlockEdit', 'llms/visibility-controls', visibilityControls );

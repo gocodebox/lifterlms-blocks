@@ -14,7 +14,8 @@ import ServerSideRender from '@wordpress/server-side-render';
 
 /**
  * Block Name
- * @type {String}
+ *
+ * @type {string}
  */
 export const name = 'llms/lesson-navigation';
 
@@ -23,7 +24,7 @@ export const name = 'llms/lesson-navigation';
  *
  * @type {Array}
  */
-export const post_types = [ 'lesson' ];
+export const postTypes = [ 'lesson' ];
 
 /**
  * Register Block
@@ -39,12 +40,10 @@ export const settings = {
 	title: __( 'Lesson Navigation', 'lifterlms' ),
 	icon: {
 		foreground: '#2295ff',
-		src: 'leftright'
+		src: 'leftright',
 	},
 	category: 'llms-blocks', // common, formatting, layout widgets, embed. see https://wordpress.org/gutenberg/handbook/block-api/#category.
-	keywords: [
-		__( 'LifterLMS', 'lifterlms' ),
-	],
+	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 
 	/**
 	 * The edit function describes the structure of your block in the context of the editor.
@@ -58,12 +57,9 @@ export const settings = {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 */
-	edit: function( props ) {
-		const currentPost = wp.data.select( 'core/editor' ).getCurrentPost()
-		const {
-			attributes,
-			setAttributes,
-		} = props
+	edit( props ) {
+		const currentPost = wp.data.select( 'core/editor' ).getCurrentPost();
+		const { attributes, setAttributes } = props;
 
 		return (
 			<Fragment>
@@ -71,7 +67,7 @@ export const settings = {
 					block={ name }
 					attributes={ attributes }
 					urlQueryArgs={ {
-						post_id: currentPost.id
+						post_id: currentPost.id,
 					} }
 				/>
 			</Fragment>
@@ -90,7 +86,7 @@ export const settings = {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 */
-	save: function( props ) {
-		return null
+	save( props ) {
+		return null;
 	},
-}
+};

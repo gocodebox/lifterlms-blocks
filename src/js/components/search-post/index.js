@@ -6,10 +6,7 @@
  */
 
 // WP Deps.
-import {
-	__,
-	sprintf,
-} from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 
 // Internal Deps.
 import Search from '../search';
@@ -21,15 +18,15 @@ import Search from '../search';
  * @since[version] Updated to remove unnecessary overrides from Search in favor of atomic method usage.
  */
 export default class SearchPost extends Search {
-
 	/**
 	 * Retrieve the default classname for the main Select element
 	 *
 	 * @since [version]
 	 *
-	 * @return {String} Class name to be used.
+	 * @return {string} Class name to be used.
 	 */
-	getDefaultClassName = () => `llms-search--${ this.props.postType.replace( 'llms_', '' ) }`;
+	getDefaultClassName = () =>
+		`llms-search--${ this.props.postType.replace( 'llms_', '' ) }`;
 
 	/**
 	 * Retrieve the API request path used to perform the async search
@@ -38,9 +35,10 @@ export default class SearchPost extends Search {
 	 *
 	 * @since [version]
 	 *
-	 * @return {String} API request path.
+	 * @return {string} API request path.
 	 */
-	getSearchPath = () => this.props.searchPath || `/wp/v2/${ this.props.postType }`;
+	getSearchPath = () =>
+		this.props.searchPath || `/wp/v2/${ this.props.postType }`;
 
 	/**
 	 * Format the label displayed in search results.
@@ -48,8 +46,12 @@ export default class SearchPost extends Search {
 	 * @since [version]
 	 *
 	 * @param {Object} result A post response object returned by the search api.
-	 * @return {String} Label displayed for the search result item.
+	 * @return {string} Label displayed for the search result item.
 	 */
-	formatSearchResultLabel = ( result ) => sprintf( __( '%s (ID# %d)', 'lifterlms' ), result.title.rendered, result.id );
-
-};
+	formatSearchResultLabel = ( result ) =>
+		sprintf(
+			__( '%s (ID# %d)', 'lifterlms' ),
+			result.title.rendered,
+			result.id
+		);
+}

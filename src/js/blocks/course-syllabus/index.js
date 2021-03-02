@@ -16,11 +16,12 @@ import ServerSideRender from '@wordpress/server-side-render';
 
 // Internal Deps.
 import './editor.scss';
-import Inspector from './inspect'
+import Inspector from './inspect';
 
 /**
  * Block Name
- * @type {String}
+ *
+ * @type {string}
  */
 export const name = 'llms/course-syllabus';
 
@@ -29,7 +30,7 @@ export const name = 'llms/course-syllabus';
  *
  * @type {Array}
  */
-export const post_types = [ 'course' ];
+export const postTypes = [ 'course' ];
 
 /**
  * Register Course Syllabus Block
@@ -42,16 +43,13 @@ export const post_types = [ 'course' ];
  * @version 1.0.0
  */
 export const settings = {
-
 	title: __( 'Course Syllabus', 'lifterlms' ),
 	icon: {
 		foreground: '#2295ff',
-		src: 'grid-view'
+		src: 'grid-view',
 	},
 	category: 'llms-blocks', // common, formatting, layout widgets, embed. see https://wordpress.org/gutenberg/handbook/block-api/#category.
-	keywords: [
-		__( 'LifterLMS', 'lifterlms' ),
-	],
+	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 	attributes: {
 		course_id: {
 			type: 'int',
@@ -71,13 +69,9 @@ export const settings = {
 	 * @since   1.0.0
 	 * @version 1.0.0
 	 */
-	edit: props => {
-
-		const currentPost = wp.data.select( 'core/editor' ).getCurrentPost()
-		const {
-			attributes,
-			setAttributes,
-		} = props
+	edit: ( props ) => {
+		const currentPost = wp.data.select( 'core/editor' ).getCurrentPost();
+		const { attributes, setAttributes } = props;
 
 		return (
 			<Fragment>
@@ -87,7 +81,7 @@ export const settings = {
 					block={ name }
 					attributes={ attributes }
 					urlQueryArgs={ {
-						post_id: currentPost.id
+						post_id: currentPost.id,
 					} }
 				/>
 			</Fragment>
@@ -109,5 +103,4 @@ export const settings = {
 	save: () => {
 		return null;
 	},
-
-}
+};

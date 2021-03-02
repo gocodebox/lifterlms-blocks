@@ -14,11 +14,11 @@ import { __ } from '@wordpress/i18n';
  * @type {Object}
  */
 const settings = {
-	'all': __( 'everyone', 'lifterlms' ),
-	'enrolled': __( 'enrolled users', 'lifterlms' ),
-	'not_enrolled': __( 'non-enrolled users or visitors', 'lifterlms' ),
-	'logged_in': __( 'logged in users', 'lifterlms' ),
-	'logged_out': __( 'logged out users', 'lifterlms' ),
+	all: __( 'everyone', 'lifterlms' ),
+	enrolled: __( 'enrolled users', 'lifterlms' ),
+	not_enrolled: __( 'non-enrolled users or visitors', 'lifterlms' ),
+	logged_in: __( 'logged in users', 'lifterlms' ),
+	logged_out: __( 'logged out users', 'lifterlms' ),
 };
 
 /**
@@ -26,10 +26,10 @@ const settings = {
  *
  * @since [version]
  *
- * @param {String} setting Setting value.
- * @return {String} Setting label.
+ * @param {string} setting Setting value.
+ * @return {string} Setting label.
  */
-export const getSetting = ( setting ) =>  settings[ setting ] || setting;
+export const getSetting = ( setting ) => settings[ setting ] || setting;
 
 /**
  * Array of settings options as used by a select control
@@ -38,7 +38,7 @@ export const getSetting = ( setting ) =>  settings[ setting ] || setting;
  *
  * @return {Object[]} Array of objects to be passed into the options property for a select control.
  */
-export const options = Object.keys( settings ).map( key => ( {
+export const options = Object.keys( settings ).map( ( key ) => ( {
 	label: settings[ key ],
 	value: key,
 } ) );

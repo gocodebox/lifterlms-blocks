@@ -5,14 +5,9 @@
  * @version 1.6.0
  */
 
-const
-	{ RichText } = wp.blockEditor || wp.editor,
-	{ __ }       = wp.i18n,
-	{
-		RawHTML,
-		Component,
-		Fragment
-	} = wp.element;
+const { RichText } = wp.blockEditor || wp.editor,
+	{ __ } = wp.i18n,
+	{ RawHTML, Component, Fragment } = wp.element;
 
 import './editor.scss';
 
@@ -22,21 +17,28 @@ import './editor.scss';
  * @since 1.6.0
  *
  * @param {Object[]} options Array of options objects.
- * @param {String} fieldType Field node type (eg "checkbox" or "radio").
+ * @param {string} fieldType Field node type (eg "checkbox" or "radio").
  * @return {Object} HTML Fragment.
  */
 const InputGroupOptions = ( { options, fieldType } ) => {
-
 	return (
 		<Fragment>
 			{ options.map( ( option, index ) => (
-				<label key={ index } style={ { display: 'block', pointerEvents: 'none' } }>
-					<input type={ fieldType } checked={ 'yes' === option.default } readOnly={ true } /> { option.text }
+				<label
+					key={ index }
+					style={ { display: 'block', pointerEvents: 'none' } }
+				>
+					<input
+						type={ fieldType }
+						checked={ 'yes' === option.default }
+						readOnly={ true }
+					/>{ ' ' }
+					{ option.text }
 				</label>
 			) ) }
 		</Fragment>
 	);
-}
+};
 
 /**
  * Render a field in the block editor
@@ -45,29 +47,26 @@ const InputGroupOptions = ( { options, fieldType } ) => {
  * @since 1.7.1 Add block editor rendering for password type fields.
  */
 export default class Field extends Component {
-
 	/**
 	 * Determine the type of field.
 	 *
 	 * @since 1.7.1
 	 *
-	 * @return {String}
+	 * @return {string}
 	 */
 	getFieldType() {
-
 		const {
-			attributes: {
-				field,
-			},
+			attributes: { field },
 		} = this.props;
 
-		if ( -1 !== [ 'email', 'text', 'number', 'url', 'tel' ].indexOf( field ) ) {
+		if (
+			-1 !== [ 'email', 'text', 'number', 'url', 'tel' ].indexOf( field )
+		) {
 			return 'input';
 		}
 
 		return field;
-
-	};
+	}
 
 	/**
 	 * Render the field.
@@ -77,24 +76,22 @@ export default class Field extends Component {
 	 *
 	 * @return {Object} HTML Fragment.
 	 */
-  	render() {
+	render() {
+		const {
+			attributes: {
+				id,
+				description,
+				field,
+				label,
+				options,
+				placeholder,
+				required,
+				min_strength,
+			},
+			setAttributes,
+		} = this.props;
 
-		const
-			{
-				attributes: {
-					id,
-					description,
-					field,
-					label,
-					options,
-					placeholder,
-					required,
-					min_strength,
-				},
-				setAttributes,
-			} = this.props;
-
-		let classes = [];
+		const classes = [];
 		if ( required ) {
 			classes.push( 'llms-is-required' );
 		}
@@ -106,10 +103,9 @@ export default class Field extends Component {
 		 *
 		 * @since 1.6.0
 		 *
-		 * @return {String}
+		 * @return {string}
 		 */
 		const getDefaultOption = () => {
-
 			if ( placeholder ) {
 				return placeholder;
 			}
@@ -118,16 +114,15 @@ export default class Field extends Component {
 				return '';
 			}
 
-			let text = options[0].text;
+			let text = options[ 0 ].text;
 
-			const defaults = options.filter( opt => 'yes' === opt.default );
+			const defaults = options.filter( ( opt ) => 'yes' === opt.default );
 
 			if ( defaults.length ) {
-				text = defaults[0].text;
+				text = defaults[ 0 ].text;
 			}
 
 			return text;
-
 		};
 
 		return (
@@ -145,16 +140,29 @@ export default class Field extends Component {
 									} );
 								} }
 								formattingControls={ [ 'bold', 'italic' ] }
-								aria-label={ label ? __( 'Field label' ) : __( 'Empty field label; start writing to add a label' ) }
+								aria-label={
+									label
+										? __( 'Field label' )
+										: __(
+												'Empty field label; start writing to add a label'
+										  )
+								}
 								placeholder={ __( 'Enter a label' ) }
 							/>
 						) }
 						{ 'input' === fieldType && (
 							<input
 								style={ { width: '100%' } }
-								onChange={ event => setAttributes( { placeholder: event.target.value } ) }
+								onChange={ ( event ) =>
+									setAttributes( {
+										placeholder: event.target.value,
+									} )
+								}
 								value={ placeholder }
-								placeholder={ __( 'Add optional placeholder text', 'lifterlms' ) }
+								placeholder={ __(
+									'Add optional placeholder text',
+									'lifterlms'
+								) }
 							/>
 						) }
 						{ 'password' === fieldType && (
@@ -169,18 +177,33 @@ export default class Field extends Component {
 							<textarea
 								style={ { width: '100%', resize: 'none' } }
 								rows={ this.props.attributes.attributes.rows }
-								onChange={ event => setAttributes( { placeholder: event.target.value } ) }
+								onChange={ ( event ) =>
+									setAttributes( {
+										placeholder: event.target.value,
+									} )
+								}
 								value={ placeholder }
-								placeholder={ __( 'Add optional placeholder text', 'lifterlms' ) }
+								placeholder={ __(
+									'Add optional placeholder text',
+									'lifterlms'
+								) }
 							/>
 						) }
 						{ 'select' === fieldType && (
-							<select style={ { width: '100%', maxWidth: 'none', pointerEvents: 'none' } }>
+							<select
+								style={ {
+									width: '100%',
+									maxWidth: 'none',
+									pointerEvents: 'none',
+								} }
+							>
 								<option>{ getDefaultOption() }</option>
 							</select>
 						) }
 						{ 'llms-password-strength-meter' === id && (
-							<div className="llms-pwd-meter"><div>{ __( 'Very Weak', 'lifterlms' ) }</div></div>
+							<div className="llms-pwd-meter">
+								<div>{ __( 'Very Weak', 'lifterlms' ) }</div>
+							</div>
 						) }
 						<RichText
 							tagName="span"
@@ -190,19 +213,33 @@ export default class Field extends Component {
 									description: val,
 								} );
 							} }
-							formattingControls={ [ 'bold', 'strikethrough', 'link' ] }
-							aria-label={ label ? __( 'Optional field description' ) : __( 'Empty field description; start writing to add a description' ) }
-							placeholder={ __( 'Add optional description text' ) }
+							formattingControls={ [
+								'bold',
+								'strikethrough',
+								'link',
+							] }
+							aria-label={
+								label
+									? __( 'Optional field description' )
+									: __(
+											'Empty field description; start writing to add a description'
+									  )
+							}
+							placeholder={ __(
+								'Add optional description text'
+							) }
 							style={ { color: '#808285', fontStyle: 'italic' } }
 						/>
-						{ ( 'radio' === fieldType || 'checkbox' === fieldType ) && (
-							<InputGroupOptions options={ options } fieldType={ fieldType } />
+						{ ( 'radio' === fieldType ||
+							'checkbox' === fieldType ) && (
+							<InputGroupOptions
+								options={ options }
+								fieldType={ fieldType }
+							/>
 						) }
 					</div>
 				</div>
 			</Fragment>
 		);
-
 	}
-
 }

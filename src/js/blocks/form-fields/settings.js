@@ -8,20 +8,14 @@
  */
 
 // WP Deps.
-const
-	{ getBlockType } = wp.blocks,
-	{ Fill }         = wp.components,
-	{ Fragment }     = wp.element,
-	{ doAction }     = wp.hooks,
-	{ __ }           = wp.i18n;
+const { getBlockType } = wp.blocks,
+	{ Fill } = wp.components,
+	{ Fragment } = wp.element,
+	{ doAction } = wp.hooks,
+	{ __ } = wp.i18n;
 
 // External Deps.
-import {
-	cloneDeep,
-	snakeCase,
-	kebabCase,
-	uniqueId
-} from 'lodash';
+import { cloneDeep, snakeCase, kebabCase, uniqueId } from 'lodash';
 
 // Internal Deps.
 import Field from './field';
@@ -33,24 +27,24 @@ import { isUnique } from './checks';
  *
  * @since 1.6.0
  *
- * @param {String} name Base name, generally the field's "field" attribute. EG: "text".
- * @return {String} A unique name, in snake case, suitable to be used as a field's "name" attribute.
+ * @param {string} name Base name, generally the field's "field" attribute. EG: "text".
+ * @return {string} A unique name, in snake case, suitable to be used as a field's "name" attribute.
  */
 const generateName = ( name ) => {
-	return snakeCase( uniqueId( `${name}_field_` ) );
-}
+	return snakeCase( uniqueId( `${ name }_field_` ) );
+};
 
 /**
  * Generate a unique "id" attribute.
  *
  * @since 1.6.0
  *
- * @param {String} name Base name, generally the field's "name" attribute. EG: "text_field_1".
- * @return {String} A unique name, in kebab case, suitable to be used as a field's "id" attribute.
+ * @param {string} name Base name, generally the field's "name" attribute. EG: "text_field_1".
+ * @return {string} A unique name, in kebab case, suitable to be used as a field's "id" attribute.
  */
 const generateId = ( name ) => {
 	return kebabCase( name );
-}
+};
 
 /**
  * Sets up block attributes, filling defaults and generating unique values.
@@ -63,10 +57,12 @@ const generateId = ( name ) => {
  * @return {Object} Attribute object suitable for use when registering the block.
  */
 const setupAtts = ( atts, blockAtts ) => {
-
 	Object.keys( blockAtts ).forEach( ( key ) => {
 		const default_val = blockAtts[ key ].__default;
-		if ( 'undefined' !== typeof default_val && 'undefined' === typeof atts[ key ] ) {
+		if (
+			'undefined' !== typeof default_val &&
+			'undefined' === typeof atts[ key ]
+		) {
 			atts[ key ] = default_val;
 		}
 	} );
@@ -75,17 +71,16 @@ const setupAtts = ( atts, blockAtts ) => {
 		let name = generateName( atts.field );
 		while ( ! isUnique( 'name', name ) ) {
 			name = generateName( atts.field );
-		};
+		}
 		atts.name = name;
 	}
 
 	if ( ! atts.id ) {
 		let id = generateId( atts.name );
 		while ( ! isUnique( 'id', id ) ) {
-			id = generateId( uniqueId( `${atts.field}-field-` ) );
-		};
+			id = generateId( uniqueId( `${ atts.field }-field-` ) );
+		}
 		atts.id = id;
-
 	}
 
 	if ( ! atts.data_store_key ) {
@@ -93,11 +88,9 @@ const setupAtts = ( atts, blockAtts ) => {
 	}
 
 	return atts;
-
 };
 
 const attributes = {
-
 	description: {
 		type: 'string',
 		__default: '',
@@ -155,29 +148,25 @@ const attributes = {
 
 	data_store: {
 		type: 'string',
-		__default: 'usermeta'
+		__default: 'usermeta',
 	},
 
 	data_store_key: {
 		type: 'string',
 		__default: '',
 	},
-
 };
 
 const settings = {
-
 	icon: {
 		foreground: '#466dd8',
 	},
 
 	category: 'llms-fields',
 
-	keywords: [
-		__( 'LifterLMS', 'lifterlms' ),
-	],
+	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 
-	attributes: attributes,
+	attributes,
 
 	supports: {
 		llms_visibility: true,
@@ -206,9 +195,9 @@ const settings = {
 	 * @param {Object} attributes Block attributes.
 	 * @param {Function} setAttributes Reference to the block's setAttributes() function.
 	 * @param {Object} props Original properties object passed to the block's edit() function.
-	 * @return {Void}
+	 * @return {void}
 	 */
-	fillInspectorControls: function( attributes, setAttributes, props ) {},
+	fillInspectorControls( attributes, setAttributes, props ) {},
 
 	/**
 	 * The edit function describes the structure of your block in the context of the editor.
@@ -224,15 +213,10 @@ const settings = {
 	 * @param {Object} props Block properties.
 	 * @return {Function}
 	 */
-	edit: function( props ) {
-
-		const
-			{ name } = props,
+	edit( props ) {
+		const { name } = props,
 			block = getBlockType( name ),
-			{
-				clientId,
-				setAttributes,
-			} = props,
+			{ clientId, setAttributes } = props,
 			inspectorSupports = block.supports.llms_field_inspector,
 			{ fillInspectorControls } = block;
 
@@ -241,10 +225,26 @@ const settings = {
 
 		return (
 			<Fragment>
-				<Inspector { ...{ attributes, clientId, name, setAttributes, inspectorSupports } } />
+				<Inspector
+					{ ...{
+						attributes,
+						clientId,
+						name,
+						setAttributes,
+						inspectorSupports,
+					} }
+				/>
 				<Field { ...{ attributes, setAttributes } } />
 				{ inspectorSupports.customFill && (
-					<Fill name={ `llmsInspectorControlsFill.${ inspectorSupports.customFill }.${ clientId }` }>{ fillInspectorControls( attributes, setAttributes, props ) }</Fill>
+					<Fill
+						name={ `llmsInspectorControlsFill.${ inspectorSupports.customFill }.${ clientId }` }
+					>
+						{ fillInspectorControls(
+							attributes,
+							setAttributes,
+							props
+						) }
+					</Fill>
 				) }
 			</Fragment>
 		);
@@ -263,11 +263,9 @@ const settings = {
 	 * @param {Object} props Block properties.
 	 * @return {Function}
 	 */
-	save: function( props ) {
-
+	save( props ) {
 		const { attributes } = props;
 		return attributes;
-
 	},
 };
 

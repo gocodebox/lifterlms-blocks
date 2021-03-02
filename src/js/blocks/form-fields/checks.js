@@ -7,17 +7,12 @@
 
 const { select } = wp.data;
 
-import {
-	every,
-	forEach
-} from 'lodash';
+import { every, forEach } from 'lodash';
 
 function getFieldBlocks() {
-
-	let ret = [];
+	const ret = [];
 
 	const checkBlock = ( block ) => {
-
 		if ( block.innerBlocks.length ) {
 			return checkBlocks( block.innerBlocks );
 		}
@@ -27,7 +22,6 @@ function getFieldBlocks() {
 		}
 
 		return block;
-
 	};
 
 	const checkBlocks = ( blocks ) => {
@@ -41,13 +35,10 @@ function getFieldBlocks() {
 	checkBlocks( select( 'core/block-editor' ).getBlocks() );
 
 	return ret;
-
-};
+}
 
 export const isUnique = ( field, str ) => {
-
 	return every( getFieldBlocks(), ( block ) => {
 		return block.attributes[ field ] !== str;
 	} );
-
 };

@@ -18,7 +18,7 @@ import { settings as textSettings } from './text';
 /**
  * Block Name
  *
- * @type {String}
+ * @type {string}
  */
 const name = 'llms/form-field-user-address-city';
 
@@ -27,7 +27,7 @@ const name = 'llms/form-field-user-address-city';
  *
  * @type {Array}
  */
-const post_types = [ 'llms_form' ];
+const postTypes = [ 'llms_form' ];
 
 /**
  * Is this a default or composed field?
@@ -38,35 +38,33 @@ const post_types = [ 'llms_form' ];
  * Default (non-composed) fields can be added by developers to perform custom functions
  * and are not registered as a block by default
  *
- * @type {String}
+ * @type {string}
  */
 const composed = true;
 
 // Setup the field settings.
-let settings = cloneDeep( textSettings );
+const settings = cloneDeep( textSettings );
 
-settings.title       = __( 'User City', 'lifterlms' );
-settings.description = __( 'A special field used to collect a user\'s billing address city.', 'lifterlms' );
+settings.title = __( 'User City', 'lifterlms' );
+settings.description = __(
+	"A special field used to collect a user's billing address city.",
+	'lifterlms'
+);
 
 settings.icon.src = 'location';
 
 settings.supports.multiple = false;
 
-settings.supports.llms_field_inspector.id      = false;
-settings.supports.llms_field_inspector.name    = false;
-settings.supports.llms_field_inspector.match   = false;
+settings.supports.llms_field_inspector.id = false;
+settings.supports.llms_field_inspector.name = false;
+settings.supports.llms_field_inspector.match = false;
 settings.supports.llms_field_inspector.storage = false;
 
-settings.attributes.id.__default       = 'llms_billing_city';
-settings.attributes.label.__default    = __( 'City', 'lifterlms' );
-settings.attributes.name.__default     = 'llms_billing_city';
+settings.attributes.id.__default = 'llms_billing_city';
+settings.attributes.label.__default = __( 'City', 'lifterlms' );
+settings.attributes.name.__default = 'llms_billing_city';
 settings.attributes.required.__default = true;
 
 delete settings.transforms;
 
-export {
-	name,
-	post_types,
-	composed,
-	settings,
-};
+export { name, postTypes, composed, settings };

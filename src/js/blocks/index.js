@@ -6,12 +6,7 @@
  */
 
 // WP Deps.
-const
-	{
-		getBlockTypes,
-		registerBlockType,
-		unregisterBlockType,
-	} = wp.blocks,
+const { getBlockTypes, registerBlockType, unregisterBlockType } = wp.blocks,
 	{ doAction } = wp.hooks,
 	{ select } = wp.data;
 
@@ -19,14 +14,14 @@ const
 import { getCurrentPostType } from '../util/';
 
 // Standard Blocks.
-import * as courseContinueButton from './course-continue-button/'
-import * as courseInfo from './course-information/'
-import * as courseProgress from './course-progress/'
-import * as courseSyllabus from './course-syllabus/'
-import * as instructors from './instructors/'
-import * as lessonNavigation from './lesson-navigation/'
-import * as lessonProgression from './lesson-progression/'
-import * as pricingTable from './pricing-table/'
+import * as courseContinueButton from './course-continue-button/';
+import * as courseInfo from './course-information/';
+import * as courseProgress from './course-progress/';
+import * as courseSyllabus from './course-syllabus/';
+import * as instructors from './instructors/';
+import * as lessonNavigation from './lesson-navigation/';
+import * as lessonProgression from './lesson-progression/';
+import * as pricingTable from './pricing-table/';
 
 // Form Field Blocks.
 import * as formFields from './form-fields/';
@@ -40,21 +35,30 @@ import * as formFields from './form-fields/';
  * @return {void}
  */
 export const deregisterBlocksForForms = () => {
-
 	/**
 	 * Determine if a block should be deregistered from form posts.
 	 *
 	 * @since 1.7.0
 	 * @since 1.12.0 Use `safelist` in favor of `whitelist`.`
 	 *
-	 * @param {String} name Block name.
-	 * @return {Boolean}
+	 * @param {string} name Block name.
+	 * @return {boolean}
 	 */
 	const shouldUnregisterBlock = ( name ) => {
-
-		const
-			safelist = [ 'core/paragraph', 'core/heading', 'core/image', 'core/html', 'core/column', 'core/columns', 'core/group', 'core/separator', 'core/spacer' ],
-			{ _llms_form_location } = select( 'core/editor' ).getCurrentPost().meta;
+		const safelist = [
+				'core/paragraph',
+				'core/heading',
+				'core/image',
+				'core/html',
+				'core/column',
+				'core/columns',
+				'core/group',
+				'core/separator',
+				'core/spacer',
+			],
+			{ _llms_form_location } = select(
+				'core/editor'
+			).getCurrentPost().meta;
 
 		// Allow safelisted blocks.
 		if ( -1 !== safelist.indexOf( name ) ) {
@@ -62,12 +66,12 @@ export const deregisterBlocksForForms = () => {
 
 			// Vouchers can only be used on registration forms.
 		} else if ( 0 === name.indexOf( 'llms/form-field-redeem-voucher' ) ) {
-
 			return 'registration' === _llms_form_location ? false : true;
 
 			// Current user password can only be used on the account edit form.
-		} else if ( 0 === name.indexOf( 'llms/form-field-user-password-current' ) ) {
-
+		} else if (
+			0 === name.indexOf( 'llms/form-field-user-password-current' )
+		) {
 			return 'account' === _llms_form_location ? false : true;
 
 			// Allow all other form field blocks.
@@ -77,7 +81,6 @@ export const deregisterBlocksForForms = () => {
 
 		// unregister everything else.
 		return true;
-
 	};
 
 	getBlockTypes().forEach( ( { name } ) => {
@@ -85,7 +88,6 @@ export const deregisterBlocksForForms = () => {
 			unregisterBlockType( name );
 		}
 	} );
-
 };
 
 /**
@@ -99,11 +101,10 @@ export const deregisterBlocksForForms = () => {
  * @return  void
  */
 export default () => {
-
-	const post_type = getCurrentPostType();
+	const postType = getCurrentPostType();
 
 	// Blocks to register.
-	let blocks = [
+	const blocks = [
 		courseContinueButton,
 		courseInfo,
 		courseProgress,
@@ -116,15 +117,12 @@ export default () => {
 
 	// Add "composed" form fields to the block registration list.
 	Object.keys( formFields ).forEach( ( key ) => {
-
 		if ( formFields[ key ].composed ) {
 			blocks.push( formFields[ key ] );
 		}
-
 	} );
 
-	if ( 'llms_form' === post_type ) {
-
+	if ( 'llms_form' === postType ) {
 		/**
 		 * Expose all form field blocks, regardless of their registration status, for 3rd parties to utilize.
 		 *
@@ -134,21 +132,13 @@ export default () => {
 		 * @param {Array} formFields Array of form field block data objects.
 		 */
 		doAction( 'llms_form_fields_ready', formFields );
-
 	}
 
 	blocks.forEach( ( block ) => {
+		const { name, postTypes, settings } = block;
 
-		const {
-			name,
-			post_types,
-			settings,
-		} = block;
-
-		if ( ! post_types || -1 !== post_types.indexOf( post_type ) ) {
+		if ( ! postTypes || -1 !== postTypes.indexOf( postType ) ) {
 			registerBlockType( name, settings );
 		}
-
 	} );
-
 };

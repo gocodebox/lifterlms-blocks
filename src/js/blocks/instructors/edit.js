@@ -8,10 +8,7 @@
 
 // WP deps.
 import { __ } from '@wordpress/i18n';
-import {
-	Component,
-	Fragment,
-} from '@wordpress/element';
+import { Component, Fragment } from '@wordpress/element';
 import { compose } from '@wordpress/compose';
 import { withSelect } from '@wordpress/data';
 import ServerSideRender from '@wordpress/server-side-render';
@@ -22,22 +19,19 @@ import ServerSideRender from '@wordpress/server-side-render';
  * @since 1.0.0
  */
 class InstructorsEdit extends Component {
-
 	/**
 	 * Constructor
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return {Void}
+	 * @return {void}
 	 */
 	constructor() {
-
-		super( ...arguments )
+		super( ...arguments );
 
 		this.state = {
 			instructors: this.props.instructors,
-		}
-
+		};
 	}
 
 	/**
@@ -48,12 +42,7 @@ class InstructorsEdit extends Component {
 	 * @return {Fragment}
 	 */
 	render = () => {
-
-		const {
-			name,
-			attributes,
-			post_id,
-		} = this.props
+		const { name, attributes, post_id } = this.props;
 
 		return (
 			<Fragment>
@@ -61,13 +50,12 @@ class InstructorsEdit extends Component {
 					block={ name }
 					attributes={ attributes }
 					urlQueryArgs={ {
-						post_id: post_id,
+						post_id,
 					} }
 				/>
 			</Fragment>
 		);
-	}
-
+	};
 }
 
 /**
@@ -79,10 +67,9 @@ class InstructorsEdit extends Component {
  */
 export default compose( [
 	withSelect( ( select, props ) => {
-		const {
-			getEditedPostAttribute,
-			getCurrentPostId,
-		} = select( 'core/editor' );
+		const { getEditedPostAttribute, getCurrentPostId } = select(
+			'core/editor'
+		);
 		return {
 			post_id: getCurrentPostId(),
 			instructors: getEditedPostAttribute( 'instructors' ),

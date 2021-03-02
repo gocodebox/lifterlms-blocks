@@ -13,10 +13,7 @@ import $ from 'jquery';
 
 // WP deps.
 import { createBlock } from '@wordpress/blocks';
-import {
-	dispatch,
-	select,
-} from '@wordpress/data';
+import { dispatch, select } from '@wordpress/data';
 import { Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import ServerSideRender from '@wordpress/server-side-render';
@@ -27,7 +24,8 @@ import './subscribe';
 
 /**
  * Block Name
- * @type {String}
+ *
+ * @type {string}
  */
 export const name = 'llms/pricing-table';
 
@@ -36,7 +34,7 @@ export const name = 'llms/pricing-table';
  *
  * @type {Array}
  */
-export const post_types = [ 'course', 'llms_membership' ];
+export const postTypes = [ 'course', 'llms_membership' ];
 
 /**
  * Register Course Syllabus Block
@@ -49,16 +47,13 @@ export const post_types = [ 'course', 'llms_membership' ];
  * @version 1.3.6
  */
 export const settings = {
-
 	title: __( 'LifterLMS Pricing Table', 'lifterlms' ),
 	icon: {
 		foreground: '#2295ff',
 		src: 'cart',
 	},
 	category: 'llms-blocks', // common, formatting, layout widgets, embed. see https://wordpress.org/gutenberg/handbook/block-api/#category.
-	keywords: [
-		__( 'LifterLMS', 'lifterlms' ),
-	],
+	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 	attributes: {
 		post_id: {
 			type: 'int',
@@ -78,26 +73,23 @@ export const settings = {
 	 * @since   1.0.0
 	 * @version 1.3.6
 	 */
-	edit: props => {
-
-		const {
-			attributes,
-			setAttributes,
-		} = props;
+	edit: ( props ) => {
+		const { attributes, setAttributes } = props;
 
 		// Reload when changes are made to access plans.
-		$( document ).one( 'llms-access-plans-updated', function() {
-
+		$( document ).one( 'llms-access-plans-updated', function () {
 			// Replacing the block with a duplicate of itself so we can reload the block from the server.
-			dispatch( 'core/editor' ).replaceBlock( props.clientId, createBlock( name ) );
+			dispatch( 'core/editor' ).replaceBlock(
+				props.clientId,
+				createBlock( name )
+			);
 
 			// This will save the updates to the post content that appear as a result of the replacement.
 			// Since I can't seem to figure out how to prevent the change from being triggered we have to duplicate a save.
 			// which is gross. I know it's gross. It works though....
-			setTimeout( function() {
+			setTimeout( function () {
 				dispatch( 'core/editor' ).savePost();
 			}, 500 );
-
 		} );
 
 		return (
@@ -128,5 +120,4 @@ export const settings = {
 	save: () => {
 		return null;
 	},
-
-}
+};

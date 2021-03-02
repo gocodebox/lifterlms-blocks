@@ -7,23 +7,19 @@
  * @version 1.12.0
  */
 
-import { createSlotFill} from '@wordpress/components';
+import { createSlotFill } from '@wordpress/components';
 
-const
-	{ Fill, Slot } = createSlotFill( 'LLMSFormDocSettings' ),
+const { Fill, Slot } = createSlotFill( 'LLMSFormDocSettings' ),
 	/**
 	 * LLMSFormDocSettings Slot Fill object
 	 *
 	 * @since 1.6.0
 	 *
-	 * @param {Object} options.children Children components.
-	 * @return {Object} Fill component
+	 * @param {Object} options
+	 * @param {Array<Object>} options.children Children components.
+	 * @return {Fill} Fill component
 	 */
-	LLMSFormDocSettings = ( { children } ) => (
-		<Fill>
-			{ children }
-		</Fill>
-	);
+	LLMSFormDocSettings = ( { children } ) => <Fill>{ children }</Fill>;
 
 LLMSFormDocSettings.Slot = Slot;
 

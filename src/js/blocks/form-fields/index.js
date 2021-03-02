@@ -42,7 +42,6 @@ import * as userAddressZip from './fields/user-address-zip';
 import * as userPhone from './fields/user-phone';
 
 export {
-
 	checkboxes,
 	email,
 	number,
@@ -53,13 +52,10 @@ export {
 	text,
 	textarea,
 	url,
-
 	selectCountry,
 	selectState,
-
 	passwordStrengthMeter,
 	redeemVoucher,
-
 	userUsername,
 	userEmail,
 	userEmailConfirm,
@@ -75,5 +71,4 @@ export {
 	userAddressState,
 	userAddressZip,
 	userPhone,
-
 };

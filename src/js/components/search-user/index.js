@@ -6,22 +6,18 @@
  */
 
 // WP Deps.
-import {
-	__,
-	sprintf,
-} from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 
 // Internal Deps.
 import Search from '../search';
 
 export default class SearchUser extends Search {
-
 	/**
 	 * Retrieve the default classname for the main Select element
 	 *
 	 * @since [version]
 	 *
-	 * @return {String} Class name to be used.
+	 * @return {string} Class name to be used.
 	 */
 	getDefaultClassName = () => 'llms-search--user';
 
@@ -32,12 +28,11 @@ export default class SearchUser extends Search {
 	 *
 	 * @since [version]
 	 *
-	 * @param {String} search Search string, this will be included in the arguments as the `search` property.
+	 * @param {string} search Search string, this will be included in the arguments as the `search` property.
 	 * @return {Object} Object of arguments to add to the search API request.
 	 */
 	getSearchArgs( search ) {
-
-		let args = super.getSearchArgs( search );
+		const args = super.getSearchArgs( search );
 
 		const { roles } = this.props;
 		if ( roles ) {
@@ -45,8 +40,7 @@ export default class SearchUser extends Search {
 		}
 
 		return args;
-
-	};
+	}
 
 	/**
 	 * Retrieve the API request path used to perform the async search
@@ -55,7 +49,7 @@ export default class SearchUser extends Search {
 	 *
 	 * @since [version]
 	 *
-	 * @return {String} API request path.
+	 * @return {string} API request path.
 	 */
 	getSearchPath = () => this.props.searchPath || '/wp/v2/users';
 
@@ -65,8 +59,8 @@ export default class SearchUser extends Search {
 	 * @since [version]
 	 *
 	 * @param {Object} result A post response object returned by the search api.
-	 * @return {String} Label displayed for the search result item.
+	 * @return {string} Label displayed for the search result item.
 	 */
-	formatSearchResultLabel = ( result ) => sprintf( __( '%s (ID# %d)', 'lifterlms' ), result.name, result.id );
-
+	formatSearchResultLabel = ( result ) =>
+		sprintf( __( '%s (ID# %d)', 'lifterlms' ), result.name, result.id );
 }
