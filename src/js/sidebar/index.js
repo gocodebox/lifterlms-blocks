@@ -11,7 +11,7 @@ import { select } from '@wordpress/data';
 import {
 	PluginSidebar,
 	PluginSidebarMoreMenuItem,
-} from '@wordpress/editPost';
+} from '@wordpress/edit-post';
 import { Fragment } from '@wordpress/element';
 import { registerPlugin } from '@wordpress/plugins';
 
