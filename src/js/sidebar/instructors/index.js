@@ -21,6 +21,10 @@ import { Component } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 import { addQueryArgs } from '@wordpress/url';
 
+// Internal Deps.
+import SearchUser from '../../components/search-user';
+import './editor.scss';
+
 // External Deps.
 import {
 	arrayMove,
@@ -28,10 +32,6 @@ import {
 	SortableElement,
 	SortableHandle,
 } from 'react-sortable-hoc';
-
-// Internal Deps.
-import SearchUser from '../../components/search-user';
-import './editor.scss';
 
 /**
  * Output a Drag Handle.

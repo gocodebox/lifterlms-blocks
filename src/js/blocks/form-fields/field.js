@@ -5,10 +5,12 @@
  * @version 1.6.0
  */
 
-const { RichText } = wp.blockEditor || wp.editor,
-	{ __ } = wp.i18n,
-	{ RawHTML, Component, Fragment } = wp.element;
+// WP deps.
+import { RichText } from '@wordpress/block-editor';
+import { __ } from '@wordpress/i18n';
+import { Component, Fragment } from '@wordpress/element';
 
+// Internal deps.
 import './editor.scss';
 
 /**
@@ -16,8 +18,9 @@ import './editor.scss';
  *
  * @since 1.6.0
  *
- * @param {Object[]} options Array of options objects.
- * @param {string} fieldType Field node type (eg "checkbox" or "radio").
+ * @param {Object}   options
+ * @param {Object[]} options.options   Array of options objects.
+ * @param {string}   options.fieldType Field node type (eg "checkbox" or "radio").
  * @return {Object} HTML Fragment.
  */
 const InputGroupOptions = ( { options, fieldType } ) => {
@@ -52,7 +55,7 @@ export default class Field extends Component {
 	 *
 	 * @since 1.7.1
 	 *
-	 * @return {string}
+	 * @return {string} Field type identifier.
 	 */
 	getFieldType() {
 		const {
@@ -81,12 +84,10 @@ export default class Field extends Component {
 			attributes: {
 				id,
 				description,
-				field,
 				label,
 				options,
 				placeholder,
 				required,
-				min_strength,
 			},
 			setAttributes,
 		} = this.props;
@@ -103,7 +104,7 @@ export default class Field extends Component {
 		 *
 		 * @since 1.6.0
 		 *
-		 * @return {string}
+		 * @return {string} Default option value.
 		 */
 		const getDefaultOption = () => {
 			if ( placeholder ) {

@@ -2,11 +2,7 @@
  * Course Information Block.
  *
  * @since 1.0.0
- * @since 1.5.0 Add supported post type settings.
- * @since 1.8.0 Remove import of empty CSS file.
- *              Fix UX issues when all information options are disabled.
- *              Use import instead of require.
- *              Import RichText from @wordpress/blockEditor in favor of @wordpress/editor.
+ * @version [version]
  */
 
 // Import CSS.
@@ -99,7 +95,7 @@ export const settings = {
 	 * @since 1.8.0 Always show the block "title" in the editor.
 	 *
 	 * @param {Object} props Block properties.
-	 * @return {Function}
+	 * @return {Fragment} Component HTML Fragment.
 	 */
 	edit: ( props ) => {
 		const { attributes, setAttributes } = props;
@@ -153,7 +149,7 @@ export const settings = {
 										{ ...{
 											currentPost,
 											taxonomy: 'course_difficulty',
-											taxonomy_name: __(
+											taxonomyName: __(
 												'Difficulty',
 												'lifterlms'
 											),
@@ -165,7 +161,7 @@ export const settings = {
 										{ ...{
 											currentPost,
 											taxonomy: 'course_track',
-											taxonomy_name: __(
+											taxonomyName: __(
 												'Tracks',
 												'lifterlms'
 											),
@@ -177,7 +173,7 @@ export const settings = {
 										{ ...{
 											currentPost,
 											taxonomy: 'course_cat',
-											taxonomy_name: __(
+											taxonomyName: __(
 												'Categories',
 												'lifterlms'
 											),
@@ -189,7 +185,7 @@ export const settings = {
 										{ ...{
 											currentPost,
 											taxonomy: 'course_tag',
-											taxonomy_name: __(
+											taxonomyName: __(
 												'Tags',
 												'lifterlms'
 											),
@@ -211,7 +207,7 @@ export const settings = {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return {Function}
+	 * @return {null} Saving disabled for "dynamic" block.
 	 */
 	save: () => {
 		return null;

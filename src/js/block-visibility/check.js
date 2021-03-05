@@ -7,7 +7,7 @@
  *
  * @param {Object} settings Block settings object.
  * @param {string} name Block name, eg "core/paragraph".
- * @return {boolean}
+ * @return {boolean} Returns `true` when visibility is supported, otherwise `false`.
  */
 export default function supportsVisibility( settings, name ) {
 	// WP Deps.
@@ -51,7 +51,7 @@ const getBlacklist = () => {
 		/**
 		 * Otherwise known as the "Classic" block.
 		 *
-		 * @link https://github.com/gocodebox/lifterlms-blocks/issues/41
+		 * @see {@link https://github.com/gocodebox/lifterlms-blocks/issues/41}
 		 */
 		'core/freeform',
 	];

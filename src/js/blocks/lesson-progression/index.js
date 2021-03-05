@@ -53,12 +53,10 @@ export const settings = {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param {Object} props Block properties.
-	 * @return {Function}
+	 * @return {Fragment} Edit component fragment.
 	 */
-	edit( props ) {
-		const { attributes, setAttributes } = props,
-			currentPost = select( 'core/editor' ).getCurrentPost(),
+	edit() {
+		const currentPost = select( 'core/editor' ).getCurrentPost(),
 			quiz = currentPost.meta._llms_quiz * 1;
 
 		let showMainBtn = quiz ? false : true;
@@ -96,10 +94,9 @@ export const settings = {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param {Object} props Block properties.
-	 * @return {Function}
+	 * @return {null} Save disabled for "dynamic" block.
 	 */
-	save( props ) {
+	save() {
 		return null;
 	},
 };

@@ -5,6 +5,8 @@
  * @since 1.12.0 Add data store support.
  */
 
+/* eslint camelcase: [ "error", { allow: [ "min_*" ] } ] */
+
 // WP Deps.
 import { SelectControl, TextControl } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
@@ -63,6 +65,7 @@ settings.supports.llms_field_inspector.storage = false;
 settings.attributes.field.__default = 'html';
 settings.attributes.id.__default = 'llms-password-strength-meter';
 settings.attributes.description.__default = sprintf(
+	// Translators: %1$s = password minimum strength merge code; %2$s = password minimum length merge code.
 	__(
 		'A %1$s password is required. The password must be at least %2$s characters in length. Consider adding letters, numbers, and symbols to increase the password strength.',
 		'lifterlms'
@@ -90,10 +93,9 @@ delete settings.transforms;
  *
  * @param {Object} attributes Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
- * @param {Object} props Original properties object passed to the block's edit() function.
- * @return {Fragment}
+ * @return {Fragment} Component HTML fragment.
  */
-settings.fillInspectorControls = ( attributes, setAttributes, props ) => {
+settings.fillInspectorControls = ( attributes, setAttributes ) => {
 	const { min_strength, min_length } = attributes;
 
 	return (
@@ -140,10 +142,8 @@ settings.fillInspectorControls = ( attributes, setAttributes, props ) => {
  *
  * @since 1.6.0
  *
- * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
- *
- * @param   {Object} props Block properties.
- * @return  {Function}
+ * @param {Object} props Block properties.
+ * @return {Object} Block attributes object.
  */
 settings.save = ( props ) => {
 	const { attributes } = props;

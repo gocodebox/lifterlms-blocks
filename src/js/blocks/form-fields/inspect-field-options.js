@@ -11,12 +11,10 @@
 import {
 	Button,
 	BaseControl,
-	CheckboxControl,
 	TextControl,
 	Tooltip,
 	RadioControl,
 } from '@wordpress/components';
-import { withInstanceId } from '@wordpress/compose';
 import { Component } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 
@@ -36,7 +34,7 @@ import { cloneDeep } from 'lodash';
  * @param {Array}   array The array.
  * @param {number} from  Item's original index.
  * @param {number} to    Item's new index.
- * @return {Array}
+ * @return {Array} Modified array.
  */
 const arrayMove = ( array, from, to ) => {
 	array = array.slice();
@@ -53,7 +51,7 @@ const arrayMove = ( array, from, to ) => {
  *
  * @since 1.6.0
  *
- * @return {Fragment}
+ * @return {Object} Component HTML Fragment.
  */
 const DragHandle = SortableHandle( () => (
 	<span className="llms-drag-handle" style={ { cursor: 'grab' } }>
@@ -68,7 +66,7 @@ const DragHandle = SortableHandle( () => (
  *
  * @since 1.6.0
  *
- * @return {Fragment}
+ * @return {Object} Component HTML Fragment.
  */
 const OptionsList = SortableContainer(
 	( { items, onChange, onRemove, showKeys } ) => {
@@ -98,7 +96,7 @@ const OptionsList = SortableContainer(
  * @since 1.6.0
  * @since 1.12.0 Added tooltip for the "Make Default" radio control & updated the icon used for item deletion.
  *
- * @return {Fragment}
+ * @return {Object} Component HTML Fragment.
  */
 const OptionItem = SortableElement(
 	( { item, i, onChange, onRemove, showKeys } ) => {
@@ -186,6 +184,7 @@ export default class InspectorFieldOptions extends Component {
 	 *
 	 * @since 1.6.0
 	 *
+	 * @param {number} options
 	 * @param {number} options.oldIndex The option's previous index.
 	 * @param {number} options.newIndex The option's new index.
 	 * @return {void}
@@ -214,11 +213,11 @@ export default class InspectorFieldOptions extends Component {
 	 *
 	 * @since 1.6.0
 	 *
-	 * @return {Fragment}
+	 * @return {BaseControl} Component HTML fragment.
 	 */
 	render() {
 		const { attributes, setAttributes } = this.props,
-			{ field, placeholder } = attributes,
+			{ field } = attributes,
 			{ showKeys } = this.state;
 
 		let { options } = attributes;
@@ -244,7 +243,9 @@ export default class InspectorFieldOptions extends Component {
 
 			onOptionChange(
 				{
+					// Translators: %d = Option index in the list of options.
 					text: sprintf( __( 'Option %d', 'lifterlms' ), count + 1 ),
+					// Translators: %d = Option index in the list of options.
 					key: sprintf( __( 'option_%d', 'lifterlms' ), count + 1 ),
 					default: isDefault,
 				},

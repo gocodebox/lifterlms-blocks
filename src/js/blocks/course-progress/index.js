@@ -54,7 +54,7 @@ export const settings = {
 	 * @since 1.8.0 Use `className` in favor of `class`.
 	 *
 	 * @param {Object} props Block properties.
-	 * @return {Function}
+	 * @return {Object} Component HTML fragment.
 	 */
 	edit( props ) {
 		return (
@@ -74,7 +74,7 @@ export const settings = {
 	 * @since 1.8.0 Set shortcode attribute check_enrollment to true (1) so to display the progress to enrolled users only.
 	 * @since 1.9.0 Turned into a dynamic block.
 	 *
-	 * @return {null}
+	 * @return {null} Saving disabled for "dynamic" block.
 	 */
 	save() {
 		return null;
@@ -84,10 +84,11 @@ export const settings = {
 			/**
 			 * Block Editor Save
 			 *
-			 * @param props
 			 * @since 1.0.0
 			 * @deprecated 1.8.0
-			 * @return {Function}
+			 *
+			 * @param {Object} props Component properties object.
+			 * @return {Object} Component HTML Fragment.
 			 */
 			save( props ) {
 				return (

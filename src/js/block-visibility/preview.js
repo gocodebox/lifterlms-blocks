@@ -21,8 +21,6 @@ import { getSetting } from './settings';
  * is open to all or has visibility settings enabled.
  *
  * @since 1.1.0
- *
- * @return {Class}
  */
 export default class Preview extends Component {
 	/**
@@ -32,7 +30,7 @@ export default class Preview extends Component {
 	 * @since 1.6.0 Use camelCase `className` in favor of `class`.
 	 * @since [version] Improve the information displayed for a restricted block.
 	 *
-	 * @return {Fragment}
+	 * @return {Fragment} Component HTML Fragment.
 	 */
 	render() {
 		const { llms_visibility } = this.props.attributes,
@@ -50,6 +48,7 @@ export default class Preview extends Component {
 					<Dashicon icon="visibility" />
 					<span className="llms-block-visibility--msg">
 						{ sprintf(
+							// Translators: %s = visibility setting label.
 							__(
 								'This block is only visible to %s',
 								'lifterlms'

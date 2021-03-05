@@ -5,7 +5,7 @@
  * @since 1.8.0 Updated lodash imports.
  */
 
-const { select } = wp.data;
+import { select } from '@wordpress/data';
 
 import { every, forEach } from 'lodash';
 

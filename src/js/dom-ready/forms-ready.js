@@ -13,7 +13,6 @@ import { __ } from '@wordpress/i18n';
 
 // Internal Deps.
 import { deregisterBlocksForForms } from '../blocks/';
-import * as formFields from '../blocks/form-fields/';
 import { getBlocksFlat } from '../util/';
 
 /**
@@ -28,7 +27,6 @@ import { getBlocksFlat } from '../util/';
  * @return {void}
  */
 function hideCoreUI() {
-	const saved = true;
 	subscribe( () => {
 		setTimeout( () => {
 			const els = document.querySelectorAll(
@@ -49,6 +47,7 @@ function hideCoreUI() {
  * @return {void}
  */
 function maybeDisableVisibility() {
+	// eslint-disable-next-line camelcase
 	const { _llms_form_location } = select(
 		'core/editor'
 	).getEditedPostAttribute( 'meta' );

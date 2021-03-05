@@ -2,22 +2,25 @@
  * Inspector settings for the Course Information Block.
  *
  * @since 1.0.0
- * @since 1.6.0 Import `InspectorControls` from `wp.blockEditor` in favor of deprecated `wp.editor`
- * @since 1.7.0 Import `InspectorControls` from `wp.blockEditor` and fallback to `wp.editor` to maintain backwards compatibility.
- * @version 1.6.0
+ * @version [version]
  */
 
-const { __ } = wp.i18n,
-	{ Component } = wp.element,
-	{ InspectorControls } = wp.blockEditor || wp.editor,
-	{
-		PanelBody,
-		PanelRow,
-		SelectControl,
-		TextControl,
-		ToggleControl,
-	} = wp.components;
+// WP Dependencies.
+import { __ } from '@wordpress/i18n';
+import { Component } from '@wordpress/element';
+import { InspectorControls } from '@wordpress/block-editor';
+import {
+	PanelBody,
+	SelectControl,
+	TextControl,
+	ToggleControl,
+} from '@wordpress/components';
 
+/**
+ * Inspector settings for the Course Information block.
+ *
+ * @since 1.0.0
+ */
 export default class Inspector extends Component {
 	render() {
 		const {
@@ -73,7 +76,7 @@ export default class Inspector extends Component {
 					<ToggleControl
 						label={ __( 'Display Estimated Time', 'lifterlms' ) }
 						checked={ !! show_length }
-						onChange={ ( value ) =>
+						onChange={ () =>
 							setAttributes( { show_length: ! show_length } )
 						}
 						help={
@@ -86,7 +89,7 @@ export default class Inspector extends Component {
 					<ToggleControl
 						label={ __( 'Display Difficulty', 'lifterlms' ) }
 						checked={ !! show_difficulty }
-						onChange={ ( value ) =>
+						onChange={ () =>
 							setAttributes( {
 								show_difficulty: ! show_difficulty,
 							} )
@@ -101,7 +104,7 @@ export default class Inspector extends Component {
 					<ToggleControl
 						label={ __( 'Display Tracks', 'lifterlms' ) }
 						checked={ !! show_tracks }
-						onChange={ ( value ) =>
+						onChange={ () =>
 							setAttributes( { show_tracks: ! show_tracks } )
 						}
 						help={
@@ -114,7 +117,7 @@ export default class Inspector extends Component {
 					<ToggleControl
 						label={ __( 'Display Categories', 'lifterlms' ) }
 						checked={ !! show_cats }
-						onChange={ ( value ) =>
+						onChange={ () =>
 							setAttributes( { show_cats: ! show_cats } )
 						}
 						help={
@@ -130,7 +133,7 @@ export default class Inspector extends Component {
 					<ToggleControl
 						label={ __( 'Display Tags', 'lifterlms' ) }
 						checked={ !! show_tags }
-						onChange={ ( value ) =>
+						onChange={ () =>
 							setAttributes( { show_tags: ! show_tags } )
 						}
 						help={

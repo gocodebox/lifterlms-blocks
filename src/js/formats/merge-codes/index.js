@@ -1,7 +1,7 @@
 /**
  * Merge Code button on the "Format" toolbar.
  *
- * @link https://developer.wordpress.org/block-editor/tutorials/format-api/
+ * @see {@link https://developer.wordpress.org/block-editor/tutorials/format-api/}
  *
  * @since 1.6.0
  * @since 1.7.0 Import from `wp.editor` when `wp.blockEditor` is not available.
@@ -16,7 +16,6 @@ import LifterLMSIcon from '../../icons/lifterlms-icon';
 // WP Deps.
 const { RichTextToolbarButton } = wp.blockEditor || wp.editor,
 	{ Button, ClipboardButton, Modal, Tooltip } = wp.components,
-	{ withState } = wp.compose,
 	{ Component, Fragment } = wp.element,
 	{ __ } = wp.i18n,
 	{ insert, registerFormatType } = wp.richText;

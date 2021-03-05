@@ -8,11 +8,10 @@
  */
 
 // WP Deps.
-const { getBlockType } = wp.blocks,
-	{ Fill } = wp.components,
-	{ Fragment } = wp.element,
-	{ doAction } = wp.hooks,
-	{ __ } = wp.i18n;
+import { getBlockType } from '@wordpress/blocks';
+import { Fill } from '@wordpress/components';
+import { Fragment } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 
 // External Deps.
 import { cloneDeep, snakeCase, kebabCase, uniqueId } from 'lodash';
@@ -58,12 +57,12 @@ const generateId = ( name ) => {
  */
 const setupAtts = ( atts, blockAtts ) => {
 	Object.keys( blockAtts ).forEach( ( key ) => {
-		const default_val = blockAtts[ key ].__default;
+		const defaultValue = blockAtts[ key ].__default;
 		if (
-			'undefined' !== typeof default_val &&
+			'undefined' !== typeof defaultValue &&
 			'undefined' === typeof atts[ key ]
 		) {
-			atts[ key ] = default_val;
+			atts[ key ] = defaultValue;
 		}
 	} );
 
@@ -197,7 +196,7 @@ const settings = {
 	 * @param {Object} props Original properties object passed to the block's edit() function.
 	 * @return {void}
 	 */
-	fillInspectorControls( attributes, setAttributes, props ) {},
+	fillInspectorControls( attributes, setAttributes, props ) {}, // eslint-disable-line no-unused-vars
 
 	/**
 	 * The edit function describes the structure of your block in the context of the editor.
@@ -208,10 +207,8 @@ const settings = {
 	 * @since 1.6.0
 	 * @since 1.7.0 Backwards compatibility fixes for WP Core 5.2 and earlier.
 	 *
-	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-	 *
 	 * @param {Object} props Block properties.
-	 * @return {Function}
+	 * @return {Fragment} Edit component HTML Fragment.
 	 */
 	edit( props ) {
 		const { name } = props,
@@ -258,10 +255,8 @@ const settings = {
 	 *
 	 * @since 1.6.0
 	 *
-	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-	 *
 	 * @param {Object} props Block properties.
-	 * @return {Function}
+	 * @return {Object} Attributes object.
 	 */
 	save( props ) {
 		const { attributes } = props;

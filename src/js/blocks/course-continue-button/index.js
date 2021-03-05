@@ -9,7 +9,6 @@
 // WP Deps.
 import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 
 /**
  * Block Name
@@ -28,12 +27,11 @@ export const postTypes = [ 'course' ];
 /**
  * Register: Course Continue Button Block
  *
- * @link https://wordpress.org/gutenberg/handbook/block-api/
+ * @since   1.0.0
+ *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully, registered; otherwise `undefined`.
- * @since   1.0.0
- * @version 1.0.0
  */
 export const settings = {
 	title: __( 'Course Continue Button', 'lifterlms' ),
@@ -50,11 +48,10 @@ export const settings = {
 	 *
 	 * The "edit" property must be a valid function.
 	 *
-	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-	 * @param   {Object} props Block properties.
-	 * @return  {Function}
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @since 1.0.0
+	 *
+	 * @param {Object} props Block properties.
+	 * @return {Function} Component HTML fragment.
 	 */
 	edit( props ) {
 		return (
@@ -74,11 +71,10 @@ export const settings = {
 	 *
 	 * The "save" property must be specified and must be a valid function.
 	 *
-	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
-	 * @param   {Object} props Block properties.
-	 * @return  {Function}
-	 * @since   1.0.0
-	 * @version 1.0.0
+	 * @since 1.0.0
+	 *
+	 * @param {Object} props Block properties.
+	 * @return {Function} Component HTML fragment.
 	 */
 	save( props ) {
 		return (

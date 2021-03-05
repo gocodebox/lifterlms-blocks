@@ -15,7 +15,7 @@ import Search from '../search';
  * Inspector Control to search the WP database for posts of a given type
  *
  * @since 1.0.0
- * @since[version] Updated to remove unnecessary overrides from Search in favor of atomic method usage.
+ * @since [version] Updated to remove unnecessary overrides from Search in favor of atomic method usage.
  */
 export default class SearchPost extends Search {
 	/**
@@ -50,7 +50,8 @@ export default class SearchPost extends Search {
 	 */
 	formatSearchResultLabel = ( result ) =>
 		sprintf(
-			__( '%s (ID# %d)', 'lifterlms' ),
+			// Translators: %1$s = Post title; %2$ = post id.
+			__( '%1$s (ID# %2$d)', 'lifterlms' ),
 			result.title.rendered,
 			result.id
 		);

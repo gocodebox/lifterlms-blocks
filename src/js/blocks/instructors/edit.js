@@ -7,7 +7,6 @@
  */
 
 // WP deps.
-import { __ } from '@wordpress/i18n';
 import { Component, Fragment } from '@wordpress/element';
 import { compose } from '@wordpress/compose';
 import { withSelect } from '@wordpress/data';
@@ -39,10 +38,10 @@ class InstructorsEdit extends Component {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return {Fragment}
+	 * @return {Fragment} Component html fragment.
 	 */
 	render = () => {
-		const { name, attributes, post_id } = this.props;
+		const { name, attributes, post_id } = this.props; // eslint-disable-line camelcase
 
 		return (
 			<Fragment>
@@ -66,7 +65,7 @@ class InstructorsEdit extends Component {
  * @return {InstructorsEdit}
  */
 export default compose( [
-	withSelect( ( select, props ) => {
+	withSelect( ( select ) => {
 		const { getEditedPostAttribute, getCurrentPostId } = select(
 			'core/editor'
 		);

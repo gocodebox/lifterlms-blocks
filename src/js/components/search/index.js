@@ -12,8 +12,7 @@ import { debounce } from 'throttle-debounce';
 import Select from 'react-select/async';
 
 // WP deps.
-import { __, sprintf } from '@wordpress/i18n';
-import { Component, Fragment } from '@wordpress/element';
+import { Component } from '@wordpress/element';
 
 import { BaseControl } from '@wordpress/components';
 
@@ -81,8 +80,9 @@ export default class Search extends Component {
 	 * The searchPath should be passed in as a component property or child classes should
 	 * override this method to implement their own searchPath logic.
 	 *
-	 * @param search
 	 * @since [version]
+	 *
+	 * @param {string} search User-entered search string.
 	 * @return {string} API request path.
 	 */
 	getSearchUrl = ( search ) =>
@@ -153,12 +153,11 @@ export default class Search extends Component {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return {Fragment}
+	 * @return {BaseControl} Component HTML fragment.
 	 */
 	render() {
 		const {
 			className,
-			classNamePrefix,
 			label,
 			isMulti,
 			isDisabled,

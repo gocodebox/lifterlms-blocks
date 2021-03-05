@@ -1,14 +1,13 @@
 /**
  * WP Data Subscription for the llms/pricing-table block
  *
- * @since   1.3.6
- * @since 1.3.8 Explicitly import jQuery.
+ * @since 1.3.6
  * @version 1.3.8
  */
 
 // WP Deps.
-const { dispatch, select, subscribe } = wp.data;
-const { __ } = wp.i18n;
+import { dispatch, select, subscribe } from '@wordpress/data';
+import { __ } from '@wordpress/i18n';
 
 // Import jQuery.
 import $ from 'jquery';
@@ -16,17 +15,16 @@ import $ from 'jquery';
 /**
  * ID of the Post's Last Revision
  *
- * @type int
+ * @type {number}
  */
 let lastRevision = null;
 
 /**
  * Watch core data to manually save Access Plan data when the post is updated or published.
  *
- * @since   1.3.6
- * @version 1.3.6
+ * @since 1.3.6
  */
-const watchForChanges = subscribe( () => {
+subscribe( () => {
 	const {
 		getCurrentPostLastRevisionId,
 		isCurrentPostPublished,
@@ -50,9 +48,9 @@ const watchForChanges = subscribe( () => {
 	/**
 	 * Determine if the button is disabled (already saving, for example).
 	 *
-	 * @return  {boolean}
-	 * @since   1.3.6
-	 * @version 1.3.6
+	 * @since 1.3.6
+	 *
+	 * @return {boolean} Returns `true` if the button is currently disabled.
 	 */
 	const isBtnDisabled = function () {
 		return 'disabled' === $btn.attr( 'disabled' );
@@ -61,9 +59,9 @@ const watchForChanges = subscribe( () => {
 	/**
 	 * Determine if the post revision ID has changed, if it has we need to update our plans.
 	 *
-	 * @return  {boolean}
-	 * @since   1.3.6
-	 * @version 1.3.6
+	 * @since 1.3.6
+	 *
+	 * @return {boolean} Returns `true` if the revision ID has changed.
 	 */
 	const hasRevisionChanged = function () {
 		return lastRevision !== getCurrentPostLastRevisionId();

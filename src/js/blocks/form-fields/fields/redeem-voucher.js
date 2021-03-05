@@ -8,7 +8,7 @@
 // WP Deps.
 import { ToggleControl } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 
 // External Deps.
 import { cloneDeep } from 'lodash';
@@ -76,12 +76,11 @@ settings.attributes.toggleable = {
  *
  * @since 1.6.0
  *
- * @param {Object} attributes Block attributes.
+ * @param {Object}   attributes    Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
- * @param {Object} props Original properties object passed to the block's edit() function.
- * @return {Fragment}
+ * @return {Fragment} Component HTML fragment.
  */
-settings.fillInspectorControls = ( attributes, setAttributes, props ) => {
+settings.fillInspectorControls = ( attributes, setAttributes ) => {
 	const { toggleable, required } = attributes;
 
 	if ( required ) {
@@ -93,9 +92,7 @@ settings.fillInspectorControls = ( attributes, setAttributes, props ) => {
 			<ToggleControl
 				label={ __( 'Toggleable', 'lifterlms' ) }
 				checked={ !! toggleable }
-				onChange={ ( value ) =>
-					setAttributes( { toggleable: ! toggleable } )
-				}
+				onChange={ () => setAttributes( { toggleable: ! toggleable } ) }
 				help={
 					!! toggleable
 						? __(

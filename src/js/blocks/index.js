@@ -5,6 +5,8 @@
  * @version 1.12.0
  */
 
+/* eslint camelcase: [ "error", { allow: [ "_llms_form_location" ] } ] */
+
 // WP Deps.
 const { getBlockTypes, registerBlockType, unregisterBlockType } = wp.blocks,
 	{ doAction } = wp.hooks,
@@ -42,7 +44,7 @@ export const deregisterBlocksForForms = () => {
 	 * @since 1.12.0 Use `safelist` in favor of `whitelist`.`
 	 *
 	 * @param {string} name Block name.
-	 * @return {boolean}
+	 * @return {boolean} Returns `true` if a block should be unregistered.
 	 */
 	const shouldUnregisterBlock = ( name ) => {
 		const safelist = [
@@ -97,8 +99,6 @@ export const deregisterBlocksForForms = () => {
  * @since 1.5.0 Only register blocks for supported post types.
  * @since 1.6.0 Add form field blocks.
  * @since 1.7.3 Move form ready event from domReady to here to ensure blocks are exposed before blocks are parsed.
- *
- * @return  void
  */
 export default () => {
 	const postType = getCurrentPostType();

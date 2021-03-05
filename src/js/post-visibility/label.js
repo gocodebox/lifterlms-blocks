@@ -6,7 +6,7 @@
  */
 
 // WP Deps.
-const { withSelect } = wp.data;
+import { withSelect } from '@wordpress/data';
 
 // Internal Deps.
 import { visibilityOptions } from './options';

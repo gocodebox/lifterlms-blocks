@@ -7,7 +7,7 @@
 
 // WP Deps.
 import { TextControl } from '@wordpress/components';
-import { Component, Fragment } from '@wordpress/element';
+import { Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { createBlock } from '@wordpress/blocks';
 
@@ -72,10 +72,9 @@ settings.attributes.attributes = {
  *
  * @param {Object} attributes Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
- * @param {Object} props Original properties object passed to the block's edit() function.
- * @return {Fragment}
+ * @return {Fragment} Component HTML Fragment.
  */
-settings.fillInspectorControls = ( attributes, setAttributes, props ) => {
+settings.fillInspectorControls = ( attributes, setAttributes ) => {
 	const { min, max } = attributes.attributes;
 
 	return (

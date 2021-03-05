@@ -5,6 +5,8 @@
  * @version 1.12.0
  */
 
+/* eslint camelcase: [ "error", { allow: [ "data_store*" ] } ] */
+
 // WP Deps.
 import {
 	InspectorControls,
@@ -20,7 +22,7 @@ import {
 	ToggleControl,
 } from '@wordpress/components';
 import { dispatch } from '@wordpress/data';
-import { addFilter, applyFilters } from '@wordpress/hooks';
+import { applyFilters } from '@wordpress/hooks';
 import { Component, Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
@@ -150,7 +152,7 @@ export default class Inspector extends Component {
 	 *
 	 * @since 1.6.0
 	 *
-	 * @return {boolean}
+	 * @return {boolean} Returns `true` if the block has inspector support.
 	 */
 	hasInspectorSupport() {
 		const { inspectorSupports } = this.props;
@@ -167,7 +169,7 @@ export default class Inspector extends Component {
 	 * @since 1.6.0
 	 *
 	 * @param {string} control Control ID.
-	 * @return {boolean}
+	 * @return {boolean} Returns `true` if the block has support for inspector controls.
 	 */
 	hasInspectorControlSupport( control ) {
 		const { inspectorSupports } = this.props;
@@ -180,7 +182,7 @@ export default class Inspector extends Component {
 	 * @since 1.6.0
 	 * @since 1.12.0 Add inspector controls for data store mapping.
 	 *
-	 * @return {Fragment}
+	 * @return {Fragment} Component HTML fragment.
 	 */
 	render() {
 		const { attributes, setAttributes, clientId } = this.props,
@@ -189,7 +191,6 @@ export default class Inspector extends Component {
 				match,
 				name,
 				required,
-				options,
 				placeholder,
 				data_store,
 				data_store_key,
@@ -208,7 +209,7 @@ export default class Inspector extends Component {
 							<ToggleControl
 								label={ __( 'Required', 'lifterlms' ) }
 								checked={ !! required }
-								onChange={ ( value ) =>
+								onChange={ () =>
 									setAttributes( { required: ! required } )
 								}
 								help={

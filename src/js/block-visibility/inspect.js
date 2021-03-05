@@ -12,10 +12,7 @@ import { __ } from '@wordpress/i18n';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { Fragment } from '@wordpress/element';
 import { InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, PanelRow, SelectControl } from '@wordpress/components';
-
-// External Deps.
-import assign from 'lodash/assign';
+import { PanelBody, SelectControl } from '@wordpress/components';
 
 // Internal Deps.
 import check from './check';
@@ -45,7 +42,7 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 			setAttributes,
 		} = props;
 
-		let { llms_visibility_posts } = props.attributes;
+		let { llms_visibility_posts } = props.attributes; // eslint-disable-line camelcase
 
 		if ( undefined === llms_visibility_posts ) {
 			llms_visibility_posts = '[]';
@@ -56,9 +53,9 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 		/**
 		 * Retrieve a filtered object of options for the "visibility" select control
 		 *
-		 * @return  obj
-		 * @since   1.0.0
-		 * @version 1.0.0
+		 * @since 1.0.0
+		 *
+		 * @return {Object} Options object.
 		 */
 		const getVisibilityInOptions = () => {
 			const currentPost = wp.data
@@ -121,11 +118,10 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 		/**
 		 * Retrieve label text for the visibility "in" control.
 		 *
-		 * @param string  visibility value of the "visibility" control.
-		 * @param visibility
-		 * @return  string
-		 * @since   1.0.0
-		 * @version 1.0.0
+		 * @since 1.0.0
+		 *
+		 * @param {string} visibility Value of the "visibility" control.
+		 * @return {string} Translated label.
 		 */
 		const getVisibilityInLabel = ( visibility ) => {
 			if ( 'enrolled' === visibility ) {
@@ -137,21 +133,17 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 		/**
 		 * On change event callback for seaching specific posts.
 		 *
-		 * @param obj  post  WP_Post object.
-		 * @param obj  event JS event obj.
-		 * @param post
-		 * @param event
-		 * @return  void
-		 * @since   1.0.0
-		 * @version 1.0.0
+		 * @since 1.0.0
+		 *
+		 * @param {Object} post  WP_Post object.
+		 * @param {Object} event JS event obj.
+		 * @return {void}
 		 */
 		const onChange = ( post, event ) => {
 			if ( 'select-option' === event.action ) {
 				addPost( event.option );
 			} else if ( 'remove-value' === event.action ) {
 				delPost( event.removedValue );
-			} else {
-				console.log( event );
 			}
 		};
 
@@ -161,11 +153,10 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 		 * Additionally updates the valued of "visibility in" to be the default value.
 		 * Resolves an issue that causes the `in` value to not be stored because no change event is triggerd on the control.
 		 *
-		 * @param string  value setting value.
-		 * @param value
-		 * @return  void
-		 * @since   1.1.0
-		 * @version 1.1.0
+		 * @since 1.1.0
+		 *
+		 * @param {string} value Setting value.
+		 * @return {void}
 		 */
 		const onChangeVisibility = ( value ) => {
 			setAttributes( {
@@ -177,11 +168,10 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 		/**
 		 * Adds a post to the posts visibility attribute & saves.
 		 *
-		 * @param obj  add WP_Post.
-		 * @param add
-		 * @return  void
-		 * @since   1.0.0
-		 * @version 1.0.0
+		 * @since 1.0.0
+		 *
+		 * @param {Object} add WP_Post.
+		 * @return {void}
 		 */
 		const addPost = ( add ) => {
 			if (
@@ -197,11 +187,10 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 		/**
 		 * Deletes a post from the posts visibility attribute & saves.
 		 *
-		 * @param obj  add WP_Post.
-		 * @param del
-		 * @return  void
-		 * @since   1.0.0
-		 * @version 1.0.0
+		 * @since 1.0.0
+		 *
+		 * @param {Object} del WP_Post.
+		 * @return {void}
 		 */
 		const delPost = ( del ) => {
 			llms_visibility_posts.splice(
@@ -214,9 +203,9 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 		/**
 		 * Save the current posts attribute state.
 		 *
-		 * @return  void
-		 * @since   1.0.0
-		 * @version 1.0.0
+		 * @since 1.0.0
+		 *
+		 * @return {void}
 		 */
 		const savePosts = () => {
 			setAttributes( {
