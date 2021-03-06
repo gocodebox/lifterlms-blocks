@@ -18,8 +18,8 @@
  * Domain Path: /i18n
  * License: GPLv3
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
- * Requires at least: 4.9.9
- * Tested up to: 4.9.9
+ * Requires at least: 5.3
+ * Tested up to: 5.7
  */
 
 // Restrict Direct Access.
