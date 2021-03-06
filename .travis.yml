@@ -1,2 +1,3 @@
 import:
   - gocodebox/lifterlms:.config/travis/add-on.yml
+  - gocodebox/lifterlms:.config/travis/eslint.yml
