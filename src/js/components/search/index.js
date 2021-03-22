@@ -10,10 +10,10 @@
 // External Deps.
 import { debounce } from 'throttle-debounce';
 import Select from 'react-select/async';
+import { uniqueId } from 'lodash';
 
 // WP deps.
 import { Component } from '@wordpress/element';
-
 import { BaseControl } from '@wordpress/components';
 
 // Internal Deps.
@@ -152,12 +152,12 @@ export default class Search extends Component {
 	 * Render the component
 	 *
 	 * @since 1.0.0
+	 * @since [version] Pass a unique id to BaseControl.
 	 *
 	 * @return {BaseControl} Component HTML fragment.
 	 */
 	render() {
 		const {
-			className,
 			label,
 			isMulti,
 			isDisabled,
@@ -166,11 +166,13 @@ export default class Search extends Component {
 			selected,
 		} = this.props;
 
+		let className = this.props.className || this.getDefaultClassName();
+
 		return (
-			<BaseControl label={ label }>
+			<BaseControl id={ uniqueId( `${ className }--` ) } label={ label }>
 				<Select
 					ref={ ( ref ) => ( this.selectRef = ref ) }
-					className={ className || this.getDefaultClassName() }
+					className={ className }
 					classNamePrefix="llms-search"
 					isMulti={ isMulti }
 					isDisabled={ isDisabled }
