@@ -14,14 +14,12 @@
  *
  * @since 1.5.0
  *
- * @return string|false
+ * @return {string|boolean} Returns the post type name or false if not defined.
  */
 export default () => {
-
 	if ( window.llms && window.llms.post && window.llms.post.post_type ) {
 		return window.llms.post.post_type;
 	}
 
 	return false;
-
 };

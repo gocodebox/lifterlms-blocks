@@ -18,7 +18,7 @@ import { settings as userPasswordSettings } from './user-password';
 /**
  * Block Name
  *
- * @type {String}
+ * @type {string}
  */
 const name = 'llms/form-field-user-password-confirm';
 
@@ -27,7 +27,7 @@ const name = 'llms/form-field-user-password-confirm';
  *
  * @type {Array}
  */
-const post_types = [ 'llms_form' ];
+const postTypes = [ 'llms_form' ];
 
 /**
  * Is this a default or composed field?
@@ -38,25 +38,23 @@ const post_types = [ 'llms_form' ];
  * Default (non-composed) fields can be added by developers to perform custom functions
  * and are not registered as a block by default
  *
- * @type {String}
+ * @type {string}
  */
 const composed = true;
 
 // Setup the field settings.
-let settings = cloneDeep( userPasswordSettings );
+const settings = cloneDeep( userPasswordSettings );
 
-settings.title       = __( 'User Password (confirmation)', 'lifterlms' );
-settings.description = __( 'A special field used to collect a user\'s account password.', 'lifterlms' );
+settings.title = __( 'User Password (confirmation)', 'lifterlms' );
+settings.description = __(
+	"A special field used to collect a user's account password.",
+	'lifterlms'
+);
 
-settings.attributes.id.__default         = 'password_confirm';
-settings.attributes.label.__default      = __( 'Confirm Password', 'lifterlms' );
-settings.attributes.name.__default       = 'password_confirm';
-settings.attributes.match.__default      = 'password';
+settings.attributes.id.__default = 'password_confirm';
+settings.attributes.label.__default = __( 'Confirm Password', 'lifterlms' );
+settings.attributes.name.__default = 'password_confirm';
+settings.attributes.match.__default = 'password';
 settings.attributes.data_store.__default = false;
 
-export {
-	name,
-	post_types,
-	composed,
-	settings,
-};
+export { name, postTypes, composed, settings };

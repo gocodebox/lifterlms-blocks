@@ -7,17 +7,12 @@
 
 // WP Deps.
 import { createBlock } from '@wordpress/blocks';
-import {
-		dispatch,
-		subscribe,
-		select,
-	} from '@wordpress/data';
+import { dispatch, subscribe, select } from '@wordpress/data';
 import { addFilter } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
 
 // Internal Deps.
 import { deregisterBlocksForForms } from '../blocks/';
-import * as formFields from '../blocks/form-fields/';
 import { getBlocksFlat } from '../util/';
 
 /**
@@ -32,17 +27,16 @@ import { getBlocksFlat } from '../util/';
  * @return {void}
  */
 function hideCoreUI() {
-
-	let saved = true;
 	subscribe( () => {
 		setTimeout( () => {
-			const els = document.querySelectorAll( '.edit-post-layout button.editor-post-switch-to-draft, .edit-post-layout .components-panel__body.edit-post-post-status' );
-			els.forEach( el => {
+			const els = document.querySelectorAll(
+				'.edit-post-layout button.editor-post-switch-to-draft, .edit-post-layout .components-panel__body.edit-post-post-status'
+			);
+			els.forEach( ( el ) => {
 				el.style.display = 'none';
 			} );
 		}, 1 );
 	} );
-
 }
 
 /**
@@ -53,15 +47,20 @@ function hideCoreUI() {
  * @return {void}
  */
 function maybeDisableVisibility() {
-
-	const { _llms_form_location } = select( 'core/editor' ).getEditedPostAttribute( 'meta' );
+	// eslint-disable-next-line camelcase
+	const { _llms_form_location } = select(
+		'core/editor'
+	).getEditedPostAttribute( 'meta' );
 
 	if ( [ 'registration', 'account' ].includes( _llms_form_location ) ) {
-		addFilter( 'llms_block_supports_visibility', 'llms/form-block-visibility', () => {
-			return false;
-		} );
+		addFilter(
+			'llms_block_supports_visibility',
+			'llms/form-block-visibility',
+			() => {
+				return false;
+			}
+		);
 	}
-
 }
 
 /**
@@ -75,18 +74,14 @@ function maybeDisableVisibility() {
  * @return {void}
  */
 function ensureEmailFieldExists() {
-
-	const
-		emailBlockName = 'llms/form-field-user-email',
-		noticeId       = 'llms-forms-no-email-error-notice',
-		noticeSelect   = select( 'core/notices' ),
+	const emailBlockName = 'llms/form-field-user-email',
+		noticeId = 'llms-forms-no-email-error-notice',
+		noticeSelect = select( 'core/notices' ),
 		noticeDispatch = dispatch( 'core/notices' );
 
 	subscribe( () => {
-
-		const
-			post      = select( 'core/editor' ).getCurrentPost(),
-			blocks    = getBlocksFlat().map( block => block.name ),
+		const post = select( 'core/editor' ).getCurrentPost(),
+			blocks = getBlocksFlat().map( ( block ) => block.name ),
 			/**
 			 * The block editor appears to call domReady() prior to the block editor data being set
 			 * which results in getBlocksFlat() to respond with an empty array even though there are blocks
@@ -98,56 +93,68 @@ function ensureEmailFieldExists() {
 			 * If the post content doesn't include any block comment string then the empty array is not an
 			 * incorrect result.
 			 */
-			isReady   = ( blocks.length || ! post.content.includes( '<!-- wp:' ) ),
-			updateBtn = document.querySelector( 'button.editor-post-publish-button' );
+			isReady = blocks.length || ! post.content.includes( '<!-- wp:' ),
+			updateBtn = document.querySelector(
+				'button.editor-post-publish-button'
+			);
 
 		// Check if a user email field exists.
 		if ( isReady && ! blocks.includes( emailBlockName ) ) {
-
 			// Don't add duplicate notices.
-			if ( ! noticeSelect.getNotices().map( notice => notice.id ).includes( noticeId ) ) {
+			if (
+				! noticeSelect
+					.getNotices()
+					.map( ( notice ) => notice.id )
+					.includes( noticeId )
+			) {
+				noticeDispatch.createErrorNotice(
+					__( 'User Email is a required field.', 'lifterlms' ),
+					{
+						id: noticeId,
+						isDismissible: false,
+						actions: [
+							{
+								label: __(
+									'Restore user email field?',
+									'lifterlms'
+								),
 
-				noticeDispatch.createErrorNotice( __( 'User Email is a required field.', 'lifterlms' ), {
-					id: noticeId,
-					isDismissible: false,
-					actions: [ {
-						label: __( 'Restore user email field?', 'lifterlms' ),
+								/**
+								 * Restore the field, remove the notice, and re-enable the post update button.
+								 *
+								 * Inserts the user email field as the first block in the form.
+								 *
+								 * @since 1.12.0
+								 *
+								 * @return {void}
+								 */
+								onClick: () => {
+									// Add the field.
+									const blockEd =
+										dispatch( 'core/block-editor' ) ||
+										dispatch( 'core/editor' );
+									blockEd.insertBlock(
+										createBlock( emailBlockName ),
+										0
+									);
 
-						/**
-						 * Restore the field, remove the notice, and re-enable the post update button.
-						 *
-						 * Inserts the user email field as the first block in the form.
-						 *
-						 * @since 1.12.0
-						 *
-						 * @return {void}
-						 */
-						onClick: () => {
+									// Remove the notice.
+									noticeDispatch.removeNotice( noticeId );
 
-							// Add the field.
-							const blockEd = dispatch( 'core/block-editor') || dispatch( 'core/editor' );
-							blockEd.insertBlock( createBlock( emailBlockName ), 0 );
-
-							// Remove the notice.
-							noticeDispatch.removeNotice( noticeId );
-
-							// Re-enable updating.
-							updateBtn.disabled = false;
-						},
-					} ]
-
-				} );
+									// Re-enable updating.
+									updateBtn.disabled = false;
+								},
+							},
+						],
+					}
+				);
 
 				// Disable the "Update" button so the form cannot be saved in a messed up state.
 				updateBtn.disabled = true;
-
 			}
-
 		}
-
 	} );
-
-};
+}
 
 /**
  * Default Function, runs all methods and events.
@@ -160,10 +167,8 @@ function ensureEmailFieldExists() {
  * @return {void}
  */
 export default () => {
-
 	maybeDisableVisibility();
 	deregisterBlocksForForms();
 	hideCoreUI();
 	ensureEmailFieldExists();
-
 };

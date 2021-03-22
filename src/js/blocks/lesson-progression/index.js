@@ -17,10 +17,10 @@ import { __ } from '@wordpress/i18n';
 // CSS.
 import './editor.scss';
 
-
 /**
  * Block Name
- * @type {String}
+ *
+ * @type {string}
  */
 export const name = 'llms/lesson-progression';
 
@@ -29,7 +29,7 @@ export const name = 'llms/lesson-progression';
  *
  * @type {Array}
  */
-export const post_types = [ 'lesson' ];
+export const postTypes = [ 'lesson' ];
 
 /**
  * Register Block
@@ -40,12 +40,10 @@ export const settings = {
 	title: __( 'Lesson Progression (Mark Complete)', 'lifterlms' ),
 	icon: {
 		foreground: '#2295ff',
-		src: 'yes'
+		src: 'yes',
 	},
 	category: 'llms-blocks',
-	keywords: [
-		__( 'LifterLMS', 'lifterlms' ),
-	],
+	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 	supports: {
 		llms_visibility: false,
 	},
@@ -55,18 +53,11 @@ export const settings = {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param {Object} props Block properties.
-	 * @return {Function}
+	 * @return {Fragment} Edit component fragment.
 	 */
-	edit: function( props ) {
-
-		const
-			{
-				attributes,
-				setAttributes,
-			}           = props,
-			currentPost = select( 'core/editor' ).getCurrentPost(),
-			quiz        = currentPost.meta._llms_quiz * 1;
+	edit() {
+		const currentPost = select( 'core/editor' ).getCurrentPost(),
+			quiz = currentPost.meta._llms_quiz * 1;
 
 		let showMainBtn = quiz ? false : true;
 
@@ -75,17 +66,24 @@ export const settings = {
 		 *
 		 * @since 1.8.0
 		 *
-		 * @param {Boolean} showMainBtn Determines whether or not to display the main button.
+		 * @param {boolean} showMainBtn Determines whether or not to display the main button.
 		 */
-		showMainBtn = applyFilters( 'llms.lessonProgressBlock.showMainBtn', showMainBtn );
+		showMainBtn = applyFilters(
+			'llms.lessonProgressBlock.showMainBtn',
+			showMainBtn
+		);
 
 		return (
 			<Fragment>
-				{ !!quiz && (
-					<Button className="llms-prog-btn--quiz" isPrimary>{ __( 'Take Quiz', 'lifterlms' ) }</Button>
+				{ !! quiz && (
+					<Button className="llms-prog-btn--quiz" isPrimary>
+						{ __( 'Take Quiz', 'lifterlms' ) }
+					</Button>
 				) }
 				{ showMainBtn && (
-					<Button className="llms-prog-btn--complete" isPrimary>{ __( 'Mark Complete', 'lifterlms' ) }</Button>
+					<Button className="llms-prog-btn--complete" isPrimary>
+						{ __( 'Mark Complete', 'lifterlms' ) }
+					</Button>
 				) }
 			</Fragment>
 		);
@@ -96,10 +94,9 @@ export const settings = {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param {Object} props Block properties.
-	 * @return {Function}
+	 * @return {null} Save disabled for "dynamic" block.
 	 */
-	save: function( props ) {
-		return null
+	save() {
+		return null;
 	},
 };

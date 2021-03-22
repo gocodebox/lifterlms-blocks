@@ -8,24 +8,17 @@
  */
 
 // WP Deps.
-const
-	{ __ }                         = wp.i18n,
-	{ createHigherOrderComponent } = wp.compose,
-	{ Fragment }                   = wp.element,
-	{ InspectorControls }          = wp.blockEditor || wp.editor,
-	{
-		PanelBody,
-		PanelRow,
-		SelectControl,
-	}                              = wp.components;
-
-// External Deps.
-import assign from 'lodash/assign';
+import { __ } from '@wordpress/i18n';
+import { createHigherOrderComponent } from '@wordpress/compose';
+import { Fragment } from '@wordpress/element';
+import { InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, SelectControl } from '@wordpress/components';
 
 // Internal Deps.
 import check from './check';
 import Preview from './preview';
 import SearchPost from '../components/search-post';
+import { options as visibilityOptions } from './settings';
 
 /**
  * Block edit inspector controls for visibility settings
@@ -38,26 +31,18 @@ import SearchPost from '../components/search-post';
  * @since 1.8.0 Fix issue causing visibility attributes to render on blocks that don't support them.
  */
 export default createHigherOrderComponent( ( BlockEdit ) => {
-
 	return ( props ) => {
-
 		// Exit early if the block doesn't support visibility.
 		if ( ! check( wp.blocks.getBlockType( props.name ), props.name ) ) {
-			return (
-				<Fragment>
-					<BlockEdit { ...props } />
-				</Fragment>
-			);
+			return <BlockEdit { ...props } />;
 		}
 
-		const { attributes: {
-			llms_visibility,
-			llms_visibility_in,
-		}, setAttributes } = props;
+		const {
+			attributes: { llms_visibility, llms_visibility_in },
+			setAttributes,
+		} = props;
 
-		let {
-			llms_visibility_posts,
-		} = props.attributes;
+		let { llms_visibility_posts } = props.attributes; // eslint-disable-line camelcase
 
 		if ( undefined === llms_visibility_posts ) {
 			llms_visibility_posts = '[]';
@@ -68,70 +53,99 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 		/**
 		 * Retrieve a filtered object of options for the "visibility" select control
 		 *
-		 * @return  obj
-		 * @since   1.0.0
-		 * @version 1.0.0
+		 * @since 1.0.0
+		 *
+		 * @return {Object} Options object.
 		 */
 		const getVisibilityInOptions = () => {
+			const currentPost = wp.data
+				.select( 'core/editor' )
+				.getCurrentPost();
 
-			const currentPost = wp.data.select( 'core/editor' ).getCurrentPost();
-
-			let options = [];
+			const options = [];
 
 			if ( -1 !== [ 'course', 'lesson' ].indexOf( currentPost.type ) ) {
-				options.push( { value: 'this', label: __( 'in this course', 'lifterlms' ) } );
+				options.push( {
+					value: 'this',
+					label: __( 'in this course', 'lifterlms' ),
+				} );
 			}
 
-			options.push( { value: 'any_course', label: __( 'in any course', 'lifterlms' ) } );
+			options.push( {
+				value: 'any_course',
+				label: __( 'in any course', 'lifterlms' ),
+			} );
 
 			if ( -1 !== [ 'llms_membership' ].indexOf( currentPost.type ) ) {
-				options.push( { value: 'this', label: __( 'in this membership', 'lifterlms' ) } );
+				options.push( {
+					value: 'this',
+					label: __( 'in this membership', 'lifterlms' ),
+				} );
 			}
 
 			options.push(
-				{ value: 'any_membership', label: __( 'in any membership', 'lifterlms' ) },
-				{ value: 'any', label: __( 'in any course or membership', 'lifterlms' ) },
-				{ value: 'list_all', label: __( 'in all of the selected courses or memberships', 'lifterlms' ) },
-				{ value: 'list_any', label: __( 'in any of the selected courses or memberships', 'lifterlms' ) }
+				{
+					value: 'any_membership',
+					label: __( 'in any membership', 'lifterlms' ),
+				},
+				{
+					value: 'any',
+					label: __( 'in any course or membership', 'lifterlms' ),
+				},
+				{
+					value: 'list_all',
+					label: __(
+						'in all of the selected courses or memberships',
+						'lifterlms'
+					),
+				},
+				{
+					value: 'list_any',
+					label: __(
+						'in any of the selected courses or memberships',
+						'lifterlms'
+					),
+				}
 			);
 
-			return wp.hooks.applyFilters( 'llms_blocks_block_visibility_in_options', options, currentPost );
-
-		}
+			return wp.hooks.applyFilters(
+				'llms_blocks_block_visibility_in_options',
+				options,
+				currentPost
+			);
+		};
 
 		/**
 		 * Retrieve label text for the visibility "in" control.
 		 *
-		 * @param   string  visibility value of the "visibility" control.
-		 * @return  string
-		 * @since   1.0.0
-		 * @version 1.0.0
+		 * @since 1.0.0
+		 *
+		 * @param {string} visibility Value of the "visibility" control.
+		 * @return {string} Translated label.
 		 */
-		const getVisibilityInLabel = visibility => {
+		const getVisibilityInLabel = ( visibility ) => {
 			if ( 'enrolled' === visibility ) {
 				return __( 'Enrolled In', 'lifterlms' );
 			}
 			return __( 'Not Enrolled In', 'lifterlms' );
-		}
+		};
 
 		/**
 		 * On change event callback for seaching specific posts.
 		 *
-		 * @param   obj  post  WP_Post object.
-		 * @param   obj  event JS event obj.
-		 * @return  void
-		 * @since   1.0.0
-		 * @version 1.0.0
+		 * @since 1.0.0
+		 *
+		 * @param {Object} post  WP_Post object.
+		 * @param {Object} event JS event obj.
+		 * @return {void}
 		 */
 		const onChange = ( post, event ) => {
 			if ( 'select-option' === event.action ) {
 				addPost( event.option );
 			} else if ( 'remove-value' === event.action ) {
 				delPost( event.removedValue );
-			} else {
-				console.log( event );
 			}
-		}
+		};
 
 		/**
 		 * On Change event callback for visibility select control
@@ -139,115 +153,144 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 		 * Additionally updates the valued of "visibility in" to be the default value.
 		 * Resolves an issue that causes the `in` value to not be stored because no change event is triggerd on the control.
 		 *
-		 * @param   string  value setting value.
-		 * @return  void
-		 * @since   1.1.0
-		 * @version 1.1.0
+		 * @since 1.1.0
+		 *
+		 * @param {string} value Setting value.
+		 * @return {void}
 		 */
 		const onChangeVisibility = ( value ) => {
-
 			setAttributes( {
 				llms_visibility: value,
-				llms_visibility_in: getVisibilityInOptions()[0].value,
+				llms_visibility_in: getVisibilityInOptions()[ 0 ].value,
 			} );
-
-		}
+		};
 
 		/**
 		 * Adds a post to the posts visibility attribute & saves.
 		 *
-		 * @param   obj  add WP_Post.
-		 * @return  void
-		 * @since   1.0.0
-		 * @version 1.0.0
+		 * @since 1.0.0
+		 *
+		 * @param {Object} add WP_Post.
+		 * @return {void}
 		 */
 		const addPost = ( add ) => {
-			if ( ! llms_visibility_posts.map( ( { id } ) => id ).includes( add.id ) ) {
+			if (
+				! llms_visibility_posts
+					.map( ( { id } ) => id )
+					.includes( add.id )
+			) {
 				llms_visibility_posts.push( add );
 			}
 			savePosts();
-		}
+		};
 
 		/**
 		 * Deletes a post from the posts visibility attribute & saves.
 		 *
-		 * @param   obj  add WP_Post.
-		 * @return  void
-		 * @since   1.0.0
-		 * @version 1.0.0
+		 * @since 1.0.0
+		 *
+		 * @param {Object} del WP_Post.
+		 * @return {void}
 		 */
 		const delPost = ( del ) => {
-			llms_visibility_posts.splice( llms_visibility_posts.map( ( { id } ) => id ).indexOf( del.id ), 1 );
+			llms_visibility_posts.splice(
+				llms_visibility_posts.map( ( { id } ) => id ).indexOf( del.id ),
+				1
+			);
 			savePosts();
-		}
+		};
 
 		/**
 		 * Save the current posts attribute state.
 		 *
-		 * @return  void
-		 * @since   1.0.0
-		 * @version 1.0.0
+		 * @since 1.0.0
+		 *
+		 * @return {void}
 		 */
 		const savePosts = () => {
-			setAttributes( { llms_visibility_posts: JSON.stringify( llms_visibility_posts ) } );
-		}
+			setAttributes( {
+				llms_visibility_posts: JSON.stringify( llms_visibility_posts ),
+			} );
+		};
 
 		return (
 			<Fragment>
-				<Preview {...props} />
-				<BlockEdit { ...props } />
+				<Preview { ...props }>
+					<BlockEdit { ...props } />
+				</Preview>
 				<InspectorControls>
 					<PanelBody
-						title={ __( 'Enrollment Visibility', 'lifterlms' ) }>
-
+						title={ __( 'Enrollment Visibility', 'lifterlms' ) }
+					>
 						<SelectControl
+							className="llms-visibility-select"
 							label={ __( 'Display to', 'lifterlms' ) }
 							value={ llms_visibility }
 							onChange={ onChangeVisibility }
-							options={ [
-								{ value: 'all', label: __( 'everyone', 'lifterlms' ) },
-								{ value: 'enrolled', label: __( 'enrolled users', 'lifterlms' ) },
-								{ value: 'not_enrolled', label: __( 'non-enrolled users or visitors', 'lifterlms' ) },
-								{ value: 'logged_in', label: __( 'logged in users', 'lifterlms' ) },
-								{ value: 'logged_out', label: __( 'logged out users', 'lifterlms' ) },
-							] }
+							options={ visibilityOptions }
 						/>
 
-						{ -1 === [ 'all', 'logged_in', 'logged_out' ].indexOf( llms_visibility ) && (
+						{ -1 ===
+							[ 'all', 'logged_in', 'logged_out' ].indexOf(
+								llms_visibility
+							) && (
 							<Fragment>
 								<SelectControl
-									label={ getVisibilityInLabel( llms_visibility ) }
+									className="llms-visibility-select--in"
+									label={ getVisibilityInLabel(
+										llms_visibility
+									) }
 									value={ llms_visibility_in }
-									onChange={ value => setAttributes( { llms_visibility_in: value } ) }
+									onChange={ ( value ) =>
+										setAttributes( {
+											llms_visibility_in: value,
+										} )
+									}
 									options={ getVisibilityInOptions() }
 								/>
 
-								{ ( 'list_all' === llms_visibility_in || 'list_any' === llms_visibility_in ) && (
-
+								{ ( 'list_all' === llms_visibility_in ||
+									'list_any' === llms_visibility_in ) && (
 									<div>
 										<SearchPost
 											isMulti
 											postType="course"
-											label={ __( 'Courses', 'lifterlms' ) }
-											placeholder={ __( 'Search by course title...', 'lifterlms' ) }
+											label={ __(
+												'Courses',
+												'lifterlms'
+											) }
+											placeholder={ __(
+												'Search by course title…',
+												'lifterlms'
+											) }
 											onChange={ onChange }
-											selected={ llms_visibility_posts.filter( post => 'course' === post.type ) }
+											selected={ llms_visibility_posts.filter(
+												( post ) =>
+													'course' === post.type
+											) }
 										/>
 										<SearchPost
 											isMulti
 											postType="llms_membership"
-											label={ __( 'Memberships', 'lifterlms' ) }
-											placeholder={ __( 'Search by membership title...', 'lifterlms' ) }
+											label={ __(
+												'Memberships',
+												'lifterlms'
+											) }
+											placeholder={ __(
+												'Search by membership title…',
+												'lifterlms'
+											) }
 											onChange={ onChange }
-											selected={ llms_visibility_posts.filter( post => 'llms_membership' === post.type ) }
+											selected={ llms_visibility_posts.filter(
+												( post ) =>
+													'llms_membership' ===
+													post.type
+											) }
 										/>
 									</div>
-
 								) }
-
 							</Fragment>
 						) }
-
 					</PanelBody>
 				</InspectorControls>
 			</Fragment>

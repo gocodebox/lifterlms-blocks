@@ -6,39 +6,20 @@
  */
 
 // WP Deps.
-const {
-	Button,
-	Dropdown,
-	RadioControl,
-} = wp.components
-const {
-	compose,
-	ifCondition,
-	withInstanceId,
-} = wp.compose;
-const {
-	withDispatch,
-	withSelect,
-} = wp.data;
-const {
-	Component,
-} = wp.element
-const { PluginPostStatusInfo } = wp.editPost;
-const { __ } = wp.i18n;
+import { Button, Dropdown } from '@wordpress/components';
+import { compose, ifCondition, withInstanceId } from '@wordpress/compose';
+import { withDispatch, withSelect } from '@wordpress/data';
+import { Component } from '@wordpress/element';
+import { PluginPostStatusInfo } from '@wordpress/edit-post';
+import { __ } from '@wordpress/i18n';
 
 // Internal Deps.
 import { visibilityOptions } from './options';
 import { default as PostVisibilityLabel } from './label';
 
 class PostVisibility extends Component {
-
 	render() {
-
-		const {
-			onUpdateVisibility,
-			instanceId,
-			visibility,
-		} = this.props;
+		const { onUpdateVisibility, instanceId, visibility } = this.props;
 
 		const handlers = {
 			catalog_search: {
@@ -53,13 +34,13 @@ class PostVisibility extends Component {
 			hidden: {
 				checked: visibility === 'hidden',
 			},
-		}
+		};
 
 		return (
-			<PluginPostStatusInfo
-				className="llms-post-visibility"
-			>
-				<span>{ __( 'Catalog & Search Visibility', 'lifterlms' ) }</span>
+			<PluginPostStatusInfo className="llms-post-visibility">
+				<span>
+					{ __( 'Catalog & Search Visibility', 'lifterlms' ) }
+				</span>
 				<div>
 					<Dropdown
 						className="llms-post-visibility-dropdown"
@@ -74,55 +55,71 @@ class PostVisibility extends Component {
 							</Button>
 						) }
 						renderContent={ () => (
-							<fieldset key="visibility-selector" className="editor-post-visibility__dialog-fieldset">
+							<fieldset
+								key="visibility-selector"
+								className="editor-post-visibility__dialog-fieldset"
+							>
 								<legend className="editor-post-visibility__dialog-legend">
 									{ __( 'Catalog Visibility', 'lifterlms' ) }
 								</legend>
-								{ visibilityOptions.map( ( { value, label, info } ) => (
-									<div key={ value } className="editor-post-visibility__choice">
-										<input
-											type="radio"
-											name={ `llms-editor-post-visibility__setting-${ instanceId }` }
-											value={ value }
-											onChange={ () => onUpdateVisibility( value ) }
-											checked={ handlers[ value ].checked }
-											id={ `editor-post-${ value }-${ instanceId }` }
-											aria-describedby={ `editor-post-${ value }-${ instanceId }-description` }
-											className="editor-post-visibility__dialog-radio"
-										/>
-										<label
-											htmlFor={ `editor-post-${ value }-${ instanceId }` }
-											className="editor-post-visibility__dialog-label"
+								{ visibilityOptions.map(
+									( { value, label, info } ) => (
+										<div
+											key={ value }
+											className="editor-post-visibility__choice"
 										>
-											{ label }
-										</label>
-										{ <p id={ `llms-editor-post-${ value }-${ instanceId }-description` } className="editor-post-visibility__dialog-info">{ info }</p> }
-									</div>
-								) ) }
+											<input
+												type="radio"
+												name={ `llms-editor-post-visibility__setting-${ instanceId }` }
+												value={ value }
+												onChange={ () =>
+													onUpdateVisibility( value )
+												}
+												checked={
+													handlers[ value ].checked
+												}
+												id={ `editor-post-${ value }-${ instanceId }` }
+												aria-describedby={ `editor-post-${ value }-${ instanceId }-description` }
+												className="editor-post-visibility__dialog-radio"
+											/>
+											<label
+												htmlFor={ `editor-post-${ value }-${ instanceId }` }
+												className="editor-post-visibility__dialog-label"
+											>
+												{ label }
+											</label>
+											{
+												<p
+													id={ `llms-editor-post-${ value }-${ instanceId }-description` }
+													className="editor-post-visibility__dialog-info"
+												>
+													{ info }
+												</p>
+											}
+										</div>
+									)
+								) }
 							</fieldset>
 						) }
 					/>
 				</div>
 			</PluginPostStatusInfo>
 		);
-	};
-
-};
+	}
+}
 
 export default compose( [
 	withSelect( ( select ) => {
-		const {
-			getCurrentPostType,
-			getEditedPostAttribute,
-		} = select( 'core/editor' );
+		const { getCurrentPostType, getEditedPostAttribute } = select(
+			'core/editor'
+		);
 
 		return {
 			postType: getCurrentPostType(),
 			visibility: getEditedPostAttribute( 'visibility' ),
 		};
 	} ),
-	withDispatch( ( dispatch, { meta } ) => {
-
+	withDispatch( ( dispatch ) => {
 		const { editPost } = dispatch( 'core/editor' );
 
 		return {
@@ -131,6 +128,9 @@ export default compose( [
 			},
 		};
 	} ),
-	ifCondition( ( { postType } ) => -1 !== [ 'course', 'llms_membership' ].indexOf( postType ) ),
+	ifCondition(
+		( { postType } ) =>
+			-1 !== [ 'course', 'llms_membership' ].indexOf( postType )
+	),
 	withInstanceId,
 ] )( PostVisibility );

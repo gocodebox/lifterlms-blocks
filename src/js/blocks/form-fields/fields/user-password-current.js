@@ -18,7 +18,7 @@ import { settings as userPasswordSettings } from './user-password';
 /**
  * Block Name
  *
- * @type {String}
+ * @type {string}
  */
 const name = 'llms/form-field-user-password-current';
 
@@ -27,7 +27,7 @@ const name = 'llms/form-field-user-password-current';
  *
  * @type {Array}
  */
-const post_types = [ 'llms_form' ];
+const postTypes = [ 'llms_form' ];
 
 /**
  * Is this a default or composed field?
@@ -38,26 +38,24 @@ const post_types = [ 'llms_form' ];
  * Default (non-composed) fields can be added by developers to perform custom functions
  * and are not registered as a block by default
  *
- * @type {String}
+ * @type {string}
  */
 const composed = true;
 
 // Setup the field settings.
-let settings = cloneDeep( userPasswordSettings );
+const settings = cloneDeep( userPasswordSettings );
 
-settings.title       = __( 'User Password (current)', 'lifterlms' );
-settings.description = __( 'A special field used to validate the user\'s current password during a password change attempt.', 'lifterlms' );
+settings.title = __( 'User Password (current)', 'lifterlms' );
+settings.description = __(
+	"A special field used to validate the user's current password during a password change attempt.",
+	'lifterlms'
+);
 
-settings.attributes.id.__default         = 'password_current';
-settings.attributes.label.__default      = __( 'Current Password', 'lifterlms' );
-settings.attributes.name.__default       = 'password_current';
+settings.attributes.id.__default = 'password_current';
+settings.attributes.label.__default = __( 'Current Password', 'lifterlms' );
+settings.attributes.name.__default = 'password_current';
 settings.attributes.data_store.__default = false;
 
 delete settings.attributes.match.__default;
 
-export {
-	name,
-	post_types,
-	composed,
-	settings,
-};
+export { name, postTypes, composed, settings };

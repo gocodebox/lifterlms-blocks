@@ -6,23 +6,17 @@
  */
 
 // WP Deps.
-const {
-	withSelect,
-} = wp.data;
+import { withSelect } from '@wordpress/data';
 
 // Internal Deps.
 import { visibilityOptions } from './options';
 
 function PostVisibilityLabel( { visibility } ) {
-
 	return visibilityOptions.find( ( { value } ) => {
 		return value === visibility;
 	} ).label;
-
 }
 
 export default withSelect( ( select ) => ( {
-
 	visibility: select( 'core/editor' ).getEditedPostAttribute( 'visibility' ),
-
 } ) )( PostVisibilityLabel );

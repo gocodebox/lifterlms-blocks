@@ -18,7 +18,7 @@ import { settings as phoneSettings } from './phone';
 /**
  * Block Name
  *
- * @type {String}
+ * @type {string}
  */
 const name = 'llms/form-field-user-phone';
 
@@ -27,7 +27,7 @@ const name = 'llms/form-field-user-phone';
  *
  * @type {Array}
  */
-const post_types = [ 'llms_form' ];
+const postTypes = [ 'llms_form' ];
 
 /**
  * Is this a default or composed field?
@@ -38,32 +38,30 @@ const post_types = [ 'llms_form' ];
  * Default (non-composed) fields can be added by developers to perform custom functions
  * and are not registered as a block by default
  *
- * @type {String}
+ * @type {string}
  */
 const composed = true;
 
 // Setup the field settings.
-let settings = cloneDeep( phoneSettings );
+const settings = cloneDeep( phoneSettings );
 
-settings.title       = __( 'User Phone', 'lifterlms' );
-settings.description = __( 'A special field used to collect a user\'s phone number.', 'lifterlms' );
+settings.title = __( 'User Phone', 'lifterlms' );
+settings.description = __(
+	"A special field used to collect a user's phone number.",
+	'lifterlms'
+);
 
 settings.supports.multiple = false;
 
-settings.supports.llms_field_inspector.id      = false;
-settings.supports.llms_field_inspector.name    = false;
-settings.supports.llms_field_inspector.match   = false;
+settings.supports.llms_field_inspector.id = false;
+settings.supports.llms_field_inspector.name = false;
+settings.supports.llms_field_inspector.match = false;
 settings.supports.llms_field_inspector.storage = false;
 
-settings.attributes.id.__default       = 'llms_phone';
-settings.attributes.label.__default    = __( 'Phone Number', 'lifterlms' );
-settings.attributes.name.__default     = 'llms_phone';
+settings.attributes.id.__default = 'llms_phone';
+settings.attributes.label.__default = __( 'Phone Number', 'lifterlms' );
+settings.attributes.name.__default = 'llms_phone';
 
 delete settings.transforms;
 
-export {
-	name,
-	post_types,
-	composed,
-	settings,
-};
+export { name, postTypes, composed, settings };

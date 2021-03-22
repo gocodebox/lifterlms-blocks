@@ -22,12 +22,11 @@ import check from './check';
  * @since 1.8.0
  *
  * @param {Object} attributes    Block settings.attributes object.
- * @param {String} attributeName Visibility attribute name.
+ * @param {string} attributeName Visibility attribute name.
  * @param {Object} defaults      Visibility attribute default values.
- * @return {Object}
+ * @return {Object} Updated block settings attributes.
  */
 const setAttribute = ( attributes, attributeName, defaults ) => {
-
 	// Default is already set, ensure type is set.
 	if ( attributes[ attributeName ] && attributes[ attributeName ].default ) {
 		attributes[ attributeName ].type = defaults.type;
@@ -36,9 +35,7 @@ const setAttribute = ( attributes, attributeName, defaults ) => {
 	}
 
 	return attributes;
-
 };
-
 
 /**
  * Add visibility settings to qualifying blocks.
@@ -48,12 +45,11 @@ const setAttribute = ( attributes, attributeName, defaults ) => {
  * @since 1.0.0
  * @since 1.8.0 Merge default values into block settings.
  *
- * @param {object} settings Block settings object.
+ * @param {Object} settings Block settings object.
  * @param {string} name Block name, eg "core/paragraph".
- * @return {object}
+ * @return {Object} Block settings object.
  */
 export default function visibilityAttributes( settings, name ) {
-
 	if ( ! check( settings, name ) ) {
 		return settings;
 	}
@@ -62,7 +58,7 @@ export default function visibilityAttributes( settings, name ) {
 		settings.attributes = {};
 	}
 
-	const visibilityAttributes = {
+	const attrs = {
 		llms_visibility: {
 			default: 'all',
 			type: 'string',
@@ -77,10 +73,13 @@ export default function visibilityAttributes( settings, name ) {
 		},
 	};
 
-	Object.keys( visibilityAttributes ).forEach( key => {
-		settings.attributes = setAttribute( settings.attributes, key, visibilityAttributes[ key ] );
+	Object.keys( attrs ).forEach( ( key ) => {
+		settings.attributes = setAttribute(
+			settings.attributes,
+			key,
+			attrs[ key ]
+		);
 	} );
 
-	return settings
-
-};
+	return settings;
+}

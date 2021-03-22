@@ -7,10 +7,7 @@
 
 // WP Deps.
 import domReady from '@wordpress/dom-ready';
-import {
-	select,
-	subscribe,
-} from '@wordpress/data';
+import { select, subscribe } from '@wordpress/data';
 
 // Internal Deps.
 import formsReady from './forms-ready';
@@ -25,7 +22,6 @@ import formsReady from './forms-ready';
  * @return {void}
  */
 domReady( () => {
-
 	/**
 	 * The unsubscribe seems to not run "fast" enough and we end up calling the formsReady() method twice
 	 * when relying solely on unsubscribe(). Adding a boolean check appears to "fix" this "problem".
@@ -33,16 +29,15 @@ domReady( () => {
 	let dispatched = false;
 
 	const unsubscribe = subscribe( () => {
-
 		const post = select( 'core/editor' ).getCurrentPost();
-		if ( false === dispatched && 0 !== Object.keys( post ).length && 'llms_form' === post.type ) {
-
+		if (
+			false === dispatched &&
+			0 !== Object.keys( post ).length &&
+			'llms_form' === post.type
+		) {
 			dispatched = true;
 			unsubscribe();
 			formsReady();
-
 		}
-
 	} );
-
 } );

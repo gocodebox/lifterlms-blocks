@@ -8,31 +8,31 @@
  */
 
 // WP Deps.
-const
-	{ __ }                = wp.i18n,
-	{ Component }         = wp.element,
-	{ InspectorControls } = wp.blockEditor || wp.editor,
-	{
-		PanelBody,
-		PanelRow,
-		SelectControl,
-		TextControl,
-		ToggleControl,
-	}                      = wp.components;
+import { __ } from '@wordpress/i18n';
+import { Component } from '@wordpress/element';
+import { InspectorControls } from '@wordpress/block-editor';
+import { PanelBody } from '@wordpress/components';
 
+/**
+ * Block inspector component
+ *
+ * @since 1.0.0
+ */
 export default class Inspector extends Component {
-
-  render() {
-
-	const { attributes: {
-		course_id
-	}, setAttributes } = this.props;
-
-	return (
-		<InspectorControls>
-			<PanelBody title={ __( 'Course Syllabus Options', 'lifterlms' ) }>
-			</PanelBody>
-		</InspectorControls>
-	)
-  }
+	/**
+	 * Render the component
+	 *
+	 * @since [version]
+	 *
+	 * @return {InspectorControls} Component HTML fragment.
+	 */
+	render() {
+		return (
+			<InspectorControls>
+				<PanelBody
+					title={ __( 'Course Syllabus Options', 'lifterlms' ) }
+				></PanelBody>
+			</InspectorControls>
+		);
+	}
 }

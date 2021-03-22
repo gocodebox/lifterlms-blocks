@@ -17,7 +17,7 @@ import getDefaultSettings from '../settings';
 /**
  * Block Name
  *
- * @type {String}
+ * @type {string}
  */
 const name = 'llms/form-field-textarea';
 
@@ -26,7 +26,7 @@ const name = 'llms/form-field-textarea';
  *
  * @type {Array}
  */
-const post_types = [ 'llms_form' ];
+const postTypes = [ 'llms_form' ];
 
 /**
  * Is this a default or composed field?
@@ -37,14 +37,14 @@ const post_types = [ 'llms_form' ];
  * Default (non-composed) fields can be added by developers to perform custom functions
  * and are not registered as a block by default.
  *
- * @type {String}
+ * @type {string}
  */
 const composed = false;
 
 // Setup the field settings.
-let settings = getDefaultSettings();
+const settings = getDefaultSettings();
 
-settings.title       = __( 'Paragraph Text', 'lifterlms' );
+settings.title = __( 'Paragraph Text', 'lifterlms' );
 settings.description = __( 'A textarea input.', 'lifterlms' );
 
 settings.supports.llms_field_inspector.customFill = 'fieldTextarea';
@@ -57,7 +57,7 @@ settings.attributes.attributes = {
 	type: 'object',
 	__default: {
 		rows: 4,
-	}
+	},
 };
 
 /**
@@ -67,25 +67,27 @@ settings.attributes.attributes = {
  *
  * @param {Object}   attributes    Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
- * @param {Object}   props         Original properties object passed to the block's edit() function.
- * @return {Fragment}
+ * @return {Fragment} Component html fragment.
  */
-settings.fillInspectorControls = ( attributes, setAttributes, props ) => {
-
+settings.fillInspectorControls = ( attributes, setAttributes ) => {
 	return (
 		<Fragment>
 			<TextControl
 				label={ __( 'Rows', 'lifterlms' ) }
-				help={ __( 'Specify the number of text rows for the textarea input.', 'lifterlms' ) }
+				help={ __(
+					'Specify the number of text rows for the textarea input.',
+					'lifterlms'
+				) }
 				value={ attributes.attributes.rows }
 				type="number"
-				onChange={ rows => setAttributes( { attributes: { rows } } ) }
+				onChange={ ( rows ) =>
+					setAttributes( { attributes: { rows } } )
+				}
 				min="2"
 				step="1"
 			/>
 		</Fragment>
 	);
-
 };
 
 settings.transforms = {
@@ -98,17 +100,15 @@ settings.transforms = {
 				'llms/form-field-password',
 				'llms/form-field-phone',
 				'llms/form-field-text',
-				'llms/form-field-url'
+				'llms/form-field-url',
 			],
-			transform: ( attributes ) => createBlock( name, { ...attributes, field: settings.attributes.field.__default } ),
+			transform: ( attributes ) =>
+				createBlock( name, {
+					...attributes,
+					field: settings.attributes.field.__default,
+				} ),
 		},
 	],
-}
-
-export {
-	name,
-	post_types,
-	composed,
-	settings,
 };
 
+export { name, postTypes, composed, settings };

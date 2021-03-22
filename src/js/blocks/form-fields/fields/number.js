@@ -7,10 +7,7 @@
 
 // WP Deps.
 import { TextControl } from '@wordpress/components';
-import {
-	Component,
-	Fragment,
-} from '@wordpress/element';
+import { Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { createBlock } from '@wordpress/blocks';
 
@@ -21,7 +18,7 @@ import icon from '../../../icons/field-number';
 /**
  * Block Name
  *
- * @type {String}
+ * @type {string}
  */
 const name = 'llms/form-field-number';
 
@@ -30,7 +27,7 @@ const name = 'llms/form-field-number';
  *
  * @type {Array}
  */
-const post_types = [ 'llms_form' ];
+const postTypes = [ 'llms_form' ];
 
 /**
  * Is this a default or composed field?
@@ -41,15 +38,18 @@ const post_types = [ 'llms_form' ];
  * Default (non-composed) fields can be added by developers to perform custom functions
  * and are not registered as a block by default.
  *
- * @type {String}
+ * @type {string}
  */
 const composed = false;
 
 // Setup the field settings.
-let settings = getDefaultSettings();
+const settings = getDefaultSettings();
 
-settings.title       = __( 'Number', 'lifterlms' );
-settings.description = __( 'An input field which accepts numbers.', 'lifterlms' );
+settings.title = __( 'Number', 'lifterlms' );
+settings.description = __(
+	'An input field which accepts numbers.',
+	'lifterlms'
+);
 
 settings.supports.llms_field_inspector.customFill = 'fieldNumber';
 
@@ -62,7 +62,7 @@ settings.attributes.attributes = {
 	__default: {
 		min: '',
 		max: '',
-	}
+	},
 };
 
 /**
@@ -72,35 +72,40 @@ settings.attributes.attributes = {
  *
  * @param {Object} attributes Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
- * @param {Object} props Original properties object passed to the block's edit() function.
- * @return {Fragment}
+ * @return {Fragment} Component HTML Fragment.
  */
-settings.fillInspectorControls = ( attributes, setAttributes, props ) => {
-
+settings.fillInspectorControls = ( attributes, setAttributes ) => {
 	const { min, max } = attributes.attributes;
 
 	return (
 		<Fragment>
-
 			<TextControl
 				label={ __( 'Minimum Value', 'lifterlms' ) }
-				help={ __( 'Specify the minimum allowed value. Leave blank for no minimum.', 'lifterlms' ) }
+				help={ __(
+					'Specify the minimum allowed value. Leave blank for no minimum.',
+					'lifterlms'
+				) }
 				value={ min }
 				type="number"
-				onChange={ val => setAttributes( { attributes: { min: val, max: max } } ) }
+				onChange={ ( val ) =>
+					setAttributes( { attributes: { min: val, max } } )
+				}
 			/>
 
 			<TextControl
 				label={ __( 'Maximum Value', 'lifterlms' ) }
-				help={ __( 'Specify the maximum allowed value. Leave blank for no maximum.', 'lifterlms' ) }
+				help={ __(
+					'Specify the maximum allowed value. Leave blank for no maximum.',
+					'lifterlms'
+				) }
 				value={ max }
 				type="number"
-				onChange={ val => setAttributes( { attributes: { min: min, max: val } } ) }
+				onChange={ ( val ) =>
+					setAttributes( { attributes: { min, max: val } } )
+				}
 			/>
-
 		</Fragment>
 	);
-
 };
 
 settings.transforms = {
@@ -113,17 +118,15 @@ settings.transforms = {
 				'llms/form-field-phone',
 				'llms/form-field-text',
 				'llms/form-field-textarea',
-				'llms/form-field-url'
+				'llms/form-field-url',
 			],
-			transform: ( attributes ) => createBlock( name, { ...attributes, field: settings.attributes.field.__default } ),
+			transform: ( attributes ) =>
+				createBlock( name, {
+					...attributes,
+					field: settings.attributes.field.__default,
+				} ),
 		},
 	],
 };
 
-export {
-	name,
-	post_types,
-	composed,
-	settings,
-};
-
+export { name, postTypes, composed, settings };
