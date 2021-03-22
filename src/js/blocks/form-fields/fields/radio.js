@@ -69,7 +69,7 @@ settings.transforms = {
 	from: [
 		{
 			type: 'block',
-			blocks: [ 'llms/form-field-radio', 'llms/form-field-select' ],
+			blocks: [ 'llms/form-field-checkboxes', 'llms/form-field-select' ],
 			transform: ( attributes ) =>
 				createBlock( name, {
 					...attributes,
