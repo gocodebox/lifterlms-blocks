@@ -12,36 +12,7 @@ import { Component, Fragment } from '@wordpress/element';
 
 // Internal deps.
 import './editor.scss';
-
-/**
- * Output a list of options for an input group field (checkbox/radio).
- *
- * @since 1.6.0
- *
- * @param {Object}   options
- * @param {Object[]} options.options   Array of options objects.
- * @param {string}   options.fieldType Field node type (eg "checkbox" or "radio").
- * @return {Object} HTML Fragment.
- */
-const InputGroupOptions = ( { options, fieldType } ) => {
-	return (
-		<Fragment>
-			{ options.map( ( option, index ) => (
-				<label
-					key={ index }
-					style={ { display: 'block', pointerEvents: 'none' } }
-				>
-					<input
-						type={ fieldType }
-						checked={ 'yes' === option.default }
-						readOnly={ true }
-					/>{ ' ' }
-					{ option.text }
-				</label>
-			) ) }
-		</Fragment>
-	);
-};
+import InputGroupOptions from './input-group-options';
 
 /**
  * Render a field in the block editor
