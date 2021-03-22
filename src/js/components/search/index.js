@@ -158,15 +158,14 @@ export default class Search extends Component {
 	 */
 	render() {
 		const {
-			label,
-			isMulti,
-			isDisabled,
-			onChange,
-			placeholder,
-			selected,
-		} = this.props;
-
-		let className = this.props.className || this.getDefaultClassName();
+				label,
+				isMulti,
+				isDisabled,
+				onChange,
+				placeholder,
+				selected,
+			} = this.props,
+			className = this.props.className || this.getDefaultClassName();
 
 		return (
 			<BaseControl id={ uniqueId( `${ className }--` ) } label={ label }>
