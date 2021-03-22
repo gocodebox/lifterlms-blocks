@@ -217,7 +217,7 @@ export default class InspectorFieldOptions extends Component {
 	 */
 	render() {
 		const { attributes, setAttributes } = this.props,
-			{ field } = attributes,
+			{ id, field } = attributes,
 			{ showKeys } = this.state;
 
 		let { options } = attributes;
@@ -278,6 +278,7 @@ export default class InspectorFieldOptions extends Component {
 		 * Callback when options are changed.
 		 *
 		 * @since 1.6.0
+		 * @since [version] Pass an id to <BaseControl>
 		 *
 		 * @param {Object}  option Option data.
 		 * @param {number} index  Option index.
@@ -304,7 +305,7 @@ export default class InspectorFieldOptions extends Component {
 		};
 
 		return (
-			<BaseControl label={ __( 'Options', 'lifterlms' ) }>
+			<BaseControl id={ id } label={ __( 'Options', 'lifterlms' ) }>
 				<OptionsList
 					items={ options }
 					onSortEnd={ this.onSortEnd }
