@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.0.0-beta.2 - 2021-03-22
+--------------------------
+
++ Fixed block editor visual issues encountered on certain blocks when block-level visibility restrictions are enabled.
+
+
 v2.0.0-beta.1 - 2021-03-22
 --------------------------
 
