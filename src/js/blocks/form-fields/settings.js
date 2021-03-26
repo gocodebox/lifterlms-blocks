@@ -287,4 +287,4 @@ export default () => {
  */
 export function getDefaultPostTypes() {
 	return cloneDeep( [ 'llms_form', 'wp_block' ] );
-};
+}

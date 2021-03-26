@@ -14,7 +14,10 @@ import { Fragment } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 
 // Internal Deps.
-import { default as getDefaultSettings, getDefaultPostTypes } from '../settings';
+import {
+	default as getDefaultSettings,
+	getDefaultPostTypes,
+} from '../settings';
 
 /**
  * Block Name

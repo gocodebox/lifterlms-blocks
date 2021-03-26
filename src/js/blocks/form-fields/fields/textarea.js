@@ -13,7 +13,10 @@ import { __ } from '@wordpress/i18n';
 import { createBlock } from '@wordpress/blocks';
 
 // Internal Deps.
-import { default as getDefaultSettings, getDefaultPostTypes } from '../settings';
+import {
+	default as getDefaultSettings,
+	getDefaultPostTypes,
+} from '../settings';
 
 /**
  * Block Name

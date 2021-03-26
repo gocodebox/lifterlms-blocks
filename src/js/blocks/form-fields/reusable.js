@@ -28,11 +28,9 @@ import { getCurrentPostType } from '../../util/';
  * @since [version]
  */
 if ( 'wp_block' === getCurrentPostType() ) {
-
 	let lastContent = '';
 
 	subscribe( () => {
-
 		const content = select( 'core/editor' ).getEditedPostContent();
 
 		if ( 'undefined' === typeof content || content === lastContent ) {
@@ -41,14 +39,14 @@ if ( 'wp_block' === getCurrentPostType() ) {
 
 		lastContent = content;
 
-		const is_llms_field = content.includes( '<!-- wp:llms/form-field' ) ? 'yes' : 'no';
+		const val = content.includes( '<!-- wp:llms/form-field' )
+			? 'yes'
+			: 'no';
 
 		dispatch( 'core/editor' ).editPost( {
-			is_llms_field
+			is_llms_field: val,
 		} );
-
 	} );
-
 }
 
 /**
@@ -57,10 +55,9 @@ if ( 'wp_block' === getCurrentPostType() ) {
  * @since [version]
  *
  * @param {number} ref The WP_Post ID of the reusable block.
- * @return {WP_Block} A block editor block object.
+ * @return {Object} A block editor block object.
  */
 function getBlockByRef( ref ) {
-
 	let refBlock = false;
 
 	some( select( 'core/block-editor' ).getBlocks(), ( block ) => {
@@ -72,7 +69,6 @@ function getBlockByRef( ref ) {
 	} );
 
 	return refBlock;
-
 }
 
 /**
@@ -87,7 +83,6 @@ addFilter(
 	'blocks.getSaveElement',
 	'llms/core-block/save',
 	( el, block, attributes ) => {
-
 		if ( 'core/block' !== block.name ) {
 			return el;
 		}
@@ -95,25 +90,25 @@ addFilter(
 		const { ref } = attributes;
 
 		// Wait for block resolution.
-		const hasResolvedBlock = select( 'core' ).hasFinishedResolution( 'getEntityRecord', [
+		const hasResolvedBlock = select(
+			'core'
+		).hasFinishedResolution( 'getEntityRecord', [
 			'postType',
 			'wp_block',
 			ref,
 		] );
 
 		if ( hasResolvedBlock ) {
-
 			// Get field blocks from the block.
 			const fields = getFieldBlocks( getBlockByRef( ref ) );
 
-			wp.data.dispatch( 'core' ).editEntityRecord( 'postType', 'wp_block', attributes.ref, {
-				is_llms_field: fields.length > 0 ? 'yes' : 'no',
-			} );
-
+			wp.data
+				.dispatch( 'core' )
+				.editEntityRecord( 'postType', 'wp_block', attributes.ref, {
+					is_llms_field: fields.length > 0 ? 'yes' : 'no',
+				} );
 		}
 
 		return el;
-
 	}
 );
-

@@ -14,7 +14,10 @@ import { __ } from '@wordpress/i18n';
 import { cloneDeep } from 'lodash';
 
 // Internal Deps.
-import { settings as stateSelectSettings, postTypes } from './select-state-l10n';
+import {
+	settings as stateSelectSettings,
+	postTypes,
+} from './select-state-l10n';
 
 /**
  * Block Name

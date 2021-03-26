@@ -10,7 +10,6 @@ import { every, forEach } from 'lodash';
 
 // WP Deps.
 import { select } from '@wordpress/data';
-import { useEntityBlockEditor } from '@wordpress/core-data';
 
 /**
  * Determines if the block is (or contains) field block/s
@@ -21,11 +20,10 @@ import { useEntityBlockEditor } from '@wordpress/core-data';
  * @since Unknown
  * @since [version] Adds support for reusable blocks.
  *
- * @param {WP_Block} block A block object.
- * @return {WP_Block[]} An array of field blocks.
+ * @param {Object} block A block object.
+ * @return {Object[]} An array of field blocks.
  */
 function filterBlock( block ) {
-
 	// Check the block's inner blocks.
 	if ( block.innerBlocks.length ) {
 		return filterBlocks( block.innerBlocks );
@@ -33,10 +31,12 @@ function filterBlock( block ) {
 
 	// Reusable blocks don't have inner blocks defined so we need to look them up this ay.
 	if ( 'core/block' === block.name ) {
-
-		const { blocks } = select( 'core' ).getEditedEntityRecord( 'postType', 'wp_block', block.attributes.ref );
+		const { blocks } = select( 'core' ).getEditedEntityRecord(
+			'postType',
+			'wp_block',
+			block.attributes.ref
+		);
 		return filterBlocks( blocks );
-
 	}
 
 	// Only return form field blocks.
@@ -45,8 +45,7 @@ function filterBlock( block ) {
 	}
 
 	return [ block ];
-
-};
+}
 
 /**
  * Recursively filter blocks (checking inner blocks)
@@ -55,25 +54,21 @@ function filterBlock( block ) {
  *
  * @since [version]
  *
- * @param {WP_Block[]} blocks An array of blocks to filter.
- * @return {WP_Block[]} An array of field blocks.
+ * @param {Object[]} blocks An array of blocks to filter.
+ * @return {Object[]} An array of field blocks.
  */
 function filterBlocks( blocks = [] ) {
-
 	let fieldBlocks = [];
 
 	forEach( blocks, ( block ) => {
-
 		const filtered = filterBlock( block );
 		if ( filtered.length ) {
 			fieldBlocks = fieldBlocks.concat( filtered );
 		}
-
 	} );
 
 	return fieldBlocks;
-
-};
+}
 
 /**
  * Retrieve a "flattened" list of all form fields from a list of blocks
@@ -83,8 +78,8 @@ function filterBlocks( blocks = [] ) {
  *
  * @since Unknown
  *
- * @param {WP_Block[]} blocks An array of blocks to filter.
- * @return {WP_Block[]} An array of field blocks.
+ * @param {Object[]} blocks An array of blocks to filter.
+ * @return {Object[]} An array of field blocks.
  */
 export const getFieldBlocks = ( blocks = [] ) => {
 	if ( ! Array.isArray( blocks ) ) {
@@ -98,12 +93,15 @@ export const getFieldBlocks = ( blocks = [] ) => {
  *
  * @since Unknown
  *
- * @param {String} field Attribute key name.
- * @param {String} str   String to check for uniqueness.
- * @return {Boolean} Returns `true` when the string is unique across the form and `false` if it's not.
+ * @param {string} field Attribute key name.
+ * @param {string} str   String to check for uniqueness.
+ * @return {boolean} Returns `true` when the string is unique across the form and `false` if it's not.
  */
 export const isUnique = ( field, str ) => {
-	return every( getFieldBlocks( select( 'core/block-editor' ).getBlocks() ), ( block ) => {
-		return block.attributes[ field ] !== str;
-	} );
+	return every(
+		getFieldBlocks( select( 'core/block-editor' ).getBlocks() ),
+		( block ) => {
+			return block.attributes[ field ] !== str;
+		}
+	);
 };

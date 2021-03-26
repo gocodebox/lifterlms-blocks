@@ -48,7 +48,6 @@ export const deregisterBlocksForForms = () => {
 	 * @return {boolean} Returns `true` if a block should be unregistered.
 	 */
 	const shouldUnregisterBlock = ( name ) => {
-
 		const safelist = [
 				'core/block', // Reusable block.
 				'core/paragraph',
@@ -105,7 +104,6 @@ export const deregisterBlocksForForms = () => {
  * @since [version] Trigger `llms_form_fields_ready` on `wp_block` posts.
  */
 export default () => {
-
 	const postType = getCurrentPostType();
 
 	// Blocks to register.
