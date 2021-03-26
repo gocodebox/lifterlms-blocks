@@ -14,6 +14,7 @@ import {
 	TextControl,
 	Tooltip,
 	RadioControl,
+	CheckboxControl,
 } from '@wordpress/components';
 import { Component } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
@@ -69,7 +70,7 @@ const DragHandle = SortableHandle( () => (
  * @return {Object} Component HTML Fragment.
  */
 const OptionsList = SortableContainer(
-	( { items, onChange, onRemove, showKeys } ) => {
+	( { items, onChange, onRemove, showKeys, type } ) => {
 		return (
 			<ul className="llms-field-options">
 				{ items.map( ( option, index ) => (
@@ -81,6 +82,7 @@ const OptionsList = SortableContainer(
 						onChange={ onChange }
 						onRemove={ onRemove }
 						showKeys={ showKeys }
+						type={ type }
 					/>
 				) ) }
 			</ul>
@@ -95,25 +97,38 @@ const OptionsList = SortableContainer(
  *
  * @since 1.6.0
  * @since 1.12.0 Added tooltip for the "Make Default" radio control & updated the icon used for item deletion.
+ * @since [version] Added special treatment for checkboxes.
  *
  * @return {Object} Component HTML Fragment.
  */
 const OptionItem = SortableElement(
-	( { item, i, onChange, onRemove, showKeys } ) => {
+	( { item, i, onChange, onRemove, showKeys, type } ) => {
+		const OptionControl = 'checkbox' === type ?
+			<CheckboxControl
+				className="llms-field-opt-default"
+				checked = { 'yes' === item.default }
+				onChange={ ( val ) => {
+					onChange( { ...item, default: true === val ? 'yes' : 'no' }, i );
+				} }
+				tabIndex="-1"
+			/>
+			:
+			<RadioControl
+				className="llms-field-opt-default"
+				selected={ item.default }
+				onChange={ ( val ) => {
+					onChange( { ...item, default: val }, i );
+				} }
+				options={ [ { label: '', value: 'yes' } ] }
+				tabIndex="-1"
+			/>;
+
 		return (
 			<li className="llms-field-option">
 				<DragHandle />
 				<Tooltip text={ __( 'Make default', 'lifterlms' ) }>
 					<div className="llms-field-opt-default-wrap">
-						<RadioControl
-							className="llms-field-opt-default"
-							selected={ item.default }
-							onChange={ ( val ) => {
-								onChange( { ...item, default: val }, i );
-							} }
-							options={ [ { label: '', value: 'yes' } ] }
-							tabIndex="-1"
-						/>
+						{ OptionControl }
 					</div>
 				</Tooltip>
 				<div className="llms-field-opt-text-wrap">
@@ -172,7 +187,6 @@ export default class InspectorFieldOptions extends Component {
 		super( ...arguments );
 
 		const { options } = this.props.attributes;
-
 		this.state = {
 			showKeys: false,
 			items: options,
@@ -279,19 +293,24 @@ export default class InspectorFieldOptions extends Component {
 		 *
 		 * @since 1.6.0
 		 * @since [version] Pass an id to <BaseControl>
+		 *                  Pass the field type to <OptionsList>
+		 *                  Also allow multiple defaults for checkboxes.
 		 *
 		 * @param {Object}  option Option data.
 		 * @param {number} index  Option index.
 		 * @return {void}
 		 */
 		const onOptionChange = ( option, index ) => {
-			const prevOption = options[ index ] ? options[ index ] : false;
+			const prevOption = options[ index ] ? options[ index ] : false,
+				  {field}    = this.props.attributes;
 
 			options[ index ] = option;
 			this.updateOptions( options );
 
-			// When setting an option as the "default", set all other options to not be the default.
+			// When setting an option as the "default", set all other options to not be the default,
+			// if not a checkbox.
 			if (
+				'checkbox' !== field &&
 				'yes' === option.default &&
 				prevOption &&
 				prevOption.default !== option.default
@@ -314,6 +333,7 @@ export default class InspectorFieldOptions extends Component {
 					onChange={ onOptionChange }
 					onRemove={ removeOption }
 					showKeys={ showKeys }
+					type={ field }
 				/>
 
 				<Button

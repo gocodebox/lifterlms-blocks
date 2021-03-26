@@ -22,11 +22,13 @@
 
 	input {
 		border: 1px solid #999;
-		border-radius: 4px;
 		padding: 4px 8px;
 		&:focus::placeholder {
 			opacity: 0;
 		}
+	}
+	input:not([type=radio]) {
+		border-radius: 4px;
 	}
 
 	.llms-field {
