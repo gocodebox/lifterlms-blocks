@@ -3,6 +3,7 @@
  *
  * @since 1.6.0
  * @since 1.12.0 Add data store support.
+ * @since [version] Add reusable block support.
  */
 
 /* eslint camelcase: [ "error", { allow: [ "min_*" ] } ] */
@@ -13,7 +14,7 @@ import { Fragment } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 
 // Internal Deps.
-import getDefaultSettings from '../settings';
+import { default as getDefaultSettings, getDefaultPostTypes } from '../settings';
 
 /**
  * Block Name
@@ -27,7 +28,7 @@ const name = 'llms/form-field-password-strength-meter';
  *
  * @type {Array}
  */
-const postTypes = [ 'llms_form' ];
+const postTypes = getDefaultPostTypes();
 
 /**
  * Is this a default or composed field?

@@ -3,6 +3,7 @@
  *
  * @since 1.6.0
  * @since 1.12.0 Add transform support and default options.
+ * @since [version] Add reusable block support.
  */
 
 // WP Deps.
@@ -10,7 +11,7 @@ import { __ } from '@wordpress/i18n';
 import { createBlock } from '@wordpress/blocks';
 
 // Internal Deps.
-import getDefaultSettings from '../settings';
+import { default as getDefaultSettings, getDefaultPostTypes } from '../settings';
 import icon from '../../../icons/field-checkbox';
 
 /**
@@ -25,7 +26,7 @@ const name = 'llms/form-field-checkboxes';
  *
  * @type {Array}
  */
-const postTypes = [ 'llms_form' ];
+const postTypes = getDefaultPostTypes();
 
 /**
  * Is this a default or composed field?

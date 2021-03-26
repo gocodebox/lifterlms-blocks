@@ -4,6 +4,7 @@
  * @since 1.7.1
  * @since 1.8.0 Updated lodash imports.
  * @since 1.12.0 Add data store support.
+ * @since [version] Add reusable block support.
  */
 
 // WP Deps.
@@ -13,7 +14,7 @@ import { __ } from '@wordpress/i18n';
 import { cloneDeep } from 'lodash';
 
 // Internal Deps.
-import { settings as userPasswordSettings } from './user-password';
+import { settings as userPasswordSettings, postTypes } from './user-password';
 
 /**
  * Block Name
@@ -21,13 +22,6 @@ import { settings as userPasswordSettings } from './user-password';
  * @type {string}
  */
 const name = 'llms/form-field-user-password-current';
-
-/**
- * Array of supported post types.
- *
- * @type {Array}
- */
-const postTypes = [ 'llms_form' ];
 
 /**
  * Is this a default or composed field?

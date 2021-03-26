@@ -4,6 +4,7 @@
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
  * @since 1.12.0 Add data store support.
+ * @since [version] Add reusable block support.
  */
 
 // WP Deps.
@@ -13,7 +14,7 @@ import { __ } from '@wordpress/i18n';
 import { cloneDeep } from 'lodash';
 
 // Internal Deps.
-import { settings as phoneSettings } from './phone';
+import { settings as phoneSettings, postTypes } from './phone';
 
 /**
  * Block Name
@@ -21,13 +22,6 @@ import { settings as phoneSettings } from './phone';
  * @type {string}
  */
 const name = 'llms/form-field-user-phone';
-
-/**
- * Array of supported post types.
- *
- * @type {Array}
- */
-const postTypes = [ 'llms_form' ];
 
 /**
  * Is this a default or composed field?

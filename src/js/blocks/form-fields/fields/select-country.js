@@ -3,6 +3,7 @@
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
+ * @since [version] Add reusable block support.
  */
 
 // WP Deps.
@@ -12,7 +13,7 @@ import { __ } from '@wordpress/i18n';
 import { cloneDeep } from 'lodash';
 
 // Internal Deps.
-import { settings as selectSettings } from './select';
+import { settings as selectSettings, postTypes } from './select';
 
 /**
  * Block Name
@@ -20,13 +21,6 @@ import { settings as selectSettings } from './select';
  * @type {string}
  */
 const name = 'llms/form-field-select-country';
-
-/**
- * Array of supported post types.
- *
- * @type {Array}
- */
-const postTypes = [ 'llms_form' ];
 
 /**
  * Is this a default or composed field?

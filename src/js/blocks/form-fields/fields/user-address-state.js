@@ -4,6 +4,7 @@
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
  * @since 1.12.0 Add data store support.
+ * @since [version] Add reusable block support.
  */
 
 // WP Deps.
@@ -13,7 +14,7 @@ import { __ } from '@wordpress/i18n';
 import { cloneDeep } from 'lodash';
 
 // Internal Deps.
-import { settings as stateSelectSettings } from './select-state-l10n';
+import { settings as stateSelectSettings, postTypes } from './select-state-l10n';
 
 /**
  * Block Name
@@ -21,13 +22,6 @@ import { settings as stateSelectSettings } from './select-state-l10n';
  * @type {string}
  */
 const name = 'llms/form-field-user-address-state';
-
-/**
- * Array of supported post types.
- *
- * @type {Array}
- */
-const postTypes = [ 'llms_form' ];
 
 /**
  * Is this a default or composed field?

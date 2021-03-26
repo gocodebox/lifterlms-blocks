@@ -3,6 +3,7 @@
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
+ * @since [version] Add reusable block support.
  */
 
 // WP Deps.
@@ -14,7 +15,7 @@ import { __ } from '@wordpress/i18n';
 import { cloneDeep } from 'lodash';
 
 // Internal Deps.
-import { settings as textSettings } from './text';
+import { settings as textSettings, postTypes } from './text';
 
 /**
  * Block Name
@@ -22,13 +23,6 @@ import { settings as textSettings } from './text';
  * @type {string}
  */
 const name = 'llms/form-field-redeem-voucher';
-
-/**
- * Array of supported post types.
- *
- * @type {Array}
- */
-const postTypes = [ 'llms_form' ];
 
 /**
  * Is this a default or composed field?
