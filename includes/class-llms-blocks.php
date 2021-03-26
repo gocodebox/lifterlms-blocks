@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version 1.10.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -115,6 +115,7 @@ class LLMS_Blocks {
 	 * @since 1.0.0
 	 * @since 1.4.0 Add status tools class.
 	 * @since 1.9.0 Added course progress block class.
+	 * @since [version] Include LLMS_Blocks_Reusable.
 	 *
 	 * @return  void
 	 */
@@ -131,6 +132,7 @@ class LLMS_Blocks {
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-instructors.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-types.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-visibility.php';
+		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-reusable.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-status-tools.php';
 
 		// Block Visibility Component.
