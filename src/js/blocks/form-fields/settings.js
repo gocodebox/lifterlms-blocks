@@ -9,6 +9,7 @@
 
 // WP Deps.
 import { getBlockType } from '@wordpress/blocks';
+import { select } from '@wordpress/data';
 import { Fill } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
@@ -25,12 +26,14 @@ import { isUnique } from './checks';
  * Generate a unique "name" attribute.
  *
  * @since 1.6.0
+ * @since [version] Removed '_field' and added the current post id to ensure uniqueness across multiple forms.
  *
  * @param {string} name Base name, generally the field's "field" attribute. EG: "text".
  * @return {string} A unique name, in snake case, suitable to be used as a field's "name" attribute.
  */
 const generateName = ( name ) => {
-	return snakeCase( uniqueId( `${ name }_field_` ) );
+	const { getCurrentPostId } = select( 'core/editor' );
+	return snakeCase( uniqueId( `${ name }_${ getCurrentPostId() }_` ) );
 };
 
 /**
@@ -264,6 +267,24 @@ const settings = {
 	},
 };
 
+/**
+ * Retrieve a copy of the default settings object
+ *
+ * @since Unknown
+ *
+ * @return {Object} A settings object.
+ */
 export default () => {
 	return cloneDeep( settings );
+};
+
+/**
+ * Retrieve a copy of an array of default post types that support fields
+ *
+ * @since [version]
+ *
+ * @return {string[]} Array of post type names.
+ */
+export function getDefaultPostTypes() {
+	return cloneDeep( [ 'llms_form', 'wp_block' ] );
 };
