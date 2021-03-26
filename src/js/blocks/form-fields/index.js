@@ -2,8 +2,11 @@
  * Export all fields in the fields library.
  *
  * @since 1.6.0
- * @version 1.7.1
+ * @version [version]
  */
+
+// Hooks.
+import './reusable';
 
 // Default Fields.
 import * as checkboxes from './fields/checkboxes';
