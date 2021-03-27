@@ -302,7 +302,7 @@ export default class InspectorFieldOptions extends Component {
 		 */
 		const onOptionChange = ( option, index ) => {
 			const prevOption = options[ index ] ? options[ index ] : false,
-				  {field}    = this.props.attributes;
+				  { field }    = this.props.attributes;
 
 			options[ index ] = option;
 			this.updateOptions( options );
