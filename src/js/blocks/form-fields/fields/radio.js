@@ -62,7 +62,7 @@ settings.attributes.options.__default = [
 	{
 		default: 'no',
 		text: __( 'Option 2', 'lifterlms' ),
-		key: __( 'option_1', 'lifterlms' ),
+		key: __( 'option_2', 'lifterlms' ),
 	},
 ];
 
