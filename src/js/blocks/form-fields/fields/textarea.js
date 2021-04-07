@@ -99,17 +99,25 @@ settings.transforms = {
 		{
 			type: 'block',
 			blocks: [
-				'llms/form-field-email',
-				'llms/form-field-number',
-				'llms/form-field-password',
-				'llms/form-field-phone',
 				'llms/form-field-text',
-				'llms/form-field-url',
 			],
 			transform: ( attributes ) =>
 				createBlock( name, {
 					...attributes,
 					field: settings.attributes.field.__default,
+				} ),
+		},
+	],
+	to: [
+		{
+			type: 'block',
+			blocks: [
+				'llms/form-field-text',
+			],
+			transform: ( attributes ) =>
+				createBlock( 'llms/form-field-text', {
+					...attributes,
+					field: 'text'
 				} ),
 		},
 	],

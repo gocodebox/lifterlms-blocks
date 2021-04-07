@@ -28,7 +28,7 @@ import GroupLayoutControl from '../group-layout-control';
  *
  * @type {string}
  */
-const name = 'llms/form-field-user-address';
+const name = 'llms/form-field-user-address-street';
 
 /**
  * Array of supported post types.
@@ -52,14 +52,25 @@ const composed = false;
 
 // Setup the field settings.
 const settings = getSettingsFromBase( getDefaultSettings(), {
-	title: __( 'User Address', 'lifterlms' ),
-	description: __( "A group of fields used to collect a user's full address.", 'lifterlms' ),
+	title: __( 'User Street Address', 'lifterlms' ),
+	description: __( "Collect a user's street address.", 'lifterlms' ),
 	icon: {
 		src: 'id-alt',
 	},
+	attributes: {
+		fieldLayout: {
+			type: 'string',
+			default: 'columns',
+		},
+	},
 	supports: {
 		multiple: false,
+		llms_field_group: true,
 	},
+	providesContext: {
+		'llms/fieldGroup/fieldLayout': 'fieldLayout',
+	},
+	parent: [ 'llms/form-field-user-name' ],
 	edit: function( props ) {
 
 		const blockProps = useBlockProps(),
@@ -68,18 +79,13 @@ const settings = getSettingsFromBase( getDefaultSettings(), {
 			{ fieldLayout } = attributes,
 			INNER_ORIENTATION = 'columns' === fieldLayout ? 'horizontal' : 'vertical',
 			INNER_ALLOWED = [
-				'llms/form-field-user-address-street',
-				'llms/form-field-user-address-city',
-				'llms/form-field-user-address-country',
-				'llms/form-field-user-address-region',
+				'llms/form-field-user-address-street-primary',
+				'llms/form-field-user-address-street-secondary',
 			],
 			INNER_TEMPLATE = [
-				[ 'llms/form-field-user-address-street' ],
-				[ 'llms/form-field-user-address-city' ],
-				[ 'llms/form-field-user-address-country' ],
-				[ 'llms/form-field-user-address-region' ],
+				[ 'llms/form-field-user-address-street-primary', { columns: 8, last_column: false } ],
+				[ 'llms/form-field-user-address-street-secondary', { columns: 4, last_column: true } ],
 			];
-
 
 		return (
 			<div { ...blockProps }>
@@ -89,7 +95,7 @@ const settings = getSettingsFromBase( getDefaultSettings(), {
 					</PanelBody>
 				</InspectorControls>
 
-				<div className="llms-field-group llms-field--user-address" data-field-layout={ fieldLayout }>
+				<div className="llms-field-group llms-field--user-address--street" data-field-layout={ fieldLayout }>
 					<InnerBlocks
 						allowedBlocks={ INNER_ALLOWED }
 						template={ INNER_TEMPLATE }

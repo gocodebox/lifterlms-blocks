@@ -11,7 +11,7 @@
 import { __ } from '@wordpress/i18n';
 
 // Internal Deps.
-import { settings as baseSettings, postTypes } from './select';
+import { settings as baseSettings, postTypes } from './user-address-street-primary';
 import { getSettingsFromBase } from '../settings';
 
 /**
@@ -19,7 +19,7 @@ import { getSettingsFromBase } from '../settings';
  *
  * @type {string}
  */
-const name = 'llms/form-field-user-address-state';
+const name = 'llms/form-field-user-address-street-secondary';
 
 /**
  * Is this a default or composed field?
@@ -36,57 +36,37 @@ const composed = true;
 
 // Setup the field settings.
 const settings = getSettingsFromBase( baseSettings, {
-	title: __( 'User Country', 'lifterlms' ),
+	title: __( 'User Street Address Additional Information', 'lifterlms' ),
 	description: __(
-		"A special field used to collect a user's billing country.",
+		"A special field used to collect a user's street address.",
 		'lifterlms'
 	),
-	icon: {
-		src: 'location',
-	},
-	supports: {
-		multiple: false,
-		llms_field_inspector: {
-			id: false,
-			name: false,
-			required: true,
-			match: false,
-			storage: false,
-			options: false,
-		},
-	},
 	attributes: {
 		id: {
-			__default: 'llms_billing_state',
+			__default: 'llms_billing_address_2',
 		},
 		label: {
-			__default: __( 'State / Region', 'lifterlms' ),
-		},
-		name: {
-			__default: 'llms_billing_state',
-		},
-		required: {
-			__default: true,
-		},
-		data_store: {
-			__default: 'usermeta',
-		},
-		data_store_key: {
-			__default: 'llms_billing_state',
-		},
-		options_preset: {
-			__default: 'states',
+			__default: '',
 		},
 		placeholder: {
-			__default: __( 'Select a State / Region', 'lifterlms' ),
-		}
+			__default: __( 'Apartment, suite, etc...', 'lifterlms' ),
+		},
+		name: {
+			__default: 'llms_billing_address_2',
+		},
+		required: {
+			__default: false,
+		},
+		data_store_key: {
+			__default: 'llms_billing_address_2',
+		},
 	},
-	parent: [ 'llms/form-field-user-address-region' ],
 	usesContext: [
 		'llms/fieldGroup/fieldLayout',
 	],
 } );
 
 delete settings.transforms;
+delete settings.variations;
 
 export { name, postTypes, composed, settings };

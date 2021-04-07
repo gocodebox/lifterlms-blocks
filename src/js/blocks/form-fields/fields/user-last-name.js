@@ -1,5 +1,5 @@
 /**
- * BLOCK: llms/form-field-user-last-name
+ * BLOCK: llms/form-field-user-email
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
@@ -10,11 +10,9 @@
 // WP Deps.
 import { __ } from '@wordpress/i18n';
 
-// External Deps.
-import { cloneDeep } from 'lodash';
-
 // Internal Deps.
-import { settings as firstNameSettings, postTypes } from './user-first-name';
+import { settings as baseSettings, postTypes } from './user-first-name';
+import { getSettingsFromBase } from '../settings';
 
 /**
  * Block Name
@@ -37,17 +35,21 @@ const name = 'llms/form-field-user-last-name';
 const composed = true;
 
 // Setup the field settings.
-const settings = cloneDeep( firstNameSettings );
+const settings = getSettingsFromBase( baseSettings, {
+	title: __( 'Last Name', 'lifterlms' ),
+	description: __(
+		"A special field used to collect a user's last name.",
+		'lifterlms'
+	),
+	attributes: {
+		id: { __default: 'last_name', },
+		label: { __default: __( 'Last Name', 'lifterlms' ), },
+		name: { __default: 'last_name', },
+		data_store_key: { __default: 'last_name', },
+	}
+} );
 
-settings.title = __( 'User Last Name', 'lifterlms' );
-settings.description = __(
-	"A special field used to collect a user's last name.",
-	'lifterlms'
-);
-
-settings.attributes.id.__default = 'last_name';
-settings.attributes.label.__default = __( 'Last Name', 'lifterlms' );
-settings.attributes.name.__default = 'last_name';
-settings.attributes.required.__default = true;
+delete settings.transforms;
+delete settings.variations;
 
 export { name, postTypes, composed, settings };

@@ -97,3 +97,18 @@ li.llms-field-option {
 	}
 
 }
+
+.wp-block.llms-fields {
+	margin-left: 0;
+}
+
+
+.llms-field-group[data-field-layout="columns"] {
+	.block-editor-block-list__layout {
+		> .wp-block.llms-fields {
+			display: inline-block;
+			&:nth-child( odd ) { padding-right: 28px; }
+			&:nth-child( even ) { padding-left: 28px; }
+		}
+	}
+}

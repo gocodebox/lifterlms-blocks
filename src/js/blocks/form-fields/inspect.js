@@ -110,6 +110,45 @@ export default class Inspector extends Component {
 		return false;
 	}
 
+	getColumnsOptions( context ) {
+
+		let options = [];
+
+		// Full width is allowed inside stacked groups or when the field is being used solo.
+		if ( ! context || ( context && ( ! context['llms/fieldGroup/fieldLayout'] || 'stacked' === context['llms/fieldGroup/fieldLayout'] ) ) ) {
+			options.push( {
+				value: 12,
+				label: __( '100%', 'lifterlms' ),
+			} );
+		}
+
+		options = options.concat( [
+			{
+				value: 9,
+				label: __( '75%', 'lifterlms' ),
+			},
+			{
+				value: 8,
+				label: __( '66.66%', 'lifterlms' ),
+			},
+			{
+				value: 6,
+				label: __( '50%', 'lifterlms' ),
+			},
+			{
+				value: 4,
+				label: __( '33.33%', 'lifterlms' ),
+			},
+			{
+				value: 3,
+				label: __( '25%', 'lifterlms' ),
+			},
+		] );
+
+		return options;
+
+	}
+
 	/**
 	 * Retrieve an array of objects to be used in the Matching Field select control.
 	 *
@@ -185,15 +224,17 @@ export default class Inspector extends Component {
 	 * @return {Fragment} Component HTML fragment.
 	 */
 	render() {
-		const { attributes, setAttributes, clientId } = this.props,
+		const { attributes, setAttributes, clientId, context } = this.props,
 			{
 				id,
-				match,
 				name,
 				required,
 				placeholder,
 				data_store,
 				data_store_key,
+				columns,
+				isConfirmationField,
+				isConfirmationControlField,
 			} = attributes;
 
 		// Return early if there's no inspector options to display.
@@ -205,7 +246,7 @@ export default class Inspector extends Component {
 			<Fragment>
 				<InspectorControls>
 					<PanelBody>
-						{ this.hasInspectorControlSupport( 'required' ) && (
+						{ ! isConfirmationField && this.hasInspectorControlSupport( 'required' ) && (
 							<ToggleControl
 								label={ __( 'Required', 'lifterlms' ) }
 								checked={ !! required }
@@ -225,6 +266,20 @@ export default class Inspector extends Component {
 								}
 							/>
 						) }
+
+						<SelectControl
+							label={ __( 'Field Width', 'lifterlms' ) }
+							onChange={ ( columns ) => {
+								columns = parseInt( columns, 10 );
+								setAttributes( { columns } );
+							} }
+							help={ __(
+								'Determines the width of the form field.',
+								'lifterlms'
+							) }
+							value={ columns }
+							options={ this.getColumnsOptions( context ) }
+						/>
 
 						{ this.hasInspectorControlSupport( 'options' ) && (
 							<InspectorFieldOptions
@@ -256,7 +311,7 @@ export default class Inspector extends Component {
 						) }
 					</PanelBody>
 
-					{ this.hasInspectorControlSupport( 'storage' ) && (
+					{ ! isConfirmationField && this.hasInspectorControlSupport( 'storage' ) && (
 						<PanelBody title={ __( 'Data Storage', 'lifterlms' ) }>
 							<SelectControl
 								label={ __( 'Location', 'lifterlms' ) }
@@ -354,7 +409,7 @@ export default class Inspector extends Component {
 				</InspectorControls>
 
 				<InspectorAdvancedControls>
-					{ this.hasInspectorControlSupport( 'name' ) && (
+					{ ! isConfirmationField && this.hasInspectorControlSupport( 'name' ) && (
 						<TextControl
 							label={ __( 'Field Name', 'lifterlms' ) }
 							onChange={ ( value ) =>
@@ -368,7 +423,7 @@ export default class Inspector extends Component {
 						/>
 					) }
 
-					{ this.hasInspectorControlSupport( 'id' ) && (
+					{ ! isConfirmationField && this.hasInspectorControlSupport( 'id' ) && (
 						<TextControl
 							label={ __( 'Field ID', 'lifterlms' ) }
 							onChange={ ( value ) =>
@@ -382,31 +437,6 @@ export default class Inspector extends Component {
 						/>
 					) }
 
-					{ this.hasInspectorControlSupport( 'match' ) && (
-						<SelectControl
-							label={ __( 'Confirmation Field', 'lifterlms' ) }
-							onChange={ ( value ) => {
-								// Save the matched field value.
-								setAttributes( { match: value } );
-
-								// Update the matched field to have the current field as its matcher.
-								const match = this.getBlockByFieldId( value );
-								if ( match ) {
-									dispatch(
-										'core/block-editor'
-									).updateBlockAttributes( match.clientId, {
-										match: id,
-									} );
-								}
-							} }
-							help={ __(
-								'Requires this field to match the selected field.',
-								'lifterlms'
-							) }
-							value={ match }
-							options={ this.getMatchFieldOptions() }
-						/>
-					) }
 				</InspectorAdvancedControls>
 			</Fragment>
 		);

@@ -11199,7 +11199,12 @@ __webpack_require__.r(__webpack_exports__);
     var _props$attributes = props.attributes,
         llms_visibility = _props$attributes.llms_visibility,
         llms_visibility_in = _props$attributes.llms_visibility_in,
-        setAttributes = props.setAttributes;
+        setAttributes = props.setAttributes; // Visibility is disabled via block properties.
+
+    if ('off' === llms_visibility) {
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props);
+    }
+
     var llms_visibility_posts = props.attributes.llms_visibility_posts; // eslint-disable-line camelcase
 
     if (undefined === llms_visibility_posts) {
@@ -12565,8 +12570,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/core-data */ "@wordpress/core-data");
-/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_2__);
 /**
  * Form Field related checks
  *
@@ -12575,7 +12578,6 @@ __webpack_require__.r(__webpack_exports__);
  */
 // External Deps.
  // WP Deps.
-
 
 
 /**
@@ -12587,8 +12589,8 @@ __webpack_require__.r(__webpack_exports__);
  * @since Unknown
  * @since [version] Adds support for reusable blocks.
  *
- * @param {WP_Block} block A block object.
- * @return {WP_Block[]} An array of field blocks.
+ * @param {Object} block A block object.
+ * @return {Object[]} An array of field blocks.
  */
 
 function filterBlock(block) {
@@ -12612,8 +12614,6 @@ function filterBlock(block) {
 
   return [block];
 }
-
-;
 /**
  * Recursively filter blocks (checking inner blocks)
  *
@@ -12621,9 +12621,10 @@ function filterBlock(block) {
  *
  * @since [version]
  *
- * @param {WP_Block[]} blocks An array of blocks to filter.
- * @return {WP_Block[]} An array of field blocks.
+ * @param {Object[]} blocks An array of blocks to filter.
+ * @return {Object[]} An array of field blocks.
  */
+
 
 function filterBlocks() {
   var blocks = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -12637,8 +12638,6 @@ function filterBlocks() {
   });
   return fieldBlocks;
 }
-
-;
 /**
  * Retrieve a "flattened" list of all form fields from a list of blocks
  *
@@ -12647,9 +12646,10 @@ function filterBlocks() {
  *
  * @since Unknown
  *
- * @param {WP_Block[]} blocks An array of blocks to filter.
- * @return {WP_Block[]} An array of field blocks.
+ * @param {Object[]} blocks An array of blocks to filter.
+ * @return {Object[]} An array of field blocks.
  */
+
 
 var getFieldBlocks = function getFieldBlocks() {
   var blocks = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -12665,9 +12665,9 @@ var getFieldBlocks = function getFieldBlocks() {
  *
  * @since Unknown
  *
- * @param {String} field Attribute key name.
- * @param {String} str   String to check for uniqueness.
- * @return {Boolean} Returns `true` when the string is unique across the form and `false` if it's not.
+ * @param {string} field Attribute key name.
+ * @param {string} str   String to check for uniqueness.
+ * @return {boolean} Returns `true` when the string is unique across the form and `false` if it's not.
  */
 
 var isUnique = function isUnique(field, str) {
@@ -12675,6 +12675,230 @@ var isUnique = function isUnique(field, str) {
     return block.attributes[field] !== str;
   });
 };
+
+/***/ }),
+
+/***/ "./src/js/blocks/form-fields/edit.js":
+/*!*******************************************!*\
+  !*** ./src/js/blocks/form-fields/edit.js ***!
+  \*******************************************/
+/*! exports provided: editField, editGroup */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editField", function() { return editField; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editGroup", function() { return editGroup; });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./field */ "./src/js/blocks/form-fields/field.js");
+/* harmony import */ var _inspect__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./inspect */ "./src/js/blocks/form-fields/inspect.js");
+/* harmony import */ var _checks__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./checks */ "./src/js/blocks/form-fields/checks.js");
+/* harmony import */ var _group_data__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./group-data */ "./src/js/blocks/form-fields/group-data.js");
+/* harmony import */ var _group_layout_control__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./group-layout-control */ "./src/js/blocks/form-fields/group-layout-control.js");
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Generate a unique "name" attribute.
+ *
+ * @since 1.6.0
+ * @since [version] Removed '_field' and added the current post id to ensure uniqueness across multiple forms.
+ *
+ * @param {string} name Base name, generally the field's "field" attribute. EG: "text".
+ * @return {string} A unique name, in snake case, suitable to be used as a field's "name" attribute.
+ */
+
+var generateName = function generateName(name) {
+  var _select = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__["select"])('core/editor'),
+      getCurrentPostId = _select.getCurrentPostId;
+
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_7__["snakeCase"])(Object(lodash__WEBPACK_IMPORTED_MODULE_7__["uniqueId"])("".concat(name, "_").concat(getCurrentPostId(), "_")));
+};
+/**
+ * Generate a unique "id" attribute.
+ *
+ * @since 1.6.0
+ *
+ * @param {string} name Base name, generally the field's "name" attribute. EG: "text_field_1".
+ * @return {string} A unique name, in kebab case, suitable to be used as a field's "id" attribute.
+ */
+
+
+var generateId = function generateId(name) {
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_7__["kebabCase"])(name);
+};
+/**
+ * Sets up block attributes, filling defaults and generating unique values.
+ *
+ * @since 1.6.0
+ * @since 1.12.0 Add data_store_key generation.
+ *
+ * @param {Object} atts      Default block attributes object.
+ * @param {Object} blockAtts Actual WP_Block attributes object.
+ * @return {Object} Attribute object suitable for use when registering the block.
+ */
+
+
+var setupAtts = function setupAtts(atts, blockAtts) {
+  Object.keys(blockAtts).forEach(function (key) {
+    var defaultValue = blockAtts[key].__default;
+
+    if ('undefined' !== typeof defaultValue && 'undefined' === typeof atts[key]) {
+      atts[key] = defaultValue;
+    }
+  });
+
+  if (!atts.name) {
+    var name = generateName(atts.field);
+
+    while (!Object(_checks__WEBPACK_IMPORTED_MODULE_10__["isUnique"])('name', name)) {
+      name = generateName(atts.field);
+    }
+
+    atts.name = name;
+  }
+
+  if (!atts.id) {
+    var id = generateId(atts.name);
+
+    while (!Object(_checks__WEBPACK_IMPORTED_MODULE_10__["isUnique"])('id', id)) {
+      id = generateId(Object(lodash__WEBPACK_IMPORTED_MODULE_7__["uniqueId"])("".concat(atts.field, "-field-")));
+    }
+
+    atts.id = id;
+  }
+
+  if ('' === atts.data_store_key) {
+    atts.data_store_key = atts.name;
+  }
+
+  return atts;
+};
+
+function editField(props) {
+  var name = props.name,
+      block = Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["getBlockType"])(name),
+      clientId = props.clientId,
+      context = props.context,
+      setAttributes = props.setAttributes,
+      inspectorSupports = block.supports.llms_field_inspector,
+      editFills = block.supports.llms_edit_fill,
+      fieldGroupContext = block.fieldGroupContext,
+      fillEditAfter = block.fillEditAfter,
+      fillInspectorControls = block.fillInspectorControls,
+      _select2 = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__["select"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["store"]),
+      getSelectedBlockClientId = _select2.getSelectedBlockClientId;
+
+  var attributes = props.attributes;
+  attributes = setupAtts(attributes, block.attributes);
+  var blockProps = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["useBlockProps"])({
+    className: 'llms-fields',
+    style: {
+      width: attributes.columns / 12 * 100 + '%'
+    }
+  }); // Manage field data for blocks in field groups.
+
+  if (context['llms/fieldGroup/fieldLayout']) {
+    Object(_group_data__WEBPACK_IMPORTED_MODULE_11__["default"])(props);
+  } // We can't disable the variation transformer by context so we'll do it this way which is gross but works.
+
+
+  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    if (block.variations && block.variations.length && clientId === getSelectedBlockClientId()) {
+      var interval = setInterval(function () {
+        var el = document.querySelector('.block-editor-block-inspector .block-editor-block-variation-transforms');
+
+        if (el) {
+          el.style.display = attributes.isConfirmationField ? 'none' : 'inline-block';
+          clearInterval(interval);
+        }
+
+        return function () {
+          clearInterval(interval);
+        };
+      }, 10);
+    }
+  });
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", blockProps, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_inspect__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    attributes: attributes,
+    clientId: clientId,
+    name: name,
+    setAttributes: setAttributes,
+    inspectorSupports: inspectorSupports,
+    context: context
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_field__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes,
+    block: block,
+    clientId: clientId,
+    context: context
+  }), inspectorSupports.customFill && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["Fill"], {
+    name: "llmsInspectorControlsFill.".concat(inspectorSupports.customFill, ".").concat(clientId)
+  }, fillInspectorControls(attributes, setAttributes, props)), editFills.after && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["Fill"], {
+    name: "llmsEditFill.after.".concat(editFills.after, ".").concat(clientId)
+  }, fillEditAfter(attributes, setAttributes, props)));
+}
+;
+function editGroup(props) {
+  var attributes = props.attributes,
+      clientId = props.clientId,
+      name = props.name,
+      fieldLayout = attributes.fieldLayout,
+      _select3 = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__["select"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["store"]),
+      getBlock = _select3.getBlock,
+      block = getBlock(clientId),
+      blockType = Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["getBlockType"])(name),
+      _blockType$llmsInnerB = blockType.llmsInnerBlocks,
+      allowed = _blockType$llmsInnerB.allowed,
+      template = _blockType$llmsInnerB.template,
+      lock = _blockType$llmsInnerB.lock;
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["PanelBody"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_group_layout_control__WEBPACK_IMPORTED_MODULE_12__["default"], _objectSpread(_objectSpread({}, props), {}, {
+    block: block
+  })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "llms-field-group llms-field--user-name",
+    "data-field-layout": fieldLayout
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["InnerBlocks"], {
+    allowedBlocks: allowed,
+    template: template,
+    templateLock: lock,
+    orientation: 'columns' === fieldLayout ? 'horizontal' : 'vertical'
+  })));
+}
+;
 
 /***/ }),
 
@@ -12715,9 +12939,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./editor.scss */ "./src/js/blocks/form-fields/editor.scss");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_editor_scss__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _input_group_options__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./input-group-options */ "./src/js/blocks/form-fields/input-group-options.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./editor.scss */ "./src/js/blocks/form-fields/editor.scss");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_editor_scss__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _input_group_options__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./input-group-options */ "./src/js/blocks/form-fields/input-group-options.js");
 
 
 
@@ -12736,6 +12962,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
  * @version 1.6.0
  */
 // WP deps.
+
 
 
  // Internal deps.
@@ -12792,14 +13019,18 @@ var Field = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var _this$props = this.props,
-          _this$props$attribute = _this$props.attributes,
-          id = _this$props$attribute.id,
-          description = _this$props$attribute.description,
-          label = _this$props$attribute.label,
-          options = _this$props$attribute.options,
-          placeholder = _this$props$attribute.placeholder,
-          required = _this$props$attribute.required,
-          setAttributes = _this$props.setAttributes;
+          attributes = _this$props.attributes,
+          setAttributes = _this$props.setAttributes,
+          block = _this$props.block,
+          clientId = _this$props.clientId,
+          id = attributes.id,
+          description = attributes.description,
+          columns = attributes.columns,
+          label = attributes.label,
+          options = attributes.options,
+          placeholder = attributes.placeholder,
+          required = attributes.required,
+          editFills = block.supports.llms_edit_fill;
       var classes = [];
 
       if (required) {
@@ -12837,8 +13068,6 @@ var Field = /*#__PURE__*/function (_Component) {
       };
 
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("div", {
-        className: "llms-fields"
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("div", {
         className: "llms-field"
       }, 'html' !== fieldType && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__["RichText"], {
         tagName: "label",
@@ -12889,9 +13118,7 @@ var Field = /*#__PURE__*/function (_Component) {
           maxWidth: 'none',
           pointerEvents: 'none'
         }
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("option", null, getDefaultOption())), 'llms-password-strength-meter' === id && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("div", {
-        className: "llms-pwd-meter"
-      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("div", null, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__["__"])('Very Weak', 'lifterlms'))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__["RichText"], {
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("option", null, getDefaultOption())), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__["RichText"], {
         tagName: "span",
         value: description,
         onChange: function onChange(val) {
@@ -12906,10 +13133,12 @@ var Field = /*#__PURE__*/function (_Component) {
           color: '#808285',
           fontStyle: 'italic'
         }
-      }), ('radio' === fieldType || 'checkbox' === fieldType) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_input_group_options__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      }), ('radio' === fieldType || 'checkbox' === fieldType) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_input_group_options__WEBPACK_IMPORTED_MODULE_10__["default"], {
         options: options,
         fieldType: fieldType
-      }))));
+      })), editFills.after && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["Slot"], {
+        name: "llmsEditFill.after.".concat(editFills.after, ".").concat(clientId)
+      }));
     }
   }]);
 
@@ -12952,6 +13181,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
  *
  * @since 1.6.0
  * @since 1.12.0 Add transform support and default options.
+ * @since [version] Add reusable block support.
  */
 // WP Deps.
 
@@ -13015,95 +13245,10 @@ settings.transforms = {
 
 /***/ }),
 
-/***/ "./src/js/blocks/form-fields/fields/email.js":
-/*!***************************************************!*\
-  !*** ./src/js/blocks/form-fields/fields/email.js ***!
-  \***************************************************/
-/*! exports provided: name, postTypes, composed, settings */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return postTypes; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-/**
- * BLOCK: llms/form-field-email
- *
- * @since 1.6.0
- * @since 1.12.0 Add transform support.
- */
-// WP Deps.
-
- // Internal Deps.
-
-
-/**
- * Block Name
- *
- * @type {string}
- */
-
-var name = 'llms/form-field-email';
-/**
- * Array of supported post types.
- *
- * @type {Array}
- */
-
-var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["getDefaultPostTypes"])();
-/**
- * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
- *
- * @type {string}
- */
-
-var composed = false; // Setup the field settings.
-
-var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["default"])();
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Email Address', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('An input field which accepts email addresses.', 'lifterlms');
-settings.icon.src = 'email-alt';
-settings.attributes.field.__default = 'email';
-settings.transforms = {
-  from: [{
-    type: 'block',
-    blocks: ['llms/form-field-number', 'llms/form-field-password', 'llms/form-field-phone', 'llms/form-field-text', 'llms/form-field-textarea', 'llms/form-field-url'],
-    transform: function transform(attributes) {
-      return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, _objectSpread(_objectSpread({}, attributes), {}, {
-        field: settings.attributes.field.__default
-      }));
-    }
-  }]
-};
-
-
-/***/ }),
-
-/***/ "./src/js/blocks/form-fields/fields/number.js":
-/*!****************************************************!*\
-  !*** ./src/js/blocks/form-fields/fields/number.js ***!
-  \****************************************************/
+/***/ "./src/js/blocks/form-fields/fields/confirm-group.js":
+/*!***********************************************************!*\
+  !*** ./src/js/blocks/form-fields/fields/confirm-group.js ***!
+  \***********************************************************/
 /*! exports provided: name, postTypes, composed, settings */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13117,14 +13262,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
-/* harmony import */ var _icons_field_number__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../icons/field-number */ "./src/js/icons/field-number.js");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
+/* harmony import */ var _group_layout_control__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../group-layout-control */ "./src/js/blocks/form-fields/group-layout-control.js");
 
 
 
@@ -13133,12 +13282,15 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 /**
- * BLOCK: llms/form-field-number
+ * BLOCK: llms/form-field-passwords
  *
  * @since 1.6.0
  * @since 1.12.0 Add transform support.
+ * @since [version] Add reusable block support.
  */
 // WP Deps.
+
+
 
 
 
@@ -13152,14 +13304,14 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
  * @type {string}
  */
 
-var name = 'llms/form-field-number';
+var name = 'llms/form-field-confirm-group';
 /**
  * Array of supported post types.
  *
  * @type {Array}
  */
 
-var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_5__["getDefaultPostTypes"])();
+var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_7__["getDefaultPostTypes"])();
 /**
  * Is this a default or composed field?
  *
@@ -13174,209 +13326,98 @@ var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_5__["getDefaultPostTyp
 
 var composed = false; // Setup the field settings.
 
-var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_5__["default"])();
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Number', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('An input field which accepts numbers.', 'lifterlms');
-settings.supports.llms_field_inspector.customFill = 'fieldNumber';
-settings.icon.src = _icons_field_number__WEBPACK_IMPORTED_MODULE_6__["default"];
-settings.attributes.field.__default = 'number';
-settings.attributes.attributes = {
-  type: 'object',
-  __default: {
-    min: '',
-    max: ''
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_7__["default"])();
+settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Input Confirmation Group', 'lifterlms');
+settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Adds a required confirmation field to an input field.', 'lifterlms');
+settings.icon.src = 'controls-repeat';
+settings.attributes = {
+  fieldLayout: {
+    type: 'string',
+    default: 'columns'
   }
 };
-/**
- * Fill the controls slot with additional controls specific to this field.
- *
- * @since 1.6.0
- *
- * @param {Object} attributes Block attributes.
- * @param {Function} setAttributes Reference to the block's setAttributes() function.
- * @return {Fragment} Component HTML Fragment.
- */
-
-settings.fillInspectorControls = function (attributes, setAttributes) {
-  var _attributes$attribute = attributes.attributes,
-      min = _attributes$attribute.min,
-      max = _attributes$attribute.max;
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["TextControl"], {
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Minimum Value', 'lifterlms'),
-    help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Specify the minimum allowed value. Leave blank for no minimum.', 'lifterlms'),
-    value: min,
-    type: "number",
-    onChange: function onChange(val) {
-      return setAttributes({
-        attributes: {
-          min: val,
-          max: max
-        }
-      });
-    }
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["TextControl"], {
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Maximum Value', 'lifterlms'),
-    help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Specify the maximum allowed value. Leave blank for no maximum.', 'lifterlms'),
-    value: max,
-    type: "number",
-    onChange: function onChange(val) {
-      return setAttributes({
-        attributes: {
-          min: min,
-          max: val
-        }
-      });
-    }
-  }));
+settings.providesContext = {
+  'llms/fieldGroup/fieldLayout': 'fieldLayout'
 };
+settings.supports = _objectSpread(_objectSpread({}, settings.supports), {}, {
+  llms_field_group: true
+});
+var ALLOWED = ['llms/form-field-text', 'llms/form-field-user-email', 'llms/form-field-user-password'];
 
-settings.transforms = {
-  from: [{
-    type: 'block',
-    blocks: ['llms/form-field-email', 'llms/form-field-password', 'llms/form-field-phone', 'llms/form-field-text', 'llms/form-field-textarea', 'llms/form-field-url'],
-    transform: function transform(attributes) {
-      return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__["createBlock"])(name, _objectSpread(_objectSpread({}, attributes), {}, {
-        field: settings.attributes.field.__default
-      }));
+function getControllerBlockAttrs() {
+  var attributes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  return _objectSpread(_objectSpread({}, attributes), {}, {
+    columns: 6,
+    last_column: false,
+    isConfirmationControlField: true,
+    llms_visibility: 'off'
+  });
+}
+
+function getControlledBlockAttrs() {
+  var attributes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  return _objectSpread(_objectSpread({}, attributes), {}, {
+    label: attributes.label ? sprintf(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Confirm %s', 'lifterlms'), attributes.label) : '',
+    columns: 6,
+    last_column: true,
+    data_store: false,
+    data_store_key: false,
+    isConfirmationField: true,
+    llms_visibility: 'off'
+  });
+}
+
+function revertToSingle(block) {
+  var _dispatch = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["dispatch"])('core/block-editor'),
+      replaceBlock = _dispatch.replaceBlock,
+      clientId = block.clientId,
+      innerBlocks = block.innerBlocks,
+      llms_visibility = block.attributes.llms_visibility,
+      _innerBlocks$ = innerBlocks[0],
+      name = _innerBlocks$.name,
+      attributes = _innerBlocks$.attributes;
+
+  replaceBlock(clientId, Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, _objectSpread(_objectSpread({}, attributes), {}, {
+    columns: 12,
+    last_column: true,
+    isConfirmationControlField: false,
+    llms_visibility: llms_visibility
+  })));
+}
+
+;
+
+settings.edit = function (props) {
+  var blockProps = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["useBlockProps"])();
+  var attributes = props.attributes,
+      clientId = props.clientId,
+      setAttributes = props.setAttributes;
+  var hasConfirmation = attributes.hasConfirmation,
+      fieldLayout = attributes.fieldLayout;
+  var block = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])('core/block-editor').getBlock(clientId),
+      hasChildren = block && block.innerBlocks.length > 0,
+      firstChild = hasChildren ? block.innerBlocks[0] : null,
+      firstChildBlock = firstChild ? Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["getBlockType"])(firstChild.name) : null,
+      editFills = firstChildBlock ? firstChildBlock.supports.llms_edit_fill : {
+    after: false
+  };
+  var TEMPLATE = hasChildren ? null : [['llms/form-field-text', getControllerBlockAttrs()], ['llms/form-field-text', getControlledBlockAttrs()]];
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", blockProps, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["PanelBody"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_group_layout_control__WEBPACK_IMPORTED_MODULE_8__["default"], _objectSpread(_objectSpread({}, props), {}, {
+    block: block
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["Button"], {
+    isDestructive: true,
+    onClick: function onClick() {
+      return revertToSingle(block);
     }
-  }]
-};
-
-
-/***/ }),
-
-/***/ "./src/js/blocks/form-fields/fields/password-strength-meter.js":
-/*!*********************************************************************!*\
-  !*** ./src/js/blocks/form-fields/fields/password-strength-meter.js ***!
-  \*********************************************************************/
-/*! exports provided: name, postTypes, composed, settings */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return postTypes; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
-
-
-/**
- * BLOCK: llms/form-field-password-strength-meter
- *
- * @since 1.6.0
- * @since 1.12.0 Add data store support.
- */
-
-/* eslint camelcase: [ "error", { allow: [ "min_*" ] } ] */
-// WP Deps.
-
-
- // Internal Deps.
-
-
-/**
- * Block Name
- *
- * @type {string}
- */
-
-var name = 'llms/form-field-password-strength-meter';
-/**
- * Array of supported post types.
- *
- * @type {Array}
- */
-
-var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["getDefaultPostTypes"])();
-/**
- * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
- *
- * @type {string}
- */
-
-var composed = true; // Setup the field settings.
-
-var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["default"])();
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Password Strength Meter', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Combine with a password field to help users create strong passwords.', 'lifterlms');
-settings.icon.src = 'dashboard';
-settings.supports.multiple = false;
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
-settings.supports.llms_field_inspector.match = false;
-settings.supports.llms_field_inspector.required = false;
-settings.supports.llms_field_inspector.customFill = 'passwordStrengthMeter';
-settings.supports.llms_field_inspector.storage = false;
-settings.attributes.field.__default = 'html';
-settings.attributes.id.__default = 'llms-password-strength-meter';
-settings.attributes.description.__default = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["sprintf"])( // Translators: %1$s = password minimum strength merge code; %2$s = password minimum length merge code.
-Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('A %1$s password is required. The password must be at least %2$s characters in length. Consider adding letters, numbers, and symbols to increase the password strength.', 'lifterlms'), '{min_strength}', '{min_length}');
-settings.attributes.data_store.__default = false;
-settings.attributes.min_strength = {
-  type: 'string',
-  __default: 'strong'
-};
-settings.attributes.min_length = {
-  type: 'integer',
-  __default: 6
-};
-delete settings.transforms;
-/**
- * Fill the controls slot with additional controls specific to this field.
- *
- * @since 1.6.0
- *
- * @param {Object} attributes Block attributes.
- * @param {Function} setAttributes Reference to the block's setAttributes() function.
- * @return {Fragment} Component HTML fragment.
- */
-
-settings.fillInspectorControls = function (attributes, setAttributes) {
-  var min_strength = attributes.min_strength,
-      min_length = attributes.min_length;
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["SelectControl"], {
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Minimum Password Strength', 'lifterlms'),
-    help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display in the meter description with: {min_strength}.', 'lifterlms'),
-    value: min_strength,
-    onChange: function onChange(min_strength) {
-      return setAttributes({
-        min_strength: min_strength
-      });
-    },
-    options: [{
-      value: 'strong',
-      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Strong', 'lifterlms')
-    }, {
-      value: 'medium',
-      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Medium', 'lifterlms')
-    }, {
-      value: 'weak',
-      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Weak', 'lifterlms')
-    }]
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["TextControl"], {
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Minimum Password Length', 'lifterlms'),
-    help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Display in the meter description with: {min_length}.', 'lifterlms'),
-    value: min_length,
-    type: "number",
-    min: "6",
-    onChange: function onChange(min_length) {
-      return setAttributes({
-        min_length: min_length * 1
-      });
-    }
+  }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Remove confirmation field', 'lifterlms')))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "llms-field-group llms-field--confirm-group",
+    "data-field-layout": fieldLayout
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["InnerBlocks"], {
+    allowedBlocks: ALLOWED,
+    template: TEMPLATE,
+    templateLock: "all"
+  })), editFills.after && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["Slot"], {
+    name: "llmsEditFill.after.".concat(editFills.after, ".").concat(firstChild.clientId)
   }));
 };
 /**
@@ -13385,195 +13426,35 @@ settings.fillInspectorControls = function (attributes, setAttributes) {
  *
  * The "save" property must be specified and must be a valid function.
  *
- * @since 1.6.0
+ * @since [version]
  *
- * @param {Object} props Block properties.
- * @return {Object} Block attributes object.
+ * @return {Object} Attributes object.
  */
 
 
-settings.save = function (props) {
-  var attributes = props.attributes;
-
-  if (!attributes.className) {
-    attributes.className = '';
-  }
-
-  if (-1 === attributes.className.indexOf('llms-password-strength-meter')) {
-    attributes.className += ' llms-password-strength-meter';
-    attributes.className = attributes.className.trim();
-  }
-
-  return attributes;
+settings.save = function () {
+  var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["useBlockProps"].save();
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", blockProps, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["InnerBlocks"].Content, null));
 };
 
-
-
-/***/ }),
-
-/***/ "./src/js/blocks/form-fields/fields/password.js":
-/*!******************************************************!*\
-  !*** ./src/js/blocks/form-fields/fields/password.js ***!
-  \******************************************************/
-/*! exports provided: name, postTypes, composed, settings */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return postTypes; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-/**
- * BLOCK: llms/form-field-password
- *
- * @since 1.6.0
- * @since 1.12.0 Add transform support.
- */
-// WP Deps.
-
- // Internal Deps.
-
-
-/**
- * Block Name
- *
- * @type {string}
- */
-
-var name = 'llms/form-field-password';
-/**
- * Array of supported post types.
- *
- * @type {Array}
- */
-
-var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["getDefaultPostTypes"])();
-/**
- * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
- *
- * @type {string}
- */
-
-var composed = false; // Setup the field settings.
-
-var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["default"])();
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Password', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('A password input field.', 'lifterlms');
-settings.icon.src = 'lock';
-settings.attributes.field.__default = 'password';
 settings.transforms = {
   from: [{
     type: 'block',
-    blocks: ['llms/form-field-email', 'llms/form-field-number', 'llms/form-field-phone', 'llms/form-field-text', 'llms/form-field-textarea', 'llms/form-field-url'],
+    blocks: ['llms/form-field-text'],
     transform: function transform(attributes) {
-      return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["createBlock"])(name, _objectSpread(_objectSpread({}, attributes), {}, {
-        field: settings.attributes.field.__default
-      }));
+      return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, {}, [Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])('llms/form-field-text', getControllerBlockAttrs(attributes)), Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])('llms/form-field-text', getControlledBlockAttrs(attributes))]);
     }
-  }]
-};
-
-
-/***/ }),
-
-/***/ "./src/js/blocks/form-fields/fields/phone.js":
-/*!***************************************************!*\
-  !*** ./src/js/blocks/form-fields/fields/phone.js ***!
-  \***************************************************/
-/*! exports provided: name, postTypes, composed, settings */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return postTypes; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-/**
- * BLOCK: llms/form-field-phone
- *
- * @since 1.6.0
- * @since 1.12.0 Add transform support.
- */
-// WP Deps.
-
- // Internal Deps.
-
-
-/**
- * Block Name
- *
- * @type {string}
- */
-
-var name = 'llms/form-field-phone';
-/**
- * Array of supported post types.
- *
- * @type {Array}
- */
-
-var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["getDefaultPostTypes"])();
-/**
- * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
- *
- * @type {string}
- */
-
-var composed = false; // Setup the field settings.
-
-var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["default"])();
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Phone', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('An input that accepts and validates telephone numbers.', 'lifterlms');
-settings.attributes.field.__default = 'tel';
-settings.icon.src = 'phone';
-settings.transforms = {
-  from: [{
+  }, {
     type: 'block',
-    blocks: ['llms/form-field-email', 'llms/form-field-number', 'llms/form-field-password', 'llms/form-field-text', 'llms/form-field-textarea', 'llms/form-field-url'],
+    blocks: ['llms/form-field-user-email'],
     transform: function transform(attributes) {
-      return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, _objectSpread(_objectSpread({}, attributes), {}, {
-        field: settings.attributes.field.__default
-      }));
+      return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, {}, [Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])('llms/form-field-user-email', getControllerBlockAttrs(attributes)), Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])('llms/form-field-text', getControlledBlockAttrs(attributes))]);
+    }
+  }, {
+    type: 'block',
+    blocks: ['llms/form-field-user-password'],
+    transform: function transform(attributes) {
+      return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, {}, [Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])('llms/form-field-user-password', getControllerBlockAttrs(attributes)), Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])('llms/form-field-text', getControlledBlockAttrs(attributes))]);
     }
   }]
 };
@@ -13613,6 +13494,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
  *
  * @since 1.6.0
  * @since 1.12.0 Add transform support and default options.
+ * @since [version] Add reusable block support.
  */
 // WP Deps.
 
@@ -13706,6 +13588,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
+ * @since [version] Add reusable block support.
  */
 // WP Deps.
 
@@ -13787,134 +13670,6 @@ settings.fillInspectorControls = function (attributes, setAttributes) {
 
 /***/ }),
 
-/***/ "./src/js/blocks/form-fields/fields/select-country.js":
-/*!************************************************************!*\
-  !*** ./src/js/blocks/form-fields/fields/select-country.js ***!
-  \************************************************************/
-/*! exports provided: name, postTypes, composed, settings */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./select */ "./src/js/blocks/form-fields/fields/select.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _select__WEBPACK_IMPORTED_MODULE_2__["postTypes"]; });
-
-/**
- * BLOCK: llms/form-field-select-country
- *
- * @since 1.6.0
- * @since 1.8.0 Updated lodash imports.
- */
-// WP Deps.
- // External Deps.
-
- // Internal Deps.
-
-
-/**
- * Block Name
- *
- * @type {string}
- */
-
-var name = 'llms/form-field-select-country';
-/**
- * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
- *
- * @type {string}
- */
-
-var composed = false; // Setup the field settings.
-
-var settings = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_select__WEBPACK_IMPORTED_MODULE_2__["settings"]);
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Dropdown Countries', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('A searchable select field prepopulated with a list of countries.', 'lifterlms');
-settings.icon.src = 'admin-site';
-settings.attributes.options_preset.__default = 'countries';
-settings.attributes.placeholder.__default = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select a Country', 'lifterlms');
-settings.supports.llms_field_inspector.options = false;
-delete settings.transforms;
-
-
-/***/ }),
-
-/***/ "./src/js/blocks/form-fields/fields/select-state-l10n.js":
-/*!***************************************************************!*\
-  !*** ./src/js/blocks/form-fields/fields/select-state-l10n.js ***!
-  \***************************************************************/
-/*! exports provided: name, postTypes, composed, settings */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./select */ "./src/js/blocks/form-fields/fields/select.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _select__WEBPACK_IMPORTED_MODULE_2__["postTypes"]; });
-
-/**
- * BLOCK: llms/form-field-select-state-l10n
- *
- * @since 1.6.0
- * @since 1.8.0 Updated lodash imports.
- */
-// WP Deps.
- // External Deps.
-
- // Internal Deps.
-
-
-/**
- * Block Name
- *
- * @type {string}
- */
-
-var name = 'llms/form-field-select-state-l10n';
-/**
- * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
- *
- * @type {string}
- */
-
-var composed = false; // Setup the field settings.
-
-var settings = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_select__WEBPACK_IMPORTED_MODULE_2__["settings"]);
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Dropdown States', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('A searchable select field prepopulated with a country states / regions. When combined with a "Dropdown Countries" field, this field will automatically update to display options for the currently selected country.', 'lifterlms');
-settings.icon.src = 'admin-site-alt';
-settings.attributes.options_preset.__default = 'states';
-settings.attributes.placeholder.__default = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select a State', 'lifterlms');
-settings.supports.llms_field_inspector.options = false;
-delete settings.transforms;
-
-
-/***/ }),
-
 /***/ "./src/js/blocks/form-fields/fields/select.js":
 /*!****************************************************!*\
   !*** ./src/js/blocks/form-fields/fields/select.js ***!
@@ -13947,6 +13702,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
  *
  * @since 1.6.0
  * @since 1.12.0 Add transform support and default options.
+ * @since [version] Add reusable block support.
  */
 // WP Deps.
 
@@ -14026,12 +13782,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
-/* harmony import */ var _icons_field_text__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../icons/field-text */ "./src/js/icons/field-text.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
+/* harmony import */ var _icons_field_text__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../icons/field-text */ "./src/js/icons/field-text.js");
+/* harmony import */ var _icons_field_number__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../icons/field-number */ "./src/js/icons/field-number.js");
+
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -14043,10 +13805,14 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
  *
  * @since 1.6.0
  * @since 1.12.0 Add transform support.
+ * @since [version] Add reusable block support.
  */
 // WP Deps.
 
+
+
  // Internal Deps.
+
 
 
 
@@ -14063,7 +13829,7 @@ var name = 'llms/form-field-text';
  * @type {Array}
  */
 
-var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["getDefaultPostTypes"])();
+var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_5__["getDefaultPostTypes"])();
 /**
  * Is this a default or composed field?
  *
@@ -14078,21 +13844,116 @@ var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["getDefaultPostTyp
 
 var composed = false; // Setup the field settings.
 
-var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["default"])();
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Text', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('A simple text input field.', 'lifterlms');
-settings.icon.src = _icons_field_text__WEBPACK_IMPORTED_MODULE_4__["default"];
-settings.transforms = {
-  from: [{
-    type: 'block',
-    blocks: ['llms/form-field-email', 'llms/form-field-password', 'llms/form-field-phone', 'llms/form-field-number', 'llms/form-field-textarea', 'llms/form-field-url'],
-    transform: function transform(attributes) {
-      return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, _objectSpread(_objectSpread({}, attributes), {}, {
-        field: settings.attributes.field.__default
-      }));
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_5__["default"])();
+settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Text', 'lifterlms');
+settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('A simple text input field.', 'lifterlms');
+settings.icon.src = _icons_field_text__WEBPACK_IMPORTED_MODULE_6__["default"];
+settings.variations = [{
+  name: 'text',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Text', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('An input field which accepts any form of text.', 'lifterlms'),
+  isDefault: true,
+  icon: _icons_field_text__WEBPACK_IMPORTED_MODULE_6__["default"]
+}, {
+  name: 'email',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Email', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('A text input field which only accepts an email address.', 'lifterlms'),
+  icon: 'email-alt'
+}, {
+  name: 'password',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Password', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('User password confirmation field.', 'lifterlms'),
+  icon: 'lock',
+  scope: []
+}, {
+  name: 'number',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Number', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('An input field which only accepts numeric input.', 'lifterlms'),
+  icon: _icons_field_number__WEBPACK_IMPORTED_MODULE_7__["default"],
+  attributes: {
+    html_attrs: {
+      min: '',
+      max: ''
     }
-  }]
-};
+  }
+}, {
+  name: 'tel',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Phone Number', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('An input field which only accepts phone numbers.', 'lifterlms'),
+  icon: 'phone'
+}, {
+  name: 'url',
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Website Address / URL', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('An input field which only accepts a website address or URL.', 'lifterlms'),
+  icon: 'admin-links'
+}];
+settings.usesContext = ['llms/fieldGroup/fieldLayout'];
+settings.supports.llms_field_inspector.customFill = 'fieldTextAdditionalControls';
+/**
+ * Fill the controls slot with additional controls specific to this field.
+ *
+ * @since [version]
+ *
+ * @param {Object} attributes Block attributes.
+ * @param {Function} setAttributes Reference to the block's setAttributes() function.
+ * @return {Fragment} Component HTML Fragment.
+ */
+
+settings.fillInspectorControls = function (attributes, setAttributes) {
+  if (attributes.isConfirmationField || 'number' !== attributes.field) {
+    return;
+  } // Add min/max options to a number field.
+
+
+  var html_attrs = attributes.html_attrs,
+      min = html_attrs.min,
+      max = html_attrs.max;
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["TextControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Minimum Value', 'lifterlms'),
+    help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Specify the minimum allowed value. Leave blank for no minimum.', 'lifterlms'),
+    value: min,
+    type: "number",
+    onChange: function onChange(min) {
+      return setAttributes({
+        html_attrs: _objectSpread(_objectSpread({}, html_attrs), {}, {
+          min: min
+        })
+      });
+    }
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["TextControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Maximum Value', 'lifterlms'),
+    help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Specify the maximum allowed value. Leave blank for no maximum.', 'lifterlms'),
+    value: max,
+    type: "number",
+    onChange: function onChange(max) {
+      return setAttributes({
+        html_attrs: _objectSpread(_objectSpread({}, html_attrs), {}, {
+          max: max
+        })
+      });
+    }
+  }));
+}; // Add some data to all variations.
+
+
+settings.variations.forEach(function (variation) {
+  // Setup scope.
+  variation.scope = variation.scope || ['block', 'inserter', 'transform']; // Update the icon (add the default foreground color.
+
+  variation.icon = _objectSpread(_objectSpread({}, settings.icon), {}, {
+    src: variation.icon
+  }); // Add a "field" attribute based off the variation name.
+
+  if (!variation.attributes) {
+    variation.attributes = {};
+  }
+
+  variation.attributes.field = variation.name; // Add an isActive function.
+
+  variation.isActive = function (blockAttributes, variationAttributes) {
+    return blockAttributes.field === variationAttributes.field;
+  };
+});
 
 
 /***/ }),
@@ -14133,6 +13994,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
  *
  * @since 1.6.0
  * @since 1.12.0 Add transform support.
+ * @since [version] Add reusable block support.
  */
 // WP Deps.
 
@@ -14212,170 +14074,23 @@ settings.fillInspectorControls = function (attributes, setAttributes) {
 settings.transforms = {
   from: [{
     type: 'block',
-    blocks: ['llms/form-field-email', 'llms/form-field-number', 'llms/form-field-password', 'llms/form-field-phone', 'llms/form-field-text', 'llms/form-field-url'],
+    blocks: ['llms/form-field-text'],
     transform: function transform(attributes) {
       return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__["createBlock"])(name, _objectSpread(_objectSpread({}, attributes), {}, {
         field: settings.attributes.field.__default
       }));
     }
-  }]
-};
-
-
-/***/ }),
-
-/***/ "./src/js/blocks/form-fields/fields/url.js":
-/*!*************************************************!*\
-  !*** ./src/js/blocks/form-fields/fields/url.js ***!
-  \*************************************************/
-/*! exports provided: name, postTypes, composed, settings */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return postTypes; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-/**
- * BLOCK: llms/form-field-url
- *
- * @since 1.6.0
- * @since 1.12.0 Add transform support.
- */
-// WP Deps.
-
- // Internal Deps.
-
-
-/**
- * Block Name
- *
- * @type {string}
- */
-
-var name = 'llms/form-field-url';
-/**
- * Array of supported post types.
- *
- * @type {Array}
- */
-
-var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["getDefaultPostTypes"])();
-/**
- * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
- *
- * @type {string}
- */
-
-var composed = false; // Setup the field settings.
-
-var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["default"])();
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Website / URL', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('An input field which accepts and web addresses.', 'lifterlms');
-settings.icon.src = 'admin-links';
-settings.attributes.field.__default = 'url';
-settings.transforms = {
-  from: [{
+  }],
+  to: [{
     type: 'block',
-    blocks: ['llms/form-field-password', 'llms/form-field-email', 'llms/form-field-number', 'llms/form-field-phone', 'llms/form-field-text', 'llms/form-field-textarea'],
+    blocks: ['llms/form-field-text'],
     transform: function transform(attributes) {
-      return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, _objectSpread(_objectSpread({}, attributes), {}, {
-        field: settings.attributes.field.__default
+      return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__["createBlock"])('llms/form-field-text', _objectSpread(_objectSpread({}, attributes), {}, {
+        field: 'text'
       }));
     }
   }]
 };
-
-
-/***/ }),
-
-/***/ "./src/js/blocks/form-fields/fields/user-address-additional.js":
-/*!*********************************************************************!*\
-  !*** ./src/js/blocks/form-fields/fields/user-address-additional.js ***!
-  \*********************************************************************/
-/*! exports provided: name, postTypes, composed, settings */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./text */ "./src/js/blocks/form-fields/fields/text.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _text__WEBPACK_IMPORTED_MODULE_2__["postTypes"]; });
-
-/**
- * BLOCK: llms/form-field-user-address-additional
- *
- * @since 1.6.0
- * @since 1.8.0 Updated lodash imports.
- * @since 1.12.0 Add data store support.
- */
-// WP Deps.
- // External Deps.
-
- // Internal Deps.
-
-
-/**
- * Block Name
- *
- * @type {string}
- */
-
-var name = 'llms/form-field-user-address-additional';
-/**
- * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default
- *
- * @type {string}
- */
-
-var composed = true; // Setup the field settings.
-
-var settings = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_text__WEBPACK_IMPORTED_MODULE_2__["settings"]);
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Address (Line 2)', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's billing address additional information.", 'lifterlms');
-settings.icon.src = 'location';
-settings.supports.multiple = false;
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
-settings.supports.llms_field_inspector.match = false;
-settings.supports.llms_field_inspector.storage = false;
-settings.attributes.id.__default = 'llms_billing_address_2';
-settings.attributes.placeholder.__default = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Apartment, suite, or unit', 'lifterlms');
-settings.attributes.name.__default = 'llms_billing_address_2';
-settings.attributes.label_show_empty.__default = true;
-delete settings.transforms;
 
 
 /***/ }),
@@ -14394,22 +14109,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./text */ "./src/js/blocks/form-fields/fields/text.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _text__WEBPACK_IMPORTED_MODULE_2__["postTypes"]; });
+/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./text */ "./src/js/blocks/form-fields/fields/text.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _text__WEBPACK_IMPORTED_MODULE_1__["postTypes"]; });
 
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
 /**
- * BLOCK: llms/form-field-user-address-city
+ * BLOCK: llms/form-field-user-email
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
  * @since 1.12.0 Add data store support.
+ * @since [version] Add reusable block support.
  */
 // WP Deps.
- // External Deps.
-
  // Internal Deps.
+
 
 
 /**
@@ -14433,20 +14147,46 @@ var name = 'llms/form-field-user-address-city';
 
 var composed = true; // Setup the field settings.
 
-var settings = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_text__WEBPACK_IMPORTED_MODULE_2__["settings"]);
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User City', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's billing address city.", 'lifterlms');
-settings.icon.src = 'location';
-settings.supports.multiple = false;
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
-settings.supports.llms_field_inspector.match = false;
-settings.supports.llms_field_inspector.storage = false;
-settings.attributes.id.__default = 'llms_billing_city';
-settings.attributes.label.__default = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('City', 'lifterlms');
-settings.attributes.name.__default = 'llms_billing_city';
-settings.attributes.required.__default = true;
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBase"])(_text__WEBPACK_IMPORTED_MODULE_1__["settings"], {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User City', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's billing city.", 'lifterlms'),
+  icon: {
+    src: 'location-alt'
+  },
+  supports: {
+    multiple: false,
+    llms_field_inspector: {
+      id: false,
+      name: false,
+      required: true,
+      match: false,
+      storage: false
+    }
+  },
+  attributes: {
+    id: {
+      __default: 'llms_billing_city'
+    },
+    label: {
+      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('City', 'lifterlms')
+    },
+    name: {
+      __default: 'llms_billing_city'
+    },
+    required: {
+      __default: true
+    },
+    data_store: {
+      __default: 'usermeta'
+    },
+    data_store_key: {
+      __default: 'llms_billing_city'
+    }
+  },
+  parent: ['llms/form-field-user-address']
+});
 delete settings.transforms;
+delete settings.variations;
 
 
 /***/ }),
@@ -14465,22 +14205,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _select_country__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./select-country */ "./src/js/blocks/form-fields/fields/select-country.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _select_country__WEBPACK_IMPORTED_MODULE_2__["postTypes"]; });
+/* harmony import */ var _select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./select */ "./src/js/blocks/form-fields/fields/select.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _select__WEBPACK_IMPORTED_MODULE_1__["postTypes"]; });
 
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
 /**
- * BLOCK: llms/form-field-user-address-country
+ * BLOCK: llms/form-field-user-email
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
  * @since 1.12.0 Add data store support.
+ * @since [version] Add reusable block support.
  */
 // WP Deps.
- // External Deps.
-
  // Internal Deps.
+
 
 
 /**
@@ -14504,22 +14243,246 @@ var name = 'llms/form-field-user-address-country';
 
 var composed = true; // Setup the field settings.
 
-var settings = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_select_country__WEBPACK_IMPORTED_MODULE_2__["settings"]);
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Country', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's billing address country.", 'lifterlms');
-settings.supports.multiple = false; // Can only have a single email address field.
-
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
-settings.supports.llms_field_inspector.required = false;
-settings.supports.llms_field_inspector.match = false;
-settings.supports.llms_field_inspector.storage = false;
-settings.attributes.id.__default = 'llms_billing_country';
-settings.attributes.label.__default = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Country / Region', 'lifterlms');
-settings.attributes.name.__default = 'llms_billing_country';
-settings.attributes.required.__default = true;
-settings.attributes.placeholder.__default = '';
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBase"])(_select__WEBPACK_IMPORTED_MODULE_1__["settings"], {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Country', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's billing country.", 'lifterlms'),
+  icon: {
+    src: 'admin-site'
+  },
+  supports: {
+    multiple: false,
+    llms_field_inspector: {
+      id: false,
+      name: false,
+      required: true,
+      match: false,
+      storage: false,
+      options: false
+    }
+  },
+  attributes: {
+    id: {
+      __default: 'llms_billing_country'
+    },
+    label: {
+      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Country', 'lifterlms')
+    },
+    name: {
+      __default: 'llms_billing_country'
+    },
+    required: {
+      __default: true
+    },
+    data_store: {
+      __default: 'usermeta'
+    },
+    data_store_key: {
+      __default: 'llms_billing_country'
+    },
+    options_preset: {
+      __default: 'countries'
+    },
+    placeholder: {
+      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select a Country', 'lifterlms')
+    }
+  },
+  parent: ['llms/form-field-user-address']
+});
 delete settings.transforms;
+
+
+/***/ }),
+
+/***/ "./src/js/blocks/form-fields/fields/user-address-postal-code.js":
+/*!**********************************************************************!*\
+  !*** ./src/js/blocks/form-fields/fields/user-address-postal-code.js ***!
+  \**********************************************************************/
+/*! exports provided: name, postTypes, composed, settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./text */ "./src/js/blocks/form-fields/fields/text.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _text__WEBPACK_IMPORTED_MODULE_1__["postTypes"]; });
+
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
+/**
+ * BLOCK: llms/form-field-user-email
+ *
+ * @since 1.6.0
+ * @since 1.8.0 Updated lodash imports.
+ * @since 1.12.0 Add data store support.
+ * @since [version] Add reusable block support.
+ */
+// WP Deps.
+ // Internal Deps.
+
+
+
+/**
+ * Block Name
+ *
+ * @type {string}
+ */
+
+var name = 'llms/form-field-user-address-postal-code';
+/**
+ * Is this a default or composed field?
+ *
+ * Composed fields serve specific functions (like the User Email Address field)
+ * and are automatically added to the form builder UI.
+ *
+ * Default (non-composed) fields can be added by developers to perform custom functions
+ * and are not registered as a block by default
+ *
+ * @type {string}
+ */
+
+var composed = true; // Setup the field settings.
+
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBase"])(_text__WEBPACK_IMPORTED_MODULE_1__["settings"], {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Postal Code', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's postal or zip code.", 'lifterlms'),
+  icon: {
+    src: 'post-status'
+  },
+  supports: {
+    multiple: false,
+    llms_field_inspector: {
+      id: false,
+      name: false,
+      required: true,
+      match: false,
+      storage: false
+    }
+  },
+  attributes: {
+    id: {
+      __default: 'llms_billing_zip'
+    },
+    label: {
+      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Postal / Zip Code', 'lifterlms')
+    },
+    name: {
+      __default: 'llms_billing_zip'
+    },
+    required: {
+      __default: true
+    },
+    data_store: {
+      __default: 'usermeta'
+    },
+    data_store_key: {
+      __default: 'llms_billing_zip'
+    }
+  },
+  parent: ['llms/form-field-user-address-region'],
+  usesContext: ['llms/fieldGroup/fieldLayout']
+});
+delete settings.transforms;
+delete settings.variations;
+
+
+/***/ }),
+
+/***/ "./src/js/blocks/form-fields/fields/user-address-region.js":
+/*!*****************************************************************!*\
+  !*** ./src/js/blocks/form-fields/fields/user-address-region.js ***!
+  \*****************************************************************/
+/*! exports provided: name, postTypes, composed, settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return postTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
+/* harmony import */ var _group_layout_control__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../group-layout-control */ "./src/js/blocks/form-fields/group-layout-control.js");
+/**
+ * BLOCK: llms/form-field-passwords
+ *
+ * @since 1.6.0
+ * @since 1.12.0 Add transform support.
+ * @since [version] Add reusable block support.
+ */
+// WP Deps.
+
+
+
+
+
+ // Internal Deps.
+
+
+
+/**
+ * Block Name
+ *
+ * @type {string}
+ */
+
+var name = 'llms/form-field-user-address-region';
+/**
+ * Array of supported post types.
+ *
+ * @type {Array}
+ */
+
+var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_6__["getDefaultPostTypes"])();
+/**
+ * Is this a default or composed field?
+ *
+ * Composed fields serve specific functions (like the User Email Address field)
+ * and are automatically added to the form builder UI.
+ *
+ * Default (non-composed) fields can be added by developers to perform custom functions
+ * and are not registered as a block by default.
+ *
+ * @type {string}
+ */
+
+var composed = false; // Setup the field settings.
+
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_6__["getSettingsFromBase"])(Object(_settings__WEBPACK_IMPORTED_MODULE_6__["default"])('group'), {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('User Street Address', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])("Collect a user's street address.", 'lifterlms'),
+  icon: {
+    src: 'id-alt'
+  },
+  supports: {
+    multiple: false
+  },
+  parent: ['llms/form-field-user-name'],
+  llmsInnerBlocks: {
+    allowed: ['llms/form-field-user-address-state', 'llms/form-field-user-address-postal-code'],
+    template: [['llms/form-field-user-address-state', {
+      columns: 6,
+      last_column: false
+    }], ['llms/form-field-user-address-postal-code', {
+      columns: 6,
+      last_column: true
+    }]]
+  }
+});
 
 
 /***/ }),
@@ -14538,22 +14501,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _select_state_l10n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./select-state-l10n */ "./src/js/blocks/form-fields/fields/select-state-l10n.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _select_state_l10n__WEBPACK_IMPORTED_MODULE_2__["postTypes"]; });
+/* harmony import */ var _select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./select */ "./src/js/blocks/form-fields/fields/select.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _select__WEBPACK_IMPORTED_MODULE_1__["postTypes"]; });
 
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
 /**
- * BLOCK: llms/form-field-user-address-state
+ * BLOCK: llms/form-field-user-email
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
  * @since 1.12.0 Add data store support.
+ * @since [version] Add reusable block support.
  */
 // WP Deps.
- // External Deps.
-
  // Internal Deps.
+
 
 
 /**
@@ -14577,28 +14539,61 @@ var name = 'llms/form-field-user-address-state';
 
 var composed = true; // Setup the field settings.
 
-var settings = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_select_state_l10n__WEBPACK_IMPORTED_MODULE_2__["settings"]);
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User State', 'lifterlms');
-settings.supports.multiple = false;
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
-settings.supports.llms_field_inspector.required = false;
-settings.supports.llms_field_inspector.match = false;
-settings.supports.llms_field_inspector.storage = false;
-settings.attributes.id.__default = 'llms_billing_state';
-settings.attributes.label.__default = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('State / Province', 'lifterlms');
-settings.attributes.name.__default = 'llms_billing_state';
-settings.attributes.required.__default = true;
-settings.attributes.placeholder.__default = '';
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBase"])(_select__WEBPACK_IMPORTED_MODULE_1__["settings"], {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Country', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's billing country.", 'lifterlms'),
+  icon: {
+    src: 'location'
+  },
+  supports: {
+    multiple: false,
+    llms_field_inspector: {
+      id: false,
+      name: false,
+      required: true,
+      match: false,
+      storage: false,
+      options: false
+    }
+  },
+  attributes: {
+    id: {
+      __default: 'llms_billing_state'
+    },
+    label: {
+      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('State / Region', 'lifterlms')
+    },
+    name: {
+      __default: 'llms_billing_state'
+    },
+    required: {
+      __default: true
+    },
+    data_store: {
+      __default: 'usermeta'
+    },
+    data_store_key: {
+      __default: 'llms_billing_state'
+    },
+    options_preset: {
+      __default: 'states'
+    },
+    placeholder: {
+      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Select a State / Region', 'lifterlms')
+    }
+  },
+  parent: ['llms/form-field-user-address-region'],
+  usesContext: ['llms/fieldGroup/fieldLayout']
+});
 delete settings.transforms;
 
 
 /***/ }),
 
-/***/ "./src/js/blocks/form-fields/fields/user-address-zip.js":
-/*!**************************************************************!*\
-  !*** ./src/js/blocks/form-fields/fields/user-address-zip.js ***!
-  \**************************************************************/
+/***/ "./src/js/blocks/form-fields/fields/user-address-street-primary.js":
+/*!*************************************************************************!*\
+  !*** ./src/js/blocks/form-fields/fields/user-address-street-primary.js ***!
+  \*************************************************************************/
 /*! exports provided: name, postTypes, composed, settings */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14609,22 +14604,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./text */ "./src/js/blocks/form-fields/fields/text.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _text__WEBPACK_IMPORTED_MODULE_2__["postTypes"]; });
+/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./text */ "./src/js/blocks/form-fields/fields/text.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _text__WEBPACK_IMPORTED_MODULE_1__["postTypes"]; });
 
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
 /**
- * BLOCK: llms/form-field-user-address-zip
+ * BLOCK: llms/form-field-user-email
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
  * @since 1.12.0 Add data store support.
+ * @since [version] Add reusable block support.
  */
 // WP Deps.
- // External Deps.
-
  // Internal Deps.
+
 
 
 /**
@@ -14633,7 +14627,7 @@ __webpack_require__.r(__webpack_exports__);
  * @type {string}
  */
 
-var name = 'llms/form-field-user-address-zip';
+var name = 'llms/form-field-user-address-street-primary';
 /**
  * Is this a default or composed field?
  *
@@ -14648,20 +14642,268 @@ var name = 'llms/form-field-user-address-zip';
 
 var composed = true; // Setup the field settings.
 
-var settings = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_text__WEBPACK_IMPORTED_MODULE_2__["settings"]);
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Zip Code', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('A special field used to collect a user\'s billing address postal code. When the "User Address Country" field is used, this field will be hidden for any country which does not utilize postal codes and the field label will automatically update based on available locale language information.', 'lifterlms');
-settings.icon.src = 'location';
-settings.supports.multiple = false;
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
-settings.supports.llms_field_inspector.match = false;
-settings.supports.llms_field_inspector.storage = false;
-settings.attributes.id.__default = 'llms_billing_zip';
-settings.attributes.label.__default = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Zip / Postal Code', 'lifterlms');
-settings.attributes.name.__default = 'llms_billing_zip';
-settings.attributes.required.__default = true;
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBase"])(_text__WEBPACK_IMPORTED_MODULE_1__["settings"], {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Street Address', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's street address.", 'lifterlms'),
+  icon: {
+    src: 'admin-home'
+  },
+  supports: {
+    multiple: false,
+    llms_field_inspector: {
+      id: false,
+      name: false,
+      required: true,
+      match: false,
+      storage: false
+    }
+  },
+  attributes: {
+    id: {
+      __default: 'llms_billing_address_1'
+    },
+    label: {
+      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Address', 'lifterlms')
+    },
+    name: {
+      __default: 'llms_billing_address_1'
+    },
+    required: {
+      __default: true
+    },
+    data_store: {
+      __default: 'usermeta'
+    },
+    data_store_key: {
+      __default: 'llms_billing_address_1'
+    }
+  },
+  parent: ['llms/form-field-user-address-street'],
+  usesContext: ['llms/fieldGroup/fieldLayout']
+});
 delete settings.transforms;
+delete settings.variations;
+
+
+/***/ }),
+
+/***/ "./src/js/blocks/form-fields/fields/user-address-street-secondary.js":
+/*!***************************************************************************!*\
+  !*** ./src/js/blocks/form-fields/fields/user-address-street-secondary.js ***!
+  \***************************************************************************/
+/*! exports provided: name, postTypes, composed, settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _user_address_street_primary__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user-address-street-primary */ "./src/js/blocks/form-fields/fields/user-address-street-primary.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _user_address_street_primary__WEBPACK_IMPORTED_MODULE_1__["postTypes"]; });
+
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
+/**
+ * BLOCK: llms/form-field-user-email
+ *
+ * @since 1.6.0
+ * @since 1.8.0 Updated lodash imports.
+ * @since 1.12.0 Add data store support.
+ * @since [version] Add reusable block support.
+ */
+// WP Deps.
+ // Internal Deps.
+
+
+
+/**
+ * Block Name
+ *
+ * @type {string}
+ */
+
+var name = 'llms/form-field-user-address-street-secondary';
+/**
+ * Is this a default or composed field?
+ *
+ * Composed fields serve specific functions (like the User Email Address field)
+ * and are automatically added to the form builder UI.
+ *
+ * Default (non-composed) fields can be added by developers to perform custom functions
+ * and are not registered as a block by default
+ *
+ * @type {string}
+ */
+
+var composed = true; // Setup the field settings.
+
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBase"])(_user_address_street_primary__WEBPACK_IMPORTED_MODULE_1__["settings"], {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Street Address Additional Information', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's street address.", 'lifterlms'),
+  attributes: {
+    id: {
+      __default: 'llms_billing_address_2'
+    },
+    label: {
+      __default: ''
+    },
+    placeholder: {
+      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Apartment, suite, etc...', 'lifterlms')
+    },
+    name: {
+      __default: 'llms_billing_address_2'
+    },
+    required: {
+      __default: false
+    },
+    data_store_key: {
+      __default: 'llms_billing_address_2'
+    }
+  },
+  usesContext: ['llms/fieldGroup/fieldLayout']
+});
+delete settings.transforms;
+delete settings.variations;
+
+
+/***/ }),
+
+/***/ "./src/js/blocks/form-fields/fields/user-address-street.js":
+/*!*****************************************************************!*\
+  !*** ./src/js/blocks/form-fields/fields/user-address-street.js ***!
+  \*****************************************************************/
+/*! exports provided: name, postTypes, composed, settings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return postTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
+/* harmony import */ var _group_layout_control__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../group-layout-control */ "./src/js/blocks/form-fields/group-layout-control.js");
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+/**
+ * BLOCK: llms/form-field-passwords
+ *
+ * @since 1.6.0
+ * @since 1.12.0 Add transform support.
+ * @since [version] Add reusable block support.
+ */
+// WP Deps.
+
+
+
+
+
+ // Internal Deps.
+
+
+
+/**
+ * Block Name
+ *
+ * @type {string}
+ */
+
+var name = 'llms/form-field-user-address-street';
+/**
+ * Array of supported post types.
+ *
+ * @type {Array}
+ */
+
+var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_7__["getDefaultPostTypes"])();
+/**
+ * Is this a default or composed field?
+ *
+ * Composed fields serve specific functions (like the User Email Address field)
+ * and are automatically added to the form builder UI.
+ *
+ * Default (non-composed) fields can be added by developers to perform custom functions
+ * and are not registered as a block by default.
+ *
+ * @type {string}
+ */
+
+var composed = false; // Setup the field settings.
+
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_7__["getSettingsFromBase"])(Object(_settings__WEBPACK_IMPORTED_MODULE_7__["default"])(), {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('User Street Address', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])("Collect a user's street address.", 'lifterlms'),
+  icon: {
+    src: 'id-alt'
+  },
+  attributes: {
+    fieldLayout: {
+      type: 'string',
+      default: 'columns'
+    }
+  },
+  supports: {
+    multiple: false,
+    llms_field_group: true
+  },
+  providesContext: {
+    'llms/fieldGroup/fieldLayout': 'fieldLayout'
+  },
+  parent: ['llms/form-field-user-name'],
+  edit: function edit(props) {
+    var blockProps = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["useBlockProps"])(),
+        attributes = props.attributes,
+        clientId = props.clientId,
+        setAttributes = props.setAttributes,
+        block = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])('core/block-editor').getBlock(clientId),
+        fieldLayout = attributes.fieldLayout,
+        INNER_ORIENTATION = 'columns' === fieldLayout ? 'horizontal' : 'vertical',
+        INNER_ALLOWED = ['llms/form-field-user-address-street-primary', 'llms/form-field-user-address-street-secondary'],
+        INNER_TEMPLATE = [['llms/form-field-user-address-street-primary', {
+      columns: 8,
+      last_column: false
+    }], ['llms/form-field-user-address-street-secondary', {
+      columns: 4,
+      last_column: true
+    }]];
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", blockProps, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["PanelBody"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_group_layout_control__WEBPACK_IMPORTED_MODULE_8__["default"], _objectSpread(_objectSpread({}, props), {}, {
+      block: block
+    })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+      className: "llms-field-group llms-field--user-address--street",
+      "data-field-layout": fieldLayout
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["InnerBlocks"], {
+      allowedBlocks: INNER_ALLOWED,
+      template: INNER_TEMPLATE,
+      templateLock: "insert",
+      orientation: INNER_ORIENTATION
+    })));
+  },
+  save: function save() {
+    var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["useBlockProps"].save();
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", blockProps, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["InnerBlocks"].Content, null));
+  }
+});
 
 
 /***/ }),
@@ -14676,26 +14918,47 @@ delete settings.transforms;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return postTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./text */ "./src/js/blocks/form-fields/fields/text.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _text__WEBPACK_IMPORTED_MODULE_2__["postTypes"]; });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
+/* harmony import */ var _group_layout_control__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../group-layout-control */ "./src/js/blocks/form-fields/group-layout-control.js");
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 /**
- * BLOCK: llms/form-field-user-address
+ * BLOCK: llms/form-field-passwords
  *
  * @since 1.6.0
- * @since 1.8.0 Updated lodash imports.
- * @since 1.12.0 Add data store support.
+ * @since 1.12.0 Add transform support.
+ * @since [version] Add reusable block support.
  */
 // WP Deps.
- // External Deps.
+
+
+
+
 
  // Internal Deps.
+
 
 
 /**
@@ -14706,76 +14969,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var name = 'llms/form-field-user-address';
 /**
- * Is this a default or composed field?
+ * Array of supported post types.
  *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default
- *
- * @type {string}
+ * @type {Array}
  */
 
-var composed = true; // Setup the field settings.
-
-var settings = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_text__WEBPACK_IMPORTED_MODULE_2__["settings"]);
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Address', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's billing street address.", 'lifterlms');
-settings.icon.src = 'location';
-settings.supports.multiple = false;
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
-settings.supports.llms_field_inspector.match = false;
-settings.supports.llms_field_inspector.storage = false;
-settings.attributes.id.__default = 'llms_billing_address_1';
-settings.attributes.label.__default = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Address', 'lifterlms');
-settings.attributes.name.__default = 'llms_billing_address_1';
-settings.attributes.required.__default = true;
-delete settings.transforms;
-
-
-/***/ }),
-
-/***/ "./src/js/blocks/form-fields/fields/user-email-confirm.js":
-/*!****************************************************************!*\
-  !*** ./src/js/blocks/form-fields/fields/user-email-confirm.js ***!
-  \****************************************************************/
-/*! exports provided: name, postTypes, composed, settings */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _user_email__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user-email */ "./src/js/blocks/form-fields/fields/user-email.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _user_email__WEBPACK_IMPORTED_MODULE_2__["postTypes"]; });
-
-/**
- * BLOCK: llms/form-field-user-email-confirm
- *
- * @since 1.6.0
- * @since 1.8.0 Updated lodash imports.
- * @since 1.12.0 Add data store support.
- */
-// WP Deps.
- // External Deps.
-
- // Internal Deps.
-
-
-/**
- * Block Name
- *
- * @type {string}
- */
-
-var name = 'llms/form-field-user-email-confirm';
+var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_7__["getDefaultPostTypes"])();
 /**
  * Is this a default or composed field?
  *
@@ -14783,21 +14982,49 @@ var name = 'llms/form-field-user-email-confirm';
  * and are automatically added to the form builder UI.
  *
  * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default
+ * and are not registered as a block by default.
  *
  * @type {string}
  */
 
-var composed = true; // Setup the field settings.
+var composed = false; // Setup the field settings.
 
-var settings = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_user_email__WEBPACK_IMPORTED_MODULE_2__["settings"]);
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Email (confirmation)', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to confirm a user's account email address.", 'lifterlms');
-settings.attributes.id.__default = 'email_address_confirm';
-settings.attributes.label.__default = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Confirm Email Address', 'lifterlms');
-settings.attributes.name.__default = 'email_address_confirm';
-settings.attributes.match.__default = 'email_address';
-settings.attributes.data_store.__default = false;
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_7__["getSettingsFromBase"])(Object(_settings__WEBPACK_IMPORTED_MODULE_7__["default"])(), {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('User Address', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])("A group of fields used to collect a user's full address.", 'lifterlms'),
+  icon: {
+    src: 'id-alt'
+  },
+  supports: {
+    multiple: false
+  },
+  edit: function edit(props) {
+    var blockProps = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["useBlockProps"])(),
+        attributes = props.attributes,
+        clientId = props.clientId,
+        setAttributes = props.setAttributes,
+        block = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])('core/block-editor').getBlock(clientId),
+        fieldLayout = attributes.fieldLayout,
+        INNER_ORIENTATION = 'columns' === fieldLayout ? 'horizontal' : 'vertical',
+        INNER_ALLOWED = ['llms/form-field-user-address-street', 'llms/form-field-user-address-city', 'llms/form-field-user-address-country', 'llms/form-field-user-address-region'],
+        INNER_TEMPLATE = [['llms/form-field-user-address-street'], ['llms/form-field-user-address-city'], ['llms/form-field-user-address-country'], ['llms/form-field-user-address-region']];
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", blockProps, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["PanelBody"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_group_layout_control__WEBPACK_IMPORTED_MODULE_8__["default"], _objectSpread(_objectSpread({}, props), {}, {
+      block: block
+    })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+      className: "llms-field-group llms-field--user-address",
+      "data-field-layout": fieldLayout
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["InnerBlocks"], {
+      allowedBlocks: INNER_ALLOWED,
+      template: INNER_TEMPLATE,
+      templateLock: "insert",
+      orientation: INNER_ORIENTATION
+    })));
+  },
+  save: function save() {
+    var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["useBlockProps"].save();
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", blockProps, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["InnerBlocks"].Content, null));
+  }
+});
 
 
 /***/ }),
@@ -14816,22 +15043,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _email__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./email */ "./src/js/blocks/form-fields/fields/email.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _email__WEBPACK_IMPORTED_MODULE_2__["postTypes"]; });
+/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./text */ "./src/js/blocks/form-fields/fields/text.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _text__WEBPACK_IMPORTED_MODULE_1__["postTypes"]; });
 
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
 /**
  * BLOCK: llms/form-field-user-email
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
  * @since 1.12.0 Add data store support.
+ * @since [version] Add reusable block support.
  */
 // WP Deps.
- // External Deps.
-
  // Internal Deps.
+
 
 
 /**
@@ -14855,24 +15081,52 @@ var name = 'llms/form-field-user-email';
 
 var composed = true; // Setup the field settings.
 
-var settings = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_email__WEBPACK_IMPORTED_MODULE_2__["settings"]);
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Email', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's account email address.", 'lifterlms');
-settings.supports.multiple = false; // Can only have a single email address field.
-
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
-settings.supports.llms_field_inspector.required = false;
-settings.supports.llms_field_inspector.match = false;
-settings.supports.llms_field_inspector.storage = false;
-settings.attributes.id.__default = 'email_address';
-settings.attributes.label.__default = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Email Address', 'lifterlms');
-settings.attributes.name.__default = 'email_address';
-settings.attributes.required.__default = true;
-settings.attributes.match.__default = 'email_address_confirm';
-settings.attributes.data_store.__default = 'users';
-settings.attributes.data_store_key.__default = 'user_email';
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBase"])(_text__WEBPACK_IMPORTED_MODULE_1__["settings"], {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Email', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's account email address.", 'lifterlms'),
+  icon: {
+    src: 'email-alt'
+  },
+  supports: {
+    multiple: false,
+    // Can only have a single email address field.
+    llms_field_inspector: {
+      id: false,
+      name: false,
+      required: false,
+      match: false,
+      storage: false
+    }
+  },
+  attributes: {
+    id: {
+      __default: 'email_address'
+    },
+    field: {
+      __default: 'email'
+    },
+    label: {
+      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Email Address', 'lifterlms')
+    },
+    name: {
+      __default: 'email_address'
+    },
+    required: {
+      __default: true
+    },
+    match: {
+      __default: 'email_address_confirm'
+    },
+    data_store: {
+      __default: 'users'
+    },
+    data_store_key: {
+      __default: 'user_email'
+    }
+  }
+});
 delete settings.transforms;
+delete settings.variations;
 
 
 /***/ }),
@@ -14891,22 +15145,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./text */ "./src/js/blocks/form-fields/fields/text.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _text__WEBPACK_IMPORTED_MODULE_2__["postTypes"]; });
+/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./text */ "./src/js/blocks/form-fields/fields/text.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _text__WEBPACK_IMPORTED_MODULE_1__["postTypes"]; });
 
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
 /**
- * BLOCK: llms/form-field-user-first-name
+ * BLOCK: llms/form-field-user-email
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
  * @since 1.12.0 Add data store support.
+ * @since [version] Add reusable block support.
  */
 // WP Deps.
- // External Deps.
-
  // Internal Deps.
+
 
 
 /**
@@ -14930,20 +15183,51 @@ var name = 'llms/form-field-user-first-name';
 
 var composed = true; // Setup the field settings.
 
-var settings = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_text__WEBPACK_IMPORTED_MODULE_2__["settings"]);
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User First Name', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's first name.", 'lifterlms');
-settings.icon.src = 'admin-users';
-settings.supports.multiple = false;
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
-settings.supports.llms_field_inspector.match = false;
-settings.supports.llms_field_inspector.storage = false;
-settings.attributes.id.__default = 'first_name';
-settings.attributes.label.__default = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('First Name', 'lifterlms');
-settings.attributes.name.__default = 'first_name';
-settings.attributes.required.__default = true;
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBase"])(_text__WEBPACK_IMPORTED_MODULE_1__["settings"], {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('First Name', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's first name.", 'lifterlms'),
+  icon: {
+    src: 'admin-users'
+  },
+  supports: {
+    multiple: false,
+    // Can only have a single email address field.
+    llms_field_inspector: {
+      id: false,
+      name: false,
+      required: true,
+      match: false,
+      storage: false
+    }
+  },
+  attributes: {
+    id: {
+      __default: 'first_name'
+    },
+    field: {
+      __default: 'text'
+    },
+    label: {
+      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('First Name', 'lifterlms')
+    },
+    name: {
+      __default: 'first_name'
+    },
+    required: {
+      __default: true
+    },
+    data_store: {
+      __default: 'usermeta'
+    },
+    data_store_key: {
+      __default: 'first_name'
+    }
+  },
+  parent: ['llms/form-field-user-name'],
+  usesContext: ['llms/fieldGroup/fieldLayout']
+});
 delete settings.transforms;
+delete settings.variations;
 
 
 /***/ }),
@@ -14962,22 +15246,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _user_first_name__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user-first-name */ "./src/js/blocks/form-fields/fields/user-first-name.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _user_first_name__WEBPACK_IMPORTED_MODULE_2__["postTypes"]; });
+/* harmony import */ var _user_first_name__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user-first-name */ "./src/js/blocks/form-fields/fields/user-first-name.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _user_first_name__WEBPACK_IMPORTED_MODULE_1__["postTypes"]; });
 
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
 /**
- * BLOCK: llms/form-field-user-last-name
+ * BLOCK: llms/form-field-user-email
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
  * @since 1.12.0 Add data store support.
+ * @since [version] Add reusable block support.
  */
 // WP Deps.
- // External Deps.
-
  // Internal Deps.
+
 
 
 /**
@@ -15001,45 +15284,62 @@ var name = 'llms/form-field-user-last-name';
 
 var composed = true; // Setup the field settings.
 
-var settings = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_user_first_name__WEBPACK_IMPORTED_MODULE_2__["settings"]);
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Last Name', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's last name.", 'lifterlms');
-settings.attributes.id.__default = 'last_name';
-settings.attributes.label.__default = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Last Name', 'lifterlms');
-settings.attributes.name.__default = 'last_name';
-settings.attributes.required.__default = true;
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBase"])(_user_first_name__WEBPACK_IMPORTED_MODULE_1__["settings"], {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Last Name', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's last name.", 'lifterlms'),
+  attributes: {
+    id: {
+      __default: 'last_name'
+    },
+    label: {
+      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Last Name', 'lifterlms')
+    },
+    name: {
+      __default: 'last_name'
+    },
+    data_store_key: {
+      __default: 'last_name'
+    }
+  }
+});
+delete settings.transforms;
+delete settings.variations;
 
 
 /***/ }),
 
-/***/ "./src/js/blocks/form-fields/fields/user-password-confirm.js":
-/*!*******************************************************************!*\
-  !*** ./src/js/blocks/form-fields/fields/user-password-confirm.js ***!
-  \*******************************************************************/
+/***/ "./src/js/blocks/form-fields/fields/user-names.js":
+/*!********************************************************!*\
+  !*** ./src/js/blocks/form-fields/fields/user-names.js ***!
+  \********************************************************/
 /*! exports provided: name, postTypes, composed, settings */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return postTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _user_password__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user-password */ "./src/js/blocks/form-fields/fields/user-password.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _user_password__WEBPACK_IMPORTED_MODULE_2__["postTypes"]; });
-
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
 /**
- * BLOCK: llms/form-field-user-password-confirm
+ * BLOCK: llms/form-field-passwords
  *
  * @since 1.6.0
- * @since 1.8.0 Updated lodash imports.
- * @since 1.12.0 Add data store support.
+ * @since 1.12.0 Add transform support.
+ * @since [version] Add reusable block support.
  */
 // WP Deps.
- // External Deps.
+
+
 
  // Internal Deps.
 
@@ -15050,7 +15350,14 @@ __webpack_require__.r(__webpack_exports__);
  * @type {string}
  */
 
-var name = 'llms/form-field-user-password-confirm';
+var name = 'llms/form-field-user-name';
+/**
+ * Array of supported post types.
+ *
+ * @type {Array}
+ */
+
+var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_4__["getDefaultPostTypes"])();
 /**
  * Is this a default or composed field?
  *
@@ -15058,86 +15365,33 @@ var name = 'llms/form-field-user-password-confirm';
  * and are automatically added to the form builder UI.
  *
  * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default
+ * and are not registered as a block by default.
  *
  * @type {string}
  */
 
-var composed = true; // Setup the field settings.
+var composed = false; // Setup the field settings.
 
-var settings = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_user_password__WEBPACK_IMPORTED_MODULE_2__["settings"]);
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Password (confirmation)', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's account password.", 'lifterlms');
-settings.attributes.id.__default = 'password_confirm';
-settings.attributes.label.__default = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Confirm Password', 'lifterlms');
-settings.attributes.name.__default = 'password_confirm';
-settings.attributes.match.__default = 'password';
-settings.attributes.data_store.__default = false;
-
-
-/***/ }),
-
-/***/ "./src/js/blocks/form-fields/fields/user-password-current.js":
-/*!*******************************************************************!*\
-  !*** ./src/js/blocks/form-fields/fields/user-password-current.js ***!
-  \*******************************************************************/
-/*! exports provided: name, postTypes, composed, settings */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _user_password__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user-password */ "./src/js/blocks/form-fields/fields/user-password.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _user_password__WEBPACK_IMPORTED_MODULE_2__["postTypes"]; });
-
-/**
- * BLOCK: llms/form-field-user-password-current
- *
- * @since 1.7.1
- * @since 1.8.0 Updated lodash imports.
- * @since 1.12.0 Add data store support.
- */
-// WP Deps.
- // External Deps.
-
- // Internal Deps.
-
-
-/**
- * Block Name
- *
- * @type {string}
- */
-
-var name = 'llms/form-field-user-password-current';
-/**
- * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default
- *
- * @type {string}
- */
-
-var composed = true; // Setup the field settings.
-
-var settings = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_user_password__WEBPACK_IMPORTED_MODULE_2__["settings"]);
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Password (current)', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to validate the user's current password during a password change attempt.", 'lifterlms');
-settings.attributes.id.__default = 'password_current';
-settings.attributes.label.__default = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Current Password', 'lifterlms');
-settings.attributes.name.__default = 'password_current';
-settings.attributes.data_store.__default = false;
-delete settings.attributes.match.__default;
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_4__["getSettingsFromBase"])(Object(_settings__WEBPACK_IMPORTED_MODULE_4__["default"])('group'), {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('User name', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])("A special field used to collect a user's first and last name.", 'lifterlms'),
+  icon: {
+    src: 'admin-users'
+  },
+  supports: {
+    multiple: false
+  },
+  llmsInnerBlocks: {
+    allowed: ['llms/form-field-user-first-name', 'llms/form-field-user-last-name'],
+    template: [['llms/form-field-user-first-name', {
+      columns: 6,
+      last_column: false
+    }], ['llms/form-field-user-last-name', {
+      columns: 6,
+      last_column: true
+    }]]
+  }
+});
 
 
 /***/ }),
@@ -15154,12 +15408,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _password__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./password */ "./src/js/blocks/form-fields/fields/password.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _password__WEBPACK_IMPORTED_MODULE_2__["postTypes"]; });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./text */ "./src/js/blocks/form-fields/fields/text.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _text__WEBPACK_IMPORTED_MODULE_5__["postTypes"]; });
+
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 /**
  * BLOCK: llms/form-field-user-password
@@ -15167,11 +15435,14 @@ __webpack_require__.r(__webpack_exports__);
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
  * @since 1.12.0 Add data store support.
+ * @since [version] Add reusable block support.
  */
 // WP Deps.
- // External Deps.
+
+
 
  // Internal Deps.
+
 
 
 /**
@@ -15181,181 +15452,485 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 var name = 'llms/form-field-user-password';
+var composed = true;
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_6__["getSettingsFromBase"])(_text__WEBPACK_IMPORTED_MODULE_5__["settings"], {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('User Password', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("A special field used to collect a user's account password.", 'lifterlms'),
+  icon: {
+    src: 'lock'
+  },
+  supports: {
+    multiple: false,
+    // Can only have a single user password field.
+    llms_field_inspector: {
+      id: false,
+      name: false,
+      required: false,
+      match: false,
+      storage: false,
+      customFill: 'userPassAdditionalControls'
+    },
+    llms_edit_fill: {
+      after: 'userPassStrengthMeter'
+    }
+  },
+  attributes: {
+    // Defaults.
+    id: {
+      __default: 'password'
+    },
+    field: {
+      __default: 'password'
+    },
+    label: {
+      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Password', 'lifterlms')
+    },
+    name: {
+      __default: 'password'
+    },
+    required: {
+      __default: true
+    },
+    match: {
+      __default: 'password_confirm'
+    },
+    data_store: {
+      __default: 'users'
+    },
+    data_store_key: {
+      __default: 'user_pass'
+    },
+    // Extra attributes.
+    meter: {
+      type: 'boolean',
+      __default: true
+    },
+    meter_description: {
+      type: 'string',
+      __default: sprintf(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('A %1$s password is required with at least %2$s characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.', 'lifterlms'), '{min_strength}', '{min_length}')
+    },
+    min_strength: {
+      type: 'string',
+      __default: 'strong'
+    },
+    html_attrs: {
+      __default: {
+        minlength: 8
+      }
+    }
+  }
+});
+settings.fillEditAfter = function (attributes, setAttributes, props) {
+  // console.log( props );
+  var meter = attributes.meter,
+      meter_description = attributes.meter_description;
+
+  if (!meter) {
+    return;
+  }
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+    className: "llms-pwd-meter"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", null, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Very Weak', 'lifterlms'))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["RichText"], {
+    style: {
+      marginTop: 0
+    },
+    tagName: "p",
+    value: meter_description,
+    onChange: function onChange(meter_description) {
+      return setAttributes({
+        meter_description: meter_description
+      });
+    },
+    allowedFormats: ['core/bold', 'core/italic'],
+    "aria-label": meter_description ? Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Password strength meter description', 'lifterlms') : Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Empty Password strength meter description; start writing to add a label'),
+    placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Enter a description for the password strength meter', 'lifterlms')
+  }));
+},
 /**
- * Is this a default or composed field?
+ * Fill the controls slot with additional controls specific to this field.
  *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
+ * @since [version]
  *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default
- *
- * @type {string}
+ * @param {Object} attributes Block attributes.
+ * @param {Function} setAttributes Reference to the block's setAttributes() function.
+ * @return {Fragment} Component HTML Fragment.
  */
+settings.fillInspectorControls = function (attributes, setAttributes) {
+  var isConfirmationField = attributes.isConfirmationField,
+      meter = attributes.meter,
+      min_strength = attributes.min_strength,
+      html_attrs = attributes.html_attrs,
+      minlength = html_attrs.minlength;
 
-var composed = true; // Setup the field settings.
+  if (isConfirmationField) {
+    return;
+  }
 
-var settings = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_password__WEBPACK_IMPORTED_MODULE_2__["settings"]);
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Password', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's account password.", 'lifterlms');
-settings.supports.multiple = false;
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
-settings.supports.llms_field_inspector.required = false;
-settings.supports.llms_field_inspector.match = false;
-settings.supports.llms_field_inspector.storage = false;
-settings.attributes.id.__default = 'password';
-settings.attributes.label.__default = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Password', 'lifterlms');
-settings.attributes.name.__default = 'password';
-settings.attributes.required.__default = true;
-settings.attributes.match.__default = 'password_confirm';
-settings.attributes.data_store.__default = 'users';
-settings.attributes.data_store_key.__default = 'user_pass';
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["ToggleControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Password strength meter', 'lifterlms'),
+    help: meter ? Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Password strength meter is enabled.', 'lifterlms') : Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Password strength meter is disabled.', 'lifterlms'),
+    checked: meter,
+    onChange: function onChange() {
+      return setAttributes({
+        meter: !meter
+      });
+    }
+  }), meter && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["SelectControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Minimum Password Strength', 'lifterlms'),
+    help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Display in the meter's description with: {min_strength}.", 'lifterlms'),
+    value: min_strength,
+    onChange: function onChange(min_strength) {
+      return setAttributes({
+        min_strength: min_strength
+      });
+    },
+    options: [{
+      value: 'strong',
+      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Strong', 'lifterlms')
+    }, {
+      value: 'medium',
+      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Medium', 'lifterlms')
+    }, {
+      value: 'weak',
+      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Weak', 'lifterlms')
+    }]
+  }), meter && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["TextControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Minimum Password Length', 'lifterlms'),
+    help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Display in the meter's description with: {min_length}.", 'lifterlms'),
+    value: minlength,
+    type: "number",
+    min: "6",
+    onChange: function onChange(val) {
+      return setAttributes({
+        html_attrs: _objectSpread(_objectSpread({}, html_attrs), {}, {
+          minlength: val * 1
+        })
+      });
+    }
+  }));
+};
 delete settings.transforms;
+delete settings.variations;
 
 
 /***/ }),
 
-/***/ "./src/js/blocks/form-fields/fields/user-phone.js":
-/*!********************************************************!*\
-  !*** ./src/js/blocks/form-fields/fields/user-phone.js ***!
-  \********************************************************/
-/*! exports provided: name, postTypes, composed, settings */
+/***/ "./src/js/blocks/form-fields/group-data.js":
+/*!*************************************************!*\
+  !*** ./src/js/blocks/form-fields/group-data.js ***!
+  \*************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _phone__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./phone */ "./src/js/blocks/form-fields/fields/phone.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _phone__WEBPACK_IMPORTED_MODULE_2__["postTypes"]; });
-
-/**
- * BLOCK: llms/form-field-user-phone
- *
- * @since 1.6.0
- * @since 1.8.0 Updated lodash imports.
- * @since 1.12.0 Add data store support.
- */
-// WP Deps.
- // External Deps.
-
- // Internal Deps.
+// WP deps.
+ // Exterenal deps.
 
 
 /**
- * Block Name
+ * Retrieve a list of field group blocks
  *
- * @type {string}
+ * @since [version]
+ *
+ * @return {?Object[]} Array of supporting block objects
  */
 
-var name = 'llms/form-field-user-phone';
+function getSupportingParents() {
+  var _select = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["select"])('core/blocks'),
+      getBlockTypes = _select.getBlockTypes,
+      hasBlockSupport = _select.hasBlockSupport;
+
+  return getBlockTypes().filter(function (block) {
+    return hasBlockSupport(block, 'llms_field_group');
+  });
+}
 /**
- * Is this a default or composed field?
+ * Retrieve the field group parent for a given block
  *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
+ * @since [version]
  *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default
- *
- * @type {string}
+ * @param {string} clientId The client ID of an existing block.
+ * @return {Object} WP Block object of the parent.
  */
 
-var composed = true; // Setup the field settings.
 
-var settings = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_phone__WEBPACK_IMPORTED_MODULE_2__["settings"]);
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Phone', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's phone number.", 'lifterlms');
-settings.supports.multiple = false;
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
-settings.supports.llms_field_inspector.match = false;
-settings.supports.llms_field_inspector.storage = false;
-settings.attributes.id.__default = 'llms_phone';
-settings.attributes.label.__default = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Phone Number', 'lifterlms');
-settings.attributes.name.__default = 'llms_phone';
-delete settings.transforms;
+function getParentFieldGroup(clientId) {
+  var _select2 = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["select"])('core/block-editor'),
+      getBlock = _select2.getBlock,
+      getBlockParentsByBlockName = _select2.getBlockParentsByBlockName;
 
+  return getBlock(getBlockParentsByBlockName(clientId, getSupportingParents().map(function (_ref) {
+    var name = _ref.name;
+    return name;
+  })));
+}
+/**
+ * Retrieve the sibling block for a block in a field group
+ *
+ * @since [version]
+ *
+ * @see [Reference]
+ * @link [URL]
+ *
+ * @param {string} clientId The client ID of an existing block.
+ * @return {?Object} WP Block object of the sibling.
+ */
+
+
+function getSibling(clientId) {
+  var parent = getParentFieldGroup(clientId);
+  return parent && parent.innerBlocks.length ? Object(lodash__WEBPACK_IMPORTED_MODULE_1__["find"])(parent.innerBlocks, function (block) {
+    return block.clientId !== clientId;
+  }) : null;
+}
+/**
+ * Calculates the column value for a column's sibling
+ *
+ * This will ensure that the total of the blocks columns does not exceed 12
+ * unless one of the two blocks is set to be full-width (12 columns).
+ *
+ * @since [version]
+ *
+ * @param {number} cols        Current block columns width.
+ * @param {number} siblingCols Current sibling block columns width.
+ * @return {number} Adjusted columns width for the sibling block.
+ */
+
+
+function determineSiblingCols(cols, siblingCols) {
+  if (cols === 12 || siblingCols === 12) {
+    siblingCols === 12;
+  } else if (cols + siblingCols > 12) {
+    siblingCols = 12 - cols;
+  }
+
+  return siblingCols;
+}
+
+;
+
+function isLastColumn(clientId) {
+  var parent = getParentFieldGroup(clientId);
+
+  if (parent && parent.innerBlocks.length) {
+    return clientId === parent.innerBlocks[parent.innerBlocks.length - 1].clientId;
+  }
+}
+
+;
+
+function updateChildren() {
+  var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      setAttributes = _ref2.setAttributes,
+      currentUpdates = _ref2.currentUpdates,
+      siblingClientId = _ref2.siblingClientId,
+      siblingUpdates = _ref2.siblingUpdates;
+
+  var _dispatch = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["dispatch"])('core/block-editor'),
+      updateBlockAttributes = _dispatch.updateBlockAttributes;
+  /**
+   * Persist the staged updates.
+   *
+   * The setTimeout is bad but fixes no-op/memory leak.
+   *
+   * @see https://github.com/WordPress/gutenberg/issues/21049#issuecomment-632134201
+   */
+
+
+  setTimeout(function () {
+    if (!Object(lodash__WEBPACK_IMPORTED_MODULE_1__["isEmpty"])(currentUpdates)) {
+      setAttributes(currentUpdates);
+    }
+
+    if (siblingClientId && !Object(lodash__WEBPACK_IMPORTED_MODULE_1__["isEmpty"])(siblingUpdates)) {
+      updateBlockAttributes(siblingClientId, siblingUpdates);
+    }
+  });
+}
+
+function getConfirmGroupUpdates(attributes, siblingAttributes) {
+  var currentUpdates = {},
+      siblingUpdates = {}; // Updates matching, id, & name fields.
+
+  if (attributes.isConfirmationControlField) {
+    var name = attributes.name,
+        id = attributes.id,
+        required = attributes.required,
+        field = attributes.field,
+        confirmName = "".concat(name, "_confirm"),
+        confirmId = "".concat(id, "-confirm");
+    siblingUpdates.match = id;
+    siblingUpdates.name = confirmName;
+    siblingUpdates.id = confirmId;
+    currentUpdates.match = confirmId;
+  } // Sync required attribute between grouped fields.
+
+
+  if (attributes.required !== siblingAttributes.required) {
+    siblingUpdates.required = attributes.required;
+  } // Sync the field variation type.
+
+
+  if (attributes.field !== siblingAttributes.field) {
+    siblingUpdates.field = attributes.field;
+  }
+
+  return {
+    currentUpdates: currentUpdates,
+    siblingUpdates: siblingUpdates
+  };
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      attributes = _ref3.attributes,
+      context = _ref3.context,
+      clientId = _ref3.clientId,
+      setAttributes = _ref3.setAttributes;
+
+  var columns = attributes.columns,
+      sibling = getSibling(clientId);
+  var currentUpdates = {},
+      siblingUpdates = {}; // When a preview is generated in the block switcher you don't have anything to work with here.
+
+  if (!sibling) {
+    return;
+  }
+
+  var siblingClientId = sibling.clientId; // Syncing for confirm group fields.
+
+  if (attributes.isConfirmationControlField || attributes.isConfirmationField) {
+    var groupUpdates = getConfirmGroupUpdates(attributes, sibling.attributes);
+    currentUpdates = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["merge"])(currentUpdates, getConfirmGroupUpdates.currentUpdates);
+    siblingUpdates = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["merge"])(siblingUpdates, getConfirmGroupUpdates.siblingUpdates);
+  } // Updates columns based on group layout.
+
+
+  siblingUpdates.columns = determineSiblingCols(columns, sibling.attributes.columns);
+
+  if ('columns' === context['llms/fieldGroup/fieldLayout']) {
+    var isLast = isLastColumn(clientId);
+    currentUpdates.last_column = isLastColumn(clientId);
+    siblingUpdates.last_column = !isLast;
+  } else {
+    currentUpdates.last_column = true;
+    siblingUpdates.last_column = true;
+  }
+
+  updateChildren({
+    setAttributes: setAttributes,
+    currentUpdates: currentUpdates,
+    siblingClientId: siblingClientId,
+    siblingUpdates: siblingUpdates
+  });
+});
 
 /***/ }),
 
-/***/ "./src/js/blocks/form-fields/fields/user-username.js":
+/***/ "./src/js/blocks/form-fields/group-layout-control.js":
 /*!***********************************************************!*\
-  !*** ./src/js/blocks/form-fields/fields/user-username.js ***!
+  !*** ./src/js/blocks/form-fields/group-layout-control.js ***!
   \***********************************************************/
-/*! exports provided: name, postTypes, composed, settings */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./text */ "./src/js/blocks/form-fields/fields/text.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _text__WEBPACK_IMPORTED_MODULE_2__["postTypes"]; });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__);
 
-/**
- * BLOCK: llms/form-field-user-username
- *
- * @since 1.6.0
- * @since 1.8.0 Updated lodash imports.
- * @since 1.12.0 Add data store support.
- */
-// WP Deps.
- // External Deps.
 
- // Internal Deps.
+
 
 
 /**
- * Block Name
+ * On Change callback for the radio control element
  *
- * @type {string}
+ * Updates the block's attributes and sets the child blocks column attributes
+ * depending on the newly selected field layout option.
+ *
+ * If the selected layout is "stacked" makes children full width and sets them all as the
+ * last column.
+ *
+ * If the selected layout is "columns" makes children 50/50 width, sets the last field as the
+ * last column and marks the other fields as not being the last column.
+ *
+ * @since [version]
+ *
+ * @param {string}   options.fieldLayout   The newly selected field layout option.
+ * @param {function} options.setAttributes Function to set attributes on the current block (group).
+ * @param {Object[]} options.innerBlocks   Array of the current block's innerBlocks.
+ * @return {void}
  */
 
-var name = 'llms/form-field-user-username';
-/**
- * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default
- *
- * @type {string}
- */
+function _onChange(_ref) {
+  var fieldLayout = _ref.fieldLayout,
+      setAttributes = _ref.setAttributes,
+      innerBlocks = _ref.innerBlocks;
 
-var composed = true; // Setup the field settings.
+  var _dispatch = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__["dispatch"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["store"]),
+      updateBlockAttributes = _dispatch.updateBlockAttributes; // Update the field layout on the group block.
 
-var settings = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(_text__WEBPACK_IMPORTED_MODULE_2__["settings"]);
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Username', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("A special field used to collect a user's account username. If this field is omitted a username will be automatically generated based off their email address. Users can always login using either their email address or username.", 'lifterlms');
-settings.icon.src = 'admin-users';
-settings.supports.multiple = false; // Can only have a single email address field.
 
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
-settings.supports.llms_field_inspector.required = false;
-settings.supports.llms_field_inspector.match = false;
-settings.supports.llms_field_inspector.storage = false;
-settings.attributes.id.__default = 'user_login';
-settings.attributes.label.__default = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Username', 'lifterlms');
-settings.attributes.name.__default = 'user_login';
-settings.attributes.required.__default = true;
-settings.attributes.data_store.__default = 'users';
-delete settings.transforms;
+  setAttributes({
+    fieldLayout: fieldLayout
+  }); // Update inner blocks.
 
+  var columns = 'columns' === fieldLayout ? 6 : 12;
+  innerBlocks.forEach(function (_ref2, index) {
+    var clientId = _ref2.clientId;
+    var last_column = 1 === index;
+
+    if (0 === index && 'stacked' === fieldLayout) {
+      last_column = true;
+    }
+
+    updateBlockAttributes(clientId, {
+      columns: columns,
+      last_column: last_column
+    });
+  });
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (function (props) {
+  var attributes = props.attributes,
+      block = props.block,
+      setAttributes = props.setAttributes,
+      fieldLayout = attributes.fieldLayout,
+      innerBlocks = block.innerBlocks;
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["RadioControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Field Layout', 'lifterlms'),
+    selected: fieldLayout,
+    onChange: function onChange(fieldLayout) {
+      return _onChange({
+        fieldLayout: fieldLayout,
+        setAttributes: setAttributes,
+        innerBlocks: innerBlocks
+      });
+    },
+    options: [{
+      value: 'columns',
+      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Columns', 'lifterlms')
+    }, {
+      value: 'stacked',
+      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Stacked', 'lifterlms')
+    }]
+  });
+});
 
 /***/ }),
 
@@ -15363,93 +15938,77 @@ delete settings.transforms;
 /*!********************************************!*\
   !*** ./src/js/blocks/form-fields/index.js ***!
   \********************************************/
-/*! exports provided: checkboxes, email, number, password, phone, radio, select, text, textarea, url, selectCountry, selectState, passwordStrengthMeter, redeemVoucher, userUsername, userEmail, userEmailConfirm, userPassword, userPasswordConfirm, userPasswordCurrent, userFirstName, userLastName, userAddress, userAddressAdditional, userAddressCountry, userAddressCity, userAddressState, userAddressZip, userPhone */
+/*! exports provided: confirmGroup, checkboxes, radio, select, text, textarea, userEmail, userFirstName, userLastName, userNames, userPassword, userAddress, userAddressStreet, userAddressStreetPrimary, userAddressStreetSecondary, userAddressCity, userAddressCountry, userAddressRegion, userAddressState, userAddressPostalCode */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reusable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./reusable */ "./src/js/blocks/form-fields/reusable.js");
-/* harmony import */ var _fields_checkboxes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fields/checkboxes */ "./src/js/blocks/form-fields/fields/checkboxes.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "checkboxes", function() { return _fields_checkboxes__WEBPACK_IMPORTED_MODULE_1__; });
-/* harmony import */ var _fields_email__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fields/email */ "./src/js/blocks/form-fields/fields/email.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "email", function() { return _fields_email__WEBPACK_IMPORTED_MODULE_2__; });
-/* harmony import */ var _fields_number__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./fields/number */ "./src/js/blocks/form-fields/fields/number.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "number", function() { return _fields_number__WEBPACK_IMPORTED_MODULE_3__; });
-/* harmony import */ var _fields_password__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./fields/password */ "./src/js/blocks/form-fields/fields/password.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "password", function() { return _fields_password__WEBPACK_IMPORTED_MODULE_4__; });
-/* harmony import */ var _fields_phone__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./fields/phone */ "./src/js/blocks/form-fields/fields/phone.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "phone", function() { return _fields_phone__WEBPACK_IMPORTED_MODULE_5__; });
-/* harmony import */ var _fields_radio__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./fields/radio */ "./src/js/blocks/form-fields/fields/radio.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "radio", function() { return _fields_radio__WEBPACK_IMPORTED_MODULE_6__; });
-/* harmony import */ var _fields_select__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./fields/select */ "./src/js/blocks/form-fields/fields/select.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "select", function() { return _fields_select__WEBPACK_IMPORTED_MODULE_7__; });
-/* harmony import */ var _fields_text__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./fields/text */ "./src/js/blocks/form-fields/fields/text.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "text", function() { return _fields_text__WEBPACK_IMPORTED_MODULE_8__; });
-/* harmony import */ var _fields_textarea__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./fields/textarea */ "./src/js/blocks/form-fields/fields/textarea.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "textarea", function() { return _fields_textarea__WEBPACK_IMPORTED_MODULE_9__; });
-/* harmony import */ var _fields_url__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./fields/url */ "./src/js/blocks/form-fields/fields/url.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "url", function() { return _fields_url__WEBPACK_IMPORTED_MODULE_10__; });
-/* harmony import */ var _fields_select_country__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./fields/select-country */ "./src/js/blocks/form-fields/fields/select-country.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "selectCountry", function() { return _fields_select_country__WEBPACK_IMPORTED_MODULE_11__; });
-/* harmony import */ var _fields_select_state_l10n__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./fields/select-state-l10n */ "./src/js/blocks/form-fields/fields/select-state-l10n.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "selectState", function() { return _fields_select_state_l10n__WEBPACK_IMPORTED_MODULE_12__; });
-/* harmony import */ var _fields_password_strength_meter__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./fields/password-strength-meter */ "./src/js/blocks/form-fields/fields/password-strength-meter.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "passwordStrengthMeter", function() { return _fields_password_strength_meter__WEBPACK_IMPORTED_MODULE_13__; });
-/* harmony import */ var _fields_redeem_voucher__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./fields/redeem-voucher */ "./src/js/blocks/form-fields/fields/redeem-voucher.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "redeemVoucher", function() { return _fields_redeem_voucher__WEBPACK_IMPORTED_MODULE_14__; });
-/* harmony import */ var _fields_user_username__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./fields/user-username */ "./src/js/blocks/form-fields/fields/user-username.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userUsername", function() { return _fields_user_username__WEBPACK_IMPORTED_MODULE_15__; });
-/* harmony import */ var _fields_user_email__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./fields/user-email */ "./src/js/blocks/form-fields/fields/user-email.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userEmail", function() { return _fields_user_email__WEBPACK_IMPORTED_MODULE_16__; });
-/* harmony import */ var _fields_user_email_confirm__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./fields/user-email-confirm */ "./src/js/blocks/form-fields/fields/user-email-confirm.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userEmailConfirm", function() { return _fields_user_email_confirm__WEBPACK_IMPORTED_MODULE_17__; });
-/* harmony import */ var _fields_user_password__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./fields/user-password */ "./src/js/blocks/form-fields/fields/user-password.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userPassword", function() { return _fields_user_password__WEBPACK_IMPORTED_MODULE_18__; });
-/* harmony import */ var _fields_user_password_confirm__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./fields/user-password-confirm */ "./src/js/blocks/form-fields/fields/user-password-confirm.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userPasswordConfirm", function() { return _fields_user_password_confirm__WEBPACK_IMPORTED_MODULE_19__; });
-/* harmony import */ var _fields_user_password_current__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./fields/user-password-current */ "./src/js/blocks/form-fields/fields/user-password-current.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userPasswordCurrent", function() { return _fields_user_password_current__WEBPACK_IMPORTED_MODULE_20__; });
-/* harmony import */ var _fields_user_first_name__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./fields/user-first-name */ "./src/js/blocks/form-fields/fields/user-first-name.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userFirstName", function() { return _fields_user_first_name__WEBPACK_IMPORTED_MODULE_21__; });
-/* harmony import */ var _fields_user_last_name__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./fields/user-last-name */ "./src/js/blocks/form-fields/fields/user-last-name.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userLastName", function() { return _fields_user_last_name__WEBPACK_IMPORTED_MODULE_22__; });
-/* harmony import */ var _fields_user_address__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./fields/user-address */ "./src/js/blocks/form-fields/fields/user-address.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddress", function() { return _fields_user_address__WEBPACK_IMPORTED_MODULE_23__; });
-/* harmony import */ var _fields_user_address_additional__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./fields/user-address-additional */ "./src/js/blocks/form-fields/fields/user-address-additional.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressAdditional", function() { return _fields_user_address_additional__WEBPACK_IMPORTED_MODULE_24__; });
-/* harmony import */ var _fields_user_address_city__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./fields/user-address-city */ "./src/js/blocks/form-fields/fields/user-address-city.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressCity", function() { return _fields_user_address_city__WEBPACK_IMPORTED_MODULE_25__; });
-/* harmony import */ var _fields_user_address_country__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./fields/user-address-country */ "./src/js/blocks/form-fields/fields/user-address-country.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressCountry", function() { return _fields_user_address_country__WEBPACK_IMPORTED_MODULE_26__; });
-/* harmony import */ var _fields_user_address_state__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./fields/user-address-state */ "./src/js/blocks/form-fields/fields/user-address-state.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressState", function() { return _fields_user_address_state__WEBPACK_IMPORTED_MODULE_27__; });
-/* harmony import */ var _fields_user_address_zip__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./fields/user-address-zip */ "./src/js/blocks/form-fields/fields/user-address-zip.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressZip", function() { return _fields_user_address_zip__WEBPACK_IMPORTED_MODULE_28__; });
-/* harmony import */ var _fields_user_phone__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./fields/user-phone */ "./src/js/blocks/form-fields/fields/user-phone.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userPhone", function() { return _fields_user_phone__WEBPACK_IMPORTED_MODULE_29__; });
+/* harmony import */ var _fields_confirm_group__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fields/confirm-group */ "./src/js/blocks/form-fields/fields/confirm-group.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "confirmGroup", function() { return _fields_confirm_group__WEBPACK_IMPORTED_MODULE_1__; });
+/* harmony import */ var _fields_checkboxes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fields/checkboxes */ "./src/js/blocks/form-fields/fields/checkboxes.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "checkboxes", function() { return _fields_checkboxes__WEBPACK_IMPORTED_MODULE_2__; });
+/* harmony import */ var _fields_radio__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./fields/radio */ "./src/js/blocks/form-fields/fields/radio.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "radio", function() { return _fields_radio__WEBPACK_IMPORTED_MODULE_3__; });
+/* harmony import */ var _fields_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./fields/select */ "./src/js/blocks/form-fields/fields/select.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "select", function() { return _fields_select__WEBPACK_IMPORTED_MODULE_4__; });
+/* harmony import */ var _fields_text__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./fields/text */ "./src/js/blocks/form-fields/fields/text.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "text", function() { return _fields_text__WEBPACK_IMPORTED_MODULE_5__; });
+/* harmony import */ var _fields_textarea__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./fields/textarea */ "./src/js/blocks/form-fields/fields/textarea.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "textarea", function() { return _fields_textarea__WEBPACK_IMPORTED_MODULE_6__; });
+/* harmony import */ var _fields_redeem_voucher__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./fields/redeem-voucher */ "./src/js/blocks/form-fields/fields/redeem-voucher.js");
+/* harmony import */ var _fields_user_email__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./fields/user-email */ "./src/js/blocks/form-fields/fields/user-email.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userEmail", function() { return _fields_user_email__WEBPACK_IMPORTED_MODULE_8__; });
+/* harmony import */ var _fields_user_first_name__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./fields/user-first-name */ "./src/js/blocks/form-fields/fields/user-first-name.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userFirstName", function() { return _fields_user_first_name__WEBPACK_IMPORTED_MODULE_9__; });
+/* harmony import */ var _fields_user_last_name__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./fields/user-last-name */ "./src/js/blocks/form-fields/fields/user-last-name.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userLastName", function() { return _fields_user_last_name__WEBPACK_IMPORTED_MODULE_10__; });
+/* harmony import */ var _fields_user_names__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./fields/user-names */ "./src/js/blocks/form-fields/fields/user-names.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userNames", function() { return _fields_user_names__WEBPACK_IMPORTED_MODULE_11__; });
+/* harmony import */ var _fields_user_password__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./fields/user-password */ "./src/js/blocks/form-fields/fields/user-password.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userPassword", function() { return _fields_user_password__WEBPACK_IMPORTED_MODULE_12__; });
+/* harmony import */ var _fields_user_address__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./fields/user-address */ "./src/js/blocks/form-fields/fields/user-address.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddress", function() { return _fields_user_address__WEBPACK_IMPORTED_MODULE_13__; });
+/* harmony import */ var _fields_user_address_street__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./fields/user-address-street */ "./src/js/blocks/form-fields/fields/user-address-street.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressStreet", function() { return _fields_user_address_street__WEBPACK_IMPORTED_MODULE_14__; });
+/* harmony import */ var _fields_user_address_street_primary__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./fields/user-address-street-primary */ "./src/js/blocks/form-fields/fields/user-address-street-primary.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressStreetPrimary", function() { return _fields_user_address_street_primary__WEBPACK_IMPORTED_MODULE_15__; });
+/* harmony import */ var _fields_user_address_street_secondary__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./fields/user-address-street-secondary */ "./src/js/blocks/form-fields/fields/user-address-street-secondary.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressStreetSecondary", function() { return _fields_user_address_street_secondary__WEBPACK_IMPORTED_MODULE_16__; });
+/* harmony import */ var _fields_user_address_city__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./fields/user-address-city */ "./src/js/blocks/form-fields/fields/user-address-city.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressCity", function() { return _fields_user_address_city__WEBPACK_IMPORTED_MODULE_17__; });
+/* harmony import */ var _fields_user_address_country__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./fields/user-address-country */ "./src/js/blocks/form-fields/fields/user-address-country.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressCountry", function() { return _fields_user_address_country__WEBPACK_IMPORTED_MODULE_18__; });
+/* harmony import */ var _fields_user_address_region__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./fields/user-address-region */ "./src/js/blocks/form-fields/fields/user-address-region.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressRegion", function() { return _fields_user_address_region__WEBPACK_IMPORTED_MODULE_19__; });
+/* harmony import */ var _fields_user_address_state__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./fields/user-address-state */ "./src/js/blocks/form-fields/fields/user-address-state.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressState", function() { return _fields_user_address_state__WEBPACK_IMPORTED_MODULE_20__; });
+/* harmony import */ var _fields_user_address_postal_code__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./fields/user-address-postal-code */ "./src/js/blocks/form-fields/fields/user-address-postal-code.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressPostalCode", function() { return _fields_user_address_postal_code__WEBPACK_IMPORTED_MODULE_21__; });
 /**
  * Export all fields in the fields library.
  *
  * @since 1.6.0
- * @version 1.7.1
+ * @version [version]
  */
 // Hooks.
+ // Confirm Field Group.
+
  // Default Fields.
 
 
 
 
 
-
-
-
-
-
- // Preset Fields
-
-
  // Composed Fields.
 
+ // import * as userUsername from './fields/user-username';
+
+
+
+
+
+ // User Address Fields.
 
 
 
@@ -15459,13 +16018,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
+ // import * as userPasswordCurrent from './fields/user-password-current';
+// import * as userAddress from './fields/user-address';
+// import * as userPhone from './fields/user-phone';
 
 
 
@@ -16103,6 +16658,36 @@ var Inspector = /*#__PURE__*/function (_Component) {
 
       return false;
     }
+  }, {
+    key: "getColumnsOptions",
+    value: function getColumnsOptions(context) {
+      var options = []; // Full width is allowed inside stacked groups or when the field is being used solo.
+
+      if (!context || context && (!context['llms/fieldGroup/fieldLayout'] || 'stacked' === context['llms/fieldGroup/fieldLayout'])) {
+        options.push({
+          value: 12,
+          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('100%', 'lifterlms')
+        });
+      }
+
+      options = options.concat([{
+        value: 9,
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('75%', 'lifterlms')
+      }, {
+        value: 8,
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('66.66%', 'lifterlms')
+      }, {
+        value: 6,
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('50%', 'lifterlms')
+      }, {
+        value: 4,
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('33.33%', 'lifterlms')
+      }, {
+        value: 3,
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('25%', 'lifterlms')
+      }]);
+      return options;
+    }
     /**
      * Retrieve an array of objects to be used in the Matching Field select control.
      *
@@ -16184,19 +16769,23 @@ var Inspector = /*#__PURE__*/function (_Component) {
           attributes = _this$props2.attributes,
           setAttributes = _this$props2.setAttributes,
           clientId = _this$props2.clientId,
+          context = _this$props2.context,
           id = attributes.id,
           match = attributes.match,
           name = attributes.name,
           required = attributes.required,
           placeholder = attributes.placeholder,
           data_store = attributes.data_store,
-          data_store_key = attributes.data_store_key; // Return early if there's no inspector options to display.
+          data_store_key = attributes.data_store_key,
+          columns = attributes.columns,
+          isConfirmationField = attributes.isConfirmationField,
+          isConfirmationControlField = attributes.isConfirmationControlField; // Return early if there's no inspector options to display.
 
       if (!this.hasInspectorSupport()) {
         return '';
       }
 
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["PanelBody"], null, this.hasInspectorControlSupport('required') && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["ToggleControl"], {
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["PanelBody"], null, !isConfirmationField && this.hasInspectorControlSupport('required') && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["ToggleControl"], {
         label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('Required', 'lifterlms'),
         checked: !!required,
         onChange: function onChange() {
@@ -16205,6 +16794,17 @@ var Inspector = /*#__PURE__*/function (_Component) {
           });
         },
         help: !!required ? Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('Field is required.', 'lifterlms') : Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('Field is optional.', 'lifterlms')
+      }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["SelectControl"], {
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('Field Width', 'lifterlms'),
+        onChange: function onChange(columns) {
+          columns = parseInt(columns, 10);
+          setAttributes({
+            columns: columns
+          });
+        },
+        help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('Determines the width of the form field.', 'lifterlms'),
+        value: columns,
+        options: this.getColumnsOptions(context)
       }), this.hasInspectorControlSupport('options') && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_inspect_field_options__WEBPACK_IMPORTED_MODULE_12__["default"], {
         attributes: attributes,
         setAttributes: setAttributes
@@ -16219,7 +16819,7 @@ var Inspector = /*#__PURE__*/function (_Component) {
         help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('Displays a placeholder option as the selected instead of a default value.', 'lifterlms')
       }), this.hasInspectorControlSupport('customFill') && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["Slot"], {
         name: "llmsInspectorControlsFill.".concat(this.hasInspectorControlSupport('customFill'), ".").concat(clientId)
-      })), this.hasInspectorControlSupport('storage') && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["PanelBody"], {
+      })), !isConfirmationField && this.hasInspectorControlSupport('storage') && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["PanelBody"], {
         title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('Data Storage', 'lifterlms')
       }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["SelectControl"], {
         label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('Location', 'lifterlms'),
@@ -16270,7 +16870,7 @@ var Inspector = /*#__PURE__*/function (_Component) {
             addingKey: ''
           });
         }
-      }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('Add New Key', 'lifterlms'))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__["InspectorAdvancedControls"], null, this.hasInspectorControlSupport('name') && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["TextControl"], {
+      }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('Add New Key', 'lifterlms'))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__["InspectorAdvancedControls"], null, !isConfirmationField && this.hasInspectorControlSupport('name') && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["TextControl"], {
         label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('Field Name', 'lifterlms'),
         onChange: function onChange(value) {
           return setAttributes({
@@ -16279,7 +16879,7 @@ var Inspector = /*#__PURE__*/function (_Component) {
         },
         help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])("The field's HTML name attribute.", 'lifterlms'),
         value: name
-      }), this.hasInspectorControlSupport('id') && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["TextControl"], {
+      }), !isConfirmationField && this.hasInspectorControlSupport('id') && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["TextControl"], {
         label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('Field ID', 'lifterlms'),
         onChange: function onChange(value) {
           return setAttributes({
@@ -16288,7 +16888,7 @@ var Inspector = /*#__PURE__*/function (_Component) {
         },
         help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])("The field's HTML id attribute.", 'lifterlms'),
         value: id
-      }), this.hasInspectorControlSupport('match') && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["SelectControl"], {
+      }), !isConfirmationControlField && !isConfirmationField && this.hasInspectorControlSupport('match') && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["SelectControl"], {
         label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('Confirmation Field', 'lifterlms'),
         onChange: function onChange(value) {
           // Save the matched field value.
@@ -16371,9 +16971,9 @@ if ('wp_block' === Object(_util___WEBPACK_IMPORTED_MODULE_4__["getCurrentPostTyp
     }
 
     lastContent = content;
-    var is_llms_field = content.includes('<!-- wp:llms/form-field') ? 'yes' : 'no';
+    var val = content.includes('<!-- wp:llms/form-field') ? 'yes' : 'no';
     Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["dispatch"])('core/editor').editPost({
-      is_llms_field: is_llms_field
+      is_llms_field: val
     });
   });
 }
@@ -16383,7 +16983,7 @@ if ('wp_block' === Object(_util___WEBPACK_IMPORTED_MODULE_4__["getCurrentPostTyp
  * @since [version]
  *
  * @param {number} ref The WP_Post ID of the reusable block.
- * @return {WP_Block} A block editor block object.
+ * @return {Object} A block editor block object.
  */
 
 
@@ -16432,33 +17032,53 @@ Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["addFilter"])('blocks.getSa
 
 /***/ }),
 
+/***/ "./src/js/blocks/form-fields/save.js":
+/*!*******************************************!*\
+  !*** ./src/js/blocks/form-fields/save.js ***!
+  \*******************************************/
+/*! exports provided: saveField, saveGroup */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveField", function() { return saveField; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveGroup", function() { return saveGroup; });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function saveField(props) {
+  var attributes = props.attributes;
+  return attributes;
+}
+function saveGroup(props) {
+  var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["useBlockProps"].save();
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", blockProps, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["InnerBlocks"].Content, null));
+}
+
+/***/ }),
+
 /***/ "./src/js/blocks/form-fields/settings.js":
 /*!***********************************************!*\
   !*** ./src/js/blocks/form-fields/settings.js ***!
   \***********************************************/
-/*! exports provided: default, getDefaultPostTypes */
+/*! exports provided: default, getDefaultPostTypes, getSettingsFromBase */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDefaultPostTypes", function() { return getDefaultPostTypes; });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./field */ "./src/js/blocks/form-fields/field.js");
-/* harmony import */ var _inspect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./inspect */ "./src/js/blocks/form-fields/inspect.js");
-/* harmony import */ var _checks__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./checks */ "./src/js/blocks/form-fields/checks.js");
-
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSettingsFromBase", function() { return getSettingsFromBase; });
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/js/blocks/form-fields/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./save */ "./src/js/blocks/form-fields/save.js");
 /**
  * Default settings for registering a field block.
  *
@@ -16469,166 +17089,22 @@ __webpack_require__.r(__webpack_exports__);
  */
 // WP Deps.
 
-
-
-
  // External Deps.
 
  // Internal Deps.
 
 
 
-
-/**
- * Generate a unique "name" attribute.
- *
- * @since 1.6.0
- * @since [version] Removed '_field' and added the current post id to ensure uniqueness across multiple forms.
- *
- * @param {string} name Base name, generally the field's "field" attribute. EG: "text".
- * @return {string} A unique name, in snake case, suitable to be used as a field's "name" attribute.
- */
-
-var generateName = function generateName(name) {
-  var _select = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__["select"])('core/editor'),
-      getCurrentPostId = _select.getCurrentPostId;
-
-  return Object(lodash__WEBPACK_IMPORTED_MODULE_5__["snakeCase"])(Object(lodash__WEBPACK_IMPORTED_MODULE_5__["uniqueId"])("".concat(name, "_").concat(getCurrentPostId(), "_")));
-};
-/**
- * Generate a unique "id" attribute.
- *
- * @since 1.6.0
- *
- * @param {string} name Base name, generally the field's "name" attribute. EG: "text_field_1".
- * @return {string} A unique name, in kebab case, suitable to be used as a field's "id" attribute.
- */
-
-
-var generateId = function generateId(name) {
-  return Object(lodash__WEBPACK_IMPORTED_MODULE_5__["kebabCase"])(name);
-};
-/**
- * Sets up block attributes, filling defaults and generating unique values.
- *
- * @since 1.6.0
- * @since 1.12.0 Add data_store_key generation.
- *
- * @param {Object} atts      Default block attributes object.
- * @param {Object} blockAtts Actual WP_Block attributes object.
- * @return {Object} Attribute object suitable for use when registering the block.
- */
-
-
-var setupAtts = function setupAtts(atts, blockAtts) {
-  Object.keys(blockAtts).forEach(function (key) {
-    var defaultValue = blockAtts[key].__default;
-
-    if ('undefined' !== typeof defaultValue && 'undefined' === typeof atts[key]) {
-      atts[key] = defaultValue;
-    }
-  });
-
-  if (!atts.name) {
-    var name = generateName(atts.field);
-
-    while (!Object(_checks__WEBPACK_IMPORTED_MODULE_8__["isUnique"])('name', name)) {
-      name = generateName(atts.field);
-    }
-
-    atts.name = name;
-  }
-
-  if (!atts.id) {
-    var id = generateId(atts.name);
-
-    while (!Object(_checks__WEBPACK_IMPORTED_MODULE_8__["isUnique"])('id', id)) {
-      id = generateId(Object(lodash__WEBPACK_IMPORTED_MODULE_5__["uniqueId"])("".concat(atts.field, "-field-")));
-    }
-
-    atts.id = id;
-  }
-
-  if (!atts.data_store_key) {
-    atts.data_store_key = atts.name;
-  }
-
-  return atts;
-};
-
-var attributes = {
-  description: {
-    type: 'string',
-    __default: ''
-  },
-  field: {
-    type: 'string',
-    __default: 'text'
-  },
-  required: {
-    type: 'boolean',
-    __default: false
-  },
-  label: {
-    type: 'string',
-    __default: ''
-  },
-  label_show_empty: {
-    type: 'string',
-    __default: false
-  },
-  match: {
-    type: 'string',
-    __default: ''
-  },
-  options: {
-    type: 'array',
-    __default: []
-  },
-  options_preset: {
-    type: 'string',
-    __default: ''
-  },
-  placeholder: {
-    type: 'string',
-    __default: ''
-  },
-  name: {
-    type: 'string',
-    __default: ''
-  },
-  id: {
-    type: 'string',
-    __default: ''
-  },
-  data_store: {
-    type: 'string',
-    __default: 'usermeta'
-  },
-  data_store_key: {
-    type: 'string',
-    __default: ''
-  }
-};
-var settings = {
+var settingsBase = {
+  apiVersion: 2,
   icon: {
     foreground: '#466dd8'
   },
   category: 'llms-fields',
-  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('LifterLMS', 'lifterlms')],
-  attributes: attributes,
+  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('LifterLMS', 'lifterlms')],
+  attributes: {},
   supports: {
-    llms_visibility: true,
-    llms_field_inspector: {
-      id: true,
-      match: true,
-      name: true,
-      options: false,
-      placeholder: false,
-      required: true,
-      customFill: false,
-      storage: true
-    }
+    llms_visibility: true
   },
   example: {},
 
@@ -16647,65 +17123,150 @@ var settings = {
    */
   fillInspectorControls: function fillInspectorControls(attributes, setAttributes, props) {},
   // eslint-disable-line no-unused-vars
-
-  /**
-   * The edit function describes the structure of your block in the context of the editor.
-   * This represents what the editor will render when the block is used.
-   *
-   * The "edit" property must be a valid function.
-   *
-   * @since 1.6.0
-   * @since 1.7.0 Backwards compatibility fixes for WP Core 5.2 and earlier.
-   *
-   * @param {Object} props Block properties.
-   * @return {Fragment} Edit component HTML Fragment.
-   */
-  edit: function edit(props) {
-    var name = props.name,
-        block = Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__["getBlockType"])(name),
-        clientId = props.clientId,
-        setAttributes = props.setAttributes,
-        inspectorSupports = block.supports.llms_field_inspector,
-        fillInspectorControls = block.fillInspectorControls;
-    var attributes = props.attributes;
-    attributes = setupAtts(attributes, block.attributes);
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_inspect__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      attributes: attributes,
-      clientId: clientId,
-      name: name,
-      setAttributes: setAttributes,
-      inspectorSupports: inspectorSupports
-    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_field__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      attributes: attributes,
-      setAttributes: setAttributes
-    }), inspectorSupports.customFill && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["Fill"], {
-      name: "llmsInspectorControlsFill.".concat(inspectorSupports.customFill, ".").concat(clientId)
-    }, fillInspectorControls(attributes, setAttributes, props)));
-  },
-
-  /**
-   * The save function defines the way in which the different attributes should be combined
-   * into the final markup, which is then serialized by Gutenberg into post_content.
-   *
-   * The "save" property must be specified and must be a valid function.
-   *
-   * @since 1.6.0
-   *
-   * @param {Object} props Block properties.
-   * @return {Object} Attributes object.
-   */
-  save: function save(props) {
-    var attributes = props.attributes;
-    return attributes;
-  }
+  fillEditAfter: function fillEditAfter(attributes, setAttributes, props) {}
 };
+var settingsField = {
+  attributes: {
+    description: {
+      type: 'string',
+      __default: ''
+    },
+    field: {
+      type: 'string',
+      __default: 'text'
+    },
+    required: {
+      type: 'boolean',
+      __default: false
+    },
+    label: {
+      type: 'string',
+      __default: ''
+    },
+    label_show_empty: {
+      type: 'string',
+      __default: false
+    },
+    match: {
+      type: 'string',
+      __default: ''
+    },
+    options: {
+      type: 'array',
+      __default: []
+    },
+    options_preset: {
+      type: 'string',
+      __default: ''
+    },
+    placeholder: {
+      type: 'string',
+      __default: ''
+    },
+    columns: {
+      type: 'integer',
+      __default: 12
+    },
+    last_column: {
+      type: 'boolean',
+      __default: true
+    },
+    name: {
+      type: 'string',
+      __default: ''
+    },
+    id: {
+      type: 'string',
+      __default: ''
+    },
+    data_store: {
+      type: 'string',
+      __default: 'usermeta'
+    },
+    data_store_key: {
+      type: 'string',
+      __default: ''
+    },
+    html_attrs: {
+      type: 'object',
+      __default: {}
+    },
+    isConfirmationField: {
+      type: 'boolean',
+      __default: false
+    },
+    isConfirmationControlField: {
+      type: 'boolean',
+      __default: false
+    }
+  },
+  supports: {
+    llms_field_inspector: {
+      id: true,
+      name: true,
+      options: false,
+      placeholder: false,
+      required: true,
+      customFill: false,
+      storage: true
+    },
+    llms_edit_fill: {
+      after: false
+    },
+    llms_field_group: false
+  },
+  edit: _edit__WEBPACK_IMPORTED_MODULE_3__["editField"],
+  save: _save__WEBPACK_IMPORTED_MODULE_4__["saveField"]
+};
+var settingsGroup = {
+  attributes: {
+    fieldLayout: {
+      type: 'string',
+      default: 'columns'
+    }
+  },
+  supports: {
+    llms_field_group: true
+  },
+  providesContext: {
+    'llms/fieldGroup/fieldLayout': 'fieldLayout'
+  },
+  llmsInnerBlocks: {
+    template: [],
+    allowed: [],
+    lock: 'insert'
+  },
+  edit: _edit__WEBPACK_IMPORTED_MODULE_3__["editGroup"],
+  save: _save__WEBPACK_IMPORTED_MODULE_4__["saveGroup"]
+};
+/**
+ * Retrieve a copy of the default settings object
+ *
+ * @since Unknown
+ *
+ * @return {Object} A settings object.
+ */
+
 /* harmony default export */ __webpack_exports__["default"] = (function () {
-  return Object(lodash__WEBPACK_IMPORTED_MODULE_5__["cloneDeep"])(settings);
+  var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'field';
+  var addSettings = 'field' === type ? settingsField : settingsGroup;
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_2__["merge"])({}, Object(lodash__WEBPACK_IMPORTED_MODULE_2__["cloneDeep"])(settingsBase), addSettings);
 });
+/**
+ * Retrieve a copy of an array of default post types that support fields
+ *
+ * @since [version]
+ *
+ * @return {string[]} Array of post type names.
+ */
+
 function getDefaultPostTypes() {
-  return Object(lodash__WEBPACK_IMPORTED_MODULE_5__["cloneDeep"])(['llms_form', 'wp_block']);
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_2__["cloneDeep"])(['llms_form', 'wp_block']);
 }
-;
+function getSettingsFromBase(baseSettings) {
+  var overrides = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_2__["merge"])({}, baseSettings, overrides);
+}
 
 /***/ }),
 
@@ -16733,7 +17294,7 @@ __webpack_require__.r(__webpack_exports__);
  * LifterLMS Block Library.
  *
  * @since 1.7.0
- * @version 1.12.0
+ * @version [version]
  */
 
 /* eslint camelcase: [ "error", { allow: [ "_llms_form_location" ] } ] */
@@ -16771,7 +17332,8 @@ var deregisterBlocksForForms = function deregisterBlocksForForms() {
    * Determine if a block should be deregistered from form posts.
    *
    * @since 1.7.0
-   * @since 1.12.0 Use `safelist` in favor of `whitelist`.`
+   * @since 1.12.0 Use `safelist` in favor of `whitelist`.
+   * @since [version] Add core/block to the safelist.
    *
    * @param {string} name Block name.
    * @return {boolean} Returns `true` if a block should be unregistered.
@@ -16811,6 +17373,7 @@ var deregisterBlocksForForms = function deregisterBlocksForForms() {
  * @since 1.5.0 Only register blocks for supported post types.
  * @since 1.6.0 Add form field blocks.
  * @since 1.7.3 Move form ready event from domReady to here to ensure blocks are exposed before blocks are parsed.
+ * @since [version] Trigger `llms_form_fields_ready` on `wp_block` posts.
  */
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
@@ -16840,12 +17403,12 @@ var deregisterBlocksForForms = function deregisterBlocksForForms() {
     var name = block.name,
         postTypes = block.postTypes,
         settings = block.settings;
-    console.log(name, postTypes);
 
     if (!postTypes || -1 !== postTypes.indexOf(postType)) {
       registerBlockType(name, settings);
     }
-  });
+  }); // registerBlockType( 'test/dupe-wrapper', {
+  // } );
 });
 
 /***/ }),
@@ -18354,7 +18917,7 @@ __webpack_require__.r(__webpack_exports__);
   xmlns: "http://www.w3.org/2000/svg",
   width: "20px",
   height: "20px",
-  viewBox: "0 0 768 768"
+  viewBox: "0 0 540 540"
 }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("path", {
   d: "M247.75 256l16-64h-63.5l-16 64h63.5zM439.75 130l-14 56q-1.75 6-7.75 6h-81.75l-16 64h77.75q3.75 0 6.25 3 2.5 3.5 1.5 7l-14 56q-1.25 6-7.75 6h-81.75l-20.25 82q-1.75 6-7.75 6h-56q-4 0-6.5-3-2.25-3-1.5-7l19.5-78h-63.5l-20.25 82q-1.75 6-7.75 6h-56.25q-3.75 0-6.25-3-2.25-3-1.5-7l19.5-78h-77.75q-3.75 0-6.25-3-2.25-3-1.5-7l14-56q1.75-6 7.75-6h81.75l16-64h-77.75q-3.75 0-6.25-3-2.5-3.5-1.5-7l14-56q1.25-6 7.75-6h81.75l20.25-82q1.75-6 8-6h56q3.75 0 6.25 3 2.25 3 1.5 7l-19.5 78h63.5l20.25-82q1.75-6 8-6h56q3.75 0 6.25 3 2.25 3 1.5 7l-19.5 78h77.75q3.75 0 6.25 3 2.25 3 1.5 7z"
 })));
@@ -19721,17 +20284,6 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports) {
 
 (function() { module.exports = window["wp"]["compose"]; }());
-
-/***/ }),
-
-/***/ "@wordpress/core-data":
-/*!**********************************!*\
-  !*** external ["wp","coreData"] ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-(function() { module.exports = window["wp"]["coreData"]; }());
 
 /***/ }),
 

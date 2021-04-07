@@ -1,5 +1,5 @@
 /**
- * BLOCK: llms/form-field-user-address-country
+ * BLOCK: llms/form-field-user-email
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
@@ -10,11 +10,9 @@
 // WP Deps.
 import { __ } from '@wordpress/i18n';
 
-// External Deps.
-import { cloneDeep } from 'lodash';
-
 // Internal Deps.
-import { settings as countrySelectSettings, postTypes } from './select-country';
+import { settings as baseSettings, postTypes } from './select';
+import { getSettingsFromBase } from '../settings';
 
 /**
  * Block Name
@@ -37,27 +35,54 @@ const name = 'llms/form-field-user-address-country';
 const composed = true;
 
 // Setup the field settings.
-const settings = cloneDeep( countrySelectSettings );
-
-settings.title = __( 'User Country', 'lifterlms' );
-settings.description = __(
-	"A special field used to collect a user's billing address country.",
-	'lifterlms'
-);
-
-settings.supports.multiple = false; // Can only have a single email address field.
-
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
-settings.supports.llms_field_inspector.required = false;
-settings.supports.llms_field_inspector.match = false;
-settings.supports.llms_field_inspector.storage = false;
-
-settings.attributes.id.__default = 'llms_billing_country';
-settings.attributes.label.__default = __( 'Country / Region', 'lifterlms' );
-settings.attributes.name.__default = 'llms_billing_country';
-settings.attributes.required.__default = true;
-settings.attributes.placeholder.__default = '';
+const settings = getSettingsFromBase( baseSettings, {
+	title: __( 'User Country', 'lifterlms' ),
+	description: __(
+		"A special field used to collect a user's billing country.",
+		'lifterlms'
+	),
+	icon: {
+		src: 'admin-site',
+	},
+	supports: {
+		multiple: false,
+		llms_field_inspector: {
+			id: false,
+			name: false,
+			required: true,
+			match: false,
+			storage: false,
+			options: false,
+		},
+	},
+	attributes: {
+		id: {
+			__default: 'llms_billing_country',
+		},
+		label: {
+			__default: __( 'Country', 'lifterlms' ),
+		},
+		name: {
+			__default: 'llms_billing_country',
+		},
+		required: {
+			__default: true,
+		},
+		data_store: {
+			__default: 'usermeta',
+		},
+		data_store_key: {
+			__default: 'llms_billing_country',
+		},
+		options_preset: {
+			__default: 'countries',
+		},
+		placeholder: {
+			__default: __( 'Select a Country', 'lifterlms' ),
+		}
+	},
+	parent: [ 'llms/form-field-user-address' ],
+} );
 
 delete settings.transforms;
 

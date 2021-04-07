@@ -9,6 +9,7 @@
 import { RichText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import { Component, Fragment } from '@wordpress/element';
+import { Slot } from '@wordpress/components';
 
 // Internal deps.
 import './editor.scss';
@@ -51,17 +52,24 @@ export default class Field extends Component {
 	 * @return {Object} HTML Fragment.
 	 */
 	render() {
+
 		const {
-			attributes: {
+			attributes,
+			setAttributes,
+			block,
+			clientId,
+		} = this.props,
+		{
 				id,
 				description,
+				columns,
 				label,
 				options,
 				placeholder,
 				required,
-			},
-			setAttributes,
-		} = this.props;
+		} = attributes,
+		editFills = block.supports.llms_edit_fill;
+
 
 		const classes = [];
 		if ( required ) {
@@ -99,118 +107,118 @@ export default class Field extends Component {
 
 		return (
 			<Fragment>
-				<div className="llms-fields">
-					<div className="llms-field">
-						{ 'html' !== fieldType && (
-							<RichText
-								tagName="label"
-								className={ classes.join( ' ' ) }
-								value={ label }
-								onChange={ ( val ) => {
-									setAttributes( {
-										label: val,
-									} );
-								} }
-								formattingControls={ [ 'bold', 'italic' ] }
-								aria-label={
-									label
-										? __( 'Field label' )
-										: __(
-												'Empty field label; start writing to add a label'
-										  )
-								}
-								placeholder={ __( 'Enter a label' ) }
-							/>
-						) }
-						{ 'input' === fieldType && (
-							<input
-								style={ { width: '100%' } }
-								onChange={ ( event ) =>
-									setAttributes( {
-										placeholder: event.target.value,
-									} )
-								}
-								value={ placeholder }
-								placeholder={ __(
-									'Add optional placeholder text',
-									'lifterlms'
-								) }
-							/>
-						) }
-						{ 'password' === fieldType && (
-							<input
-								disabled="disabed"
-								type="password"
-								style={ { width: '100%' } }
-								value="F4K3p4$50Rd"
-							/>
-						) }
-						{ 'textarea' === fieldType && (
-							<textarea
-								style={ { width: '100%', resize: 'none' } }
-								rows={ this.props.attributes.attributes.rows }
-								onChange={ ( event ) =>
-									setAttributes( {
-										placeholder: event.target.value,
-									} )
-								}
-								value={ placeholder }
-								placeholder={ __(
-									'Add optional placeholder text',
-									'lifterlms'
-								) }
-							/>
-						) }
-						{ 'select' === fieldType && (
-							<select
-								style={ {
-									width: '100%',
-									maxWidth: 'none',
-									pointerEvents: 'none',
-								} }
-							>
-								<option>{ getDefaultOption() }</option>
-							</select>
-						) }
-						{ 'llms-password-strength-meter' === id && (
-							<div className="llms-pwd-meter">
-								<div>{ __( 'Very Weak', 'lifterlms' ) }</div>
-							</div>
-						) }
+				<div className="llms-field">
+					{ 'html' !== fieldType && (
 						<RichText
-							tagName="span"
-							value={ description }
+							tagName="label"
+							className={ classes.join( ' ' ) }
+							value={ label }
 							onChange={ ( val ) => {
 								setAttributes( {
-									description: val,
+									label: val,
 								} );
 							} }
-							formattingControls={ [
-								'bold',
-								'strikethrough',
-								'link',
-							] }
+							formattingControls={ [ 'bold', 'italic' ] }
 							aria-label={
 								label
-									? __( 'Optional field description' )
+									? __( 'Field label' )
 									: __(
-											'Empty field description; start writing to add a description'
+											'Empty field label; start writing to add a label'
 									  )
 							}
-							placeholder={ __(
-								'Add optional description text'
-							) }
-							style={ { color: '#808285', fontStyle: 'italic' } }
+							placeholder={ __( 'Enter a label' ) }
 						/>
-						{ ( 'radio' === fieldType ||
-							'checkbox' === fieldType ) && (
-							<InputGroupOptions
-								options={ options }
-								fieldType={ fieldType }
-							/>
+					) }
+					{ 'input' === fieldType && (
+						<input
+							style={ { width: '100%' } }
+							onChange={ ( event ) =>
+								setAttributes( {
+									placeholder: event.target.value,
+								} )
+							}
+							value={ placeholder }
+							placeholder={ __(
+								'Add optional placeholder text',
+								'lifterlms'
+							) }
+						/>
+					) }
+					{ 'password' === fieldType && (
+						<input
+							disabled="disabed"
+							type="password"
+							style={ { width: '100%' } }
+							value="F4K3p4$50Rd"
+						/>
+					) }
+					{ 'textarea' === fieldType && (
+						<textarea
+							style={ { width: '100%', resize: 'none' } }
+							rows={ this.props.attributes.attributes.rows }
+							onChange={ ( event ) =>
+								setAttributes( {
+									placeholder: event.target.value,
+								} )
+							}
+							value={ placeholder }
+							placeholder={ __(
+								'Add optional placeholder text',
+								'lifterlms'
+							) }
+						/>
+					) }
+					{ 'select' === fieldType && (
+						<select
+							style={ {
+								width: '100%',
+								maxWidth: 'none',
+								pointerEvents: 'none',
+							} }
+						>
+							<option>{ getDefaultOption() }</option>
+						</select>
+					) }
+					<RichText
+						tagName="span"
+						value={ description }
+						onChange={ ( val ) => {
+							setAttributes( {
+								description: val,
+							} );
+						} }
+						formattingControls={ [
+							'bold',
+							'strikethrough',
+							'link',
+						] }
+						aria-label={
+							label
+								? __( 'Optional field description' )
+								: __(
+										'Empty field description; start writing to add a description'
+								  )
+						}
+						placeholder={ __(
+							'Add optional description text'
 						) }
-					</div>
+						style={ { color: '#808285', fontStyle: 'italic' } }
+					/>
+					{ ( 'radio' === fieldType ||
+						'checkbox' === fieldType ) && (
+						<InputGroupOptions
+							options={ options }
+							fieldType={ fieldType }
+						/>
+					) }
 				</div>
+
+				{ editFills.after && (
+					<Slot
+						name={ `llmsEditFill.after.${ editFills.after }.${ clientId }` }
+					/>
+				) }
+
 			</Fragment>
 		);
 	}

@@ -7,6 +7,8 @@
  */
 
 // WP Deps.
+import { TextControl } from '@wordpress/components';
+import { Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { createBlock } from '@wordpress/blocks';
 
@@ -15,7 +17,8 @@ import {
 	default as getDefaultSettings,
 	getDefaultPostTypes,
 } from '../settings';
-import icon from '../../../icons/field-text';
+import defaultIcon from '../../../icons/field-text';
+import numberIcon from '../../../icons/field-number';
 
 /**
  * Block Name
@@ -50,27 +53,135 @@ const settings = getDefaultSettings();
 settings.title = __( 'Text', 'lifterlms' );
 settings.description = __( 'A simple text input field.', 'lifterlms' );
 
-settings.icon.src = icon;
+settings.icon.src = defaultIcon;
 
-settings.transforms = {
-	from: [
-		{
-			type: 'block',
-			blocks: [
-				'llms/form-field-email',
-				'llms/form-field-password',
-				'llms/form-field-phone',
-				'llms/form-field-number',
-				'llms/form-field-textarea',
-				'llms/form-field-url',
-			],
-			transform: ( attributes ) =>
-				createBlock( name, {
-					...attributes,
-					field: settings.attributes.field.__default,
-				} ),
+settings.variations = [
+	{
+		name: 'text',
+		title: __( 'Text', 'lifterlms' ),
+		description: __( 'An input field which accepts any form of text.', 'lifterlms' ),
+		isDefault: true,
+		icon: defaultIcon
+	},
+	{
+		name: 'email',
+		title: __( 'Email', 'lifterlms' ),
+		description: __( 'A text input field which only accepts an email address.', 'lifterlms' ),
+		icon:  'email-alt',
+	},
+	{
+		name: 'password',
+		title: __( 'Password', 'lifterlms' ),
+		description: __( 'User password confirmation field.', 'lifterlms' ),
+		icon:  'lock',
+		scope: [],
+	},
+	{
+		name: 'number',
+		title: __( 'Number', 'lifterlms' ),
+		description: __( 'An input field which only accepts numeric input.', 'lifterlms' ),
+		icon: numberIcon,
+		attributes: {
+			html_attrs: {
+				min: '',
+				max: '',
+			},
 		},
-	],
+	},
+	{
+		name: 'tel',
+		title: __( 'Phone Number', 'lifterlms' ),
+		description: __( 'An input field which only accepts phone numbers.', 'lifterlms' ),
+		icon: 'phone',
+	},
+	{
+		name: 'url',
+		title: __( 'Website Address / URL', 'lifterlms' ),
+		description: __( 'An input field which only accepts a website address or URL.', 'lifterlms' ),
+		icon: 'admin-links',
+	},
+];
+
+settings.usesContext = [
+	'llms/fieldGroup/fieldLayout',
+];
+
+settings.supports.llms_field_inspector.customFill = 'fieldTextAdditionalControls';
+
+/**
+ * Fill the controls slot with additional controls specific to this field.
+ *
+ * @since [version]
+ *
+ * @param {Object} attributes Block attributes.
+ * @param {Function} setAttributes Reference to the block's setAttributes() function.
+ * @return {Fragment} Component HTML Fragment.
+ */
+settings.fillInspectorControls = ( attributes, setAttributes ) => {
+
+	if ( attributes.isConfirmationField || 'number' !== attributes.field ) {
+		return;
+	}
+
+	// Add min/max options to a number field.
+	const { html_attrs } = attributes,
+		{ min, max } = html_attrs;
+
+	return (
+		<Fragment>
+			<TextControl
+				label={ __( 'Minimum Value', 'lifterlms' ) }
+				help={ __(
+					'Specify the minimum allowed value. Leave blank for no minimum.',
+					'lifterlms'
+				) }
+				value={ min }
+				type="number"
+				onChange={ ( min ) =>
+					setAttributes( { html_attrs: { ...html_attrs, min } } )
+				}
+			/>
+
+			<TextControl
+				label={ __( 'Maximum Value', 'lifterlms' ) }
+				help={ __(
+					'Specify the maximum allowed value. Leave blank for no maximum.',
+					'lifterlms'
+				) }
+				value={ max }
+				type="number"
+				onChange={ ( max ) =>
+					setAttributes( { html_attrs: { ...html_attrs, max } } )
+				}
+			/>
+		</Fragment>
+	);
 };
+
+
+
+// Add some data to all variations.
+settings.variations.forEach( ( variation ) => {
+
+	// Setup scope.
+	variation.scope = variation.scope || [ 'block', 'inserter', 'transform' ];
+
+	// Update the icon (add the default foreground color.
+	variation.icon = {
+		...settings.icon,
+		src: variation.icon
+	};
+
+	// Add a "field" attribute based off the variation name.
+	if ( ! variation.attributes ) {
+		variation.attributes = {};
+	}
+	variation.attributes.field = variation.name;
+
+	// Add an isActive function.
+	variation.isActive = ( blockAttributes, variationAttributes ) =>
+		blockAttributes.field ===
+		variationAttributes.field;
+} );
 
 export { name, postTypes, composed, settings };

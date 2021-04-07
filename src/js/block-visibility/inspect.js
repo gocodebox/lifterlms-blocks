@@ -32,6 +32,7 @@ import { options as visibilityOptions } from './settings';
  */
 export default createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
+
 		// Exit early if the block doesn't support visibility.
 		if ( ! check( wp.blocks.getBlockType( props.name ), props.name ) ) {
 			return <BlockEdit { ...props } />;
@@ -41,6 +42,11 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 			attributes: { llms_visibility, llms_visibility_in },
 			setAttributes,
 		} = props;
+
+		// Visibility is disabled via block properties.
+		if ( 'off' === llms_visibility ) {
+			return <BlockEdit { ...props } />;
+		}
 
 		let { llms_visibility_posts } = props.attributes; // eslint-disable-line camelcase
 

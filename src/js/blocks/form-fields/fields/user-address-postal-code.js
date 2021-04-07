@@ -11,7 +11,7 @@
 import { __ } from '@wordpress/i18n';
 
 // Internal Deps.
-import { settings as baseSettings, postTypes } from './select';
+import { settings as baseSettings, postTypes } from './text';
 import { getSettingsFromBase } from '../settings';
 
 /**
@@ -19,7 +19,7 @@ import { getSettingsFromBase } from '../settings';
  *
  * @type {string}
  */
-const name = 'llms/form-field-user-address-state';
+const name = 'llms/form-field-user-address-postal-code';
 
 /**
  * Is this a default or composed field?
@@ -36,13 +36,13 @@ const composed = true;
 
 // Setup the field settings.
 const settings = getSettingsFromBase( baseSettings, {
-	title: __( 'User Country', 'lifterlms' ),
+	title: __( 'User Postal Code', 'lifterlms' ),
 	description: __(
-		"A special field used to collect a user's billing country.",
+		"A special field used to collect a user's postal or zip code.",
 		'lifterlms'
 	),
 	icon: {
-		src: 'location',
+		src: 'post-status',
 	},
 	supports: {
 		multiple: false,
@@ -52,18 +52,17 @@ const settings = getSettingsFromBase( baseSettings, {
 			required: true,
 			match: false,
 			storage: false,
-			options: false,
 		},
 	},
 	attributes: {
 		id: {
-			__default: 'llms_billing_state',
+			__default: 'llms_billing_zip',
 		},
 		label: {
-			__default: __( 'State / Region', 'lifterlms' ),
+			__default: __( 'Postal / Zip Code', 'lifterlms' ),
 		},
 		name: {
-			__default: 'llms_billing_state',
+			__default: 'llms_billing_zip',
 		},
 		required: {
 			__default: true,
@@ -72,14 +71,8 @@ const settings = getSettingsFromBase( baseSettings, {
 			__default: 'usermeta',
 		},
 		data_store_key: {
-			__default: 'llms_billing_state',
+			__default: 'llms_billing_zip',
 		},
-		options_preset: {
-			__default: 'states',
-		},
-		placeholder: {
-			__default: __( 'Select a State / Region', 'lifterlms' ),
-		}
 	},
 	parent: [ 'llms/form-field-user-address-region' ],
 	usesContext: [
@@ -88,5 +81,6 @@ const settings = getSettingsFromBase( baseSettings, {
 } );
 
 delete settings.transforms;
+delete settings.variations;
 
 export { name, postTypes, composed, settings };

@@ -144,4 +144,10 @@ export default () => {
 			registerBlockType( name, settings );
 		}
 	} );
+
+	// registerBlockType( 'test/dupe-wrapper', {
+
+
+
+	// } );
 };

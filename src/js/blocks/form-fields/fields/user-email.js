@@ -10,11 +10,9 @@
 // WP Deps.
 import { __ } from '@wordpress/i18n';
 
-// External Deps.
-import { cloneDeep } from 'lodash';
-
 // Internal Deps.
-import { settings as emailSettings, postTypes } from './email';
+import { settings as baseSettings, postTypes } from './text';
+import { getSettingsFromBase } from '../settings';
 
 /**
  * Block Name
@@ -37,30 +35,39 @@ const name = 'llms/form-field-user-email';
 const composed = true;
 
 // Setup the field settings.
-const settings = cloneDeep( emailSettings );
+const settings = getSettingsFromBase( baseSettings, {
+	title: __( 'User Email', 'lifterlms' ),
+	description: __(
+		"A special field used to collect a user's account email address.",
+		'lifterlms'
+	),
+	icon: {
+		src: 'email-alt',
+	},
+	supports: {
+		multiple: false,  // Can only have a single email address field.
+		llms_field_inspector: {
+			id: false,
+			name: false,
+			required: false,
+			match: false,
+			storage: false,
+		},
+	},
+	attributes: {
+		id: { __default: 'email_address', },
+		field: { __default: 'email', },
+		label: { __default: __( 'Email Address', 'lifterlms' ), },
+		name: { __default: 'email_address', },
+		required: { __default: true, },
+		match: { __default: 'email_address_confirm', },
+		data_store: { __default: 'users', },
+		data_store_key: { __default: 'user_email', },
 
-settings.title = __( 'User Email', 'lifterlms' );
-settings.description = __(
-	"A special field used to collect a user's account email address.",
-	'lifterlms'
-);
-
-settings.supports.multiple = false; // Can only have a single email address field.
-
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
-settings.supports.llms_field_inspector.required = false;
-settings.supports.llms_field_inspector.match = false;
-settings.supports.llms_field_inspector.storage = false;
-
-settings.attributes.id.__default = 'email_address';
-settings.attributes.label.__default = __( 'Email Address', 'lifterlms' );
-settings.attributes.name.__default = 'email_address';
-settings.attributes.required.__default = true;
-settings.attributes.match.__default = 'email_address_confirm';
-settings.attributes.data_store.__default = 'users';
-settings.attributes.data_store_key.__default = 'user_email';
+	}
+} );
 
 delete settings.transforms;
+delete settings.variations;
 
 export { name, postTypes, composed, settings };

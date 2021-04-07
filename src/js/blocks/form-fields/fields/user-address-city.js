@@ -1,5 +1,5 @@
 /**
- * BLOCK: llms/form-field-user-address-city
+ * BLOCK: llms/form-field-user-email
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
@@ -10,11 +10,9 @@
 // WP Deps.
 import { __ } from '@wordpress/i18n';
 
-// External Deps.
-import { cloneDeep } from 'lodash';
-
 // Internal Deps.
-import { settings as textSettings, postTypes } from './text';
+import { settings as baseSettings, postTypes } from './text';
+import { getSettingsFromBase } from '../settings';
 
 /**
  * Block Name
@@ -37,28 +35,49 @@ const name = 'llms/form-field-user-address-city';
 const composed = true;
 
 // Setup the field settings.
-const settings = cloneDeep( textSettings );
-
-settings.title = __( 'User City', 'lifterlms' );
-settings.description = __(
-	"A special field used to collect a user's billing address city.",
-	'lifterlms'
-);
-
-settings.icon.src = 'location';
-
-settings.supports.multiple = false;
-
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
-settings.supports.llms_field_inspector.match = false;
-settings.supports.llms_field_inspector.storage = false;
-
-settings.attributes.id.__default = 'llms_billing_city';
-settings.attributes.label.__default = __( 'City', 'lifterlms' );
-settings.attributes.name.__default = 'llms_billing_city';
-settings.attributes.required.__default = true;
+const settings = getSettingsFromBase( baseSettings, {
+	title: __( 'User City', 'lifterlms' ),
+	description: __(
+		"A special field used to collect a user's billing city.",
+		'lifterlms'
+	),
+	icon: {
+		src: 'location-alt',
+	},
+	supports: {
+		multiple: false,
+		llms_field_inspector: {
+			id: false,
+			name: false,
+			required: true,
+			match: false,
+			storage: false,
+		},
+	},
+	attributes: {
+		id: {
+			__default: 'llms_billing_city',
+		},
+		label: {
+			__default: __( 'City', 'lifterlms' ),
+		},
+		name: {
+			__default: 'llms_billing_city',
+		},
+		required: {
+			__default: true,
+		},
+		data_store: {
+			__default: 'usermeta',
+		},
+		data_store_key: {
+			__default: 'llms_billing_city',
+		},
+	},
+	parent: [ 'llms/form-field-user-address' ],
+} );
 
 delete settings.transforms;
+delete settings.variations;
 
 export { name, postTypes, composed, settings };

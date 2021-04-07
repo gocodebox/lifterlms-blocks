@@ -1,5 +1,5 @@
 /**
- * BLOCK: llms/form-field-user-first-name
+ * BLOCK: llms/form-field-user-email
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
@@ -10,11 +10,9 @@
 // WP Deps.
 import { __ } from '@wordpress/i18n';
 
-// External Deps.
-import { cloneDeep } from 'lodash';
-
 // Internal Deps.
-import { settings as textSettings, postTypes } from './text';
+import { settings as baseSettings, postTypes } from './text';
+import { getSettingsFromBase } from '../settings';
 
 /**
  * Block Name
@@ -37,28 +35,41 @@ const name = 'llms/form-field-user-first-name';
 const composed = true;
 
 // Setup the field settings.
-const settings = cloneDeep( textSettings );
-
-settings.title = __( 'User First Name', 'lifterlms' );
-settings.description = __(
-	"A special field used to collect a user's first name.",
-	'lifterlms'
-);
-
-settings.icon.src = 'admin-users';
-
-settings.supports.multiple = false;
-
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
-settings.supports.llms_field_inspector.match = false;
-settings.supports.llms_field_inspector.storage = false;
-
-settings.attributes.id.__default = 'first_name';
-settings.attributes.label.__default = __( 'First Name', 'lifterlms' );
-settings.attributes.name.__default = 'first_name';
-settings.attributes.required.__default = true;
+const settings = getSettingsFromBase( baseSettings, {
+	title: __( 'First Name', 'lifterlms' ),
+	description: __(
+		"A special field used to collect a user's first name.",
+		'lifterlms'
+	),
+	icon: {
+		src: 'admin-users',
+	},
+	supports: {
+		multiple: false,  // Can only have a single email address field.
+		llms_field_inspector: {
+			id: false,
+			name: false,
+			required: true,
+			match: false,
+			storage: false,
+		},
+	},
+	attributes: {
+		id: { __default: 'first_name', },
+		field: { __default: 'text', },
+		label: { __default: __( 'First Name', 'lifterlms' ), },
+		name: { __default: 'first_name', },
+		required: { __default: true, },
+		data_store: { __default: 'usermeta', },
+		data_store_key: { __default: 'first_name', },
+	},
+	parent: [ 'llms/form-field-user-name' ],
+	usesContext: [
+		'llms/fieldGroup/fieldLayout',
+	],
+} );
 
 delete settings.transforms;
+delete settings.variations;
 
 export { name, postTypes, composed, settings };

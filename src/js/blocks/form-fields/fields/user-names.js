@@ -1,5 +1,5 @@
 /**
- * BLOCK: llms/form-field-phone
+ * BLOCK: llms/form-field-passwords
  *
  * @since 1.6.0
  * @since 1.12.0 Add transform support.
@@ -7,12 +7,15 @@
  */
 
 // WP Deps.
+import { createBlock, getBlockType } from '@wordpress/blocks';
+import { select } from '@wordpress/data';
+import { Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { createBlock } from '@wordpress/blocks';
 
 // Internal Deps.
 import {
 	default as getDefaultSettings,
+	getSettingsFromBase,
 	getDefaultPostTypes,
 } from '../settings';
 
@@ -21,7 +24,7 @@ import {
  *
  * @type {string}
  */
-const name = 'llms/form-field-phone';
+const name = 'llms/form-field-user-name';
 
 /**
  * Array of supported post types.
@@ -44,37 +47,28 @@ const postTypes = getDefaultPostTypes();
 const composed = false;
 
 // Setup the field settings.
-const settings = getDefaultSettings();
-
-settings.title = __( 'Phone', 'lifterlms' );
-settings.description = __(
-	'An input that accepts and validates telephone numbers.',
-	'lifterlms'
-);
-
-settings.attributes.field.__default = 'tel';
-
-settings.icon.src = 'phone';
-
-settings.transforms = {
-	from: [
-		{
-			type: 'block',
-			blocks: [
-				'llms/form-field-email',
-				'llms/form-field-number',
-				'llms/form-field-password',
-				'llms/form-field-text',
-				'llms/form-field-textarea',
-				'llms/form-field-url',
-			],
-			transform: ( attributes ) =>
-				createBlock( name, {
-					...attributes,
-					field: settings.attributes.field.__default,
-				} ),
+const settings = getSettingsFromBase(
+	getDefaultSettings( 'group' ),
+	{
+		title: __( 'User name', 'lifterlms' ),
+		description: __( "A special field used to collect a user's first and last name.", 'lifterlms' ),
+		icon: {
+			src: 'admin-users',
 		},
-	],
-};
+		supports: {
+			multiple: false,
+		},
+		llmsInnerBlocks: {
+			allowed: [
+				'llms/form-field-user-first-name',
+				'llms/form-field-user-last-name',
+			],
+			template: [
+				[ 'llms/form-field-user-first-name', { columns: 6, last_column: false } ],
+				[ 'llms/form-field-user-last-name', { columns: 6, last_column: true } ],
+			],
+		},
+	}
+);
 
 export { name, postTypes, composed, settings };
