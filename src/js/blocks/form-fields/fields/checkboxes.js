@@ -4,6 +4,7 @@
  * @since 1.6.0
  * @since 1.12.0 Add transform support and default options.
  * @since [version] Add reusable block support.
+ * @since [version] Added default keys.
  */
 
 // WP Deps.
@@ -60,10 +61,12 @@ settings.attributes.options.__default = [
 	{
 		default: 'no',
 		text: __( 'Option 1', 'lifterlms' ),
+		key: __( 'option_1', 'lifterlms' ),
 	},
 	{
 		default: 'no',
 		text: __( 'Option 2', 'lifterlms' ),
+		key: __( 'option_2', 'lifterlms' ),
 	},
 ];
 
