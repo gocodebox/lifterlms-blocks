@@ -7,11 +7,6 @@
  */
 
 // WP Deps.
-import { createBlock, getBlockType } from '@wordpress/blocks';
-import { select } from '@wordpress/data';
-import { useBlockProps, InnerBlocks, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 // Internal Deps.
@@ -21,37 +16,29 @@ import {
 	getDefaultPostTypes,
 } from '../settings';
 
-import GroupLayoutControl from '../group-layout-control';
-
 /**
  * Block Name
  *
  * @type {string}
  */
-const name = 'llms/form-field-user-address-region';
+export const name = 'llms/form-field-user-address-region';
 
 /**
  * Array of supported post types.
  *
  * @type {Array}
  */
-const postTypes = getDefaultPostTypes();
+export const postTypes = getDefaultPostTypes();
 
 /**
  * Is this a default or composed field?
  *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
- *
  * @type {string}
  */
-const composed = false;
+export const composed = true;
 
 // Setup the field settings.
-const settings = getSettingsFromBase(
+export const settings = getSettingsFromBase(
 	getDefaultSettings( 'group' ),
 	{
 		title: __( 'User Street Address', 'lifterlms' ),
@@ -75,5 +62,3 @@ const settings = getSettingsFromBase(
 		},
 	}
 );
-
-export { name, postTypes, composed, settings };

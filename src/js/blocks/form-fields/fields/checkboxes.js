@@ -14,7 +14,9 @@ import { createBlock } from '@wordpress/blocks';
 // Internal Deps.
 import {
 	default as getDefaultSettings,
+	getSettingsFromBase,
 	getDefaultPostTypes,
+	getDefaultOptionsArray,
 } from '../settings';
 import icon from '../../../icons/field-checkbox';
 
@@ -23,67 +25,62 @@ import icon from '../../../icons/field-checkbox';
  *
  * @type {string}
  */
-const name = 'llms/form-field-checkboxes';
+export const name = 'llms/form-field-checkboxes';
 
 /**
  * Array of supported post types.
  *
  * @type {Array}
  */
-const postTypes = getDefaultPostTypes();
+export const postTypes = getDefaultPostTypes();
 
 /**
- * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
+ * Field composition type.
  *
  * @type {string}
  */
-const composed = false;
+export const composed = false;
 
-// Setup the field settings.
-const settings = getDefaultSettings();
-
-settings.title = __( 'Checkboxes', 'lifterlms' );
-settings.description = __(
-	'A single checkbox toggle or a group of multiple checkboxes.',
-	'lifterlms'
-);
-
-settings.icon.src = icon;
-
-settings.attributes.field.__default = 'checkbox';
-settings.attributes.options.__default = [
+/**
+ * Block settings
+ *
+ * @type {Object}
+ */
+export const settings = getSettingsFromBase(
+	getDefaultSettings(),
 	{
-		default: 'no',
-		text: __( 'Option 1', 'lifterlms' ),
-		key: __( 'option_1', 'lifterlms' ),
-	},
-	{
-		default: 'no',
-		text: __( 'Option 2', 'lifterlms' ),
-		key: __( 'option_2', 'lifterlms' ),
-	},
-];
-
-settings.supports.llms_field_inspector.options = true;
-
-settings.transforms = {
-	from: [
-		{
-			type: 'block',
-			blocks: [ 'llms/form-field-radio', 'llms/form-field-select' ],
-			transform: ( attributes ) =>
-				createBlock( name, {
-					...attributes,
-					field: settings.attributes.field.__default,
-				} ),
+		title: __( 'Checkboxes', 'lifterlms' ),
+		description: __(
+			'A single checkbox toggle or a group of multiple checkboxes.',
+			'lifterlms'
+		),
+		icon: {
+			src: icon,
 		},
-	],
-};
-
-export { name, postTypes, composed, settings };
+		supports: {
+			llms_field_inspector: {
+				options: true,
+			},
+		},
+		attributes: {
+			field: {
+				__default: 'checkbox',
+			},
+			options: {
+				__default: getDefaultOptionsArray( 2, 0 ),
+			}
+		},
+		transforms: {
+			from: [
+				{
+					type: 'block',
+					blocks: [ 'llms/form-field-radio', 'llms/form-field-select' ],
+					transform: ( attributes ) => createBlock( name, {
+						...attributes,
+						field: settings.attributes.field.__default,
+					} ),
+				},
+			],
+		},
+	}
+);

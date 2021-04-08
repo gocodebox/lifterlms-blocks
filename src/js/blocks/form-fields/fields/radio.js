@@ -13,77 +13,70 @@ import { createBlock } from '@wordpress/blocks';
 
 // Internal Deps.
 import {
-	default as getDefaultSettings,
+	getSettingsFromBase,
 	getDefaultPostTypes,
+	getDefaultOptionsArray,
 } from '../settings';
 import icon from '../../../icons/field-radio';
+import { settings as baseSettings } from './checkboxes';
+
 
 /**
  * Block Name
  *
  * @type {string}
  */
-const name = 'llms/form-field-radio';
+export const name = 'llms/form-field-radio';
 
 /**
  * Array of supported post types.
  *
  * @type {Array}
  */
-const postTypes = getDefaultPostTypes();
+export const postTypes = getDefaultPostTypes();
 
 /**
- * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
+ * Field composition type.
  *
  * @type {string}
  */
-const composed = false;
+export const composed = false;
 
-// Setup the field settings.
-const settings = getDefaultSettings();
-
-settings.title = __( 'Radio', 'lifterlms' );
-settings.description = __(
-	'A group of radio inputs which can be populated with any number of options.',
-	'lifterlms'
-);
-
-settings.icon.src = icon;
-
-settings.attributes.field.__default = 'radio';
-settings.attributes.options.__default = [
+/**
+ * Block settings
+ *
+ * @type {Object}
+ */
+export const settings = getSettingsFromBase(
+	baseSettings,
 	{
-		default: 'yes',
-		text: __( 'Option 1', 'lifterlms' ),
-		key: __( 'option_1', 'lifterlms' ),
-	},
-	{
-		default: 'no',
-		text: __( 'Option 2', 'lifterlms' ),
-		key: __( 'option_2', 'lifterlms' ),
-	},
-];
-
-settings.supports.llms_field_inspector.options = true;
-
-settings.transforms = {
-	from: [
-		{
-			type: 'block',
-			blocks: [ 'llms/form-field-checkboxes', 'llms/form-field-select' ],
-			transform: ( attributes ) =>
-				createBlock( name, {
-					...attributes,
-					field: settings.attributes.field.__default,
-				} ),
+		title: __( 'Radio', 'lifterlms' ),
+		description: __(
+			'A group of radio inputs which can be populated with any number of options.',
+			'lifterlms'
+		),
+		icon: {
+			src: icon,
 		},
-	],
-};
-
-export { name, postTypes, composed, settings };
+		attributes: {
+			field: {
+				__default: 'radio',
+			},
+			options: {
+				__default: getDefaultOptionsArray( 2, 1 ),
+			}
+		},
+		transforms: {
+			from: [
+				{
+					type: 'block',
+					blocks: [ 'llms/form-field-checkboxes', 'llms/form-field-select' ],
+					transform: ( attributes ) => createBlock( name, {
+						...attributes,
+						field: settings.attributes.field.__default,
+					} ),
+				},
+			],
+		},
+	}
+);

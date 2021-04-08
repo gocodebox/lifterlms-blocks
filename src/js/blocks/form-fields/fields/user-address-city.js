@@ -19,65 +19,60 @@ import { getSettingsFromBase } from '../settings';
  *
  * @type {string}
  */
-const name = 'llms/form-field-user-address-city';
+export const name = 'llms/form-field-user-address-city';
 
 /**
  * Is this a default or composed field?
  *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default
- *
  * @type {string}
  */
-const composed = true;
+export const composed = true;
 
 // Setup the field settings.
-const settings = getSettingsFromBase( baseSettings, {
-	title: __( 'User City', 'lifterlms' ),
-	description: __(
-		"A special field used to collect a user's billing city.",
-		'lifterlms'
-	),
-	icon: {
-		src: 'location-alt',
+export const settings = getSettingsFromBase(
+	baseSettings,
+	{
+		title: __( 'User City', 'lifterlms' ),
+		description: __(
+			"A special field used to collect a user's billing city.",
+			'lifterlms'
+		),
+		icon: {
+			src: 'location-alt',
+		},
+		supports: {
+			multiple: false,
+			llms_field_inspector: {
+				id: false,
+				name: false,
+				required: true,
+				match: false,
+				storage: false,
+			},
+		},
+		attributes: {
+			id: {
+				__default: 'llms_billing_city',
+			},
+			label: {
+				__default: __( 'City', 'lifterlms' ),
+			},
+			name: {
+				__default: 'llms_billing_city',
+			},
+			required: {
+				__default: true,
+			},
+			data_store: {
+				__default: 'usermeta',
+			},
+			data_store_key: {
+				__default: 'llms_billing_city',
+			},
+		},
+		parent: [ 'llms/form-field-user-address' ],
 	},
-	supports: {
-		multiple: false,
-		llms_field_inspector: {
-			id: false,
-			name: false,
-			required: true,
-			match: false,
-			storage: false,
-		},
-	},
-	attributes: {
-		id: {
-			__default: 'llms_billing_city',
-		},
-		label: {
-			__default: __( 'City', 'lifterlms' ),
-		},
-		name: {
-			__default: 'llms_billing_city',
-		},
-		required: {
-			__default: true,
-		},
-		data_store: {
-			__default: 'usermeta',
-		},
-		data_store_key: {
-			__default: 'llms_billing_city',
-		},
-	},
-	parent: [ 'llms/form-field-user-address' ],
-} );
+	[ 'transforms', 'variations' ]
+);
 
-delete settings.transforms;
-delete settings.variations;
-
-export { name, postTypes, composed, settings };
+export { postTypes };

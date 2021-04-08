@@ -21,7 +21,7 @@ import * as textarea from './fields/textarea';
 // Composed Fields.
 import * as redeemVoucher from './fields/redeem-voucher';
 
-// import * as userUsername from './fields/user-username';
+import * as userLogin from './fields/user-login';
 import * as userEmail from './fields/user-email';
 import * as userFirstName from './fields/user-first-name';
 import * as userLastName from './fields/user-last-name';
@@ -56,7 +56,7 @@ export {
 	textarea,
 
 	// redeemVoucher,
-	// userUsername,
+	userLogin,
 	userEmail,
 	userFirstName,
 	userLastName,

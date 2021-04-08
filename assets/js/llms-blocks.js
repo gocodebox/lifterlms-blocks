@@ -13182,6 +13182,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
  * @since 1.6.0
  * @since 1.12.0 Add transform support and default options.
  * @since [version] Add reusable block support.
+ * @since [version] Added default keys.
  */
 // WP Deps.
 
@@ -13204,44 +13205,49 @@ var name = 'llms/form-field-checkboxes';
 
 var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["getDefaultPostTypes"])();
 /**
- * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
+ * Field composition type.
  *
  * @type {string}
  */
 
-var composed = false; // Setup the field settings.
+var composed = false;
+/**
+ * Block settings
+ *
+ * @type {Object}
+ */
 
-var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["default"])();
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Checkboxes', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('A single checkbox toggle or a group of multiple checkboxes.', 'lifterlms');
-settings.icon.src = _icons_field_checkbox__WEBPACK_IMPORTED_MODULE_4__["default"];
-settings.attributes.field.__default = 'checkbox';
-settings.attributes.options.__default = [{
-  default: 'no',
-  text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Option 1', 'lifterlms')
-}, {
-  default: 'no',
-  text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Option 2', 'lifterlms')
-}];
-settings.supports.llms_field_inspector.options = true;
-settings.transforms = {
-  from: [{
-    type: 'block',
-    blocks: ['llms/form-field-radio', 'llms/form-field-select'],
-    transform: function transform(attributes) {
-      return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, _objectSpread(_objectSpread({}, attributes), {}, {
-        field: settings.attributes.field.__default
-      }));
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["getSettingsFromBase"])(Object(_settings__WEBPACK_IMPORTED_MODULE_3__["default"])(), {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Checkboxes', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('A single checkbox toggle or a group of multiple checkboxes.', 'lifterlms'),
+  icon: {
+    src: _icons_field_checkbox__WEBPACK_IMPORTED_MODULE_4__["default"]
+  },
+  supports: {
+    llms_field_inspector: {
+      options: true
     }
-  }]
-};
-
+  },
+  attributes: {
+    field: {
+      __default: 'checkbox'
+    },
+    options: {
+      __default: Object(_settings__WEBPACK_IMPORTED_MODULE_3__["getDefaultOptionsArray"])(2, 0)
+    }
+  },
+  transforms: {
+    from: [{
+      type: 'block',
+      blocks: ['llms/form-field-radio', 'llms/form-field-select'],
+      transform: function transform(attributes) {
+        return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, _objectSpread(_objectSpread({}, attributes), {}, {
+          field: settings.attributes.field.__default
+        }));
+      }
+    }]
+  }
+});
 
 /***/ }),
 
@@ -13483,6 +13489,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
 /* harmony import */ var _icons_field_radio__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../icons/field-radio */ "./src/js/icons/field-radio.js");
+/* harmony import */ var _checkboxes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./checkboxes */ "./src/js/blocks/form-fields/fields/checkboxes.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -13495,10 +13502,12 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
  * @since 1.6.0
  * @since 1.12.0 Add transform support and default options.
  * @since [version] Add reusable block support.
+ * @since [version] Add default keys.
  */
 // WP Deps.
 
  // Internal Deps.
+
 
 
 
@@ -13517,44 +13526,44 @@ var name = 'llms/form-field-radio';
 
 var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["getDefaultPostTypes"])();
 /**
- * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
+ * Field composition type.
  *
  * @type {string}
  */
 
-var composed = false; // Setup the field settings.
+var composed = false;
+/**
+ * Block settings
+ *
+ * @type {Object}
+ */
 
-var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["default"])();
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Radio', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('A group of radio inputs which can be populated with any number of options.', 'lifterlms');
-settings.icon.src = _icons_field_radio__WEBPACK_IMPORTED_MODULE_4__["default"];
-settings.attributes.field.__default = 'radio';
-settings.attributes.options.__default = [{
-  default: 'yes',
-  text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Option 1', 'lifterlms')
-}, {
-  default: 'no',
-  text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Option 2', 'lifterlms')
-}];
-settings.supports.llms_field_inspector.options = true;
-settings.transforms = {
-  from: [{
-    type: 'block',
-    blocks: ['llms/form-field-checkboxes', 'llms/form-field-select'],
-    transform: function transform(attributes) {
-      return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, _objectSpread(_objectSpread({}, attributes), {}, {
-        field: settings.attributes.field.__default
-      }));
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["getSettingsFromBase"])(_checkboxes__WEBPACK_IMPORTED_MODULE_5__["settings"], {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Radio', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('A group of radio inputs which can be populated with any number of options.', 'lifterlms'),
+  icon: {
+    src: _icons_field_radio__WEBPACK_IMPORTED_MODULE_4__["default"]
+  },
+  attributes: {
+    field: {
+      __default: 'radio'
+    },
+    options: {
+      __default: Object(_settings__WEBPACK_IMPORTED_MODULE_3__["getDefaultOptionsArray"])(2, 1)
     }
-  }]
-};
-
+  },
+  transforms: {
+    from: [{
+      type: 'block',
+      blocks: ['llms/form-field-checkboxes', 'llms/form-field-select'],
+      transform: function transform(attributes) {
+        return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, _objectSpread(_objectSpread({}, attributes), {}, {
+          field: settings.attributes.field.__default
+        }));
+      }
+    }]
+  }
+});
 
 /***/ }),
 
@@ -13691,6 +13700,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
 /* harmony import */ var _icons_field_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../icons/field-select */ "./src/js/icons/field-select.js");
+/* harmony import */ var _radio__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./radio */ "./src/js/blocks/form-fields/fields/radio.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -13710,6 +13720,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
+
 /**
  * Block Name
  *
@@ -13725,45 +13736,46 @@ var name = 'llms/form-field-select';
 
 var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["getDefaultPostTypes"])();
 /**
- * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
+ * Field composition type.
  *
  * @type {string}
  */
 
-var composed = false; // Setup the field settings.
+var composed = false;
+/**
+ * Block settings
+ *
+ * @type {Object}
+ */
 
-var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["default"])();
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Dropdown', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('A select field which can be populated with any number of options.', 'lifterlms');
-settings.icon.src = _icons_field_select__WEBPACK_IMPORTED_MODULE_4__["default"];
-settings.attributes.field.__default = 'select';
-settings.attributes.options.__default = [{
-  default: 'yes',
-  text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Option 1', 'lifterlms')
-}, {
-  default: 'no',
-  text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Option 2', 'lifterlms')
-}];
-settings.supports.llms_field_inspector.options = true;
-settings.supports.llms_field_inspector.placeholder = true;
-settings.transforms = {
-  from: [{
-    type: 'block',
-    blocks: ['llms/form-field-checkboxes', 'llms/form-field-radio'],
-    transform: function transform(attributes) {
-      return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, _objectSpread(_objectSpread({}, attributes), {}, {
-        field: settings.attributes.field.__default
-      }));
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_3__["getSettingsFromBase"])(_radio__WEBPACK_IMPORTED_MODULE_5__["settings"], {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Dropdown', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('A select field which can be populated with any number of options.', 'lifterlms'),
+  icon: {
+    src: _icons_field_select__WEBPACK_IMPORTED_MODULE_4__["default"]
+  },
+  attributes: {
+    field: {
+      __default: 'select'
     }
-  }]
-};
-
+  },
+  supports: {
+    llms_field_inspector: {
+      placeholder: true
+    }
+  },
+  transforms: {
+    from: [{
+      type: 'block',
+      blocks: ['llms/form-field-checkboxes', 'llms/form-field-radio'],
+      transform: function transform(attributes) {
+        return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, _objectSpread(_objectSpread({}, attributes), {}, {
+          field: settings.attributes.field.__default
+        }));
+      }
+    }]
+  }
+});
 
 /***/ }),
 
@@ -14099,7 +14111,7 @@ settings.transforms = {
 /*!***************************************************************!*\
   !*** ./src/js/blocks/form-fields/fields/user-address-city.js ***!
   \***************************************************************/
-/*! exports provided: name, postTypes, composed, settings */
+/*! exports provided: name, composed, settings, postTypes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14135,12 +14147,6 @@ __webpack_require__.r(__webpack_exports__);
 var name = 'llms/form-field-user-address-city';
 /**
  * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default
  *
  * @type {string}
  */
@@ -14184,9 +14190,7 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBas
     }
   },
   parent: ['llms/form-field-user-address']
-});
-delete settings.transforms;
-delete settings.variations;
+}, ['transforms', 'variations']);
 
 
 /***/ }),
@@ -14195,7 +14199,7 @@ delete settings.variations;
 /*!******************************************************************!*\
   !*** ./src/js/blocks/form-fields/fields/user-address-country.js ***!
   \******************************************************************/
-/*! exports provided: name, postTypes, composed, settings */
+/*! exports provided: name, composed, settings, postTypes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14231,12 +14235,6 @@ __webpack_require__.r(__webpack_exports__);
 var name = 'llms/form-field-user-address-country';
 /**
  * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default
  *
  * @type {string}
  */
@@ -14287,8 +14285,7 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBas
     }
   },
   parent: ['llms/form-field-user-address']
-});
-delete settings.transforms;
+}, ['transforms']);
 
 
 /***/ }),
@@ -14297,7 +14294,7 @@ delete settings.transforms;
 /*!**********************************************************************!*\
   !*** ./src/js/blocks/form-fields/fields/user-address-postal-code.js ***!
   \**********************************************************************/
-/*! exports provided: name, postTypes, composed, settings */
+/*! exports provided: name, composed, settings, postTypes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14333,12 +14330,6 @@ __webpack_require__.r(__webpack_exports__);
 var name = 'llms/form-field-user-address-postal-code';
 /**
  * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default
  *
  * @type {string}
  */
@@ -14383,9 +14374,7 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBas
   },
   parent: ['llms/form-field-user-address-region'],
   usesContext: ['llms/fieldGroup/fieldLayout']
-});
-delete settings.transforms;
-delete settings.variations;
+}, ['transforms', 'variations']);
 
 
 /***/ }),
@@ -14403,20 +14392,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return postTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
-/* harmony import */ var _group_layout_control__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../group-layout-control */ "./src/js/blocks/form-fields/group-layout-control.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
 /**
  * BLOCK: llms/form-field-passwords
  *
@@ -14425,13 +14403,7 @@ __webpack_require__.r(__webpack_exports__);
  * @since [version] Add reusable block support.
  */
 // WP Deps.
-
-
-
-
-
  // Internal Deps.
-
 
 
 /**
@@ -14447,24 +14419,18 @@ var name = 'llms/form-field-user-address-region';
  * @type {Array}
  */
 
-var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_6__["getDefaultPostTypes"])();
+var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_1__["getDefaultPostTypes"])();
 /**
  * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
  *
  * @type {string}
  */
 
-var composed = false; // Setup the field settings.
+var composed = true; // Setup the field settings.
 
-var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_6__["getSettingsFromBase"])(Object(_settings__WEBPACK_IMPORTED_MODULE_6__["default"])('group'), {
-  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('User Street Address', 'lifterlms'),
-  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])("Collect a user's street address.", 'lifterlms'),
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_1__["getSettingsFromBase"])(Object(_settings__WEBPACK_IMPORTED_MODULE_1__["default"])('group'), {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Street Address', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Collect a user's street address.", 'lifterlms'),
   icon: {
     src: 'id-alt'
   },
@@ -14483,7 +14449,6 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_6__["getSettingsFromBas
     }]]
   }
 });
-
 
 /***/ }),
 
@@ -15033,7 +14998,7 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_7__["getSettingsFromBas
 /*!********************************************************!*\
   !*** ./src/js/blocks/form-fields/fields/user-email.js ***!
   \********************************************************/
-/*! exports provided: name, postTypes, composed, settings */
+/*! exports provided: name, composed, settings, postTypes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15070,12 +15035,6 @@ var name = 'llms/form-field-user-email';
 /**
  * Is this a default or composed field?
  *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default
- *
  * @type {string}
  */
 
@@ -15089,12 +15048,10 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBas
   },
   supports: {
     multiple: false,
-    // Can only have a single email address field.
     llms_field_inspector: {
       id: false,
       name: false,
       required: false,
-      match: false,
       storage: false
     }
   },
@@ -15114,9 +15071,6 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBas
     required: {
       __default: true
     },
-    match: {
-      __default: 'email_address_confirm'
-    },
     data_store: {
       __default: 'users'
     },
@@ -15124,9 +15078,7 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBas
       __default: 'user_email'
     }
   }
-});
-delete settings.transforms;
-delete settings.variations;
+}, ['transforms', 'variations']);
 
 
 /***/ }),
@@ -15135,7 +15087,7 @@ delete settings.variations;
 /*!*************************************************************!*\
   !*** ./src/js/blocks/form-fields/fields/user-first-name.js ***!
   \*************************************************************/
-/*! exports provided: name, postTypes, composed, settings */
+/*! exports provided: name, composed, settings, postTypes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15172,12 +15124,6 @@ var name = 'llms/form-field-user-first-name';
 /**
  * Is this a default or composed field?
  *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default
- *
  * @type {string}
  */
 
@@ -15196,7 +15142,6 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBas
       id: false,
       name: false,
       required: true,
-      match: false,
       storage: false
     }
   },
@@ -15225,9 +15170,7 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBas
   },
   parent: ['llms/form-field-user-name'],
   usesContext: ['llms/fieldGroup/fieldLayout']
-});
-delete settings.transforms;
-delete settings.variations;
+}, ['transforms', 'variations']);
 
 
 /***/ }),
@@ -15236,7 +15179,7 @@ delete settings.variations;
 /*!************************************************************!*\
   !*** ./src/js/blocks/form-fields/fields/user-last-name.js ***!
   \************************************************************/
-/*! exports provided: name, postTypes, composed, settings */
+/*! exports provided: name, composed, settings, postTypes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15302,8 +15245,92 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBas
     }
   }
 });
-delete settings.transforms;
-delete settings.variations;
+
+
+/***/ }),
+
+/***/ "./src/js/blocks/form-fields/fields/user-login.js":
+/*!********************************************************!*\
+  !*** ./src/js/blocks/form-fields/fields/user-login.js ***!
+  \********************************************************/
+/*! exports provided: name, composed, settings, postTypes */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return name; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composed", function() { return composed; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "settings", function() { return settings; });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./text */ "./src/js/blocks/form-fields/fields/text.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _text__WEBPACK_IMPORTED_MODULE_1__["postTypes"]; });
+
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
+/**
+ * BLOCK: llms/form-field-user-login
+ *
+ * @since [version]
+ */
+// WP Deps.
+ // Internal Deps.
+
+
+
+/**
+ * Block Name
+ *
+ * @type {string}
+ */
+
+var name = 'llms/form-field-user-login';
+/**
+ * Is this a default or composed field?
+ *
+ * @type {string}
+ */
+
+var composed = true; // Setup the field settings.
+
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBase"])(_text__WEBPACK_IMPORTED_MODULE_1__["settings"], {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Login', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Field used to collect a user's account username. If this field is omitted a username will be automatically generated based off their email address. Users can always login using either their email address or username.", 'lifterlms'),
+  icon: {
+    src: 'admin-users'
+  },
+  supports: {
+    multiple: false,
+    llms_field_inspector: {
+      id: false,
+      name: false,
+      required: false,
+      storage: false
+    }
+  },
+  attributes: {
+    id: {
+      __default: 'user_login'
+    },
+    field: {
+      __default: 'text'
+    },
+    label: {
+      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Username', 'lifterlms')
+    },
+    name: {
+      __default: 'user_login'
+    },
+    required: {
+      __default: true
+    },
+    data_store: {
+      __default: 'users'
+    },
+    data_store_key: {
+      __default: 'user_login'
+    }
+  }
+}[('transforms', 'variations')]);
 
 
 /***/ }),
@@ -15361,12 +15388,6 @@ var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_4__["getDefaultPostTyp
 /**
  * Is this a default or composed field?
  *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
- *
  * @type {string}
  */
 
@@ -15392,7 +15413,6 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_4__["getSettingsFromBas
     }]]
   }
 });
-
 
 /***/ }),
 
@@ -15938,7 +15958,7 @@ function _onChange(_ref) {
 /*!********************************************!*\
   !*** ./src/js/blocks/form-fields/index.js ***!
   \********************************************/
-/*! exports provided: confirmGroup, checkboxes, radio, select, text, textarea, userEmail, userFirstName, userLastName, userNames, userPassword, userAddress, userAddressStreet, userAddressStreetPrimary, userAddressStreetSecondary, userAddressCity, userAddressCountry, userAddressRegion, userAddressState, userAddressPostalCode */
+/*! exports provided: confirmGroup, checkboxes, radio, select, text, textarea, userLogin, userEmail, userFirstName, userLastName, userNames, userPassword, userAddress, userAddressStreet, userAddressStreetPrimary, userAddressStreetSecondary, userAddressCity, userAddressCountry, userAddressRegion, userAddressState, userAddressPostalCode */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15957,34 +15977,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fields_textarea__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./fields/textarea */ "./src/js/blocks/form-fields/fields/textarea.js");
 /* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "textarea", function() { return _fields_textarea__WEBPACK_IMPORTED_MODULE_6__; });
 /* harmony import */ var _fields_redeem_voucher__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./fields/redeem-voucher */ "./src/js/blocks/form-fields/fields/redeem-voucher.js");
-/* harmony import */ var _fields_user_email__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./fields/user-email */ "./src/js/blocks/form-fields/fields/user-email.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userEmail", function() { return _fields_user_email__WEBPACK_IMPORTED_MODULE_8__; });
-/* harmony import */ var _fields_user_first_name__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./fields/user-first-name */ "./src/js/blocks/form-fields/fields/user-first-name.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userFirstName", function() { return _fields_user_first_name__WEBPACK_IMPORTED_MODULE_9__; });
-/* harmony import */ var _fields_user_last_name__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./fields/user-last-name */ "./src/js/blocks/form-fields/fields/user-last-name.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userLastName", function() { return _fields_user_last_name__WEBPACK_IMPORTED_MODULE_10__; });
-/* harmony import */ var _fields_user_names__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./fields/user-names */ "./src/js/blocks/form-fields/fields/user-names.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userNames", function() { return _fields_user_names__WEBPACK_IMPORTED_MODULE_11__; });
-/* harmony import */ var _fields_user_password__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./fields/user-password */ "./src/js/blocks/form-fields/fields/user-password.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userPassword", function() { return _fields_user_password__WEBPACK_IMPORTED_MODULE_12__; });
-/* harmony import */ var _fields_user_address__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./fields/user-address */ "./src/js/blocks/form-fields/fields/user-address.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddress", function() { return _fields_user_address__WEBPACK_IMPORTED_MODULE_13__; });
-/* harmony import */ var _fields_user_address_street__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./fields/user-address-street */ "./src/js/blocks/form-fields/fields/user-address-street.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressStreet", function() { return _fields_user_address_street__WEBPACK_IMPORTED_MODULE_14__; });
-/* harmony import */ var _fields_user_address_street_primary__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./fields/user-address-street-primary */ "./src/js/blocks/form-fields/fields/user-address-street-primary.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressStreetPrimary", function() { return _fields_user_address_street_primary__WEBPACK_IMPORTED_MODULE_15__; });
-/* harmony import */ var _fields_user_address_street_secondary__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./fields/user-address-street-secondary */ "./src/js/blocks/form-fields/fields/user-address-street-secondary.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressStreetSecondary", function() { return _fields_user_address_street_secondary__WEBPACK_IMPORTED_MODULE_16__; });
-/* harmony import */ var _fields_user_address_city__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./fields/user-address-city */ "./src/js/blocks/form-fields/fields/user-address-city.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressCity", function() { return _fields_user_address_city__WEBPACK_IMPORTED_MODULE_17__; });
-/* harmony import */ var _fields_user_address_country__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./fields/user-address-country */ "./src/js/blocks/form-fields/fields/user-address-country.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressCountry", function() { return _fields_user_address_country__WEBPACK_IMPORTED_MODULE_18__; });
-/* harmony import */ var _fields_user_address_region__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./fields/user-address-region */ "./src/js/blocks/form-fields/fields/user-address-region.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressRegion", function() { return _fields_user_address_region__WEBPACK_IMPORTED_MODULE_19__; });
-/* harmony import */ var _fields_user_address_state__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./fields/user-address-state */ "./src/js/blocks/form-fields/fields/user-address-state.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressState", function() { return _fields_user_address_state__WEBPACK_IMPORTED_MODULE_20__; });
-/* harmony import */ var _fields_user_address_postal_code__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./fields/user-address-postal-code */ "./src/js/blocks/form-fields/fields/user-address-postal-code.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressPostalCode", function() { return _fields_user_address_postal_code__WEBPACK_IMPORTED_MODULE_21__; });
+/* harmony import */ var _fields_user_login__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./fields/user-login */ "./src/js/blocks/form-fields/fields/user-login.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userLogin", function() { return _fields_user_login__WEBPACK_IMPORTED_MODULE_8__; });
+/* harmony import */ var _fields_user_email__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./fields/user-email */ "./src/js/blocks/form-fields/fields/user-email.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userEmail", function() { return _fields_user_email__WEBPACK_IMPORTED_MODULE_9__; });
+/* harmony import */ var _fields_user_first_name__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./fields/user-first-name */ "./src/js/blocks/form-fields/fields/user-first-name.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userFirstName", function() { return _fields_user_first_name__WEBPACK_IMPORTED_MODULE_10__; });
+/* harmony import */ var _fields_user_last_name__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./fields/user-last-name */ "./src/js/blocks/form-fields/fields/user-last-name.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userLastName", function() { return _fields_user_last_name__WEBPACK_IMPORTED_MODULE_11__; });
+/* harmony import */ var _fields_user_names__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./fields/user-names */ "./src/js/blocks/form-fields/fields/user-names.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userNames", function() { return _fields_user_names__WEBPACK_IMPORTED_MODULE_12__; });
+/* harmony import */ var _fields_user_password__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./fields/user-password */ "./src/js/blocks/form-fields/fields/user-password.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userPassword", function() { return _fields_user_password__WEBPACK_IMPORTED_MODULE_13__; });
+/* harmony import */ var _fields_user_address__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./fields/user-address */ "./src/js/blocks/form-fields/fields/user-address.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddress", function() { return _fields_user_address__WEBPACK_IMPORTED_MODULE_14__; });
+/* harmony import */ var _fields_user_address_street__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./fields/user-address-street */ "./src/js/blocks/form-fields/fields/user-address-street.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressStreet", function() { return _fields_user_address_street__WEBPACK_IMPORTED_MODULE_15__; });
+/* harmony import */ var _fields_user_address_street_primary__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./fields/user-address-street-primary */ "./src/js/blocks/form-fields/fields/user-address-street-primary.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressStreetPrimary", function() { return _fields_user_address_street_primary__WEBPACK_IMPORTED_MODULE_16__; });
+/* harmony import */ var _fields_user_address_street_secondary__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./fields/user-address-street-secondary */ "./src/js/blocks/form-fields/fields/user-address-street-secondary.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressStreetSecondary", function() { return _fields_user_address_street_secondary__WEBPACK_IMPORTED_MODULE_17__; });
+/* harmony import */ var _fields_user_address_city__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./fields/user-address-city */ "./src/js/blocks/form-fields/fields/user-address-city.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressCity", function() { return _fields_user_address_city__WEBPACK_IMPORTED_MODULE_18__; });
+/* harmony import */ var _fields_user_address_country__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./fields/user-address-country */ "./src/js/blocks/form-fields/fields/user-address-country.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressCountry", function() { return _fields_user_address_country__WEBPACK_IMPORTED_MODULE_19__; });
+/* harmony import */ var _fields_user_address_region__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./fields/user-address-region */ "./src/js/blocks/form-fields/fields/user-address-region.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressRegion", function() { return _fields_user_address_region__WEBPACK_IMPORTED_MODULE_20__; });
+/* harmony import */ var _fields_user_address_state__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./fields/user-address-state */ "./src/js/blocks/form-fields/fields/user-address-state.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressState", function() { return _fields_user_address_state__WEBPACK_IMPORTED_MODULE_21__; });
+/* harmony import */ var _fields_user_address_postal_code__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./fields/user-address-postal-code */ "./src/js/blocks/form-fields/fields/user-address-postal-code.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "userAddressPostalCode", function() { return _fields_user_address_postal_code__WEBPACK_IMPORTED_MODULE_22__; });
 /**
  * Export all fields in the fields library.
  *
@@ -16002,7 +16024,7 @@ __webpack_require__.r(__webpack_exports__);
 
  // Composed Fields.
 
- // import * as userUsername from './fields/user-username';
+
 
 
 
@@ -16200,7 +16222,8 @@ var OptionsList = Object(react_sortable_hoc__WEBPACK_IMPORTED_MODULE_10__["Sorta
   var items = _ref.items,
       onChange = _ref.onChange,
       onRemove = _ref.onRemove,
-      showKeys = _ref.showKeys;
+      showKeys = _ref.showKeys,
+      type = _ref.type;
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("ul", {
     className: "llms-field-options"
   }, items.map(function (option, index) {
@@ -16212,7 +16235,8 @@ var OptionsList = Object(react_sortable_hoc__WEBPACK_IMPORTED_MODULE_10__["Sorta
       item: option,
       onChange: onChange,
       onRemove: onRemove,
-      showKeys: showKeys
+      showKeys: showKeys,
+      type: type
     });
   }));
 });
@@ -16223,6 +16247,7 @@ var OptionsList = Object(react_sortable_hoc__WEBPACK_IMPORTED_MODULE_10__["Sorta
  *
  * @since 1.6.0
  * @since 1.12.0 Added tooltip for the "Make Default" radio control & updated the icon used for item deletion.
+ * @since [version] Added special treatment for checkboxes.
  *
  * @return {Object} Component HTML Fragment.
  */
@@ -16232,14 +16257,18 @@ var OptionItem = Object(react_sortable_hoc__WEBPACK_IMPORTED_MODULE_10__["Sortab
       i = _ref2.i,
       _onChange = _ref2.onChange,
       onRemove = _ref2.onRemove,
-      showKeys = _ref2.showKeys;
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("li", {
-    className: "llms-field-option"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(DragHandle, null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["Tooltip"], {
-    text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('Make default', 'lifterlms')
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("div", {
-    className: "llms-field-opt-default-wrap"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["RadioControl"], {
+      showKeys = _ref2.showKeys,
+      type = _ref2.type;
+  var OptionControl = 'checkbox' === type ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["CheckboxControl"], {
+    className: "llms-field-opt-default",
+    checked: 'yes' === item.default,
+    onChange: function onChange(val) {
+      _onChange(_objectSpread(_objectSpread({}, item), {}, {
+        default: true === val ? 'yes' : 'no'
+      }), i);
+    },
+    tabIndex: "-1"
+  }) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["RadioControl"], {
     className: "llms-field-opt-default",
     selected: item.default,
     onChange: function onChange(val) {
@@ -16252,7 +16281,14 @@ var OptionItem = Object(react_sortable_hoc__WEBPACK_IMPORTED_MODULE_10__["Sortab
       value: 'yes'
     }],
     tabIndex: "-1"
-  }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("div", {
+  });
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("li", {
+    className: "llms-field-option"
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(DragHandle, null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["Tooltip"], {
+    text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_9__["__"])('Make default', 'lifterlms')
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("div", {
+    className: "llms-field-opt-default-wrap"
+  }, OptionControl)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])("div", {
     className: "llms-field-opt-text-wrap"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["TextControl"], {
     className: "llms-field-opt-text",
@@ -16428,6 +16464,8 @@ var InspectorFieldOptions = /*#__PURE__*/function (_Component) {
        *
        * @since 1.6.0
        * @since [version] Pass an id to <BaseControl>
+       *                  Pass the field type to <OptionsList>
+       *                  Also allow multiple defaults for checkboxes.
        *
        * @param {Object}  option Option data.
        * @param {number} index  Option index.
@@ -16436,13 +16474,15 @@ var InspectorFieldOptions = /*#__PURE__*/function (_Component) {
 
 
       var onOptionChange = function onOptionChange(option, index) {
-        var prevOption = options[index] ? options[index] : false;
+        var prevOption = options[index] ? options[index] : false,
+            field = _this2.props.attributes.field;
         options[index] = option;
 
-        _this2.updateOptions(options); // When setting an option as the "default", set all other options to not be the default.
+        _this2.updateOptions(options); // When setting an option as the "default", set all other options to not be the default,
+        // if not a checkbox.
 
 
-        if ('yes' === option.default && prevOption && prevOption.default !== option.default) {
+        if ('checkbox' !== field && 'yes' === option.default && prevOption && prevOption.default !== option.default) {
           options.forEach(function (opt, i) {
             if (i !== index) {
               onOptionChange(_objectSpread(_objectSpread({}, opt), {}, {
@@ -16463,7 +16503,8 @@ var InspectorFieldOptions = /*#__PURE__*/function (_Component) {
         helperClass: "llms-sort-helper",
         onChange: onOptionChange,
         onRemove: removeOption,
-        showKeys: showKeys
+        showKeys: showKeys,
+        type: field
       }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["Button"], {
         isDefault: true,
         onClick: function onClick() {
@@ -16771,7 +16812,6 @@ var Inspector = /*#__PURE__*/function (_Component) {
           clientId = _this$props2.clientId,
           context = _this$props2.context,
           id = attributes.id,
-          match = attributes.match,
           name = attributes.name,
           required = attributes.required,
           placeholder = attributes.placeholder,
@@ -16888,25 +16928,6 @@ var Inspector = /*#__PURE__*/function (_Component) {
         },
         help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])("The field's HTML id attribute.", 'lifterlms'),
         value: id
-      }), !isConfirmationControlField && !isConfirmationField && this.hasInspectorControlSupport('match') && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["SelectControl"], {
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('Confirmation Field', 'lifterlms'),
-        onChange: function onChange(value) {
-          // Save the matched field value.
-          setAttributes({
-            match: value
-          }); // Update the matched field to have the current field as its matcher.
-
-          var match = _this2.getBlockByFieldId(value);
-
-          if (match) {
-            Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_9__["dispatch"])('core/block-editor').updateBlockAttributes(match.clientId, {
-              match: id
-            });
-          }
-        },
-        help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__["__"])('Requires this field to match the selected field.', 'lifterlms'),
-        value: match,
-        options: this.getMatchFieldOptions()
       })));
     }
   }]);
@@ -17064,13 +17085,14 @@ function saveGroup(props) {
 /*!***********************************************!*\
   !*** ./src/js/blocks/form-fields/settings.js ***!
   \***********************************************/
-/*! exports provided: default, getDefaultPostTypes, getSettingsFromBase */
+/*! exports provided: default, getDefaultPostTypes, getSettingsFromBase, getDefaultOptionsArray */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDefaultPostTypes", function() { return getDefaultPostTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSettingsFromBase", function() { return getSettingsFromBase; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDefaultOptionsArray", function() { return getDefaultOptionsArray; });
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
@@ -17265,7 +17287,30 @@ function getDefaultPostTypes() {
 }
 function getSettingsFromBase(baseSettings) {
   var overrides = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var exclude = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+  baseSettings = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["cloneDeep"])(baseSettings);
+
+  for (var i = 0; i < exclude.length; i++) {
+    delete baseSettings[exclude[i]];
+  }
+
   return Object(lodash__WEBPACK_IMPORTED_MODULE_2__["merge"])({}, baseSettings, overrides);
+}
+function getDefaultOptionsArray() {
+  var count = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2;
+  var defaults = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+  var opts = [];
+
+  for (var i = 1; i <= count; i++) {
+    opts.push({
+      default: defaults && defaults > 0 ? 'yes' : 'no',
+      text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["sprintf"])(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Option %d', 'lifterlms'), i),
+      key: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["sprintf"])(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('option_%d', 'lifterlms'), i)
+    });
+    defaults--;
+  }
+
+  return opts;
 }
 
 /***/ }),

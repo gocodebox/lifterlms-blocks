@@ -9,7 +9,7 @@
 
 // WP Deps.
 import { select } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 
 // External Deps.
 import { cloneDeep, merge } from 'lodash';
@@ -220,12 +220,37 @@ export function getDefaultPostTypes() {
 	return cloneDeep( [ 'llms_form', 'wp_block' ] );
 }
 
-export function getSettingsFromBase( baseSettings, overrides = {} ) {
+export function getSettingsFromBase( baseSettings, overrides = {}, exclude = [] ) {
+
+	baseSettings = cloneDeep( baseSettings );
+	for ( let i = 0; i < exclude.length; i++ ) {
+		delete baseSettings[ exclude[ i ] ];
+	}
 
 	return merge(
 		{},
 		baseSettings,
 		overrides
 	);
+
+}
+
+export function getDefaultOptionsArray( count = 2, defaults = 1 ) {
+
+	const opts = [];
+
+	for ( let i = 1; i <= count; i++ ) {
+
+		opts.push( {
+			default: defaults && defaults > 0 ? 'yes' : 'no',
+			text: sprintf( __( 'Option %d', 'lifterlms' ), i ),
+			key: sprintf( __( 'option_%d', 'lifterlms' ), i )
+		} );
+
+		defaults--;
+
+	}
+
+	return opts;
 
 }

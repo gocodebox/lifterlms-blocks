@@ -19,71 +19,67 @@ import { getSettingsFromBase } from '../settings';
  *
  * @type {string}
  */
-const name = 'llms/form-field-user-address-country';
+export const name = 'llms/form-field-user-address-country';
 
 /**
  * Is this a default or composed field?
  *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default
- *
  * @type {string}
  */
-const composed = true;
+export const composed = true;
 
 // Setup the field settings.
-const settings = getSettingsFromBase( baseSettings, {
-	title: __( 'User Country', 'lifterlms' ),
-	description: __(
-		"A special field used to collect a user's billing country.",
-		'lifterlms'
-	),
-	icon: {
-		src: 'admin-site',
+export const settings = getSettingsFromBase(
+	baseSettings,
+	{
+		title: __( 'User Country', 'lifterlms' ),
+		description: __(
+			"A special field used to collect a user's billing country.",
+			'lifterlms'
+		),
+		icon: {
+			src: 'admin-site',
+		},
+		supports: {
+			multiple: false,
+			llms_field_inspector: {
+				id: false,
+				name: false,
+				required: true,
+				match: false,
+				storage: false,
+				options: false,
+			},
+		},
+		attributes: {
+			id: {
+				__default: 'llms_billing_country',
+			},
+			label: {
+				__default: __( 'Country', 'lifterlms' ),
+			},
+			name: {
+				__default: 'llms_billing_country',
+			},
+			required: {
+				__default: true,
+			},
+			data_store: {
+				__default: 'usermeta',
+			},
+			data_store_key: {
+				__default: 'llms_billing_country',
+			},
+			options_preset: {
+				__default: 'countries',
+			},
+			placeholder: {
+				__default: __( 'Select a Country', 'lifterlms' ),
+			}
+		},
+		parent: [ 'llms/form-field-user-address' ],
 	},
-	supports: {
-		multiple: false,
-		llms_field_inspector: {
-			id: false,
-			name: false,
-			required: true,
-			match: false,
-			storage: false,
-			options: false,
-		},
-	},
-	attributes: {
-		id: {
-			__default: 'llms_billing_country',
-		},
-		label: {
-			__default: __( 'Country', 'lifterlms' ),
-		},
-		name: {
-			__default: 'llms_billing_country',
-		},
-		required: {
-			__default: true,
-		},
-		data_store: {
-			__default: 'usermeta',
-		},
-		data_store_key: {
-			__default: 'llms_billing_country',
-		},
-		options_preset: {
-			__default: 'countries',
-		},
-		placeholder: {
-			__default: __( 'Select a Country', 'lifterlms' ),
-		}
-	},
-	parent: [ 'llms/form-field-user-address' ],
-} );
+	[ 'transforms' ]
+);
 
-delete settings.transforms;
-
-export { name, postTypes, composed, settings };
+export { postTypes };

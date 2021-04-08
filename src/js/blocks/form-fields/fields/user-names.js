@@ -24,30 +24,24 @@ import {
  *
  * @type {string}
  */
-const name = 'llms/form-field-user-name';
+export const name = 'llms/form-field-user-name';
 
 /**
  * Array of supported post types.
  *
  * @type {Array}
  */
-const postTypes = getDefaultPostTypes();
+export const postTypes = getDefaultPostTypes();
 
 /**
  * Is this a default or composed field?
  *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
- *
  * @type {string}
  */
-const composed = false;
+export const composed = false;
 
 // Setup the field settings.
-const settings = getSettingsFromBase(
+export const settings = getSettingsFromBase(
 	getDefaultSettings( 'group' ),
 	{
 		title: __( 'User name', 'lifterlms' ),
@@ -70,5 +64,3 @@ const settings = getSettingsFromBase(
 		},
 	}
 );
-
-export { name, postTypes, composed, settings };

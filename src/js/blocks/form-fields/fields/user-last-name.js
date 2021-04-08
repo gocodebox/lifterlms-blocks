@@ -19,7 +19,7 @@ import { getSettingsFromBase } from '../settings';
  *
  * @type {string}
  */
-const name = 'llms/form-field-user-last-name';
+export const name = 'llms/form-field-user-last-name';
 
 /**
  * Is this a default or composed field?
@@ -32,24 +32,32 @@ const name = 'llms/form-field-user-last-name';
  *
  * @type {string}
  */
-const composed = true;
+export const composed = true;
 
 // Setup the field settings.
-const settings = getSettingsFromBase( baseSettings, {
-	title: __( 'Last Name', 'lifterlms' ),
-	description: __(
-		"A special field used to collect a user's last name.",
-		'lifterlms'
-	),
-	attributes: {
-		id: { __default: 'last_name', },
-		label: { __default: __( 'Last Name', 'lifterlms' ), },
-		name: { __default: 'last_name', },
-		data_store_key: { __default: 'last_name', },
+export const settings = getSettingsFromBase(
+	baseSettings,
+	{
+		title: __( 'Last Name', 'lifterlms' ),
+		description: __(
+			"A special field used to collect a user's last name.",
+			'lifterlms'
+		),
+		attributes: {
+			id: {
+				__default: 'last_name',
+			},
+			label: {
+				__default: __( 'Last Name', 'lifterlms' ),
+			},
+			name: {
+				__default: 'last_name',
+			},
+			data_store_key: {
+				__default: 'last_name',
+			},
+		},
 	}
-} );
+);
 
-delete settings.transforms;
-delete settings.variations;
-
-export { name, postTypes, composed, settings };
+export { postTypes };
