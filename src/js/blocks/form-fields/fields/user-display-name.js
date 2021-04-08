@@ -61,10 +61,13 @@ export const settings = getSettingsFromBase(
 				__default: 'text',
 			},
 			label: {
-				__default: __( 'Email Address', 'lifterlms' ),
+				__default: __( 'Display Name', 'lifterlms' ),
 			},
 			name: {
 				__default: 'display_name',
+			},
+			required: {
+				__default: true,
 			},
 			data_store: {
 				__default: 'users',

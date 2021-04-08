@@ -155,7 +155,7 @@ export default class Field extends Component {
 					{ 'textarea' === fieldType && (
 						<textarea
 							style={ { width: '100%', resize: 'none' } }
-							rows={ this.props.attributes.attributes.rows }
+							rows={ this.props.attributes.html_attrs.rows }
 							onChange={ ( event ) =>
 								setAttributes( {
 									placeholder: event.target.value,

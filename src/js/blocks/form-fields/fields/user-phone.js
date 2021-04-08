@@ -1,55 +1,82 @@
 /**
- * BLOCK: llms/form-field-user-phone
+ * BLOCK: llms/form-field-user-email
  *
  * @since 1.6.0
- * @since 1.8.0 Updated lodash imports.
- * @since 1.12.0 Add data store support.
- * @since [version] Add reusable block support.
+ * @version [version]
  */
 
 // WP Deps.
 import { __ } from '@wordpress/i18n';
 
-// External Deps.
-import { cloneDeep } from 'lodash';
-
 // Internal Deps.
-import { settings as phoneSettings, postTypes } from './phone';
+import { settings as baseSettings, postTypes } from './text';
+import { getSettingsFromBase } from '../settings';
 
 /**
  * Block Name
  *
  * @type {string}
  */
-const name = 'llms/form-field-user-phone';
+export const name = 'llms/form-field-user-phone';
 
 /**
  * Is this a default or composed field?
  *
  * @type {string}
  */
-const composed = true;
+export const composed = true;
 
-// Setup the field settings.
-const settings = cloneDeep( phoneSettings );
+/**
+ * Block settings
+ *
+ * @since 1.6.0
+ * @since 1.12.0 Add data store support.
+ * @since [version] Add reusable block support.
+ *
+ * @type {Object}
+ */
+export const settings = getSettingsFromBase(
+	baseSettings,
+	{
+		title: __( 'User Phone', 'lifterlms' ),
+		description: __(
+			"A field used to collect a user's phone number.",
+			'lifterlms'
+		),
+		icon: {
+			src: 'phone',
+		},
+		supports: {
+			multiple: false,
+			llms_field_inspector: {
+				id: false,
+				name: false,
+				storage: false,
+			},
+		},
+		attributes: {
+			id: {
+				__default: 'llms_phone',
+			},
+			field: {
+				__default: 'tel',
+			},
+			label: {
+				__default: __( 'Phone number', 'lifterlms' ),
+			},
+			name: {
+				__default: 'llms_phone',
+			},
+			data_store: {
+				__default: 'usermeta',
+			},
+			data_store_key: {
+				__default: 'llms_phone',
+			},
 
-settings.title = __( 'User Phone', 'lifterlms' );
-settings.description = __(
-	"A special field used to collect a user's phone number.",
-	'lifterlms'
+		},
+	},
+	[ 'transforms', 'variations' ],
 );
 
-settings.supports.multiple = false;
-
-settings.supports.llms_field_inspector.id = false;
-settings.supports.llms_field_inspector.name = false;
-settings.supports.llms_field_inspector.match = false;
-settings.supports.llms_field_inspector.storage = false;
-
-settings.attributes.id.__default = 'llms_phone';
-settings.attributes.label.__default = __( 'Phone Number', 'lifterlms' );
-settings.attributes.name.__default = 'llms_phone';
-
-delete settings.transforms;
-
-export { name, postTypes, composed, settings };
+export { postTypes }

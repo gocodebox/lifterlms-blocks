@@ -1,9 +1,8 @@
 /**
- * BLOCK: llms/form-field-passwords
+ * BLOCK: llms/form-field-user-address-region
  *
  * @since 1.6.0
- * @since 1.12.0 Add transform support.
- * @since [version] Add reusable block support.
+ * @version [version]
  */
 
 // WP Deps.
@@ -37,7 +36,15 @@ export const postTypes = getDefaultPostTypes();
  */
 export const composed = true;
 
-// Setup the field settings.
+/**
+ * Block settings
+ *
+ * @since 1.6.0
+ * @since 1.12.0 Add transform support.
+ * @since [version] Add reusable block support.
+ *
+ * @type {Object}
+ */
 export const settings = getSettingsFromBase(
 	getDefaultSettings( 'group' ),
 	{

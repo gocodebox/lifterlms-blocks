@@ -2,9 +2,7 @@
  * BLOCK: llms/form-field-user-email
  *
  * @since 1.6.0
- * @since 1.8.0 Updated lodash imports.
- * @since 1.12.0 Add data store support.
- * @since [version] Add reusable block support.
+ * @version [version]
  */
 
 // WP Deps.
@@ -28,7 +26,16 @@ export const name = 'llms/form-field-user-email';
  */
 export const composed = true;
 
-// Setup the field settings.
+/**
+ * Block settings
+ *
+ * @since 1.6.0
+ * @since 1.8.0 Updated lodash imports.
+ * @since 1.12.0 Add data store support.
+ * @since [version] Add reusable block support.
+ *
+ * @type {Object}
+ */
 export const settings = getSettingsFromBase(
 	baseSettings,
 	{

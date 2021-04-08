@@ -185,7 +185,7 @@ export function editGroup( props ) {
 				</PanelBody>
 			</InspectorControls>
 
-			<div className="llms-field-group llms-field--user-name" data-field-layout={ fieldLayout }>
+			<div className="llms-field-group" data-field-layout={ fieldLayout }>
 				<InnerBlocks
 					allowedBlocks={ allowed }
 					template={ template }

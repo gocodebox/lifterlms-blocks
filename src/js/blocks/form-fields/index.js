@@ -21,6 +21,7 @@ import * as textarea from './fields/textarea';
 // Composed Fields.
 import * as redeemVoucher from './fields/redeem-voucher';
 
+import * as userDisplayName from './fields/user-display-name';
 import * as userLogin from './fields/user-login';
 import * as userEmail from './fields/user-email';
 import * as userFirstName from './fields/user-first-name';
@@ -39,13 +40,13 @@ import * as userAddressRegion from './fields/user-address-region';
 import * as userAddressState from './fields/user-address-state';
 import * as userAddressPostalCode from './fields/user-address-postal-code';
 
+import * as userPhone from './fields/user-phone';
 
 
 // import * as userPasswordCurrent from './fields/user-password-current';
 // import * as userAddress from './fields/user-address';
 
 
-// import * as userPhone from './fields/user-phone';
 
 export {
 	confirmGroup,
@@ -55,13 +56,7 @@ export {
 	text,
 	textarea,
 
-	// redeemVoucher,
-	userLogin,
-	userEmail,
-	userFirstName,
-	userLastName,
-	userNames,
-	userPassword,
+	redeemVoucher,
 
 	userAddress,
 	userAddressStreet,
@@ -73,7 +68,15 @@ export {
 	userAddressState,
 	userAddressPostalCode,
 
+	userDisplayName,
+	userEmail,
+	userFirstName,
+	userLastName,
+	userLogin,
+	userNames,
+	userPassword,
+	userPhone,
+
 	// userPasswordCurrent,
 	// userAddressAdditional,
-	// userPhone,
 };

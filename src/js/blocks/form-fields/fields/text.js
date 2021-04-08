@@ -37,12 +37,6 @@ const postTypes = getDefaultPostTypes();
 /**
  * Is this a default or composed field?
  *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
- *
  * @type {string}
  */
 const composed = false;

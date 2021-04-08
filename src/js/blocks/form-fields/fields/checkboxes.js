@@ -2,9 +2,7 @@
  * BLOCK: llms/form-field-checkboxes
  *
  * @since 1.6.0
- * @since 1.12.0 Add transform support and default options.
- * @since [version] Add reusable block support.
- * @since [version] Added default keys.
+ * @version [version]
  */
 
 // WP Deps.
@@ -43,6 +41,9 @@ export const composed = false;
 
 /**
  * Block settings
+ *
+ * @since 1.12.0 Add transform support and default options.
+ * @since [version] Major refactor for 2.0.
  *
  * @type {Object}
  */

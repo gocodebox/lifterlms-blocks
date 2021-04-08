@@ -1,15 +1,11 @@
 /**
  * BLOCK: llms/form-field-passwords
  *
- * @since 1.6.0
- * @since 1.12.0 Add transform support.
- * @since [version] Add reusable block support.
+ * @since [version]
+ * @version [version]
  */
 
 // WP Deps.
-import { createBlock, getBlockType } from '@wordpress/blocks';
-import { select } from '@wordpress/data';
-import { Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 // Internal Deps.
@@ -40,7 +36,13 @@ export const postTypes = getDefaultPostTypes();
  */
 export const composed = false;
 
-// Setup the field settings.
+/**
+ * Block settings
+ *
+ * @since [version]
+ *
+ * @type {Object}
+ */
 export const settings = getSettingsFromBase(
 	getDefaultSettings( 'group' ),
 	{

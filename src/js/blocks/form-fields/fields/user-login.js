@@ -2,6 +2,7 @@
  * BLOCK: llms/form-field-user-login
  *
  * @since [version]
+ * @version [version]
  */
 
 // WP Deps.
@@ -25,7 +26,13 @@ export const name = 'llms/form-field-user-login';
  */
 export const composed = true;
 
-// Setup the field settings.
+/**
+ * Block settings
+ *
+ * @since [version]
+ *
+ * @type {Object}
+ */
 export const settings = getSettingsFromBase(
 	baseSettings,
 	{

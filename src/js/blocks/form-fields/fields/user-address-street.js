@@ -1,17 +1,11 @@
 /**
- * BLOCK: llms/form-field-passwords
+ * BLOCK: llms/form-field-user-address-street
  *
  * @since 1.6.0
- * @since 1.12.0 Add transform support.
- * @since [version] Add reusable block support.
+ * @version [version]
  */
 
 // WP Deps.
-import { createBlock, getBlockType } from '@wordpress/blocks';
-import { select } from '@wordpress/data';
-import { useBlockProps, InnerBlocks, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 // Internal Deps.
@@ -21,102 +15,56 @@ import {
 	getDefaultPostTypes,
 } from '../settings';
 
-import GroupLayoutControl from '../group-layout-control';
-
 /**
- * Block Name
+ * Block Namer
  *
  * @type {string}
  */
-const name = 'llms/form-field-user-address-street';
+export const name = 'llms/form-field-user-address-street';
 
 /**
  * Array of supported post types.
  *
  * @type {Array}
  */
-const postTypes = getDefaultPostTypes();
+export const postTypes = getDefaultPostTypes();
 
 /**
  * Is this a default or composed field?
  *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
- *
  * @type {string}
  */
-const composed = false;
+export const composed = true;
 
-// Setup the field settings.
-const settings = getSettingsFromBase( getDefaultSettings(), {
-	title: __( 'User Street Address', 'lifterlms' ),
-	description: __( "Collect a user's street address.", 'lifterlms' ),
-	icon: {
-		src: 'id-alt',
-	},
-	attributes: {
-		fieldLayout: {
-			type: 'string',
-			default: 'columns',
+/**
+ * Block Settings
+ *
+ * @since 1.6.0
+ * @since [version] Add reusable block support.
+ *
+ * @type {Object}
+ */
+export const settings = getSettingsFromBase(
+	getDefaultSettings( 'group' ),
+	{
+		title: __( 'User Street rAddress', 'lifterlms' ),
+		description: __( "Collect a user's street address.", 'lifterlms' ),
+		icon: {
+			src: 'id-alt',
 		},
-	},
-	supports: {
-		multiple: false,
-		llms_field_group: true,
-	},
-	providesContext: {
-		'llms/fieldGroup/fieldLayout': 'fieldLayout',
-	},
-	parent: [ 'llms/form-field-user-name' ],
-	edit: function( props ) {
-
-		const blockProps = useBlockProps(),
-			{ attributes, clientId, setAttributes } = props,
-			block = select( 'core/block-editor' ).getBlock( clientId ),
-			{ fieldLayout } = attributes,
-			INNER_ORIENTATION = 'columns' === fieldLayout ? 'horizontal' : 'vertical',
-			INNER_ALLOWED = [
+		supports: {
+			multiple: false,
+		},
+		llmsInnerBlocks: {
+			allowed: [
 				'llms/form-field-user-address-street-primary',
 				'llms/form-field-user-address-street-secondary',
 			],
-			INNER_TEMPLATE = [
+			template: [
 				[ 'llms/form-field-user-address-street-primary', { columns: 8, last_column: false } ],
 				[ 'llms/form-field-user-address-street-secondary', { columns: 4, last_column: true } ],
-			];
-
-		return (
-			<div { ...blockProps }>
-				<InspectorControls>
-					<PanelBody>
-						<GroupLayoutControl { ...{ ...props, block } } />
-					</PanelBody>
-				</InspectorControls>
-
-				<div className="llms-field-group llms-field--user-address--street" data-field-layout={ fieldLayout }>
-					<InnerBlocks
-						allowedBlocks={ INNER_ALLOWED }
-						template={ INNER_TEMPLATE }
-						templateLock="insert"
-						orientation={ INNER_ORIENTATION }
-					/>
-				</div>
-			</div>
-		);
-	},
-	save: function() {
-
-		const blockProps = useBlockProps.save();
-
-		return (
-			<div { ...blockProps }>
-				<InnerBlocks.Content />
-			</div>
-		);
-
+			],
+		},
+		parent: [ 'llms/form-field-user-name' ],
 	}
-} );
-
-export { name, postTypes, composed, settings };
+);

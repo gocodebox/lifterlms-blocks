@@ -2,9 +2,7 @@
  * BLOCK: llms/form-field-radio
  *
  * @since 1.6.0
- * @since 1.12.0 Add transform support and default options.
- * @since [version] Add reusable block support.
- * @since [version] Add default keys.
+ * @version [version]
  */
 
 // WP Deps.
@@ -44,6 +42,10 @@ export const composed = false;
 
 /**
  * Block settings
+ *
+ * @since 1.12.0 Add transform support and default options.
+ * @since [version] Add reusable block support.
+ * @since [version] Add default keys.
  *
  * @type {Object}
  */
