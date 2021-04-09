@@ -2,7 +2,7 @@ import { getBlockType } from '@wordpress/blocks';
 import { useBlockProps, InnerBlocks, InspectorControls } from '@wordpress/block-editor';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { select } from '@wordpress/data';
-import { Fill } from '@wordpress/components';
+import { Slot, Fill } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { PanelBody } from '@wordpress/components';
@@ -170,29 +170,56 @@ export function editField( props ) {
 
 export function editGroup( props ) {
 
-	const { attributes, clientId, name } = props,
-		{ fieldLayout }                  = attributes,
-		{ getBlock }                     = select( blockEditorStore ),
-		block                            = getBlock( clientId ),
-		blockType                        = getBlockType( name ),
-		{ allowed, template, lock }      = blockType.llmsInnerBlocks;
+	const {
+			attributes,
+			clientId,
+			name,
+			setAttributes
+		}                 = props,
+		{ fieldLayout }   = attributes,
+		{ getBlock }      = select( blockEditorStore ),
+		block             = getBlock( clientId ),
+		blockType         = getBlockType( name ),
+		{
+			allowed,
+			template,
+			lock,
+		}                 = blockType.llmsInnerBlocks,
+		primaryBlock      = block && block.innerBlocks.length ? block.innerBlocks[ blockType.findControllerBlockIndex( block.innerBlocks ) ] : null,
+		primaryBlockType  = primaryBlock ? getBlockType( primaryBlock.name ) : null,
+		editFills         = primaryBlockType ? primaryBlockType.supports.llms_edit_fill : { after: false },
+		inspectorSupports = blockType.supports.llms_field_inspector;
 
 	return (
 		<div { ...useBlockProps() }>
 			<InspectorControls>
 				<PanelBody>
 					<GroupLayoutControl { ...{ ...props, block } } />
+
+					{ inspectorSupports.customFill && (
+						blockType.fillInspectorControls(
+							attributes,
+							setAttributes,
+							props
+						)
+					) }
 				</PanelBody>
 			</InspectorControls>
 
 			<div className="llms-field-group" data-field-layout={ fieldLayout }>
 				<InnerBlocks
 					allowedBlocks={ allowed }
-					template={ template }
+					template={ 'function' === typeof template ? template( { attributes, clientId, block, blockType } ) : template }
 					templateLock={ lock }
 					orientation={ 'columns' === fieldLayout ? 'horizontal' : 'vertical' }
 				/>
 			</div>
+
+			{ editFills.after && (
+				<Slot
+					name={ `llmsEditFill.after.${ editFills.after }.${ primaryBlock.clientId }` }
+				/>
+			) }
 		</div>
 	);
 };

@@ -76,7 +76,7 @@ export const settings = getSettingsFromBase(
 				__default: 'user_login',
 			},
 		},
-	}
+	},
 	[ 'transforms', 'variations' ],
 );
 

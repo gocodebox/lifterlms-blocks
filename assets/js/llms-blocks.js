@@ -12876,6 +12876,7 @@ function editGroup(props) {
   var attributes = props.attributes,
       clientId = props.clientId,
       name = props.name,
+      setAttributes = props.setAttributes,
       fieldLayout = attributes.fieldLayout,
       _select3 = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__["select"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["store"]),
       getBlock = _select3.getBlock,
@@ -12884,19 +12885,32 @@ function editGroup(props) {
       _blockType$llmsInnerB = blockType.llmsInnerBlocks,
       allowed = _blockType$llmsInnerB.allowed,
       template = _blockType$llmsInnerB.template,
-      lock = _blockType$llmsInnerB.lock;
+      lock = _blockType$llmsInnerB.lock,
+      primaryBlock = block && block.innerBlocks.length ? block.innerBlocks[blockType.findControllerBlockIndex(block.innerBlocks)] : null,
+      primaryBlockType = primaryBlock ? Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["getBlockType"])(primaryBlock.name) : null,
+      editFills = primaryBlockType ? primaryBlockType.supports.llms_edit_fill : {
+    after: false
+  },
+      inspectorSupports = blockType.supports.llms_field_inspector;
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["PanelBody"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_group_layout_control__WEBPACK_IMPORTED_MODULE_12__["default"], _objectSpread(_objectSpread({}, props), {}, {
     block: block
-  })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
+  })), inspectorSupports.customFill && blockType.fillInspectorControls(attributes, setAttributes, props))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: "llms-field-group",
     "data-field-layout": fieldLayout
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["InnerBlocks"], {
     allowedBlocks: allowed,
-    template: template,
+    template: 'function' === typeof template ? template({
+      attributes: attributes,
+      clientId: clientId,
+      block: block,
+      blockType: blockType
+    }) : template,
     templateLock: lock,
     orientation: 'columns' === fieldLayout ? 'horizontal' : 'vertical'
-  })));
+  })), editFills.after && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["Slot"], {
+    name: "llmsEditFill.after.".concat(editFills.after, ".").concat(primaryBlock.clientId)
+  }));
 }
 ;
 
@@ -13023,6 +13037,7 @@ var Field = /*#__PURE__*/function (_Component) {
           setAttributes = _this$props.setAttributes,
           block = _this$props.block,
           clientId = _this$props.clientId,
+          context = _this$props.context,
           id = attributes.id,
           description = attributes.description,
           columns = attributes.columns,
@@ -13279,8 +13294,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
-/* harmony import */ var _group_layout_control__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../group-layout-control */ "./src/js/blocks/form-fields/group-layout-control.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
 
 
 
@@ -13303,7 +13319,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
  // Internal Deps.
 
 
-
 /**
  * Block Name
  *
@@ -13317,38 +13332,22 @@ var name = 'llms/form-field-confirm-group';
  * @type {Array}
  */
 
-var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_7__["getDefaultPostTypes"])();
+var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_8__["getDefaultPostTypes"])();
 /**
  * Is this a default or composed field?
- *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
  *
  * @type {string}
  */
 
-var composed = false; // Setup the field settings.
-
-var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_7__["default"])();
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Input Confirmation Group', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Adds a required confirmation field to an input field.', 'lifterlms');
-settings.icon.src = 'controls-repeat';
-settings.attributes = {
-  fieldLayout: {
-    type: 'string',
-    default: 'columns'
-  }
-};
-settings.providesContext = {
-  'llms/fieldGroup/fieldLayout': 'fieldLayout'
-};
-settings.supports = _objectSpread(_objectSpread({}, settings.supports), {}, {
-  llms_field_group: true
-});
-var ALLOWED = ['llms/form-field-text', 'llms/form-field-user-email', 'llms/form-field-user-password'];
+var composed = false;
+/**
+ * Retrieve block attributes for a controller block
+ *
+ * @since [version]
+ *
+ * @param {Object} attributes Existing attributes to merge defaults into.
+ * @return {Object} Updated block attributes.
+ */
 
 function getControllerBlockAttrs() {
   var attributes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -13359,6 +13358,15 @@ function getControllerBlockAttrs() {
     llms_visibility: 'off'
   });
 }
+/**
+ * Retrieve block attributes for a controlled (confirmation) block
+ *
+ * @since [version]
+ *
+ * @param {Object} attributes Existing attributes to merge defaults into.
+ * @return {Object} Updated block attributes.
+ */
+
 
 function getControlledBlockAttrs() {
   var attributes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -13372,16 +13380,29 @@ function getControlledBlockAttrs() {
     llms_visibility: 'off'
   });
 }
+/**
+ * Revert the confirmation group to a single field
+ *
+ * Replaces the group block with the controller block (first inner child) of the group.
+ *
+ * @since [version]
+ *
+ * @param {string} clientId Client ID of the group block.
+ * @return {void}
+ */
 
-function revertToSingle(block) {
-  var _dispatch = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["dispatch"])('core/block-editor'),
+
+function revertToSingle(clientId) {
+  var _select = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["store"]),
+      getBlock = _select.getBlock,
+      _dispatch = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["dispatch"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["store"]),
       replaceBlock = _dispatch.replaceBlock,
-      clientId = block.clientId,
+      block = getBlock(clientId),
       innerBlocks = block.innerBlocks,
       llms_visibility = block.attributes.llms_visibility,
-      _innerBlocks$ = innerBlocks[0],
-      name = _innerBlocks$.name,
-      attributes = _innerBlocks$.attributes;
+      _innerBlocks$findCont = innerBlocks[findControllerBlockIndex(innerBlocks)],
+      name = _innerBlocks$findCont.name,
+      attributes = _innerBlocks$findCont.attributes;
 
   replaceBlock(clientId, Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, _objectSpread(_objectSpread({}, attributes), {}, {
     columns: 12,
@@ -13392,79 +13413,134 @@ function revertToSingle(block) {
 }
 
 ;
+/**
+ * Allowed blocks list.
+ *
+ * @type {string[]}
+ */
 
-settings.edit = function (props) {
-  var blockProps = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["useBlockProps"])();
-  var attributes = props.attributes,
-      clientId = props.clientId,
-      setAttributes = props.setAttributes;
-  var hasConfirmation = attributes.hasConfirmation,
-      fieldLayout = attributes.fieldLayout;
-  var block = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])('core/block-editor').getBlock(clientId),
-      hasChildren = block && block.innerBlocks.length > 0,
-      firstChild = hasChildren ? block.innerBlocks[0] : null,
-      firstChildBlock = firstChild ? Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["getBlockType"])(firstChild.name) : null,
-      editFills = firstChildBlock ? firstChildBlock.supports.llms_edit_fill : {
-    after: false
-  };
-  var TEMPLATE = hasChildren ? null : [['llms/form-field-text', getControllerBlockAttrs()], ['llms/form-field-text', getControlledBlockAttrs()]];
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", blockProps, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["PanelBody"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_group_layout_control__WEBPACK_IMPORTED_MODULE_8__["default"], _objectSpread(_objectSpread({}, props), {}, {
-    block: block
-  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["Button"], {
-    isDestructive: true,
-    onClick: function onClick() {
-      return revertToSingle(block);
-    }
-  }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Remove confirmation field', 'lifterlms')))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-    className: "llms-field-group llms-field--confirm-group",
-    "data-field-layout": fieldLayout
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["InnerBlocks"], {
-    allowedBlocks: ALLOWED,
-    template: TEMPLATE,
-    templateLock: "all"
-  })), editFills.after && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["Slot"], {
-    name: "llmsEditFill.after.".concat(editFills.after, ".").concat(firstChild.clientId)
-  }));
+var allowed = ['llms/form-field-text', 'llms/form-field-user-email', 'llms/form-field-user-login', 'llms/form-field-user-password'];
+/**
+ * Block transforms.
+ *
+ * @type {Object}
+ */
+
+var transforms = {
+  from: []
 };
 /**
- * The save function defines the way in which the different attributes should be combined
- * into the final markup, which is then serialized by Gutenberg into post_content.
+ * Create a block transform for each of the allowed blocks
  *
- * The "save" property must be specified and must be a valid function.
+ * When creating a confirm group from a single block the first child
+ * should be a direct copy of the block itself (EG: user-email -> user->email).
+ *
+ * The second child should be a simple text block with the type of the first block
+ * (eg: user-email to text with a field type email).
+ *
+ * Therefore each transform is identical except for the block type of the first child
+ * block.
  *
  * @since [version]
  *
- * @return {Object} Attributes object.
+ * @param {string} blockName Name of the block being transformed into a group.
+ * @return {void}
+ */
+
+allowed.forEach(function (blockName) {
+  transforms.from.push({
+    type: 'block',
+    blocks: [blockName],
+    transform: function transform(attributes) {
+      var children = [Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(blockName, getControllerBlockAttrs(attributes)), Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])('llms/form-field-text', getControlledBlockAttrs(attributes))];
+      return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, {}, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["isRTL"])() ? children.reverse() : children);
+    }
+  });
+});
+/**
+ * Fill the controls slot with additional controls specific to this field.
+ *
+ * @since [version]
+ *
+ * @param {Object} attributes Block attributes.
+ * @param {Function} setAttributes Reference to the block's setAttributes() function.
+ * @return {Button} Component HTML Fragment.
+ */
+
+var fillInspectorControls = function fillInspectorControls(attributes, setAttributes, props) {
+  var clientId = props.clientId;
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["Button"], {
+    isDestructive: true,
+    onClick: function onClick() {
+      return revertToSingle(clientId);
+    }
+  }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Remove confirmation field', 'lifterlms'));
+};
+/**
+ * Finds the index of the primary (controller) field in the group
+ *
+ * @since [version]
+ *
+ * @param {Object[]} innerBlocks ) Inner blocks array.
+ * @return {number} Array index of the primary block within the inner blocks array.
  */
 
 
-settings.save = function () {
-  var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["useBlockProps"].save();
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", blockProps, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["InnerBlocks"].Content, null));
+var findControllerBlockIndex = function findControllerBlockIndex(innerBlocks) {
+  return innerBlocks.findIndex(function (_ref) {
+    var attributes = _ref.attributes;
+    return attributes.isConfirmationControlField;
+  });
 };
+/**
+ * Block settings
+ *
+ * @type {Object}
+ */
 
-settings.transforms = {
-  from: [{
-    type: 'block',
-    blocks: ['llms/form-field-text'],
-    transform: function transform(attributes) {
-      return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, {}, [Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])('llms/form-field-text', getControllerBlockAttrs(attributes)), Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])('llms/form-field-text', getControlledBlockAttrs(attributes))]);
-    }
-  }, {
-    type: 'block',
-    blocks: ['llms/form-field-user-email'],
-    transform: function transform(attributes) {
-      return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, {}, [Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])('llms/form-field-user-email', getControllerBlockAttrs(attributes)), Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])('llms/form-field-text', getControlledBlockAttrs(attributes))]);
-    }
-  }, {
-    type: 'block',
-    blocks: ['llms/form-field-user-password'],
-    transform: function transform(attributes) {
-      return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])(name, {}, [Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])('llms/form-field-user-password', getControllerBlockAttrs(attributes)), Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["createBlock"])('llms/form-field-text', getControlledBlockAttrs(attributes))]);
-    }
-  }]
-};
 
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_8__["getSettingsFromBase"])(Object(_settings__WEBPACK_IMPORTED_MODULE_8__["default"])('group'), {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Input Confirmation Group', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Adds a required confirmation field to an input field.', 'lifterlms'),
+  icon: {
+    src: 'controls-repeat'
+  },
+  transforms: transforms,
+  fillInspectorControls: fillInspectorControls,
+  findControllerBlockIndex: findControllerBlockIndex,
+  supports: {
+    llms_field_inspector: {
+      customFill: 'confirmGroupAdditionalControls'
+    }
+  },
+  llmsInnerBlocks: {
+    allowed: allowed,
+
+    /**
+     * Create block template depending on it's innerBlocks
+     *
+     * If the block has no children, setup matching text fields (type can be changed later).
+     *
+     * Otherwise pass in `null` which will allow various composed fields to be setup through
+     * transformation. They'll be locked by template locking even though no template is provided.
+     *
+     * @since [version]
+     *
+     * @param {?Object} options.block Block object.
+     * @return {?Array} An InnerBlocks template array.
+     */
+    template: function template(_ref2) {
+      var block = _ref2.block;
+      var template = null;
+
+      if (!block || !block.innerBlocks.length) {
+        template = [['llms/form-field-text', getControllerBlockAttrs()], ['llms/form-field-text', getControlledBlockAttrs()]];
+      }
+
+      return template;
+    }
+  }
+});
 
 /***/ }),
 
@@ -13846,8 +13922,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
  * BLOCK: llms/form-field-text
  *
  * @since 1.6.0
- * @since 1.12.0 Add transform support.
- * @since [version] Add reusable block support.
+ * @version [version]
  */
 // WP Deps.
 
@@ -13858,6 +13933,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
+var baseSettings = Object(_settings__WEBPACK_IMPORTED_MODULE_5__["default"])();
 /**
  * Block Name
  *
@@ -13878,13 +13954,14 @@ var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_5__["getDefaultPostTyp
  * @type {string}
  */
 
-var composed = false; // Setup the field settings.
+var composed = false;
+/**
+ * Block Variations
+ *
+ * @type {Object[]}
+ */
 
-var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_5__["default"])();
-settings.title = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Text', 'lifterlms');
-settings.description = Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('A simple text input field.', 'lifterlms');
-settings.icon.src = _icons_field_text__WEBPACK_IMPORTED_MODULE_6__["default"];
-settings.variations = [{
+var variations = [{
   name: 'text',
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Text', 'lifterlms'),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('An input field which accepts any form of text.', 'lifterlms'),
@@ -13923,8 +14000,33 @@ settings.variations = [{
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('An input field which only accepts a website address or URL.', 'lifterlms'),
   icon: 'admin-links'
 }];
-settings.usesContext = ['llms/fieldGroup/fieldLayout'];
-settings.supports.llms_field_inspector.customFill = 'fieldTextAdditionalControls';
+/**
+ * Add information to each variation
+ *
+ * @since [version]
+ *
+ * @param {Object} ( variation ) A block variation object.
+ * @return {Object[]} Update block variations array.
+ */
+
+variations.forEach(function (variation) {
+  // Setup scope.
+  variation.scope = variation.scope || ['block', 'inserter', 'transform']; // Update the icon (add the default foreground color.
+
+  variation.icon = _objectSpread(_objectSpread({}, baseSettings.icon), {}, {
+    src: variation.icon
+  }); // Add a "field" attribute based off the variation name.
+
+  if (!variation.attributes) {
+    variation.attributes = {};
+  }
+
+  variation.attributes.field = variation.name; // Add an isActive function.
+
+  variation.isActive = function (blockAttributes, variationAttributes) {
+    return blockAttributes.field === variationAttributes.field;
+  };
+});
 /**
  * Fill the controls slot with additional controls specific to this field.
  *
@@ -13935,7 +14037,8 @@ settings.supports.llms_field_inspector.customFill = 'fieldTextAdditionalControls
  * @return {Fragment} Component HTML Fragment.
  */
 
-settings.fillInspectorControls = function (attributes, setAttributes) {
+var fillInspectorControls = function fillInspectorControls(attributes, setAttributes) {
+  // We only add extra controls to the number variation.
   if (attributes.isConfirmationField || 'number' !== attributes.field) {
     return;
   } // Add min/max options to a number field.
@@ -13969,28 +14072,31 @@ settings.fillInspectorControls = function (attributes, setAttributes) {
       });
     }
   }));
-}; // Add some data to all variations.
+};
+/**
+ * Block settings
+ *
+ * @since [version]
+ *
+ * @type {Object}
+ */
 
 
-settings.variations.forEach(function (variation) {
-  // Setup scope.
-  variation.scope = variation.scope || ['block', 'inserter', 'transform']; // Update the icon (add the default foreground color.
-
-  variation.icon = _objectSpread(_objectSpread({}, settings.icon), {}, {
-    src: variation.icon
-  }); // Add a "field" attribute based off the variation name.
-
-  if (!variation.attributes) {
-    variation.attributes = {};
-  }
-
-  variation.attributes.field = variation.name; // Add an isActive function.
-
-  variation.isActive = function (blockAttributes, variationAttributes) {
-    return blockAttributes.field === variationAttributes.field;
-  };
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_5__["getSettingsFromBase"])(baseSettings, {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Text', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])("A simple text input field.", 'lifterlms'),
+  icon: {
+    src: _icons_field_text__WEBPACK_IMPORTED_MODULE_6__["default"]
+  },
+  usesContext: ['llms/fieldGroup/fieldLayout'],
+  supports: {
+    llms_field_inspector: {
+      customFill: 'fieldTextAdditionalControls'
+    }
+  },
+  variations: variations,
+  fillInspectorControls: fillInspectorControls
 });
-
 
 /***/ }),
 
@@ -15412,7 +15518,7 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBas
       __default: 'user_login'
     }
   }
-}[('transforms', 'variations')]);
+}, ['transforms', 'variations']);
 
 
 /***/ }),
@@ -15499,7 +15605,7 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_1__["getSettingsFromBas
 /*!***********************************************************!*\
   !*** ./src/js/blocks/form-fields/fields/user-password.js ***!
   \***********************************************************/
-/*! exports provided: name, postTypes, composed, settings */
+/*! exports provided: name, composed, settings */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15518,8 +15624,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./text */ "./src/js/blocks/form-fields/fields/text.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _text__WEBPACK_IMPORTED_MODULE_5__["postTypes"]; });
-
 /* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
 
 
@@ -15552,75 +15656,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 var name = 'llms/form-field-user-password';
 var composed = true;
-var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_6__["getSettingsFromBase"])(_text__WEBPACK_IMPORTED_MODULE_5__["settings"], {
-  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('User Password', 'lifterlms'),
-  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("A special field used to collect a user's account password.", 'lifterlms'),
-  icon: {
-    src: 'lock'
-  },
-  supports: {
-    multiple: false,
-    // Can only have a single user password field.
-    llms_field_inspector: {
-      id: false,
-      name: false,
-      required: false,
-      match: false,
-      storage: false,
-      customFill: 'userPassAdditionalControls'
-    },
-    llms_edit_fill: {
-      after: 'userPassStrengthMeter'
-    }
-  },
-  attributes: {
-    // Defaults.
-    id: {
-      __default: 'password'
-    },
-    field: {
-      __default: 'password'
-    },
-    label: {
-      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Password', 'lifterlms')
-    },
-    name: {
-      __default: 'password'
-    },
-    required: {
-      __default: true
-    },
-    match: {
-      __default: 'password_confirm'
-    },
-    data_store: {
-      __default: 'users'
-    },
-    data_store_key: {
-      __default: 'user_pass'
-    },
-    // Extra attributes.
-    meter: {
-      type: 'boolean',
-      __default: true
-    },
-    meter_description: {
-      type: 'string',
-      __default: sprintf(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('A %1$s password is required with at least %2$s characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.', 'lifterlms'), '{min_strength}', '{min_length}')
-    },
-    min_strength: {
-      type: 'string',
-      __default: 'strong'
-    },
-    html_attrs: {
-      __default: {
-        minlength: 8
-      }
-    }
-  }
-});
-settings.fillEditAfter = function (attributes, setAttributes, props) {
-  // console.log( props );
+
+var fillEditAfter = function fillEditAfter(attributes, setAttributes, props) {
+  console.log(attributes);
   var meter = attributes.meter,
       meter_description = attributes.meter_description;
 
@@ -15645,7 +15683,7 @@ settings.fillEditAfter = function (attributes, setAttributes, props) {
     "aria-label": meter_description ? Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Password strength meter description', 'lifterlms') : Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Empty Password strength meter description; start writing to add a label'),
     placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Enter a description for the password strength meter', 'lifterlms')
   }));
-},
+};
 /**
  * Fill the controls slot with additional controls specific to this field.
  *
@@ -15655,7 +15693,9 @@ settings.fillEditAfter = function (attributes, setAttributes, props) {
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
  * @return {Fragment} Component HTML Fragment.
  */
-settings.fillInspectorControls = function (attributes, setAttributes) {
+
+
+var fillInspectorControls = function fillInspectorControls(attributes, setAttributes) {
   var isConfirmationField = attributes.isConfirmationField,
       meter = attributes.meter,
       min_strength = attributes.min_strength,
@@ -15709,9 +15749,75 @@ settings.fillInspectorControls = function (attributes, setAttributes) {
     }
   }));
 };
-delete settings.transforms;
-delete settings.variations;
 
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_6__["getSettingsFromBase"])(_text__WEBPACK_IMPORTED_MODULE_5__["settings"], {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('User Password', 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("A special field used to collect a user's account password.", 'lifterlms'),
+  icon: {
+    src: 'lock'
+  },
+  supports: {
+    multiple: false,
+    // Can only have a single user password field.
+    llms_field_inspector: {
+      id: false,
+      name: false,
+      required: false,
+      storage: false,
+      customFill: 'userPassAdditionalControls'
+    },
+    llms_edit_fill: {
+      after: 'userPassStrengthMeter'
+    }
+  },
+  attributes: {
+    // Defaults.
+    id: {
+      __default: 'password'
+    },
+    field: {
+      __default: 'password'
+    },
+    label: {
+      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Password', 'lifterlms')
+    },
+    name: {
+      __default: 'password'
+    },
+    required: {
+      __default: true
+    },
+    match: {
+      __default: 'password_confirm'
+    },
+    data_store: {
+      __default: 'users'
+    },
+    data_store_key: {
+      __default: 'user_pass'
+    },
+    // Extra attributes.
+    meter: {
+      type: 'boolean',
+      __default: true
+    },
+    meter_description: {
+      type: 'string',
+      __default: sprintf(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('A %1$s password is required with at least %2$s characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.', 'lifterlms'), '{min_strength}', '{min_length}')
+    },
+    min_strength: {
+      type: 'string',
+      __default: 'strong'
+    },
+    html_attrs: {
+      __default: {
+        minlength: 8
+      }
+    }
+  },
+  fillEditAfter: fillEditAfter,
+  fillInspectorControls: fillInspectorControls
+}, ['transforms', 'variations']);
 
 /***/ }),
 

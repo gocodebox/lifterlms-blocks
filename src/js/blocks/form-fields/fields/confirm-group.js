@@ -6,79 +6,51 @@
  */
 
 // WP Deps.
-import { createBlock, getBlockType } from '@wordpress/blocks';
+import { createBlock } from '@wordpress/blocks';
 import { dispatch, select } from '@wordpress/data';
-import { useBlockProps, InnerBlocks, InspectorControls } from '@wordpress/block-editor';
-import { Button, PanelBody, Slot } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import { store as blockEditorStore } from '@wordpress/block-editor';
+import { Button } from '@wordpress/components';
+import { __, isRTL } from '@wordpress/i18n';
+
+import { findIndex } from 'lodash';
 
 // Internal Deps.
 import {
 	default as getDefaultSettings,
+	getSettingsFromBase,
 	getDefaultPostTypes,
 } from '../settings';
 
-import GroupLayoutControl from '../group-layout-control';
 
 /**
  * Block Name
  *
  * @type {string}
  */
-const name = 'llms/form-field-confirm-group';
+export const name = 'llms/form-field-confirm-group';
 
 /**
  * Array of supported post types.
  *
  * @type {Array}
  */
-const postTypes = getDefaultPostTypes();
+export const postTypes = getDefaultPostTypes();
 
 /**
  * Is this a default or composed field?
  *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
- *
  * @type {string}
  */
-const composed = false;
+export const composed = false;
 
-// Setup the field settings.
-const settings = getDefaultSettings();
-
-settings.title = __( 'Input Confirmation Group', 'lifterlms' );
-settings.description = __( 'Adds a required confirmation field to an input field.', 'lifterlms' );
-
-settings.icon.src = 'controls-repeat';
-
-
-settings.attributes = {
-	fieldLayout: {
-		type: 'string',
-		default: 'columns',
-	},
-};
-
-settings.providesContext = {
-	'llms/fieldGroup/fieldLayout': 'fieldLayout',
-};
-
-settings.supports = {
-	...settings.supports,
-	llms_field_group: true,
-};
-
-const ALLOWED = [
-	'llms/form-field-text',
-	'llms/form-field-user-email',
-	'llms/form-field-user-password',
-];
-
+/**
+ * Retrieve block attributes for a controller block
+ *
+ * @since [version]
+ *
+ * @param {Object} attributes Existing attributes to merge defaults into.
+ * @return {Object} Updated block attributes.
+ */
 function getControllerBlockAttrs( attributes = {} ) {
 	return {
 		...attributes,
@@ -90,6 +62,14 @@ function getControllerBlockAttrs( attributes = {} ) {
 
 }
 
+/**
+ * Retrieve block attributes for a controlled (confirmation) block
+ *
+ * @since [version]
+ *
+ * @param {Object} attributes Existing attributes to merge defaults into.
+ * @return {Object} Updated block attributes.
+ */
 function getControlledBlockAttrs( attributes = {} ) {
 
 	return {
@@ -105,13 +85,26 @@ function getControlledBlockAttrs( attributes = {} ) {
 
 }
 
-function revertToSingle( block ) {
+/**
+ * Revert the confirmation group to a single field
+ *
+ * Replaces the group block with the controller block (first inner child) of the group.
+ *
+ * @since [version]
+ *
+ * @param {string} clientId Client ID of the group block.
+ * @return {void}
+ */
+function revertToSingle( clientId ) {
 
 	const
-		{ replaceBlock } = dispatch( 'core/block-editor' ),
-		{ clientId, innerBlocks } = block,
-		{ llms_visibility } = block.attributes,
-		{ name, attributes } = innerBlocks[0];
+		{ getBlock }         = select( blockEditorStore	 ),
+		{ replaceBlock }     = dispatch( blockEditorStore ),
+		block                = getBlock( clientId ),
+		{ innerBlocks }      = block,
+		{ llms_visibility }  = block.attributes,
+		{ name, attributes } = innerBlocks[ findControllerBlockIndex( innerBlocks ) ];
+
 	replaceBlock(
 		clientId,
 		createBlock(
@@ -128,118 +121,149 @@ function revertToSingle( block ) {
 
 };
 
-settings.edit = function( props ) {
+/**
+ * Allowed blocks list.
+ *
+ * @type {string[]}
+ */
+const allowed = [
+	'llms/form-field-text',
+	'llms/form-field-user-email',
+	'llms/form-field-user-login',
+	'llms/form-field-user-password',
+];
 
-	const blockProps = useBlockProps();
-
-	const { attributes, clientId, setAttributes } = props;
-
-	const { hasConfirmation, fieldLayout } = attributes;
-
-	const
-		block           = select( 'core/block-editor' ).getBlock( clientId ),
-		hasChildren     = ( block && block.innerBlocks.length > 0 ),
-		firstChild      = hasChildren ? block.innerBlocks[0] : null,
-		firstChildBlock = firstChild ? getBlockType( firstChild.name ) : null,
-		editFills       = firstChildBlock ? firstChildBlock.supports.llms_edit_fill : { after: false };
-
-	const TEMPLATE = hasChildren ? null : [
-		[ 'llms/form-field-text', getControllerBlockAttrs() ],
-		[ 'llms/form-field-text', getControlledBlockAttrs() ],
-	];
-
-	return (
-		<div { ...blockProps }>
-			<InspectorControls>
-				<PanelBody>
-					<GroupLayoutControl { ...{ ...props, block } } />
-					<Button
-						isDestructive
-						onClick={ () => revertToSingle( block ) }
-					>{ __( 'Remove confirmation field', 'lifterlms' ) }</Button>
-				</PanelBody>
-			</InspectorControls>
-			<div className="llms-field-group llms-field--confirm-group" data-field-layout={ fieldLayout }>
-				<InnerBlocks
-					allowedBlocks={ ALLOWED }
-					template={ TEMPLATE }
-					templateLock="all"
-				/>
-			</div>
-
-			{ editFills.after && (
-				<Slot
-					name={ `llmsEditFill.after.${ editFills.after }.${ firstChild.clientId }` }
-				/>
-			) }
-		</div>
-	);
+/**
+ * Block transforms.
+ *
+ * @type {Object}
+ */
+const transforms = {
+	from: []
 };
 
 /**
- * The save function defines the way in which the different attributes should be combined
- * into the final markup, which is then serialized by Gutenberg into post_content.
+ * Create a block transform for each of the allowed blocks
  *
- * The "save" property must be specified and must be a valid function.
+ * When creating a confirm group from a single block the first child
+ * should be a direct copy of the block itself (EG: user-email -> user->email).
+ *
+ * The second child should be a simple text block with the type of the first block
+ * (eg: user-email to text with a field type email).
+ *
+ * Therefore each transform is identical except for the block type of the first child
+ * block.
  *
  * @since [version]
  *
- * @return {Object} Attributes object.
+ * @param {string} blockName Name of the block being transformed into a group.
+ * @return {void}
  */
-settings.save = function() {
-	const blockProps = useBlockProps.save();
-	return (
-		<div { ...blockProps }>
-			<InnerBlocks.Content />
-		</div>
-	);
-};
+allowed.forEach( blockName => {
 
-settings.transforms = {
-	from: [
-		{
-			type: 'block',
-			blocks: [ 'llms/form-field-text' ],
-			transform: ( attributes ) => {
-				return createBlock(
-					name,
-					{},
-					[
-						createBlock( 'llms/form-field-text', getControllerBlockAttrs( attributes ) ),
-						createBlock( 'llms/form-field-text', getControlledBlockAttrs( attributes ) ),
-					]
-				);
-			},
-		},
-		{
-			type: 'block',
-			blocks: [ 'llms/form-field-user-email' ],
-			transform: ( attributes ) => {
-				return createBlock(
-					name,
-					{},
-					[
-						createBlock( 'llms/form-field-user-email', getControllerBlockAttrs( attributes ) ),
-						createBlock( 'llms/form-field-text', getControlledBlockAttrs( attributes ) ),
-					]
-				);
-			},
-		},
-		{
-			type: 'block',
-			blocks: [ 'llms/form-field-user-password' ],
-			transform: ( attributes ) => {
-				return createBlock(
-					name,
-					{},
-					[
-						createBlock( 'llms/form-field-user-password', getControllerBlockAttrs( attributes ) ),
-						createBlock( 'llms/form-field-text', getControlledBlockAttrs( attributes ) ),
-					]
-				);
-			},
+	transforms.from.push( {
+		type: 'block',
+		blocks: [ blockName ],
+		transform: attributes => {
+
+			const children = [
+				createBlock( blockName, getControllerBlockAttrs( attributes ) ),
+				createBlock( 'llms/form-field-text', getControlledBlockAttrs( attributes ) ),
+			];
+
+			return createBlock( name, {}, isRTL() ? children.reverse() : children );
+
 		}
-	]
+	} );
+
+} );
+
+/**
+ * Fill the controls slot with additional controls specific to this field.
+ *
+ * @since [version]
+ *
+ * @param {Object} attributes Block attributes.
+ * @param {Function} setAttributes Reference to the block's setAttributes() function.
+ * @return {Button} Component HTML Fragment.
+ */
+const fillInspectorControls = ( attributes, setAttributes, props ) => {
+
+	const { clientId } = props;
+
+	return (
+		<Button
+			isDestructive
+			onClick={ () => revertToSingle( clientId ) }
+		>{ __( 'Remove confirmation field', 'lifterlms' ) }</Button>
+	);
+
 };
 
-export { name, postTypes, composed, settings };
+/**
+ * Finds the index of the primary (controller) field in the group
+ *
+ * @since [version]
+ *
+ * @param {Object[]} innerBlocks ) Inner blocks array.
+ * @return {number} Array index of the primary block within the inner blocks array.
+ */
+const findControllerBlockIndex = ( innerBlocks ) => innerBlocks.findIndex( ( { attributes } ) => attributes.isConfirmationControlField );
+
+/**
+ * Block settings
+ *
+ * @type {Object}
+ */
+export const settings = getSettingsFromBase(
+	getDefaultSettings( 'group' ),
+	{
+		title: __( 'Input Confirmation Group', 'lifterlms' ),
+		description: __( 'Adds a required confirmation field to an input field.', 'lifterlms' ),
+		icon: {
+			src: 'controls-repeat',
+		},
+		transforms,
+		fillInspectorControls,
+		findControllerBlockIndex,
+		supports: {
+			llms_field_inspector: {
+				customFill: 'confirmGroupAdditionalControls',
+			},
+		},
+		llmsInnerBlocks: {
+
+			allowed,
+
+			/**
+			 * Create block template depending on it's innerBlocks
+			 *
+			 * If the block has no children, setup matching text fields (type can be changed later).
+			 *
+			 * Otherwise pass in `null` which will allow various composed fields to be setup through
+			 * transformation. They'll be locked by template locking even though no template is provided.
+			 *
+			 * @since [version]
+			 *
+			 * @param {?Object} options.block Block object.
+			 * @return {?Array} An InnerBlocks template array.
+			 */
+			template: ( { block } ) => {
+
+				let template = null;
+
+				if ( ! block || ! block.innerBlocks.length ) {
+
+					template = [
+						[ 'llms/form-field-text', getControllerBlockAttrs() ],
+						[ 'llms/form-field-text', getControlledBlockAttrs() ],
+					];
+
+				}
+
+				return template;
+
+			},
+		},
+	}
+);

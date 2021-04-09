@@ -58,6 +58,7 @@ export default class Field extends Component {
 			setAttributes,
 			block,
 			clientId,
+			context,
 		} = this.props,
 		{
 				id,
@@ -69,7 +70,6 @@ export default class Field extends Component {
 				required,
 		} = attributes,
 		editFills = block.supports.llms_edit_fill;
-
 
 		const classes = [];
 		if ( required ) {

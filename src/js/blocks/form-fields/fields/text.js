@@ -2,8 +2,7 @@
  * BLOCK: llms/form-field-text
  *
  * @since 1.6.0
- * @since 1.12.0 Add transform support.
- * @since [version] Add reusable block support.
+ * @version [version]
  */
 
 // WP Deps.
@@ -15,41 +14,41 @@ import { createBlock } from '@wordpress/blocks';
 // Internal Deps.
 import {
 	default as getDefaultSettings,
+	getSettingsFromBase,
 	getDefaultPostTypes,
 } from '../settings';
 import defaultIcon from '../../../icons/field-text';
 import numberIcon from '../../../icons/field-number';
+
+const baseSettings = getDefaultSettings();
 
 /**
  * Block Name
  *
  * @type {string}
  */
-const name = 'llms/form-field-text';
+export const name = 'llms/form-field-text';
 
 /**
  * Array of supported post types.
  *
  * @type {Array}
  */
-const postTypes = getDefaultPostTypes();
+export const postTypes = getDefaultPostTypes();
 
 /**
  * Is this a default or composed field?
  *
  * @type {string}
  */
-const composed = false;
+export const composed = false;
 
-// Setup the field settings.
-const settings = getDefaultSettings();
-
-settings.title = __( 'Text', 'lifterlms' );
-settings.description = __( 'A simple text input field.', 'lifterlms' );
-
-settings.icon.src = defaultIcon;
-
-settings.variations = [
+/**
+ * Block Variations
+ *
+ * @type {Object[]}
+ */
+const variations = [
 	{
 		name: 'text',
 		title: __( 'Text', 'lifterlms' ),
@@ -96,11 +95,36 @@ settings.variations = [
 	},
 ];
 
-settings.usesContext = [
-	'llms/fieldGroup/fieldLayout',
-];
+/**
+ * Add information to each variation
+ *
+ * @since [version]
+ *
+ * @param {Object} ( variation ) A block variation object.
+ * @return {Object[]} Update block variations array.
+ */
+variations.forEach( ( variation ) => {
 
-settings.supports.llms_field_inspector.customFill = 'fieldTextAdditionalControls';
+	// Setup scope.
+	variation.scope = variation.scope || [ 'block', 'inserter', 'transform' ];
+
+	// Update the icon (add the default foreground color.
+	variation.icon = {
+		...baseSettings.icon,
+		src: variation.icon
+	};
+
+	// Add a "field" attribute based off the variation name.
+	if ( ! variation.attributes ) {
+		variation.attributes = {};
+	}
+	variation.attributes.field = variation.name;
+
+	// Add an isActive function.
+	variation.isActive = ( blockAttributes, variationAttributes ) =>
+		blockAttributes.field ===
+		variationAttributes.field;
+} );
 
 /**
  * Fill the controls slot with additional controls specific to this field.
@@ -111,8 +135,9 @@ settings.supports.llms_field_inspector.customFill = 'fieldTextAdditionalControls
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
  * @return {Fragment} Component HTML Fragment.
  */
-settings.fillInspectorControls = ( attributes, setAttributes ) => {
+const fillInspectorControls = ( attributes, setAttributes ) => {
 
+	// We only add extra controls to the number variation.
 	if ( attributes.isConfirmationField || 'number' !== attributes.field ) {
 		return;
 	}
@@ -152,30 +177,31 @@ settings.fillInspectorControls = ( attributes, setAttributes ) => {
 	);
 };
 
+/**
+ * Block settings
+ *
+ * @since [version]
+ *
+ * @type {Object}
+ */
+export const settings = getSettingsFromBase(
+	baseSettings,
+	{
+		title: __( 'Text', 'lifterlms' ),
+		description: __( "A simple text input field.", 'lifterlms' ),
+		icon: {
+			src: defaultIcon,
+		},
+		usesContext: [
+			'llms/fieldGroup/fieldLayout',
+		],
+		supports: {
+			llms_field_inspector: {
+				customFill: 'fieldTextAdditionalControls',
+			}
+		},
+		variations,
+		fillInspectorControls,
 
-
-// Add some data to all variations.
-settings.variations.forEach( ( variation ) => {
-
-	// Setup scope.
-	variation.scope = variation.scope || [ 'block', 'inserter', 'transform' ];
-
-	// Update the icon (add the default foreground color.
-	variation.icon = {
-		...settings.icon,
-		src: variation.icon
-	};
-
-	// Add a "field" attribute based off the variation name.
-	if ( ! variation.attributes ) {
-		variation.attributes = {};
 	}
-	variation.attributes.field = variation.name;
-
-	// Add an isActive function.
-	variation.isActive = ( blockAttributes, variationAttributes ) =>
-		blockAttributes.field ===
-		variationAttributes.field;
-} );
-
-export { name, postTypes, composed, settings };
+);

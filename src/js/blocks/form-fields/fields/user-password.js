@@ -27,88 +27,13 @@ import { getSettingsFromBase } from '../settings';
  *
  * @type {string}
  */
-const name = 'llms/form-field-user-password';
+export const name = 'llms/form-field-user-password';
 
-const composed = true;
+export const composed = true;
 
-const settings = getSettingsFromBase( baseSettings, {
-	title: __( 'User Password', 'lifterlms' ),
-	description: __(
-		"A special field used to collect a user's account password.",
-		'lifterlms'
-	),
-	icon: {
-		src: 'lock',
-	},
-	supports: {
-		multiple: false,  // Can only have a single user password field.
-		llms_field_inspector: {
-			id: false,
-			name: false,
-			required: false,
-			match: false,
-			storage: false,
-			customFill: 'userPassAdditionalControls',
-		},
-		llms_edit_fill: {
-			after: 'userPassStrengthMeter',
-		}
-	},
-	attributes: {
-		// Defaults.
-		id: {
-			__default: 'password',
-		},
-		field: {
-			__default: 'password',
-		},
-		label: {
-			__default: __( 'Password', 'lifterlms' ),
-		},
-		name: {
-			__default: 'password',
-		},
-		required: {
-			__default: true,
-		},
-		match: {
-			__default: 'password_confirm',
-		},
-		data_store: {
-			__default: 'users',
-		},
-		data_store_key: {
-			__default: 'user_pass',
-		},
+const fillEditAfter = ( attributes, setAttributes, props ) => {
 
-		// Extra attributes.
-		meter: {
-			type: 'boolean',
-			__default: true,
-		},
-		meter_description: {
-			type: 'string',
-			__default: sprintf(
-				__( 'A %1$s password is required with at least %2$s characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.', 'lifterlms' ),
-				'{min_strength}', '{min_length}',
-			),
-		},
-		min_strength: {
-			type: 'string',
-			__default: 'strong',
-		},
-		html_attrs: {
-			__default: {
-				minlength: 8,
-			}
-		}
-
-	},
-} );
-
-settings.fillEditAfter = function( attributes, setAttributes, props ) {
-
-	// console.log( props );
+	console.log( attributes );
 
 	const { meter, meter_description } = attributes;
 
@@ -137,10 +62,7 @@ settings.fillEditAfter = function( attributes, setAttributes, props ) {
 		</Fragment>
 	);
 
-},
-
-
-
+};
 
 /**
  * Fill the controls slot with additional controls specific to this field.
@@ -151,7 +73,7 @@ settings.fillEditAfter = function( attributes, setAttributes, props ) {
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
  * @return {Fragment} Component HTML Fragment.
  */
-settings.fillInspectorControls = ( attributes, setAttributes ) => {
+const fillInspectorControls = ( attributes, setAttributes ) => {
 
 	const { isConfirmationField, meter, min_strength, html_attrs } = attributes,
 		{ minlength } = html_attrs;
@@ -210,11 +132,83 @@ settings.fillInspectorControls = ( attributes, setAttributes ) => {
 	);
 };
 
+export const settings = getSettingsFromBase(
+	baseSettings,
+	{
+		title: __( 'User Password', 'lifterlms' ),
+		description: __(
+			"A special field used to collect a user's account password.",
+			'lifterlms'
+		),
+		icon: {
+			src: 'lock',
+		},
+		supports: {
+			multiple: false,  // Can only have a single user password field.
+			llms_field_inspector: {
+				id: false,
+				name: false,
+				required: false,
+				storage: false,
+				customFill: 'userPassAdditionalControls',
+			},
+			llms_edit_fill: {
+				after: 'userPassStrengthMeter',
+			}
+		},
+		attributes: {
+			// Defaults.
+			id: {
+				__default: 'password',
+			},
+			field: {
+				__default: 'password',
+			},
+			label: {
+				__default: __( 'Password', 'lifterlms' ),
+			},
+			name: {
+				__default: 'password',
+			},
+			required: {
+				__default: true,
+			},
+			match: {
+				__default: 'password_confirm',
+			},
+			data_store: {
+				__default: 'users',
+			},
+			data_store_key: {
+				__default: 'user_pass',
+			},
+
+			// Extra attributes.
+			meter: {
+				type: 'boolean',
+				__default: true,
+			},
+			meter_description: {
+				type: 'string',
+				__default: sprintf(
+					__( 'A %1$s password is required with at least %2$s characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.', 'lifterlms' ),
+					'{min_strength}', '{min_length}',
+				),
+			},
+			min_strength: {
+				type: 'string',
+				__default: 'strong',
+			},
+			html_attrs: {
+				__default: {
+					minlength: 8,
+				}
+			}
+		},
+		fillEditAfter,
+		fillInspectorControls,
+	},
+	[ 'transforms', 'variations' ]
+);
 
 
-
-
-delete settings.transforms;
-delete settings.variations;
-
-export { name, postTypes, composed, settings };
