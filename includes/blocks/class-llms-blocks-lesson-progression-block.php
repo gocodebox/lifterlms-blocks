@@ -61,7 +61,7 @@ class LLMS_Blocks_Lesson_Progression_Block extends LLMS_Blocks_Abstract_Block {
 	 */
 	public function get_empty_render_message() {
 		$lesson = llms_get_post( get_the_ID() );
-		if ( $lesson && is_a($lesson, 'LLMS_Lesson') && $lesson->is_free() ) {
+		if ( $lesson && is_a( $lesson, 'LLMS_Lesson' ) && $lesson->is_free() ) {
 			return '';
 		}
 		return parent::get_empty_render_message();
