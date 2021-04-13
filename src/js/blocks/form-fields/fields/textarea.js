@@ -81,6 +81,7 @@ export const settings = getSettingsFromBase(
 		icon: {
 			src: 'editor-paragraph',
 		},
+		category: 'llms-custom-fields',
 		supports: {
 			llms_field_inspector: {
 				customFill: 'fieldTextarea'

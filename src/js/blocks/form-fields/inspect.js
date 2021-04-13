@@ -13,6 +13,7 @@ import {
 	InspectorAdvancedControls,
 } from '@wordpress/block-editor';
 import {
+	BaseControl,
 	Button,
 	PanelBody,
 	PanelRow,
@@ -21,10 +22,12 @@ import {
 	TextControl,
 	ToggleControl,
 } from '@wordpress/components';
-import { dispatch } from '@wordpress/data';
+import { select, dispatch } from '@wordpress/data';
 import { applyFilters } from '@wordpress/hooks';
 import { Component, Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+import { switchToBlockType, getPossibleBlockTransformations, getBlockType } from '@wordpress/blocks';
+import { store as blockEditorStore } from '@wordpress/block-editor';
 
 // Internal Deps.
 import InspectorFieldOptions from './inspect-field-options';
@@ -215,6 +218,33 @@ export default class Inspector extends Component {
 		return inspectorSupports[ control ];
 	}
 
+	canTransformToGroup( block ) {
+		// If the block is already within a confirmation block then we can't add a confirmation group.
+		if ( !  block || this.isInAConfirmGroup( block ) ) {
+			return false;
+		}
+		return getPossibleBlockTransformations( [ block ] ).map( ( { name } ) => name ).includes( 'llms/form-field-confirm-group' );
+	}
+
+	isInAConfirmGroup( block ) {
+		return ( this.getParentGroupClientId( block ) );
+	}
+
+	getParentGroupClientId( block ) {
+
+		if ( ! block ) {
+			return false;
+		}
+
+		const
+			{ clientId } = block,
+			{ getBlockParentsByBlockName } = select( blockEditorStore ),
+			parents = getBlockParentsByBlockName( clientId, 'llms/form-field-confirm-group' );
+
+		return parents.length ? parents[0] : false;
+
+	}
+
 	/**
 	 * Render the Block Inspector
 	 *
@@ -225,6 +255,7 @@ export default class Inspector extends Component {
 	 */
 	render() {
 		const { attributes, setAttributes, clientId, context } = this.props,
+			block = select( blockEditorStore ).getBlock( clientId ),
 			{
 				id,
 				name,
@@ -241,6 +272,9 @@ export default class Inspector extends Component {
 		if ( ! this.hasInspectorSupport() ) {
 			return '';
 		}
+
+		const canTransformToGroup = this.canTransformToGroup( block ),
+			isInAConfirmGroup = this.isInAConfirmGroup( block );
 
 		return (
 			<Fragment>
@@ -302,6 +336,65 @@ export default class Inspector extends Component {
 							/>
 						) }
 
+						{ ( canTransformToGroup || ( isConfirmationControlField && isInAConfirmGroup ) ) && (
+							<ToggleControl
+								label={ __( 'Confirmation Field', 'lifterlms' ) }
+								checked={ isInAConfirmGroup }
+								onChange={ () => {
+
+									const
+										{ replaceBlock, selectBlock } = dispatch( blockEditorStore ),
+										{ findControllerBlockIndex } = getBlockType( 'llms/form-field-confirm-group' ),
+										{ getBlock }    = select( blockEditorStore );
+
+									let
+										replaceClientId = clientId,
+										newBlockType    = 'llms/form-field-confirm-group',
+										blockToSwitch   = block,
+										selectBlockId   = null;
+
+									if ( isInAConfirmGroup ) {
+										replaceClientId = this.getParentGroupClientId( block );
+										blockToSwitch   = getBlock( replaceClientId );
+										newBlockType    = block.name;
+									}
+
+									const switched = switchToBlockType( blockToSwitch, newBlockType );
+									replaceBlock( replaceClientId, switched );
+
+									if ( ! isInAConfirmGroup ) {
+										const
+											{ innerBlocks } = getBlock( clientId ),
+											controllerIndex = findControllerBlockIndex( innerBlocks );
+
+										selectBlockId = innerBlocks[ controllerIndex ].clientId;
+
+									} else {
+
+										selectBlockId = switched[0].clientId;
+
+									}
+
+									selectBlock( selectBlockId );
+
+
+
+								}
+								}
+								help={
+									isInAConfirmGroup
+										? __(
+												'A Confirmation field is active.',
+												'lifterlms'
+										  )
+										: __(
+												'No confirmation field.',
+												'lifterlms'
+										  )
+								}
+							/>
+						) }
+
 						{ this.hasInspectorControlSupport( 'customFill' ) && (
 							<Slot
 								name={ `llmsInspectorControlsFill.${ this.hasInspectorControlSupport(
@@ -309,6 +402,7 @@ export default class Inspector extends Component {
 								) }.${ clientId }` }
 							/>
 						) }
+
 					</PanelBody>
 
 					{ ! isConfirmationField && this.hasInspectorControlSupport( 'storage' ) && (

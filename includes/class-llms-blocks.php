@@ -57,14 +57,22 @@ class LLMS_Blocks {
 	 * @return array
 	 */
 	public function add_block_category( $categories ) {
+
 		$categories[] = array(
 			'slug'  => 'llms-blocks',
 			'title' => __( 'LifterLMS Blocks', 'lifterlms' ),
 		);
-		$categories[] = array(
-			'slug'  => 'llms-fields',
-			'title' => __( 'LifterLMS Form Fields', 'lifterlms' ),
-		);
+
+		array_unshift( $categories, array(
+			'slug'  => 'llms-custom-fields',
+			'title' => __( 'Custom User Information', 'lifterlms' ),
+		) );
+
+		array_unshift( $categories, array(
+			'slug'  => 'llms-user-info-fields',
+			'title' => __( 'User Information', 'lifterlms' ),
+		) );
+
 		return $categories;
 	}
 

@@ -33,8 +33,6 @@ export const composed = true;
 
 const fillEditAfter = ( attributes, setAttributes, props ) => {
 
-	console.log( attributes );
-
 	const { meter, meter_description } = attributes;
 
 	if ( ! meter ) {
@@ -144,6 +142,7 @@ export const settings = getSettingsFromBase(
 			src: 'lock',
 		},
 		supports: {
+			inserter: true,
 			multiple: false,  // Can only have a single user password field.
 			llms_field_inspector: {
 				id: false,

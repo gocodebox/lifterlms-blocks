@@ -185,16 +185,25 @@ export function editGroup( props ) {
 			template,
 			lock,
 		}                 = blockType.llmsInnerBlocks,
-		primaryBlock      = block && block.innerBlocks.length ? block.innerBlocks[ blockType.findControllerBlockIndex( block.innerBlocks ) ] : null,
+		primaryBlock      = block && block.innerBlocks.length && 'llms/form-field-confirm-group' === block.name ? block.innerBlocks[ blockType.findControllerBlockIndex( block.innerBlocks ) ] : null,
 		primaryBlockType  = primaryBlock ? getBlockType( primaryBlock.name ) : null,
 		editFills         = primaryBlockType ? primaryBlockType.supports.llms_edit_fill : { after: false },
-		inspectorSupports = blockType.supports.llms_field_inspector;
+		inspectorSupports = blockType.supports.llms_field_inspector,
+		hasLayout         = blockType.providesContext && blockType.providesContext['llms/fieldGroup/fieldLayout'];
+
+	let orientation = 'columns' === fieldLayout ? 'horizontal' : 'vertical';
+	if ( ! hasLayout ) {
+		orientation = 'vertical';
+	}
 
 	return (
 		<div { ...useBlockProps() }>
 			<InspectorControls>
 				<PanelBody>
-					<GroupLayoutControl { ...{ ...props, block } } />
+
+					{ hasLayout && (
+						<GroupLayoutControl { ...{ ...props, block } } />
+					) }
 
 					{ inspectorSupports.customFill && (
 						blockType.fillInspectorControls(
@@ -203,15 +212,17 @@ export function editGroup( props ) {
 							props
 						)
 					) }
+
 				</PanelBody>
+
 			</InspectorControls>
 
-			<div className="llms-field-group" data-field-layout={ fieldLayout }>
+			<div className="llms-field-group" data-field-layout={ hasLayout ? fieldLayout : 'stacked' }>
 				<InnerBlocks
 					allowedBlocks={ allowed }
 					template={ 'function' === typeof template ? template( { attributes, clientId, block, blockType } ) : template }
 					templateLock={ lock }
-					orientation={ 'columns' === fieldLayout ? 'horizontal' : 'vertical' }
+					orientation={ orientation }
 				/>
 			</div>
 

@@ -97,9 +97,11 @@ function updateChildren( { setAttributes, currentUpdates, siblingClientId, sibli
 	setTimeout( () => {
 		if ( ! isEmpty( currentUpdates ) ) {
 			setAttributes( currentUpdates );
+			console.log( currentUpdates );
 		}
 
 		if ( siblingClientId && ! isEmpty( siblingUpdates ) ) {
+			console.log( siblingUpdates );
 			updateBlockAttributes( siblingClientId, siblingUpdates );
 		}
 	} );
@@ -164,8 +166,8 @@ export default function( { attributes, context, clientId, setAttributes } = {} )
 
 		const groupUpdates = getConfirmGroupUpdates( attributes, sibling.attributes );
 
-		currentUpdates = merge( currentUpdates, getConfirmGroupUpdates.currentUpdates );
-		siblingUpdates = merge( siblingUpdates, getConfirmGroupUpdates.siblingUpdates );
+		currentUpdates = merge( currentUpdates, groupUpdates.currentUpdates );
+		siblingUpdates = merge( siblingUpdates, groupUpdates.siblingUpdates );
 
 	}
 

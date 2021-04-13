@@ -45,6 +45,7 @@ export const settings = getSettingsFromBase(
 			src: 'nametag',
 		},
 		supports: {
+			inserter: true,
 			multiple: false,
 			llms_field_inspector: {
 				id: false,

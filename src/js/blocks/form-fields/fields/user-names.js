@@ -34,7 +34,7 @@ export const postTypes = getDefaultPostTypes();
  *
  * @type {string}
  */
-export const composed = false;
+export const composed = true;
 
 /**
  * Block settings
@@ -52,6 +52,7 @@ export const settings = getSettingsFromBase(
 			src: 'admin-users',
 		},
 		supports: {
+			inserter: true,
 			multiple: false,
 		},
 		llmsInnerBlocks: {

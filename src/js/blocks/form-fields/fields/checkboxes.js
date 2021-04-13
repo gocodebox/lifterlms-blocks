@@ -58,6 +58,7 @@ export const settings = getSettingsFromBase(
 		icon: {
 			src: icon,
 		},
+		category: 'llms-custom-fields',
 		supports: {
 			llms_field_inspector: {
 				options: true,

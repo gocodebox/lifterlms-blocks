@@ -54,6 +54,7 @@ export const settings = getSettingsFromBase(
 			src: 'id-alt',
 		},
 		supports: {
+			inserter: true,
 			multiple: false,
 		},
 		llmsInnerBlocks: {
@@ -71,4 +72,5 @@ export const settings = getSettingsFromBase(
 			],
 		},
 	},
+	[ 'providesContext' ]
 );

@@ -82,6 +82,7 @@ export const settings = getSettingsFromBase(
 			src: 'tickets-alt',
 		},
 		supports: {
+			inserter: true,
 			multiple: false,
 			llms_field_inspector: {
 				id: false,

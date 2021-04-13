@@ -41,7 +41,7 @@ export const postTypes = getDefaultPostTypes();
  *
  * @type {string}
  */
-export const composed = false;
+export const composed = true;
 
 /**
  * Retrieve block attributes for a controller block
@@ -139,7 +139,8 @@ const allowed = [
  * @type {Object}
  */
 const transforms = {
-	from: []
+	from: [],
+	to: [],
 };
 
 /**
@@ -166,13 +167,48 @@ allowed.forEach( blockName => {
 		blocks: [ blockName ],
 		transform: attributes => {
 
+			const { llms_visibility } = attributes;
+
 			const children = [
 				createBlock( blockName, getControllerBlockAttrs( attributes ) ),
 				createBlock( 'llms/form-field-text', getControlledBlockAttrs( attributes ) ),
 			];
 
-			return createBlock( name, {}, isRTL() ? children.reverse() : children );
+			return createBlock( name, { llms_visibility }, isRTL() ? children.reverse() : children );
 
+		}
+	} );
+
+	transforms.to.push( {
+		type: 'block',
+		blocks: [ blockName ],
+		isMatch: ( groupAttributes ) => {
+
+			const
+				{ getSelectedBlock } = select( blockEditorStore ),
+				{ innerBlocks }      = getSelectedBlock(),
+				controllerBlock      = innerBlocks[ findControllerBlockIndex( innerBlocks ) ],
+				{ name }             = controllerBlock;
+
+			return name === blockName;
+
+		},
+		transform: ( groupAttributes, innerBlocks ) => {
+			const
+				{ llms_visibility }  = groupAttributes,
+				controllerBlock      = innerBlocks[ findControllerBlockIndex( innerBlocks ) ],
+				{ name, attributes } = controllerBlock;
+
+			return createBlock(
+				name,
+				{
+					...attributes,
+					columns: 12,
+					last_column: true,
+					isConfirmationControlField: false,
+					llms_visibility,
+				}
+			);
 		}
 	} );
 
@@ -223,6 +259,7 @@ export const settings = getSettingsFromBase(
 		icon: {
 			src: 'controls-repeat',
 		},
+		category: 'llms-custom-fields',
 		transforms,
 		fillInspectorControls,
 		findControllerBlockIndex,
@@ -230,6 +267,7 @@ export const settings = getSettingsFromBase(
 			llms_field_inspector: {
 				customFill: 'confirmGroupAdditionalControls',
 			},
+			inserter: false,
 		},
 		llmsInnerBlocks: {
 

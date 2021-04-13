@@ -27,9 +27,9 @@ const settingsBase = {
 		foreground: '#466dd8',
 	},
 
-	category: 'llms-fields',
+	category: 'llms-user-info-fields',
 
-	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
+	keywords: [ __( 'LifterLMS', 'lifterlms' ), 'llms' ],
 
 	attributes: {},
 
@@ -176,6 +176,7 @@ const settingsGroup = {
 	},
 	supports: {
 		llms_field_group: true,
+		llms_field_inspector: false,
 	},
 	providesContext: {
 		'llms/fieldGroup/fieldLayout': 'fieldLayout',

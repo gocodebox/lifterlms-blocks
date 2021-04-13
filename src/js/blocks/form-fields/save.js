@@ -9,11 +9,6 @@ export function saveField( props ) {
 
 export function saveGroup( props ) {
 
-	const blockProps = useBlockProps.save();
-	return (
-		<div { ...blockProps }>
-			<InnerBlocks.Content />
-		</div>
-	);
+	return ( <InnerBlocks.Content /> );
 
 }

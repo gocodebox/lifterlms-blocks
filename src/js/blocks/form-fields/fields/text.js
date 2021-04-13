@@ -41,7 +41,7 @@ export const postTypes = getDefaultPostTypes();
  *
  * @type {string}
  */
-export const composed = false;
+export const composed = true;
 
 /**
  * Block Variations
@@ -196,6 +196,7 @@ export const settings = getSettingsFromBase(
 			'llms/fieldGroup/fieldLayout',
 		],
 		supports: {
+			inserter: false,
 			llms_field_inspector: {
 				customFill: 'fieldTextAdditionalControls',
 			}
