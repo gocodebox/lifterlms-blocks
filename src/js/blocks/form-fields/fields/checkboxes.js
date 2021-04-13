@@ -47,42 +47,40 @@ export const composed = false;
  *
  * @type {Object}
  */
-export const settings = getSettingsFromBase(
-	getDefaultSettings(),
-	{
-		title: __( 'Checkboxes', 'lifterlms' ),
-		description: __(
-			'A single checkbox toggle or a group of multiple checkboxes.',
-			'lifterlms'
-		),
-		icon: {
-			src: icon,
+export const settings = getSettingsFromBase( getDefaultSettings(), {
+	title: __( 'Checkboxes', 'lifterlms' ),
+	description: __(
+		'A single checkbox toggle or a group of multiple checkboxes.',
+		'lifterlms'
+	),
+	icon: {
+		src: icon,
+	},
+	category: 'llms-custom-fields',
+	supports: {
+		llms_field_inspector: {
+			options: true,
 		},
-		category: 'llms-custom-fields',
-		supports: {
-			llms_field_inspector: {
-				options: true,
-			},
+	},
+	attributes: {
+		field: {
+			__default: 'checkbox',
 		},
-		attributes: {
-			field: {
-				__default: 'checkbox',
-			},
-			options: {
-				__default: getDefaultOptionsArray( 2, 0 ),
-			}
+		options: {
+			__default: getDefaultOptionsArray( 2, 0 ),
 		},
-		transforms: {
-			from: [
-				{
-					type: 'block',
-					blocks: [ 'llms/form-field-radio', 'llms/form-field-select' ],
-					transform: ( attributes ) => createBlock( name, {
+	},
+	transforms: {
+		from: [
+			{
+				type: 'block',
+				blocks: [ 'llms/form-field-radio', 'llms/form-field-select' ],
+				transform: ( attributes ) =>
+					createBlock( name, {
 						...attributes,
 						field: settings.attributes.field.__default,
 					} ),
-				},
-			],
-		},
-	}
-);
+			},
+		],
+	},
+} );

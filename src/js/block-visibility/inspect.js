@@ -32,7 +32,6 @@ import { options as visibilityOptions } from './settings';
  */
 export default createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
-
 		// Exit early if the block doesn't support visibility.
 		if ( ! check( wp.blocks.getBlockType( props.name ), props.name ) ) {
 			return <BlockEdit { ...props } />;

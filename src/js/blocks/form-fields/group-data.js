@@ -1,4 +1,3 @@
-
 // WP deps.
 import { dispatch, select } from '@wordpress/data';
 
@@ -13,10 +12,10 @@ import { find, isEmpty, merge } from 'lodash';
  * @return {?Object[]} Array of supporting block objects
  */
 function getSupportingParents() {
-
 	const { getBlockTypes, hasBlockSupport } = select( 'core/blocks' );
-	return getBlockTypes().filter( block => hasBlockSupport( block, 'llms_field_group' ) );
-
+	return getBlockTypes().filter( ( block ) =>
+		hasBlockSupport( block, 'llms_field_group' )
+	);
 }
 
 /**
@@ -28,8 +27,15 @@ function getSupportingParents() {
  * @return {Object} WP Block object of the parent.
  */
 function getParentFieldGroup( clientId ) {
-	const { getBlock, getBlockParentsByBlockName } = select( 'core/block-editor' );
-	return getBlock( getBlockParentsByBlockName( clientId, getSupportingParents().map( ( { name } ) => name ) ) );
+	const { getBlock, getBlockParentsByBlockName } = select(
+		'core/block-editor'
+	);
+	return getBlock(
+		getBlockParentsByBlockName(
+			clientId,
+			getSupportingParents().map( ( { name } ) => name )
+		)
+	);
 }
 
 /**
@@ -44,10 +50,10 @@ function getParentFieldGroup( clientId ) {
  * @return {?Object} WP Block object of the sibling.
  */
 function getSibling( clientId ) {
-
 	const parent = getParentFieldGroup( clientId );
-	return parent && parent.innerBlocks.length ? find( parent.innerBlocks, block => block.clientId !== clientId ) : null;
-
+	return parent && parent.innerBlocks.length
+		? find( parent.innerBlocks, ( block ) => block.clientId !== clientId )
+		: null;
 }
 
 /**
@@ -63,7 +69,6 @@ function getSibling( clientId ) {
  * @return {number} Adjusted columns width for the sibling block.
  */
 function determineSiblingCols( cols, siblingCols ) {
-
 	if ( cols === 12 || siblingCols === 12 ) {
 		siblingCols === 12;
 	} else if ( cols + siblingCols > 12 ) {
@@ -71,20 +76,24 @@ function determineSiblingCols( cols, siblingCols ) {
 	}
 
 	return siblingCols;
-
-};
+}
 
 function isLastColumn( clientId ) {
-
 	const parent = getParentFieldGroup( clientId );
 	if ( parent && parent.innerBlocks.length ) {
-		return clientId === parent.innerBlocks[ parent.innerBlocks.length - 1 ].clientId
+		return (
+			clientId ===
+			parent.innerBlocks[ parent.innerBlocks.length - 1 ].clientId
+		);
 	}
+}
 
-};
-
-function updateChildren( { setAttributes, currentUpdates, siblingClientId, siblingUpdates } = {} ) {
-
+function updateChildren( {
+	setAttributes,
+	currentUpdates,
+	siblingClientId,
+	siblingUpdates,
+} = {} ) {
 	const { updateBlockAttributes } = dispatch( 'core/block-editor' );
 
 	/**
@@ -105,28 +114,23 @@ function updateChildren( { setAttributes, currentUpdates, siblingClientId, sibli
 			updateBlockAttributes( siblingClientId, siblingUpdates );
 		}
 	} );
-
 }
 
 function getConfirmGroupUpdates( attributes, siblingAttributes ) {
-
 	const currentUpdates = {},
 		siblingUpdates = {};
 
 	// Updates matching, id, & name fields.
 	if ( attributes.isConfirmationControlField ) {
-
-		const
-			{ name, id, required, field } = attributes,
-			confirmName  = `${ name }_confirm`,
-			confirmId    = `${ id }-confirm`;
+		const { name, id, required, field } = attributes,
+			confirmName = `${ name }_confirm`,
+			confirmId = `${ id }-confirm`;
 
 		siblingUpdates.match = id;
-		siblingUpdates.name  = confirmName;
-		siblingUpdates.id    = confirmId;
+		siblingUpdates.name = confirmName;
+		siblingUpdates.id = confirmId;
 
 		currentUpdates.match = confirmId;
-
 	}
 
 	// Sync required attribute between grouped fields.
@@ -143,13 +147,16 @@ function getConfirmGroupUpdates( attributes, siblingAttributes ) {
 		currentUpdates,
 		siblingUpdates,
 	};
-
 }
 
-export default function( { attributes, context, clientId, setAttributes } = {} ) {
-
+export default function ( {
+	attributes,
+	context,
+	clientId,
+	setAttributes,
+} = {} ) {
 	const { columns } = attributes,
-		sibling       = getSibling( clientId );
+		sibling = getSibling( clientId );
 
 	let currentUpdates = {},
 		siblingUpdates = {};
@@ -162,32 +169,39 @@ export default function( { attributes, context, clientId, setAttributes } = {} )
 	const siblingClientId = sibling.clientId;
 
 	// Syncing for confirm group fields.
-	if ( attributes.isConfirmationControlField || attributes.isConfirmationField )  {
-
-		const groupUpdates = getConfirmGroupUpdates( attributes, sibling.attributes );
+	if (
+		attributes.isConfirmationControlField ||
+		attributes.isConfirmationField
+	) {
+		const groupUpdates = getConfirmGroupUpdates(
+			attributes,
+			sibling.attributes
+		);
 
 		currentUpdates = merge( currentUpdates, groupUpdates.currentUpdates );
 		siblingUpdates = merge( siblingUpdates, groupUpdates.siblingUpdates );
-
 	}
 
 	// Updates columns based on group layout.
-	siblingUpdates.columns = determineSiblingCols( columns, sibling.attributes.columns );
+	siblingUpdates.columns = determineSiblingCols(
+		columns,
+		sibling.attributes.columns
+	);
 
-	if ( 'columns' === context['llms/fieldGroup/fieldLayout'] ) {
-
+	if ( 'columns' === context[ 'llms/fieldGroup/fieldLayout' ] ) {
 		const isLast = isLastColumn( clientId );
 
 		currentUpdates.last_column = isLastColumn( clientId );
 		siblingUpdates.last_column = ! isLast;
-
 	} else {
-
 		currentUpdates.last_column = true;
 		siblingUpdates.last_column = true;
-
 	}
 
-	updateChildren( { setAttributes, currentUpdates, siblingClientId, siblingUpdates } );
-
+	updateChildren( {
+		setAttributes,
+		currentUpdates,
+		siblingClientId,
+		siblingUpdates,
+	} );
 }

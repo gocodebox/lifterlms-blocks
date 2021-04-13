@@ -36,29 +36,26 @@ export const composed = true;
  *
  * @type {Object}
  */
-export const settings = getSettingsFromBase(
-	baseSettings,
-	{
-		title: __( 'Last Name', 'lifterlms' ),
-		description: __(
-			"A special field used to collect a user's last name.",
-			'lifterlms'
-		),
-		attributes: {
-			id: {
-				__default: 'last_name',
-			},
-			label: {
-				__default: __( 'Last Name', 'lifterlms' ),
-			},
-			name: {
-				__default: 'last_name',
-			},
-			data_store_key: {
-				__default: 'last_name',
-			},
+export const settings = getSettingsFromBase( baseSettings, {
+	title: __( 'Last Name', 'lifterlms' ),
+	description: __(
+		"A special field used to collect a user's last name.",
+		'lifterlms'
+	),
+	attributes: {
+		id: {
+			__default: 'last_name',
 		},
-	}
-);
+		label: {
+			__default: __( 'Last Name', 'lifterlms' ),
+		},
+		name: {
+			__default: 'last_name',
+		},
+		data_store_key: {
+			__default: 'last_name',
+		},
+	},
+} );
 
 export { postTypes };

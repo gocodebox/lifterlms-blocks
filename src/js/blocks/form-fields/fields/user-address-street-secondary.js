@@ -9,7 +9,10 @@
 import { __ } from '@wordpress/i18n';
 
 // Internal Deps.
-import { settings as baseSettings, postTypes } from './user-address-street-primary';
+import {
+	settings as baseSettings,
+	postTypes,
+} from './user-address-street-primary';
 import { getSettingsFromBase } from '../settings';
 
 /**
@@ -51,7 +54,7 @@ export const settings = getSettingsFromBase(
 				__default: '',
 			},
 			placeholder: {
-				__default: __( 'Apartment, suite, etc...', 'lifterlms' ),
+				__default: __( 'Apartment, suite, etc…', 'lifterlms' ),
 			},
 			name: {
 				__default: 'llms_billing_address_2',
@@ -63,9 +66,7 @@ export const settings = getSettingsFromBase(
 				__default: 'llms_billing_address_2',
 			},
 		},
-		usesContext: [
-			'llms/fieldGroup/fieldLayout',
-		],
+		usesContext: [ 'llms/fieldGroup/fieldLayout' ],
 	},
 	[ 'transforms', 'variations' ]
 );

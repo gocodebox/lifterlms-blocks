@@ -103,25 +103,30 @@ const OptionsList = SortableContainer(
  */
 const OptionItem = SortableElement(
 	( { item, i, onChange, onRemove, showKeys, type } ) => {
-		const OptionControl = 'checkbox' === type ?
-			<CheckboxControl
-				className="llms-field-opt-default"
-				checked = { 'yes' === item.default }
-				onChange={ ( val ) => {
-					onChange( { ...item, default: true === val ? 'yes' : 'no' }, i );
-				} }
-				tabIndex="-1"
-			/>
-			:
-			<RadioControl
-				className="llms-field-opt-default"
-				selected={ item.default }
-				onChange={ ( val ) => {
-					onChange( { ...item, default: val }, i );
-				} }
-				options={ [ { label: '', value: 'yes' } ] }
-				tabIndex="-1"
-			/>;
+		const OptionControl =
+			'checkbox' === type ? (
+				<CheckboxControl
+					className="llms-field-opt-default"
+					checked={ 'yes' === item.default }
+					onChange={ ( val ) => {
+						onChange(
+							{ ...item, default: true === val ? 'yes' : 'no' },
+							i
+						);
+					} }
+					tabIndex="-1"
+				/>
+			) : (
+				<RadioControl
+					className="llms-field-opt-default"
+					selected={ item.default }
+					onChange={ ( val ) => {
+						onChange( { ...item, default: val }, i );
+					} }
+					options={ [ { label: '', value: 'yes' } ] }
+					tabIndex="-1"
+				/>
+			);
 
 		return (
 			<li className="llms-field-option">
@@ -302,7 +307,7 @@ export default class InspectorFieldOptions extends Component {
 		 */
 		const onOptionChange = ( option, index ) => {
 			const prevOption = options[ index ] ? options[ index ] : false,
-				  { field }    = this.props.attributes;
+				{ field } = this.props.attributes;
 
 			options[ index ] = option;
 			this.updateOptions( options );

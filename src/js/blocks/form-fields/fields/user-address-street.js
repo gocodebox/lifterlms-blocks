@@ -44,27 +44,30 @@ export const composed = true;
  *
  * @type {Object}
  */
-export const settings = getSettingsFromBase(
-	getDefaultSettings( 'group' ),
-	{
-		title: __( 'User Street rAddress', 'lifterlms' ),
-		description: __( "Collect a user's street address.", 'lifterlms' ),
-		icon: {
-			src: 'id-alt',
-		},
-		supports: {
-			multiple: false,
-		},
-		llmsInnerBlocks: {
-			allowed: [
+export const settings = getSettingsFromBase( getDefaultSettings( 'group' ), {
+	title: __( 'User Street rAddress', 'lifterlms' ),
+	description: __( "Collect a user's street address.", 'lifterlms' ),
+	icon: {
+		src: 'id-alt',
+	},
+	supports: {
+		multiple: false,
+	},
+	llmsInnerBlocks: {
+		allowed: [
+			'llms/form-field-user-address-street-primary',
+			'llms/form-field-user-address-street-secondary',
+		],
+		template: [
+			[
 				'llms/form-field-user-address-street-primary',
+				{ columns: 8, last_column: false },
+			],
+			[
 				'llms/form-field-user-address-street-secondary',
+				{ columns: 4, last_column: true },
 			],
-			template: [
-				[ 'llms/form-field-user-address-street-primary', { columns: 8, last_column: false } ],
-				[ 'llms/form-field-user-address-street-secondary', { columns: 4, last_column: true } ],
-			],
-		},
-		parent: [ 'llms/form-field-user-name' ],
-	}
-);
+		],
+	},
+	parent: [ 'llms/form-field-user-name' ],
+} );

@@ -48,7 +48,7 @@ export const settings = getSettingsFromBase(
 			src: 'admin-users',
 		},
 		supports: {
-			multiple: false,  // Can only have a single email address field.
+			multiple: false, // Can only have a single email address field.
 			llms_field_inspector: {
 				id: false,
 				name: false,
@@ -80,11 +80,9 @@ export const settings = getSettingsFromBase(
 			},
 		},
 		parent: [ 'llms/form-field-user-name' ],
-		usesContext: [
-			'llms/fieldGroup/fieldLayout',
-		],
+		usesContext: [ 'llms/fieldGroup/fieldLayout' ],
 	},
-	[ 'transforms', 'variations' ],
+	[ 'transforms', 'variations' ]
 );
 
-export { postTypes }
+export { postTypes };

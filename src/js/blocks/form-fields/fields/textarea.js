@@ -39,9 +39,8 @@ export const composed = false;
  * @return {Fragment} Component html fragment.
  */
 const fillInspectorControls = ( attributes, setAttributes ) => {
-
 	const { html_attrs } = attributes,
-		{ rows } = html_attrs ;
+		{ rows } = html_attrs;
 
 	return (
 		<TextControl
@@ -61,7 +60,6 @@ const fillInspectorControls = ( attributes, setAttributes ) => {
 	);
 };
 
-
 /**
  * Block settings
  *
@@ -75,7 +73,7 @@ export const settings = getSettingsFromBase(
 	{
 		title: __( 'Textarea', 'lifterlms' ),
 		description: __(
-			"A text field accepting multiple lines of user information.",
+			'A text field accepting multiple lines of user information.',
 			'lifterlms'
 		),
 		icon: {
@@ -84,7 +82,7 @@ export const settings = getSettingsFromBase(
 		category: 'llms-custom-fields',
 		supports: {
 			llms_field_inspector: {
-				customFill: 'fieldTextarea'
+				customFill: 'fieldTextarea',
 			},
 		},
 		attributes: {
@@ -94,7 +92,7 @@ export const settings = getSettingsFromBase(
 			html_attrs: {
 				__default: {
 					rows: 4,
-				}
+				},
 			},
 		},
 		fillInspectorControls,
@@ -102,9 +100,7 @@ export const settings = getSettingsFromBase(
 			from: [
 				{
 					type: 'block',
-					blocks: [
-						'llms/form-field-text',
-					],
+					blocks: [ 'llms/form-field-text' ],
 					transform: ( attributes ) =>
 						createBlock( name, {
 							...attributes,
@@ -119,19 +115,17 @@ export const settings = getSettingsFromBase(
 			to: [
 				{
 					type: 'block',
-					blocks: [
-						'llms/form-field-text',
-					],
+					blocks: [ 'llms/form-field-text' ],
 					transform: ( attributes ) =>
 						createBlock( 'llms/form-field-text', {
 							...attributes,
-							field: 'text'
+							field: 'text',
 						} ),
 				},
 			],
 		},
 	},
-	[ 'transforms', 'variations' ],
+	[ 'transforms', 'variations' ]
 );
 
-export { postTypes }
+export { postTypes };

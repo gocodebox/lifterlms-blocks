@@ -74,10 +74,9 @@ export const settings = getSettingsFromBase(
 			data_store_key: {
 				__default: 'llms_phone',
 			},
-
 		},
 	},
-	[ 'transforms', 'variations' ],
+	[ 'transforms', 'variations' ]
 );
 
-export { postTypes }
+export { postTypes };

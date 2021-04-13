@@ -43,27 +43,33 @@ export const composed = true;
  *
  * @type {Object}
  */
-export const settings = getSettingsFromBase(
-	getDefaultSettings( 'group' ),
-	{
-		title: __( 'User name', 'lifterlms' ),
-		description: __( "A special field used to collect a user's first and last name.", 'lifterlms' ),
-		icon: {
-			src: 'admin-users',
-		},
-		supports: {
-			inserter: true,
-			multiple: false,
-		},
-		llmsInnerBlocks: {
-			allowed: [
+export const settings = getSettingsFromBase( getDefaultSettings( 'group' ), {
+	title: __( 'User name', 'lifterlms' ),
+	description: __(
+		"A special field used to collect a user's first and last name.",
+		'lifterlms'
+	),
+	icon: {
+		src: 'admin-users',
+	},
+	supports: {
+		inserter: true,
+		multiple: false,
+	},
+	llmsInnerBlocks: {
+		allowed: [
+			'llms/form-field-user-first-name',
+			'llms/form-field-user-last-name',
+		],
+		template: [
+			[
 				'llms/form-field-user-first-name',
+				{ columns: 6, last_column: false },
+			],
+			[
 				'llms/form-field-user-last-name',
+				{ columns: 6, last_column: true },
 			],
-			template: [
-				[ 'llms/form-field-user-first-name', { columns: 6, last_column: false } ],
-				[ 'llms/form-field-user-last-name', { columns: 6, last_column: true } ],
-			],
-		},
-	}
-);
+		],
+	},
+} );

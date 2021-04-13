@@ -52,27 +52,36 @@ const variations = [
 	{
 		name: 'text',
 		title: __( 'Text', 'lifterlms' ),
-		description: __( 'An input field which accepts any form of text.', 'lifterlms' ),
+		description: __(
+			'An input field which accepts any form of text.',
+			'lifterlms'
+		),
 		isDefault: true,
-		icon: defaultIcon
+		icon: defaultIcon,
 	},
 	{
 		name: 'email',
 		title: __( 'Email', 'lifterlms' ),
-		description: __( 'A text input field which only accepts an email address.', 'lifterlms' ),
-		icon:  'email-alt',
+		description: __(
+			'A text input field which only accepts an email address.',
+			'lifterlms'
+		),
+		icon: 'email-alt',
 	},
 	{
 		name: 'password',
 		title: __( 'Password', 'lifterlms' ),
 		description: __( 'User password confirmation field.', 'lifterlms' ),
-		icon:  'lock',
+		icon: 'lock',
 		scope: [],
 	},
 	{
 		name: 'number',
 		title: __( 'Number', 'lifterlms' ),
-		description: __( 'An input field which only accepts numeric input.', 'lifterlms' ),
+		description: __(
+			'An input field which only accepts numeric input.',
+			'lifterlms'
+		),
 		icon: numberIcon,
 		attributes: {
 			html_attrs: {
@@ -84,13 +93,19 @@ const variations = [
 	{
 		name: 'tel',
 		title: __( 'Phone Number', 'lifterlms' ),
-		description: __( 'An input field which only accepts phone numbers.', 'lifterlms' ),
+		description: __(
+			'An input field which only accepts phone numbers.',
+			'lifterlms'
+		),
 		icon: 'phone',
 	},
 	{
 		name: 'url',
 		title: __( 'Website Address / URL', 'lifterlms' ),
-		description: __( 'An input field which only accepts a website address or URL.', 'lifterlms' ),
+		description: __(
+			'An input field which only accepts a website address or URL.',
+			'lifterlms'
+		),
 		icon: 'admin-links',
 	},
 ];
@@ -104,14 +119,13 @@ const variations = [
  * @return {Object[]} Update block variations array.
  */
 variations.forEach( ( variation ) => {
-
 	// Setup scope.
 	variation.scope = variation.scope || [ 'block', 'inserter', 'transform' ];
 
 	// Update the icon (add the default foreground color.
 	variation.icon = {
 		...baseSettings.icon,
-		src: variation.icon
+		src: variation.icon,
 	};
 
 	// Add a "field" attribute based off the variation name.
@@ -122,8 +136,7 @@ variations.forEach( ( variation ) => {
 
 	// Add an isActive function.
 	variation.isActive = ( blockAttributes, variationAttributes ) =>
-		blockAttributes.field ===
-		variationAttributes.field;
+		blockAttributes.field === variationAttributes.field;
 } );
 
 /**
@@ -136,7 +149,6 @@ variations.forEach( ( variation ) => {
  * @return {Fragment} Component HTML Fragment.
  */
 const fillInspectorControls = ( attributes, setAttributes ) => {
-
 	// We only add extra controls to the number variation.
 	if ( attributes.isConfirmationField || 'number' !== attributes.field ) {
 		return;
@@ -184,25 +196,19 @@ const fillInspectorControls = ( attributes, setAttributes ) => {
  *
  * @type {Object}
  */
-export const settings = getSettingsFromBase(
-	baseSettings,
-	{
-		title: __( 'Text', 'lifterlms' ),
-		description: __( "A simple text input field.", 'lifterlms' ),
-		icon: {
-			src: defaultIcon,
+export const settings = getSettingsFromBase( baseSettings, {
+	title: __( 'Text', 'lifterlms' ),
+	description: __( 'A simple text input field.', 'lifterlms' ),
+	icon: {
+		src: defaultIcon,
+	},
+	usesContext: [ 'llms/fieldGroup/fieldLayout' ],
+	supports: {
+		inserter: false,
+		llms_field_inspector: {
+			customFill: 'fieldTextAdditionalControls',
 		},
-		usesContext: [
-			'llms/fieldGroup/fieldLayout',
-		],
-		supports: {
-			inserter: false,
-			llms_field_inspector: {
-				customFill: 'fieldTextAdditionalControls',
-			}
-		},
-		variations,
-		fillInspectorControls,
-
-	}
-);
+	},
+	variations,
+	fillInspectorControls,
+} );

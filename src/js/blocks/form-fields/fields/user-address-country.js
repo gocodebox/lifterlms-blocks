@@ -82,7 +82,7 @@ export const settings = getSettingsFromBase(
 			},
 			placeholder: {
 				__default: __( 'Select a Country', 'lifterlms' ),
-			}
+			},
 		},
 		parent: [ 'llms/form-field-user-address' ],
 	},

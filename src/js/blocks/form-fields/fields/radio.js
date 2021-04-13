@@ -18,7 +18,6 @@ import {
 import icon from '../../../icons/field-radio';
 import { settings as baseSettings } from './checkboxes';
 
-
 /**
  * Block Name
  *
@@ -49,36 +48,37 @@ export const composed = false;
  *
  * @type {Object}
  */
-export const settings = getSettingsFromBase(
-	baseSettings,
-	{
-		title: __( 'Radio', 'lifterlms' ),
-		description: __(
-			'A group of radio inputs which can be populated with any number of options.',
-			'lifterlms'
-		),
-		icon: {
-			src: icon,
+export const settings = getSettingsFromBase( baseSettings, {
+	title: __( 'Radio', 'lifterlms' ),
+	description: __(
+		'A group of radio inputs which can be populated with any number of options.',
+		'lifterlms'
+	),
+	icon: {
+		src: icon,
+	},
+	attributes: {
+		field: {
+			__default: 'radio',
 		},
-		attributes: {
-			field: {
-				__default: 'radio',
-			},
-			options: {
-				__default: getDefaultOptionsArray( 2, 1 ),
-			}
+		options: {
+			__default: getDefaultOptionsArray( 2, 1 ),
 		},
-		transforms: {
-			from: [
-				{
-					type: 'block',
-					blocks: [ 'llms/form-field-checkboxes', 'llms/form-field-select' ],
-					transform: ( attributes ) => createBlock( name, {
+	},
+	transforms: {
+		from: [
+			{
+				type: 'block',
+				blocks: [
+					'llms/form-field-checkboxes',
+					'llms/form-field-select',
+				],
+				transform: ( attributes ) =>
+					createBlock( name, {
 						...attributes,
 						field: settings.attributes.field.__default,
 					} ),
-				},
-			],
-		},
-	}
-);
+			},
+		],
+	},
+} );

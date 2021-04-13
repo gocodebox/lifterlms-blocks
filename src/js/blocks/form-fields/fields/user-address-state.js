@@ -81,12 +81,10 @@ export const settings = getSettingsFromBase(
 			},
 			placeholder: {
 				__default: __( 'Select a State / Region', 'lifterlms' ),
-			}
+			},
 		},
 		parent: [ 'llms/form-field-user-address-region' ],
-		usesContext: [
-			'llms/fieldGroup/fieldLayout',
-		],
+		usesContext: [ 'llms/fieldGroup/fieldLayout' ],
 	},
 	[ 'transforms' ]
 );

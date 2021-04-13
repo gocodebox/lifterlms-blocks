@@ -32,7 +32,7 @@ export const postTypes = getDefaultPostTypes();
 /**
  * Is this a default or composed field?
  *
- * @type {Boolean}
+ * @type {boolean}
  */
 export const composed = true;
 
@@ -49,7 +49,10 @@ export const settings = getSettingsFromBase(
 	getDefaultSettings( 'group' ),
 	{
 		title: __( 'User Address', 'lifterlms' ),
-		description: __( "A group of fields used to collect a user's full address.", 'lifterlms' ),
+		description: __(
+			"A group of fields used to collect a user's full address.",
+			'lifterlms'
+		),
 		icon: {
 			src: 'id-alt',
 		},

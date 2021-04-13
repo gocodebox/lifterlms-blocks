@@ -79,10 +79,9 @@ export const settings = getSettingsFromBase(
 			data_store_key: {
 				__default: 'user_email',
 			},
-
 		},
 	},
-	[ 'transforms', 'variations' ],
+	[ 'transforms', 'variations' ]
 );
 
-export { postTypes }
+export { postTypes };

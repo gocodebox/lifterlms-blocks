@@ -38,7 +38,7 @@ export const settings = getSettingsFromBase(
 	{
 		title: __( 'User Display Name', 'lifterlms' ),
 		description: __(
-			"Allows a user to choose how their name will be displayed publicly on the site.",
+			'Allows a user to choose how their name will be displayed publicly on the site.',
 			'lifterlms'
 		),
 		icon: {
@@ -76,10 +76,9 @@ export const settings = getSettingsFromBase(
 			data_store_key: {
 				__default: 'display_name',
 			},
-
 		},
 	},
-	[ 'transforms', 'variations' ],
+	[ 'transforms', 'variations' ]
 );
 
-export { postTypes }
+export { postTypes };

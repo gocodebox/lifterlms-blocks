@@ -146,7 +146,5 @@ export default () => {
 
 	// registerBlockType( 'test/dupe-wrapper', {
 
-
-
 	// } );
 };

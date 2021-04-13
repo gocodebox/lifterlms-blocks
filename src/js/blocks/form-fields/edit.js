@@ -1,12 +1,15 @@
 import { getBlockType } from '@wordpress/blocks';
-import { useBlockProps, InnerBlocks, InspectorControls } from '@wordpress/block-editor';
+import {
+	useBlockProps,
+	InnerBlocks,
+	InspectorControls,
+} from '@wordpress/block-editor';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { select } from '@wordpress/data';
 import { Slot, Fill } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { PanelBody } from '@wordpress/components';
-
 
 import { snakeCase, kebabCase, uniqueId } from 'lodash';
 
@@ -87,7 +90,6 @@ const setupAtts = ( atts, blockAtts ) => {
 };
 
 export function editField( props ) {
-
 	const { name } = props,
 		block = getBlockType( name ),
 		{ clientId, context, setAttributes } = props,
@@ -99,28 +101,37 @@ export function editField( props ) {
 	let { attributes } = props;
 	attributes = setupAtts( attributes, block.attributes );
 
-	const blockProps = useBlockProps( { className: 'llms-fields', style: { width: attributes.columns / 12 * 100 + '%' } } );
+	const blockProps = useBlockProps( {
+		className: 'llms-fields',
+		style: { width: ( attributes.columns / 12 ) * 100 + '%' },
+	} );
 
 	// Manage field data for blocks in field groups.
-	if ( context['llms/fieldGroup/fieldLayout'] ) {
+	if ( context[ 'llms/fieldGroup/fieldLayout' ] ) {
 		manageFieldGroupAttributes( props );
 	}
 
 	// We can't disable the variation transformer by context so we'll do it this way which is gross but works.
 	useEffect( () => {
-		if ( block.variations && block.variations.length && clientId === getSelectedBlockClientId() ) {
-			let interval = setInterval( () => {
-
-				let el = document.querySelector( '.block-editor-block-inspector .block-editor-block-variation-transforms' );
+		if (
+			block.variations &&
+			block.variations.length &&
+			clientId === getSelectedBlockClientId()
+		) {
+			const interval = setInterval( () => {
+				const el = document.querySelector(
+					'.block-editor-block-inspector .block-editor-block-variation-transforms'
+				);
 				if ( el ) {
-					el.style.display = attributes.isConfirmationField ? 'none' : 'inline-block';
+					el.style.display = attributes.isConfirmationField
+						? 'none'
+						: 'inline-block';
 					clearInterval( interval );
 				}
 
 				return () => {
 					clearInterval( interval );
-				}
-
+				};
 			}, 10 );
 		}
 	} );
@@ -138,7 +149,9 @@ export function editField( props ) {
 				} }
 			/>
 
-			<Field { ...{ attributes, setAttributes, block, clientId, context } } />
+			<Field
+				{ ...{ attributes, setAttributes, block, clientId, context } }
+			/>
 
 			{ inspectorSupports.customFill && (
 				<Fill
@@ -156,40 +169,38 @@ export function editField( props ) {
 				<Fill
 					name={ `llmsEditFill.after.${ editFills.after }.${ clientId }` }
 				>
-					{ fillEditAfter(
-						attributes,
-						setAttributes,
-						props
-					) }
+					{ fillEditAfter( attributes, setAttributes, props ) }
 				</Fill>
 			) }
 		</div>
 	);
-
-};
+}
 
 export function editGroup( props ) {
-
-	const {
-			attributes,
-			clientId,
-			name,
-			setAttributes
-		}                 = props,
-		{ fieldLayout }   = attributes,
-		{ getBlock }      = select( blockEditorStore ),
-		block             = getBlock( clientId ),
-		blockType         = getBlockType( name ),
-		{
-			allowed,
-			template,
-			lock,
-		}                 = blockType.llmsInnerBlocks,
-		primaryBlock      = block && block.innerBlocks.length && 'llms/form-field-confirm-group' === block.name ? block.innerBlocks[ blockType.findControllerBlockIndex( block.innerBlocks ) ] : null,
-		primaryBlockType  = primaryBlock ? getBlockType( primaryBlock.name ) : null,
-		editFills         = primaryBlockType ? primaryBlockType.supports.llms_edit_fill : { after: false },
+	const { attributes, clientId, name, setAttributes } = props,
+		{ fieldLayout } = attributes,
+		{ getBlock } = select( blockEditorStore ),
+		block = getBlock( clientId ),
+		blockType = getBlockType( name ),
+		{ allowed, template, lock } = blockType.llmsInnerBlocks,
+		primaryBlock =
+			block &&
+			block.innerBlocks.length &&
+			'llms/form-field-confirm-group' === block.name
+				? block.innerBlocks[
+						blockType.findControllerBlockIndex( block.innerBlocks )
+				  ]
+				: null,
+		primaryBlockType = primaryBlock
+			? getBlockType( primaryBlock.name )
+			: null,
+		editFills = primaryBlockType
+			? primaryBlockType.supports.llms_edit_fill
+			: { after: false },
 		inspectorSupports = blockType.supports.llms_field_inspector,
-		hasLayout         = blockType.providesContext && blockType.providesContext['llms/fieldGroup/fieldLayout'];
+		hasLayout =
+			blockType.providesContext &&
+			blockType.providesContext[ 'llms/fieldGroup/fieldLayout' ];
 
 	let orientation = 'columns' === fieldLayout ? 'horizontal' : 'vertical';
 	if ( ! hasLayout ) {
@@ -200,27 +211,35 @@ export function editGroup( props ) {
 		<div { ...useBlockProps() }>
 			<InspectorControls>
 				<PanelBody>
-
 					{ hasLayout && (
 						<GroupLayoutControl { ...{ ...props, block } } />
 					) }
 
-					{ inspectorSupports.customFill && (
+					{ inspectorSupports.customFill &&
 						blockType.fillInspectorControls(
 							attributes,
 							setAttributes,
 							props
-						)
-					) }
-
+						) }
 				</PanelBody>
-
 			</InspectorControls>
 
-			<div className="llms-field-group" data-field-layout={ hasLayout ? fieldLayout : 'stacked' }>
+			<div
+				className="llms-field-group"
+				data-field-layout={ hasLayout ? fieldLayout : 'stacked' }
+			>
 				<InnerBlocks
 					allowedBlocks={ allowed }
-					template={ 'function' === typeof template ? template( { attributes, clientId, block, blockType } ) : template }
+					template={
+						'function' === typeof template
+							? template( {
+									attributes,
+									clientId,
+									block,
+									blockType,
+							  } )
+							: template
+					}
 					templateLock={ lock }
 					orientation={ orientation }
 				/>
@@ -233,4 +252,4 @@ export function editGroup( props ) {
 			) }
 		</div>
 	);
-};
+}

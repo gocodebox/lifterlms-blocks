@@ -17,7 +17,6 @@ import {
 import { RichText } from '@wordpress/block-editor';
 import { Fragment } from '@wordpress/element';
 
-
 // Internal Deps.
 import { settings as baseSettings, postTypes } from './text';
 import { getSettingsFromBase } from '../settings';
@@ -32,7 +31,6 @@ export const name = 'llms/form-field-user-password';
 export const composed = true;
 
 const fillEditAfter = ( attributes, setAttributes, props ) => {
-
 	const { meter, meter_description } = attributes;
 
 	if ( ! meter ) {
@@ -48,18 +46,27 @@ const fillEditAfter = ( attributes, setAttributes, props ) => {
 				style={ { marginTop: 0 } }
 				tagName="p"
 				value={ meter_description }
-				onChange={ ( meter_description ) => setAttributes( { meter_description } ) }
+				onChange={ ( meter_description ) =>
+					setAttributes( { meter_description } )
+				}
 				allowedFormats={ [ 'core/bold', 'core/italic' ] }
 				aria-label={
 					meter_description
-						? __( 'Password strength meter description', 'lifterlms' )
-						: __( 'Empty Password strength meter description; start writing to add a label' )
+						? __(
+								'Password strength meter description',
+								'lifterlms'
+						  )
+						: __(
+								'Empty Password strength meter description; start writing to add a label'
+						  )
 				}
-				placeholder={ __( 'Enter a description for the password strength meter', 'lifterlms' ) }
+				placeholder={ __(
+					'Enter a description for the password strength meter',
+					'lifterlms'
+				) }
 			/>
 		</Fragment>
 	);
-
 };
 
 /**
@@ -72,7 +79,6 @@ const fillEditAfter = ( attributes, setAttributes, props ) => {
  * @return {Fragment} Component HTML Fragment.
  */
 const fillInspectorControls = ( attributes, setAttributes ) => {
-
 	const { isConfirmationField, meter, min_strength, html_attrs } = attributes,
 		{ minlength } = html_attrs;
 
@@ -84,7 +90,17 @@ const fillInspectorControls = ( attributes, setAttributes ) => {
 		<Fragment>
 			<ToggleControl
 				label={ __( 'Password strength meter', 'lifterlms' ) }
-				help={ meter ? __( 'Password strength meter is enabled.', 'lifterlms' ) : __( 'Password strength meter is disabled.', 'lifterlms' ) }
+				help={
+					meter
+						? __(
+								'Password strength meter is enabled.',
+								'lifterlms'
+						  )
+						: __(
+								'Password strength meter is disabled.',
+								'lifterlms'
+						  )
+				}
 				checked={ meter }
 				onChange={ () => setAttributes( { meter: ! meter } ) }
 			/>
@@ -97,7 +113,9 @@ const fillInspectorControls = ( attributes, setAttributes ) => {
 						'lifterlms'
 					) }
 					value={ min_strength }
-					onChange={ ( min_strength ) => setAttributes( { min_strength } ) }
+					onChange={ ( min_strength ) =>
+						setAttributes( { min_strength } )
+					}
 					options={ [
 						{ value: 'strong', label: __( 'Strong', 'lifterlms' ) },
 						{ value: 'medium', label: __( 'Medium', 'lifterlms' ) },
@@ -121,7 +139,7 @@ const fillInspectorControls = ( attributes, setAttributes ) => {
 							html_attrs: {
 								...html_attrs,
 								minlength: val * 1,
-							}
+							},
 						} )
 					}
 				/>
@@ -143,7 +161,7 @@ export const settings = getSettingsFromBase(
 		},
 		supports: {
 			inserter: true,
-			multiple: false,  // Can only have a single user password field.
+			multiple: false, // Can only have a single user password field.
 			llms_field_inspector: {
 				id: false,
 				name: false,
@@ -153,7 +171,7 @@ export const settings = getSettingsFromBase(
 			},
 			llms_edit_fill: {
 				after: 'userPassStrengthMeter',
-			}
+			},
 		},
 		attributes: {
 			// Defaults.
@@ -190,8 +208,12 @@ export const settings = getSettingsFromBase(
 			meter_description: {
 				type: 'string',
 				__default: sprintf(
-					__( 'A %1$s password is required with at least %2$s characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.', 'lifterlms' ),
-					'{min_strength}', '{min_length}',
+					__(
+						'A %1$s password is required with at least %2$s characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.',
+						'lifterlms'
+					),
+					'{min_strength}',
+					'{min_length}'
 				),
 			},
 			min_strength: {
@@ -201,13 +223,11 @@ export const settings = getSettingsFromBase(
 			html_attrs: {
 				__default: {
 					minlength: 8,
-				}
-			}
+				},
+			},
 		},
 		fillEditAfter,
 		fillInspectorControls,
 	},
 	[ 'transforms', 'variations' ]
 );
-
-

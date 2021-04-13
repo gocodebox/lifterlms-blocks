@@ -18,9 +18,7 @@ import { cloneDeep, merge } from 'lodash';
 import { editField, editGroup } from './edit';
 import { saveField, saveGroup } from './save';
 
-
 const settingsBase = {
-
 	apiVersion: 2,
 
 	icon: {
@@ -55,7 +53,6 @@ const settingsBase = {
 	fillInspectorControls( attributes, setAttributes, props ) {}, // eslint-disable-line no-unused-vars
 
 	fillEditAfter( attributes, setAttributes, props ) {},
-
 };
 
 const settingsField = {
@@ -190,24 +187,17 @@ const settingsGroup = {
 	save: saveGroup,
 };
 
-
-
 /**
  * Retrieve a copy of the default settings object
  *
+ * @param type
  * @since Unknown
- *
  * @return {Object} A settings object.
  */
 export default ( type = 'field' ) => {
-
 	const addSettings = 'field' === type ? settingsField : settingsGroup;
 
-	return merge(
-		{},
-		cloneDeep( settingsBase ),
-		addSettings
-	);
+	return merge( {}, cloneDeep( settingsBase ), addSettings );
 };
 
 /**
@@ -221,37 +211,31 @@ export function getDefaultPostTypes() {
 	return cloneDeep( [ 'llms_form', 'wp_block' ] );
 }
 
-export function getSettingsFromBase( baseSettings, overrides = {}, exclude = [] ) {
-
+export function getSettingsFromBase(
+	baseSettings,
+	overrides = {},
+	exclude = []
+) {
 	baseSettings = cloneDeep( baseSettings );
 	for ( let i = 0; i < exclude.length; i++ ) {
 		delete baseSettings[ exclude[ i ] ];
 	}
 
-	return merge(
-		{},
-		baseSettings,
-		overrides
-	);
-
+	return merge( {}, baseSettings, overrides );
 }
 
 export function getDefaultOptionsArray( count = 2, defaults = 1 ) {
-
 	const opts = [];
 
 	for ( let i = 1; i <= count; i++ ) {
-
 		opts.push( {
 			default: defaults && defaults > 0 ? 'yes' : 'no',
 			text: sprintf( __( 'Option %d', 'lifterlms' ), i ),
-			key: sprintf( __( 'option_%d', 'lifterlms' ), i )
+			key: sprintf( __( 'option_%d', 'lifterlms' ), i ),
 		} );
 
 		defaults--;
-
 	}
 
 	return opts;
-
 }

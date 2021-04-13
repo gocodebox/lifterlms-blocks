@@ -18,12 +18,11 @@ import { dispatch } from '@wordpress/data';
  * @since [version]
  *
  * @param {string}   options.fieldLayout   The newly selected field layout option.
- * @param {function} options.setAttributes Function to set attributes on the current block (group).
+ * @param {Function} options.setAttributes Function to set attributes on the current block (group).
  * @param {Object[]} options.innerBlocks   Array of the current block's innerBlocks.
  * @return {void}
  */
 function onChange( { fieldLayout, setAttributes, innerBlocks } ) {
-
 	const { updateBlockAttributes } = dispatch( blockEditorStore );
 
 	// Update the field layout on the group block.
@@ -32,20 +31,16 @@ function onChange( { fieldLayout, setAttributes, innerBlocks } ) {
 	// Update inner blocks.
 	const columns = 'columns' === fieldLayout ? 6 : 12;
 	innerBlocks.forEach( ( { clientId }, index ) => {
-
-		let last_column = ( 1 === index );
+		let last_column = 1 === index;
 		if ( 0 === index && 'stacked' === fieldLayout ) {
 			last_column = true;
 		}
 
 		updateBlockAttributes( clientId, { columns, last_column } );
-
 	} );
-
 }
 
-export default function( props ) {
-
+export default function ( props ) {
 	const { attributes, block, setAttributes } = props,
 		{ fieldLayout } = attributes,
 		{ innerBlocks } = block;
@@ -54,7 +49,9 @@ export default function( props ) {
 		<RadioControl
 			label={ __( 'Field Layout', 'lifterlms' ) }
 			selected={ fieldLayout }
-			onChange={ ( fieldLayout ) => onChange( { fieldLayout, setAttributes, innerBlocks } ) }
+			onChange={ ( fieldLayout ) =>
+				onChange( { fieldLayout, setAttributes, innerBlocks } )
+			}
 			options={ [
 				{ value: 'columns', label: __( 'Columns', 'lifterlms' ) },
 				{ value: 'stacked', label: __( 'Stacked', 'lifterlms' ) },

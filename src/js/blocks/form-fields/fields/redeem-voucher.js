@@ -37,7 +37,6 @@ export const composed = true;
  * @return {Fragment} Component HTML fragment.
  */
 const fillInspectorControls = ( attributes, setAttributes ) => {
-
 	const { toggleable, required } = attributes;
 
 	if ( required ) {
@@ -75,7 +74,7 @@ export const settings = getSettingsFromBase(
 	{
 		title: __( 'Voucher Code Redemption', 'lifterlms' ),
 		description: __(
-			"Allows user to redeem a voucher code during account registration.",
+			'Allows user to redeem a voucher code during account registration.',
 			'lifterlms'
 		),
 		icon: {
@@ -88,7 +87,7 @@ export const settings = getSettingsFromBase(
 				id: false,
 				name: false,
 				storage: false,
-				customFill: 'redeemVoucher'
+				customFill: 'redeemVoucher',
 			},
 		},
 		attributes: {
@@ -117,11 +116,10 @@ export const settings = getSettingsFromBase(
 			toggleable: {
 				__default: false,
 			},
-
 		},
 		fillInspectorControls,
 	},
-	[ 'transforms', 'variations' ],
+	[ 'transforms', 'variations' ]
 );
 
-export { postTypes }
+export { postTypes };

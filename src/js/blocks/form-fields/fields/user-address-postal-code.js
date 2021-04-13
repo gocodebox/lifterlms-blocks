@@ -78,9 +78,7 @@ export const settings = getSettingsFromBase(
 			},
 		},
 		parent: [ 'llms/form-field-user-address-region' ],
-		usesContext: [
-			'llms/fieldGroup/fieldLayout',
-		],
+		usesContext: [ 'llms/fieldGroup/fieldLayout' ],
 	},
 	[ 'transforms', 'variations' ]
 );

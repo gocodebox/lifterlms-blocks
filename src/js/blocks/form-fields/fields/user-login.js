@@ -78,7 +78,7 @@ export const settings = getSettingsFromBase(
 			},
 		},
 	},
-	[ 'transforms', 'variations' ],
+	[ 'transforms', 'variations' ]
 );
 
 export { postTypes };

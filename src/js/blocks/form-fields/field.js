@@ -52,15 +52,14 @@ export default class Field extends Component {
 	 * @return {Object} HTML Fragment.
 	 */
 	render() {
-
 		const {
-			attributes,
-			setAttributes,
-			block,
-			clientId,
-			context,
-		} = this.props,
-		{
+				attributes,
+				setAttributes,
+				block,
+				clientId,
+				context,
+			} = this.props,
+			{
 				id,
 				description,
 				columns,
@@ -68,8 +67,8 @@ export default class Field extends Component {
 				options,
 				placeholder,
 				required,
-		} = attributes,
-		editFills = block.supports.llms_edit_fill;
+			} = attributes,
+			editFills = block.supports.llms_edit_fill;
 
 		const classes = [];
 		if ( required ) {
@@ -199,13 +198,10 @@ export default class Field extends Component {
 										'Empty field description; start writing to add a description'
 								  )
 						}
-						placeholder={ __(
-							'Add optional description text'
-						) }
+						placeholder={ __( 'Add optional description text' ) }
 						style={ { color: '#808285', fontStyle: 'italic' } }
 					/>
-					{ ( 'radio' === fieldType ||
-						'checkbox' === fieldType ) && (
+					{ ( 'radio' === fieldType || 'checkbox' === fieldType ) && (
 						<InputGroupOptions
 							options={ options }
 							fieldType={ fieldType }
@@ -218,7 +214,6 @@ export default class Field extends Component {
 						name={ `llmsEditFill.after.${ editFills.after }.${ clientId }` }
 					/>
 				) }
-
 			</Fragment>
 		);
 	}
