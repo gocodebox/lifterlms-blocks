@@ -15,6 +15,7 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 	 *
 	 * @since 1.5.1
 	 * @since 1.6.0 Update test to accommodate form fields cat.
+	 * @since [version] Update test to reflect updated cat order.
 	 *
 	 * @return void
 	 */
@@ -24,12 +25,16 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 
 		$our_cats = array(
 			array(
-				'slug'  => 'llms-blocks',
-				'title' => 'LifterLMS Blocks',
+				'slug'  => 'llms-user-info-fields',
+				'title' => 'User Information',
 			),
 			array(
-				'slug'  => 'llms-fields',
-				'title' => 'LifterLMS Form Fields',
+				'slug'  => 'llms-custom-fields',
+				'title' => 'Custom User Information',
+			),
+			array(
+				'slug'  => 'llms-blocks',
+				'title' => 'LifterLMS Blocks',
 			),
 		);
 
@@ -39,7 +44,7 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 		);
 
 		$this->assertSame( $our_cats, $obj->add_block_category( array() ) );
-		$this->assertSame( array( $existing, $our_cats[0], $our_cats[1] ), $obj->add_block_category( array( $existing ) ) );
+		$this->assertSame( array( $our_cats[0], $our_cats[1], $existing, $our_cats[2] ), $obj->add_block_category( array( $existing ) ) );
 
 	}
 

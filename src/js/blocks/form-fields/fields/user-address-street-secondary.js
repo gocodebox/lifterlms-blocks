@@ -1,5 +1,5 @@
 /**
- * BLOCK: llms/form-field-user-email
+ * BLOCK: llms/form-field-user-address-street-secondary
  *
  * @since 1.6.0
  * @version [version]
@@ -9,7 +9,10 @@
 import { __ } from '@wordpress/i18n';
 
 // Internal Deps.
-import { settings as baseSettings, postTypes } from './text';
+import {
+	settings as baseSettings,
+	postTypes,
+} from './user-address-street-primary';
 import { getSettingsFromBase } from '../settings';
 
 /**
@@ -17,7 +20,7 @@ import { getSettingsFromBase } from '../settings';
  *
  * @type {string}
  */
-export const name = 'llms/form-field-user-phone';
+export const name = 'llms/form-field-user-address-street-secondary';
 
 /**
  * Is this a default or composed field?
@@ -38,43 +41,32 @@ export const composed = true;
 export const settings = getSettingsFromBase(
 	baseSettings,
 	{
-		title: __( 'User Phone', 'lifterlms' ),
+		title: __( 'User Street Address Additional Information', 'lifterlms' ),
 		description: __(
-			"A field used to collect a user's phone number.",
+			"A special field used to collect a user's street address.",
 			'lifterlms'
 		),
-		icon: {
-			src: 'phone',
-		},
-		supports: {
-			inserter: true,
-			multiple: false,
-			llms_field_inspector: {
-				id: false,
-				name: false,
-				storage: false,
-			},
-		},
 		attributes: {
 			id: {
-				__default: 'llms_phone',
-			},
-			field: {
-				__default: 'tel',
+				__default: 'llms_billing_address_2',
 			},
 			label: {
-				__default: __( 'Phone number', 'lifterlms' ),
+				__default: '',
+			},
+			placeholder: {
+				__default: __( 'Apartment, suite, etc…', 'lifterlms' ),
 			},
 			name: {
-				__default: 'llms_phone',
+				__default: 'llms_billing_address_2',
 			},
-			data_store: {
-				__default: 'usermeta',
+			required: {
+				__default: false,
 			},
 			data_store_key: {
-				__default: 'llms_phone',
+				__default: 'llms_billing_address_2',
 			},
 		},
+		usesContext: [ 'llms/fieldGroup/fieldLayout' ],
 	},
 	[ 'transforms', 'variations' ]
 );

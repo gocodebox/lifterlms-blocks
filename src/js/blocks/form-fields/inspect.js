@@ -5,12 +5,11 @@
  * @version 1.12.0
  */
 
-/* eslint camelcase: [ "error", { allow: [ "data_store*" ] } ] */
-
 // WP Deps.
 import {
 	InspectorControls,
 	InspectorAdvancedControls,
+	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import {
 	Button,
@@ -21,10 +20,15 @@ import {
 	TextControl,
 	ToggleControl,
 } from '@wordpress/components';
-import { dispatch } from '@wordpress/data';
+import { select, dispatch } from '@wordpress/data';
 import { applyFilters } from '@wordpress/hooks';
 import { Component, Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+import {
+	switchToBlockType,
+	getPossibleBlockTransformations,
+	getBlockType,
+} from '@wordpress/blocks';
 
 // Internal Deps.
 import InspectorFieldOptions from './inspect-field-options';
@@ -110,6 +114,48 @@ export default class Inspector extends Component {
 		return false;
 	}
 
+	getColumnsOptions( context ) {
+		let options = [];
+
+		// Full width is allowed inside stacked groups or when the field is being used solo.
+		if (
+			! context ||
+			( context &&
+				( ! context[ 'llms/fieldGroup/fieldLayout' ] ||
+					'stacked' === context[ 'llms/fieldGroup/fieldLayout' ] ) )
+		) {
+			options.push( {
+				value: 12,
+				label: __( '100%', 'lifterlms' ),
+			} );
+		}
+
+		options = options.concat( [
+			{
+				value: 9,
+				label: __( '75%', 'lifterlms' ),
+			},
+			{
+				value: 8,
+				label: __( '66.66%', 'lifterlms' ),
+			},
+			{
+				value: 6,
+				label: __( '50%', 'lifterlms' ),
+			},
+			{
+				value: 4,
+				label: __( '33.33%', 'lifterlms' ),
+			},
+			{
+				value: 3,
+				label: __( '25%', 'lifterlms' ),
+			},
+		] );
+
+		return options;
+	}
+
 	/**
 	 * Retrieve an array of objects to be used in the Matching Field select control.
 	 *
@@ -176,6 +222,35 @@ export default class Inspector extends Component {
 		return inspectorSupports[ control ];
 	}
 
+	canTransformToGroup( block ) {
+		// If the block is already within a confirmation block then we can't add a confirmation group.
+		if ( ! block || this.isInAConfirmGroup( block ) ) {
+			return false;
+		}
+		return getPossibleBlockTransformations( [ block ] )
+			.map( ( { name } ) => name )
+			.includes( 'llms/form-field-confirm-group' );
+	}
+
+	isInAConfirmGroup( block ) {
+		return this.getParentGroupClientId( block );
+	}
+
+	getParentGroupClientId( block ) {
+		if ( ! block ) {
+			return false;
+		}
+
+		const { clientId } = block,
+			{ getBlockParentsByBlockName } = select( blockEditorStore ),
+			parents = getBlockParentsByBlockName(
+				clientId,
+				'llms/form-field-confirm-group'
+			);
+
+		return parents.length ? parents[ 0 ] : false;
+	}
+
 	/**
 	 * Render the Block Inspector
 	 *
@@ -185,46 +260,69 @@ export default class Inspector extends Component {
 	 * @return {Fragment} Component HTML fragment.
 	 */
 	render() {
-		const { attributes, setAttributes, clientId } = this.props,
-			{
-				id,
-				match,
-				name,
-				required,
-				placeholder,
-				data_store,
-				data_store_key,
-			} = attributes;
-
 		// Return early if there's no inspector options to display.
 		if ( ! this.hasInspectorSupport() ) {
 			return '';
 		}
 
+		const { attributes, setAttributes, clientId, context } = this.props,
+			block = select( blockEditorStore ).getBlock( clientId ),
+			{
+				id,
+				name,
+				required,
+				placeholder,
+				data_store,
+				data_store_key,
+				columns,
+				isConfirmationField,
+				isConfirmationControlField,
+			} = attributes;
+
+		const canTransformToGroup = this.canTransformToGroup( block ),
+			isInAConfirmGroup = this.isInAConfirmGroup( block );
+
 		return (
 			<Fragment>
 				<InspectorControls>
 					<PanelBody>
-						{ this.hasInspectorControlSupport( 'required' ) && (
-							<ToggleControl
-								label={ __( 'Required', 'lifterlms' ) }
-								checked={ !! required }
-								onChange={ () =>
-									setAttributes( { required: ! required } )
-								}
-								help={
-									!! required
-										? __(
-												'Field is required.',
-												'lifterlms'
-										  )
-										: __(
-												'Field is optional.',
-												'lifterlms'
-										  )
-								}
-							/>
-						) }
+						{ ! isConfirmationField &&
+							this.hasInspectorControlSupport( 'required' ) && (
+								<ToggleControl
+									label={ __( 'Required', 'lifterlms' ) }
+									checked={ !! required }
+									onChange={ () =>
+										setAttributes( {
+											required: ! required,
+										} )
+									}
+									help={
+										!! required
+											? __(
+													'Field is required.',
+													'lifterlms'
+											  )
+											: __(
+													'Field is optional.',
+													'lifterlms'
+											  )
+									}
+								/>
+							) }
+
+						<SelectControl
+							label={ __( 'Field Width', 'lifterlms' ) }
+							onChange={ ( columns ) => {
+								columns = parseInt( columns, 10 );
+								setAttributes( { columns } );
+							} }
+							help={ __(
+								'Determines the width of the form field.',
+								'lifterlms'
+							) }
+							value={ columns }
+							options={ this.getColumnsOptions( context ) }
+						/>
 
 						{ this.hasInspectorControlSupport( 'options' ) && (
 							<InspectorFieldOptions
@@ -247,6 +345,82 @@ export default class Inspector extends Component {
 							/>
 						) }
 
+						{ ( canTransformToGroup ||
+							( isConfirmationControlField &&
+								isInAConfirmGroup ) ) && (
+							<ToggleControl
+								label={ __(
+									'Confirmation Field',
+									'lifterlms'
+								) }
+								checked={ isInAConfirmGroup }
+								onChange={ () => {
+									const {
+											replaceBlock,
+											selectBlock,
+										} = dispatch( blockEditorStore ),
+										{
+											findControllerBlockIndex,
+										} = getBlockType(
+											'llms/form-field-confirm-group'
+										),
+										{ getBlock } = select(
+											blockEditorStore
+										);
+
+									let replaceClientId = clientId,
+										newBlockType =
+											'llms/form-field-confirm-group',
+										blockToSwitch = block,
+										selectBlockId = null;
+
+									if ( isInAConfirmGroup ) {
+										replaceClientId = this.getParentGroupClientId(
+											block
+										);
+										blockToSwitch = getBlock(
+											replaceClientId
+										);
+										newBlockType = block.name;
+									}
+
+									const switched = switchToBlockType(
+										blockToSwitch,
+										newBlockType
+									);
+									replaceBlock( replaceClientId, switched );
+
+									if ( ! isInAConfirmGroup ) {
+										const { innerBlocks } = getBlock(
+												clientId
+											),
+											controllerIndex = findControllerBlockIndex(
+												innerBlocks
+											);
+
+										selectBlockId =
+											innerBlocks[ controllerIndex ]
+												.clientId;
+									} else {
+										selectBlockId = switched[ 0 ].clientId;
+									}
+
+									selectBlock( selectBlockId );
+								} }
+								help={
+									isInAConfirmGroup
+										? __(
+												'A Confirmation field is active.',
+												'lifterlms'
+										  )
+										: __(
+												'No confirmation field.',
+												'lifterlms'
+										  )
+								}
+							/>
+						) }
+
 						{ this.hasInspectorControlSupport( 'customFill' ) && (
 							<Slot
 								name={ `llmsInspectorControlsFill.${ this.hasInspectorControlSupport(
@@ -256,157 +430,143 @@ export default class Inspector extends Component {
 						) }
 					</PanelBody>
 
-					{ this.hasInspectorControlSupport( 'storage' ) && (
-						<PanelBody title={ __( 'Data Storage', 'lifterlms' ) }>
-							<SelectControl
-								label={ __( 'Location', 'lifterlms' ) }
-								onChange={ ( data_store ) =>
-									setAttributes( { data_store } )
-								}
-								help={ __(
-									'Database table where field data will be stored for a user completing the form.',
-									'lifterlms'
-								) }
-								value={ data_store }
-								options={ this.getDataStoreOptions(
-									'locations'
-								) }
-							/>
-
-							<SelectControl
-								label={ __( 'Key', 'lifterlms' ) }
-								onChange={ ( data_store_key ) =>
-									setAttributes( { data_store_key } )
-								}
-								help={ __(
-									'Name of the field where data is stored.',
-									'lifterlms'
-								) }
-								value={ data_store_key }
-								options={ this.getDataStoreOptions(
-									'keys',
-									data_store,
-									'users' === data_store
-										? []
-										: [ name, data_store_key ]
-								) }
-							/>
-
-							{ 'users' !== data_store && (
-								<Button
-									isLink
-									onClick={ () =>
-										this.setState( {
-											addingKeys: ! this.state.addingKeys,
-										} )
+					{ ! isConfirmationField &&
+						this.hasInspectorControlSupport( 'storage' ) && (
+							<PanelBody
+								title={ __( 'Data Storage', 'lifterlms' ) }
+							>
+								<SelectControl
+									label={ __( 'Location', 'lifterlms' ) }
+									onChange={ ( data_store ) =>
+										setAttributes( { data_store } )
 									}
-								>
-									{ __( 'Add New Key', 'lifterlms' ) }
-								</Button>
-							) }
+									help={ __(
+										'Database table where field data will be stored for a user completing the form.',
+										'lifterlms'
+									) }
+									value={ data_store }
+									options={ this.getDataStoreOptions(
+										'locations'
+									) }
+								/>
 
-							{ 'users' !== data_store && this.state.addingKeys && (
-								<Fragment>
-									<PanelRow>
-										<TextControl
-											label={ __(
-												'New Key Name',
-												'lifterlms'
-											) }
-											onChange={ ( value ) =>
-												this.setState( {
-													addingKey: value.replace(
-														/[^0-9a-zA-Z_-]/g,
-														''
-													),
-												} )
-											}
-											help={ __(
-												'Database field key name. Only accepts alphanumeric characters, hyphens, and underscores.',
-												'lifterlms'
-											) }
-											value={ this.state.addingKey }
-										/>
-									</PanelRow>
+								<SelectControl
+									label={ __( 'Key', 'lifterlms' ) }
+									onChange={ ( data_store_key ) =>
+										setAttributes( { data_store_key } )
+									}
+									help={ __(
+										'Name of the field where data is stored.',
+										'lifterlms'
+									) }
+									value={ data_store_key }
+									options={ this.getDataStoreOptions(
+										'keys',
+										data_store,
+										'users' === data_store
+											? []
+											: [ name, data_store_key ]
+									) }
+								/>
 
+								{ 'users' !== data_store && (
 									<Button
-										isSecondary
-										onClick={ () => {
-											// Select the newly added key.
-											setAttributes( {
-												data_store_key: this.state
-													.addingKey,
-											} );
-
-											// Clear the state.
+										isLink
+										onClick={ () =>
 											this.setState( {
-												addingKeys: false,
-												addingKey: '',
-											} );
-										} }
+												addingKeys: ! this.state
+													.addingKeys,
+											} )
+										}
 									>
 										{ __( 'Add New Key', 'lifterlms' ) }
 									</Button>
-								</Fragment>
-							) }
-						</PanelBody>
-					) }
+								) }
+
+								{ 'users' !== data_store &&
+									this.state.addingKeys && (
+										<Fragment>
+											<PanelRow>
+												<TextControl
+													label={ __(
+														'New Key Name',
+														'lifterlms'
+													) }
+													onChange={ ( value ) =>
+														this.setState( {
+															addingKey: value.replace(
+																/[^0-9a-zA-Z_-]/g,
+																''
+															),
+														} )
+													}
+													help={ __(
+														'Database field key name. Only accepts alphanumeric characters, hyphens, and underscores.',
+														'lifterlms'
+													) }
+													value={
+														this.state.addingKey
+													}
+												/>
+											</PanelRow>
+
+											<Button
+												isSecondary
+												onClick={ () => {
+													// Select the newly added key.
+													setAttributes( {
+														data_store_key: this
+															.state.addingKey,
+													} );
+
+													// Clear the state.
+													this.setState( {
+														addingKeys: false,
+														addingKey: '',
+													} );
+												} }
+											>
+												{ __(
+													'Add New Key',
+													'lifterlms'
+												) }
+											</Button>
+										</Fragment>
+									) }
+							</PanelBody>
+						) }
 				</InspectorControls>
 
 				<InspectorAdvancedControls>
-					{ this.hasInspectorControlSupport( 'name' ) && (
-						<TextControl
-							label={ __( 'Field Name', 'lifterlms' ) }
-							onChange={ ( value ) =>
-								setAttributes( { name: value } )
-							}
-							help={ __(
-								"The field's HTML name attribute.",
-								'lifterlms'
-							) }
-							value={ name }
-						/>
-					) }
-
-					{ this.hasInspectorControlSupport( 'id' ) && (
-						<TextControl
-							label={ __( 'Field ID', 'lifterlms' ) }
-							onChange={ ( value ) =>
-								setAttributes( { id: value } )
-							}
-							help={ __(
-								"The field's HTML id attribute.",
-								'lifterlms'
-							) }
-							value={ id }
-						/>
-					) }
-
-					{ this.hasInspectorControlSupport( 'match' ) && (
-						<SelectControl
-							label={ __( 'Confirmation Field', 'lifterlms' ) }
-							onChange={ ( value ) => {
-								// Save the matched field value.
-								setAttributes( { match: value } );
-
-								// Update the matched field to have the current field as its matcher.
-								const match = this.getBlockByFieldId( value );
-								if ( match ) {
-									dispatch(
-										'core/block-editor'
-									).updateBlockAttributes( match.clientId, {
-										match: id,
-									} );
+					{ ! isConfirmationField &&
+						this.hasInspectorControlSupport( 'name' ) && (
+							<TextControl
+								label={ __( 'Field Name', 'lifterlms' ) }
+								onChange={ ( value ) =>
+									setAttributes( { name: value } )
 								}
-							} }
-							help={ __(
-								'Requires this field to match the selected field.',
-								'lifterlms'
-							) }
-							value={ match }
-							options={ this.getMatchFieldOptions() }
-						/>
-					) }
+								help={ __(
+									"The field's HTML name attribute.",
+									'lifterlms'
+								) }
+								value={ name }
+							/>
+						) }
+
+					{ ! isConfirmationField &&
+						this.hasInspectorControlSupport( 'id' ) && (
+							<TextControl
+								label={ __( 'Field ID', 'lifterlms' ) }
+								onChange={ ( value ) =>
+									setAttributes( { id: value } )
+								}
+								help={ __(
+									"The field's HTML id attribute.",
+									'lifterlms'
+								) }
+								value={ id }
+							/>
+						) }
 				</InspectorAdvancedControls>
 			</Fragment>
 		);

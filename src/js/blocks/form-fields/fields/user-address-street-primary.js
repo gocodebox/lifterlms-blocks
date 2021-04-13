@@ -1,8 +1,8 @@
 /**
- * BLOCK: llms/form-field-user-address-city
+ * BLOCK: llms/form-field-user-address-street-primary
  *
  * @since 1.6.0
- * @version  [version]
+ * @version [version]
  */
 
 // WP Deps.
@@ -17,7 +17,7 @@ import { getSettingsFromBase } from '../settings';
  *
  * @type {string}
  */
-export const name = 'llms/form-field-user-address-city';
+export const name = 'llms/form-field-user-address-street-primary';
 
 /**
  * Is this a default or composed field?
@@ -39,13 +39,13 @@ export const composed = true;
 export const settings = getSettingsFromBase(
 	baseSettings,
 	{
-		title: __( 'User City', 'lifterlms' ),
+		title: __( 'User Street Address', 'lifterlms' ),
 		description: __(
-			"A special field used to collect a user's billing city.",
+			"A special field used to collect a user's street address.",
 			'lifterlms'
 		),
 		icon: {
-			src: 'location-alt',
+			src: 'admin-home',
 		},
 		supports: {
 			multiple: false,
@@ -53,19 +53,18 @@ export const settings = getSettingsFromBase(
 				id: false,
 				name: false,
 				required: true,
-				match: false,
 				storage: false,
 			},
 		},
 		attributes: {
 			id: {
-				__default: 'llms_billing_city',
+				__default: 'llms_billing_address_1',
 			},
 			label: {
-				__default: __( 'City', 'lifterlms' ),
+				__default: __( 'Address', 'lifterlms' ),
 			},
 			name: {
-				__default: 'llms_billing_city',
+				__default: 'llms_billing_address_1',
 			},
 			required: {
 				__default: true,
@@ -74,10 +73,11 @@ export const settings = getSettingsFromBase(
 				__default: 'usermeta',
 			},
 			data_store_key: {
-				__default: 'llms_billing_city',
+				__default: 'llms_billing_address_1',
 			},
 		},
-		parent: [ 'llms/form-field-user-address' ],
+		parent: [ 'llms/form-field-user-address-street' ],
+		usesContext: [ 'llms/fieldGroup/fieldLayout' ],
 	},
 	[ 'transforms', 'variations' ]
 );

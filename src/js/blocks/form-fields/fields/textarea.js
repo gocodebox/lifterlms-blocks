@@ -2,113 +2,130 @@
  * BLOCK: llms/form-field-textarea
  *
  * @since 1.6.0
- * @since 1.12.0 Add transform support.
+ * @version [version]
  */
 
 // WP Deps.
-import { TextControl } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
 import { createBlock } from '@wordpress/blocks';
+import { TextControl } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 
 // Internal Deps.
-import getDefaultSettings from '../settings';
+import { settings as baseSettings, postTypes } from './text';
+import { getSettingsFromBase } from '../settings';
 
 /**
  * Block Name
  *
  * @type {string}
  */
-const name = 'llms/form-field-textarea';
-
-/**
- * Array of supported post types.
- *
- * @type {Array}
- */
-const postTypes = [ 'llms_form' ];
+export const name = 'llms/form-field-textarea';
 
 /**
  * Is this a default or composed field?
  *
- * Composed fields serve specific functions (like the User Email Address field)
- * and are automatically added to the form builder UI.
- *
- * Default (non-composed) fields can be added by developers to perform custom functions
- * and are not registered as a block by default.
- *
  * @type {string}
  */
-const composed = false;
-
-// Setup the field settings.
-const settings = getDefaultSettings();
-
-settings.title = __( 'Paragraph Text', 'lifterlms' );
-settings.description = __( 'A textarea input.', 'lifterlms' );
-
-settings.supports.llms_field_inspector.customFill = 'fieldTextarea';
-
-settings.icon.src = 'editor-paragraph';
-
-settings.attributes.field.__default = 'textarea';
-
-settings.attributes.attributes = {
-	type: 'object',
-	__default: {
-		rows: 4,
-	},
-};
+export const composed = false;
 
 /**
  * Fill the controls slot with additional controls specific to this field.
  *
  * @since 1.12.0
+ * @since [version] Update to use `html_attrs.rows` in favor of `attributes.rows`.
  *
  * @param {Object}   attributes    Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
- * @return {Fragment} Component html fragment.
+ * @return {TextControl} Component html fragment.
  */
-settings.fillInspectorControls = ( attributes, setAttributes ) => {
+const fillInspectorControls = ( attributes, setAttributes ) => {
+	const { html_attrs } = attributes,
+		{ rows } = html_attrs;
+
 	return (
-		<Fragment>
-			<TextControl
-				label={ __( 'Rows', 'lifterlms' ) }
-				help={ __(
-					'Specify the number of text rows for the textarea input.',
-					'lifterlms'
-				) }
-				value={ attributes.attributes.rows }
-				type="number"
-				onChange={ ( rows ) =>
-					setAttributes( { attributes: { rows } } )
-				}
-				min="2"
-				step="1"
-			/>
-		</Fragment>
+		<TextControl
+			label={ __( 'Rows', 'lifterlms' ) }
+			help={ __(
+				'Specify the number of text rows for the textarea input.',
+				'lifterlms'
+			) }
+			value={ rows }
+			type="number"
+			onChange={ ( rows ) =>
+				setAttributes( { html_attrs: { ...html_attrs, rows } } )
+			}
+			min="2"
+			step="1"
+		/>
 	);
 };
 
-settings.transforms = {
-	from: [
-		{
-			type: 'block',
-			blocks: [
-				'llms/form-field-email',
-				'llms/form-field-number',
-				'llms/form-field-password',
-				'llms/form-field-phone',
-				'llms/form-field-text',
-				'llms/form-field-url',
-			],
-			transform: ( attributes ) =>
-				createBlock( name, {
-					...attributes,
-					field: settings.attributes.field.__default,
-				} ),
+/**
+ * Block settings
+ *
+ * @since 1.6.0
+ * @since [version] Refactor for 2.0.
+ *
+ * @type {Object}
+ */
+export const settings = getSettingsFromBase(
+	baseSettings,
+	{
+		title: __( 'Textarea', 'lifterlms' ),
+		description: __(
+			'A text field accepting multiple lines of user information.',
+			'lifterlms'
+		),
+		icon: {
+			src: 'editor-paragraph',
 		},
-	],
-};
+		category: 'llms-custom-fields',
+		supports: {
+			llms_field_inspector: {
+				customFill: 'fieldTextarea',
+			},
+		},
+		attributes: {
+			field: {
+				__default: 'textarea',
+			},
+			html_attrs: {
+				__default: {
+					rows: 4,
+				},
+			},
+		},
+		fillInspectorControls,
+		transforms: {
+			from: [
+				{
+					type: 'block',
+					blocks: [ 'llms/form-field-text' ],
+					transform: ( attributes ) =>
+						createBlock( name, {
+							...attributes,
+							html_attrs: {
+								...attributes.html_attrs,
+								rows: 4,
+							},
+							field: 'textarea',
+						} ),
+				},
+			],
+			to: [
+				{
+					type: 'block',
+					blocks: [ 'llms/form-field-text' ],
+					transform: ( attributes ) =>
+						createBlock( 'llms/form-field-text', {
+							...attributes,
+							field: 'text',
+						} ),
+				},
+			],
+		},
+	},
+	[ 'transforms', 'variations' ]
+);
 
-export { name, postTypes, composed, settings };
+export { postTypes };

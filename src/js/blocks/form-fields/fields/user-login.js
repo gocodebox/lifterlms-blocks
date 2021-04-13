@@ -1,8 +1,8 @@
 /**
- * BLOCK: llms/form-field-user-address-city
+ * BLOCK: llms/form-field-user-login
  *
- * @since 1.6.0
- * @version  [version]
+ * @since [version]
+ * @version [version]
  */
 
 // WP Deps.
@@ -17,7 +17,7 @@ import { getSettingsFromBase } from '../settings';
  *
  * @type {string}
  */
-export const name = 'llms/form-field-user-address-city';
+export const name = 'llms/form-field-user-login';
 
 /**
  * Is this a default or composed field?
@@ -29,55 +29,54 @@ export const composed = true;
 /**
  * Block settings
  *
- * @since 1.6.0
- * @since 1.8.0 Updated lodash imports.
- * @since 1.12.0 Add data store support.
- * @since [version] Add reusable block support.
+ * @since [version]
  *
  * @type {Object}
  */
 export const settings = getSettingsFromBase(
 	baseSettings,
 	{
-		title: __( 'User City', 'lifterlms' ),
+		title: __( 'User Login', 'lifterlms' ),
 		description: __(
-			"A special field used to collect a user's billing city.",
+			"Field used to collect a user's account username. If this field is omitted a username will be automatically generated based off their email address. Users can always login using either their email address or username.",
 			'lifterlms'
 		),
 		icon: {
-			src: 'location-alt',
+			src: 'admin-users',
 		},
 		supports: {
+			inserter: true,
 			multiple: false,
 			llms_field_inspector: {
 				id: false,
 				name: false,
-				required: true,
-				match: false,
+				required: false,
 				storage: false,
 			},
 		},
 		attributes: {
 			id: {
-				__default: 'llms_billing_city',
+				__default: 'user_login',
+			},
+			field: {
+				__default: 'text',
 			},
 			label: {
-				__default: __( 'City', 'lifterlms' ),
+				__default: __( 'Username', 'lifterlms' ),
 			},
 			name: {
-				__default: 'llms_billing_city',
+				__default: 'user_login',
 			},
 			required: {
 				__default: true,
 			},
 			data_store: {
-				__default: 'usermeta',
+				__default: 'users',
 			},
 			data_store_key: {
-				__default: 'llms_billing_city',
+				__default: 'user_login',
 			},
 		},
-		parent: [ 'llms/form-field-user-address' ],
 	},
 	[ 'transforms', 'variations' ]
 );

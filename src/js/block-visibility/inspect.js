@@ -42,6 +42,11 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 			setAttributes,
 		} = props;
 
+		// Visibility is disabled via block properties.
+		if ( 'off' === llms_visibility ) {
+			return <BlockEdit { ...props } />;
+		}
+
 		let { llms_visibility_posts } = props.attributes; // eslint-disable-line camelcase
 
 		if ( undefined === llms_visibility_posts ) {

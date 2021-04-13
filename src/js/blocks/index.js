@@ -2,7 +2,7 @@
  * LifterLMS Block Library.
  *
  * @since 1.7.0
- * @version 1.12.0
+ * @version [version]
  */
 
 /* eslint camelcase: [ "error", { allow: [ "_llms_form_location" ] } ] */
@@ -41,13 +41,15 @@ export const deregisterBlocksForForms = () => {
 	 * Determine if a block should be deregistered from form posts.
 	 *
 	 * @since 1.7.0
-	 * @since 1.12.0 Use `safelist` in favor of `whitelist`.`
+	 * @since 1.12.0 Use `safelist` in favor of `whitelist`.
+	 * @since [version] Add core/block to the safelist.
 	 *
 	 * @param {string} name Block name.
 	 * @return {boolean} Returns `true` if a block should be unregistered.
 	 */
 	const shouldUnregisterBlock = ( name ) => {
 		const safelist = [
+				'core/block', // Reusable block.
 				'core/paragraph',
 				'core/heading',
 				'core/image',
@@ -99,6 +101,7 @@ export const deregisterBlocksForForms = () => {
  * @since 1.5.0 Only register blocks for supported post types.
  * @since 1.6.0 Add form field blocks.
  * @since 1.7.3 Move form ready event from domReady to here to ensure blocks are exposed before blocks are parsed.
+ * @since [version] Trigger `llms_form_fields_ready` on `wp_block` posts.
  */
 export default () => {
 	const postType = getCurrentPostType();
@@ -122,7 +125,7 @@ export default () => {
 		}
 	} );
 
-	if ( 'llms_form' === postType ) {
+	if ( [ 'llms_form', 'wp_block' ].includes( postType ) ) {
 		/**
 		 * Expose all form field blocks, regardless of their registration status, for 3rd parties to utilize.
 		 *
@@ -136,9 +139,12 @@ export default () => {
 
 	blocks.forEach( ( block ) => {
 		const { name, postTypes, settings } = block;
-
 		if ( ! postTypes || -1 !== postTypes.indexOf( postType ) ) {
 			registerBlockType( name, settings );
 		}
 	} );
+
+	// registerBlockType( 'test/dupe-wrapper', {
+
+	// } );
 };
