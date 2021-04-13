@@ -135,7 +135,6 @@ class LLMS_Blocks {
 		// Classes.
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-assets.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-abstract-block.php';
-		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-field-patterns.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-migrate.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-page-builders.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-instructors.php';
