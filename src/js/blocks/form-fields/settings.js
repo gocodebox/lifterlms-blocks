@@ -8,15 +8,14 @@
  */
 
 // WP Deps.
-import { select } from '@wordpress/data';
 import { __, sprintf } from '@wordpress/i18n';
 
 // External Deps.
 import { cloneDeep, merge } from 'lodash';
 
 // Internal Deps.
-import { editField, editGroup } from './edit';
-import { saveField, saveGroup } from './save';
+import { EditField, EditGroup } from './edit';
+import { SaveField, SaveGroup } from './save';
 
 const settingsBase = {
 	apiVersion: 2,
@@ -45,14 +44,29 @@ const settingsBase = {
 	 *
 	 * @since 1.6.0
 	 *
-	 * @param {Object} attributes Block attributes.
+	 * @param {Object}   attributes    Block attributes.
 	 * @param {Function} setAttributes Reference to the block's setAttributes() function.
-	 * @param {Object} props Original properties object passed to the block's edit() function.
+	 * @param {Object}   props         Original properties object passed to the block's edit() function.
 	 * @return {void}
 	 */
 	fillInspectorControls( attributes, setAttributes, props ) {}, // eslint-disable-line no-unused-vars
 
-	fillEditAfter( attributes, setAttributes, props ) {},
+	/**
+	 * Render components after the field in the main editor area
+	 *
+	 * This stub can be overwritten when registering a new field block. It should return
+	 * a <Fragment> containing any custom HTML for the block.
+	 *
+	 * See The user password block for an implementation.
+	 *
+	 * @since [version]
+	 *
+	 * @param {Object}   attributes    Block attributes.
+	 * @param {Function} setAttributes Reference to the block's setAttributes() function.
+	 * @param {Object}   props         Original properties object passed to the block's edit() function.
+	 * @return {void}
+	 */
+	fillEditAfter( attributes, setAttributes, props ) {}, // eslint-disable-line no-unused-vars
 };
 
 const settingsField = {
@@ -160,8 +174,8 @@ const settingsField = {
 		},
 		llms_field_group: false,
 	},
-	edit: editField,
-	save: saveField,
+	edit: EditField,
+	save: SaveField,
 };
 
 const settingsGroup = {
@@ -183,15 +197,16 @@ const settingsGroup = {
 		allowed: [],
 		lock: 'insert',
 	},
-	edit: editGroup,
-	save: saveGroup,
+	edit: EditGroup,
+	save: SaveGroup,
 };
 
 /**
  * Retrieve a copy of the default settings object
  *
- * @param type
  * @since Unknown
+ *
+ * @param {string} type The field type.
  * @return {Object} A settings object.
  */
 export default ( type = 'field' ) => {
@@ -230,7 +245,9 @@ export function getDefaultOptionsArray( count = 2, defaults = 1 ) {
 	for ( let i = 1; i <= count; i++ ) {
 		opts.push( {
 			default: defaults && defaults > 0 ? 'yes' : 'no',
+			// Translators: %d = option number order.
 			text: sprintf( __( 'Option %d', 'lifterlms' ), i ),
+			// Translators: %d = option number order.
 			key: sprintf( __( 'option_%d', 'lifterlms' ), i ),
 		} );
 

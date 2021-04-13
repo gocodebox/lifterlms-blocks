@@ -9,7 +9,6 @@
 import { TextControl } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { createBlock } from '@wordpress/blocks';
 
 // Internal Deps.
 import {
@@ -115,7 +114,7 @@ const variations = [
  *
  * @since [version]
  *
- * @param {Object} ( variation ) A block variation object.
+ * @param {Object} variation A block variation object.
  * @return {Object[]} Update block variations array.
  */
 variations.forEach( ( variation ) => {

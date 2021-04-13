@@ -5,15 +5,13 @@
  * @version 1.12.0
  */
 
-/* eslint camelcase: [ "error", { allow: [ "data_store*" ] } ] */
-
 // WP Deps.
 import {
 	InspectorControls,
 	InspectorAdvancedControls,
+	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import {
-	BaseControl,
 	Button,
 	PanelBody,
 	PanelRow,
@@ -31,7 +29,6 @@ import {
 	getPossibleBlockTransformations,
 	getBlockType,
 } from '@wordpress/blocks';
-import { store as blockEditorStore } from '@wordpress/block-editor';
 
 // Internal Deps.
 import InspectorFieldOptions from './inspect-field-options';
@@ -263,6 +260,11 @@ export default class Inspector extends Component {
 	 * @return {Fragment} Component HTML fragment.
 	 */
 	render() {
+		// Return early if there's no inspector options to display.
+		if ( ! this.hasInspectorSupport() ) {
+			return '';
+		}
+
 		const { attributes, setAttributes, clientId, context } = this.props,
 			block = select( blockEditorStore ).getBlock( clientId ),
 			{
@@ -276,11 +278,6 @@ export default class Inspector extends Component {
 				isConfirmationField,
 				isConfirmationControlField,
 			} = attributes;
-
-		// Return early if there's no inspector options to display.
-		if ( ! this.hasInspectorSupport() ) {
-			return '';
-		}
 
 		const canTransformToGroup = this.canTransformToGroup( block ),
 			isInAConfirmGroup = this.isInAConfirmGroup( block );

@@ -9,7 +9,7 @@ import { find, isEmpty, merge } from 'lodash';
  *
  * @since [version]
  *
- * @return {?Object[]} Array of supporting block objects
+ * @return {?Array.<Object>} Array of supporting block objects
  */
 function getSupportingParents() {
 	const { getBlockTypes, hasBlockSupport } = select( 'core/blocks' );
@@ -43,9 +43,6 @@ function getParentFieldGroup( clientId ) {
  *
  * @since [version]
  *
- * @see [Reference]
- * @link [URL]
- *
  * @param {string} clientId The client ID of an existing block.
  * @return {?Object} WP Block object of the sibling.
  */
@@ -70,7 +67,7 @@ function getSibling( clientId ) {
  */
 function determineSiblingCols( cols, siblingCols ) {
 	if ( cols === 12 || siblingCols === 12 ) {
-		siblingCols === 12;
+		siblingCols = 12;
 	} else if ( cols + siblingCols > 12 ) {
 		siblingCols = 12 - cols;
 	}
@@ -106,11 +103,9 @@ function updateChildren( {
 	setTimeout( () => {
 		if ( ! isEmpty( currentUpdates ) ) {
 			setAttributes( currentUpdates );
-			console.log( currentUpdates );
 		}
 
 		if ( siblingClientId && ! isEmpty( siblingUpdates ) ) {
-			console.log( siblingUpdates );
 			updateBlockAttributes( siblingClientId, siblingUpdates );
 		}
 	} );
@@ -122,7 +117,7 @@ function getConfirmGroupUpdates( attributes, siblingAttributes ) {
 
 	// Updates matching, id, & name fields.
 	if ( attributes.isConfirmationControlField ) {
-		const { name, id, required, field } = attributes,
+		const { name, id } = attributes,
 			confirmName = `${ name }_confirm`,
 			confirmId = `${ id }-confirm`;
 

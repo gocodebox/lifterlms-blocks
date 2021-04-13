@@ -34,7 +34,7 @@ export const composed = true;
  * @since 1.12.0 Add data store support.
  * @since [version] Add reusable block support.
  *
- * @type {[type]}
+ * @type {Object}
  */
 export const settings = getSettingsFromBase(
 	baseSettings,

@@ -17,6 +17,7 @@ import { dispatch } from '@wordpress/data';
  *
  * @since [version]
  *
+ * @param {Object}   options
  * @param {string}   options.fieldLayout   The newly selected field layout option.
  * @param {Function} options.setAttributes Function to set attributes on the current block (group).
  * @param {Object[]} options.innerBlocks   Array of the current block's innerBlocks.

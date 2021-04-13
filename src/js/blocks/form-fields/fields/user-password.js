@@ -8,7 +8,7 @@
  */
 
 // WP Deps.
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import {
 	SelectControl,
 	TextControl,
@@ -30,7 +30,7 @@ export const name = 'llms/form-field-user-password';
 
 export const composed = true;
 
-const fillEditAfter = ( attributes, setAttributes, props ) => {
+const fillEditAfter = ( attributes, setAttributes ) => {
 	const { meter, meter_description } = attributes;
 
 	if ( ! meter ) {
@@ -208,6 +208,7 @@ export const settings = getSettingsFromBase(
 			meter_description: {
 				type: 'string',
 				__default: sprintf(
+					// Translators: %1$s = Min strength merge code; %2$s = min length merge code.
 					__(
 						'A %1$s password is required with at least %2$s characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.',
 						'lifterlms'
@@ -231,3 +232,5 @@ export const settings = getSettingsFromBase(
 	},
 	[ 'transforms', 'variations' ]
 );
+
+export { postTypes };

@@ -10,9 +10,7 @@ import { createBlock } from '@wordpress/blocks';
 import { dispatch, select } from '@wordpress/data';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { Button } from '@wordpress/components';
-import { __, isRTL } from '@wordpress/i18n';
-
-import { findIndex } from 'lodash';
+import { __, isRTL, sprintf } from '@wordpress/i18n';
 
 // Internal Deps.
 import {
@@ -72,7 +70,8 @@ function getControlledBlockAttrs( attributes = {} ) {
 	return {
 		...attributes,
 		label: attributes.label
-			? sprintf( __( 'Confirm %s', 'lifterlms' ), attributes.label )
+			? // Translators: %s label of the controller field.
+			  sprintf( __( 'Confirm %s', 'lifterlms' ), attributes.label )
 			: '',
 		columns: 6,
 		last_column: true,
@@ -180,7 +179,7 @@ allowed.forEach( ( blockName ) => {
 	transforms.to.push( {
 		type: 'block',
 		blocks: [ blockName ],
-		isMatch: ( groupAttributes ) => {
+		isMatch: () => {
 			const { getSelectedBlock } = select( blockEditorStore ),
 				{ innerBlocks } = getSelectedBlock(),
 				controllerBlock =
@@ -210,9 +209,9 @@ allowed.forEach( ( blockName ) => {
  * Fill the controls slot with additional controls specific to this field.
  *
  * @since [version]
- * @param {Object} attributes Block attributes.
- * @param props
+ * @param {Object}   attributes    Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
+ * @param {Object}   props         Block properties.
  * @return {Button} Component HTML Fragment.
  */
 const fillInspectorControls = ( attributes, setAttributes, props ) => {
@@ -275,6 +274,7 @@ export const settings = getSettingsFromBase( getDefaultSettings( 'group' ), {
 		 *
 		 * @since [version]
 		 *
+		 * @param {Object}  options
 		 * @param {?Object} options.block Block object.
 		 * @return {?Array} An InnerBlocks template array.
 		 */

@@ -34,7 +34,7 @@ export const composed = true;
  *
  * @param {Object}   attributes    Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
- * @return {Fragment} Component HTML fragment.
+ * @return {ToggleControl} Component HTML fragment.
  */
 const fillInspectorControls = ( attributes, setAttributes ) => {
 	const { toggleable, required } = attributes;

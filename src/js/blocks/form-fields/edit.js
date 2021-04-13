@@ -3,13 +3,11 @@ import {
 	useBlockProps,
 	InnerBlocks,
 	InspectorControls,
+	store as blockEditorStore,
 } from '@wordpress/block-editor';
-import { store as blockEditorStore } from '@wordpress/block-editor';
 import { select } from '@wordpress/data';
-import { Slot, Fill } from '@wordpress/components';
+import { PanelBody, Slot, Fill } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
-import { PanelBody } from '@wordpress/components';
 
 import { snakeCase, kebabCase, uniqueId } from 'lodash';
 
@@ -89,13 +87,13 @@ const setupAtts = ( atts, blockAtts ) => {
 	return atts;
 };
 
-export function editField( props ) {
+export function EditField( props ) {
 	const { name } = props,
 		block = getBlockType( name ),
 		{ clientId, context, setAttributes } = props,
 		inspectorSupports = block.supports.llms_field_inspector,
 		editFills = block.supports.llms_edit_fill,
-		{ fieldGroupContext, fillEditAfter, fillInspectorControls } = block,
+		{ fillEditAfter, fillInspectorControls } = block,
 		{ getSelectedBlockClientId } = select( blockEditorStore );
 
 	let { attributes } = props;
@@ -176,7 +174,7 @@ export function editField( props ) {
 	);
 }
 
-export function editGroup( props ) {
+export function EditGroup( props ) {
 	const { attributes, clientId, name, setAttributes } = props,
 		{ fieldLayout } = attributes,
 		{ getBlock } = select( blockEditorStore ),

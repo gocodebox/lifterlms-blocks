@@ -10,11 +10,7 @@ import { __ } from '@wordpress/i18n';
 import { createBlock } from '@wordpress/blocks';
 
 // Internal Deps.
-import {
-	getSettingsFromBase,
-	getDefaultPostTypes,
-	getDefaultOptionsArray,
-} from '../settings';
+import { getSettingsFromBase, getDefaultPostTypes } from '../settings';
 import icon from '../../../icons/field-select';
 import { settings as baseSettings } from './radio';
 

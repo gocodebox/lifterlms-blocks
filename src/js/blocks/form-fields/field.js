@@ -52,22 +52,8 @@ export default class Field extends Component {
 	 * @return {Object} HTML Fragment.
 	 */
 	render() {
-		const {
-				attributes,
-				setAttributes,
-				block,
-				clientId,
-				context,
-			} = this.props,
-			{
-				id,
-				description,
-				columns,
-				label,
-				options,
-				placeholder,
-				required,
-			} = attributes,
+		const { attributes, setAttributes, block, clientId } = this.props,
+			{ description, label, options, placeholder, required } = attributes,
 			editFills = block.supports.llms_edit_fill;
 
 		const classes = [];

@@ -1,10 +1,32 @@
-import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+/**
+ * Block save functions
+ *
+ * @since [version]
+ */
 
-export function saveField( props ) {
+// WP deps.
+import { InnerBlocks } from '@wordpress/block-editor';
+
+/**
+ * Save function for a standard field
+ *
+ * @since [version]
+ *
+ * @param {Object} props Block properties.
+ * @return {Object} Block attributes object.
+ */
+export function SaveField( props ) {
 	const { attributes } = props;
 	return attributes;
 }
 
-export function saveGroup( props ) {
+/**
+ * Save function for a standard field
+ *
+ * @since [version]
+ *
+ * @return {InnerBlocks.Content} Inner blocks.
+ */
+export function SaveGroup() {
 	return <InnerBlocks.Content />;
 }

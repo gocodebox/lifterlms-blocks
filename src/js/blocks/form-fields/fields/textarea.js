@@ -36,7 +36,7 @@ export const composed = false;
  *
  * @param {Object}   attributes    Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
- * @return {Fragment} Component html fragment.
+ * @return {TextControl} Component html fragment.
  */
 const fillInspectorControls = ( attributes, setAttributes ) => {
 	const { html_attrs } = attributes,
