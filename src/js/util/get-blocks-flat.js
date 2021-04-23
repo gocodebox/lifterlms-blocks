@@ -10,6 +10,10 @@
 
 // External Deps.
 import { select } from '@wordpress/data';
+import { store as coreStore } from '@wordpress/core-data';
+import { store as blockEditorStore } from '@wordpress/block-editor';
+
+
 
 /**
  * Recursively pulls inner/nested blocks to return a flat array of blocks.
@@ -23,7 +27,14 @@ export const flattenBlocks = ( blocks ) => {
 	let flat = [];
 
 	blocks.forEach( ( block ) => {
-		if ( block.innerBlocks.length ) {
+
+		if ( 'core/block' === block.name ) {
+			const { getEditedEntityRecord } = select( coreStore );
+			const editedEntity = getEditedEntityRecord( 'postType', 'wp_block', block.attributes.ref );
+			if ( editedEntity && editedEntity.blocks ) {
+				flat = flat.concat( flattenBlocks( editedEntity.blocks ) );
+			}
+		} else if ( block.innerBlocks.length ) {
 			flat = flat.concat( flattenBlocks( block.innerBlocks ) );
 		} else {
 			flat.push( block );
@@ -42,6 +53,6 @@ export const flattenBlocks = ( blocks ) => {
  * @return {Array} Flattened array of blocks.
  */
 export default () => {
-	const editor = select( 'core/block-editor' ) || select( 'core/editor' );
-	return flattenBlocks( editor.getBlocks() );
+	const { getBlocks } = select( blockEditorStore );
+	return flattenBlocks( getBlocks() );
 };

@@ -65,6 +65,9 @@ export const settings = getSettingsFromBase(
 			data_store_key: {
 				__default: 'llms_billing_address_2',
 			},
+			label_show_empty: {
+				__default: true,
+			}
 		},
 		usesContext: [ 'llms/fieldGroup/fieldLayout' ],
 	},

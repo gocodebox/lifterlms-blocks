@@ -63,7 +63,7 @@ export const settings = getSettingsFromBase(
 				__default: 'tel',
 			},
 			label: {
-				__default: __( 'Phone number', 'lifterlms' ),
+				__default: __( 'Phone Number', 'lifterlms' ),
 			},
 			name: {
 				__default: 'llms_phone',

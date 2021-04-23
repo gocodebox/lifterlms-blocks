@@ -13,6 +13,7 @@ import { createHigherOrderComponent } from '@wordpress/compose';
 import { Fragment } from '@wordpress/element';
 import { InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, SelectControl } from '@wordpress/components';
+import { applyFilters } from '@wordpress/hooks';
 
 // Internal Deps.
 import check from './check';
@@ -113,7 +114,7 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 				}
 			);
 
-			return wp.hooks.applyFilters(
+			return applyFilters(
 				'llms_blocks_block_visibility_in_options',
 				options,
 				currentPost
@@ -232,7 +233,7 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 							label={ __( 'Display to', 'lifterlms' ) }
 							value={ llms_visibility }
 							onChange={ onChangeVisibility }
-							options={ visibilityOptions }
+							options={ applyFilters( 'llms_block_visibility_settings_options', visibilityOptions ) }
 						/>
 
 						{ -1 ===

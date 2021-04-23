@@ -8,8 +8,12 @@
 // WP Deps.
 import { createBlock } from '@wordpress/blocks';
 import { dispatch, subscribe, select } from '@wordpress/data';
+import { store as blockEditorStore } from '@wordpress/block-editor';
 import { addFilter } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
+
+// External deps.
+import { debounce, some } from 'lodash';
 
 // Internal Deps.
 import { deregisterBlocksForForms } from '../blocks/';
@@ -47,6 +51,7 @@ function hideCoreUI() {
  * @return {void}
  */
 function maybeDisableVisibility() {
+
 	// eslint-disable-next-line camelcase
 	const { _llms_form_location } = select(
 		'core/editor'
@@ -64,6 +69,76 @@ function maybeDisableVisibility() {
 }
 
 /**
+ * Modify the list of available block-level visibility options
+ *
+ * Certain form fields (user email, password, and login) are required to
+ * create a WordPress account. Therefore we cannot allow end users to restrict
+ * visibility of these fields otherwise we could end up with forms that cannot
+ * function.
+ *
+ * For example, if a user email field were to be created with a visibility setting
+ * of "logged_in" it would be impossible for the user to create a new account.
+ *
+ * However, displaying an email field only to logged out users is acceptable because
+ * once the account is created (by a logged out user) it isn't required on future enrollments.
+ *
+ * This function reduces the list to only allow visibility settings of "all" and "logged out"
+ * to be used.
+ *
+ * @since [version]
+ *
+ * @return {void}
+ */
+function modifyVisibilityForBlocks() {
+
+	/**
+	 * Determines whether or not a given block should have it's visibility options modified
+	 *
+	 * @since [version]
+	 *
+	 * @param {Object}   options             A WP_Block object.
+	 * @param {string}   options.name        The block's name.
+	 * @param {Object[]} options.innerBlocks The block's inner blocks list.
+	 * @return {boolean} Whether or not the settings list should be modified.
+	 */
+	const shouldModify = ( { name, innerBlocks } ) => {
+
+		const toModify = [
+			'llms/form-field-user-email',
+			'llms/form-field-user-password',
+			'llms/form-field-user-login',
+		];
+
+		if ( 'llms/form-field-confirm-group' === name ) {
+			return some( innerBlocks, ( innerBlock ) => toModify.includes( innerBlock.name ) );
+		}
+
+		return toModify.includes( name );
+
+	};
+
+	addFilter(
+		'llms_block_visibility_settings_options',
+		'llms/form-block-visibility-options',
+		( opts ) => {
+
+			const
+				{ getSelectedBlock } = select( blockEditorStore ),
+				selectedBlock = getSelectedBlock();
+
+			if ( selectedBlock && shouldModify( selectedBlock ) ) {
+				return opts.filter( ( { value } ) => [ 'all', 'logged_out' ].includes( value ) );
+			}
+
+			return opts;
+
+		}
+
+	);
+
+}
+
+/**
  * All forms must have *at least* an email field.
  *
  * Watches editor data and if the field is removed throw an error notice.
@@ -74,40 +149,44 @@ function maybeDisableVisibility() {
  * @return {void}
  */
 function ensureEmailFieldExists() {
+
 	const emailBlockName = 'llms/form-field-user-email',
 		noticeId = 'llms-forms-no-email-error-notice',
-		noticeSelect = select( 'core/notices' ),
-		noticeDispatch = dispatch( 'core/notices' );
+		{ getNotices } = select( 'core/notices' ),
+		{ createErrorNotice, removeNotice } = dispatch( 'core/notices' );
 
-	subscribe( () => {
-		const post = select( 'core/editor' ).getCurrentPost(),
-			blocks = getBlocksFlat().map( ( block ) => block.name ),
-			/**
-			 * The block editor appears to call domReady() prior to the block editor data being set
-			 * which results in getBlocksFlat() to respond with an empty array even though there are blocks
-			 * in the post content.
-			 *
-			 * To combat this we can determine that the editor "is ready" when there is either at least a single
-			 * block in the blocks array or the post content *does not* include a block comment string.
-			 *
-			 * If the post content doesn't include any block comment string then the empty array is not an
-			 * incorrect result.
-			 */
-			isReady = blocks.length || ! post.content.includes( '<!-- wp:' ),
-			updateBtn = document.querySelector(
-				'button.editor-post-publish-button'
-			);
 
-		// Check if a user email field exists.
-		if ( isReady && ! blocks.includes( emailBlockName ) ) {
-			// Don't add duplicate notices.
-			if (
-				! noticeSelect
-					.getNotices()
-					.map( ( notice ) => notice.id )
-					.includes( noticeId )
-			) {
-				noticeDispatch.createErrorNotice(
+	subscribe(
+
+		debounce( () => {
+
+			const post = select( 'core/editor' ).getCurrentPost(),
+				blocks = getBlocksFlat().map( ( block ) => block.name ),
+				hasNotice = getNotices().map( ( notice ) => notice.id ).includes( noticeId ),
+				/**
+				 * The block editor appears to call domReady() prior to the block editor data being set
+				 * which results in getBlocksFlat() to respond with an empty array even though there are blocks
+				 * in the post content.
+				 *
+				 * To combat this we can determine that the editor "is ready" when there is either at least a single
+				 * block in the blocks array or the post content *does not* include a block comment string.
+				 *
+				 * If the post content doesn't include any block comment string then the empty array is not an
+				 * incorrect result.
+				 */
+				isReady = ! post.content.includes( '<!-- wp:' ) || blocks.length,
+				updateBtn = document.querySelector(
+					'button.editor-post-publish-button'
+				);
+
+			if ( ! isReady ) {
+				return;
+			}
+
+			// Check if a user email field exists & the notice hasn't been displayed yet.
+			if ( ! blocks.includes( emailBlockName ) && ! hasNotice ) {
+
+				createErrorNotice(
 					__( 'User Email is a required field.', 'lifterlms' ),
 					{
 						id: noticeId,
@@ -137,12 +216,6 @@ function ensureEmailFieldExists() {
 										createBlock( emailBlockName ),
 										0
 									);
-
-									// Remove the notice.
-									noticeDispatch.removeNotice( noticeId );
-
-									// Re-enable updating.
-									updateBtn.disabled = false;
 								},
 							},
 						],
@@ -151,9 +224,21 @@ function ensureEmailFieldExists() {
 
 				// Disable the "Update" button so the form cannot be saved in a messed up state.
 				updateBtn.disabled = true;
+
+			} else if ( blocks.includes( emailBlockName ) && hasNotice )  {
+
+				// Remove the notice.
+				removeNotice( noticeId );
+
+				// Re-enable updating.
+				updateBtn.disabled = false;
+
 			}
-		}
-	} );
+
+		}, 500 )
+
+	);
+
 }
 
 /**
@@ -168,6 +253,7 @@ function ensureEmailFieldExists() {
  */
 export default () => {
 	maybeDisableVisibility();
+	modifyVisibilityForBlocks();
 	deregisterBlocksForForms();
 	hideCoreUI();
 	ensureEmailFieldExists();

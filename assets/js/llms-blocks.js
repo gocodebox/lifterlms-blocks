@@ -11068,7 +11068,7 @@ function supportsVisibility(settings, name) {
     ret = false; // Don't add to blocks that explicitly don't support llms_visibility.
   } else if (settings.supports && false === settings.supports.llms_visibility) {
     ret = false; // Exclude blocks identified by our blacklist.
-  } else if (getBlacklist().includes(name)) {
+  } else if (getBlocklist().includes(name)) {
     ret = false;
   }
 
@@ -11082,7 +11082,7 @@ function supportsVisibility(settings, name) {
  * @return {Array} List of block names.
  */
 
-var getBlacklist = function getBlacklist() {
+var getBlocklist = function getBlocklist() {
   return [
   /**
    * Otherwise known as the "Classic" block.
@@ -11153,10 +11153,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _check__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./check */ "./src/js/block-visibility/check.js");
-/* harmony import */ var _preview__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./preview */ "./src/js/block-visibility/preview.js");
-/* harmony import */ var _components_search_post__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/search-post */ "./src/js/components/search-post/index.js");
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./settings */ "./src/js/block-visibility/settings.js");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _check__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./check */ "./src/js/block-visibility/check.js");
+/* harmony import */ var _preview__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./preview */ "./src/js/block-visibility/preview.js");
+/* harmony import */ var _components_search_post__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/search-post */ "./src/js/components/search-post/index.js");
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./settings */ "./src/js/block-visibility/settings.js");
 
 
 /**
@@ -11168,6 +11170,7 @@ __webpack_require__.r(__webpack_exports__);
  * @version 1.8.0
  */
 // WP Deps.
+
 
 
 
@@ -11192,7 +11195,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__["createHigherOrderComponent"])(function (BlockEdit) {
   return function (props) {
     // Exit early if the block doesn't support visibility.
-    if (!Object(_check__WEBPACK_IMPORTED_MODULE_5__["default"])(wp.blocks.getBlockType(props.name), props.name)) {
+    if (!Object(_check__WEBPACK_IMPORTED_MODULE_6__["default"])(wp.blocks.getBlockType(props.name), props.name)) {
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props);
     }
 
@@ -11256,7 +11259,7 @@ __webpack_require__.r(__webpack_exports__);
         value: 'list_any',
         label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('in any of the selected courses or memberships', 'lifterlms')
       });
-      return wp.hooks.applyFilters('llms_blocks_block_visibility_in_options', options, currentPost);
+      return Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_5__["applyFilters"])('llms_blocks_block_visibility_in_options', options, currentPost);
     };
     /**
      * Retrieve label text for the visibility "in" control.
@@ -11364,14 +11367,14 @@ __webpack_require__.r(__webpack_exports__);
       });
     };
 
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_preview__WEBPACK_IMPORTED_MODULE_6__["default"], props, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["PanelBody"], {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_preview__WEBPACK_IMPORTED_MODULE_7__["default"], props, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["PanelBody"], {
       title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Enrollment Visibility', 'lifterlms')
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["SelectControl"], {
       className: "llms-visibility-select",
       label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Display to', 'lifterlms'),
       value: llms_visibility,
       onChange: onChangeVisibility,
-      options: _settings__WEBPACK_IMPORTED_MODULE_8__["options"]
+      options: Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_5__["applyFilters"])('llms_block_visibility_settings_options', _settings__WEBPACK_IMPORTED_MODULE_9__["options"])
     }), -1 === ['all', 'logged_in', 'logged_out'].indexOf(llms_visibility) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["SelectControl"], {
       className: "llms-visibility-select--in",
       label: getVisibilityInLabel(llms_visibility),
@@ -11382,7 +11385,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       },
       options: getVisibilityInOptions()
-    }), ('list_all' === llms_visibility_in || 'list_any' === llms_visibility_in) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_search_post__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    }), ('list_all' === llms_visibility_in || 'list_any' === llms_visibility_in) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_search_post__WEBPACK_IMPORTED_MODULE_8__["default"], {
       isMulti: true,
       postType: "course",
       label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Courses', 'lifterlms'),
@@ -11391,7 +11394,7 @@ __webpack_require__.r(__webpack_exports__);
       selected: llms_visibility_posts.filter(function (post) {
         return 'course' === post.type;
       })
-    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_search_post__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_search_post__WEBPACK_IMPORTED_MODULE_8__["default"], {
       isMulti: true,
       postType: "llms_membership",
       label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Memberships', 'lifterlms'),
@@ -12682,13 +12685,13 @@ var isUnique = function isUnique(field, str) {
 /*!*******************************************!*\
   !*** ./src/js/blocks/form-fields/edit.js ***!
   \*******************************************/
-/*! exports provided: editField, editGroup */
+/*! exports provided: EditField, EditGroup */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editField", function() { return editField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editGroup", function() { return editGroup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditField", function() { return EditField; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditGroup", function() { return EditGroup; });
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
@@ -12701,24 +12704,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./field */ "./src/js/blocks/form-fields/field.js");
-/* harmony import */ var _inspect__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./inspect */ "./src/js/blocks/form-fields/inspect.js");
-/* harmony import */ var _checks__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./checks */ "./src/js/blocks/form-fields/checks.js");
-/* harmony import */ var _group_data__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./group-data */ "./src/js/blocks/form-fields/group-data.js");
-/* harmony import */ var _group_layout_control__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./group-layout-control */ "./src/js/blocks/form-fields/group-layout-control.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./field */ "./src/js/blocks/form-fields/field.js");
+/* harmony import */ var _inspect__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./inspect */ "./src/js/blocks/form-fields/inspect.js");
+/* harmony import */ var _checks__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./checks */ "./src/js/blocks/form-fields/checks.js");
+/* harmony import */ var _group_data__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./group-data */ "./src/js/blocks/form-fields/group-data.js");
+/* harmony import */ var _group_layout_control__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./group-layout-control */ "./src/js/blocks/form-fields/group-layout-control.js");
 
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-
-
 
 
 
@@ -12745,7 +12743,7 @@ var generateName = function generateName(name) {
   var _select = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__["select"])('core/editor'),
       getCurrentPostId = _select.getCurrentPostId;
 
-  return Object(lodash__WEBPACK_IMPORTED_MODULE_7__["snakeCase"])(Object(lodash__WEBPACK_IMPORTED_MODULE_7__["uniqueId"])("".concat(name, "_").concat(getCurrentPostId(), "_")));
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_6__["snakeCase"])(Object(lodash__WEBPACK_IMPORTED_MODULE_6__["uniqueId"])("".concat(name, "_").concat(getCurrentPostId(), "_")));
 };
 /**
  * Generate a unique "id" attribute.
@@ -12758,7 +12756,7 @@ var generateName = function generateName(name) {
 
 
 var generateId = function generateId(name) {
-  return Object(lodash__WEBPACK_IMPORTED_MODULE_7__["kebabCase"])(name);
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_6__["kebabCase"])(name);
 };
 /**
  * Sets up block attributes, filling defaults and generating unique values.
@@ -12784,7 +12782,7 @@ var setupAtts = function setupAtts(atts, blockAtts) {
   if (!atts.name) {
     var name = generateName(atts.field);
 
-    while (!Object(_checks__WEBPACK_IMPORTED_MODULE_10__["isUnique"])('name', name)) {
+    while (!Object(_checks__WEBPACK_IMPORTED_MODULE_9__["isUnique"])('name', name)) {
       name = generateName(atts.field);
     }
 
@@ -12794,8 +12792,8 @@ var setupAtts = function setupAtts(atts, blockAtts) {
   if (!atts.id) {
     var id = generateId(atts.name);
 
-    while (!Object(_checks__WEBPACK_IMPORTED_MODULE_10__["isUnique"])('id', id)) {
-      id = generateId(Object(lodash__WEBPACK_IMPORTED_MODULE_7__["uniqueId"])("".concat(atts.field, "-field-")));
+    while (!Object(_checks__WEBPACK_IMPORTED_MODULE_9__["isUnique"])('id', id)) {
+      id = generateId(Object(lodash__WEBPACK_IMPORTED_MODULE_6__["uniqueId"])("".concat(atts.field, "-field-")));
     }
 
     atts.id = id;
@@ -12808,7 +12806,7 @@ var setupAtts = function setupAtts(atts, blockAtts) {
   return atts;
 };
 
-function editField(props) {
+function EditField(props) {
   var name = props.name,
       block = Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["getBlockType"])(name),
       clientId = props.clientId,
@@ -12816,7 +12814,6 @@ function editField(props) {
       setAttributes = props.setAttributes,
       inspectorSupports = block.supports.llms_field_inspector,
       editFills = block.supports.llms_edit_fill,
-      fieldGroupContext = block.fieldGroupContext,
       fillEditAfter = block.fillEditAfter,
       fillInspectorControls = block.fillInspectorControls,
       _select2 = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__["select"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["store"]),
@@ -12832,7 +12829,7 @@ function editField(props) {
   }); // Manage field data for blocks in field groups.
 
   if (context['llms/fieldGroup/fieldLayout']) {
-    Object(_group_data__WEBPACK_IMPORTED_MODULE_11__["default"])(props);
+    Object(_group_data__WEBPACK_IMPORTED_MODULE_10__["default"])(props);
   } // We can't disable the variation transformer by context so we'll do it this way which is gross but works.
 
 
@@ -12852,14 +12849,14 @@ function editField(props) {
       }, 10);
     }
   });
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", blockProps, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_inspect__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", blockProps, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_inspect__WEBPACK_IMPORTED_MODULE_8__["default"], {
     attributes: attributes,
     clientId: clientId,
     name: name,
     setAttributes: setAttributes,
     inspectorSupports: inspectorSupports,
     context: context
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_field__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_field__WEBPACK_IMPORTED_MODULE_7__["default"], {
     attributes: attributes,
     setAttributes: setAttributes,
     block: block,
@@ -12871,8 +12868,7 @@ function editField(props) {
     name: "llmsEditFill.after.".concat(editFills.after, ".").concat(clientId)
   }, fillEditAfter(attributes, setAttributes, props)));
 }
-;
-function editGroup(props) {
+function EditGroup(props) {
   var attributes = props.attributes,
       clientId = props.clientId,
       name = props.name,
@@ -12900,7 +12896,7 @@ function editGroup(props) {
     orientation = 'vertical';
   }
 
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["PanelBody"], null, hasLayout && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_group_layout_control__WEBPACK_IMPORTED_MODULE_12__["default"], _objectSpread(_objectSpread({}, props), {}, {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["PanelBody"], null, hasLayout && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_group_layout_control__WEBPACK_IMPORTED_MODULE_11__["default"], _objectSpread(_objectSpread({}, props), {}, {
     block: block
   })), inspectorSupports.customFill && blockType.fillInspectorControls(attributes, setAttributes, props))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: "llms-field-group",
@@ -12919,7 +12915,6 @@ function editGroup(props) {
     name: "llmsEditFill.after.".concat(editFills.after, ".").concat(primaryBlock.clientId)
   }));
 }
-;
 
 /***/ }),
 
@@ -13044,10 +13039,7 @@ var Field = /*#__PURE__*/function (_Component) {
           setAttributes = _this$props.setAttributes,
           block = _this$props.block,
           clientId = _this$props.clientId,
-          context = _this$props.context,
-          id = attributes.id,
           description = attributes.description,
-          columns = attributes.columns,
           label = attributes.label,
           options = attributes.options,
           placeholder = attributes.placeholder,
@@ -13302,9 +13294,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
 
 
 
@@ -13319,7 +13309,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
  * @version [version]
  */
 // WP Deps.
-
 
 
 
@@ -13340,7 +13329,7 @@ var name = 'llms/form-field-confirm-group';
  * @type {Array}
  */
 
-var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_8__["getDefaultPostTypes"])();
+var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_7__["getDefaultPostTypes"])();
 /**
  * Is this a default or composed field?
  *
@@ -13379,7 +13368,8 @@ function getControllerBlockAttrs() {
 function getControlledBlockAttrs() {
   var attributes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   return _objectSpread(_objectSpread({}, attributes), {}, {
-    label: attributes.label ? sprintf(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Confirm %s', 'lifterlms'), attributes.label) : '',
+    label: attributes.label ? // Translators: %s label of the controller field.
+    Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["sprintf"])(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Confirm %s', 'lifterlms'), attributes.label) : '',
     columns: 6,
     last_column: true,
     data_store: false,
@@ -13416,16 +13406,16 @@ function revertToSingle(clientId) {
     columns: 12,
     last_column: true,
     isConfirmationControlField: false,
+    match: '',
     llms_visibility: llms_visibility
   })));
 }
-
-;
 /**
  * Allowed blocks list.
  *
  * @type {string[]}
  */
+
 
 var allowed = ['llms/form-field-text', 'llms/form-field-user-email', 'llms/form-field-user-login', 'llms/form-field-user-password'];
 /**
@@ -13471,7 +13461,7 @@ allowed.forEach(function (blockName) {
   transforms.to.push({
     type: 'block',
     blocks: [blockName],
-    isMatch: function isMatch(groupAttributes) {
+    isMatch: function isMatch() {
       var _select2 = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__["select"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["store"]),
           getSelectedBlock = _select2.getSelectedBlock,
           _getSelectedBlock = getSelectedBlock(),
@@ -13490,6 +13480,7 @@ allowed.forEach(function (blockName) {
         columns: 12,
         last_column: true,
         isConfirmationControlField: false,
+        match: '',
         llms_visibility: llms_visibility
       }));
     }
@@ -13499,9 +13490,9 @@ allowed.forEach(function (blockName) {
  * Fill the controls slot with additional controls specific to this field.
  *
  * @since [version]
- *
- * @param {Object} attributes Block attributes.
+ * @param {Object}   attributes    Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
+ * @param {Object}   props         Block properties.
  * @return {Button} Component HTML Fragment.
  */
 
@@ -13537,7 +13528,7 @@ var findControllerBlockIndex = function findControllerBlockIndex(innerBlocks) {
  */
 
 
-var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_8__["getSettingsFromBase"])(Object(_settings__WEBPACK_IMPORTED_MODULE_8__["default"])('group'), {
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_7__["getSettingsFromBase"])(Object(_settings__WEBPACK_IMPORTED_MODULE_7__["default"])('group'), {
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Input Confirmation Group', 'lifterlms'),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Adds a required confirmation field to an input field.', 'lifterlms'),
   icon: {
@@ -13566,6 +13557,7 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_8__["getSettingsFromBas
      *
      * @since [version]
      *
+     * @param {Object}  options
      * @param {?Object} options.block Block object.
      * @return {?Array} An InnerBlocks template array.
      */
@@ -13742,7 +13734,7 @@ var composed = true;
  *
  * @param {Object}   attributes    Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
- * @return {Fragment} Component HTML fragment.
+ * @return {ToggleControl} Component HTML fragment.
  */
 
 var fillInspectorControls = function fillInspectorControls(attributes, setAttributes) {
@@ -13777,7 +13769,7 @@ var fillInspectorControls = function fillInspectorControls(attributes, setAttrib
 
 var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_4__["getSettingsFromBase"])(_text__WEBPACK_IMPORTED_MODULE_3__["settings"], {
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Voucher Code Redemption', 'lifterlms'),
-  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Allows user to redeem a voucher code during account registration.", 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('Allows user to redeem a voucher code during account registration.', 'lifterlms'),
   icon: {
     src: 'tickets-alt'
   },
@@ -13947,11 +13939,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
-/* harmony import */ var _icons_field_text__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../icons/field-text */ "./src/js/icons/field-text.js");
-/* harmony import */ var _icons_field_number__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../icons/field-number */ "./src/js/icons/field-number.js");
+/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
+/* harmony import */ var _icons_field_text__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../icons/field-text */ "./src/js/icons/field-text.js");
+/* harmony import */ var _icons_field_number__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../icons/field-number */ "./src/js/icons/field-number.js");
 
 
 
@@ -13968,13 +13958,12 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 // WP Deps.
 
 
-
  // Internal Deps.
 
 
 
 
-var baseSettings = Object(_settings__WEBPACK_IMPORTED_MODULE_5__["default"])();
+var baseSettings = Object(_settings__WEBPACK_IMPORTED_MODULE_4__["default"])();
 /**
  * Block Name
  *
@@ -13988,7 +13977,7 @@ var name = 'llms/form-field-text';
  * @type {Array}
  */
 
-var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_5__["getDefaultPostTypes"])();
+var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_4__["getDefaultPostTypes"])();
 /**
  * Is this a default or composed field?
  *
@@ -14007,7 +13996,7 @@ var variations = [{
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Text', 'lifterlms'),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('An input field which accepts any form of text.', 'lifterlms'),
   isDefault: true,
-  icon: _icons_field_text__WEBPACK_IMPORTED_MODULE_6__["default"]
+  icon: _icons_field_text__WEBPACK_IMPORTED_MODULE_5__["default"]
 }, {
   name: 'email',
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Email', 'lifterlms'),
@@ -14023,7 +14012,7 @@ var variations = [{
   name: 'number',
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Number', 'lifterlms'),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('An input field which only accepts numeric input.', 'lifterlms'),
-  icon: _icons_field_number__WEBPACK_IMPORTED_MODULE_7__["default"],
+  icon: _icons_field_number__WEBPACK_IMPORTED_MODULE_6__["default"],
   attributes: {
     html_attrs: {
       min: '',
@@ -14046,7 +14035,7 @@ var variations = [{
  *
  * @since [version]
  *
- * @param {Object} ( variation ) A block variation object.
+ * @param {Object} variation A block variation object.
  * @return {Object[]} Update block variations array.
  */
 
@@ -14123,11 +14112,11 @@ var fillInspectorControls = function fillInspectorControls(attributes, setAttrib
  */
 
 
-var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_5__["getSettingsFromBase"])(baseSettings, {
+var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_4__["getSettingsFromBase"])(baseSettings, {
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Text', 'lifterlms'),
-  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])("A simple text input field.", 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('A simple text input field.', 'lifterlms'),
   icon: {
-    src: _icons_field_text__WEBPACK_IMPORTED_MODULE_6__["default"]
+    src: _icons_field_text__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   usesContext: ['llms/fieldGroup/fieldLayout'],
   supports: {
@@ -14210,7 +14199,7 @@ var composed = false;
  *
  * @param {Object}   attributes    Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
- * @return {Fragment} Component html fragment.
+ * @return {TextControl} Component html fragment.
  */
 
 var fillInspectorControls = function fillInspectorControls(attributes, setAttributes) {
@@ -14244,7 +14233,7 @@ var fillInspectorControls = function fillInspectorControls(attributes, setAttrib
 
 var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_6__["getSettingsFromBase"])(_text__WEBPACK_IMPORTED_MODULE_5__["settings"], {
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Textarea', 'lifterlms'),
-  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])("A text field accepting multiple lines of user information.", 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('A text field accepting multiple lines of user information.', 'lifterlms'),
   icon: {
     src: 'editor-paragraph'
   },
@@ -14440,7 +14429,7 @@ var composed = true;
  * @since 1.12.0 Add data store support.
  * @since [version] Add reusable block support.
  *
- * @type {[type]}
+ * @type {Object}
  */
 
 var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBase"])(_select__WEBPACK_IMPORTED_MODULE_1__["settings"], {
@@ -14933,7 +14922,7 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBas
       __default: ''
     },
     placeholder: {
-      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Apartment, suite, etc...', 'lifterlms')
+      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Apartment, suite, etc…', 'lifterlms')
     },
     name: {
       __default: 'llms_billing_address_2'
@@ -14943,6 +14932,9 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBas
     },
     data_store_key: {
       __default: 'llms_billing_address_2'
+    },
+    label_show_empty: {
+      __default: true
     }
   },
   usesContext: ['llms/fieldGroup/fieldLayout']
@@ -15074,7 +15066,7 @@ var postTypes = Object(_settings__WEBPACK_IMPORTED_MODULE_1__["getDefaultPostTyp
 /**
  * Is this a default or composed field?
  *
- * @type {Boolean}
+ * @type {boolean}
  */
 
 var composed = true;
@@ -15159,7 +15151,7 @@ var composed = true;
 
 var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBase"])(_text__WEBPACK_IMPORTED_MODULE_1__["settings"], {
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('User Display Name', 'lifterlms'),
-  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Allows a user to choose how their name will be displayed publicly on the site.", 'lifterlms'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Allows a user to choose how their name will be displayed publicly on the site.', 'lifterlms'),
   icon: {
     src: 'nametag'
   },
@@ -15653,7 +15645,7 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_1__["getSettingsFromBas
 /*!***********************************************************!*\
   !*** ./src/js/blocks/form-fields/fields/user-password.js ***!
   \***********************************************************/
-/*! exports provided: name, composed, settings */
+/*! exports provided: name, composed, settings, postTypes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15672,6 +15664,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _text__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./text */ "./src/js/blocks/form-fields/fields/text.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "postTypes", function() { return _text__WEBPACK_IMPORTED_MODULE_5__["postTypes"]; });
+
 /* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../settings */ "./src/js/blocks/form-fields/settings.js");
 
 
@@ -15705,7 +15699,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 var name = 'llms/form-field-user-password';
 var composed = true;
 
-var fillEditAfter = function fillEditAfter(attributes, setAttributes, props) {
+var fillEditAfter = function fillEditAfter(attributes, setAttributes) {
   var meter = attributes.meter,
       meter_description = attributes.meter_description;
 
@@ -15851,7 +15845,8 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_6__["getSettingsFromBas
     },
     meter_description: {
       type: 'string',
-      __default: sprintf(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('A %1$s password is required with at least %2$s characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.', 'lifterlms'), '{min_strength}', '{min_length}')
+      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["sprintf"])( // Translators: %1$s = Min strength merge code; %2$s = min length merge code.
+      Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('A %1$s password is required with at least %2$s characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.', 'lifterlms'), '{min_strength}', '{min_length}')
     },
     min_strength: {
       type: 'string',
@@ -15866,6 +15861,7 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_6__["getSettingsFromBas
   fillEditAfter: fillEditAfter,
   fillInspectorControls: fillInspectorControls
 }, ['transforms', 'variations']);
+
 
 /***/ }),
 
@@ -15945,7 +15941,7 @@ var settings = Object(_settings__WEBPACK_IMPORTED_MODULE_2__["getSettingsFromBas
       __default: 'tel'
     },
     label: {
-      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Phone number', 'lifterlms')
+      __default: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Phone Number', 'lifterlms')
     },
     name: {
       __default: 'llms_phone'
@@ -15984,7 +15980,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @since [version]
  *
- * @return {?Object[]} Array of supporting block objects
+ * @return {?Array.<Object>} Array of supporting block objects
  */
 
 function getSupportingParents() {
@@ -16021,9 +16017,6 @@ function getParentFieldGroup(clientId) {
  *
  * @since [version]
  *
- * @see [Reference]
- * @link [URL]
- *
  * @param {string} clientId The client ID of an existing block.
  * @return {?Object} WP Block object of the sibling.
  */
@@ -16051,15 +16044,13 @@ function getSibling(clientId) {
 
 function determineSiblingCols(cols, siblingCols) {
   if (cols === 12 || siblingCols === 12) {
-    siblingCols === 12;
+    siblingCols = 12;
   } else if (cols + siblingCols > 12) {
     siblingCols = 12 - cols;
   }
 
   return siblingCols;
 }
-
-;
 
 function isLastColumn(clientId) {
   var parent = getParentFieldGroup(clientId);
@@ -16068,8 +16059,6 @@ function isLastColumn(clientId) {
     return clientId === parent.innerBlocks[parent.innerBlocks.length - 1].clientId;
   }
 }
-
-;
 
 function updateChildren() {
   var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
@@ -16092,11 +16081,9 @@ function updateChildren() {
   setTimeout(function () {
     if (!Object(lodash__WEBPACK_IMPORTED_MODULE_1__["isEmpty"])(currentUpdates)) {
       setAttributes(currentUpdates);
-      console.log(currentUpdates);
     }
 
     if (siblingClientId && !Object(lodash__WEBPACK_IMPORTED_MODULE_1__["isEmpty"])(siblingUpdates)) {
-      console.log(siblingUpdates);
       updateBlockAttributes(siblingClientId, siblingUpdates);
     }
   });
@@ -16109,10 +16096,8 @@ function getConfirmGroupUpdates(attributes, siblingAttributes) {
   if (attributes.isConfirmationControlField) {
     var name = attributes.name,
         id = attributes.id,
-        required = attributes.required,
-        field = attributes.field,
         confirmName = "".concat(name, "_confirm"),
-        confirmId = "".concat(id, "-confirm");
+        confirmId = "".concat(id, "_confirm");
     siblingUpdates.match = id;
     siblingUpdates.name = confirmName;
     siblingUpdates.id = confirmId;
@@ -16219,8 +16204,9 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @since [version]
  *
+ * @param {Object}   options
  * @param {string}   options.fieldLayout   The newly selected field layout option.
- * @param {function} options.setAttributes Function to set attributes on the current block (group).
+ * @param {Function} options.setAttributes Function to set attributes on the current block (group).
  * @param {Object[]} options.innerBlocks   Array of the current block's innerBlocks.
  * @return {void}
  */
@@ -16918,10 +16904,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
  * @since 1.6.0
  * @version 1.12.0
  */
-
-/* eslint camelcase: [ "error", { allow: [ "data_store*" ] } ] */
 // WP Deps.
-
 
 
 
@@ -17176,6 +17159,11 @@ var Inspector = /*#__PURE__*/function (_Component) {
     value: function render() {
       var _this2 = this;
 
+      // Return early if there's no inspector options to display.
+      if (!this.hasInspectorSupport()) {
+        return '';
+      }
+
       var _this$props2 = this.props,
           attributes = _this$props2.attributes,
           setAttributes = _this$props2.setAttributes,
@@ -17190,12 +17178,7 @@ var Inspector = /*#__PURE__*/function (_Component) {
           data_store_key = attributes.data_store_key,
           columns = attributes.columns,
           isConfirmationField = attributes.isConfirmationField,
-          isConfirmationControlField = attributes.isConfirmationControlField; // Return early if there's no inspector options to display.
-
-      if (!this.hasInspectorSupport()) {
-        return '';
-      }
-
+          isConfirmationControlField = attributes.isConfirmationControlField;
       var canTransformToGroup = this.canTransformToGroup(block),
           isInAConfirmGroup = this.isInAConfirmGroup(block);
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_7__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["PanelBody"], null, !isConfirmationField && this.hasInspectorControlSupport('required') && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__["ToggleControl"], {
@@ -17469,24 +17452,48 @@ Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["addFilter"])('blocks.getSa
 /*!*******************************************!*\
   !*** ./src/js/blocks/form-fields/save.js ***!
   \*******************************************/
-/*! exports provided: saveField, saveGroup */
+/*! exports provided: SaveField, SaveGroup */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveField", function() { return saveField; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveGroup", function() { return saveGroup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SaveField", function() { return SaveField; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SaveGroup", function() { return SaveGroup; });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
 
 
-function saveField(props) {
+/**
+ * Block save functions
+ *
+ * @since [version]
+ */
+// WP deps.
+
+/**
+ * Save function for a standard field
+ *
+ * @since [version]
+ *
+ * @param {Object} props Block properties.
+ * @return {Object} Block attributes object.
+ */
+
+function SaveField(props) {
   var attributes = props.attributes;
   return attributes;
 }
-function saveGroup(props) {
+/**
+ * Save function for a standard field
+ *
+ * @since [version]
+ *
+ * @return {InnerBlocks.Content} Inner blocks.
+ */
+
+function SaveGroup() {
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["InnerBlocks"].Content, null);
 }
 
@@ -17504,14 +17511,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDefaultPostTypes", function() { return getDefaultPostTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSettingsFromBase", function() { return getSettingsFromBase; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDefaultOptionsArray", function() { return getDefaultOptionsArray; });
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/js/blocks/form-fields/edit.js");
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./save */ "./src/js/blocks/form-fields/save.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/js/blocks/form-fields/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/js/blocks/form-fields/save.js");
 /**
  * Default settings for registering a field block.
  *
@@ -17521,7 +17526,6 @@ __webpack_require__.r(__webpack_exports__);
  * @since 1.12.0 Add support for data stores & default examples object.
  */
 // WP Deps.
-
  // External Deps.
 
  // Internal Deps.
@@ -17534,7 +17538,7 @@ var settingsBase = {
     foreground: '#466dd8'
   },
   category: 'llms-user-info-fields',
-  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('LifterLMS', 'lifterlms'), 'llms'],
+  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('LifterLMS', 'lifterlms'), 'llms'],
   attributes: {},
   supports: {
     llms_visibility: true
@@ -17549,14 +17553,31 @@ var settingsBase = {
    *
    * @since 1.6.0
    *
-   * @param {Object} attributes Block attributes.
+   * @param {Object}   attributes    Block attributes.
    * @param {Function} setAttributes Reference to the block's setAttributes() function.
-   * @param {Object} props Original properties object passed to the block's edit() function.
+   * @param {Object}   props         Original properties object passed to the block's edit() function.
    * @return {void}
    */
   fillInspectorControls: function fillInspectorControls(attributes, setAttributes, props) {},
   // eslint-disable-line no-unused-vars
-  fillEditAfter: function fillEditAfter(attributes, setAttributes, props) {}
+
+  /**
+   * Render components after the field in the main editor area
+   *
+   * This stub can be overwritten when registering a new field block. It should return
+   * a <Fragment> containing any custom HTML for the block.
+   *
+   * See The user password block for an implementation.
+   *
+   * @since [version]
+   *
+   * @param {Object}   attributes    Block attributes.
+   * @param {Function} setAttributes Reference to the block's setAttributes() function.
+   * @param {Object}   props         Original properties object passed to the block's edit() function.
+   * @return {void}
+   */
+  fillEditAfter: function fillEditAfter(attributes, setAttributes, props) {} // eslint-disable-line no-unused-vars
+
 };
 var settingsField = {
   attributes: {
@@ -17648,8 +17669,8 @@ var settingsField = {
     },
     llms_field_group: false
   },
-  edit: _edit__WEBPACK_IMPORTED_MODULE_3__["editField"],
-  save: _save__WEBPACK_IMPORTED_MODULE_4__["saveField"]
+  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["EditField"],
+  save: _save__WEBPACK_IMPORTED_MODULE_3__["SaveField"]
 };
 var settingsGroup = {
   attributes: {
@@ -17670,21 +17691,22 @@ var settingsGroup = {
     allowed: [],
     lock: 'insert'
   },
-  edit: _edit__WEBPACK_IMPORTED_MODULE_3__["editGroup"],
-  save: _save__WEBPACK_IMPORTED_MODULE_4__["saveGroup"]
+  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["EditGroup"],
+  save: _save__WEBPACK_IMPORTED_MODULE_3__["SaveGroup"]
 };
 /**
  * Retrieve a copy of the default settings object
  *
  * @since Unknown
  *
+ * @param {string} type The field type.
  * @return {Object} A settings object.
  */
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'field';
   var addSettings = 'field' === type ? settingsField : settingsGroup;
-  return Object(lodash__WEBPACK_IMPORTED_MODULE_2__["merge"])({}, Object(lodash__WEBPACK_IMPORTED_MODULE_2__["cloneDeep"])(settingsBase), addSettings);
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["merge"])({}, Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(settingsBase), addSettings);
 });
 /**
  * Retrieve a copy of an array of default post types that support fields
@@ -17695,18 +17717,18 @@ var settingsGroup = {
  */
 
 function getDefaultPostTypes() {
-  return Object(lodash__WEBPACK_IMPORTED_MODULE_2__["cloneDeep"])(['llms_form', 'wp_block']);
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(['llms_form', 'wp_block']);
 }
 function getSettingsFromBase(baseSettings) {
   var overrides = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var exclude = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-  baseSettings = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["cloneDeep"])(baseSettings);
+  baseSettings = Object(lodash__WEBPACK_IMPORTED_MODULE_1__["cloneDeep"])(baseSettings);
 
   for (var i = 0; i < exclude.length; i++) {
     delete baseSettings[exclude[i]];
   }
 
-  return Object(lodash__WEBPACK_IMPORTED_MODULE_2__["merge"])({}, baseSettings, overrides);
+  return Object(lodash__WEBPACK_IMPORTED_MODULE_1__["merge"])({}, baseSettings, overrides);
 }
 function getDefaultOptionsArray() {
   var count = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2;
@@ -17716,8 +17738,10 @@ function getDefaultOptionsArray() {
   for (var i = 1; i <= count; i++) {
     opts.push({
       default: defaults && defaults > 0 ? 'yes' : 'no',
-      text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["sprintf"])(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Option %d', 'lifterlms'), i),
-      key: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["sprintf"])(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('option_%d', 'lifterlms'), i)
+      // Translators: %d = option number order.
+      text: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["sprintf"])(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Option %d', 'lifterlms'), i),
+      // Translators: %d = option number order.
+      key: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["sprintf"])(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('option_%d', 'lifterlms'), i)
     });
     defaults--;
   }
@@ -19108,12 +19132,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
-/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _blocks___WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../blocks/ */ "./src/js/blocks/index.js");
-/* harmony import */ var _util___WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../util/ */ "./src/js/util/index.js");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _blocks___WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../blocks/ */ "./src/js/blocks/index.js");
+/* harmony import */ var _util___WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../util/ */ "./src/js/util/index.js");
 /**
  * DOM Ready Events for LifterLMS Forms (llms_forms) Post Type
  *
@@ -19123,6 +19151,9 @@ __webpack_require__.r(__webpack_exports__);
 // WP Deps.
 
 
+
+
+ // External deps.
 
  // Internal Deps.
 
@@ -19165,10 +19196,73 @@ function maybeDisableVisibility() {
       _llms_form_location = _select$getEditedPost._llms_form_location;
 
   if (['registration', 'account'].includes(_llms_form_location)) {
-    Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_2__["addFilter"])('llms_block_supports_visibility', 'llms/form-block-visibility', function () {
+    Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__["addFilter"])('llms_block_supports_visibility', 'llms/form-block-visibility', function () {
       return false;
     });
   }
+}
+/**
+ * Modify the list of available block-level visibility options
+ *
+ * Certain form fields (user email, password, and login) are required to
+ * create a WordPress account. Therefore we cannot allow end users to restrict
+ * visibility of these fields otherwise we could end up with forms that cannot
+ * function.
+ *
+ * For example, if a user email field were to be created with a visibility setting
+ * of "logged_in" it would be impossible for the user to create a new account.
+ *
+ * However, displaying an email field only to logged out users is acceptable because
+ * once the account is created (by a logged out user) it isn't required on future enrollments.
+ *
+ * This function reduces the list to only allow visibility settings of "all" and "logged out"
+ * to be used.
+ *
+ * @since [version]
+ *
+ * @return {void}
+ */
+
+
+function modifyVisibilityForBlocks() {
+  /**
+   * Determines whether or not a given block should have it's visibility options modified
+   *
+   * @since [version]
+   *
+   * @param {Object}   options             A WP_Block object.
+   * @param {string}   options.name        The block's name.
+   * @param {Object[]} options.innerBlocks The block's inner blocks list.
+   * @return {boolean} Whether or not the settings list should be modified.
+   */
+  var shouldModify = function shouldModify(_ref) {
+    var name = _ref.name,
+        innerBlocks = _ref.innerBlocks;
+    var toModify = ['llms/form-field-user-email', 'llms/form-field-user-password', 'llms/form-field-user-login'];
+
+    if ('llms/form-field-confirm-group' === name) {
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_5__["some"])(innerBlocks, function (innerBlock) {
+        return toModify.includes(innerBlock.name);
+      });
+    }
+
+    return toModify.includes(name);
+  };
+
+  Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__["addFilter"])('llms_block_visibility_settings_options', 'llms/form-block-visibility-options', function (opts) {
+    var _select = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["select"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["store"]),
+        getSelectedBlock = _select.getSelectedBlock,
+        selectedBlock = getSelectedBlock();
+
+    if (selectedBlock && shouldModify(selectedBlock)) {
+      return opts.filter(function (_ref2) {
+        var value = _ref2.value;
+        return ['all', 'logged_out'].includes(value);
+      });
+    }
+
+    return opts;
+  });
 }
 /**
  * All forms must have *at least* an email field.
@@ -19185,13 +19279,20 @@ function maybeDisableVisibility() {
 function ensureEmailFieldExists() {
   var emailBlockName = 'llms/form-field-user-email',
       noticeId = 'llms-forms-no-email-error-notice',
-      noticeSelect = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["select"])('core/notices'),
-      noticeDispatch = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])('core/notices');
-  Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["subscribe"])(function () {
+      _select2 = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["select"])('core/notices'),
+      getNotices = _select2.getNotices,
+      _dispatch = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])('core/notices'),
+      createErrorNotice = _dispatch.createErrorNotice,
+      removeNotice = _dispatch.removeNotice;
+
+  Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["subscribe"])(Object(lodash__WEBPACK_IMPORTED_MODULE_5__["debounce"])(function () {
     var post = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["select"])('core/editor').getCurrentPost(),
-        blocks = Object(_util___WEBPACK_IMPORTED_MODULE_5__["getBlocksFlat"])().map(function (block) {
+        blocks = Object(_util___WEBPACK_IMPORTED_MODULE_7__["getBlocksFlat"])().map(function (block) {
       return block.name;
     }),
+        hasNotice = getNotices().map(function (notice) {
+      return notice.id;
+    }).includes(noticeId),
 
     /**
      * The block editor appears to call domReady() prior to the block editor data being set
@@ -19204,45 +19305,46 @@ function ensureEmailFieldExists() {
      * If the post content doesn't include any block comment string then the empty array is not an
      * incorrect result.
      */
-    isReady = blocks.length || !post.content.includes('<!-- wp:'),
-        updateBtn = document.querySelector('button.editor-post-publish-button'); // Check if a user email field exists.
+    isReady = !post.content.includes('<!-- wp:') || blocks.length,
+        updateBtn = document.querySelector('button.editor-post-publish-button');
 
-    if (isReady && !blocks.includes(emailBlockName)) {
-      // Don't add duplicate notices.
-      if (!noticeSelect.getNotices().map(function (notice) {
-        return notice.id;
-      }).includes(noticeId)) {
-        noticeDispatch.createErrorNotice(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('User Email is a required field.', 'lifterlms'), {
-          id: noticeId,
-          isDismissible: false,
-          actions: [{
-            label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Restore user email field?', 'lifterlms'),
+    if (!isReady) {
+      return;
+    } // Check if a user email field exists & the notice hasn't been displayed yet.
 
-            /**
-             * Restore the field, remove the notice, and re-enable the post update button.
-             *
-             * Inserts the user email field as the first block in the form.
-             *
-             * @since 1.12.0
-             *
-             * @return {void}
-             */
-            onClick: function onClick() {
-              // Add the field.
-              var blockEd = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])('core/block-editor') || Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])('core/editor');
-              blockEd.insertBlock(Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["createBlock"])(emailBlockName), 0); // Remove the notice.
 
-              noticeDispatch.removeNotice(noticeId); // Re-enable updating.
+    if (!blocks.includes(emailBlockName) && !hasNotice) {
+      createErrorNotice(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('User Email is a required field.', 'lifterlms'), {
+        id: noticeId,
+        isDismissible: false,
+        actions: [{
+          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Restore user email field?', 'lifterlms'),
 
-              updateBtn.disabled = false;
-            }
-          }]
-        }); // Disable the "Update" button so the form cannot be saved in a messed up state.
+          /**
+           * Restore the field, remove the notice, and re-enable the post update button.
+           *
+           * Inserts the user email field as the first block in the form.
+           *
+           * @since 1.12.0
+           *
+           * @return {void}
+           */
+          onClick: function onClick() {
+            // Add the field.
+            var blockEd = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])('core/block-editor') || Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])('core/editor');
+            blockEd.insertBlock(Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["createBlock"])(emailBlockName), 0);
+          }
+        }]
+      }); // Disable the "Update" button so the form cannot be saved in a messed up state.
 
-        updateBtn.disabled = true;
-      }
+      updateBtn.disabled = true;
+    } else if (blocks.includes(emailBlockName) && hasNotice) {
+      // Remove the notice.
+      removeNotice(noticeId); // Re-enable updating.
+
+      updateBtn.disabled = false;
     }
-  });
+  }, 500));
 }
 /**
  * Default Function, runs all methods and events.
@@ -19258,7 +19360,8 @@ function ensureEmailFieldExists() {
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   maybeDisableVisibility();
-  Object(_blocks___WEBPACK_IMPORTED_MODULE_4__["deregisterBlocksForForms"])();
+  modifyVisibilityForBlocks();
+  Object(_blocks___WEBPACK_IMPORTED_MODULE_6__["deregisterBlocksForForms"])();
   hideCoreUI();
   ensureEmailFieldExists();
 });
@@ -20576,6 +20679,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "flattenBlocks", function() { return flattenBlocks; });
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/core-data */ "@wordpress/core-data");
+/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
 /**
  * Block List Flattening Utilities.
  *
@@ -20586,6 +20693,8 @@ __webpack_require__.r(__webpack_exports__);
  * @version 1.6.0
  */
 // External Deps.
+
+
 
 /**
  * Recursively pulls inner/nested blocks to return a flat array of blocks.
@@ -20599,7 +20708,16 @@ __webpack_require__.r(__webpack_exports__);
 var flattenBlocks = function flattenBlocks(blocks) {
   var flat = [];
   blocks.forEach(function (block) {
-    if (block.innerBlocks.length) {
+    if ('core/block' === block.name) {
+      var _select = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["select"])(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_1__["store"]),
+          getEditedEntityRecord = _select.getEditedEntityRecord;
+
+      var editedEntity = getEditedEntityRecord('postType', 'wp_block', block.attributes.ref);
+
+      if (editedEntity && editedEntity.blocks) {
+        flat = flat.concat(flattenBlocks(editedEntity.blocks));
+      }
+    } else if (block.innerBlocks.length) {
       flat = flat.concat(flattenBlocks(block.innerBlocks));
     } else {
       flat.push(block);
@@ -20617,8 +20735,10 @@ var flattenBlocks = function flattenBlocks(blocks) {
  */
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
-  var editor = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["select"])('core/block-editor') || Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["select"])('core/editor');
-  return flattenBlocks(editor.getBlocks());
+  var _select2 = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["select"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["store"]),
+      getBlocks = _select2.getBlocks;
+
+  return flattenBlocks(getBlocks());
 });
 
 /***/ }),
@@ -20741,6 +20861,17 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports) {
 
 (function() { module.exports = window["wp"]["compose"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/core-data":
+/*!**********************************!*\
+  !*** external ["wp","coreData"] ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["coreData"]; }());
 
 /***/ }),
 

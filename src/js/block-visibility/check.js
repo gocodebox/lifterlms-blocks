@@ -27,7 +27,7 @@ export default function supportsVisibility( settings, name ) {
 		ret = false;
 
 		// Exclude blocks identified by our blacklist.
-	} else if ( getBlacklist().includes( name ) ) {
+	} else if ( getBlocklist().includes( name ) ) {
 		ret = false;
 	}
 
@@ -46,7 +46,7 @@ export default function supportsVisibility( settings, name ) {
  *
  * @return {Array} List of block names.
  */
-const getBlacklist = () => {
+const getBlocklist = () => {
 	return [
 		/**
 		 * Otherwise known as the "Classic" block.

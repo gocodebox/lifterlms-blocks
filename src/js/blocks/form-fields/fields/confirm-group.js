@@ -109,6 +109,7 @@ function revertToSingle( clientId ) {
 			columns: 12,
 			last_column: true,
 			isConfirmationControlField: false,
+			match: '',
 			llms_visibility,
 		} )
 	);
@@ -199,6 +200,7 @@ allowed.forEach( ( blockName ) => {
 				columns: 12,
 				last_column: true,
 				isConfirmationControlField: false,
+				match: '',
 				llms_visibility,
 			} );
 		},

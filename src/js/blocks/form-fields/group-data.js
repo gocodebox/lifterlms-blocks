@@ -119,7 +119,7 @@ function getConfirmGroupUpdates( attributes, siblingAttributes ) {
 	if ( attributes.isConfirmationControlField ) {
 		const { name, id } = attributes,
 			confirmName = `${ name }_confirm`,
-			confirmId = `${ id }-confirm`;
+			confirmId = `${ id }_confirm`;
 
 		siblingUpdates.match = id;
 		siblingUpdates.name = confirmName;
