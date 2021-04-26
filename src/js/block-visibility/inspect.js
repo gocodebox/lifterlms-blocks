@@ -2,9 +2,7 @@
  * Add visibility attribute inspect and preview interfaces to qualifying blocks
  *
  * @since 1.0.0
- * @since 1.6.0 Import `InspectorControls` from `wp.blockEditor` in favor of deprecated `wp.editor`
- * @since 1.7.0 Import `InspectorControls` from `wp.blockEditor` and fallback to `wp.editor` to maintain backwards compatibility.
- * @version 1.8.0
+ * @version [version]
  */
 
 // WP Deps.
