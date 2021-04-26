@@ -64,7 +64,7 @@ class LLMS_Blocks_Reusable {
 	 *
 	 * @since [version]
 	 *
-	 * @return [type] [description]
+	 * @return void
 	 */
 	public function rest_register_fields() {
 
@@ -107,7 +107,7 @@ class LLMS_Blocks_Reusable {
 		}
 
 		$query_args = array();
-		wp_parse_str( parse_url( $referer, PHP_URL_QUERY ), $query_args );
+		wp_parse_str( wp_parse_url( $referer, PHP_URL_QUERY ), $query_args );
 		if ( empty( $query_args['post'] ) ) {
 			return $args;
 		}
