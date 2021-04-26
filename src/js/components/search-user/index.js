@@ -62,6 +62,11 @@ export default class SearchUser extends Search {
 	 * @return {string} Label displayed for the search result item.
 	 */
 	formatSearchResultLabel = ( result ) =>
-		// Translators: %1$s = User's name; %2$s = User's id.
-		sprintf( _x( '%1$s (ID# %2$d)', 'lifterlms' ), 'User search result label', result.name, result.id );
+		sprintf(
+			// Translators: %1$s = User's name; %2$s = User's id.
+			_x( '%1$s (ID# %2$d)', 'lifterlms' ),
+			'User search result label',
+			result.name,
+			result.id
+		);
 }

@@ -51,7 +51,6 @@ function hideCoreUI() {
  * @return {void}
  */
 function maybeDisableVisibility() {
-
 	// eslint-disable-next-line camelcase
 	const { _llms_form_location } = select(
 		'core/editor'
@@ -90,7 +89,6 @@ function maybeDisableVisibility() {
  * @return {void}
  */
 function modifyVisibilityForBlocks() {
-
 	/**
 	 * Determines whether or not a given block should have it's visibility options modified
 	 *
@@ -102,7 +100,6 @@ function modifyVisibilityForBlocks() {
 	 * @return {boolean} Whether or not the settings list should be modified.
 	 */
 	const shouldModify = ( { name, innerBlocks } ) => {
-
 		const toModify = [
 			'llms/form-field-user-email',
 			'llms/form-field-user-password',
@@ -110,32 +107,30 @@ function modifyVisibilityForBlocks() {
 		];
 
 		if ( 'llms/form-field-confirm-group' === name ) {
-			return some( innerBlocks, ( innerBlock ) => toModify.includes( innerBlock.name ) );
+			return some( innerBlocks, ( innerBlock ) =>
+				toModify.includes( innerBlock.name )
+			);
 		}
 
 		return toModify.includes( name );
-
 	};
 
 	addFilter(
 		'llms_block_visibility_settings_options',
 		'llms/form-block-visibility-options',
 		( opts ) => {
-
-			const
-				{ getSelectedBlock } = select( blockEditorStore ),
+			const { getSelectedBlock } = select( blockEditorStore ),
 				selectedBlock = getSelectedBlock();
 
 			if ( selectedBlock && shouldModify( selectedBlock ) ) {
-				return opts.filter( ( { value } ) => [ 'all', 'logged_out' ].includes( value ) );
+				return opts.filter( ( { value } ) =>
+					[ 'all', 'logged_out' ].includes( value )
+				);
 			}
 
 			return opts;
-
 		}
-
 	);
-
 }
 
 /**
@@ -149,43 +144,40 @@ function modifyVisibilityForBlocks() {
  * @return {void}
  */
 function ensureEmailFieldExists() {
-
 	const emailBlockName = 'llms/form-field-user-email',
 		noticeId = 'llms-forms-no-email-error-notice',
 		{ getNotices } = select( 'core/notices' ),
 		{ createErrorNotice, removeNotice } = dispatch( 'core/notices' );
 
-
 	subscribe(
-
 		debounce( () => {
-
 			const post = select( 'core/editor' ).getCurrentPost(),
-				blocks = getBlocksFlat().map( ( block ) => block.name ),
-				hasNotice = getNotices().map( ( notice ) => notice.id ).includes( noticeId ),
-				/**
-				 * The block editor appears to call domReady() prior to the block editor data being set
-				 * which results in getBlocksFlat() to respond with an empty array even though there are blocks
-				 * in the post content.
-				 *
-				 * To combat this we can determine that the editor "is ready" when there is either at least a single
-				 * block in the blocks array or the post content *does not* include a block comment string.
-				 *
-				 * If the post content doesn't include any block comment string then the empty array is not an
-				 * incorrect result.
-				 */
-				isReady = ! post.content.includes( '<!-- wp:' ) || blocks.length,
+				blocks = getBlocksFlat().map( ( block ) => block.name );
+
+			/**
+			 * The block editor appears to call domReady() prior to the block editor data being set
+			 * which results in getBlocksFlat() to respond with an empty array even though there are blocks
+			 * in the post content.
+			 *
+			 * To combat this we can determine that the editor "is ready" when there is either at least a single
+			 * block in the blocks array or the post content *does not* include a block comment string.
+			 *
+			 * If the post content doesn't include any block comment string then the empty array is not an
+			 * incorrect result.
+			 */
+			if ( ! post.content.includes( '<!-- wp:' ) || blocks.length ) {
+				return;
+			}
+
+			const hasNotice = getNotices()
+					.map( ( notice ) => notice.id )
+					.includes( noticeId ),
 				updateBtn = document.querySelector(
 					'button.editor-post-publish-button'
 				);
 
-			if ( ! isReady ) {
-				return;
-			}
-
 			// Check if a user email field exists & the notice hasn't been displayed yet.
 			if ( ! blocks.includes( emailBlockName ) && ! hasNotice ) {
-
 				createErrorNotice(
 					__( 'User Email is a required field.', 'lifterlms' ),
 					{
@@ -224,21 +216,15 @@ function ensureEmailFieldExists() {
 
 				// Disable the "Update" button so the form cannot be saved in a messed up state.
 				updateBtn.disabled = true;
-
-			} else if ( blocks.includes( emailBlockName ) && hasNotice )  {
-
+			} else if ( blocks.includes( emailBlockName ) && hasNotice ) {
 				// Remove the notice.
 				removeNotice( noticeId );
 
 				// Re-enable updating.
 				updateBtn.disabled = false;
-
 			}
-
 		}, 500 )
-
 	);
-
 }
 
 /**

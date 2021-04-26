@@ -231,7 +231,10 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 							label={ __( 'Display to', 'lifterlms' ) }
 							value={ llms_visibility }
 							onChange={ onChangeVisibility }
-							options={ applyFilters( 'llms_block_visibility_settings_options', visibilityOptions ) }
+							options={ applyFilters(
+								'llms_block_visibility_settings_options',
+								visibilityOptions
+							) }
 						/>
 
 						{ -1 ===

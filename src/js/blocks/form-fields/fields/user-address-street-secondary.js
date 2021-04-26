@@ -67,7 +67,7 @@ export const settings = getSettingsFromBase(
 			},
 			label_show_empty: {
 				__default: true,
-			}
+			},
 		},
 		usesContext: [ 'llms/fieldGroup/fieldLayout' ],
 	},

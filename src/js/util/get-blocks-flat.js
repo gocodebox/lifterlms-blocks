@@ -26,10 +26,13 @@ export const flattenBlocks = ( blocks ) => {
 	let flat = [];
 
 	blocks.forEach( ( block ) => {
-
 		if ( 'core/block' === block.name ) {
 			const { getEditedEntityRecord } = select( coreStore );
-			const editedEntity = getEditedEntityRecord( 'postType', 'wp_block', block.attributes.ref );
+			const editedEntity = getEditedEntityRecord(
+				'postType',
+				'wp_block',
+				block.attributes.ref
+			);
 			if ( editedEntity && editedEntity.blocks ) {
 				flat = flat.concat( flattenBlocks( editedEntity.blocks ) );
 			}

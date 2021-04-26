@@ -5,6 +5,9 @@
  * @version [version]
  */
 
+// WP Deps.
+import { applyFilters } from '@wordpress/hooks';
+
 /**
  * Returns a list of blocks that we've decided should not support block visibility
  *
@@ -20,19 +23,15 @@ const getDisallowedBlocks = () => {
 	 *
 	 * @param {string[]} blockNames A list of blocknames.
 	 */
-	return applyFilters(
-		'llms_block_visibility_disallowed_blocks',
-		[
-			/**
-			 * Otherwise known as the "Classic" block.
-			 *
-			 * @see {@link https://github.com/gocodebox/lifterlms-blocks/issues/41}
-			 */
-			'core/freeform',
-		],
-	);
+	return applyFilters( 'llms_block_visibility_disallowed_blocks', [
+		/**
+		 * Otherwise known as the "Classic" block.
+		 *
+		 * @see {@link https://github.com/gocodebox/lifterlms-blocks/issues/41}
+		 */
+		'core/freeform',
+	] );
 };
-
 
 /**
  * Determine if a block should have visibility settings added to it.
@@ -46,9 +45,6 @@ const getDisallowedBlocks = () => {
  * @return {boolean} Returns `true` when visibility is supported, otherwise `false`.
  */
 export default function supportsVisibility( settings, name ) {
-	// WP Deps.
-	const { applyFilters } = wp.hooks;
-
 	let ret = true;
 
 	// Don't add to Dynamic Blocks.
