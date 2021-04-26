@@ -6,7 +6,7 @@
  */
 
 // WP Deps.
-import { __, sprintf } from '@wordpress/i18n';
+import { _x, sprintf } from '@wordpress/i18n';
 
 // Internal Deps.
 import Search from '../search';
@@ -63,5 +63,5 @@ export default class SearchUser extends Search {
 	 */
 	formatSearchResultLabel = ( result ) =>
 		// Translators: %1$s = User's name; %2$s = User's id.
-		sprintf( __( '%1$s (ID# %2$d)', 'lifterlms' ), result.name, result.id );
+		sprintf( _x( '%1$s (ID# %2$d)', 'lifterlms' ), 'User search result label', result.name, result.id );
 }

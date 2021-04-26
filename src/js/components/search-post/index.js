@@ -6,7 +6,7 @@
  */
 
 // WP Deps.
-import { __, sprintf } from '@wordpress/i18n';
+import { _x, sprintf } from '@wordpress/i18n';
 
 // Internal Deps.
 import Search from '../search';
@@ -51,7 +51,8 @@ export default class SearchPost extends Search {
 	formatSearchResultLabel = ( result ) =>
 		sprintf(
 			// Translators: %1$s = Post title; %2$ = post id.
-			__( '%1$s (ID# %2$d)', 'lifterlms' ),
+			_x( '%1$s (ID# %2$d)', 'lifterlms' ),
+			'Search result label',
 			result.title.rendered,
 			result.id
 		);
