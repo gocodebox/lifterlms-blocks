@@ -5,7 +5,7 @@
  * a flat array of every block in the layout.
  *
  * @since 1.6.0
- * @version 1.6.0
+ * @version [version]
  */
 
 // External Deps.
@@ -13,12 +13,11 @@ import { select } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 
-
-
 /**
  * Recursively pulls inner/nested blocks to return a flat array of blocks.
  *
  * @since 1.6.0
+ * @since [version] Automatically, load innerBlocks of a reusable blocks.
  *
  * @param {Array} blocks Array of WP Blocks.
  * @return {Array} Array of WP Blocks.
@@ -48,7 +47,7 @@ export const flattenBlocks = ( blocks ) => {
  * Retrieve an array of flattened blocks from the block editor.
  *
  * @since 1.6.0
- * @since 1.7.0 Backwards compat fix: fallback to `core/editor` if `core/block-editor` isn't available
+ * @since 1.7.0 Backwards compat fix: fallback to `core/editor` if `core/block-editor` isn't available.
  *
  * @return {Array} Flattened array of blocks.
  */
