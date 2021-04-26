@@ -31,34 +31,6 @@ class LLMS_Blocks_Reusable {
 
 	}
 
-	public static function create( $post_title, $blocks_or_content = '', $group = false ) {
-
-		$post_content = is_string( $blocks_or_content ) ? $blocks_or_content : serialize_block( $blocks_or_content );
-
-		$args = array(
-			'post_title'   => $post_title,
-			'post_status'  => 'publish',
-			'post_content' => $post_content,
-			'post_type'    => 'wp_block',
-			'meta_input'   => array(
-				'_is_llms_field' => 'yes',
-			),
-		);
-
-		$post = wp_insert_post( $args );
-
-		return $post;
-
-	}
-
-	public static function create_from_template( $template ) {
-
-		$templates = require LLMS_BLOCKS_PLUGIN_DIR . '/includes/llms-blocks-schema.php';
-
-		return self::create( $template, $templates[ $template ] );
-
-	}
-
 	/**
 	 * Read rest field read callback
 	 *
