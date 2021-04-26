@@ -72,7 +72,7 @@ class LLMS_Blocks_Reusable {
 			'wp_block',
 			'is_llms_field',
 			array(
-				'get_callback' => array( $this, 'rest_callback_get' ),
+				'get_callback'    => array( $this, 'rest_callback_get' ),
 				'update_callback' => array( $this, 'rest_callback_update' ),
 			)
 		);
