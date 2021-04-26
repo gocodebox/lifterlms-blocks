@@ -1,6 +1,18 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.0.0-beta.3 - 2021-04-26
+--------------------------
+
++ All form field blocks refactored and many were removed or renamed.
++ Added column support to form field blocks.
++ Added reusable block support to form field blocks.
++ Removed support for block visibility on required field blocks (email and password).
++ Added reusable block filtering to only show "supported" reusable blocks when editing a form.
++ Added utility function support for reusable blocks.
++ Fixed issues related to visual rendering of checkboxes / radio elements on custom fields.
+
+
 v2.0.0-beta.2 - 2021-03-22
 --------------------------
 
