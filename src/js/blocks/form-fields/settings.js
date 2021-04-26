@@ -245,9 +245,9 @@ export function getDefaultOptionsArray( count = 2, defaults = 1 ) {
 	for ( let i = 1; i <= count; i++ ) {
 		opts.push( {
 			default: defaults && defaults > 0 ? 'yes' : 'no',
-			// Translators: %d = option number order.
+			// Translators: %d = Option index in the list of options.
 			text: sprintf( __( 'Option %d', 'lifterlms' ), i ),
-			// Translators: %d = option number order.
+			// Translators: %d = Option index in the list of options.
 			key: sprintf( __( 'option_%d', 'lifterlms' ), i ),
 		} );
 
