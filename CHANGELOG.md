@@ -1,6 +1,35 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.0.0-beta.3 - 2021-04-26
+--------------------------
+
++ All form field blocks refactored and many were removed or renamed.
++ Added column support to form field blocks.
++ Added reusable block support to form field blocks.
++ Removed support for block visibility on required field blocks (email and password).
++ Added reusable block filtering to only show "supported" reusable blocks when editing a form.
++ Added utility function support for reusable blocks.
++ Fixed issues related to visual rendering of checkboxes / radio elements on custom fields.
+
+
+v2.0.0-beta.2 - 2021-03-22
+--------------------------
+
++ Fixed block editor visual issues encountered on certain blocks when block-level visibility restrictions are enabled.
+
+
+v2.0.0-beta.1 - 2021-03-22
+--------------------------
+
++ Improved Javascript localization.
++ Updated JS source files to follow (slightly modified) eslint standards as defined by `@wordpress/eslint-plugin/recommended`.
++ Disabled import of incomplete module `./formats/merge-codes`.
++ Improved the information displayed for a restricted block.
++ Don't render `InspectorControls` for the Course Syllabus block since it doesn't have any actual settings to inspect.
++ Improved the Search, SearchPost, and SearchUser components and made backwards incompatible changes to their usage.
+
+
 v1.12.0 - 2021-01-07
 --------------------
 

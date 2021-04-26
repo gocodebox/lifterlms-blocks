@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version 1.6.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -28,9 +28,7 @@ class LLMS_Blocks_Visibility {
 	 * @return void
 	 */
 	public function __construct() {
-
 		add_filter( 'render_block', array( $this, 'maybe_filter_block' ), 20, 2 );
-
 	}
 
 	/**
@@ -40,7 +38,7 @@ class LLMS_Blocks_Visibility {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return  array
+	 * @return array
 	 */
 	public static function get_attributes() {
 		return array(
@@ -62,11 +60,11 @@ class LLMS_Blocks_Visibility {
 	/**
 	 * Get the number of enrollments for a user by post type.
 	 *
-	 * @since   1.0.0
+	 * @since 1.0.0
 	 *
-	 * @param   int    $uid  WP_User ID.
-	 * @param   string $type post type.
-	 * @return  int
+	 * @param int    $uid  WP_User ID.
+	 * @param string $type Post type.
+	 * @return int
 	 */
 	private function get_enrollment_count_by_type( $uid, $type ) {
 
@@ -90,12 +88,12 @@ class LLMS_Blocks_Visibility {
 	}
 
 	/**
-	 * Parse post ids from block visibility in attrs.
+	 * Parse post ids from block visibility in attributes.
 	 *
-	 * @since   1.0.0
+	 * @since 1.0.0
 	 *
-	 * @param   array $attrs block attrs.
-	 * @return  array
+	 * @param array $attrs Block attributes.
+	 * @return array
 	 */
 	private function get_post_ids_from_block_attributes( $attrs ) {
 
@@ -115,12 +113,18 @@ class LLMS_Blocks_Visibility {
 	 *
 	 * @since 1.0.0
 	 * @since 1.6.0 Add logic for `logged_in` and `logged_out` block visibility options.
+	 * @since [version] Added a conditional prior to checking the block's visibility attributes.
 	 *
-	 * @param   string $content block inner content.
-	 * @param   array  $block   block info.
-	 * @return  string
+	 * @param string $content Block inner content.
+	 * @param array  $block   Block data array.
+	 * @return string
 	 */
 	public function maybe_filter_block( $content, $block ) {
+
+		// Allow conditionally filtering the block based on external context.
+		if ( ! $this->should_filter_block( $block ) ) {
+			return $content;
+		}
 
 		// No attributes or no llms visibility settings (visibile to "all").
 		if ( empty( $block['attrs'] ) || empty( $block['attrs']['llms_visibility'] ) ) {
@@ -188,7 +192,63 @@ class LLMS_Blocks_Visibility {
 			}
 		}
 
+		/**
+		 * Filters a blocks content after it has been run through visibility attribute filters
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $content The HTML content for a block. May be an empty string if the block should be invisible to the current user.
+		 * @param array  $block   Block data array.
+		 */
 		return apply_filters( 'llms_blocks_visibility_render_block', $content, $block );
+
+	}
+
+	/**
+	 * Determine whether or not a block's rendering should be modified by block-level visibility settings
+	 *
+	 * This method does not determine whether or not the block will be rendered, it only determines whether
+	 * or not we should check if it should be rendered.
+	 *
+	 * This method is primarily used to ensure that LifterLMS core dynamic blocks (pricing table, course syllabus, etc...)
+	 * are *always* displayed to creators when editing content within the block editor. This parses data from a block-renderer
+	 * WP Core API request.
+	 *
+	 * @since [version]
+	 *
+	 * @link https://developer.wordpress.org/rest-api/reference/rendered-blocks/
+	 *
+	 * @param array $block Block data array.
+	 * @return boolean If `true`, block filters should be checked, other wise they will be skipped.
+	 */
+	private function should_filter_block( $block ) {
+
+		// Always filter unless explicitly told not to.
+		$should_filter = true;
+
+		if ( llms_is_rest() ) {
+
+			$context = llms_filter_input( INPUT_GET, 'context', FILTER_SANITIZE_STRING );
+			$post_id = llms_filter_input( INPUT_GET, 'post_id', FILTER_SANITIZE_STRING );
+
+			// Always render blocks when a valid user is requesting the block in the edit context.
+			if ( 'edit' === $context && $post_id && current_user_can( 'edit_post', $post_id ) ) {
+				$should_filter = false;
+			}
+		}
+
+		/**
+		 * Filters whether or not a block's rendering should be modified by block-level visibility settings
+		 *
+		 * This filter does not determine whether or not the block will be rendered, it only determines whether
+		 * or not we should check if it should be rendered.
+		 *
+		 * @since [version]
+		 *
+		 * @param boolean $should_filter Whether or not to apply visibility filters.
+		 * @param array   $block         Block data array.
+		 */
+		return apply_filters( 'llms_blocks_visibility_should_filter_block', $should_filter, $block );
 
 	}
 
