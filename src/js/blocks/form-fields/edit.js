@@ -17,6 +17,8 @@ import { isUnique } from './checks';
 import manageFieldGroupAttributes from './group-data';
 import GroupLayoutControl from './group-layout-control';
 
+import { v4 as uuid } from 'uuid';
+
 /**
  * Generate a unique "name" attribute.
  *
@@ -48,6 +50,7 @@ const generateId = ( name ) => {
  *
  * @since 1.6.0
  * @since 1.12.0 Add data_store_key generation.
+ * @since [version] Add `uuid` property.
  *
  * @param {Object} atts      Default block attributes object.
  * @param {Object} blockAtts Actual WP_Block attributes object.
@@ -78,6 +81,10 @@ const setupAtts = ( atts, blockAtts ) => {
 			id = generateId( uniqueId( `${ atts.field }-field-` ) );
 		}
 		atts.id = id;
+	}
+
+	if ( ! atts.uuid ) {
+		atts.uuid = uuid();
 	}
 
 	if ( '' === atts.data_store_key ) {
