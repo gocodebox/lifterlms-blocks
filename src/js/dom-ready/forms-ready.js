@@ -165,7 +165,7 @@ function ensureEmailFieldExists() {
 			 * If the post content doesn't include any block comment string then the empty array is not an
 			 * incorrect result.
 			 */
-			if ( ! post.content.includes( '<!-- wp:' ) || blocks.length ) {
+			if ( ! post.content.includes( '<!-- wp:' ) || ! blocks.length ) {
 				return;
 			}
 
