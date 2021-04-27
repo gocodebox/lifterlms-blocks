@@ -99,14 +99,26 @@ addFilter(
 		] );
 
 		if ( hasResolvedBlock ) {
+
 			// Get field blocks from the block.
 			const fields = getFieldBlocks( getBlockByRef( ref ) );
 
-			wp.data
-				.dispatch( 'core' )
-				.editEntityRecord( 'postType', 'wp_block', attributes.ref, {
-					is_llms_field: fields.length > 0 ? 'yes' : 'no',
+			if ( fields.length ) {
+				/**
+				 * Update block metadata.
+				 *
+				 * The setTimeout is bad but fixes no-op/memory leak.
+				 *
+				 * @see https://github.com/WordPress/gutenberg/issues/21049#issuecomment-632134201
+				 */
+				 setTimeout( () => {
+					dispatch( 'core' )
+					.editEntityRecord( 'postType', 'wp_block', attributes.ref, {
+						is_llms_field: fields.length > 0 ? 'yes' : 'no',
+					} );
 				} );
+			}
+
 		}
 
 		return el;
