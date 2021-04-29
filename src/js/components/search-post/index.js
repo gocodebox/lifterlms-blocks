@@ -51,8 +51,7 @@ export default class SearchPost extends Search {
 	formatSearchResultLabel = ( result ) =>
 		sprintf(
 			// Translators: %1$s = Post title; %2$ = post id.
-			_x( '%1$s (ID# %2$d)', 'lifterlms' ),
-			'Search result label',
+			_x( '%1$s (ID# %2$d)', 'Search result label', 'lifterlms' ),
 			result.title.rendered,
 			result.id
 		);
