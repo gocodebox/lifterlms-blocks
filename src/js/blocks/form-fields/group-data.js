@@ -66,9 +66,15 @@ function getSibling( clientId ) {
  * @return {number} Adjusted columns width for the sibling block.
  */
 function determineSiblingCols( cols, siblingCols ) {
-	if ( cols === 12 || siblingCols === 12 ) {
+
+	if ( cols === 12 && siblingCols === 12 ) {
+		// When switching from stacked to columns,
+		siblingCols = 6;
+	} else if ( cols === 12 || siblingCols === 12 ) {
+		// If either is too long, make them both 12.
 		siblingCols = 12;
 	} else if ( cols + siblingCols > 12 ) {
+		// Every other scenario.
 		siblingCols = 12 - cols;
 	}
 
@@ -177,13 +183,13 @@ export default function ( {
 		siblingUpdates = merge( siblingUpdates, groupUpdates.siblingUpdates );
 	}
 
-	// Updates columns based on group layout.
-	siblingUpdates.columns = determineSiblingCols(
-		columns,
-		sibling.attributes.columns
-	);
-
 	if ( 'columns' === context[ 'llms/fieldGroup/fieldLayout' ] ) {
+		// Updates columns based on group layout.
+		siblingUpdates.columns = determineSiblingCols(
+			columns,
+			sibling.attributes.columns
+		);
+
 		const isLast = isLastColumn( clientId );
 
 		currentUpdates.last_column = isLastColumn( clientId );
