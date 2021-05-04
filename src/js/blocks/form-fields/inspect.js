@@ -289,6 +289,7 @@ export default class Inspector extends Component {
 						{ ! isConfirmationField &&
 							this.hasInspectorControlSupport( 'required' ) && (
 								<ToggleControl
+									className="llms-required-field-toggle"
 									label={ __( 'Required', 'lifterlms' ) }
 									checked={ !! required }
 									onChange={ () =>
@@ -349,6 +350,7 @@ export default class Inspector extends Component {
 							( isConfirmationControlField &&
 								isInAConfirmGroup ) ) && (
 							<ToggleControl
+								className="llms-confirmation-field-toggle"
 								label={ __(
 									'Confirmation Field',
 									'lifterlms'
