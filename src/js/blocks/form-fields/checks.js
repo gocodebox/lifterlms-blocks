@@ -24,6 +24,12 @@ import { select } from '@wordpress/data';
  * @return {Object[]} An array of field blocks.
  */
 function filterBlock( block ) {
+
+	// when running `wp.blocks.parse()` for a reusable block `false` gets passed in and I don't understand it.
+	if ( ! block ) {
+		return [ block ];
+	}
+
 	// Check the block's inner blocks.
 	if ( block.innerBlocks.length ) {
 		return filterBlocks( block.innerBlocks );
