@@ -312,6 +312,7 @@ export default class Inspector extends Component {
 							) }
 
 						<SelectControl
+							className="llms-field-width-select"
 							label={ __( 'Field Width', 'lifterlms' ) }
 							onChange={ ( columns ) => {
 								columns = parseInt( columns, 10 );
