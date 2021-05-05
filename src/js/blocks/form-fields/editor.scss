@@ -114,15 +114,21 @@ li.llms-field-option {
 
 }
 
-.llms-field-group[data-field-layout="stacked"] {
-	.block-editor-block-list__layout {
-		> .wp-block.llms-fields {
-			// margin-left: 0;
-		}
-	}
-}
+.llms-cols-12 .llms-field { width: 100%; }
+.llms-cols-9 .llms-field { width: 75%; }
+.llms-cols-8 .llms-field { width: 66.66%; }
+.llms-cols-6 .llms-field { width: 50%; }
+.llms-cols-4 .llms-field { width: 33.33%; }
+.llms-cols-3 .llms-field { width: 25%; }
 
 .llms-field-group[data-field-layout="columns"] {
+	[class*=llms-cols-] .llms-field { width: 100%; }
+	.llms-cols-12 { width: 100%; }
+	.llms-cols-9 { width: 75%; }
+	.llms-cols-8 { width: 66.66%; }
+	.llms-cols-6 { width: 50%; }
+	.llms-cols-4 { width: 33.33%; }
+	.llms-cols-3 { width: 25%; }
 	.block-editor-block-list__layout {
 		> .wp-block.llms-fields {
 			display: inline-block;

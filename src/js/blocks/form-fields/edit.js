@@ -107,8 +107,7 @@ export function EditField( props ) {
 	attributes = setupAtts( attributes, block.attributes );
 
 	const blockProps = useBlockProps( {
-		className: 'llms-fields',
-		style: { width: ( attributes.columns / 12 ) * 100 + '%' },
+		className: `llms-fields llms-cols-${ attributes.columns }`,
 	} );
 
 	// Manage field data for blocks in field groups.
