@@ -16,6 +16,7 @@ import {
 } from '@wordpress/components';
 import { compose } from '@wordpress/compose';
 import { dispatch, select, withDispatch, withSelect } from '@wordpress/data';
+import { store as blockEditorStore } from '@wordpress/block-editor';
 import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
 import { Component, Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
@@ -69,8 +70,8 @@ class FormDocumentSettings extends Component {
 		 * @return {void}
 		 */
 		function replaceAllBlocks( template ) {
-			dispatch( 'core/block-editor' ).replaceBlocks(
-				select( 'core/block-editor' )
+			dispatch( blockEditorStore ).replaceBlocks(
+				select( blockEditorStore )
 					.getBlocks()
 					.map( ( block ) => block.clientId ),
 				parse( template )
