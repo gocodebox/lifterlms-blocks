@@ -116,7 +116,6 @@ export default class Field extends Component {
 					) }
 					{ 'input' === fieldType && (
 						<input
-							style={ { width: '100%' } }
 							onChange={ ( event ) =>
 								setAttributes( {
 									placeholder: event.target.value,
@@ -133,13 +132,11 @@ export default class Field extends Component {
 						<input
 							disabled="disabed"
 							type="password"
-							style={ { width: '100%' } }
 							value="F4K3p4$50Rd"
 						/>
 					) }
 					{ 'textarea' === fieldType && (
 						<textarea
-							style={ { width: '100%', resize: 'none' } }
 							rows={ this.props.attributes.html_attrs.rows }
 							onChange={ ( event ) =>
 								setAttributes( {
@@ -154,13 +151,7 @@ export default class Field extends Component {
 						/>
 					) }
 					{ 'select' === fieldType && (
-						<select
-							style={ {
-								width: '100%',
-								maxWidth: 'none',
-								pointerEvents: 'none',
-							} }
-						>
+						<select>
 							<option>{ getDefaultOption() }</option>
 						</select>
 					) }

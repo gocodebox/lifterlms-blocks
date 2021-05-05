@@ -27,8 +27,22 @@
 			opacity: 0;
 		}
 	}
+
+	input:not([type=radio]):not([type="checkbox"]),
+	textarea,
+	select {
+		width: 100%;
+	}
+
+
 	input:not([type=radio]) {
 		border-radius: 4px;
+	}
+	textarea { resize: none; }
+
+	select {
+		max-Width: none;
+		pointer-events: none;
 	}
 
 	.llms-field {
@@ -103,7 +117,7 @@ li.llms-field-option {
 .llms-field-group[data-field-layout="stacked"] {
 	.block-editor-block-list__layout {
 		> .wp-block.llms-fields {
-			margin-left: 0;
+			// margin-left: 0;
 		}
 	}
 }
