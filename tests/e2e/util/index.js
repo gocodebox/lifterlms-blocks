@@ -7,10 +7,12 @@
  * @version 1.12.0
  */
 
+import blockSnapshotMatcher from './block-snapshot-matcher';
 import clearBlocks from './clear-blocks';
 import visitForm from './visit-form';
 
 export {
+	blockSnapshotMatcher,
 	clearBlocks,
 	visitForm,
 };
