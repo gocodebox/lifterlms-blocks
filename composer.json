@@ -51,7 +51,6 @@
     "env": "\"vendor/bin/llms-env\"",
     "env:setup": [
       "\"vendor/bin/llms-env\" wp plugin install lifterlms --activate",
-      "\"vendor/bin/llms-env\" wp plugin update lifterlms",
       "\"vendor/bin/llms-env\" wp plugin activate lifterlms-blocks"
     ],
     "fix-cs": "\"vendor/bin/phpcbf\"",
