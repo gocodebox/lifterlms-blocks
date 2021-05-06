@@ -208,12 +208,36 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 		 * Save the current posts attribute state.
 		 *
 		 * @since 1.0.0
+		 * @since [version] The post object stored in the block attribute was reduced to
+		 *               include only the minimum required properties.
 		 *
 		 * @return {void}
 		 */
 		const savePosts = () => {
+
+			// Reduce the post objects to only what we require to save.
+			const toSave = llms_visibility_posts.map( ( post ) => {
+
+				const { id, title, type } = post,
+					stored = { id, title, type };
+
+				/**
+				 * Filters the reduced WP_Post object stored as a block attribute
+				 *
+				 * By default, the `id`, `title`, and `type` properties are stored, should
+				 * additional object properties be required they may be added here.
+				 *
+				 * @since [version]
+				 *
+				 * @param {Object} stored Reduced WP_Post object.
+				 * @param {Object} pot    The original WP_Post object.
+				 */
+				return applyFilters( 'llms_block_visibility_stored_post_props', stored, post );
+
+			} );
+
 			setAttributes( {
-				llms_visibility_posts: JSON.stringify( llms_visibility_posts ),
+				llms_visibility_posts: JSON.stringify( toSave ),
 			} );
 		};
 
