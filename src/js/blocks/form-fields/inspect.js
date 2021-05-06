@@ -233,7 +233,7 @@ export default class Inspector extends Component {
 	}
 
 	isInAConfirmGroup( block ) {
-		return this.getParentGroupClientId( block );
+		return this.getParentGroupClientId( block ) ? true : false;
 	}
 
 	getParentGroupClientId( block ) {
@@ -251,6 +251,23 @@ export default class Inspector extends Component {
 		return parents.length ? parents[ 0 ] : false;
 	}
 
+	getBlockSiblings( block ) {
+
+		const parentClientId = this.getParentGroupClientId( block );
+
+		if ( ! parentClientId ) {
+			return [];
+		}
+
+		const { getBlock } = select( blockEditorStore ),
+			parentBlock = getBlock( parentClientId );
+
+		return parentBlock.innerBlocks.filter( ( { clientId } ) => clientId !== block.clientId );
+
+	}
+
+
+
 	/**
 	 * Render the Block Inspector
 	 *
@@ -260,6 +277,7 @@ export default class Inspector extends Component {
 	 * @return {Fragment} Component HTML fragment.
 	 */
 	render() {
+
 		// Return early if there's no inspector options to display.
 		if ( ! this.hasInspectorSupport() ) {
 			return '';
@@ -315,8 +333,20 @@ export default class Inspector extends Component {
 							className="llms-field-width-select"
 							label={ __( 'Field Width', 'lifterlms' ) }
 							onChange={ ( columns ) => {
+
 								columns = parseInt( columns, 10 );
 								setAttributes( { columns } );
+
+								const sibling = this.getBlockSiblings( block );
+
+								if ( sibling.length && columns + sibling[0].attributes.columns > 12 ) {
+
+									const { updateBlockAttributes } = dispatch( blockEditorStore );
+									updateBlockAttributes( sibling[0].clientId, {
+										columns: 12 - columns,
+									} );
+								}
+
 							} }
 							help={ __(
 								'Determines the width of the form field.',

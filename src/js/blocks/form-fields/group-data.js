@@ -53,33 +53,6 @@ function getSibling( clientId ) {
 		: null;
 }
 
-/**
- * Calculates the column value for a column's sibling
- *
- * This will ensure that the total of the blocks columns does not exceed 12
- * unless one of the two blocks is set to be full-width (12 columns).
- *
- * @since [version]
- *
- * @param {number} cols        Current block columns width.
- * @param {number} siblingCols Current sibling block columns width.
- * @return {number} Adjusted columns width for the sibling block.
- */
-function determineSiblingCols( cols, siblingCols ) {
-	if ( cols === 12 && siblingCols === 12 ) {
-		// When switching from stacked to columns,
-		siblingCols = 6;
-	} else if ( cols === 12 || siblingCols === 12 ) {
-		// If either is too long, make them both 12.
-		siblingCols = 12;
-	} else if ( cols + siblingCols > 12 ) {
-		// Every other scenario.
-		siblingCols = 12 - cols;
-	}
-
-	return siblingCols;
-}
-
 function isLastColumn( clientId ) {
 	const parent = getParentFieldGroup( clientId );
 	if ( parent && parent.innerBlocks.length ) {
@@ -180,22 +153,6 @@ export default function ( {
 
 		currentUpdates = merge( currentUpdates, groupUpdates.currentUpdates );
 		siblingUpdates = merge( siblingUpdates, groupUpdates.siblingUpdates );
-	}
-
-	if ( 'columns' === context[ 'llms/fieldGroup/fieldLayout' ] ) {
-		// Updates columns based on group layout.
-		siblingUpdates.columns = determineSiblingCols(
-			columns,
-			sibling.attributes.columns
-		);
-
-		const isLast = isLastColumn( clientId );
-
-		currentUpdates.last_column = isLastColumn( clientId );
-		siblingUpdates.last_column = ! isLast;
-	} else {
-		currentUpdates.last_column = true;
-		siblingUpdates.last_column = true;
 	}
 
 	updateChildren( {
