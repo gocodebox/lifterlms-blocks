@@ -19,6 +19,7 @@ import {
 } from '@lifterlms/llms-e2e-test-utils';
 
 import {
+	blockSnapshotMatcher,
 	visitForm,
 } from '../../util';
 
@@ -34,96 +35,83 @@ async function openFormSettingsPanel() {
 
 }
 
+async function getAllBlockNames() {
+	const blocks = await getAllBlocks();
+	return blocks.map( ( { name } ) => name );
+}
+
 describe( 'Admin/FormsDocSidebar', () => {
 
-	it ( 'should display the location when open registration is disabled', async () => {
+	describe( 'LocationDisplay', () => {
 
-		await toggleOpenRegistration( false );
-		await visitForm( 'Register' );
-		await openFormSettingsPanel();
+		it ( 'should display the location when open registration is disabled', async () => {
 
-		expect( await page.$eval( '.llms-forms-doc-settings .components-panel__row', el => el.innerHTML ) ).toMatchSnapshot();
+			await toggleOpenRegistration( false );
+
+			page.once( 'dialog', async dialog => await dialog.accept() ); // Leave page without saving.
+
+			await visitForm( 'Register' );
+			await openFormSettingsPanel();
+
+			expect( await page.$eval( '.llms-forms-doc-settings .components-panel__row', el => el.textContent ) ).toMatchSnapshot();
+
+		} );
+
+		it ( 'should display the location with a link when open registration is enabled', async () => {
+
+			await toggleOpenRegistration( true );
+
+			page.on( 'dialog', async dialog => await dialog.accept() ); // Leave page without saving.
+
+			await visitForm( 'Register' );
+			await openFormSettingsPanel();
+
+			expect( await page.$eval( '.llms-forms-doc-settings .components-panel__row a', el => el.textContent ) ).toMatchSnapshot();
+
+		} );
+
+	} );
+
+	describe( 'TemplateRevert', () => {
+
+		it ( 'should allow a form to be reverted to the default layout', async () => {
+
+			await visitForm( 'Register' );
+
+			// Add a new block.
+			await insertBlock( 'Paragraph' );
+			await page.keyboard.type( 'Lorem ipsum' );
+
+			// Remove the last field block on screen.
+			let blocks = await getAllBlocks();
+			const lastBlock = blocks[ blocks.length - 2 ];
+			await page.evaluate( async ( clientId ) => {
+				return wp.data.dispatch( 'core/block-editor' ).removeBlock( clientId );
+			}, lastBlock.clientId );
+
+			// Revert.
+			await openFormSettingsPanel();
+			await clickElementByText( 'Revert to Default', '.components-panel .components-button' );
+
+			// Notice should display.
+			await page.waitForSelector( '.components-notice.is-success' );
+			expect( await page.$eval( '.components-notice.is-success .components-notice__content', el => el.innerHTML ) ).toMatchSnapshot();
+
+			// Match block list.
+			expect( await getAllBlockNames() ).toMatchSnapshot();
+
+			// Undo the revert.
+			await click( '.components-notice.is-success .components-notice__content button' );
+
+			// Notice gets removed
+			expect( await page.evaluate( () => document.querySelector( '.components-notice.is-success' ) ) ).toBeNull();
+
+			// Changes before the revert should be found.
+			expect( await getAllBlockNames() ).toMatchSnapshot();
+
+		} );
 
 	} );
 
-	it ( 'should display the location with a link when open registration is enabled', async () => {
-
-		await toggleOpenRegistration( true );
-		await visitForm( 'Register' );
-		await openFormSettingsPanel();
-
-		expect( await page.$eval( '.llms-forms-doc-settings .components-panel__row', el => el.innerHTML ) ).toMatchSnapshot();
-
-	} );
-
-	it ( 'should allow a form to be reverted to the default layout', async () => {
-
-		async function findBlock( type, content = null ) {
-			const
-				blocks   = await getAllBlocks(),
-				matching = blocks.filter( block => {
-					if ( type !== block.name ) {
-						return false;
-					} else if ( null !== content && content !== block.attributes.content ) {
-						return false;
-					}
-					return true;
-				} );
-			return matching.length ? matching[0] : false;
-		}
-
-		async function getBlocksSansIds() {
-
-			function deleteClientId( block ) {
-				delete block.clientId;
-				if ( block.innerBlocks.length ) {
-					block.innerBlocks.map( block => { return deleteClientId( block ) } );
-				}
-				return block;
-			}
-
-			const blocks = await getAllBlocks();
-			return blocks.map( block => { return deleteClientId( block ) } );
-		}
-
-		await visitForm( 'Register' );
-
-		// Delete the last block on the screen.
-		const phoneBlock = await findBlock( 'llms/form-field-user-phone' );
-		await selectBlockByClientId( phoneBlock.clientId );
-		await click( 'button.components-dropdown-menu__toggle[aria-label="More options"]' );
-		await clickElementByText( 'Remove block' );
-
-		// Add a new block.
-		await insertBlock( 'Paragraph' );
-		await page.waitFor( 5 );
-		await page.keyboard.type( 'Lorem ipsum' );
-
-		await openFormSettingsPanel();
-		await clickElementByText( 'Revert to Default', '.components-panel .components-button' );
-
-		// Notice should display.
-		await page.waitForSelector( '.components-notice.is-success' );
-		expect( await page.$eval( '.components-notice.is-success .components-notice__content', el => el.innerHTML ) ).toMatchSnapshot();
-
-		// Phone block should be back.
-		expect( await findBlock( 'llms/form-field-user-phone' ) ).toBeTruthy();
-
-		// Lipsum paragraph block should be gone.
-		expect( await findBlock( 'core/paragraph', 'Lorem ipsum' ) ).toStrictEqual( false );
-
-		// Blocks should match the initial default layout.
-		expect( await getBlocksSansIds() ).toMatchSnapshot();
-
-		// Undo the revert.
-		await click( '.components-notice.is-success .components-notice__content button' );
-
-		// Notice gets removed
-		expect( await page.evaluate( () => document.querySelector( '.components-notice.is-success' ) ) ).toBeNull();
-
-		// Changes before the revert should be found.
-		expect( await getBlocksSansIds() ).toMatchSnapshot();
-
-	} );
 
 } );
