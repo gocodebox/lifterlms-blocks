@@ -20,6 +20,7 @@ import {
 
 import {
 	blockSnapshotMatcher,
+	removeBlockByClientId,
 	visitForm,
 } from '../../util';
 
@@ -85,9 +86,7 @@ describe( 'Admin/FormsDocSidebar', () => {
 			// Remove the last field block on screen.
 			let blocks = await getAllBlocks();
 			const lastBlock = blocks[ blocks.length - 2 ];
-			await page.evaluate( async ( clientId ) => {
-				return wp.data.dispatch( 'core/block-editor' ).removeBlock( clientId );
-			}, lastBlock.clientId );
+			await removeBlockByClientId( lastBlock.clientId );
 
 			// Revert.
 			await openFormSettingsPanel();
@@ -105,6 +104,8 @@ describe( 'Admin/FormsDocSidebar', () => {
 
 			// Notice gets removed
 			expect( await page.evaluate( () => document.querySelector( '.components-notice.is-success' ) ) ).toBeNull();
+
+			await page.waitFor( 1000 );
 
 			// Changes before the revert should be found.
 			expect( await getAllBlockNames() ).toMatchSnapshot();

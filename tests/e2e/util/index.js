@@ -9,10 +9,14 @@
 
 import blockSnapshotMatcher from './block-snapshot-matcher';
 import clearBlocks from './clear-blocks';
+import publishAndSaveEntities from './publish-and-save-entities';
+import removeBlockByClientId from './remove-block-by-client-id';
 import visitForm from './visit-form';
 
 export {
 	blockSnapshotMatcher,
 	clearBlocks,
+	publishAndSaveEntities,
+	removeBlockByClientId,
 	visitForm,
 };

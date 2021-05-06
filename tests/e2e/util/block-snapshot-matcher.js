@@ -8,7 +8,7 @@
  *
  * @type {Object}
  */
-export const blockSnapshotMatcher = {
+export default {
 	clientId: expect.any( String ),
 	innerBlocks: expect.anything(), // You'd think that `expect.any( Array )` would work but doesn't.
 };

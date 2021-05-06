@@ -210,7 +210,7 @@ Object {
 exports[`Blocks/FormFields User Email/Editor can toggle the group layout 2`] = `
 Object {
   "attributes": Object {
-    "columns": 6,
+    "columns": 12,
     "data_store": "users",
     "data_store_key": "user_email",
     "description": "Custom description",
@@ -221,7 +221,7 @@ Object {
     "isConfirmationField": false,
     "label": "Custom Label Email Address",
     "label_show_empty": false,
-    "last_column": false,
+    "last_column": true,
     "llms_visibility": "off",
     "llms_visibility_in": "",
     "llms_visibility_posts": "[]",
@@ -243,7 +243,7 @@ Object {
 exports[`Blocks/FormFields User Email/Editor can toggle the group layout 3`] = `
 Object {
   "attributes": Object {
-    "columns": 6,
+    "columns": 12,
     "data_store": false,
     "data_store_key": false,
     "description": "Custom description",

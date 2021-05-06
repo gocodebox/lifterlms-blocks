@@ -84,6 +84,8 @@ describe( 'BlockVisibility', () => {
 		await page.waitForSelector( '.llms-search--course .llms-search__menu' );
 		await page.keyboard.press( 'Enter' );
 
+		await page.waitFor( 1000 );
+
 		// Attributes added to the post content.
 		expect( await getEditedPostContent() ).toMatchSnapshot();
 

@@ -11,8 +11,6 @@ import {
 	insertBlock,
 	openGlobalBlockInserter,
 	openDocumentSettingsSidebar,
-	publishPostWithPrePublishChecksDisabled,
-	selectBlockByClientId,
 } from '@wordpress/e2e-test-utils';
 
 import {
@@ -21,16 +19,21 @@ import {
 } from '@lifterlms/llms-e2e-test-utils';
 
 import {
+	publishAndSaveEntities,
+	removeBlockByClientId,
 	visitForm,
 } from '../../util';
 
 async function removeUserEmailBlock() {
 
 	const blocks = await getAllBlocks();
-	await selectBlockByClientId( blocks[0].clientId );
+	await removeBlockByClientId( blocks[0].clientId );
 
-	await click( 'button.components-dropdown-menu__toggle[aria-label="More options"]' );
-	await clickElementByText( 'Remove block' );
+}
+
+async function getAvailableSidebarPanelTitles() {
+
+	return page.$$eval( '.components-panel .block-editor-block-inspector .components-panel__body-title', els => els.map( ( { textContent } ) => textContent ) );
 
 }
 
@@ -38,21 +41,23 @@ describe( 'Admin/FormsReady', () => {
 
 	it ( 'should disable the use of the "Draft" button', async () => {
 
+		const draftBtnSelector = '.edit-post-layout button.editor-post-switch-to-draft';
+
 		await visitForm();
 
 		// On page load.
 		await page.waitFor( 5 );
-		expect( await page.$eval( '.edit-post-layout button.editor-post-switch-to-draft', el => el.style.display ) ).toBe( 'none' );
+		expect( await page.$eval( draftBtnSelector, el => el.style.display ) ).toBe( 'none' );
 
 		// Add a block.
 		await insertBlock( 'Paragraph' );
 		await page.waitFor( 5 );
-		expect( await page.$eval( '.edit-post-layout button.editor-post-switch-to-draft', el => el.style.display ) ).toBe( 'none' );
+		expect( await page.$eval( draftBtnSelector, el => el.style.display ) ).toBe( 'none' );
 
 		// After updating.
-		await publishPostWithPrePublishChecksDisabled();
-		await page.waitFor( 5 );
-		expect( await page.$eval( '.edit-post-layout button.editor-post-switch-to-draft', el => el.style.display ) ).toBe( 'none' );
+		await publishAndSaveEntities();
+		await page.waitFor( 500 );
+		expect( await page.$eval( draftBtnSelector, el => el.style.display ) ).toBe( 'none' );
 
 	} );
 
@@ -100,6 +105,7 @@ describe( 'Admin/FormsReady', () => {
 		await click( '.components-notice.is-error .components-notice__content button' );
 
 		// Notice gets removed
+		await page.waitFor( 2000 );
 		expect( await page.evaluate( () => document.querySelector( '.components-notice.is-error' ) ) ).toBeNull();
 		const blocks = await getAllBlocks();
 		expect( blocks[0].name ).toBe( 'llms/form-field-user-email' );
@@ -118,37 +124,51 @@ describe( 'Admin/FormsReady', () => {
 
 	} );
 
-	it ( 'should disable block-level visibility settings on the registration form', async () => {
+	it ( 'should deregister voucher block on checkout and account edit forms', async () => {
 
-		await visitForm( 'Register' );
+		const forms = {
+			'Register': false,
+			'Edit Account Information': false,
+			'Billing Information': true,
+		};
 
-		const blocks = await getAllBlocks();
-		await selectBlockByClientId( blocks[0].clientId );
+		for ( let form in forms ) {
 
-		expect( await page.$eval( '.components-panel .block-editor-block-inspector div:nth-child(3) .components-panel__body-title', el => el.textContent ) ).toBe( 'Advanced' );
+			await visitForm( form );
 
-	} );
+			await openGlobalBlockInserter();
+			expect( await getAllBlockInserterItemTitles() ).toMatchSnapshot();
 
-	it ( 'should disable block-level visibility settings on the account edit form', async () => {
-
-		await visitForm( 'Edit Account Information' );
-
-		const blocks = await getAllBlocks();
-		await selectBlockByClientId( blocks[0].clientId );
-
-		expect( await page.$eval( '.components-panel .block-editor-block-inspector div:nth-child(3) .components-panel__body-title', el => el.textContent ) ).toBe( 'Advanced' );
+		}
 
 	} );
 
-	it ( 'should disable allow block-level visibility settings on the checkout form', async () => {
 
-		await visitForm( 'Billing Information' );
+	const forms = {
+		'Register': false,
+		'Edit Account Information': false,
+		'Billing Information': true,
+	};
 
-		const blocks = await getAllBlocks();
-		await selectBlockByClientId( blocks[0].clientId );
+	for ( let form in forms ) {
 
-		expect( await page.$eval( '.components-panel .block-editor-block-inspector div:nth-child(2) .components-panel__body-title', el => el.textContent ) ).toBe( 'Enrollment Visibility' );
+		const verb = forms[ form ] ? 'allow' : 'disable';
 
-	} );
+		it ( `should ${ verb } block-level visibility settings for the "${ form }" form`, async () => {
+
+			await visitForm( form );
+
+			await page.click( '.block-editor-block-list__layout .wp-block-llms-form-field-user-phone .llms-field > label' );
+
+			await page.waitFor( 500 );
+
+			const titles = await getAvailableSidebarPanelTitles();
+			expect( titles.includes( 'Enrollment Visibility' ) ).toStrictEqual( forms[ form ] );
+
+		} );
+
+	}
+
+
 
 } );
