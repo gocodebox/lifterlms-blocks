@@ -66,7 +66,6 @@ function getSibling( clientId ) {
  * @return {number} Adjusted columns width for the sibling block.
  */
 function determineSiblingCols( cols, siblingCols ) {
-
 	if ( cols === 12 && siblingCols === 12 ) {
 		// When switching from stacked to columns,
 		siblingCols = 6;

@@ -99,7 +99,6 @@ addFilter(
 		] );
 
 		if ( hasResolvedBlock ) {
-
 			// Get field blocks from the block.
 			const fields = getFieldBlocks( getBlockByRef( ref ) );
 
@@ -111,14 +110,17 @@ addFilter(
 				 *
 				 * @see https://github.com/WordPress/gutenberg/issues/21049#issuecomment-632134201
 				 */
-				 setTimeout( () => {
-					dispatch( 'core' )
-					.editEntityRecord( 'postType', 'wp_block', attributes.ref, {
-						is_llms_field: fields.length > 0 ? 'yes' : 'no',
-					} );
+				setTimeout( () => {
+					dispatch( 'core' ).editEntityRecord(
+						'postType',
+						'wp_block',
+						attributes.ref,
+						{
+							is_llms_field: fields.length > 0 ? 'yes' : 'no',
+						}
+					);
 				} );
 			}
-
 		}
 
 		return el;
