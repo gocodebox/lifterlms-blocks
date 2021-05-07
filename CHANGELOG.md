@@ -1,6 +1,20 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.0.0-beta.4 - 2021-05-07
+--------------------------
+
++ Fixed error encountered when opening the block editor options menu on an `llms_form` post type.
++ Added UUID generation to all form field blocks.
++ Fixed visual issues encountered with form field blocks on wide screens in the block editor.
++ Fixed issue preventing column widths from being set after switching from a stacked layout to a columns layout for a field group.
++ Added CSS classes to various option elements in the block editor
++ Moved most inline css in the editor into a static file
++ Fixed issue encountered when reverting a form to it's default
++ Fixed dynamic block rendering errors encountered when the block is restricted to specific courses/memberships.
++ Added CSS to make input placeholder text look like a placeholder
+
+
 v2.0.0-beta.3 - 2021-04-26
 --------------------------
 
