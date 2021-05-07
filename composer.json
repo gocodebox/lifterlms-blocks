@@ -70,7 +70,7 @@
       "@tests-install-plugins"
     ],
     "tests-install-plugins": [
-      "\"vendor/bin/llms-tests\" plugin lifterlms",
+      "\"vendor/bin/llms-tests\" plugin https://github.com/gocodebox/lifterlms.git@dev-500",
       "\"vendor/bin/llms-tests\" plugin classic-editor"
     ],
     "tests-reinstall": [
