@@ -81,6 +81,7 @@ export const settings = getSettingsFromBase(
 		},
 		category: 'llms-custom-fields',
 		supports: {
+			inserter: true,
 			llms_field_inspector: {
 				customFill: 'fieldTextarea',
 			},
