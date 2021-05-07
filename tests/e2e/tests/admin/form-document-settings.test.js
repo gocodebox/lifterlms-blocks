@@ -20,21 +20,10 @@ import {
 
 import {
 	blockSnapshotMatcher,
+	openFormSettingsPanel,
 	removeBlockByClientId,
 	visitForm,
 } from '../../util';
-
-async function openFormSettingsPanel() {
-
-	await clickElementByText( 'LifterLMS Form', '.components-button.edit-post-sidebar__panel-tab' );
-
-	const isOpen = await page.$eval( '.llms-forms-doc-settings', el => el.classList.contains( 'is-opened' ) );
-
-	if ( ! isOpen ) {
-		await clickElementByText( 'Form Settings', '.components-panel .components-button' );
-	}
-
-}
 
 async function getAllBlockNames() {
 	const blocks = await getAllBlocks();

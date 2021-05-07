@@ -109,6 +109,8 @@ async function testAddConfirmationProp( editable = true ) {
 
 		await clickElementByText( 'Confirmation Field' );
 
+		await page.waitFor( 2000 );
+
 		const
 			block = await getTestedBlock(),
 			{ innerBlocks } = block;

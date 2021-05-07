@@ -19,6 +19,7 @@ import {
 } from '@lifterlms/llms-e2e-test-utils';
 
 import {
+	openFormSettingsPanel,
 	publishAndSaveEntities,
 	removeBlockByClientId,
 	visitForm,
@@ -58,6 +59,12 @@ describe( 'Admin/FormsReady', () => {
 		await publishAndSaveEntities();
 		await page.waitFor( 500 );
 		expect( await page.$eval( draftBtnSelector, el => el.style.display ) ).toBe( 'none' );
+
+		// Revert the form so future snapshots don't fail.
+		await openFormSettingsPanel();
+		await clickElementByText( 'Revert to Default', '.components-panel .components-button' );
+		await page.waitForSelector( '.components-notice.is-success' );
+		await publishAndSaveEntities();
 
 	} );
 
