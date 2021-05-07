@@ -20,11 +20,16 @@
 
 .llms-fields {
 
-	input {
+	input,
+	textarea {
 		border: 1px solid #999;
+		color: #757575;
 		padding: 4px 8px;
 		&:focus::placeholder {
 			opacity: 0;
+		}
+		&::placeholder {
+			color: #757575;
 		}
 	}
 
@@ -33,7 +38,6 @@
 	select {
 		width: 100%;
 	}
-
 
 	input:not([type=radio]) {
 		border-radius: 4px;
