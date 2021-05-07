@@ -45,7 +45,7 @@ export const composed = true;
  * @type {Object}
  */
 export const settings = getSettingsFromBase( getDefaultSettings( 'group' ), {
-	title: __( 'User Street rAddress', 'lifterlms' ),
+	title: __( 'User Street Address', 'lifterlms' ),
 	description: __( "Collect a user's street address.", 'lifterlms' ),
 	icon: {
 		src: 'id-alt',
