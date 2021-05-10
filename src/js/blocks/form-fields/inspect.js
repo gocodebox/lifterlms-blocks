@@ -266,7 +266,60 @@ export default class Inspector extends Component {
 
 	}
 
+	/**
+	 * Update a field's "name" attribute
+	 *
+	 * Validates against the global field name list found in `window.llms.fieldNames`
+	 * to ensure global uniqueness and throws an error notice when a non-unique name
+	 * is submitted.
+	 *
+	 * @since [version]
+	 *
+	 * @param {string} name The new field name
+	 * @return {void}
+	 */
+	updateFieldNameAttribute( name ) {
 
+		const
+			{ attributes, setAttributes } = this.props,
+			currentName    = attributes.name;
+
+		// We don't have to do anything here.
+		if ( name === currentName ) {
+			return;
+		}
+
+		const
+			{ fieldNames } = window.llms,
+			isValid        = ! fieldNames.includes( name );
+
+		if ( ! isValid ) {
+
+			const noticeId = `llms-name-validation-err-${ attributes.uuid }`,
+			{ createErrorNotice, removeNotice } = dispatch( 'core/notices' );
+
+			removeNotice( noticeId );
+			createErrorNotice(
+				__( 'Please choose a unique field name.', 'lifterlms' ),
+				{ id: noticeId }
+			);
+
+			return;
+		}
+
+		// It's valid, update the name.
+		setAttributes( { name } );
+
+		// Remove the old name from the list.
+		delete fieldNames[ fieldNames.indexOf( currentName ) ];
+
+		// Add the new name to the list.
+		fieldNames.push( name );
+
+		// Persist to the window variable, filtering removes the deleted items.
+		window.llms.fieldNames = fieldNames.filter( i => i );
+
+	}
 
 	/**
 	 * Render the Block Inspector
@@ -575,9 +628,7 @@ export default class Inspector extends Component {
 						this.hasInspectorControlSupport( 'name' ) && (
 							<TextControl
 								label={ __( 'Field Name', 'lifterlms' ) }
-								onChange={ ( value ) =>
-									setAttributes( { name: value } )
-								}
+								onChange={ ( newName ) => this.updateFieldNameAttribute( newName ) }
 								help={ __(
 									"The field's HTML name attribute.",
 									'lifterlms'
