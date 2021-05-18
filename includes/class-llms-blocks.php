@@ -33,7 +33,11 @@ class LLMS_Blocks {
 
 		add_action( 'plugins_loaded', array( $this, 'init' ) );
 		add_action( 'add_meta_boxes', array( $this, 'remove_metaboxes' ), 999, 2 );
-		add_filter( 'block_categories', array( $this, 'add_block_category' ) );
+
+		global $wp_version;
+		$filter = version_compare( $wp_version, '5.8-alpha.1', '>=' ) ? 'block_categories_all' : 'block_categories';
+
+		add_filter( $filter, array( $this, 'add_block_category' ) );
 		add_action( 'admin_print_scripts', array( $this, 'admin_print_scripts' ), 15 );
 
 		/**
