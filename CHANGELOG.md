@@ -1,6 +1,15 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.0.0-beta.5 - 2021-05-18
+--------------------------
+
++ Add WP core 5.8 compatibility for deprecated filter `block_categories`.
++ Fixed issue encountered on courses and memberships when attempting to edit instructor information.
++ Added validation to ensure all fields have unique HTML name attributes.
++ Simplified field data storage interface to enable saving only to the usermeta table.
+
+
 v2.0.0-beta.4 - 2021-05-07
 --------------------------
 
