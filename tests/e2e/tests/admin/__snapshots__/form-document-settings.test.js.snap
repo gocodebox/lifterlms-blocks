@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Admin/FormsDocSidebar LocationDisplay should display the location when open registration is disabled 1`] = `"LocationRegistration"`;
+exports[`Admin/FormsDocSidebar LocationDisplay should display the location when open registration is disabled 1`] = `"LocationRegistration(opens in a new tab)"`;
 
 exports[`Admin/FormsDocSidebar LocationDisplay should display the location with a link when open registration is enabled 1`] = `"Registration(opens in a new tab)"`;
 
