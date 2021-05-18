@@ -53,16 +53,6 @@ function getSibling( clientId ) {
 		: null;
 }
 
-function isLastColumn( clientId ) {
-	const parent = getParentFieldGroup( clientId );
-	if ( parent && parent.innerBlocks.length ) {
-		return (
-			clientId ===
-			parent.innerBlocks[ parent.innerBlocks.length - 1 ].clientId
-		);
-	}
-}
-
 function updateChildren( {
 	setAttributes,
 	currentUpdates,
@@ -122,14 +112,8 @@ function getConfirmGroupUpdates( attributes, siblingAttributes ) {
 	};
 }
 
-export default function ( {
-	attributes,
-	context,
-	clientId,
-	setAttributes,
-} = {} ) {
-	const { columns } = attributes,
-		sibling = getSibling( clientId );
+export default function ( { attributes, clientId, setAttributes } = {} ) {
+	const sibling = getSibling( clientId );
 
 	let currentUpdates = {},
 		siblingUpdates = {};

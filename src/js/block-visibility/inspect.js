@@ -214,10 +214,8 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 		 * @return {void}
 		 */
 		const savePosts = () => {
-
 			// Reduce the post objects to only what we require to save.
 			const toSave = llms_visibility_posts.map( ( post ) => {
-
 				const { id, title, type } = post,
 					stored = { id, title, type };
 
@@ -232,8 +230,11 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 				 * @param {Object} stored Reduced WP_Post object.
 				 * @param {Object} pot    The original WP_Post object.
 				 */
-				return applyFilters( 'llms_block_visibility_stored_post_props', stored, post );
-
+				return applyFilters(
+					'llms_block_visibility_stored_post_props',
+					stored,
+					post
+				);
 			} );
 
 			setAttributes( {

@@ -252,7 +252,6 @@ export default class Inspector extends Component {
 	}
 
 	getBlockSiblings( block ) {
-
 		const parentClientId = this.getParentGroupClientId( block );
 
 		if ( ! parentClientId ) {
@@ -262,8 +261,9 @@ export default class Inspector extends Component {
 		const { getBlock } = select( blockEditorStore ),
 			parentBlock = getBlock( parentClientId );
 
-		return parentBlock.innerBlocks.filter( ( { clientId } ) => clientId !== block.clientId );
-
+		return parentBlock.innerBlocks.filter(
+			( { clientId } ) => clientId !== block.clientId
+		);
 	}
 
 	/**
@@ -279,24 +279,22 @@ export default class Inspector extends Component {
 	 * @return {void}
 	 */
 	updateFieldNameAttribute( name ) {
-
-		const
-			{ attributes, setAttributes } = this.props,
-			currentName    = attributes.name;
+		const { attributes, setAttributes } = this.props,
+			currentName = attributes.name;
 
 		// We don't have to do anything here.
 		if ( name === currentName ) {
 			return;
 		}
 
-		const
-			{ fieldNames } = window.llms,
-			isValid        = ! fieldNames.includes( name );
+		const { fieldNames } = window.llms,
+			isValid = ! fieldNames.includes( name );
 
 		if ( ! isValid ) {
-
 			const noticeId = `llms-name-validation-err-${ attributes.uuid }`,
-			{ createErrorNotice, removeNotice } = dispatch( 'core/notices' );
+				{ createErrorNotice, removeNotice } = dispatch(
+					'core/notices'
+				);
 
 			removeNotice( noticeId );
 			createErrorNotice(
@@ -317,8 +315,7 @@ export default class Inspector extends Component {
 		fieldNames.push( name );
 
 		// Persist to the window variable, filtering removes the deleted items.
-		window.llms.fieldNames = fieldNames.filter( i => i );
-
+		window.llms.fieldNames = fieldNames.filter( ( i ) => i );
 	}
 
 	/**
@@ -330,7 +327,6 @@ export default class Inspector extends Component {
 	 * @return {Fragment} Component HTML fragment.
 	 */
 	render() {
-
 		// Return early if there's no inspector options to display.
 		if ( ! this.hasInspectorSupport() ) {
 			return '';
@@ -386,20 +382,26 @@ export default class Inspector extends Component {
 							className="llms-field-width-select"
 							label={ __( 'Field Width', 'lifterlms' ) }
 							onChange={ ( columns ) => {
-
 								columns = parseInt( columns, 10 );
 								setAttributes( { columns } );
 
 								const sibling = this.getBlockSiblings( block );
 
-								if ( sibling.length && columns + sibling[0].attributes.columns > 12 ) {
-
-									const { updateBlockAttributes } = dispatch( blockEditorStore );
-									updateBlockAttributes( sibling[0].clientId, {
-										columns: 12 - columns,
-									} );
+								if (
+									sibling.length &&
+									columns + sibling[ 0 ].attributes.columns >
+										12
+								) {
+									const { updateBlockAttributes } = dispatch(
+										blockEditorStore
+									);
+									updateBlockAttributes(
+										sibling[ 0 ].clientId,
+										{
+											columns: 12 - columns,
+										}
+									);
 								}
-
 							} }
 							help={ __(
 								'Determines the width of the form field.',
@@ -628,7 +630,9 @@ export default class Inspector extends Component {
 						this.hasInspectorControlSupport( 'name' ) && (
 							<TextControl
 								label={ __( 'Field Name', 'lifterlms' ) }
-								onChange={ ( newName ) => this.updateFieldNameAttribute( newName ) }
+								onChange={ ( newName ) =>
+									this.updateFieldNameAttribute( newName )
+								}
 								help={ __(
 									"The field's HTML name attribute.",
 									'lifterlms'
