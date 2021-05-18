@@ -175,7 +175,7 @@ export default class Search extends Component {
 					classNamePrefix="llms-search"
 					isMulti={ isMulti }
 					isDisabled={ isDisabled }
-					value={ this.formatSearchResults( selected ) }
+					value={ this.formatSearchResults( selected || [] ) }
 					defaultOptions={ selected }
 					placeholder={ placeholder }
 					loadOptions={ this.onSearch }
