@@ -12,16 +12,13 @@ import {
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import {
-	Button,
 	PanelBody,
-	PanelRow,
 	SelectControl,
 	Slot,
 	TextControl,
 	ToggleControl,
 } from '@wordpress/components';
 import { select, dispatch } from '@wordpress/data';
-import { applyFilters } from '@wordpress/hooks';
 import { Component, Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import {
@@ -40,7 +37,6 @@ import getBlocksFlat from '../../util/get-blocks-flat';
  * @since 1.6.0
  */
 export default class Inspector extends Component {
-
 	/**
 	 * Retrieve a specific block by it's ID attribute.
 	 *
@@ -285,7 +281,6 @@ export default class Inspector extends Component {
 				name,
 				required,
 				placeholder,
-				data_store,
 				data_store_key,
 				columns,
 				isConfirmationField,
@@ -469,15 +464,14 @@ export default class Inspector extends Component {
 							<PanelBody
 								title={ __( 'Data Storage', 'lifterlms' ) }
 							>
-
 								<TextControl
-									label={ __(
-										'Usermeta Key',
-										'lifterlms'
-									) }
+									label={ __( 'Usermeta Key', 'lifterlms' ) }
 									onChange={ ( data_store_key ) => {
 										// Strip invalid chars
-										data_store_key = data_store_key.replace( /[^A-Za-z0-9\-\_]/g, '' );
+										data_store_key = data_store_key.replace(
+											/[^A-Za-z0-9\-\_]/g,
+											''
+										);
 										setAttributes( { data_store_key } );
 									} }
 									help={ __(
@@ -486,7 +480,6 @@ export default class Inspector extends Component {
 									) }
 									value={ data_store_key }
 								/>
-
 							</PanelBody>
 						) }
 				</InspectorControls>
