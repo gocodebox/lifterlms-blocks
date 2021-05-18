@@ -40,60 +40,6 @@ import getBlocksFlat from '../../util/get-blocks-flat';
  * @since 1.6.0
  */
 export default class Inspector extends Component {
-	/**
-	 * Constructor
-	 *
-	 * @since 1.12.0
-	 *
-	 * @return {void}
-	 */
-	constructor() {
-		super( ...arguments );
-		this.state = {
-			addingKey: '',
-			addingKeys: false,
-		};
-	}
-
-	/**
-	 * Retrieve an array of objects to be used in data store related Select controls
-	 *
-	 * @since 1.12.0
-	 *
-	 * @param {string}   key         Describes which Select control to retrieve data for.
-	 * @param {string}   location    When retrieving for the "keys" list control, additionally provide the location to provide keys for.
-	 * @param {string[]} currentKeys Array of keys to add to the keys list control. Should include the default key (equal to the fields "name") as well as the currently selected key.
-	 * @return {Object[]} Array of objects to be used for the options of a Select control.
-	 */
-	getDataStoreOptions( key, location = null, currentKeys = [] ) {
-		const opts = applyFilters( 'llms.blockFields.dataStoreOptions', {
-			users: {
-				label: __( 'Users Table', 'lifterlms' ),
-				keys: [ 'user_url', 'display_name' ],
-			},
-			usermeta: {
-				label: __( 'User Meta Table', 'lifterlms' ),
-				keys: [ 'nickname', 'description' ],
-			},
-		} );
-
-		if ( 'locations' === key ) {
-			return Object.keys( opts ).map( ( value ) => {
-				return { value, label: opts[ value ].label };
-			} );
-		} else if ( 'keys' === key ) {
-			let keys = opts[ location ].keys;
-			if ( currentKeys.length ) {
-				keys = keys.concat( currentKeys );
-			}
-			keys = [ ...new Set( keys ) ];
-			return keys.map( ( value ) => {
-				return { value, label: value };
-			} );
-		}
-
-		return [];
-	}
 
 	/**
 	 * Retrieve a specific block by it's ID attribute.
@@ -523,104 +469,24 @@ export default class Inspector extends Component {
 							<PanelBody
 								title={ __( 'Data Storage', 'lifterlms' ) }
 							>
-								<SelectControl
-									label={ __( 'Location', 'lifterlms' ) }
-									onChange={ ( data_store ) =>
-										setAttributes( { data_store } )
-									}
-									help={ __(
-										'Database table where field data will be stored for a user completing the form.',
+
+								<TextControl
+									label={ __(
+										'Usermeta Key',
 										'lifterlms'
 									) }
-									value={ data_store }
-									options={ this.getDataStoreOptions(
-										'locations'
-									) }
-								/>
-
-								<SelectControl
-									label={ __( 'Key', 'lifterlms' ) }
-									onChange={ ( data_store_key ) =>
-										setAttributes( { data_store_key } )
-									}
+									onChange={ ( data_store_key ) => {
+										// Strip invalid chars
+										data_store_key = data_store_key.replace( /[^A-Za-z0-9\-\_]/g, '' );
+										setAttributes( { data_store_key } );
+									} }
 									help={ __(
-										'Name of the field where data is stored.',
+										'Database field key name. Only accepts alphanumeric characters, hyphens, and underscores.',
 										'lifterlms'
 									) }
 									value={ data_store_key }
-									options={ this.getDataStoreOptions(
-										'keys',
-										data_store,
-										'users' === data_store
-											? []
-											: [ name, data_store_key ]
-									) }
 								/>
 
-								{ 'users' !== data_store && (
-									<Button
-										isLink
-										onClick={ () =>
-											this.setState( {
-												addingKeys: ! this.state
-													.addingKeys,
-											} )
-										}
-									>
-										{ __( 'Add New Key', 'lifterlms' ) }
-									</Button>
-								) }
-
-								{ 'users' !== data_store &&
-									this.state.addingKeys && (
-										<Fragment>
-											<PanelRow>
-												<TextControl
-													label={ __(
-														'New Key Name',
-														'lifterlms'
-													) }
-													onChange={ ( value ) =>
-														this.setState( {
-															addingKey: value.replace(
-																/[^0-9a-zA-Z_-]/g,
-																''
-															),
-														} )
-													}
-													help={ __(
-														'Database field key name. Only accepts alphanumeric characters, hyphens, and underscores.',
-														'lifterlms'
-													) }
-													value={
-														this.state.addingKey
-													}
-												/>
-											</PanelRow>
-
-											<Button
-												isSecondary
-												onClick={ () => {
-													// Select the newly added key.
-													setAttributes( {
-														data_store_key: this
-															.state.addingKey,
-													} );
-
-													// Clear the state.
-													this.setState( {
-														addingKeys: false,
-														addingKey: '',
-													} );
-												} }
-											>
-												{ __(
-													'Add New Key',
-													'lifterlms'
-												) }
-											</Button>
-										</Fragment>
-									) }
 							</PanelBody>
 						) }
 				</InspectorControls>
