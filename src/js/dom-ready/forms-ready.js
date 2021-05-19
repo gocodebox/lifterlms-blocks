@@ -89,6 +89,38 @@ function maybeDisableVisibility() {
  * @return {void}
  */
 function modifyVisibilityForBlocks() {
+
+	const visibilityOptsMap = {
+		'llms/form-field-user-email': [ 'all', 'logged_out' ],
+		'llms/form-field-user-password': [ 'all', 'logged_out' ],
+		'llms/form-field-user-login': [ 'logged_out' ],
+	};
+
+	const blocksList = Object.keys( visibilityOptsMap );
+
+	/**
+	 * Retrieve a list of options for a given block
+	 *
+	 * @since [version]
+	 *
+	 * @param {Object}   options             A WP_Block object.
+	 * @param {string}   options.name        The block's name.
+	 * @param {Object[]} options.innerBlocks The block's inner blocks list.
+	 * @return {string[]} Array of block options.
+	 */
+	const getOptsForBlock = ( { name, innerBlocks } ) => {
+
+		let mapKey = name;
+
+		if ( 'llms/form-field-confirm-group' === name ) {
+			const inner = innerBlocks.find( innerBlock => blocksList.includes( innerBlock.name ) );
+			mapKey = inner ? inner.name : mapKey;
+		}
+
+		return visibilityOptsMap[ mapKey ] || [];
+
+	};
+
 	/**
 	 * Determines whether or not a given block should have it's visibility options modified
 	 *
@@ -100,19 +132,15 @@ function modifyVisibilityForBlocks() {
 	 * @return {boolean} Whether or not the settings list should be modified.
 	 */
 	const shouldModify = ( { name, innerBlocks } ) => {
-		const toModify = [
-			'llms/form-field-user-email',
-			'llms/form-field-user-password',
-			'llms/form-field-user-login',
-		];
 
 		if ( 'llms/form-field-confirm-group' === name ) {
 			return some( innerBlocks, ( innerBlock ) =>
-				toModify.includes( innerBlock.name )
+				blocksList.includes( innerBlock.name )
 			);
 		}
 
-		return toModify.includes( name );
+		return blocksList.includes( name );
+
 	};
 
 	addFilter(
@@ -124,7 +152,7 @@ function modifyVisibilityForBlocks() {
 
 			if ( selectedBlock && shouldModify( selectedBlock ) ) {
 				return opts.filter( ( { value } ) =>
-					[ 'all', 'logged_out' ].includes( value )
+					getOptsForBlock( selectedBlock ).includes( value )
 				);
 			}
 

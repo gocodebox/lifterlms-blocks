@@ -76,6 +76,9 @@ export const settings = getSettingsFromBase(
 			data_store_key: {
 				__default: 'user_login',
 			},
+			llms_visibility: {
+				default: 'logged_out',
+			},
 		},
 	},
 	[ 'transforms', 'variations' ]
