@@ -5,10 +5,13 @@
  * @version 1.12.0
  */
 
+/* eslint camelcase: [ "error", { allow: [ "_llms_form_location" ] } ] */
+
 // WP Deps.
 import { createBlock } from '@wordpress/blocks';
 import { dispatch, subscribe, select } from '@wordpress/data';
 import { store as blockEditorStore } from '@wordpress/block-editor';
+import { store as editorStore } from '@wordpress/editor';
 import { addFilter } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
 
@@ -27,15 +30,25 @@ import { getBlocksFlat } from '../util/';
  *   protected, or published in the future.
  *
  * @since 1.12.0
+ * @since [version] Only prevent drafts on core forms.
  *
  * @return {void}
  */
 function hideCoreUI() {
+
+	const { _llms_form_is_core } = select( editorStore ).getEditedPostAttribute( 'meta' );
+
+	// Hide Status & Visibility.
+	const selectors = [ '.edit-post-layout .components-panel__body.edit-post-post-status' ];
+
+	// Core forms cannot be drafted.
+	if ( 'yes' === _llms_form_is_core ) {
+		selectors.push( '.edit-post-layout button.editor-post-switch-to-draft' );
+	}
+
 	subscribe( () => {
 		setTimeout( () => {
-			const els = document.querySelectorAll(
-				'.edit-post-layout button.editor-post-switch-to-draft, .edit-post-layout .components-panel__body.edit-post-post-status'
-			);
+			const els = document.querySelectorAll( selectors.join( ',' ) );
 			els.forEach( ( el ) => {
 				el.style.display = 'none';
 			} );
@@ -51,10 +64,8 @@ function hideCoreUI() {
  * @return {void}
  */
 function maybeDisableVisibility() {
-	// eslint-disable-next-line camelcase
-	const { _llms_form_location } = select(
-		'core/editor'
-	).getEditedPostAttribute( 'meta' );
+
+	const { _llms_form_location } = select( editorStore ).getEditedPostAttribute( 'meta' );
 
 	if ( [ 'registration', 'account' ].includes( _llms_form_location ) ) {
 		addFilter(
