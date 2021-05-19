@@ -42,7 +42,7 @@ export const deregisterBlocksForForms = () => {
 	 *
 	 * @since 1.7.0
 	 * @since 1.12.0 Use `safelist` in favor of `whitelist`.
-	 * @since [version] Add core/block to the safelist.
+	 * @since [version] Add core/block to the safelist & prevent user login on edit account page.
 	 *
 	 * @param {string} name Block name.
 	 * @return {boolean} Returns `true` if a block should be unregistered.
@@ -71,6 +71,10 @@ export const deregisterBlocksForForms = () => {
 			// Vouchers can only be used on registration forms.
 		} else if ( 0 === name.indexOf( 'llms/form-field-redeem-voucher' ) ) {
 			return 'registration' === _llms_form_location ? false : true;
+
+			// User login cannot be used on the account page.
+		} else if ( 0 === name.indexOf( 'llms/form-field-user-login' ) ) {
+			return 'account' === _llms_form_location;
 
 			// Allow all other form field blocks.
 		} else if ( -1 !== name.indexOf( 'llms/form-field' ) ) {
