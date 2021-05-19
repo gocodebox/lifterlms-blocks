@@ -42,9 +42,6 @@ import * as userAddressPostalCode from './fields/user-address-postal-code';
 
 import * as userPhone from './fields/user-phone';
 
-// import * as userPasswordCurrent from './fields/user-password-current';
-// import * as userAddress from './fields/user-address';
-
 export {
 	confirmGroup,
 	checkboxes,
@@ -70,7 +67,4 @@ export {
 	userNames,
 	userPassword,
 	userPhone,
-
-	// userPasswordCurrent,
-	// userAddressAdditional,
 };

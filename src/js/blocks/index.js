@@ -72,12 +72,6 @@ export const deregisterBlocksForForms = () => {
 		} else if ( 0 === name.indexOf( 'llms/form-field-redeem-voucher' ) ) {
 			return 'registration' === _llms_form_location ? false : true;
 
-			// Current user password can only be used on the account edit form.
-		} else if (
-			0 === name.indexOf( 'llms/form-field-user-password-current' )
-		) {
-			return 'account' === _llms_form_location ? false : true;
-
 			// Allow all other form field blocks.
 		} else if ( -1 !== name.indexOf( 'llms/form-field' ) ) {
 			return false;
