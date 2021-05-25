@@ -5,7 +5,7 @@
  * @version 1.12.0
  */
 
-/* eslint camelcase: [ "error", { allow: [ "_llms_form_location" ] } ] */
+/* eslint camelcase: [ "error", { allow: [ "_llms_form_*" ] } ] */
 
 // WP Deps.
 import { createBlock } from '@wordpress/blocks';
@@ -35,15 +35,20 @@ import { getBlocksFlat } from '../util/';
  * @return {void}
  */
 function hideCoreUI() {
-
-	const { _llms_form_is_core } = select( editorStore ).getEditedPostAttribute( 'meta' );
+	const { _llms_form_is_core } = select( editorStore ).getEditedPostAttribute(
+		'meta'
+	);
 
 	// Hide Status & Visibility.
-	const selectors = [ '.edit-post-layout .components-panel__body.edit-post-post-status' ];
+	const selectors = [
+		'.edit-post-layout .components-panel__body.edit-post-post-status',
+	];
 
 	// Core forms cannot be drafted.
 	if ( 'yes' === _llms_form_is_core ) {
-		selectors.push( '.edit-post-layout button.editor-post-switch-to-draft' );
+		selectors.push(
+			'.edit-post-layout button.editor-post-switch-to-draft'
+		);
 	}
 
 	subscribe( () => {
@@ -64,8 +69,9 @@ function hideCoreUI() {
  * @return {void}
  */
 function maybeDisableVisibility() {
-
-	const { _llms_form_location } = select( editorStore ).getEditedPostAttribute( 'meta' );
+	const { _llms_form_location } = select(
+		editorStore
+	).getEditedPostAttribute( 'meta' );
 
 	if ( [ 'registration', 'account' ].includes( _llms_form_location ) ) {
 		addFilter(
@@ -100,7 +106,6 @@ function maybeDisableVisibility() {
  * @return {void}
  */
 function modifyVisibilityForBlocks() {
-
 	const visibilityOptsMap = {
 		'llms/form-field-user-email': [ 'all', 'logged_out' ],
 		'llms/form-field-user-password': [ 'all', 'logged_out' ],
@@ -120,16 +125,16 @@ function modifyVisibilityForBlocks() {
 	 * @return {string[]} Array of block options.
 	 */
 	const getOptsForBlock = ( { name, innerBlocks } ) => {
-
 		let mapKey = name;
 
 		if ( 'llms/form-field-confirm-group' === name ) {
-			const inner = innerBlocks.find( innerBlock => blocksList.includes( innerBlock.name ) );
+			const inner = innerBlocks.find( ( innerBlock ) =>
+				blocksList.includes( innerBlock.name )
+			);
 			mapKey = inner ? inner.name : mapKey;
 		}
 
 		return visibilityOptsMap[ mapKey ] || [];
-
 	};
 
 	/**
@@ -143,7 +148,6 @@ function modifyVisibilityForBlocks() {
 	 * @return {boolean} Whether or not the settings list should be modified.
 	 */
 	const shouldModify = ( { name, innerBlocks } ) => {
-
 		if ( 'llms/form-field-confirm-group' === name ) {
 			return some( innerBlocks, ( innerBlock ) =>
 				blocksList.includes( innerBlock.name )
@@ -151,7 +155,6 @@ function modifyVisibilityForBlocks() {
 		}
 
 		return blocksList.includes( name );
-
 	};
 
 	addFilter(

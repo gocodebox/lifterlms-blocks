@@ -1,7 +1,7 @@
 /**
  * Shortcode registerFormatType() edit callback function file
  *
-  * @since [version]
+ * @since [version]
  * @version [version]
  */
 
@@ -23,8 +23,7 @@ import { RichTextToolbarButton } from '@wordpress/block-editor';
  * @param {Object} props Properties from registerFormatType().
  * @return {Object} Component fragment.
  */
-export default function( props ) {
-
+export default function ( props ) {
 	const [ isOpen, setOpen ] = useState( false ),
 		[ searchQuery, setSearchQuery ] = useState( '' ),
 		[ defaultValue, setDefaultValue ] = useState( '' ),
@@ -43,27 +42,38 @@ export default function( props ) {
 			{ isOpen && (
 				<Modal
 					className="llms-shortcodes-modal"
-					title={ __( 'LifterLMS User Information Shortcodes', 'lifterlms' ) }
-					onRequestClose={ closeModal }>
-
+					title={ __(
+						'LifterLMS User Information Shortcodes',
+						'lifterlms'
+					) }
+					onRequestClose={ closeModal }
+				>
 					<div className="llms-shortcodes-modal--main">
-
 						<aside>
 							<TextControl
 								type="search"
-								label={ __( 'Filter by label, key, or ID...', 'lifterlms' ) }
-								onChange={ ( userQuery ) => setSearchQuery( userQuery ) }
+								label={ __(
+									'Filter by label, key, or ID…',
+									'lifterlms'
+								) }
+								onChange={ ( userQuery ) =>
+									setSearchQuery( userQuery )
+								}
 							/>
 
 							<TextControl
 								label={ __( 'Default value', 'lifterlms' ) }
-								onChange={ ( userValue ) => setDefaultValue( userValue ) }
-								help={ __( 'Optional text displayed when no information exists or the user is logged out.', 'lifterlms' ) }
+								onChange={ ( userValue ) =>
+									setDefaultValue( userValue )
+								}
+								help={ __(
+									'Optional text displayed when no information exists or the user is logged out.',
+									'lifterlms'
+								) }
 							/>
 						</aside>
 
 						<section>
-
 							<Table
 								closeModal={ closeModal }
 								isActive={ isActive }
@@ -72,15 +82,10 @@ export default function( props ) {
 								value={ value }
 								defaultValue={ defaultValue }
 							/>
-
 						</section>
-
 					</div>
-
 				</Modal>
 			) }
-
 		</>
 	);
-
-};
+}

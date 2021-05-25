@@ -230,7 +230,9 @@ export default class Inspector extends Component {
 		}
 
 		const { userInfoFields } = window.llms,
-			isValid = ! userInfoFields.map( ( { name } ) => name ).includes( newName );
+			isValid = ! userInfoFields
+				.map( ( { name } ) => name )
+				.includes( newName );
 
 		if ( ! isValid ) {
 			const noticeId = `llms-name-validation-err-${ attributes.uuid }`,
@@ -251,13 +253,14 @@ export default class Inspector extends Component {
 		setAttributes( { name: newName } );
 
 		// Persist to the window var so we can validate against it immediately.
-		const fieldIndex = userInfoFields.findIndex( ( { name } ) => name === currentName );
+		const fieldIndex = userInfoFields.findIndex(
+			( { name } ) => name === currentName
+		);
 		if ( -1 === fieldIndex ) {
 			return;
 		}
 
 		window.llms.userInfoFields[ fieldIndex ].name = newName;
-
 	}
 
 	/**
