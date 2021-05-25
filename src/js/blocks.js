@@ -15,7 +15,7 @@ import '../scss/blocks.scss';
 import './block-visibility/';
 import './dom-ready/';
 import './post-visibility/';
-// import './formats/merge-codes/';
+import './formats/shortcodes/';
 import './sidebar/';
 
 // Register all Core Blocks.
