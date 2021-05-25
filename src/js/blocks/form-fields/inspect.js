@@ -217,20 +217,20 @@ export default class Inspector extends Component {
 	 *
 	 * @since [version]
 	 *
-	 * @param {string} name The new field name
+	 * @param {string} newName The new field name
 	 * @return {void}
 	 */
-	updateFieldNameAttribute( name ) {
+	updateFieldNameAttribute( newName ) {
 		const { attributes, setAttributes } = this.props,
 			currentName = attributes.name;
 
 		// We don't have to do anything here.
-		if ( name === currentName ) {
+		if ( newName === currentName ) {
 			return;
 		}
 
-		const { fieldNames } = window.llms,
-			isValid = ! fieldNames.includes( name );
+		const { userInfoFields } = window.llms,
+			isValid = ! userInfoFields.map( ( { name } ) => name ).includes( newName );
 
 		if ( ! isValid ) {
 			const noticeId = `llms-name-validation-err-${ attributes.uuid }`,
@@ -248,16 +248,16 @@ export default class Inspector extends Component {
 		}
 
 		// It's valid, update the name.
-		setAttributes( { name } );
+		setAttributes( { name: newName } );
 
-		// Remove the old name from the list.
-		delete fieldNames[ fieldNames.indexOf( currentName ) ];
+		// Persist to the window var so we can validate against it immediately.
+		const fieldIndex = userInfoFields.findIndex( ( { name } ) => name === currentName );
+		if ( -1 === fieldIndex ) {
+			return;
+		}
 
-		// Add the new name to the list.
-		fieldNames.push( name );
+		window.llms.userInfoFields[ fieldIndex ].name = newName;
 
-		// Persist to the window variable, filtering removes the deleted items.
-		window.llms.fieldNames = fieldNames.filter( ( i ) => i );
 	}
 
 	/**
