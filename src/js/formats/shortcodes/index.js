@@ -14,7 +14,7 @@ import { default as Edit } from './edit';
 import { __ } from '@wordpress/i18n';
 import { registerFormatType } from '@wordpress/rich-text';
 
-registerFormatType( 'llms/userInfoShortcodes', {
+registerFormatType( 'llms/user-info-shortcodes', {
 	title: __( 'LifterLMS User Information Shortcodes', 'lifterlms' ),
 	tagName: 'span',
 	className: 'llms-user-sc-wrap',
