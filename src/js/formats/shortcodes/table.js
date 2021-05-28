@@ -24,7 +24,7 @@ import { applyFilters } from '@wordpress/hooks';
  */
 function getShortcode( key, defaultValue = '' ) {
 	const or = defaultValue ? ` or="${ defaultValue }"` : '';
-	return `[user ${ key }${ or }]`;
+	return `[llms-user ${ key }${ or }]`;
 }
 
 /**
@@ -172,7 +172,7 @@ export default function ( {
 	}
 
 	/**
-	 * Filters a list of user information fields which are not eligible for use by the [user] shortcode
+	 * Filters a list of user information fields which are not eligible for use by the [llms-user] shortcode
 	 *
 	 * @since [version]
 	 *
