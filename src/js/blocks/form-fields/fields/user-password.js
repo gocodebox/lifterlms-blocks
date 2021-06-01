@@ -124,26 +124,25 @@ const fillInspectorControls = ( attributes, setAttributes ) => {
 				/>
 			) }
 
-			{ meter && (
-				<TextControl
-					label={ __( 'Minimum Password Length', 'lifterlms' ) }
-					help={ __(
-						"Display in the meter's description with: {min_length}.",
-						'lifterlms'
-					) }
-					value={ minlength }
-					type="number"
-					min="6"
-					onChange={ ( val ) =>
-						setAttributes( {
-							html_attrs: {
-								...html_attrs,
-								minlength: val * 1,
-							},
-						} )
-					}
-				/>
-			) }
+			<TextControl
+				label={ __( 'Minimum Password Length', 'lifterlms' ) }
+				help={ __(
+					"Display in the meter's description with: {min_length}.",
+					'lifterlms'
+				) }
+				value={ minlength }
+				type="number"
+				min="6"
+				onChange={ ( val ) =>
+					setAttributes( {
+						html_attrs: {
+							...html_attrs,
+							minlength: val * 1,
+						},
+					} )
+				}
+			/>
+
 		</Fragment>
 	);
 };
