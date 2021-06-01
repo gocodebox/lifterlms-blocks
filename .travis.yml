@@ -1,2 +1,0 @@
-import:
-  - gocodebox/lifterlms:.config/travis/add-on.yml

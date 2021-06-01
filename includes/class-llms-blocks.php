@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version 1.10.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -33,7 +33,11 @@ class LLMS_Blocks {
 
 		add_action( 'plugins_loaded', array( $this, 'init' ) );
 		add_action( 'add_meta_boxes', array( $this, 'remove_metaboxes' ), 999, 2 );
-		add_filter( 'block_categories', array( $this, 'add_block_category' ) );
+
+		global $wp_version;
+		$filter = version_compare( $wp_version, '5.8-alpha.1', '>=' ) ? 'block_categories_all' : 'block_categories';
+
+		add_filter( $filter, array( $this, 'add_block_category' ) );
 		add_action( 'admin_print_scripts', array( $this, 'admin_print_scripts' ), 15 );
 
 		/**
@@ -57,14 +61,28 @@ class LLMS_Blocks {
 	 * @return array
 	 */
 	public function add_block_category( $categories ) {
+
 		$categories[] = array(
 			'slug'  => 'llms-blocks',
 			'title' => __( 'LifterLMS Blocks', 'lifterlms' ),
 		);
-		$categories[] = array(
-			'slug'  => 'llms-fields',
-			'title' => __( 'LifterLMS Form Fields', 'lifterlms' ),
+
+		array_unshift(
+			$categories,
+			array(
+				'slug'  => 'llms-custom-fields',
+				'title' => __( 'Custom User Information', 'lifterlms' ),
+			)
 		);
+
+		array_unshift(
+			$categories,
+			array(
+				'slug'  => 'llms-user-info-fields',
+				'title' => __( 'User Information', 'lifterlms' ),
+			)
+		);
+
 		return $categories;
 	}
 
@@ -115,6 +133,7 @@ class LLMS_Blocks {
 	 * @since 1.0.0
 	 * @since 1.4.0 Add status tools class.
 	 * @since 1.9.0 Added course progress block class.
+	 * @since [version] Include LLMS_Blocks_Reusable.
 	 *
 	 * @return  void
 	 */
@@ -131,6 +150,7 @@ class LLMS_Blocks {
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-instructors.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-types.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-post-visibility.php';
+		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-reusable.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks-status-tools.php';
 
 		// Block Visibility Component.
