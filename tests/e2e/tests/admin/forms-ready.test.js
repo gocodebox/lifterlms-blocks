@@ -150,6 +150,25 @@ describe( 'Admin/FormsReady', () => {
 
 	} );
 
+	it ( 'should deregister user login block on account edit forms', async () => {
+
+		const forms = {
+			'Register': true,
+			'Edit Account Information': false,
+			'Billing Information': true,
+		};
+
+		for ( let form in forms ) {
+
+			await visitForm( form );
+
+			await openGlobalBlockInserter();
+			expect( await getAllBlockInserterItemTitles() ).toMatchSnapshot();
+
+		}
+
+	} );
+
 
 	const forms = {
 		'Register': false,
