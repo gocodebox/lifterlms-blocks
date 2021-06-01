@@ -1,6 +1,15 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.0.0-beta.6 - 2021-06-01
+--------------------------
+
++ (Re-)introduces user information shortcode through a block editor rich text area format button.
++ Prevent usage the "User Login" block on account edit forms (usersnames cannot be edited in WordPress).
++ Only prevent form posts from being made "draft" status on the "core" forms.
++ Modifies field localization data strategy for field validation and others.
+
+
 v2.0.0-beta.5 - 2021-05-18
 --------------------------
 
