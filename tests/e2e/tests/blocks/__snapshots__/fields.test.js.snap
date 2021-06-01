@@ -358,7 +358,7 @@ exports[`Blocks/FormFields User Login/Editor can add a confirmation field 1`] = 
 Object {
   "attributes": Object {
     "fieldLayout": "columns",
-    "llms_visibility": "all",
+    "llms_visibility": "logged_out",
     "llms_visibility_in": "",
     "llms_visibility_posts": "[]",
   },
@@ -450,7 +450,7 @@ Object {
     "label": "Username",
     "label_show_empty": false,
     "last_column": true,
-    "llms_visibility": "all",
+    "llms_visibility": "logged_out",
     "llms_visibility_in": "",
     "llms_visibility_posts": "[]",
     "match": "",
@@ -489,7 +489,7 @@ Object {
     "label": "Custom Label Username",
     "label_show_empty": false,
     "last_column": true,
-    "llms_visibility": "all",
+    "llms_visibility": "logged_out",
     "llms_visibility_in": "",
     "llms_visibility_posts": "[]",
     "match": "",
@@ -511,7 +511,7 @@ exports[`Blocks/FormFields User Login/Editor can toggle the group layout 1`] = `
 Object {
   "attributes": Object {
     "fieldLayout": "stacked",
-    "llms_visibility": "all",
+    "llms_visibility": "logged_out",
     "llms_visibility_in": "",
     "llms_visibility_posts": "[]",
   },
@@ -592,7 +592,7 @@ exports[`Blocks/FormFields User Login/Editor can toggle the group layout 4`] = `
 Object {
   "attributes": Object {
     "fieldLayout": "columns",
-    "llms_visibility": "all",
+    "llms_visibility": "logged_out",
     "llms_visibility_in": "",
     "llms_visibility_posts": "[]",
   },
