@@ -185,7 +185,7 @@ allowed.forEach( ( blockName ) => {
 				{ innerBlocks } = getSelectedBlock(),
 				controllerBlock =
 					innerBlocks[ findControllerBlockIndex( innerBlocks ) ],
-				{ name } = controllerBlock;
+				{ name } = controllerBlock || {};
 
 			return name === blockName;
 		},
