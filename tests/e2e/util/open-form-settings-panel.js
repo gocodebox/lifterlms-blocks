@@ -9,7 +9,7 @@ import { clickElementByText } from '@lifterlms/llms-e2e-test-utils';
  */
 export default async () => {
 
-	await clickElementByText( 'LifterLMS Form', '.components-button.edit-post-sidebar__panel-tab' );
+	await clickElementByText( 'Form', '.components-button.edit-post-sidebar__panel-tab' );
 
 	const isOpen = await page.$eval( '.llms-forms-doc-settings', el => el.classList.contains( 'is-opened' ) );
 
