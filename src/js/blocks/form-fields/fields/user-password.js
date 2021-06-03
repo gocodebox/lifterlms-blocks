@@ -108,10 +108,6 @@ const fillInspectorControls = ( attributes, setAttributes ) => {
 			{ meter && (
 				<SelectControl
 					label={ __( 'Minimum Password Strength', 'lifterlms' ) }
-					help={ __(
-						"Display in the meter's description with: {min_strength}.",
-						'lifterlms'
-					) }
 					value={ min_strength }
 					onChange={ ( min_strength ) =>
 						setAttributes( { min_strength } )
@@ -126,10 +122,6 @@ const fillInspectorControls = ( attributes, setAttributes ) => {
 
 			<TextControl
 				label={ __( 'Minimum Password Length', 'lifterlms' ) }
-				help={ __(
-					"Display in the meter's description with: {min_length}.",
-					'lifterlms'
-				) }
 				value={ minlength }
 				type="number"
 				min="6"
@@ -206,14 +198,9 @@ export const settings = getSettingsFromBase(
 			},
 			meter_description: {
 				type: 'string',
-				__default: sprintf(
-					// Translators: %1$s = Min strength merge code; %2$s = min length merge code.
-					__(
-						'A %1$s password is required with at least %2$s characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.',
-						'lifterlms'
-					),
-					'{min_strength}',
-					'{min_length}'
+				__default: __(
+					'A strong password is required with at least 8 characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.',
+					'lifterlms'
 				),
 			},
 			min_strength: {
