@@ -57,6 +57,8 @@ const generateId = ( name ) => {
  * @return {Object} Attribute object suitable for use when registering the block.
  */
 const setupAtts = ( atts, blockAtts ) => {
+
+	// Merge configured defaults into the block attributes.
 	Object.keys( blockAtts ).forEach( ( key ) => {
 		const defaultValue = blockAtts[ key ].__default;
 		if (
@@ -113,6 +115,20 @@ export function EditField( props ) {
 	// Manage field data for blocks in field groups.
 	if ( context[ 'llms/fieldGroup/fieldLayout' ] ) {
 		manageFieldGroupAttributes( props );
+	} else if ( attributes.isConfirmationField ) {
+
+		/**
+		 * Prevent confirmation fields from being copied/pasted into the editor out of their intended context.
+		 *
+		 * It's not pretty but it works.
+		 *
+		 * @link {https://github.com/gocodebox/lifterlms-blocks/issues/106}
+		 */
+		setTimeout( () => {
+			dispatch( blockEditorStore ).removeBlock( clientId );
+		}, 10 );
+
+		return null;
 	}
 
 	// We can't disable the variation transformer by context so we'll do it this way which is gross but works.
