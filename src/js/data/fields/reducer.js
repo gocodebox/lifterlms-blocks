@@ -26,9 +26,9 @@ function addField( fields, field ) {
 		...fields,
 		[ field.name ]: {
 			...field,
-		}
+		},
 	};
-};
+}
 
 /**
  * Delete a field
@@ -42,11 +42,11 @@ function addField( fields, field ) {
  * @return {Object} Updated fields object.
  */
 function deleteField( fields, nameToDelete ) {
-
-	fields = fieldsObjectToArray( fields ).filter( ( { name } ) => name !== nameToDelete );
+	fields = fieldsObjectToArray( fields ).filter(
+		( { name } ) => name !== nameToDelete
+	);
 	return fieldsArrayToObject( fields );
-
-};
+}
 
 /**
  * Edit an existing field
@@ -57,11 +57,10 @@ function deleteField( fields, nameToDelete ) {
  *
  * @param {Object} fields Current fields object derived from the state tree.
  * @param {string} name   Name of the field to be edited.
- * @param {Objcet} edits  Full or partial object of edits to make to the field.
+ * @param {Object} edits  Full or partial object of edits to make to the field.
  * @return {Object} Updated fields object.
  */
 function editField( fields, name, edits ) {
-
 	return {
 		...fields,
 		[ name ]: {
@@ -69,8 +68,7 @@ function editField( fields, name, edits ) {
 			...edits,
 		},
 	};
-
-};
+}
 
 /**
  * Rename a field
@@ -84,7 +82,7 @@ function editField( fields, name, edits ) {
  */
 function renameField( fields, oldName, newName ) {
 	const copy = {
-		...fields[ oldName ]
+		...fields[ oldName ],
 	};
 	fields = deleteField( fields, oldName );
 	return addField( fields, {
@@ -97,17 +95,14 @@ function renameField( fields, oldName, newName ) {
  * Fields reducer
  *
  * @since [version]
- *
- * @param {Object} fields Current fields object derived from the state tree.
+ * @param {Object} state  Current fields object derived from the state tree.
  * @param {Object} action Dispached action object.
  * @return {Object} Updated state.
  */
 export function fields( state = DEFAULT_FIELDS, action ) {
-
 	const { type } = action;
 
 	switch ( type ) {
-
 		case 'ADD_FIELD':
 			return addField( state, action.field );
 
@@ -125,10 +120,8 @@ export function fields( state = DEFAULT_FIELDS, action ) {
 
 		default:
 			return state;
-
 	}
-
-};
+}
 
 export default combineReducers( {
 	fields,

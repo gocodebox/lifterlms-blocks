@@ -16,7 +16,7 @@ import { fieldsArrayToObject, fieldsObjectToArray } from './util';
  * @param {Object}   state        State tree.
  * @param {Object[]} state.fields Collection of user information fields.
  * @param {string}   name         Field name
- * @return {Boolean} Returns `true` if the field exists and `false` otherwise.
+ * @return {boolean} Returns `true` if the field exists and `false` otherwise.
  */
 export function fieldExists( { fields }, name ) {
 	return fields[ name ] ? true : false;
@@ -49,11 +49,14 @@ export function getField( { fields }, name ) {
  * @return {?Object} Field object or `null` if not found.
  */
 export function getFieldBy( state, queryTerm, queryKey, context = 'global' ) {
-
-	const fields = 'global' === context ? state.fields : getLoadedFields( state );
-	return fieldsObjectToArray( fields ).find( field => field[ queryKey ] === queryTerm ) || null;
-
-};
+	const fields =
+		'global' === context ? state.fields : getLoadedFields( state );
+	return (
+		fieldsObjectToArray( fields ).find(
+			( field ) => field[ queryKey ] === queryTerm
+		) || null
+	);
+}
 
 /**
  * Returns registered user information fields.
@@ -64,7 +67,7 @@ export function getFieldBy( state, queryTerm, queryKey, context = 'global' ) {
  */
 export function getFields( { fields } ) {
 	return fields;
-};
+}
 
 /**
  * Retrieve a reduced list of loaded fields
@@ -78,7 +81,9 @@ export function getFields( { fields } ) {
  * @return {Object[]} Filtered collection of user information fields keyed by field `name` attribute.
  */
 export function getLoadedFields( { fields } ) {
-	const filtered = fieldsObjectToArray( fields ).filter( ( { clientId } ) => clientId );
+	const filtered = fieldsObjectToArray( fields ).filter(
+		( { clientId } ) => clientId
+	);
 	return fieldsArrayToObject( filtered );
 }
 
@@ -93,11 +98,13 @@ export function getLoadedFields( { fields } ) {
  * @param {Object} state    State tree.
  * @param {string} name     Field name attribute.
  * @param {string} clientId WP Block client id.
- * @return {Boolean} Returns `true` if the field is a duplicate or `false` if it's not a duplicate.
+ * @return {boolean} Returns `true` if the field is a duplicate or `false` if it's not a duplicate.
  */
 export function isDuplicate( state, name, clientId ) {
 	const field = getField( state, name );
-	return ( field && field.clientId && field.clientId !== clientId ) ? true : false;
+	return field && field.clientId && field.clientId !== clientId
+		? true
+		: false;
 }
 
 /**
@@ -107,7 +114,7 @@ export function isDuplicate( state, name, clientId ) {
  *
  * @param {Object} state    State tree.
  * @param {string} clientId WP Block client id.
- * @return {Boolean} Returns `true` if the field is loaded and `false` if it is not.
+ * @return {boolean} Returns `true` if the field is loaded and `false` if it is not.
  */
 export function isLoaded( state, clientId ) {
 	return getFieldBy( state, clientId, 'clientId', 'local' ) ? true : false;

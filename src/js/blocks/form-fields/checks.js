@@ -6,7 +6,7 @@
  */
 
 // External Deps.
-import { every, forEach } from 'lodash';
+import { forEach } from 'lodash';
 
 // WP Deps.
 import { select } from '@wordpress/data';
@@ -106,11 +106,9 @@ export const getFieldBlocks = ( blocks = [] ) => {
  * @param {string} val     String to check for uniqueness.
  * @param {string} context Field context to look within. Accepts "global" to check against all fields or "local"
  *                         to check only against loaded fields in the current form.
- * @return {Boolean} Returns `true` when the string is unique across the form and `false` if it's not.
+ * @return {boolean} Returns `true` when the string is unique across the form and `false` if it's not.
  */
 export const isUnique = ( key, val, context = 'global' ) => {
-
 	const { getFieldBy } = select( fieldsStore );
 	return getFieldBy( key, val, context ) ? false : true;
-
 };

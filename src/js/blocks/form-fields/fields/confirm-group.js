@@ -133,10 +133,8 @@ function revertToSingle( clientId ) {
  * @return {void}
  */
 function doFieldUnload( name ) {
-
 	const { unloadField } = dispatch( fieldsStore );
 	unloadField( name );
-
 }
 
 /**

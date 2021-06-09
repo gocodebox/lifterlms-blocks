@@ -9,10 +9,7 @@
 import { snakeCase, kebabCase, uniqueId } from 'lodash';
 
 // WP deps.
-import {
-	getBlockType,
-	store as blocksStore,
-} from '@wordpress/blocks';
+import { getBlockType } from '@wordpress/blocks';
 import {
 	useBlockProps,
 	InnerBlocks,
@@ -65,11 +62,10 @@ const generateId = ( name ) => {
  *
  * @param {Object}  atts        Default block attributes object.
  * @param {Object}  blockAtts   Actual WP_Block attributes object.
- * @param {Boolean} addingField Determines if the field is new and should clear certain generated attributes.
+ * @param {boolean} addingField Determines if the field is new and should clear certain generated attributes.
  * @return {Object} Attribute object suitable for use when registering the block.
  */
 const setupAtts = ( atts, blockAtts, addingField ) => {
-
 	// Merge configured defaults into the block attributes.
 	Object.keys( blockAtts ).forEach( ( key ) => {
 		const defaultValue = blockAtts[ key ].__default;
@@ -97,12 +93,14 @@ const setupAtts = ( atts, blockAtts, addingField ) => {
 		atts.id = id;
 	}
 
-	if ( '' === atts.data_store_key || ( addingField && ! atts.isConfirmationField ) ) {
+	if (
+		'' === atts.data_store_key ||
+		( addingField && ! atts.isConfirmationField )
+	) {
 		atts.data_store_key = atts.name;
 	}
 
 	return atts;
-
 };
 
 /**
@@ -114,6 +112,7 @@ const setupAtts = ( atts, blockAtts, addingField ) => {
  * @return {Object} HTML component fragment.
  */
 export function EditField( props ) {
+	let { attributes } = props;
 
 	const { name } = props,
 		block = getBlockType( name ),
@@ -122,15 +121,10 @@ export function EditField( props ) {
 		editFills = block.supports.llms_edit_fill,
 		{ fillEditAfter, fillInspectorControls } = block,
 		{ getSelectedBlockClientId } = select( blockEditorStore ),
-		{ isLoaded, fieldExists, isDuplicate } = select( fieldsStore ),
-		{ addField, loadField } = dispatch( fieldsStore ),
-		inFieldGroup = context[ 'llms/fieldGroup/fieldLayout' ] ? true : false;
-
-	let { attributes } = props,
-		addingField = (
-			! attributes.name ||
-			isDuplicate( attributes.name, clientId )
-		);
+		{ isDuplicate } = select( fieldsStore ),
+		inFieldGroup = context[ 'llms/fieldGroup/fieldLayout' ] ? true : false,
+		addingField =
+			! attributes.name || isDuplicate( attributes.name, clientId );
 
 	attributes = setupAtts( attributes, block.attributes, addingField );
 
@@ -141,20 +135,6 @@ export function EditField( props ) {
 	// Manage field data for blocks in field groups.
 	if ( inFieldGroup ) {
 		manageFieldGroupAttributes( props );
-	} else if ( attributes.isConfirmationField ) {
-
-		/**
-		 * Prevent confirmation fields from being copied/pasted into the editor out of their intended context.
-		 *
-		 * It's not pretty but it works.
-		 *
-		 * @link {https://github.com/gocodebox/lifterlms-blocks/issues/106}
-		 */
-		setTimeout( () => {
-			dispatch( blockEditorStore ).removeBlock( clientId );
-		}, 10 );
-
-		return null;
 	}
 
 	// We can't disable the variation transformer by context so we'll do it this way which is gross but works.
@@ -181,6 +161,21 @@ export function EditField( props ) {
 			}, 10 );
 		}
 	} );
+
+	if ( attributes.isConfirmationField ) {
+		/**
+		 * Prevent confirmation fields from being copied/pasted into the editor out of their intended context.
+		 *
+		 * It's not pretty but it works.
+		 *
+		 * @see {@link https://github.com/gocodebox/lifterlms-blocks/issues/106}
+		 */
+		setTimeout( () => {
+			dispatch( blockEditorStore ).removeBlock( clientId );
+		}, 10 );
+
+		return null;
+	}
 
 	return (
 		<div { ...blockProps }>

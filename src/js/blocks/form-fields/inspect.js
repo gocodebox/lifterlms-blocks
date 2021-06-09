@@ -20,7 +20,7 @@ import {
 } from '@wordpress/components';
 import { select, dispatch } from '@wordpress/data';
 import { Component, Fragment } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import {
 	switchToBlockType,
 	getPossibleBlockTransformations,
@@ -219,30 +219,39 @@ export default class Inspector extends Component {
 	 * @return {string} Error message for the given validation issue.
 	 */
 	getValidationErrText( key, val ) {
-
-		let msg = ''
+		let msg = '';
 
 		switch ( key ) {
-
 			case 'data_store_key':
-				msg = __( 'The user meta key "%s" is not unique. Please choose a value.', 'lifterlms' );
+				// Translators: %s = user-submitted value.
+				msg = __(
+					'The user meta key "%s" is not unique. Please choose a value.',
+					'lifterlms'
+				);
 				break;
 
 			case 'id':
-				msg = __( 'The ID "%s" is not unique. Please choose a unique field ID.', 'lifterlms' );
+				// Translators: %s = user-submitted value.
+				msg = __(
+					'The ID "%s" is not unique. Please choose a unique field ID.',
+					'lifterlms'
+				);
 				break;
 
 			case 'name':
-				msg = __( 'The name "%s" is not unique. Please choose a globally unique field name.', 'lifterlms' );
+				// Translators: %s = user-submitted value.
+				msg = __(
+					'The name "%s" is not unique. Please choose a globally unique field name.',
+					'lifterlms'
+				);
 				break;
 
 			default:
-				msg = __( 'The chosen value "%s" is invalid.', 'lifterlms' )
-
+				// Translators: %s = user-submitted value.
+				msg = __( 'The chosen value "%s" is invalid.', 'lifterlms' );
 		}
 
 		return sprintf( msg, val );
-
 	}
 
 	/**
@@ -256,12 +265,11 @@ export default class Inspector extends Component {
 	 *
 	 * @param {string} key      Field key.
 	 * @param {string} newValue Field value.
-	 * @param {String} context  Validation context. Accepts "global" to validate against all known fields
+	 * @param {string} context  Validation context. Accepts "global" to validate against all known fields
 	 *                          or "local" to validate against loaded fields in the current form.
 	 * @return {void}
 	 */
 	updateValueWithValidation( key, newValue, context = 'local' ) {
-
 		const { clientId, attributes, setAttributes } = this.props,
 			currentValue = attributes[ key ],
 			{ editField, renameField } = dispatch( fieldsStore ),
@@ -278,15 +286,12 @@ export default class Inspector extends Component {
 
 		removeNotice( noticeId );
 		if ( ! isValid ) {
-
-			createErrorNotice(
-				this.getValidationErrText( key, newValue ),
-				{ id: noticeId, }
-			);
+			createErrorNotice( this.getValidationErrText( key, newValue ), {
+				id: noticeId,
+			} );
 
 			// Still run updates but keep the new value valid by stripping the last character.
 			newValue = newValue.slice( 0, -1 );
-
 		}
 
 		if ( 'name' === key ) {
@@ -298,7 +303,6 @@ export default class Inspector extends Component {
 		setAttributes( {
 			[ key ]: newValue,
 		} );
-
 	}
 
 	/**
@@ -512,7 +516,10 @@ export default class Inspector extends Component {
 											/[^A-Za-z0-9\-\_]/g,
 											''
 										);
-										this.updateValueWithValidation( 'data_store_key', newDataStoreKey )
+										this.updateValueWithValidation(
+											'data_store_key',
+											newDataStoreKey
+										);
 									} }
 									help={ __(
 										'Database field key name. Only accepts alphanumeric characters, hyphens, and underscores.',
@@ -530,7 +537,11 @@ export default class Inspector extends Component {
 							<TextControl
 								label={ __( 'Field Name', 'lifterlms' ) }
 								onChange={ ( newName ) =>
-									this.updateValueWithValidation( 'name', newName, 'global' )
+									this.updateValueWithValidation(
+										'name',
+										newName,
+										'global'
+									)
 								}
 								help={ __(
 									"The field's HTML name attribute.",
@@ -545,7 +556,10 @@ export default class Inspector extends Component {
 							<TextControl
 								label={ __( 'Field ID', 'lifterlms' ) }
 								onChange={ ( newId ) =>
-									this.updateValueWithValidation( 'id', newId )
+									this.updateValueWithValidation(
+										'id',
+										newId
+									)
 								}
 								help={ __(
 									"The field's HTML id attribute.",

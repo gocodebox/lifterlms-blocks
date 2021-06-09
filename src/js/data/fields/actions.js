@@ -18,7 +18,7 @@ export function addField( field ) {
 		type: 'ADD_FIELD',
 		field,
 	};
-};
+}
 
 /**
  * Delete a field
@@ -33,7 +33,7 @@ export function deleteField( name ) {
 		type: 'DELETE_FIELD',
 		name,
 	};
-};
+}
 
 /**
  * Edit a field
@@ -50,7 +50,7 @@ export function editField( name, edits ) {
 		name,
 		edits,
 	};
-};
+}
 
 /**
  * Load a field
@@ -69,7 +69,7 @@ export function loadField( name, clientId ) {
 		name,
 		edits: { clientId },
 	};
-};
+}
 
 /**
  * Unload a field
@@ -87,7 +87,7 @@ export function unloadField( name ) {
 		name,
 		edits: { clientId: null },
 	};
-};
+}
 
 /**
  * Receive an array of field data
@@ -120,5 +120,5 @@ export function renameField( oldName, newName ) {
 		type: 'RENAME_FIELD',
 		oldName,
 		newName,
-	}
+	};
 }

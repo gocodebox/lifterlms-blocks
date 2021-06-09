@@ -40,5 +40,4 @@ domReady( () => {
 			formsReady();
 		}
 	} );
-
 } );

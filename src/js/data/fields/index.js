@@ -32,7 +32,7 @@ const storeConfig = {
 /**
  * Redux store definition
  *
- * @link {https://github.com/WordPress/gutenberg/blob/HEAD/packages/data/README.md#createReduxStore}
+ * @see https://github.com/WordPress/gutenberg/blob/HEAD/packages/data/README.md#createReduxStore
  *
  * @type {Object}
  */

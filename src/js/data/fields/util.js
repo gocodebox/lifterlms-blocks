@@ -14,7 +14,13 @@
  * @return {Object} Object of field objects.
  */
 export function fieldsArrayToObject( fields ) {
-	return fields.reduce( ( obj, currentField ) => ( { ...obj, [ currentField.name ]: currentField } ), {} );
+	return fields.reduce(
+		( obj, currentField ) => ( {
+			...obj,
+			[ currentField.name ]: currentField,
+		} ),
+		{}
+	);
 }
 
 /**

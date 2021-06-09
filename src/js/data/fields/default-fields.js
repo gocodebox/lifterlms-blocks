@@ -8,4 +8,9 @@ import { fieldsArrayToObject } from './util';
  *
  * @type {Object}
  */
-export const DEFAULT_FIELDS = fieldsArrayToObject( window.llms.userInfoFields.map( field => ( { ...field, isPersisted: true } ) ) );
+export const DEFAULT_FIELDS = fieldsArrayToObject(
+	window.llms.userInfoFields.map( ( field ) => ( {
+		...field,
+		isPersisted: true,
+	} ) )
+);

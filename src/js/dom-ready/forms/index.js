@@ -281,12 +281,10 @@ function ensureEmailFieldExists() {
  * @return {void}
  */
 export default () => {
-
 	maybeDisableVisibility();
 	modifyVisibilityForBlocks();
 	deregisterBlocksForForms();
 	hideCoreUI();
 	ensureEmailFieldExists();
 	blocksWatcher();
-
 };

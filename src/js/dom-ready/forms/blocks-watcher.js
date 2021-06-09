@@ -24,7 +24,10 @@ import { store as fieldsStore } from '../../data/fields';
  * @param {Object[]} b New block list.
  * @return {Object[]} List of changes.
  */
-const fieldBlocksDifferenceBy = ( a, b ) => differenceBy( a, b, 'clientId' ).filter( ( { name } ) => 0 === name.indexOf( 'llms/form-' ) );
+const fieldBlocksDifferenceBy = ( a, b ) =>
+	differenceBy( a, b, 'clientId' ).filter(
+		( { name } ) => 0 === name.indexOf( 'llms/form-' )
+	);
 
 /**
  * Handle deleted blocks.
@@ -37,25 +40,26 @@ const fieldBlocksDifferenceBy = ( a, b ) => differenceBy( a, b, 'clientId' ).fil
  * @return {void}
  */
 const unloadBlocks = ( deletedBlocks ) => {
-
 	deletedBlocks.forEach( ( { attributes } ) => {
-
 		const { name } = attributes,
 			{ getField } = select( fieldsStore ),
 			{ deleteField, unloadField } = dispatch( fieldsStore ),
 			field = getField( name );
 
 		if ( field ) {
-
 			setTimeout( () => {
-				console.log( field.isPersisted ? 'unloading:' : 'deleting:', name );
-				field.isPersisted ? unloadField( name ) : deleteField( name );
+				// console.log(
+				// 	field.isPersisted ? 'unloading:' : 'deleting:',
+				// 	name
+				// );
+				if ( field.isPersisted ) {
+					unloadField( name );
+				} else {
+					deleteField( name );
+				}
 			} );
-
 		}
-
 	} );
-
 };
 
 /**
@@ -69,27 +73,32 @@ const unloadBlocks = ( deletedBlocks ) => {
  * @return {void}
  */
 const loadBlocks = ( createdBlocks ) => {
-
 	const { fieldExists } = select( fieldsStore ),
 		{ loadField, addField } = dispatch( fieldsStore );
 
 	createdBlocks.forEach( ( { attributes, clientId } ) => {
-
 		const { name } = attributes;
 		setTimeout( () => {
-			console.log( fieldExists( name ) ? 'loading:' : 'adding:', name, clientId );
-			fieldExists( name ) ? loadField( name, clientId ) : addField( {
-				name,
-				clientId,
-				id: attributes.id,
-				label: attributes.label,
-				data_store: attributes.data_store,
-				data_store_key: attributes.data_store_key,
-			} );
+			// console.log(
+			// 	fieldExists( name ) ? 'loading:' : 'adding:',
+			// 	name,
+			// 	clientId
+			// );
+			if ( fieldExists( name ) ) {
+				loadField( name, clientId );
+			} else {
+				addField( {
+					name,
+					clientId,
+					id: attributes.id,
+					label: attributes.label,
+					data_store: attributes.data_store,
+					data_store_key: attributes.data_store_key,
+				} );
+			}
 		} );
 	} );
-
-}
+};
 
 /**
  * Subscription handler
@@ -98,13 +107,11 @@ const loadBlocks = ( createdBlocks ) => {
  *
  * @return {void}
  */
-export default function() {
-
+export default function () {
 	let oldBlocks = [];
 
 	subscribe(
 		debounce( () => {
-
 			const blocks = getBlocksFlat(),
 				deletedBlocks = fieldBlocksDifferenceBy( oldBlocks, blocks ),
 				createdBlocks = fieldBlocksDifferenceBy( blocks, oldBlocks );
@@ -113,8 +120,6 @@ export default function() {
 
 			unloadBlocks( deletedBlocks );
 			loadBlocks( createdBlocks );
-
 		}, 500 )
 	);
-
 }
