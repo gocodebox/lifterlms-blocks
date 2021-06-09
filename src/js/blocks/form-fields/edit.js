@@ -1,23 +1,35 @@
-import { getBlockType } from '@wordpress/blocks';
+/**
+ * Edit components
+ *
+ * @since [version]
+ * @version [version]
+ */
+
+// External deps.
+import { snakeCase, kebabCase, uniqueId } from 'lodash';
+
+// WP deps.
+import {
+	getBlockType,
+	store as blocksStore,
+} from '@wordpress/blocks';
 import {
 	useBlockProps,
 	InnerBlocks,
 	InspectorControls,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
-import { select } from '@wordpress/data';
+import { dispatch, select } from '@wordpress/data';
 import { PanelBody, Slot, Fill } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
 
-import { snakeCase, kebabCase, uniqueId } from 'lodash';
-
+// Internal Deps.
 import Field from './field';
 import Inspector from './inspect';
 import { isUnique } from './checks';
 import manageFieldGroupAttributes from './group-data';
 import GroupLayoutControl from './group-layout-control';
-
-import { v4 as uuid } from 'uuid';
+import { store as fieldsStore } from '../../data/fields';
 
 /**
  * Generate a unique "name" attribute.
@@ -50,13 +62,13 @@ const generateId = ( name ) => {
  *
  * @since 1.6.0
  * @since 1.12.0 Add data_store_key generation.
- * @since [version] Add `uuid` property.
  *
- * @param {Object} atts      Default block attributes object.
- * @param {Object} blockAtts Actual WP_Block attributes object.
+ * @param {Object}  atts        Default block attributes object.
+ * @param {Object}  blockAtts   Actual WP_Block attributes object.
+ * @param {Boolean} addingField Determines if the field is new and should clear certain generated attributes.
  * @return {Object} Attribute object suitable for use when registering the block.
  */
-const setupAtts = ( atts, blockAtts ) => {
+const setupAtts = ( atts, blockAtts, addingField ) => {
 
 	// Merge configured defaults into the block attributes.
 	Object.keys( blockAtts ).forEach( ( key ) => {
@@ -69,7 +81,7 @@ const setupAtts = ( atts, blockAtts ) => {
 		}
 	} );
 
-	if ( ! atts.name ) {
+	if ( ! atts.name || ( addingField && ! atts.isConfirmationField ) ) {
 		let name = generateName( atts.field );
 		while ( ! isUnique( 'name', name ) ) {
 			name = generateName( atts.field );
@@ -77,43 +89,57 @@ const setupAtts = ( atts, blockAtts ) => {
 		atts.name = name;
 	}
 
-	if ( ! atts.id ) {
+	if ( ! atts.id || ( addingField && ! atts.isConfirmationField ) ) {
 		let id = generateId( atts.name );
-		while ( ! isUnique( 'id', id ) ) {
+		while ( ! isUnique( 'id', id, 'local' ) ) {
 			id = generateId( uniqueId( `${ atts.field }-field-` ) );
 		}
 		atts.id = id;
 	}
 
-	if ( ! atts.uuid ) {
-		atts.uuid = uuid();
-	}
-
-	if ( '' === atts.data_store_key ) {
+	if ( '' === atts.data_store_key || ( addingField && ! atts.isConfirmationField ) ) {
 		atts.data_store_key = atts.name;
 	}
 
 	return atts;
+
 };
 
+/**
+ * Edit action for a field.
+ *
+ * @since [version]
+ *
+ * @param {Object} props Component properties.
+ * @return {Object} HTML component fragment.
+ */
 export function EditField( props ) {
+
 	const { name } = props,
 		block = getBlockType( name ),
 		{ clientId, context, setAttributes } = props,
 		inspectorSupports = block.supports.llms_field_inspector,
 		editFills = block.supports.llms_edit_fill,
 		{ fillEditAfter, fillInspectorControls } = block,
-		{ getSelectedBlockClientId } = select( blockEditorStore );
+		{ getSelectedBlockClientId } = select( blockEditorStore ),
+		{ isLoaded, fieldExists, isDuplicate } = select( fieldsStore ),
+		{ addField, loadField } = dispatch( fieldsStore ),
+		inFieldGroup = context[ 'llms/fieldGroup/fieldLayout' ] ? true : false;
 
-	let { attributes } = props;
-	attributes = setupAtts( attributes, block.attributes );
+	let { attributes } = props,
+		addingField = (
+			! attributes.name ||
+			isDuplicate( attributes.name, clientId )
+		);
+
+	attributes = setupAtts( attributes, block.attributes, addingField );
 
 	const blockProps = useBlockProps( {
 		className: `llms-fields llms-cols-${ attributes.columns }`,
 	} );
 
 	// Manage field data for blocks in field groups.
-	if ( context[ 'llms/fieldGroup/fieldLayout' ] ) {
+	if ( inFieldGroup ) {
 		manageFieldGroupAttributes( props );
 	} else if ( attributes.isConfirmationField ) {
 
@@ -196,6 +222,14 @@ export function EditField( props ) {
 	);
 }
 
+/**
+ * Edit action for a field group.
+ *
+ * @since [version]
+ *
+ * @param {Object} props Component properties.
+ * @return {Object} HTML component fragment.
+ */
 export function EditGroup( props ) {
 	const { attributes, clientId, name, setAttributes } = props,
 		{ fieldLayout } = attributes,
