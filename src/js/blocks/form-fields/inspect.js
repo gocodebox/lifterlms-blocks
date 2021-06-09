@@ -2,7 +2,7 @@
  * Inspector settings for the Course Information Block.
  *
  * @since 1.6.0
- * @version 1.12.0
+ * @version [version]
  */
 
 // WP Deps.
@@ -30,6 +30,7 @@ import {
 // Internal Deps.
 import InspectorFieldOptions from './inspect-field-options';
 import getBlocksFlat from '../../util/get-blocks-flat';
+import { store as fieldsStore } from '../../data/fields';
 
 /**
  * Block Inspector for Field blocks
@@ -209,58 +210,95 @@ export default class Inspector extends Component {
 	}
 
 	/**
-	 * Update a field's "name" attribute
-	 *
-	 * Validates against the global field name list found in `window.llms.fieldNames`
-	 * to ensure global uniqueness and throws an error notice when a non-unique name
-	 * is submitted.
+	 * Retrieve an error message for use in error notices thrown by updateValueWithValidation()
 	 *
 	 * @since [version]
 	 *
-	 * @param {string} newName The new field name
+	 * @param {string} key Field key.
+	 * @param {string} val Field value.
+	 * @return {string} Error message for the given validation issue.
+	 */
+	getValidationErrText( key, val ) {
+
+		let msg = ''
+
+		switch ( key ) {
+
+			case 'data_store_key':
+				msg = __( 'The user meta key "%s" is not unique. Please choose a value.', 'lifterlms' );
+				break;
+
+			case 'id':
+				msg = __( 'The ID "%s" is not unique. Please choose a unique field ID.', 'lifterlms' );
+				break;
+
+			case 'name':
+				msg = __( 'The name "%s" is not unique. Please choose a globally unique field name.', 'lifterlms' );
+				break;
+
+			default:
+				msg = __( 'The chosen value "%s" is invalid.', 'lifterlms' )
+
+		}
+
+		return sprintf( msg, val );
+
+	}
+
+	/**
+	 * Set attributes with built-in validation
+	 *
+	 * Validates fields for uniqueness against field data in the llms/user-info-fields data
+	 * store. Prevents storage of invalid data and throws an error notice when validation issues
+	 * are encountered.
+	 *
+	 * @since [version]
+	 *
+	 * @param {string} key      Field key.
+	 * @param {string} newValue Field value.
+	 * @param {String} context  Validation context. Accepts "global" to validate against all known fields
+	 *                          or "local" to validate against loaded fields in the current form.
 	 * @return {void}
 	 */
-	updateFieldNameAttribute( newName ) {
-		const { attributes, setAttributes } = this.props,
-			currentName = attributes.name;
+	updateValueWithValidation( key, newValue, context = 'local' ) {
 
-		// We don't have to do anything here.
-		if ( newName === currentName ) {
+		const { clientId, attributes, setAttributes } = this.props,
+			currentValue = attributes[ key ],
+			{ editField, renameField } = dispatch( fieldsStore ),
+			{ createErrorNotice, removeNotice } = dispatch( 'core/notices' ),
+			noticeId = `llms-${ key }-validation-err-${ clientId }`;
+
+		// No change.
+		if ( newValue === currentValue ) {
 			return;
 		}
 
-		const { userInfoFields } = window.llms,
-			isValid = ! userInfoFields
-				.map( ( { name } ) => name )
-				.includes( newName );
+		const { getFieldBy } = select( fieldsStore ),
+			isValid = getFieldBy( newValue, key, context ) ? false : true;
 
+		removeNotice( noticeId );
 		if ( ! isValid ) {
-			const noticeId = `llms-name-validation-err-${ attributes.uuid }`,
-				{ createErrorNotice, removeNotice } = dispatch(
-					'core/notices'
-				);
 
-			removeNotice( noticeId );
 			createErrorNotice(
-				__( 'Please choose a unique field name.', 'lifterlms' ),
-				{ id: noticeId }
+				this.getValidationErrText( key, newValue ),
+				{ id: noticeId, }
 			);
 
-			return;
+			// Still run updates but keep the new value valid by stripping the last character.
+			newValue = newValue.slice( 0, -1 );
+
 		}
 
-		// It's valid, update the name.
-		setAttributes( { name: newName } );
-
-		// Persist to the window var so we can validate against it immediately.
-		const fieldIndex = userInfoFields.findIndex(
-			( { name } ) => name === currentName
-		);
-		if ( -1 === fieldIndex ) {
-			return;
+		if ( 'name' === key ) {
+			renameField( attributes.name, newValue );
+		} else {
+			editField( attributes.name, { [ key ]: newValue } );
 		}
 
-		window.llms.userInfoFields[ fieldIndex ].name = newName;
+		setAttributes( {
+			[ key ]: newValue,
+		} );
+
 	}
 
 	/**
@@ -420,12 +458,11 @@ export default class Inspector extends Component {
 										blockToSwitch,
 										newBlockType
 									);
+
 									replaceBlock( replaceClientId, switched );
 
 									if ( ! isInAConfirmGroup ) {
-										const { innerBlocks } = getBlock(
-												clientId
-											),
+										const { innerBlocks } = switched[ 0 ],
 											controllerIndex = findControllerBlockIndex(
 												innerBlocks
 											);
@@ -469,13 +506,13 @@ export default class Inspector extends Component {
 							>
 								<TextControl
 									label={ __( 'Usermeta Key', 'lifterlms' ) }
-									onChange={ ( data_store_key ) => {
+									onChange={ ( newDataStoreKey ) => {
 										// Strip invalid chars
-										data_store_key = data_store_key.replace(
+										newDataStoreKey = newDataStoreKey.replace(
 											/[^A-Za-z0-9\-\_]/g,
 											''
 										);
-										setAttributes( { data_store_key } );
+										this.updateValueWithValidation( 'data_store_key', newDataStoreKey )
 									} }
 									help={ __(
 										'Database field key name. Only accepts alphanumeric characters, hyphens, and underscores.',
@@ -493,7 +530,7 @@ export default class Inspector extends Component {
 							<TextControl
 								label={ __( 'Field Name', 'lifterlms' ) }
 								onChange={ ( newName ) =>
-									this.updateFieldNameAttribute( newName )
+									this.updateValueWithValidation( 'name', newName, 'global' )
 								}
 								help={ __(
 									"The field's HTML name attribute.",
@@ -507,8 +544,8 @@ export default class Inspector extends Component {
 						this.hasInspectorControlSupport( 'id' ) && (
 							<TextControl
 								label={ __( 'Field ID', 'lifterlms' ) }
-								onChange={ ( value ) =>
-									setAttributes( { id: value } )
+								onChange={ ( newId ) =>
+									this.updateValueWithValidation( 'id', newId )
 								}
 								help={ __(
 									"The field's HTML id attribute.",
