@@ -10,7 +10,7 @@ import domReady from '@wordpress/dom-ready';
 import { select, subscribe } from '@wordpress/data';
 
 // Internal Deps.
-import formsReady from './forms-ready';
+import formsReady from './forms/';
 
 /**
  * On editor DOM ready.
@@ -40,4 +40,5 @@ domReady( () => {
 			formsReady();
 		}
 	} );
+
 } );
