@@ -2,10 +2,7 @@
  * Main Block editor entry point.
  *
  * @since 1.0.0
- * @since 1.5.0 Register blocks conditionally based on post type.
- * @since 1.6.0 Register form field blocks.
- * @since 1.7.0 Refactor into multiple files for clarity and organization.
- * @since [version] Disable import of incomplete module `./formats/merge-codes`;
+ * @version [version]
  */
 
 // SCSS.
@@ -17,6 +14,7 @@ import './dom-ready/';
 import './post-visibility/';
 import './formats/shortcodes/';
 import './sidebar/';
+import './data/';
 
 // Register all Core Blocks.
 import registerBlocks from './blocks/';
