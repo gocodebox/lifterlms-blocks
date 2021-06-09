@@ -10,7 +10,6 @@
 
 // External Deps.
 import { select } from '@wordpress/data';
-// import { store as coreStore } from '@wordpress/core-data';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 
 /**
