@@ -19,6 +19,8 @@ import {
 	getDefaultPostTypes,
 } from '../settings';
 
+import { store as fieldsStore } from '../../../data/fields';
+
 /**
  * Block Name
  *
@@ -102,6 +104,8 @@ function revertToSingle( clientId ) {
 			findControllerBlockIndex( innerBlocks )
 		];
 
+	doFieldUnload( attributes.name );
+
 	replaceBlock(
 		clientId,
 		createBlock( name, {
@@ -113,6 +117,26 @@ function revertToSingle( clientId ) {
 			llms_visibility,
 		} )
 	);
+}
+
+/**
+ * Unloads field immediately prior to running block transforms
+ *
+ * During transformations fields will show up as duplicates if we rely
+ * on the blocks-watcher to unload fields, to combat this
+ * we'll unload the fields manually before the transformations are
+ * run.
+ *
+ * @since [version]
+ *
+ * @param {string} name Field name attribute.
+ * @return {void}
+ */
+function doFieldUnload( name ) {
+
+	const { unloadField } = dispatch( fieldsStore );
+	unloadField( name );
+
 }
 
 /**
@@ -161,6 +185,8 @@ allowed.forEach( ( blockName ) => {
 		transform: ( attributes ) => {
 			const { llms_visibility } = attributes;
 
+			doFieldUnload( attributes.name );
+
 			const children = [
 				createBlock( blockName, getControllerBlockAttrs( attributes ) ),
 				createBlock(
@@ -194,6 +220,8 @@ allowed.forEach( ( blockName ) => {
 				controllerBlock =
 					innerBlocks[ findControllerBlockIndex( innerBlocks ) ],
 				{ name, attributes } = controllerBlock;
+
+			doFieldUnload( attributes.name );
 
 			return createBlock( name, {
 				...attributes,
