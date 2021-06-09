@@ -158,10 +158,6 @@ const settingsField = {
 			type: 'boolean',
 			__default: false,
 		},
-		uuid: {
-			type: 'string',
-			__default: '',
-		},
 	},
 	supports: {
 		llms_field_inspector: {
