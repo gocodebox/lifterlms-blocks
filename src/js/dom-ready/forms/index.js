@@ -19,9 +19,7 @@ import { __ } from '@wordpress/i18n';
 import { debounce, some } from 'lodash';
 
 // Internal Deps.
-import { deregisterBlocksForForms } from '../../blocks/';
 import { getBlocksFlat } from '../../util/';
-import { default as blocksWatcher } from './blocks-watcher';
 
 /**
  * Hides WP Core UI elements that we cannot disable with filters or proper APIs
@@ -283,8 +281,6 @@ function ensureEmailFieldExists() {
 export default () => {
 	maybeDisableVisibility();
 	modifyVisibilityForBlocks();
-	deregisterBlocksForForms();
 	hideCoreUI();
 	ensureEmailFieldExists();
-	blocksWatcher();
 };
