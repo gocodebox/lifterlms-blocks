@@ -162,7 +162,7 @@ export function EditField( props ) {
 		}
 	} );
 
-	if ( attributes.isConfirmationField ) {
+	if ( ! inFieldGroup && attributes.isConfirmationField ) {
 		/**
 		 * Prevent confirmation fields from being copied/pasted into the editor out of their intended context.
 		 *
