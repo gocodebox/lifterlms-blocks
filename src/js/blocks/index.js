@@ -8,9 +8,10 @@
 /* eslint camelcase: [ "error", { allow: [ "_llms_form_location" ] } ] */
 
 // WP Deps.
-const { getBlockTypes, registerBlockType, unregisterBlockType } = wp.blocks,
-	{ doAction } = wp.hooks,
-	{ select } = wp.data;
+import { getBlockTypes, registerBlockType, unregisterBlockType } from '@wordpress/blocks';
+import { store as editorStore } from '@wordpress/editor';
+import { doAction, applyFilters } from '@wordpress/hooks';
+import { select } from '@wordpress/data';
 
 // Internal Deps.
 import { getCurrentPostType } from '../util/';
@@ -37,6 +38,37 @@ import * as formFields from './form-fields/';
  * @return {void}
  */
 export const deregisterBlocksForForms = () => {
+
+	/**
+	 * Filters the list of blocks allowed to be used within LifterLMS Forms
+	 *
+	 * All blocks except those explicitly defined in this safelist are excluded from use
+	 * in the editor of a form post type.
+	 *
+	 * @since [version]
+	 *
+	 * @param {string[]} safelist Array of allowed block names.
+	 */
+	const safelist = applyFilters(
+		'llms.formBlocksSafelist', [
+			'core/block', // Reusable block.
+			'core/paragraph',
+			'core/heading',
+			'core/image',
+			'core/html',
+			'core/column',
+			'core/columns',
+			'core/group',
+			'core/separator',
+			'core/spacer',
+		]
+	);
+
+	const
+		{ getCurrentPost } = select( editorStore ),
+		{ meta = {} } = getCurrentPost(),
+		{ _llms_form_location } = meta;
+
 	/**
 	 * Determine if a block should be deregistered from form posts.
 	 *
@@ -48,21 +80,6 @@ export const deregisterBlocksForForms = () => {
 	 * @return {boolean} Returns `true` if a block should be unregistered.
 	 */
 	const shouldUnregisterBlock = ( name ) => {
-		const safelist = [
-				'core/block', // Reusable block.
-				'core/paragraph',
-				'core/heading',
-				'core/image',
-				'core/html',
-				'core/column',
-				'core/columns',
-				'core/group',
-				'core/separator',
-				'core/spacer',
-			],
-			{ _llms_form_location } = select(
-				'core/editor'
-			).getCurrentPost().meta;
 
 		// Allow safelisted blocks.
 		if ( -1 !== safelist.indexOf( name ) ) {
@@ -81,7 +98,7 @@ export const deregisterBlocksForForms = () => {
 			return false;
 		}
 
-		// unregister everything else.
+		// Unregister everything else.
 		return true;
 	};
 
