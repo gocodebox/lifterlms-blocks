@@ -95,6 +95,7 @@ function renameField( fields, oldName, newName ) {
  * Fields reducer
  *
  * @since [version]
+ *
  * @param {Object} state  Current fields object derived from the state tree.
  * @param {Object} action Dispached action object.
  * @return {Object} Updated state.
