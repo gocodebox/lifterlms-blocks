@@ -26,11 +26,13 @@ import {
 	getPossibleBlockTransformations,
 	getBlockType,
 } from '@wordpress/blocks';
+import { store as editorStore } from '@wordpress/editor';
 
 // Internal Deps.
 import InspectorFieldOptions from './inspect-field-options';
 import getBlocksFlat from '../../util/get-blocks-flat';
 import { store as fieldsStore } from '../../data/fields';
+import { isUnique } from './checks';
 
 /**
  * Block Inspector for Field blocks
@@ -38,6 +40,19 @@ import { store as fieldsStore } from '../../data/fields';
  * @since 1.6.0
  */
 export default class Inspector extends Component {
+
+	constructor( props ) {
+		super( props );
+
+		const { attributes } = props,
+			{ name } = attributes;
+
+		this.state = {
+			validationErrors: {},
+		};
+
+	}
+
 	/**
 	 * Retrieve a specific block by it's ID attribute.
 	 *
@@ -215,43 +230,152 @@ export default class Inspector extends Component {
 	 * @since [version]
 	 *
 	 * @param {string} key Field key.
-	 * @param {string} val Field value.
 	 * @return {string} Error message for the given validation issue.
 	 */
-	getValidationErrText( key, val ) {
+	getValidationErrText( key ) {
+
 		let msg = '';
 
-		switch ( key ) {
-			case 'data_store_key':
-				// Translators: %s = user-submitted value.
-				msg = __(
-					'The user meta key "%s" is not unique. Please choose a unique value.',
-					'lifterlms'
-				);
-				break;
+		const val = this.state.validationErrors[ key ];
 
-			case 'id':
-				// Translators: %s = user-submitted value.
-				msg = __(
-					'The ID "%s" is not unique. Please choose a unique field ID.',
-					'lifterlms'
-				);
-				break;
+		if ( ! val ) {
 
-			case 'name':
-				// Translators: %s = user-submitted value.
-				msg = __(
-					'The name "%s" is not unique. Please choose a globally unique field name.',
-					'lifterlms'
-				);
-				break;
+			msg = __( 'The value cannot be blank.', 'lifterlms' )
 
-			default:
-				// Translators: %s = user-submitted value.
-				msg = __( 'The chosen value "%s" is invalid.', 'lifterlms' );
+		} else if ( this.containsInvalidCharacters( val ) ) {
+
+			msg = __( 'The value "%s" contains invalid characters. Only letters, numbers, underscores, and hyphens are allowed.', 'lifterlms' );
+
+		} else {
+
+			switch ( key ) {
+				case 'data_store_key':
+					// Translators: %s = user-submitted value.
+					msg = __(
+						'The user meta key "%s" is not unique. Please choose a unique value.',
+						'lifterlms'
+					);
+					break;
+
+				case 'id':
+					// Translators: %s = user-submitted value.
+					msg = __(
+						'The ID "%s" is not unique. Please choose a unique field ID.',
+						'lifterlms'
+					);
+					break;
+
+				case 'name':
+					// Translators: %s = user-submitted value.
+					msg = __(
+						'The name "%s" is not unique. Please choose a globally unique field name.',
+						'lifterlms'
+					);
+					break;
+
+				default:
+					// Translators: %s = user-submitted value.
+					msg = __( 'The chosen value "%s" is invalid.', 'lifterlms' );
+			}
+
 		}
 
 		return sprintf( msg, val );
+
+	}
+
+	/**
+	 * Determine if invalid characters are present in an attribute
+	 *
+	 * This validates the data_store_key, name, and ID attributes only.
+	 *
+	 * This is a pretty accurate version of characters allowed in HTML name/id attributes
+	 * on the HTML 4 spec. HTML 5 allows a tremendous number of characters but I'd rather
+	 * not validate strictly against that because I want to ensure we can use the same
+	 * characters for usermeta keys.
+	 *
+	 * For future Thomas who will have forgetten how to read the regex: allows alphanumeric chars, hyphens, and underscores.
+	 *
+	 * @since [version]
+	 *
+	 * @param {string} val Attribute value.
+	 * @return {Boolean} Returns `true` if the value contains invalid chars and `false` otherwise.
+	 */
+	containsInvalidCharacters( val ) {
+		return val.match( /[^A-Za-z0-9\-\_]/g ) ? true : false;
+	}
+
+	/**
+	 * Sets (or remove) a validation error for given key
+	 *
+	 * Passing a null value removes an existing validation error.
+	 *
+	 * @since [version]
+	 *
+	 * @param {string}  key Attribute key.
+	 * @param {?string} val Content of the invalid value, an empty string, or `null` to remove an existing validation error.
+	 * @return {void}
+	 */
+	setValidationError( key, val = null ) {
+		this.setState( {
+			validationErrors: {
+				...this.state.validationErrors,
+				[ key ]: val,
+			}
+		} );
+
+	}
+
+	/**
+	 * Determines if a block attribute has a validation error.
+	 *
+	 * @since [version]
+	 *
+	 * @param {string} key Attribute key.
+	 * @return {Boolean} Returns `true` when a validation error is present and `false`` if not.
+	 */
+	hasValidationErr( key ) {
+		return ( 'string' === typeof this.state.validationErrors[ key ] );
+	}
+
+	/**
+	 * Component to render a TextControl with built-in data validation and error display
+	 *
+	 * @since [version]
+	 *
+	 * @param {Object}    props
+	 * @param {Inspector} props.parent  Reference to the parent Inspector component.
+	 * @param {string}    props.attrKey Attribute key name for the control input.
+	 * @param {string}    props.label   Label property passed to TextControl.
+	 * @param {string}    props.help    Help property passed to TextControl.
+	 * @return {Object} Component HTML fragment.
+	 */
+	ValidatedTextControl( { parent, attrKey, label, help } ) {
+
+		const { attributes } = parent.props,
+			value = attributes[ attrKey ],
+			hasError = parent.hasValidationErr( attrKey ),
+			className = hasError ? 'llms-invalid-control' : '';
+
+		return (
+			<div className={ className }>
+				<TextControl
+					label={ label }
+					help={ help }
+					value={ value }
+					onChange={ ( newValue ) =>
+						parent.updateValueWithValidation(
+							attrKey,
+							newValue,
+							'name' === attrKey ? 'global' : 'local'
+						)
+					}
+				/>
+				{ hasError && (
+					<p className="llms-invalid-control--msg">{ parent.getValidationErrText( attrKey ) }</p>
+				) }
+			</div>
+		);
 	}
 
 	/**
@@ -270,11 +394,12 @@ export default class Inspector extends Component {
 	 * @return {void}
 	 */
 	updateValueWithValidation( key, newValue, context = 'local' ) {
+
 		const { clientId, attributes, setAttributes } = this.props,
 			currentValue = attributes[ key ],
 			{ editField, renameField } = dispatch( fieldsStore ),
-			{ createErrorNotice, removeNotice } = dispatch( 'core/notices' ),
-			noticeId = `llms-${ key }-validation-err-${ clientId }`;
+			{ lockPostSaving, unlockPostSaving } = dispatch( editorStore ),
+			errorId = `llms-${ key }-validation-err-${ clientId }-${ name }`;
 
 		// No change.
 		if ( newValue === currentValue ) {
@@ -282,19 +407,39 @@ export default class Inspector extends Component {
 		}
 
 		const { getFieldBy } = select( fieldsStore ),
-			isValid = getFieldBy( newValue, key, context ) ? false : true;
+			isEmpty          = ! newValue,
+			hasInvalidChars  = this.containsInvalidCharacters( newValue ),
+			hasUniqueVal     = isUnique( newValue, key, context ),
+			isValid          = ! isEmpty && ! hasInvalidChars && hasUniqueVal;
 
-		removeNotice( noticeId );
+		this.setValidationError( key );
+		unlockPostSaving( errorId );
 		if ( ! isValid ) {
-			createErrorNotice( this.getValidationErrText( key, newValue ), {
-				id: noticeId,
-			} );
 
-			// Still run updates but keep the new value valid by stripping the last character.
-			newValue = newValue.slice( 0, -1 );
+			this.setValidationError( key, newValue );
+
+			/**
+			 * When a field is "emptied" we'll throw an error but don't save the empty value.
+			 * This results in an error being displayed and the initial (pre deletion) value being
+			 * restored. If someone highlights the whole field and deletes it the whole field name
+			 * stays and an error displays. If the backspace one at a time the first character will
+			 * remain.
+			 *
+			 * This isn't ideal but I can't find a way to let them completely empty the data
+			 * without rewriting the duplicate detection logic in the main `edit()` component.
+			 */
+			if ( isEmpty ) {
+				return;
+			}
+			lockPostSaving( errorId );
+
 		}
 
 		if ( 'name' === key ) {
+			// Renaming a duplicate will cause overwrites of the original field.
+			if ( ! hasUniqueVal ) {
+				newValue = newValue.slice( 0, -1 );
+			}
 			renameField( attributes.name, newValue );
 		} else {
 			editField( attributes.name, { [ key ]: newValue } );
@@ -303,6 +448,7 @@ export default class Inspector extends Component {
 		setAttributes( {
 			[ key ]: newValue,
 		} );
+
 	}
 
 	/**
@@ -314,6 +460,7 @@ export default class Inspector extends Component {
 	 * @return {Fragment} Component HTML fragment.
 	 */
 	render() {
+
 		// Return early if there's no inspector options to display.
 		if ( ! this.hasInspectorSupport() ) {
 			return '';
@@ -508,24 +655,14 @@ export default class Inspector extends Component {
 							<PanelBody
 								title={ __( 'Data Storage', 'lifterlms' ) }
 							>
-								<TextControl
+								<this.ValidatedTextControl
+									parent={ this }
+									attrKey="data_store_key"
 									label={ __( 'Usermeta Key', 'lifterlms' ) }
-									onChange={ ( newDataStoreKey ) => {
-										// Strip invalid chars
-										newDataStoreKey = newDataStoreKey.replace(
-											/[^A-Za-z0-9\-\_]/g,
-											''
-										);
-										this.updateValueWithValidation(
-											'data_store_key',
-											newDataStoreKey
-										);
-									} }
 									help={ __(
 										'Database field key name. Only accepts alphanumeric characters, hyphens, and underscores.',
 										'lifterlms'
 									) }
-									value={ data_store_key }
 								/>
 							</PanelBody>
 						) }
@@ -534,38 +671,27 @@ export default class Inspector extends Component {
 				<InspectorAdvancedControls>
 					{ ! isConfirmationField &&
 						this.hasInspectorControlSupport( 'name' ) && (
-							<TextControl
+							<this.ValidatedTextControl
+								parent={ this }
+								attrKey="name"
 								label={ __( 'Field Name', 'lifterlms' ) }
-								onChange={ ( newName ) =>
-									this.updateValueWithValidation(
-										'name',
-										newName,
-										'global'
-									)
-								}
 								help={ __(
 									"The field's HTML name attribute.",
 									'lifterlms'
 								) }
-								value={ name }
 							/>
 						) }
 
 					{ ! isConfirmationField &&
 						this.hasInspectorControlSupport( 'id' ) && (
-							<TextControl
+							<this.ValidatedTextControl
+								parent={ this }
+								attrKey="id"
 								label={ __( 'Field ID', 'lifterlms' ) }
-								onChange={ ( newId ) =>
-									this.updateValueWithValidation(
-										'id',
-										newId
-									)
-								}
 								help={ __(
 									"The field's HTML id attribute.",
 									'lifterlms'
 								) }
-								value={ id }
 							/>
 						) }
 				</InspectorAdvancedControls>
