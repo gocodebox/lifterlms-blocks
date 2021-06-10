@@ -225,7 +225,7 @@ export default class Inspector extends Component {
 			case 'data_store_key':
 				// Translators: %s = user-submitted value.
 				msg = __(
-					'The user meta key "%s" is not unique. Please choose a value.',
+					'The user meta key "%s" is not unique. Please choose a unique value.',
 					'lifterlms'
 				);
 				break;
