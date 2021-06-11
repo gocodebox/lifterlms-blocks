@@ -163,11 +163,7 @@ export default class Field extends Component {
 								description: val,
 							} );
 						} }
-						allowedFormats={ [
-							'bold',
-							'strikethrough',
-							'link',
-						] }
+						allowedFormats={ [ 'bold', 'strikethrough', 'link' ] }
 						aria-label={
 							label
 								? __( 'Optional field description' )

@@ -40,17 +40,19 @@ import { isUnique } from './checks';
  * @since 1.6.0
  */
 export default class Inspector extends Component {
-
+	/**
+	 * Constructor
+	 *
+	 * @since [version]
+	 *
+	 * @param {Object} props Component properties.
+	 * @return {void}
+	 */
 	constructor( props ) {
 		super( props );
-
-		const { attributes } = props,
-			{ name } = attributes;
-
 		this.state = {
 			validationErrors: {},
 		};
-
 	}
 
 	/**
@@ -233,21 +235,19 @@ export default class Inspector extends Component {
 	 * @return {string} Error message for the given validation issue.
 	 */
 	getValidationErrText( key ) {
-
 		let msg = '';
 
 		const val = this.state.validationErrors[ key ];
 
 		if ( ! val ) {
-
-			msg = __( 'The value cannot be blank.', 'lifterlms' )
-
+			msg = __( 'The value cannot be blank.', 'lifterlms' );
 		} else if ( this.containsInvalidCharacters( val ) ) {
-
-			msg = __( 'The value "%s" contains invalid characters. Only letters, numbers, underscores, and hyphens are allowed.', 'lifterlms' );
-
+			// Translators: %s = user-submitted value.
+			msg = __(
+				'The value "%s" contains invalid characters. Only letters, numbers, underscores, and hyphens are allowed.',
+				'lifterlms'
+			);
 		} else {
-
 			switch ( key ) {
 				case 'data_store_key':
 					// Translators: %s = user-submitted value.
@@ -275,13 +275,14 @@ export default class Inspector extends Component {
 
 				default:
 					// Translators: %s = user-submitted value.
-					msg = __( 'The chosen value "%s" is invalid.', 'lifterlms' );
+					msg = __(
+						'The chosen value "%s" is invalid.',
+						'lifterlms'
+					);
 			}
-
 		}
 
 		return sprintf( msg, val );
-
 	}
 
 	/**
@@ -299,7 +300,7 @@ export default class Inspector extends Component {
 	 * @since [version]
 	 *
 	 * @param {string} val Attribute value.
-	 * @return {Boolean} Returns `true` if the value contains invalid chars and `false` otherwise.
+	 * @return {boolean} Returns `true` if the value contains invalid chars and `false` otherwise.
 	 */
 	containsInvalidCharacters( val ) {
 		return val.match( /[^A-Za-z0-9\-\_]/g ) ? true : false;
@@ -321,9 +322,8 @@ export default class Inspector extends Component {
 			validationErrors: {
 				...this.state.validationErrors,
 				[ key ]: val,
-			}
+			},
 		} );
-
 	}
 
 	/**
@@ -332,10 +332,10 @@ export default class Inspector extends Component {
 	 * @since [version]
 	 *
 	 * @param {string} key Attribute key.
-	 * @return {Boolean} Returns `true` when a validation error is present and `false`` if not.
+	 * @return {boolean} Returns `true` when a validation error is present and `false`` if not.
 	 */
 	hasValidationErr( key ) {
-		return ( 'string' === typeof this.state.validationErrors[ key ] );
+		return 'string' === typeof this.state.validationErrors[ key ];
 	}
 
 	/**
@@ -351,7 +351,6 @@ export default class Inspector extends Component {
 	 * @return {Object} Component HTML fragment.
 	 */
 	ValidatedTextControl( { parent, attrKey, label, help } ) {
-
 		const { attributes } = parent.props,
 			value = attributes[ attrKey ],
 			hasError = parent.hasValidationErr( attrKey ),
@@ -372,7 +371,9 @@ export default class Inspector extends Component {
 					}
 				/>
 				{ hasError && (
-					<p className="llms-invalid-control--msg">{ parent.getValidationErrText( attrKey ) }</p>
+					<p className="llms-invalid-control--msg">
+						{ parent.getValidationErrText( attrKey ) }
+					</p>
 				) }
 			</div>
 		);
@@ -394,8 +395,8 @@ export default class Inspector extends Component {
 	 * @return {void}
 	 */
 	updateValueWithValidation( key, newValue, context = 'local' ) {
-
 		const { clientId, attributes, setAttributes } = this.props,
+			{ name } = attributes,
 			currentValue = attributes[ key ],
 			{ editField, renameField } = dispatch( fieldsStore ),
 			{ lockPostSaving, unlockPostSaving } = dispatch( editorStore ),
@@ -406,16 +407,14 @@ export default class Inspector extends Component {
 			return;
 		}
 
-		const { getFieldBy } = select( fieldsStore ),
-			isEmpty          = ! newValue,
-			hasInvalidChars  = this.containsInvalidCharacters( newValue ),
-			hasUniqueVal     = isUnique( newValue, key, context ),
-			isValid          = ! isEmpty && ! hasInvalidChars && hasUniqueVal;
+		const isEmpty = ! newValue,
+			hasInvalidChars = this.containsInvalidCharacters( newValue ),
+			hasUniqueVal = isUnique( newValue, key, context ),
+			isValid = ! isEmpty && ! hasInvalidChars && hasUniqueVal;
 
 		this.setValidationError( key );
 		unlockPostSaving( errorId );
 		if ( ! isValid ) {
-
 			this.setValidationError( key, newValue );
 
 			/**
@@ -432,7 +431,6 @@ export default class Inspector extends Component {
 				return;
 			}
 			lockPostSaving( errorId );
-
 		}
 
 		if ( 'name' === key ) {
@@ -448,7 +446,6 @@ export default class Inspector extends Component {
 		setAttributes( {
 			[ key ]: newValue,
 		} );
-
 	}
 
 	/**
@@ -460,7 +457,6 @@ export default class Inspector extends Component {
 	 * @return {Fragment} Component HTML fragment.
 	 */
 	render() {
-
 		// Return early if there's no inspector options to display.
 		if ( ! this.hasInspectorSupport() ) {
 			return '';
@@ -469,11 +465,8 @@ export default class Inspector extends Component {
 		const { attributes, setAttributes, clientId, context } = this.props,
 			block = select( blockEditorStore ).getBlock( clientId ),
 			{
-				id,
-				name,
 				required,
 				placeholder,
-				data_store_key,
 				columns,
 				isConfirmationField,
 				isConfirmationControlField,

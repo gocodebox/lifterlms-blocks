@@ -2,7 +2,7 @@
  * Handle DOM Ready Events.
  *
  * @since 1.7.0
- * @version 1.12.0
+ * @version [version]
  */
 
 // WP Deps.
@@ -21,11 +21,11 @@ import { deregisterBlocksForForms } from '../blocks/';
  * @since 1.6.0
  * @since 1.7.0 Refactor for simplicity.
  * @since 1.12.0 Wait for current post to be setup before dispatching ready event.
+ * @since [version] Add blocksWatcher() and add conditional loading on wp_block posts.
  *
  * @return {void}
  */
 domReady( () => {
-
 	const { getCurrentPost } = select( editorStore );
 
 	/**
@@ -35,26 +35,22 @@ domReady( () => {
 	let dispatched = false;
 
 	const unsubscribe = subscribe( () => {
-
 		const post = getCurrentPost();
 
 		if ( false === dispatched && 0 !== Object.keys( post ).length ) {
-
 			dispatched = true;
 			unsubscribe();
 
-			const { type, is_llms_field } = post;
+			const { type, is_llms_field: isField } = post;
 
 			if ( 'llms_form' === type ) {
 				formsReady();
 				deregisterBlocksForForms();
 				blocksWatcher();
-			} else if ( 'wp_block' === type && 'yes' === is_llms_field ) {
+			} else if ( 'wp_block' === type && 'yes' === isField ) {
 				deregisterBlocksForForms();
 				blocksWatcher();
 			}
-
 		}
-
 	} );
 } );

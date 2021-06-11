@@ -8,7 +8,11 @@
 /* eslint camelcase: [ "error", { allow: [ "_llms_form_location" ] } ] */
 
 // WP Deps.
-import { getBlockTypes, registerBlockType, unregisterBlockType } from '@wordpress/blocks';
+import {
+	getBlockTypes,
+	registerBlockType,
+	unregisterBlockType,
+} from '@wordpress/blocks';
 import { store as editorStore } from '@wordpress/editor';
 import { doAction, applyFilters } from '@wordpress/hooks';
 import { select } from '@wordpress/data';
@@ -38,7 +42,6 @@ import * as formFields from './form-fields/';
  * @return {void}
  */
 export const deregisterBlocksForForms = () => {
-
 	/**
 	 * Filters the list of blocks allowed to be used within LifterLMS Forms
 	 *
@@ -49,23 +52,20 @@ export const deregisterBlocksForForms = () => {
 	 *
 	 * @param {string[]} safelist Array of allowed block names.
 	 */
-	const safelist = applyFilters(
-		'llms.formBlocksSafelist', [
-			'core/block', // Reusable block.
-			'core/paragraph',
-			'core/heading',
-			'core/image',
-			'core/html',
-			'core/column',
-			'core/columns',
-			'core/group',
-			'core/separator',
-			'core/spacer',
-		]
-	);
+	const safelist = applyFilters( 'llms.formBlocksSafelist', [
+		'core/block', // Reusable block.
+		'core/paragraph',
+		'core/heading',
+		'core/image',
+		'core/html',
+		'core/column',
+		'core/columns',
+		'core/group',
+		'core/separator',
+		'core/spacer',
+	] );
 
-	const
-		{ getCurrentPost } = select( editorStore ),
+	const { getCurrentPost } = select( editorStore ),
 		{ meta = {} } = getCurrentPost(),
 		{ _llms_form_location } = meta;
 
@@ -80,7 +80,6 @@ export const deregisterBlocksForForms = () => {
 	 * @return {boolean} Returns `true` if a block should be unregistered.
 	 */
 	const shouldUnregisterBlock = ( name ) => {
-
 		// Allow safelisted blocks.
 		if ( -1 !== safelist.indexOf( name ) ) {
 			return false;
