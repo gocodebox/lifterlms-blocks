@@ -124,7 +124,7 @@ export function EditField( props ) {
 		{ isDuplicate } = select( fieldsStore ),
 		inFieldGroup = context[ 'llms/fieldGroup/fieldLayout' ] ? true : false,
 		addingField =
-			! attributes.name || isDuplicate( attributes.name, clientId );
+			attributes.name && isDuplicate( attributes.name, clientId );
 
 	attributes = setupAtts( attributes, block.attributes, addingField );
 
