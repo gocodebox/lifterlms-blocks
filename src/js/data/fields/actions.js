@@ -122,3 +122,16 @@ export function renameField( oldName, newName ) {
 		newName,
 	};
 }
+
+/**
+ * Reset fields to the default state
+ *
+ * @since [version]
+ *
+ * @return {Object} Action object.
+ */
+export function resetFields() {
+	return {
+		type: 'RESET_FIELDS',
+	}
+}

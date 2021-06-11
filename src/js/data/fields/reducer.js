@@ -92,6 +92,17 @@ function renameField( fields, oldName, newName ) {
 }
 
 /**
+ * Reset fields to the default state.
+ *
+ * @since [version]
+ *
+ * @return {[type]} [description]
+ */
+function resetFields() {
+	return DEFAULT_FIELDS;
+}
+
+/**
  * Fields reducer
  *
  * @since [version]
@@ -118,6 +129,9 @@ export function fields( state = DEFAULT_FIELDS, action ) {
 
 		case 'RENAME_FIELD':
 			return renameField( state, action.oldName, action.newName );
+
+		case 'RESET_FIELDS':
+			return resetFields();
 
 		default:
 			return state;

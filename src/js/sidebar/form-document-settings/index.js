@@ -7,6 +7,7 @@
  * @version [version]
  */
 
+// WP Deps.
 import { parse } from '@wordpress/blocks';
 import {
 	Button,
@@ -18,10 +19,14 @@ import { compose } from '@wordpress/compose';
 import { dispatch, select, withDispatch, withSelect } from '@wordpress/data';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
+import { store as editorStore } from '@wordpress/editor';
+import { store as noticesStore } from '@wordpress/notices';
 import { Component, Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
+// Internal Deps.
 import LLMSFormDocSettings from './slot-fill';
+import { store as fieldsStore } from '../../data/fields';
 
 /**
  * Render the "Form Settings" metabox in the "PluginDocumentSettingPanel" slot.
@@ -47,7 +52,7 @@ class FormDocumentSettings extends Component {
 		if ( 'undefined' === typeof PluginDocumentSettingPanel ) {
 			return null;
 		} else if (
-			'llms_form' !== select( 'core/editor' ).getCurrentPostType()
+			'llms_form' !== select( editorStore ).getCurrentPostType()
 		) {
 			return null;
 		}
@@ -85,19 +90,21 @@ class FormDocumentSettings extends Component {
 		 * be restored immediately following reversion.
 		 *
 		 * @since 1.12.0
-		 * @since [version] Use default template from location definition.
+		 * @since [version] Use default template from location definition & reset llms/user-info-fields data before replacing blocks.
 		 *
 		 * @return {void}
 		 */
 		function revertToDefault() {
 			const id = 'llms-form-restore-default',
 				// Save temp content for reverting in the notice action.
-				tempContent = select( 'core/editor' ).getEditedPostAttribute(
+				tempContent = select( editorStore ).getEditedPostAttribute(
 					'content'
 				),
-				{ createSuccessNotice, removeNotice } = dispatch(
-					'core/notices'
-				);
+				{ createSuccessNotice, removeNotice } = dispatch( noticesStore ),
+				{ resetFields } = dispatch( fieldsStore );
+
+			// Reset field data.
+			resetFields();
 
 			// Replace blocks.
 			replaceAllBlocks( currentLoc.template );
@@ -118,10 +125,12 @@ class FormDocumentSettings extends Component {
 							 * Restore the temporary backup and clear the notice.
 							 *
 							 * @since 1.12.0
+							 * @since [version] Reset llms/user-info-fields data before replacing blocks.
 							 *
 							 * @return {void}
 							 */
 							onClick: () => {
+								resetFields();
 								replaceAllBlocks( tempContent );
 								removeNotice( id );
 							},
@@ -228,7 +237,7 @@ const applyWithSelect = withSelect( ( select ) => {
 		getCurrentPost,
 		getCurrentPostType,
 		getEditedPostAttribute,
-	} = select( 'core/editor' );
+	} = select( editorStore );
 
 	if ( 'llms_form' !== getCurrentPostType() ) {
 		return {};
