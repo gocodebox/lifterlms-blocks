@@ -18,14 +18,6 @@ import {
 	visitForm,
 } from '../../util';
 
-const snapshotMatcherForSingle = {
-	...blockSnapshotMatcher,
-	attributes: {
-		uuid: expect.any( String )
-	},
-};
-
-
 
 /**
  * Utility function to retrieve the block being tested
@@ -117,8 +109,8 @@ async function testAddConfirmationProp( editable = true ) {
 
 		expect( block ).toMatchSnapshot( blockSnapshotMatcher );
 
-		expect( innerBlocks[0] ).toMatchSnapshot( snapshotMatcherForSingle );
-		expect( innerBlocks[1] ).toMatchSnapshot( snapshotMatcherForSingle );
+		expect( innerBlocks[0] ).toMatchSnapshot( blockSnapshotMatcher );
+		expect( innerBlocks[1] ).toMatchSnapshot( blockSnapshotMatcher );
 
 	} else {
 		expect( await page.evaluate( () => document.querySelector( '.llms-confirmation-field-toggle' ) ) ).toBeNull();
@@ -134,7 +126,7 @@ async function testDelConfirmationProp() {
 		block = await getTestedBlock(),
 		{ innerBlocks } = block;
 
-	expect( block ).toMatchSnapshot( snapshotMatcherForSingle );
+	expect( block ).toMatchSnapshot( blockSnapshotMatcher );
 	expect( innerBlocks ).toEqual( [] );
 
 }
@@ -156,8 +148,8 @@ async function testGroupLayout() {
 
 		expect( block ).toMatchSnapshot( blockSnapshotMatcher );
 
-		expect( innerBlocks[0] ).toMatchSnapshot( snapshotMatcherForSingle );
-		expect( innerBlocks[1] ).toMatchSnapshot( snapshotMatcherForSingle );
+		expect( innerBlocks[0] ).toMatchSnapshot( blockSnapshotMatcher );
+		expect( innerBlocks[1] ).toMatchSnapshot( blockSnapshotMatcher );
 	}
 
 }
@@ -254,7 +246,7 @@ describe( 'Blocks/FormFields', () => {
 			} );
 
 			it ( 'can be created using the block inserter', async () => {
-				expect( await getTestedBlock() ).toMatchSnapshot( snapshotMatcherForSingle );
+				expect( await getTestedBlock() ).toMatchSnapshot( blockSnapshotMatcher );
 			} );
 
 			it ( 'can modify the label', async () => await testLabelProp() );
