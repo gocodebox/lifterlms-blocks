@@ -24,12 +24,23 @@ Object {
     "options_preset": "",
     "placeholder": "",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
   "isValid": true,
   "name": "llms/form-field-user-display-name",
+}
+`;
+
+exports[`Blocks/FormFields User Display Name/Editor can be created using the block inserter 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "display_name",
+  "id": "display_name",
+  "isPersisted": true,
+  "label": "Display Name",
+  "name": "display_name",
 }
 `;
 
@@ -78,7 +89,6 @@ Object {
     "options_preset": "",
     "placeholder": "Custom Placeholder",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
@@ -111,12 +121,34 @@ Object {
     "options_preset": "",
     "placeholder": "Custom Placeholder",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
   "isValid": true,
   "name": "llms/form-field-text",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can add a confirmation field 4`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_email",
+  "id": "email_address",
+  "isPersisted": true,
+  "label": "Email Address",
+  "name": "email_address",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can add a confirmation field 5`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": false,
+  "data_store_key": false,
+  "id": "email_address_confirm",
+  "label": "Confirm Custom Label Email Address",
+  "name": "email_address_confirm",
 }
 `;
 
@@ -144,12 +176,23 @@ Object {
     "options_preset": "",
     "placeholder": "",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
   "isValid": true,
   "name": "llms/form-field-user-email",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can be created using the block inserter 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_email",
+  "id": "email_address",
+  "isPersisted": true,
+  "label": "Email Address",
+  "name": "email_address",
 }
 `;
 
@@ -183,12 +226,23 @@ Object {
     "options_preset": "",
     "placeholder": "Custom Placeholder",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
   "isValid": true,
   "name": "llms/form-field-user-email",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can remove the confirmation field 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_email",
+  "id": "email_address",
+  "isPersisted": true,
+  "label": "Email Address",
+  "name": "email_address",
 }
 `;
 
@@ -231,7 +285,6 @@ Object {
     "options_preset": "",
     "placeholder": "Custom Placeholder",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
@@ -264,7 +317,6 @@ Object {
     "options_preset": "",
     "placeholder": "Custom Placeholder",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
@@ -312,7 +364,6 @@ Object {
     "options_preset": "",
     "placeholder": "Custom Placeholder",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
@@ -345,7 +396,6 @@ Object {
     "options_preset": "",
     "placeholder": "Custom Placeholder",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
@@ -393,7 +443,6 @@ Object {
     "options_preset": "",
     "placeholder": "Custom Placeholder",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
@@ -426,12 +475,34 @@ Object {
     "options_preset": "",
     "placeholder": "Custom Placeholder",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
   "isValid": true,
   "name": "llms/form-field-text",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can add a confirmation field 4`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_login",
+  "id": "user_login",
+  "isPersisted": true,
+  "label": "Username",
+  "name": "user_login",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can add a confirmation field 5`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": false,
+  "data_store_key": false,
+  "id": "user_login_confirm",
+  "label": "Confirm Custom Label Username",
+  "name": "user_login_confirm",
 }
 `;
 
@@ -459,12 +530,23 @@ Object {
     "options_preset": "",
     "placeholder": "",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
   "isValid": true,
   "name": "llms/form-field-user-login",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can be created using the block inserter 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_login",
+  "id": "user_login",
+  "isPersisted": true,
+  "label": "Username",
+  "name": "user_login",
 }
 `;
 
@@ -498,12 +580,23 @@ Object {
     "options_preset": "",
     "placeholder": "Custom Placeholder",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
   "isValid": true,
   "name": "llms/form-field-user-login",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can remove the confirmation field 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_login",
+  "id": "user_login",
+  "isPersisted": true,
+  "label": "Username",
+  "name": "user_login",
 }
 `;
 
@@ -546,7 +639,6 @@ Object {
     "options_preset": "",
     "placeholder": "Custom Placeholder",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
@@ -579,7 +671,6 @@ Object {
     "options_preset": "",
     "placeholder": "Custom Placeholder",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
@@ -627,7 +718,6 @@ Object {
     "options_preset": "",
     "placeholder": "Custom Placeholder",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
@@ -660,7 +750,6 @@ Object {
     "options_preset": "",
     "placeholder": "Custom Placeholder",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
@@ -706,14 +795,13 @@ Object {
     "llms_visibility_posts": "[]",
     "match": "password_confirm",
     "meter": true,
-    "meter_description": "A {min_strength} password is required with at least {min_length} characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.",
+    "meter_description": "A strong password is required with at least 8 characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.",
     "min_strength": "strong",
     "name": "password",
     "options": Array [],
     "options_preset": "",
     "placeholder": "",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
@@ -748,12 +836,34 @@ Object {
     "options_preset": "",
     "placeholder": "",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
   "isValid": true,
   "name": "llms/form-field-text",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can add a confirmation field 4`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_pass",
+  "id": "password",
+  "isPersisted": true,
+  "label": "Password",
+  "name": "password",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can add a confirmation field 5`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": false,
+  "data_store_key": false,
+  "id": "password_confirm",
+  "label": "Confirm Custom Label Password",
+  "name": "password_confirm",
 }
 `;
 
@@ -779,19 +889,30 @@ Object {
     "llms_visibility_posts": "[]",
     "match": "password_confirm",
     "meter": true,
-    "meter_description": "A {min_strength} password is required with at least {min_length} characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.",
+    "meter_description": "A strong password is required with at least 8 characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.",
     "min_strength": "strong",
     "name": "password",
     "options": Array [],
     "options_preset": "",
     "placeholder": "",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
   "isValid": true,
   "name": "llms/form-field-user-password",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can be created using the block inserter 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_pass",
+  "id": "password",
+  "isPersisted": true,
+  "label": "Password",
+  "name": "password",
 }
 `;
 
@@ -821,19 +942,30 @@ Object {
     "llms_visibility_posts": "[]",
     "match": "",
     "meter": true,
-    "meter_description": "A {min_strength} password is required with at least {min_length} characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.",
+    "meter_description": "A strong password is required with at least 8 characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.",
     "min_strength": "strong",
     "name": "password",
     "options": Array [],
     "options_preset": "",
     "placeholder": "",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
   "isValid": true,
   "name": "llms/form-field-user-password",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can remove the confirmation field 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_pass",
+  "id": "password",
+  "isPersisted": true,
+  "label": "Password",
+  "name": "password",
 }
 `;
 
@@ -874,14 +1006,13 @@ Object {
     "llms_visibility_posts": "[]",
     "match": "password_confirm",
     "meter": true,
-    "meter_description": "A {min_strength} password is required with at least {min_length} characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.",
+    "meter_description": "A strong password is required with at least 8 characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.",
     "min_strength": "strong",
     "name": "password",
     "options": Array [],
     "options_preset": "",
     "placeholder": "",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
@@ -916,7 +1047,6 @@ Object {
     "options_preset": "",
     "placeholder": "",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
@@ -962,14 +1092,13 @@ Object {
     "llms_visibility_posts": "[]",
     "match": "password_confirm",
     "meter": true,
-    "meter_description": "A {min_strength} password is required with at least {min_length} characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.",
+    "meter_description": "A strong password is required with at least 8 characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.",
     "min_strength": "strong",
     "name": "password",
     "options": Array [],
     "options_preset": "",
     "placeholder": "",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
@@ -1004,7 +1133,6 @@ Object {
     "options_preset": "",
     "placeholder": "",
     "required": true,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
@@ -1037,12 +1165,23 @@ Object {
     "options_preset": "",
     "placeholder": "",
     "required": false,
-    "uuid": Any<String>,
   },
   "clientId": Any<String>,
   "innerBlocks": Anything,
   "isValid": true,
   "name": "llms/form-field-user-phone",
+}
+`;
+
+exports[`Blocks/FormFields User Phone/Editor can be created using the block inserter 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "usermeta",
+  "data_store_key": "llms_phone",
+  "id": "llms_phone",
+  "isPersisted": true,
+  "label": "Phone Number",
+  "name": "llms_phone",
 }
 `;
 

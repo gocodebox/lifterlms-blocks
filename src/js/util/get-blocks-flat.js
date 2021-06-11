@@ -10,7 +10,6 @@
 
 // External Deps.
 import { select } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 
 /**
@@ -27,15 +26,8 @@ export const flattenBlocks = ( blocks ) => {
 
 	blocks.forEach( ( block ) => {
 		if ( 'core/block' === block.name ) {
-			const { getEditedEntityRecord } = select( coreStore );
-			const editedEntity = getEditedEntityRecord(
-				'postType',
-				'wp_block',
-				block.attributes.ref
-			);
-			if ( editedEntity && editedEntity.blocks ) {
-				flat = flat.concat( flattenBlocks( editedEntity.blocks ) );
-			}
+			const { getBlocks } = select( blockEditorStore );
+			flat = flat.concat( flattenBlocks( getBlocks( block.clientId ) ) );
 		} else if ( block.innerBlocks.length ) {
 			flat = flat.concat( flattenBlocks( block.innerBlocks ) );
 		} else {

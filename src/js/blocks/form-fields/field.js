@@ -103,7 +103,7 @@ export default class Field extends Component {
 									label: val,
 								} );
 							} }
-							formattingControls={ [ 'bold', 'italic' ] }
+							allowedFormats={ [ 'bold', 'italic' ] }
 							aria-label={
 								label
 									? __( 'Field label' )
@@ -163,11 +163,7 @@ export default class Field extends Component {
 								description: val,
 							} );
 						} }
-						formattingControls={ [
-							'bold',
-							'strikethrough',
-							'link',
-						] }
+						allowedFormats={ [ 'bold', 'strikethrough', 'link' ] }
 						aria-label={
 							label
 								? __( 'Optional field description' )

@@ -5,6 +5,28 @@
 // @version 1.6.0
 //
 
+.llms-invalid-control {
+
+	margin-bottom: 24px;
+	.components-base-control {
+		margin-bottom: 0;
+		.components-text-control__input {
+			border-color: #cc1818;
+			background-color: rgba( #cc1818, 0.05 );
+		}
+	}
+	.llms-invalid-control--msg {
+		background-color: rgba( #cc1818, 0.05 );
+		border-left: 4px solid #cc1818;
+		color: #cc1818;
+		font-style: italic;
+		font-size: 12px;
+		margin-bottom: 0;
+		padding: 6px 2px 6px 8px;
+	}
+
+}
+
 .llms-pwd-meter {
 	border: 1px solid #e35b5b;
 	margin-top: 5px;
