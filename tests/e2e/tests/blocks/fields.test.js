@@ -19,6 +19,10 @@ import {
 } from '../../util';
 
 
+const fieldSnapshotMatcher = {
+	clientId: expect.any( String ),
+};
+
 /**
  * Utility function to retrieve the block being tested
  *
@@ -33,6 +37,16 @@ import {
 async function getTestedBlock() {
 	const blocks = await getAllBlocks();
 	return blocks[0];
+}
+
+async function getLoadedBlocks() {
+	return await page.evaluate( async() => {
+		return wp.data.select( 'llms/user-info-fields' ).getLoadedFields();
+	} );
+}
+
+async function getField( name ) {
+	return await page.evaluate( ( _name ) => wp.data.select( 'llms/user-info-fields' ).getField( _name ), name );
 }
 
 async function testLabelProp() {
@@ -95,7 +109,7 @@ async function testPlaceholderProp( editable = true ) {
 	}
 }
 
-async function testAddConfirmationProp( editable = true ) {
+async function testAddConfirmationProp( editable = true, fieldName = '' ) {
 
 	if ( editable ) {
 
@@ -107,10 +121,27 @@ async function testAddConfirmationProp( editable = true ) {
 			block = await getTestedBlock(),
 			{ innerBlocks } = block;
 
+		// Group.
 		expect( block ).toMatchSnapshot( blockSnapshotMatcher );
 
+		// Main field.
 		expect( innerBlocks[0] ).toMatchSnapshot( blockSnapshotMatcher );
+
+		// Confirm field.
 		expect( innerBlocks[1] ).toMatchSnapshot( blockSnapshotMatcher );
+
+		// Test loading block via the llms/user-info-fields store.
+		await page.waitFor( 1000 ); // Waiting for subscription watcher to catch up.
+
+		// Main field.
+		const loadedField = await getField( fieldName );
+		expect( loadedField ).toMatchSnapshot( fieldSnapshotMatcher );
+		expect( loadedField.clientId ).toBe( innerBlocks[0].clientId );
+
+		// Confirm field.
+		const loadedConfirmField = await getField( `${fieldName}_confirm` );
+		expect( loadedConfirmField ).toMatchSnapshot( fieldSnapshotMatcher );
+		expect( loadedConfirmField.clientId ).toBe( innerBlocks[1].clientId );
 
 	} else {
 		expect( await page.evaluate( () => document.querySelector( '.llms-confirmation-field-toggle' ) ) ).toBeNull();
@@ -118,7 +149,7 @@ async function testAddConfirmationProp( editable = true ) {
 
 }
 
-async function testDelConfirmationProp() {
+async function testDelConfirmationProp( fieldName ) {
 
 	await clickElementByText( 'Remove confirmation field' );
 
@@ -128,6 +159,15 @@ async function testDelConfirmationProp() {
 
 	expect( block ).toMatchSnapshot( blockSnapshotMatcher );
 	expect( innerBlocks ).toEqual( [] );
+
+	// Test field data.
+	await page.waitFor( 1000 ); // Waiting for subscription watcher to catch up.
+	const loadedField = await getField( fieldName );
+	expect( loadedField ).toMatchSnapshot( fieldSnapshotMatcher );
+	expect( loadedField.clientId ).toBe( block.clientId );
+
+	// Confirm field is gone.
+	expect( await getField( `${ fieldName }_confirm` ) ).toBeNull();
 
 }
 
@@ -181,30 +221,35 @@ const fields = [
 		confirmation: true,
 		required: false,
 		placeholder: true,
+		fieldName: 'email_address',
 	},
 	{
 		name: 'User Password',
 		confirmation: true,
 		required: false,
 		placeholder: false,
+		fieldName: 'password',
 	},
 	{
 		name: 'User Login',
 		confirmation: true,
 		required: false,
 		placeholder: true,
+		fieldName: 'user_login',
 	},
 	{
 		name: 'User Display Name',
 		confirmation: false,
 		required: false,
 		placeholder: true,
+		fieldName: 'display_name',
 	},
 	{
 		name: 'User Phone',
 		confirmation: false,
 		required: true,
 		placeholder: true,
+		fieldName: 'llms_phone',
 	},
 
 	/**
@@ -246,7 +291,17 @@ describe( 'Blocks/FormFields', () => {
 			} );
 
 			it ( 'can be created using the block inserter', async () => {
-				expect( await getTestedBlock() ).toMatchSnapshot( blockSnapshotMatcher );
+
+				// Test the block itself.
+				const testedBlock = await getTestedBlock();
+				expect( testedBlock ).toMatchSnapshot( blockSnapshotMatcher );
+
+				// Test loading block via the llms/user-info-fields store.
+				await page.waitFor( 1000 ); // Waiting for subscription watcher to catch up.
+				const loadedField = await getField( field.fieldName );
+				expect( loadedField ).toMatchSnapshot( fieldSnapshotMatcher );
+				expect( loadedField.clientId ).toBe( testedBlock.clientId );
+
 			} );
 
 			it ( 'can modify the label', async () => await testLabelProp() );
@@ -260,11 +315,11 @@ describe( 'Blocks/FormFields', () => {
 			}
 
 			if ( field.confirmation ) {
-				it ( 'can add a confirmation field', async () => await testAddConfirmationProp( true ) );
+				it ( 'can add a confirmation field', async () => await testAddConfirmationProp( true, field.fieldName ) );
 				it ( 'can toggle the group layout', async() => await testGroupLayout() );
-				it ( 'can remove the confirmation field', async() => await testDelConfirmationProp() );
+				it ( 'can remove the confirmation field', async() => await testDelConfirmationProp( field.fieldName ) );
 			} else {
-				it ( 'cannot add a confirmation field', async () => await testAddConfirmationProp( false ) );
+				it ( 'cannot add a confirmation field', async () => await testAddConfirmationProp( false, field.fieldName ) );
 			}
 
 			if ( field.required ) {

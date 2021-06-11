@@ -32,6 +32,18 @@ Object {
 }
 `;
 
+exports[`Blocks/FormFields User Display Name/Editor can be created using the block inserter 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "display_name",
+  "id": "display_name",
+  "isPersisted": true,
+  "label": "Display Name",
+  "name": "display_name",
+}
+`;
+
 exports[`Blocks/FormFields User Display Name/Editor can modify the description 1`] = `"Custom description"`;
 
 exports[`Blocks/FormFields User Display Name/Editor can modify the label 1`] = `"Custom Label Display Name"`;
@@ -117,6 +129,29 @@ Object {
 }
 `;
 
+exports[`Blocks/FormFields User Email/Editor can add a confirmation field 4`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_email",
+  "id": "email_address",
+  "isPersisted": true,
+  "label": "Email Address",
+  "name": "email_address",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can add a confirmation field 5`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": false,
+  "data_store_key": false,
+  "id": "email_address_confirm",
+  "label": "Confirm Custom Label Email Address",
+  "name": "email_address_confirm",
+}
+`;
+
 exports[`Blocks/FormFields User Email/Editor can be created using the block inserter 1`] = `
 Object {
   "attributes": Object {
@@ -146,6 +181,18 @@ Object {
   "innerBlocks": Anything,
   "isValid": true,
   "name": "llms/form-field-user-email",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can be created using the block inserter 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_email",
+  "id": "email_address",
+  "isPersisted": true,
+  "label": "Email Address",
+  "name": "email_address",
 }
 `;
 
@@ -184,6 +231,18 @@ Object {
   "innerBlocks": Anything,
   "isValid": true,
   "name": "llms/form-field-user-email",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can remove the confirmation field 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_email",
+  "id": "email_address",
+  "isPersisted": true,
+  "label": "Email Address",
+  "name": "email_address",
 }
 `;
 
@@ -424,6 +483,29 @@ Object {
 }
 `;
 
+exports[`Blocks/FormFields User Login/Editor can add a confirmation field 4`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_login",
+  "id": "user_login",
+  "isPersisted": true,
+  "label": "Username",
+  "name": "user_login",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can add a confirmation field 5`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": false,
+  "data_store_key": false,
+  "id": "user_login_confirm",
+  "label": "Confirm Custom Label Username",
+  "name": "user_login_confirm",
+}
+`;
+
 exports[`Blocks/FormFields User Login/Editor can be created using the block inserter 1`] = `
 Object {
   "attributes": Object {
@@ -453,6 +535,18 @@ Object {
   "innerBlocks": Anything,
   "isValid": true,
   "name": "llms/form-field-user-login",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can be created using the block inserter 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_login",
+  "id": "user_login",
+  "isPersisted": true,
+  "label": "Username",
+  "name": "user_login",
 }
 `;
 
@@ -491,6 +585,18 @@ Object {
   "innerBlocks": Anything,
   "isValid": true,
   "name": "llms/form-field-user-login",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can remove the confirmation field 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_login",
+  "id": "user_login",
+  "isPersisted": true,
+  "label": "Username",
+  "name": "user_login",
 }
 `;
 
@@ -738,6 +844,29 @@ Object {
 }
 `;
 
+exports[`Blocks/FormFields User Password/Editor can add a confirmation field 4`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_pass",
+  "id": "password",
+  "isPersisted": true,
+  "label": "Password",
+  "name": "password",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can add a confirmation field 5`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": false,
+  "data_store_key": false,
+  "id": "password_confirm",
+  "label": "Confirm Custom Label Password",
+  "name": "password_confirm",
+}
+`;
+
 exports[`Blocks/FormFields User Password/Editor can be created using the block inserter 1`] = `
 Object {
   "attributes": Object {
@@ -772,6 +901,18 @@ Object {
   "innerBlocks": Anything,
   "isValid": true,
   "name": "llms/form-field-user-password",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can be created using the block inserter 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_pass",
+  "id": "password",
+  "isPersisted": true,
+  "label": "Password",
+  "name": "password",
 }
 `;
 
@@ -813,6 +954,18 @@ Object {
   "innerBlocks": Anything,
   "isValid": true,
   "name": "llms/form-field-user-password",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can remove the confirmation field 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_pass",
+  "id": "password",
+  "isPersisted": true,
+  "label": "Password",
+  "name": "password",
 }
 `;
 
@@ -1017,6 +1170,18 @@ Object {
   "innerBlocks": Anything,
   "isValid": true,
   "name": "llms/form-field-user-phone",
+}
+`;
+
+exports[`Blocks/FormFields User Phone/Editor can be created using the block inserter 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "usermeta",
+  "data_store_key": "llms_phone",
+  "id": "llms_phone",
+  "isPersisted": true,
+  "label": "Phone Number",
+  "name": "llms_phone",
 }
 `;
 
