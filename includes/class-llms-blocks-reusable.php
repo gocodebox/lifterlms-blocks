@@ -100,21 +100,11 @@ class LLMS_Blocks_Reusable {
 	 */
 	public function mod_wp_block_query( $args, $request ) {
 
-		// Get referring post.
 		$referer = $request->get_header( 'referer' );
-		if ( empty( $referer ) ) {
-			return $args;
-		}
+		$screen  = empty( $referer ) ? false : $this->get_screen_from_referer( $referer );
 
-		$query_args = array();
-		wp_parse_str( wp_parse_url( $referer, PHP_URL_QUERY ), $query_args );
-		if ( empty( $query_args['post'] ) ) {
-			return $args;
-		}
-
-		// Reusable blocks can contain blocks.
-		$post_type = get_post_type( $query_args['post'] );
-		if ( 'wp_block' === $post_type ) {
+		// We don't care about the screen or it's a reusable block screen.
+		if ( empty( $screen ) || 'wp_block' === $screen ) {
 			return $args;
 		}
 
@@ -126,7 +116,7 @@ class LLMS_Blocks_Reusable {
 		}
 
 		// Forms should show only blocks with forms and everything else should exclude blocks with forms.
-		$include_fields       = 'llms_form' === $post_type;
+		$include_fields       = 'llms_form' === $screen;
 		$args['meta_query'][] = $this->get_meta_query( $include_fields );
 
 		return $args;
@@ -168,6 +158,38 @@ class LLMS_Blocks_Reusable {
 		}
 
 		return $meta_query;
+
+	}
+
+	/**
+	 * Determine the screen where a reusable blocks rest query originated
+	 *
+	 * The screen name will either be "widgets" or the WP_Post name of a registered WP_Post type.
+	 *
+	 * For any other screen we return `false` because we don't care about it.
+	 *
+	 * @since [version]
+	 *
+	 * @param string $referer Referring URL for the REST request.
+	 * @return string|boolean Returns the screen name or `false` if we don't care about the screen.
+	 */
+	private function get_screen_from_referer( $referer ) {
+
+		// Blockified widgets screen.
+		if ( 'widgets.php' === basename( wp_parse_url( $referer, PHP_URL_PATH ) ) ) {
+			return 'widgets';
+		}
+
+		$query_args = array();
+		wp_parse_str( wp_parse_url( $referer, PHP_URL_QUERY ), $query_args );
+
+		// Something else.
+		if ( empty( $query_args['post'] ) ) {
+			return false;
+		}
+
+		// Block editor for a WP_Post.
+		return get_post_type( $query_args['post'] );
 
 	}
 
