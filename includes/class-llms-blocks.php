@@ -103,7 +103,7 @@ class LLMS_Blocks {
 	public function admin_print_scripts() {
 
 		$screen = get_current_screen();
-		if ( ! $screen || ( empty( $screen->is_block_editor ) && 'customizer' !== $screen ) ) {
+		if ( ! $screen || ( empty( $screen->is_block_editor ) && 'customize' !== $screen->base ) ) {
 			return;
 		}
 
