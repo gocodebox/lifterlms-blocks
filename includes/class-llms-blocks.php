@@ -96,13 +96,14 @@ class LLMS_Blocks {
 	 * @link https://github.com/gocodebox/lifterlms-blocks/issues/30
 	 *
 	 * @since 1.5.1
+	 * @since [version] Since WordPress 5.8 blocks are available in widgets and customizer screen too.
 	 *
 	 * @return void
 	 */
 	public function admin_print_scripts() {
 
 		$screen = get_current_screen();
-		if ( ! $screen || 'post' !== $screen->base ) {
+		if ( ! $screen || ( empty( $screen->is_block_editor ) && 'customize' !== $screen->base ) ) {
 			return;
 		}
 
