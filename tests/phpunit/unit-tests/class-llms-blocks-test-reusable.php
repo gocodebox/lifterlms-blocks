@@ -108,30 +108,41 @@ class LLMS_Blocks_Test_Reusable extends LLMS_Blocks_Unit_Test_Case {
 		$res = $this->main->mod_wp_block_query( $args, $request );
 		$this->assertEquals( $expect, $res );
 
-		// From any other post.
-		$post = $this->factory->post->create();
-		$request->set_header( 'referer', get_edit_post_link( $post ) );
 
-		$expect = array(
-			'input',
-			'meta_query' => array(
-				'relation' => 'AND',
-				array(
-					'relation' => 'OR',
+		// From any other post or the widgets screen.
+		$tests = array(
+			get_edit_post_link( $this->factory->post->create() ),
+			get_edit_post_link( $this->factory->post->create( array( 'post_type' => 'course' ) ) ),
+			get_edit_post_link( $this->factory->post->create( array( 'post_type' => 'page' ) ) ),
+			'https://example.tld/wp-admin/widgets.php',
+		);
+
+		foreach ( $tests as $test ) {
+
+			$request->set_header( 'referer', $test );
+
+			$expect = array(
+				'input',
+				'meta_query' => array(
+					'relation' => 'AND',
 					array(
-						'key' => '_is_llms_field',
-						'value' => 'yes',
-						'compare' => '!=',
-					),
-					array(
-						'key' => '_is_llms_field',
-						'compare' => 'NOT EXISTS',
+						'relation' => 'OR',
+						array(
+							'key' => '_is_llms_field',
+							'value' => 'yes',
+							'compare' => '!=',
+						),
+						array(
+							'key' => '_is_llms_field',
+							'compare' => 'NOT EXISTS',
+						),
 					),
 				),
-			),
-		);
-		$res = $this->main->mod_wp_block_query( $args, $request );
-		$this->assertEquals( $expect, $res );
+			);
+			$res = $this->main->mod_wp_block_query( $args, $request );
+			$this->assertEquals( $expect, $res );
+
+		}
 
 	}
 
