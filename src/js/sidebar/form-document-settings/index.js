@@ -100,7 +100,9 @@ class FormDocumentSettings extends Component {
 				tempContent = select( editorStore ).getEditedPostAttribute(
 					'content'
 				),
-				{ createSuccessNotice, removeNotice } = dispatch( noticesStore ),
+				{ createSuccessNotice, removeNotice } = dispatch(
+					noticesStore
+				),
 				{ resetFields } = dispatch( fieldsStore );
 
 			// Reset field data.
