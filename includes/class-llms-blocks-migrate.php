@@ -375,7 +375,7 @@ class LLMS_Blocks_Migrate {
 	 */
 	public function unmigrate_posts() {
 
-		$posts = $this->get_migrated_posts( array( 'posts_per_page' => 250 ) );
+		$posts = $this->get_migrated_posts( array( 'posts_per_page' => 250 ) ); // phpcs:ignore WordPress.WP.PostsPerPage.posts_per_page_posts_per_page
 
 		if ( $posts->posts ) {
 			foreach ( $posts->posts as $post ) {
@@ -420,7 +420,7 @@ class LLMS_Blocks_Migrate {
 			),
 			array( '%s' ),
 			array( '%d' )
-		);
+		); // db no-cache okay.
 
 		return false === $update ? false : true;
 

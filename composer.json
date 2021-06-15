@@ -50,8 +50,7 @@
     ],
     "env": "\"vendor/bin/llms-env\"",
     "env:setup": [
-      "\"vendor/bin/llms-env\" wp plugin install lifterlms --activate",
-      "\"vendor/bin/llms-env\" wp plugin update lifterlms",
+      "\"vendor/bin/llms-env\" wp plugin install https://downloads.wordpress.org/plugin/lifterlms.5.0.0-beta.2.zip --activate",
       "\"vendor/bin/llms-env\" wp plugin activate lifterlms-blocks"
     ],
     "fix-cs": "\"vendor/bin/phpcbf\"",
@@ -71,7 +70,7 @@
       "@tests-install-plugins"
     ],
     "tests-install-plugins": [
-      "\"vendor/bin/llms-tests\" plugin lifterlms",
+      "\"vendor/bin/llms-tests\" plugin https://github.com/gocodebox/lifterlms.git@dev-500",
       "\"vendor/bin/llms-tests\" plugin classic-editor"
     ],
     "tests-reinstall": [
