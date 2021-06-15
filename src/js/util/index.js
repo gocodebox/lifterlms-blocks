@@ -8,4 +8,7 @@
 import getBlocksFlat, { flattenBlocks } from './get-blocks-flat';
 import getCurrentPostType from './get-current-post-type.js';
 
-export { getBlocksFlat, getCurrentPostType, flattenBlocks };
+export { default as isPostEmpty } from './is-post-empty';
+export * from './get-form-location';
+
+export { flattenBlocks, getBlocksFlat, getCurrentPostType };
