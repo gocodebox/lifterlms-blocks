@@ -1,6 +1,22 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.0.0-rc.1 - 2021-06-15
+------------------------
+
++ Fixes issue encountered when adding a confirm group
++ Stop using merge codes in the password block
++ Improve block duplication handlers
++ Prevent confirm fields from being manually pasted outside of a confirm group
++ Adds the `llms/user-information-fields` redux store to allow for better field validation and handling
++ Improves and adds field attribute validation
++ Use rich text `allowedFormats` in favor of deprecated `formattingControls`
++ Remove the now unnecessary `uuid` field block attribute.
++ Adds WP core 5.8 compatibility on the widget and customizer screens.
++ Exclude LifterLMS field block reusables from the widgets reusable blocks screen.
++ Adds backwards compatibility for WordPress < 5.6
+
+
 v2.0.0-beta.6 - 2021-06-01
 --------------------------
 
