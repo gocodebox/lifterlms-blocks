@@ -7,6 +7,7 @@
  * @since 1.5.1
  * @since 1.6.0 Update `test_add_block_category` test to accommodate form fields cat.
  * @since 1.10.0 Update `test_get_dynamic_block_names` to test against core blocks available in 5.1.
+ * @version [version]
  */
 class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 
@@ -66,6 +67,7 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 	 * Test the admin_print_scripts() method.
 	 *
 	 * @since 1.5.1
+	 * @since [version] Force using block editor.
 	 *
 	 * @return void
 	 */
@@ -82,11 +84,20 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 			$this->assertOutputEmpty( array( $obj, 'admin_print_scripts' ) );
 		}
 
+		// Make sure we use the block editor.
+		add_filter( 'use_block_editor_for_post', '__return_true' );
+		add_filter( 'use_block_editor_for_post_type', '__return_true' );
+
 		// Display
 		foreach ( array( 'post', 'page', 'course', 'llms_membership' ) as $screen ) {
 			set_current_screen( $screen );
+			// This is where "is_block_editor" is actually set.
+			get_current_screen()->is_block_editor(true);
 			$this->assertOutputContains( '<script>window.llms.dynamic_blocks', array( $obj, 'admin_print_scripts' ) );
 		}
+
+		remove_filter( 'use_block_editor_for_post', '__return_true' );
+		remove_filter( 'use_block_editor_for_post_type', '__return_true' );
 
 	}
 
