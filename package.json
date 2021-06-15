@@ -9,6 +9,7 @@
     "url": "https://github.com/gocodebox/lifterlms-blocks.git"
   },
   "dependencies": {
+    "llmsWPData": "npm:@wordpress/data@^5.1.2",
     "react-select": "^4.1.0",
     "react-sortable-hoc": "^1.11.0",
     "throttle-debounce": "^2.0.1",

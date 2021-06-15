@@ -11,7 +11,7 @@ const
 	generate = require( '@lifterlms/scripts/config/webpack.config' ),
 	config   = generate( {
 		css: [ 'blocks' ],
-		js: [ 'blocks' ],
+		js: [ 'blocks', 'blocks-backwards-compat' ],
 	} );
 
 config.module.rules.forEach( rule => {
