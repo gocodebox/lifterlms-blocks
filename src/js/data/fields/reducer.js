@@ -96,7 +96,7 @@ function renameField( fields, oldName, newName ) {
  *
  * @since [version]
  *
- * @return {[type]} [description]
+ * @return {Object} Object of field objects.
  */
 function resetFields() {
 	return DEFAULT_FIELDS;
