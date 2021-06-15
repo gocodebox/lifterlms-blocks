@@ -96,7 +96,7 @@ function renameField( fields, oldName, newName ) {
  *
  * @since [version]
  *
- * @return {[type]} [description]
+ * @return {Object[]} Array of user information field objects.
  */
 function resetFields() {
 	return DEFAULT_FIELDS;

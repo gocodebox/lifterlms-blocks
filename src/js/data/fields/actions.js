@@ -133,5 +133,5 @@ export function renameField( oldName, newName ) {
 export function resetFields() {
 	return {
 		type: 'RESET_FIELDS',
-	}
+	};
 }
