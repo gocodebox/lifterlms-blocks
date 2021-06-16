@@ -158,8 +158,7 @@ class LLMS_Blocks_Assets {
 	 * @return boolean
 	 */
 	private function use_bc_assets() {
-		global $wp_version;
-		return ( version_compare( $wp_version, LLMS_Forms::instance()::MIN_WP_VERSION, '<' ) &&
+		return ( ! LLMS_Forms::instance()::are_requirments_met() &&
 			/**
 			 * Filter allowing opt-out of block editor backwards compatibility scripts.
 			 *
