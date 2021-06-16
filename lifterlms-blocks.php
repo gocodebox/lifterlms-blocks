@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @version 1.10.0
+ * @version [version]
  *
  * @wordpress-plugin
  * Plugin Name: LifterLMS Blocks
@@ -41,8 +41,8 @@ if ( ! apply_filters( 'llms_load_blocks_plugin', true ) ) {
 	return;
 }
 
-// Load only if Gutenberg exists.
-if ( function_exists( 'has_blocks' ) ) {
+// Load only when the block editor and LifterLMS are present.
+if ( function_exists( 'has_blocks' ) && function_exists( 'llms' ) ) {
 
 	if ( ! defined( 'LLMS_BLOCKS_PLUGIN_FILE' ) ) {
 		define( 'LLMS_BLOCKS_PLUGIN_FILE', __FILE__ );
