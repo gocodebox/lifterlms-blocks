@@ -41,8 +41,9 @@ if ( ! apply_filters( 'llms_load_blocks_plugin', true ) ) {
 	return;
 }
 
-// Load only when the block editor and LifterLMS are present.
-if ( function_exists( 'has_blocks' ) && function_exists( 'llms' ) ) {
+
+// Load only when the block editor is present.
+if ( function_exists( 'has_blocks' ) ) {
 
 	if ( ! defined( 'LLMS_BLOCKS_PLUGIN_FILE' ) ) {
 		define( 'LLMS_BLOCKS_PLUGIN_FILE', __FILE__ );

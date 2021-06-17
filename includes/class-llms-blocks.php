@@ -14,10 +14,6 @@ defined( 'ABSPATH' ) || exit;
  * LLMS_Blocks class
  *
  * @since 1.0.0
- * @since 1.4.0 Add status tools class.
- * @since 1.5.1 Output dynamic block information for JS consumption.
- * @since 1.6.0 Add form field block category.
- * @since 1.9.0 Add course progress block class.
  */
 class LLMS_Blocks {
 
@@ -28,26 +24,11 @@ class LLMS_Blocks {
 	 * @since 1.3.0 Updated.
 	 * @since 1.5.1 Add `admin_print_scripts` hook to handle outputting dynamic block information.
 	 * @since 1.10.0 Load localization files when running as an independent plugin.
+	 * @since [version] Move action & filter hooks to the the `init()` method.
 	 */
 	public function __construct() {
 
 		add_action( 'plugins_loaded', array( $this, 'init' ) );
-		add_action( 'add_meta_boxes', array( $this, 'remove_metaboxes' ), 999, 2 );
-
-		global $wp_version;
-		$filter = version_compare( $wp_version, '5.8-alpha.1', '>=' ) ? 'block_categories_all' : 'block_categories';
-
-		add_filter( $filter, array( $this, 'add_block_category' ) );
-		add_action( 'admin_print_scripts', array( $this, 'admin_print_scripts' ), 15 );
-
-		/**
-		 * When loaded as a library included by the LifterLMS core localization is handled by the LifterLMS core.
-		 *
-		 * When the plugin is loaded by itself as a plugin, we must localize it independently.
-		 */
-		if ( ! defined( 'LLMS_BLOCKS_LIB' ) || ! LLMS_BLOCKS_LIB ) {
-			add_action( 'init', array( $this, 'load_textdomain' ), 0 );
-		}
 
 	}
 
@@ -85,6 +66,7 @@ class LLMS_Blocks {
 
 		return $categories;
 	}
+
 
 	/**
 	 * Print dynamic block information as a JS variable
@@ -129,16 +111,13 @@ class LLMS_Blocks {
 	}
 
 	/**
-	 * Register all blocks & components.
+	 * Include all files
 	 *
-	 * @since 1.0.0
-	 * @since 1.4.0 Add status tools class.
-	 * @since 1.9.0 Added course progress block class.
-	 * @since [version] Include LLMS_Blocks_Reusable.
+	 * @since [version]
 	 *
-	 * @return  void
+	 * @return void
 	 */
-	public function init() {
+	private function includes() {
 
 		// Functions.
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/functions-llms-blocks.php';
@@ -165,6 +144,44 @@ class LLMS_Blocks {
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-lesson-navigation-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-lesson-progression-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-pricing-table-block.php';
+
+	}
+
+	/**
+	 * Register all blocks & components.
+	 *
+	 * @since 1.0.0
+	 * @since 1.4.0 Add status tools class.
+	 * @since 1.9.0 Added course progress block class.
+	 * @since [version] Return early if LifterLMS isn't installed, move file inclusion to `$this->includes()`,
+	 *              and moved actions and filters from the constructor.
+	 *
+	 * @return  void
+	 */
+	public function init() {
+
+		if ( ! function_exists( 'llms' ) ) {
+			return;
+		}
+
+		$this->includes();
+
+		add_action( 'add_meta_boxes', array( $this, 'remove_metaboxes' ), 999, 2 );
+
+		global $wp_version;
+		$filter = version_compare( $wp_version, '5.8-alpha.1', '>=' ) ? 'block_categories_all' : 'block_categories';
+
+		add_filter( $filter, array( $this, 'add_block_category' ) );
+		add_action( 'admin_print_scripts', array( $this, 'admin_print_scripts' ), 15 );
+
+		/**
+		 * When loaded as a library included by the LifterLMS core localization is handled by the LifterLMS core.
+		 *
+		 * When the plugin is loaded by itself as a plugin, we must localize it independently.
+		 */
+		if ( ! defined( 'LLMS_BLOCKS_LIB' ) || ! LLMS_BLOCKS_LIB ) {
+			add_action( 'init', array( $this, 'load_textdomain' ), 0 );
+		}
 
 	}
 
