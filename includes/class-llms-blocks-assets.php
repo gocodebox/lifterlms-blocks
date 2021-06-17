@@ -158,7 +158,7 @@ class LLMS_Blocks_Assets {
 	 * @return boolean
 	 */
 	private function use_bc_assets() {
-		return ( ! LLMS_Forms::instance()::are_requirments_met() &&
+		return ( ! LLMS_Forms::instance()->are_requirements_met() &&
 			/**
 			 * Filter allowing opt-out of block editor backwards compatibility scripts.
 			 *
