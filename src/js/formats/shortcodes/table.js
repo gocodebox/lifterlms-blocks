@@ -8,7 +8,7 @@
 import './editor.scss';
 
 import { __ } from '@wordpress/i18n';
-import { Button, Tooltip } from '@wordpress/components';
+import { ClipboardButton, Button, Tooltip } from '@wordpress/components';
 import { create, replace, insert } from '@wordpress/rich-text';
 import { useCopyToClipboard } from '@wordpress/compose';
 import { applyFilters } from '@wordpress/hooks';
@@ -38,13 +38,31 @@ function getShortcode( key, defaultValue = '' ) {
  * @return {Object} The copy button fragment.
  */
 function CopyButton( { text, onSuccess } ) {
-	const ref = useCopyToClipboard( text, onSuccess );
 
-	return (
-		<Tooltip text={ __( 'Click to copy.', 'lifterlms' ) }>
+	const BackwardsCompatButton = () => {
+
+		// WP > 5.8.
+		if ( 'undefined' === typeof useCopyToClipboard ) {
+			return (
+				<ClipboardButton isLink text={ text } onCopy={ onSuccess }>
+					{ text }
+				</ClipboardButton>
+			);
+		}
+
+		// WP 5.8+.
+		const ref = useCopyToClipboard( text, onSuccess );
+		return (
 			<Button isLink ref={ ref }>
 				{ text }
 			</Button>
+		);
+
+	};
+
+	return (
+		<Tooltip text={ __( 'Click to copy.', 'lifterlms' ) }>
+			<BackwardsCompatButton />
 		</Tooltip>
 	);
 }
