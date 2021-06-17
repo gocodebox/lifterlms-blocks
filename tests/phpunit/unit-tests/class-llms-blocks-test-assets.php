@@ -80,8 +80,9 @@ class LLMS_Blocks_Test_Assets extends LLMS_Blocks_Unit_Test_Case {
 	 */
 	public function test_backwards_compat_assets() {
 
-		global $wp_version;
+		wp_dequeue_script( 'llms-blocks-editor-bc' );
 
+		global $wp_version;
 		$temp = $wp_version;
 
 		// Asset not defined during setup.
