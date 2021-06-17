@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Admin/Shortcodes should add a default value 1`] = `
+Array [
+  "[llms-user user_login or=\\"default\\"]",
+  "[llms-user user_email or=\\"default\\"]",
+  "[llms-user first_name or=\\"default\\"]",
+  "[llms-user last_name or=\\"default\\"]",
+  "[llms-user display_name or=\\"default\\"]",
+  "[llms-user llms_billing_address_1 or=\\"default\\"]",
+  "[llms-user llms_billing_address_2 or=\\"default\\"]",
+  "[llms-user llms_billing_city or=\\"default\\"]",
+  "[llms-user llms_billing_country or=\\"default\\"]",
+  "[llms-user llms_billing_state or=\\"default\\"]",
+  "[llms-user llms_billing_zip or=\\"default\\"]",
+  "[llms-user llms_phone or=\\"default\\"]",
+]
+`;
+
+exports[`Admin/Shortcodes should add a default value 2`] = `
+Array [
+  "[llms-user user_login]",
+  "[llms-user user_email]",
+  "[llms-user first_name]",
+  "[llms-user last_name]",
+  "[llms-user display_name]",
+  "[llms-user llms_billing_address_1]",
+  "[llms-user llms_billing_address_2]",
+  "[llms-user llms_billing_city]",
+  "[llms-user llms_billing_country]",
+  "[llms-user llms_billing_state]",
+  "[llms-user llms_billing_zip]",
+  "[llms-user llms_phone]",
+]
+`;
+
+exports[`Admin/Shortcodes should allow custom shortcodes to be used 1`] = `"No fields found matching your search but you can use the shortcode below if the meta information exists in the database."`;
+
+exports[`Admin/Shortcodes should allow custom shortcodes to be used 2`] = `
+Array [
+  "Custom User Information",
+]
+`;
+
+exports[`Admin/Shortcodes should allow custom shortcodes to be used 3`] = `
+Array [
+  "[llms-user fake or=\\"test\\"]",
+]
+`;
+
+exports[`Admin/Shortcodes should allow custom shortcodes to be used 4`] = `
+"<!-- wp:paragraph -->
+<p>Ipsum<span class=\\"llms-user-sc-wrap\\">[llms-user display_name][llms-user first_name or=\\"friend\\"][llms-user fake or=\\"test\\"]</span></p>
+<!-- /wp:paragraph -->"
+`;
+
+exports[`Admin/Shortcodes should filter the list 1`] = `
+Array [
+  "Username",
+  "First Name",
+  "Last Name",
+  "Display Name",
+]
+`;
+
+exports[`Admin/Shortcodes should filter the list 2`] = `
+Array [
+  "Username",
+  "Email Address",
+  "First Name",
+  "Last Name",
+  "Display Name",
+  "Address",
+  "",
+  "City",
+  "Country",
+  "State / Region",
+  "Postal / Zip Code",
+  "Phone Number",
+]
+`;
+
+exports[`Admin/Shortcodes should filter the list 3`] = `
+Array [
+  "Username",
+  "Email Address",
+]
+`;
+
+exports[`Admin/Shortcodes should filter the list 4`] = `
+Array [
+  "Username",
+  "Email Address",
+  "First Name",
+  "Last Name",
+  "Display Name",
+  "Address",
+  "",
+  "City",
+  "Country",
+  "State / Region",
+  "Postal / Zip Code",
+  "Phone Number",
+]
+`;
+
+exports[`Admin/Shortcodes should filter the list 5`] = `
+Array [
+  "Email Address",
+]
+`;
+
+exports[`Admin/Shortcodes should filter the list 6`] = `
+Array [
+  "Username",
+  "Email Address",
+  "First Name",
+  "Last Name",
+  "Display Name",
+  "Address",
+  "",
+  "City",
+  "Country",
+  "State / Region",
+  "Postal / Zip Code",
+  "Phone Number",
+]
+`;
+
+exports[`Admin/Shortcodes should insert the shortcode 1`] = `
+"<!-- wp:paragraph -->
+<p>Ipsum<span class=\\"llms-user-sc-wrap\\">[llms-user display_name]</span></p>
+<!-- /wp:paragraph -->"
+`;
+
+exports[`Admin/Shortcodes should insert the shortcode with a default value 1`] = `
+"<!-- wp:paragraph -->
+<p>Ipsum<span class=\\"llms-user-sc-wrap\\">[llms-user display_name][llms-user first_name or=\\"friend\\"]</span></p>
+<!-- /wp:paragraph -->"
+`;
