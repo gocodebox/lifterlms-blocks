@@ -7,7 +7,7 @@
  * @package LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @version 1.10.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -16,9 +16,6 @@ defined( 'ABSPATH' ) || exit;
  * Enqueue assets
  *
  * @since 1.0.0
- * @since 1.4.1 Fix double slash in asset path; remove invalid frontend css dependency.
- * @since 1.8.0 Update asset paths & remove redundant CSS from frontend.
- * @since 1.10.0 Use the `LLMS_Assets` class to define, register, and enqueue plugin assets.
  */
 class LLMS_Blocks_Assets {
 
@@ -35,6 +32,7 @@ class LLMS_Blocks_Assets {
 	 * @since 1.0.0
 	 * @since 1.8.0 Stop outputting editor CSS on the frontend.
 	 * @since 1.10.0 Load `LLMS_Assets` and define plugin assets.
+	 * @since [version] Maybe define backwards compatibility script.
 	 *
 	 * @return void
 	 */
@@ -60,6 +58,7 @@ class LLMS_Blocks_Assets {
 
 		// Define plugin assets.
 		$this->define();
+		$this->define_bc();
 
 		// Enqueue editor assets.
 		add_action( 'enqueue_block_editor_assets', array( $this, 'editor_assets' ), 999 );
@@ -73,7 +72,7 @@ class LLMS_Blocks_Assets {
 	 *
 	 * @return void
 	 */
-	protected function define() {
+	private function define() {
 
 		$asset = include LLMS_BLOCKS_PLUGIN_DIR . '/assets/js/llms-blocks.asset.php';
 
@@ -102,21 +101,81 @@ class LLMS_Blocks_Assets {
 	}
 
 	/**
+	 * Define backwards compatibility assets
+	 *
+	 * @since [version]
+	 *
+	 * @return void
+	 */
+	protected function define_bc() {
+
+		if ( ! $this->use_bc_assets() ) {
+			return;
+		}
+
+		$asset = include LLMS_BLOCKS_PLUGIN_DIR . '/assets/js/llms-blocks-backwards-compat.asset.php';
+
+		$this->assets->define(
+			'scripts',
+			array(
+				'llms-blocks-editor-bc' => array(
+					'dependencies' => $asset['dependencies'],
+					'file_name'    => 'llms-blocks-backwards-compat',
+					'version'      => $asset['version'],
+				),
+			)
+		);
+
+	}
+
+	/**
 	 * Enqueue block editor assets.
 	 *
 	 * @since 1.0.0
 	 * @since 1.4.1 Fix double slash in asset path.
 	 * @since 1.8.0 Update asset paths and improve script dependencies.
 	 * @since 1.10.0 Use `LLMS_Assets` class methods for asset enqueues.
+	 * @since [version] Maybe load backwards compatibility script.
 	 *
 	 * @return void
 	 */
 	public function editor_assets() {
 
+		if ( $this->use_bc_assets() ) {
+			$this->assets->enqueue_script( 'llms-blocks-editor-bc' );
+		}
+
 		$this->assets->enqueue_script( 'llms-blocks-editor' );
 		$this->assets->enqueue_style( 'llms-blocks-editor' );
 
 	}
+
+	/**
+	 * Determines if WP Core backwards compatibility scripts should defined & be loaded.
+	 *
+	 * @since [version]
+	 *
+	 * @return boolean
+	 */
+	private function use_bc_assets() {
+		return ( ! LLMS_Forms::instance()->are_requirements_met() &&
+			/**
+			 * Filter allowing opt-out of block editor backwards compatibility scripts.
+			 *
+			 * @since [version]
+			 *
+			 * @example
+			 * ```
+			 * // Disable backwards compatibility scripts.
+			 * add_filter( 'llms_blocks_load_bc_scripts', '__return_false' );
+			 * ```
+			 *
+			 * @param boolean $load_scripts Whether or not to load the scripts.
+			 */
+			apply_filters( 'llms_blocks_load_bc_scripts', true )
+		);
+	}
+
 
 }
 

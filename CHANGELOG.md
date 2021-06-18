@@ -1,6 +1,93 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.0.0-rc.2 - 2021-06-18
+------------------------
+
++ Only load the plugin if LifterLMS is loaded
++ Update version checking method.
++ Fixed typo causing errors on WP 5.6 and earlier.
++ Fix WP 5.7 compatibility issues
++ Fixed issue encountered when using lesson progression blocks outside of a lesson, thanks [@reedhewitt](https://github.com/reedhewitt)!
+
+
+v2.0.0-rc.1 - 2021-06-15
+------------------------
+
++ Fixes issue encountered when adding a confirm group
++ Stop using merge codes in the password block
++ Improve block duplication handlers
++ Prevent confirm fields from being manually pasted outside of a confirm group
++ Adds the `llms/user-information-fields` redux store to allow for better field validation and handling
++ Improves and adds field attribute validation
++ Use rich text `allowedFormats` in favor of deprecated `formattingControls`
++ Remove the now unnecessary `uuid` field block attribute.
++ Adds WP core 5.8 compatibility on the widget and customizer screens.
++ Exclude LifterLMS field block reusables from the widgets reusable blocks screen.
++ Adds backwards compatibility for WordPress < 5.6
+
+
+v2.0.0-beta.6 - 2021-06-01
+--------------------------
+
++ (Re-)introduces user information shortcode through a block editor rich text area format button.
++ Prevent usage the "User Login" block on account edit forms (usersnames cannot be edited in WordPress).
++ Only prevent form posts from being made "draft" status on the "core" forms.
++ Modifies field localization data strategy for field validation and others.
+
+
+v2.0.0-beta.5 - 2021-05-18
+--------------------------
+
++ Add WP core 5.8 compatibility for deprecated filter `block_categories`.
++ Fixed issue encountered on courses and memberships when attempting to edit instructor information.
++ Added validation to ensure all fields have unique HTML name attributes.
++ Simplified field data storage interface to enable saving only to the usermeta table.
+
+
+v2.0.0-beta.4 - 2021-05-07
+--------------------------
+
++ Fixed error encountered when opening the block editor options menu on an `llms_form` post type.
++ Added UUID generation to all form field blocks.
++ Fixed visual issues encountered with form field blocks on wide screens in the block editor.
++ Fixed issue preventing column widths from being set after switching from a stacked layout to a columns layout for a field group.
++ Added CSS classes to various option elements in the block editor
++ Moved most inline css in the editor into a static file
++ Fixed issue encountered when reverting a form to it's default
++ Fixed dynamic block rendering errors encountered when the block is restricted to specific courses/memberships.
++ Added CSS to make input placeholder text look like a placeholder
+
+
+v2.0.0-beta.3 - 2021-04-26
+--------------------------
+
++ All form field blocks refactored and many were removed or renamed.
++ Added column support to form field blocks.
++ Added reusable block support to form field blocks.
++ Removed support for block visibility on required field blocks (email and password).
++ Added reusable block filtering to only show "supported" reusable blocks when editing a form.
++ Added utility function support for reusable blocks.
++ Fixed issues related to visual rendering of checkboxes / radio elements on custom fields.
+
+
+v2.0.0-beta.2 - 2021-03-22
+--------------------------
+
++ Fixed block editor visual issues encountered on certain blocks when block-level visibility restrictions are enabled.
+
+
+v2.0.0-beta.1 - 2021-03-22
+--------------------------
+
++ Improved Javascript localization.
++ Updated JS source files to follow (slightly modified) eslint standards as defined by `@wordpress/eslint-plugin/recommended`.
++ Disabled import of incomplete module `./formats/merge-codes`.
++ Improved the information displayed for a restricted block.
++ Don't render `InspectorControls` for the Course Syllabus block since it doesn't have any actual settings to inspect.
++ Improved the Search, SearchPost, and SearchUser components and made backwards incompatible changes to their usage.
+
+
 v1.12.0 - 2021-01-07
 --------------------
 
