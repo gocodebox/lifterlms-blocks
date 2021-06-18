@@ -38,31 +38,31 @@ function getShortcode( key, defaultValue = '' ) {
  * @return {Object} The copy button fragment.
  */
 function CopyButton( { text, onSuccess } ) {
+	const canUseHook = 'undefined' !== typeof useCopyToClipboard;
 
-	const BackwardsCompatButton = () => {
-
-		// WP > 5.8.
-		if ( 'undefined' === typeof useCopyToClipboard ) {
-			return (
-				<ClipboardButton isLink text={ text } onCopy={ onSuccess }>
-					{ text }
-				</ClipboardButton>
-			);
-		}
-
-		// WP 5.8+.
+	// WP 5.8+.
+	const HookButton = () => {
 		const ref = useCopyToClipboard( text, onSuccess );
 		return (
 			<Button isLink ref={ ref }>
 				{ text }
 			</Button>
 		);
+	};
 
+	// WP < 5.8.
+	const BackwardsButton = () => {
+		return (
+			<ClipboardButton isLink text={ text } onCopy={ onSuccess }>
+				{ text }
+			</ClipboardButton>
+		);
 	};
 
 	return (
 		<Tooltip text={ __( 'Click to copy.', 'lifterlms' ) }>
-			<BackwardsCompatButton />
+			{ canUseHook && <HookButton /> }
+			{ ! canUseHook && <BackwardsButton /> }
 		</Tooltip>
 	);
 }
