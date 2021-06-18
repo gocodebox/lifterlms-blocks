@@ -4,7 +4,7 @@
  * Renders a course syllabus
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.0.0
  */
 
 // WP Deps.
@@ -56,7 +56,7 @@ export const settings = {
 	 * The "edit" property must be a valid function.
 	 *
 	 * @since 1.0.0
-	 * @since [version] Don't render InspectorControls since the block doesn't have any actual settings.
+	 * @since 2.0.0 Don't render InspectorControls since the block doesn't have any actual settings.
 	 *
 	 * @param {Object} props Block properties.
 	 * @return {Fragment} Component HTML fragment.

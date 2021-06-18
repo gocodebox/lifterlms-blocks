@@ -1,8 +1,8 @@
 /**
  * Test shortcode inserter
  *
- * @since [version]
- * @version [version]
+ * @since 2.0.0
+ * @version 2.0.0
  */
 
 import {
@@ -25,7 +25,7 @@ const TOOLBAR_SELECTOR = '.block-editor-block-contextual-toolbar',
 /**
  * Retrieve a list of the titles of all shortcodes in the inserter table.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @return {string[]} List of shortcode titles.
  */
@@ -36,7 +36,7 @@ async function getVisibleTitles() {
 /**
  * Retrieve a list of the shortcodes visible in the inserter table.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @return {string[]} List of shortcodes.
  */
@@ -47,7 +47,7 @@ async function getVisibleCodes() {
 /**
  * Clear the currently selected input
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Integer} length Number of characters to remove.
  * @return {void}
@@ -63,7 +63,7 @@ async function clearSearch( length ) {
 /**
  * Filter the shortcode list by search query
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {string} query Search query.
  * @return {void}
@@ -76,7 +76,7 @@ async function filterList( query ) {
 /**
  * Add a default value to the visible shortcodes
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {string} val Default value.
  * @return {void}
@@ -89,7 +89,7 @@ async function addDefaultValue( val ) {
 /**
  * Close the inserter modal
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @return {void}
  */

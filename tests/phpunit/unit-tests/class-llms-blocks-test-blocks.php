@@ -7,7 +7,7 @@
  * @since 1.5.1
  * @since 1.6.0 Update `test_add_block_category` test to accommodate form fields cat.
  * @since 1.10.0 Update `test_get_dynamic_block_names` to test against core blocks available in 5.1.
- * @version [version]
+ * @version 2.0.0
  */
 class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 
@@ -16,7 +16,7 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 	 *
 	 * @since 1.5.1
 	 * @since 1.6.0 Update test to accommodate form fields cat.
-	 * @since [version] Update test to reflect updated cat order.
+	 * @since 2.0.0 Update test to reflect updated cat order.
 	 *
 	 * @return void
 	 */
@@ -67,7 +67,7 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 	 * Test the admin_print_scripts() method.
 	 *
 	 * @since 1.5.1
-	 * @since [version] Force using block editor.
+	 * @since 2.0.0 Force using block editor.
 	 *
 	 * @return void
 	 */

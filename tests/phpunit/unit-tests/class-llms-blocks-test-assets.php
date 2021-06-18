@@ -14,7 +14,7 @@ class LLMS_Blocks_Test_Assets extends LLMS_Blocks_Unit_Test_Case {
 	 * Deregister assets registered during tests.
 	 *
 	 * @since 1.10.0
-	 * @since [version] Add backwards compat script.
+	 * @since 2.0.0 Add backwards compat script.
 	 *
 	 * @return void
 	 */
@@ -74,7 +74,7 @@ class LLMS_Blocks_Test_Assets extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test backwards compat asset define and enqueue
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @return void
 	 */

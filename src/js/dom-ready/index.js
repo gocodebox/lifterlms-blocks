@@ -2,7 +2,7 @@
  * Handle DOM Ready Events.
  *
  * @since 1.7.0
- * @version [version]
+ * @version 2.0.0
  */
 
 // WP Deps.
@@ -21,7 +21,7 @@ import { deregisterBlocksForForms } from '../blocks/';
  * @since 1.6.0
  * @since 1.7.0 Refactor for simplicity.
  * @since 1.12.0 Wait for current post to be setup before dispatching ready event.
- * @since [version] Add blocksWatcher() and add conditional loading on wp_block posts.
+ * @since 2.0.0 Add blocksWatcher() and add conditional loading on wp_block posts.
  *
  * @return {void}
  */

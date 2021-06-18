@@ -1,8 +1,8 @@
 /**
  * Redux data store selectors
  *
- * @since [version]
- * @version [version]
+ * @since 2.0.0
+ * @version 2.0.0
  */
 
 // Internal deps.
@@ -11,7 +11,7 @@ import { fieldsArrayToObject, fieldsObjectToArray } from './util';
 /**
  * Determine if a field exists
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object}   state        State tree.
  * @param {Object[]} state.fields Collection of user information fields.
@@ -25,7 +25,7 @@ export function fieldExists( { fields }, name ) {
 /**
  * Retrieve a field by name
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object}   state        State tree.
  * @param {Object[]} state.fields Collection of user information fields.
@@ -39,7 +39,7 @@ export function getField( { fields }, name ) {
 /**
  * Query fields by user-specified key/val pair
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object} state     State tree.
  * @param {string} queryTerm Value used for searching.
@@ -74,7 +74,7 @@ export function getFields( { fields } ) {
  *
  * A "loaded" field is a field which is connected to a field block in the current block editor instance.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object}   state        State tree.
  * @param {Object[]} state.fields Collection of user information fields.
@@ -93,7 +93,7 @@ export function getLoadedFields( { fields } ) {
  * Duplicates are determined by comparing the name/clientId pair. If the clientId is different
  * than the stored clientId that means we're looking at a duplicate field.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object} state    State tree.
  * @param {string} name     Field name attribute.
@@ -110,7 +110,7 @@ export function isDuplicate( state, name, clientId ) {
 /**
  * Determine if a given clientId is connected with a field
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object} state    State tree.
  * @param {string} clientId WP Block client id.

@@ -22,7 +22,7 @@ export default class Inspector extends Component {
 	/**
 	 * Render the component
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @return {InspectorControls} Component HTML fragment.
 	 */

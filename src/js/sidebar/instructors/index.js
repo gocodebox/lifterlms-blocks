@@ -2,7 +2,7 @@
  * Instructors Sidebar Plugin
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.0.0
  */
 
 // WP deps.
@@ -245,7 +245,7 @@ class Instructors extends Component {
 	 * Add a new instructor from the selected search result.
 	 *
 	 * @since 1.0.0
-	 * @since [version] Don't use data from removed `_users` property.
+	 * @since 2.0.0 Don't use data from removed `_users` property.
 	 *
 	 * @return {void}
 	 */
@@ -323,7 +323,7 @@ class Instructors extends Component {
 	 * Render the component.
 	 *
 	 * @since 1.0.0
-	 * @since [version] Exclude currently selected users from search query.
+	 * @since 2.0.0 Exclude currently selected users from search query.
 	 *
 	 * @return {Object} HTML Fragment.
 	 */

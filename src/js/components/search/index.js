@@ -36,7 +36,7 @@ export default class Search extends Component {
 	/**
 	 * Retrieve the default classname for the main Select element
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @return {string} Class name to be used.
 	 */
@@ -47,7 +47,7 @@ export default class Search extends Component {
 	 *
 	 * Merges the searchArgs property with default arguments and the search string.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {string} search Search string, this will be included in the arguments as the `search` property.
 	 * @return {Object} Object of arguments to add to the search API request.
@@ -68,7 +68,7 @@ export default class Search extends Component {
 	 * The searchPath should be passed in as a component property or child classes should
 	 * override this method to implement their own searchPath logic.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @return {string} API request path.
 	 */
@@ -80,7 +80,7 @@ export default class Search extends Component {
 	 * The searchPath should be passed in as a component property or child classes should
 	 * override this method to implement their own searchPath logic.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {string} search User-entered search string.
 	 * @return {string} API request path.
@@ -96,7 +96,7 @@ export default class Search extends Component {
 	 *
 	 * This method is intended to be overridden by extending classes.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {Object} result API response object from the search API.
 	 * @return {string} Formatted search result label.
@@ -109,7 +109,7 @@ export default class Search extends Component {
 	 * Uses the object's `id` by default and can be overridden by extending components
 	 * to change this default behavior
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {Object} result API response object from the search API.
 	 * @return {number} Search result value.
@@ -120,7 +120,7 @@ export default class Search extends Component {
 	 * Formats the search API response array to include the required `label` and `value` properties.
 	 *
 	 * @since 1.0.0
-	 * @since [version] Updated to use helper methods for generating the label and value props.
+	 * @since 2.0.0 Updated to use helper methods for generating the label and value props.
 	 *
 	 * @param {Object[]} results Array of api response objects.
 	 * @return {Object[]} Array of api response objects with the required `label` and `value` props added to each item.
@@ -152,7 +152,7 @@ export default class Search extends Component {
 	 * Render the component
 	 *
 	 * @since 1.0.0
-	 * @since [version] Pass a unique id to BaseControl.
+	 * @since 2.0.0 Pass a unique id to BaseControl.
 	 *
 	 * @return {BaseControl} Component HTML fragment.
 	 */

@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -113,7 +113,7 @@ class LLMS_Blocks_Visibility {
 	 *
 	 * @since 1.0.0
 	 * @since 1.6.0 Add logic for `logged_in` and `logged_out` block visibility options.
-	 * @since [version] Added a conditional prior to checking the block's visibility attributes.
+	 * @since 2.0.0 Added a conditional prior to checking the block's visibility attributes.
 	 *
 	 * @param string $content Block inner content.
 	 * @param array  $block   Block data array.
@@ -214,7 +214,7 @@ class LLMS_Blocks_Visibility {
 	 * are *always* displayed to creators when editing content within the block editor. This parses data from a block-renderer
 	 * WP Core API request.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @link https://developer.wordpress.org/rest-api/reference/rendered-blocks/
 	 *
@@ -243,7 +243,7 @@ class LLMS_Blocks_Visibility {
 		 * This filter does not determine whether or not the block will be rendered, it only determines whether
 		 * or not we should check if it should be rendered.
 		 *
-		 * @since [version]
+		 * @since 2.0.0
 		 *
 		 * @param boolean $should_filter Whether or not to apply visibility filters.
 		 * @param array   $block         Block data array.

@@ -1,8 +1,8 @@
 /**
  * Edit components
  *
- * @since [version]
- * @version [version]
+ * @since 2.0.0
+ * @version 2.0.0
  */
 
 // External deps.
@@ -32,7 +32,7 @@ import { store as fieldsStore } from '../../data/fields';
  * Generate a unique "name" attribute.
  *
  * @since 1.6.0
- * @since [version] Removed '_field' and added the current post id to ensure uniqueness across multiple forms.
+ * @since 2.0.0 Removed '_field' and added the current post id to ensure uniqueness across multiple forms.
  *
  * @param {string} name Base name, generally the field's "field" attribute. EG: "text".
  * @return {string} A unique name, in snake case, suitable to be used as a field's "name" attribute.
@@ -106,7 +106,7 @@ const setupAtts = ( atts, blockAtts, addingField ) => {
 /**
  * Edit action for a field.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object} props Component properties.
  * @return {Object} HTML component fragment.
@@ -220,7 +220,7 @@ export function EditField( props ) {
 /**
  * Edit action for a field group.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object} props Component properties.
  * @return {Object} HTML component fragment.

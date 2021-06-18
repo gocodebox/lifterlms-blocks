@@ -2,7 +2,7 @@
  * Block-level visibility checks
  *
  * @since 1.6.0
- * @version [version]
+ * @version 2.0.0
  */
 
 // WP Deps.
@@ -11,7 +11,7 @@ import { applyFilters } from '@wordpress/hooks';
 /**
  * Returns a list of blocks that we've decided should not support block visibility
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @return {Array} List of block names.
  */
@@ -38,7 +38,7 @@ const getDisallowedBlocks = () => {
  *
  * @since 1.6.0
  * @since 1.8.0 Add a "blacklist" of blocks that don't support visibility.
- * @since [version] Use `getDisallowedBlocks()` in favor of removed `getBlacklist()`.
+ * @since 2.0.0 Use `getDisallowedBlocks()` in favor of removed `getBlacklist()`.
  *
  * @param {Object} settings Block settings object.
  * @param {string} name     Block name, eg "core/paragraph".

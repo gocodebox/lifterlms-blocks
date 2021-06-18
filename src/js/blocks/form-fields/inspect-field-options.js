@@ -97,7 +97,7 @@ const OptionsList = SortableContainer(
  *
  * @since 1.6.0
  * @since 1.12.0 Added tooltip for the "Make Default" radio control & updated the icon used for item deletion.
- * @since [version] Added special treatment for checkboxes.
+ * @since 2.0.0 Added special treatment for checkboxes.
  *
  * @return {Object} Component HTML Fragment.
  */
@@ -297,7 +297,7 @@ export default class InspectorFieldOptions extends Component {
 		 * Callback when options are changed.
 		 *
 		 * @since 1.6.0
-		 * @since [version] Pass an id to <BaseControl>
+		 * @since 2.0.0 Pass an id to <BaseControl>
 		 *                  Pass the field type to <OptionsList>
 		 *                  Also allow multiple defaults for checkboxes.
 		 *

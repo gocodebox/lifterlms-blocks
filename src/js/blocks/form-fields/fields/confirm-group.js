@@ -1,8 +1,8 @@
 /**
  * BLOCK: llms/form-field-confirm-group
  *
- * @since [version]
- * @version [version]
+ * @since 2.0.0
+ * @version 2.0.0
  */
 
 // WP Deps.
@@ -45,7 +45,7 @@ export const composed = true;
 /**
  * Retrieve block attributes for a controller block
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object} attributes Existing attributes to merge defaults into.
  * @return {Object} Updated block attributes.
@@ -63,7 +63,7 @@ function getControllerBlockAttrs( attributes = {} ) {
 /**
  * Retrieve block attributes for a controlled (confirmation) block
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object} attributes Existing attributes to merge defaults into.
  * @return {Object} Updated block attributes.
@@ -89,7 +89,7 @@ function getControlledBlockAttrs( attributes = {} ) {
  *
  * Replaces the group block with the controller block (first inner child) of the group.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {string} clientId Client ID of the group block.
  * @return {void}
@@ -127,7 +127,7 @@ function revertToSingle( clientId ) {
  * we'll unload the fields manually before the transformations are
  * run.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {string} name Field name attribute.
  * @return {void}
@@ -171,7 +171,7 @@ const transforms = {
  * Therefore each transform is identical except for the block type of the first child
  * block.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {string} blockName Name of the block being transformed into a group.
  * @return {void}
@@ -236,7 +236,7 @@ allowed.forEach( ( blockName ) => {
 /**
  * Fill the controls slot with additional controls specific to this field.
  *
- * @since [version]
+ * @since 2.0.0
  * @param {Object}   attributes    Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
  * @param {Object}   props         Block properties.
@@ -255,7 +255,7 @@ const fillInspectorControls = ( attributes, setAttributes, props ) => {
 /**
  * Finds the index of the primary (controller) field in the group
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object[]} innerBlocks ) Inner blocks array.
  * @return {number} Array index of the primary block within the inner blocks array.
@@ -300,7 +300,7 @@ export const settings = getSettingsFromBase( getDefaultSettings( 'group' ), {
 		 * Otherwise pass in `null` which will allow various composed fields to be setup through
 		 * transformation. They'll be locked by template locking even though no template is provided.
 		 *
-		 * @since [version]
+		 * @since 2.0.0
 		 *
 		 * @param {Object}  options
 		 * @param {?Object} options.block Block object.

@@ -1,8 +1,8 @@
 /**
  * Output a list of checkbox or radio options
  *
- * @since [version]
- * @version [version]
+ * @since 2.0.0
+ * @version 2.0.0
  */
 
 // WP deps.
@@ -13,7 +13,7 @@ import { Fragment } from '@wordpress/element';
  * Output a list of options for an input group field (checkbox/radio).
  *
  * @since 1.6.0
- * @since [version] Moved out of `field.js` to it's own file and added an instance id.
+ * @since 2.0.0 Moved out of `field.js` to it's own file and added an instance id.
  *
  * @param {Object}   options
  * @param {Object[]} options.options    Array of options objects.

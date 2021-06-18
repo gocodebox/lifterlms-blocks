@@ -29,7 +29,7 @@ import { getBlocksFlat } from '../../util/';
  *   protected, or published in the future.
  *
  * @since 1.12.0
- * @since [version] Only prevent drafts on core forms.
+ * @since 2.0.0 Only prevent drafts on core forms.
  *
  * @return {void}
  */
@@ -100,7 +100,7 @@ function maybeDisableVisibility() {
  * This function reduces the list to only allow visibility settings of "all" and "logged out"
  * to be used.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @return {void}
  */
@@ -116,7 +116,7 @@ function modifyVisibilityForBlocks() {
 	/**
 	 * Retrieve a list of options for a given block
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {Object}   options             A WP_Block object.
 	 * @param {string}   options.name        The block's name.
@@ -139,7 +139,7 @@ function modifyVisibilityForBlocks() {
 	/**
 	 * Determines whether or not a given block should have it's visibility options modified
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {Object}   options             A WP_Block object.
 	 * @param {string}   options.name        The block's name.

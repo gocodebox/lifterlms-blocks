@@ -4,7 +4,7 @@
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
  * @since 1.12.0 Add data store support.
- * @since [version] Add reusable block support.
+ * @since 2.0.0 Add reusable block support.
  */
 
 // WP Deps.
@@ -72,7 +72,7 @@ const fillEditAfter = ( attributes, setAttributes ) => {
 /**
  * Fill the controls slot with additional controls specific to this field.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object} attributes Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.

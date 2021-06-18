@@ -7,7 +7,7 @@
  * @package LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -32,7 +32,7 @@ class LLMS_Blocks_Assets {
 	 * @since 1.0.0
 	 * @since 1.8.0 Stop outputting editor CSS on the frontend.
 	 * @since 1.10.0 Load `LLMS_Assets` and define plugin assets.
-	 * @since [version] Maybe define backwards compatibility script.
+	 * @since 2.0.0 Maybe define backwards compatibility script.
 	 *
 	 * @return void
 	 */
@@ -103,7 +103,7 @@ class LLMS_Blocks_Assets {
 	/**
 	 * Define backwards compatibility assets
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @return void
 	 */
@@ -135,7 +135,7 @@ class LLMS_Blocks_Assets {
 	 * @since 1.4.1 Fix double slash in asset path.
 	 * @since 1.8.0 Update asset paths and improve script dependencies.
 	 * @since 1.10.0 Use `LLMS_Assets` class methods for asset enqueues.
-	 * @since [version] Maybe load backwards compatibility script.
+	 * @since 2.0.0 Maybe load backwards compatibility script.
 	 *
 	 * @return void
 	 */
@@ -153,7 +153,7 @@ class LLMS_Blocks_Assets {
 	/**
 	 * Determines if WP Core backwards compatibility scripts should defined & be loaded.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @return boolean
 	 */
@@ -162,7 +162,7 @@ class LLMS_Blocks_Assets {
 			/**
 			 * Filter allowing opt-out of block editor backwards compatibility scripts.
 			 *
-			 * @since [version]
+			 * @since 2.0.0
 			 *
 			 * @example
 			 * ```

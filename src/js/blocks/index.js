@@ -2,7 +2,7 @@
  * LifterLMS Block Library.
  *
  * @since 1.7.0
- * @version [version]
+ * @version 2.0.0
  */
 
 /* eslint camelcase: [ "error", { allow: [ "_llms_form_location" ] } ] */
@@ -48,7 +48,7 @@ export const deregisterBlocksForForms = () => {
 	 * All blocks except those explicitly defined in this safelist are excluded from use
 	 * in the editor of a form post type.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {string[]} safelist Array of allowed block names.
 	 */
@@ -74,7 +74,7 @@ export const deregisterBlocksForForms = () => {
 	 *
 	 * @since 1.7.0
 	 * @since 1.12.0 Use `safelist` in favor of `whitelist`.
-	 * @since [version] Add core/block to the safelist & prevent user login on edit account page.
+	 * @since 2.0.0 Add core/block to the safelist & prevent user login on edit account page.
 	 *
 	 * @param {string} name Block name.
 	 * @return {boolean} Returns `true` if a block should be unregistered.
@@ -115,7 +115,7 @@ export const deregisterBlocksForForms = () => {
  * @since 1.5.0 Only register blocks for supported post types.
  * @since 1.6.0 Add form field blocks.
  * @since 1.7.3 Move form ready event from domReady to here to ensure blocks are exposed before blocks are parsed.
- * @since [version] Trigger `llms_form_fields_ready` on `wp_block` posts.
+ * @since 2.0.0 Trigger `llms_form_fields_ready` on `wp_block` posts.
  */
 export default () => {
 	const postType = getCurrentPostType();

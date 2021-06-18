@@ -15,7 +15,7 @@ import { dispatch } from '@wordpress/data';
  * If the selected layout is "columns" makes children 50/50 width, sets the last field as the
  * last column and marks the other fields as not being the last column.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object}   options
  * @param {string}   options.fieldLayout   The newly selected field layout option.

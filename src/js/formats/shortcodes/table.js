@@ -1,8 +1,8 @@
 /**
  * Components used to display the shortcode list / table
  *
- * @since [version]
- * @version [version]
+ * @since 2.0.0
+ * @version 2.0.0
  */
 
 import './editor.scss';
@@ -16,7 +16,7 @@ import { applyFilters } from '@wordpress/hooks';
 /**
  * Retrieve the shortcode for a given meta key with optional default value
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {string} key          User meta key.
  * @param {string} defaultValue Default value.
@@ -30,7 +30,7 @@ function getShortcode( key, defaultValue = '' ) {
 /**
  * Component for a "click to copy" button
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object}   options
  * @param {string}   options.text      Text to copy to the clipboard.
@@ -70,7 +70,7 @@ function CopyButton( { text, onSuccess } ) {
 /**
  * Render an item in the table
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object}   item
  * @param {string}   item.label          Field label.
@@ -124,7 +124,7 @@ function RenderTableData(
 /**
  * Determines whether or not a given item matches the current user search filter.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {string} searchQuery            User submitted search query.
  * @param {Object} options
@@ -192,7 +192,7 @@ export default function ( {
 	/**
 	 * Filters a list of user information fields which are not eligible for use by the [llms-user] shortcode
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {string[]} exclude List of field IDs which should be excluded.
 	 */

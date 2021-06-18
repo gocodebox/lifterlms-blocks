@@ -1,14 +1,14 @@
 /**
  * Redux data store actions
  *
- * @since [version]
- * @version [version]
+ * @since 2.0.0
+ * @version 2.0.0
  */
 
 /**
  * Add a field
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object} field Field definition.
  * @return {Object} Action object.
@@ -23,7 +23,7 @@ export function addField( field ) {
 /**
  * Delete a field
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {string} name Field name.
  * @return {Object} Action object.
@@ -38,7 +38,7 @@ export function deleteField( name ) {
 /**
  * Edit a field
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {string} name  Field name.
  * @param {Object} edits Field object.
@@ -57,7 +57,7 @@ export function editField( name, edits ) {
  *
  * Stores the clientId of the associated block.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {string} name     Field name.
  * @param {string} clientId The WP Block's clientId of the associated block.
@@ -76,7 +76,7 @@ export function loadField( name, clientId ) {
  *
  * Removes the stored clientId of the associated block.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {string} name Field name.
  * @return {Object} Action object.
@@ -92,7 +92,7 @@ export function unloadField( name ) {
 /**
  * Receive an array of field data
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object[]} fields Array of field objects.
  * @return {Object} Action object.
@@ -109,7 +109,7 @@ export function receiveFields( fields ) {
  *
  * Changes the `name` attribute.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {string} oldName Current/old name of the field.
  * @param {string} newName New name of the field.
@@ -126,7 +126,7 @@ export function renameField( oldName, newName ) {
 /**
  * Reset fields to the default state
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @return {Object} Action object.
  */

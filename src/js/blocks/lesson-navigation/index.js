@@ -2,7 +2,7 @@
  * BLOCK: llms/lesson-navigation
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.0.0
  */
 
 // WP Deps.

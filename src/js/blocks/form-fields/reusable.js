@@ -2,7 +2,7 @@
  * Manage reusable block meta data
  *
  * @since Unknown
- * @version [version]
+ * @version 2.0.0
  */
 
 // WP Deps.
@@ -25,7 +25,7 @@ import { getCurrentPostType } from '../../util/';
  * This handles setting the meta value when editing a reusable block
  * directly on a reusable block edit screen.
  *
- * @since [version]
+ * @since 2.0.0
  */
 if ( 'wp_block' === getCurrentPostType() ) {
 	let lastContent = '';
@@ -52,7 +52,7 @@ if ( 'wp_block' === getCurrentPostType() ) {
 /**
  * Locate a core/block by it's ref ID
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {number} ref The WP_Post ID of the reusable block.
  * @return {Object} A block editor block object.
@@ -77,7 +77,7 @@ function getBlockByRef( ref ) {
  * This ensures that any reusable block created on a form page will have the meta data
  * set properly depending on the presence of llms form fields within the reusable block.
  *
- * @since [version]
+ * @since 2.0.0
  */
 addFilter(
 	'blocks.getSaveElement',

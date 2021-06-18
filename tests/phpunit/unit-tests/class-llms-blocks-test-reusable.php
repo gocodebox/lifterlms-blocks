@@ -6,7 +6,7 @@
  *
  * @group reusable
  *
- * @since [version]
+ * @since 2.0.0
  */
 class LLMS_Blocks_Test_Reusable extends LLMS_Blocks_Unit_Test_Case {
 
@@ -20,7 +20,7 @@ class LLMS_Blocks_Test_Reusable extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test rest callbacks.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @return void
 	 */
@@ -50,7 +50,7 @@ class LLMS_Blocks_Test_Reusable extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test rest_register_fields()
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @return void
 	 */
@@ -67,7 +67,7 @@ class LLMS_Blocks_Test_Reusable extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test mod_wp_block_query()
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @return void
 	 */

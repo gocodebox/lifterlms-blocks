@@ -2,7 +2,7 @@
  * BLOCK: llms/form-field-user-address-street
  *
  * @since 1.6.0
- * @version [version]
+ * @version 2.0.0
  */
 
 // WP Deps.
@@ -40,7 +40,7 @@ export const composed = true;
  * Block Settings
  *
  * @since 1.6.0
- * @since [version] Add reusable block support.
+ * @since 2.0.0 Add reusable block support.
  *
  * @type {Object}
  */

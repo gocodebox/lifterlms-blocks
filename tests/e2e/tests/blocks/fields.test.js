@@ -30,7 +30,7 @@ const fieldSnapshotMatcher = {
  * be a single block in the blocks list. This quickly pulls the list
  * and returns the first one.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @return {Object} A WP_Block object.
  */

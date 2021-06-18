@@ -3,7 +3,7 @@ import { clickElementByText } from '@lifterlms/llms-e2e-test-utils';
 /**
  * Opens the "LifterLMS Form" document settings panel (sidebar) in the block editor
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @return {Object} Returns element selector for the opened panel.
  */

@@ -2,7 +2,7 @@
  * Inspector settings for the Course Information Block.
  *
  * @since 1.6.0
- * @version [version]
+ * @version 2.0.0
  */
 
 // WP Deps.
@@ -43,7 +43,7 @@ export default class Inspector extends Component {
 	/**
 	 * Constructor
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {Object} props Component properties.
 	 * @return {void}
@@ -229,7 +229,7 @@ export default class Inspector extends Component {
 	/**
 	 * Retrieve an error message for use in error notices thrown by updateValueWithValidation()
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {string} key Field key.
 	 * @return {string} Error message for the given validation issue.
@@ -297,7 +297,7 @@ export default class Inspector extends Component {
 	 *
 	 * For future Thomas who will have forgetten how to read the regex: allows alphanumeric chars, hyphens, and underscores.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {string} val Attribute value.
 	 * @return {boolean} Returns `true` if the value contains invalid chars and `false` otherwise.
@@ -311,7 +311,7 @@ export default class Inspector extends Component {
 	 *
 	 * Passing a null value removes an existing validation error.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {string}  key Attribute key.
 	 * @param {?string} val Content of the invalid value, an empty string, or `null` to remove an existing validation error.
@@ -329,7 +329,7 @@ export default class Inspector extends Component {
 	/**
 	 * Determines if a block attribute has a validation error.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {string} key Attribute key.
 	 * @return {boolean} Returns `true` when a validation error is present and `false`` if not.
@@ -341,7 +341,7 @@ export default class Inspector extends Component {
 	/**
 	 * Component to render a TextControl with built-in data validation and error display
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {Object}    props
 	 * @param {Inspector} props.parent  Reference to the parent Inspector component.
@@ -386,7 +386,7 @@ export default class Inspector extends Component {
 	 * store. Prevents storage of invalid data and throws an error notice when validation issues
 	 * are encountered.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {string} key      Field key.
 	 * @param {string} newValue Field value.

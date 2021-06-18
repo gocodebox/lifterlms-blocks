@@ -1,8 +1,8 @@
 /**
  * Settings used by the block visibility component
  *
- * @since [version]
- * @version [version]
+ * @since 2.0.0
+ * @version 2.0.0
  */
 
 // WP deps.
@@ -24,7 +24,7 @@ const settings = {
 /**
  * Retrieve the label for a single setting value
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {string} setting Setting value.
  * @return {string} Setting label.
@@ -34,7 +34,7 @@ export const getSetting = ( setting ) => settings[ setting ] || setting;
 /**
  * Array of settings options as used by a select control
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @return {Object[]} Array of objects to be passed into the options property for a select control.
  */

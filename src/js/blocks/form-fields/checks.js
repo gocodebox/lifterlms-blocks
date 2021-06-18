@@ -2,7 +2,7 @@
  * Form Field related checks
  *
  * @since Unknown
- * @version [version]
+ * @version 2.0.0
  */
 
 // External Deps.
@@ -21,7 +21,7 @@ import { store as fieldsStore } from '../../data/fields';
  * passes the list of contained to filterBlocks.
  *
  * @since Unknown
- * @since [version] Adds support for reusable blocks.
+ * @since 2.0.0 Adds support for reusable blocks.
  *
  * @param {Object} block A block object.
  * @return {Object[]} An array of field blocks.
@@ -60,7 +60,7 @@ function filterBlock( block ) {
  *
  * Returns only a (flattened) list of field blocks.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object[]} blocks An array of blocks to filter.
  * @return {Object[]} An array of field blocks.
@@ -100,7 +100,7 @@ export const getFieldBlocks = ( blocks = [] ) => {
  * Ensure field attributes are unique in the requested context
  *
  * @since Unknown
- * @since [version] Added `context` parameter and use data from the llms/user-info-fields store.
+ * @since 2.0.0 Added `context` parameter and use data from the llms/user-info-fields store.
  *
  * @param {string} key     Attribute key name.
  * @param {string} val     String to check for uniqueness.

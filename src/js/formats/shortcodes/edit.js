@@ -1,8 +1,8 @@
 /**
  * Shortcode registerFormatType() edit callback function file
  *
- * @since [version]
- * @version [version]
+ * @since 2.0.0
+ * @version 2.0.0
  */
 
 // Internal deps.
@@ -18,7 +18,7 @@ import { RichTextToolbarButton } from '@wordpress/block-editor';
 /**
  * Edit function component
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object} props Properties from registerFormatType().
  * @return {Object} Component fragment.

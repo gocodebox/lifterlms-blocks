@@ -2,7 +2,7 @@
  * BLOCK: llms/form-field-text
  *
  * @since 1.6.0
- * @version [version]
+ * @version 2.0.0
  */
 
 // WP Deps.
@@ -112,7 +112,7 @@ const variations = [
 /**
  * Add information to each variation
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object} variation A block variation object.
  * @return {Object[]} Update block variations array.
@@ -141,7 +141,7 @@ variations.forEach( ( variation ) => {
 /**
  * Fill the controls slot with additional controls specific to this field.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object} attributes Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
@@ -191,7 +191,7 @@ const fillInspectorControls = ( attributes, setAttributes ) => {
 /**
  * Block settings
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @type {Object}
  */

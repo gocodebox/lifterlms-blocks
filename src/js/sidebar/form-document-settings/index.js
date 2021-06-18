@@ -4,7 +4,7 @@
  * Displays only on `llms_form` post types.
  *
  * @since 1.6.0
- * @version [version]
+ * @version 2.0.0
  */
 
 // WP Deps.
@@ -43,7 +43,7 @@ class FormDocumentSettings extends Component {
 	 *              Add link to form location on frontend if available.
 	 * @since 1.12.0 Add a class name to the document sidebar.
 	 *               Add default template restoration.
-	 * @since [version] Use default template from location definition in favor of from metadata.
+	 * @since 2.0.0 Use default template from location definition in favor of from metadata.
 	 *
 	 * @return {?Fragment} Component HTML fragment or null when not supported.
 	 */
@@ -90,7 +90,7 @@ class FormDocumentSettings extends Component {
 		 * be restored immediately following reversion.
 		 *
 		 * @since 1.12.0
-		 * @since [version] Use default template from location definition & reset llms/user-info-fields data before replacing blocks.
+		 * @since 2.0.0 Use default template from location definition & reset llms/user-info-fields data before replacing blocks.
 		 *
 		 * @return {void}
 		 */
@@ -127,7 +127,7 @@ class FormDocumentSettings extends Component {
 							 * Restore the temporary backup and clear the notice.
 							 *
 							 * @since 1.12.0
-							 * @since [version] Reset llms/user-info-fields data before replacing blocks.
+							 * @since 2.0.0 Reset llms/user-info-fields data before replacing blocks.
 							 *
 							 * @return {void}
 							 */
@@ -232,7 +232,7 @@ class FormDocumentSettings extends Component {
  * @since 1.7.0 Retrieve form link attribute.
  * @since 1.7.2 Only modify select when working with an `llms_form` post type.
  * @since 1.12.0 Load the default template meta field.
- * @since [version] Don't load default template from metadata.
+ * @since 2.0.0 Don't load default template from metadata.
  */
 const applyWithSelect = withSelect( ( select ) => {
 	const {

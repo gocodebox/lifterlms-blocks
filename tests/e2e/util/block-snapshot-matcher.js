@@ -4,7 +4,7 @@
  * This matcher ensures that innerBlocks (which may vary) and the clientId
  * don't affect snapshots of the block object.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @type {Object}
  */

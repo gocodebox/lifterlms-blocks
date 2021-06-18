@@ -4,7 +4,7 @@
  * @package LifterLMS_Blocks/Tests/E2E/Utils
  *
  * @since 1.12.0
- * @version [version]
+ * @version 2.0.0
  */
 
 import blockSnapshotMatcher from './block-snapshot-matcher';

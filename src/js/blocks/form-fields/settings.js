@@ -59,7 +59,7 @@ const settingsBase = {
 	 *
 	 * See The user password block for an implementation.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {Object}   attributes    Block attributes.
 	 * @param {Function} setAttributes Reference to the block's setAttributes() function.
@@ -218,7 +218,7 @@ export default ( type = 'field' ) => {
 /**
  * Retrieve a copy of an array of default post types that support fields
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @return {string[]} Array of post type names.
  */

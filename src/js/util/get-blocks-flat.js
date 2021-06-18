@@ -5,7 +5,7 @@
  * a flat array of every block in the layout.
  *
  * @since 1.6.0
- * @version [version]
+ * @version 2.0.0
  */
 
 // External Deps.
@@ -16,7 +16,7 @@ import { store as blockEditorStore } from '@wordpress/block-editor';
  * Recursively pulls inner/nested blocks to return a flat array of blocks.
  *
  * @since 1.6.0
- * @since [version] Automatically, load innerBlocks of a reusable blocks.
+ * @since 2.0.0 Automatically, load innerBlocks of a reusable blocks.
  *
  * @param {Array} blocks Array of WP Blocks.
  * @return {Array} Array of WP Blocks.

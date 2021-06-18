@@ -2,7 +2,7 @@
  * BLOCK: llms/form-field-redeem-voucher
  *
  * @since 1.6.0
- * @version [version]
+ * @version 2.0.0
  */
 
 // WP Deps.
@@ -65,7 +65,7 @@ const fillInspectorControls = ( attributes, setAttributes ) => {
  *
  * @since 1.6.0
  * @since 1.8.0 Updated lodash imports.
- * @since [version] Add reusable block support.
+ * @since 2.0.0 Add reusable block support.
  *
  * @type {Object}
  */

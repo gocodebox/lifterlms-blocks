@@ -1,8 +1,8 @@
 /**
  * Watch the blocks tree and sync changes to the llms/user-info-fields data store
  *
- * @since [version]
- * @version [version]
+ * @since 2.0.0
+ * @version 2.0.0
  */
 
 // External deps.
@@ -18,7 +18,7 @@ import { store as fieldsStore } from '../../data/fields';
 /**
  * Retrieve the difference in two sets of blocks.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object[]} a Control block list.
  * @param {Object[]} b New block list.
@@ -34,7 +34,7 @@ const fieldBlocksDifferenceBy = ( a, b ) =>
  *
  * Unloads persisted blocks and deletes unpersisted blocks.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object[]} deletedBlocks List of blocks that have been deleted since the last check.
  * @return {void}
@@ -67,7 +67,7 @@ const unloadBlocks = ( deletedBlocks ) => {
  *
  * Loads existing fields and creates non-existent fields.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object[]} createdBlocks List of blocks that have been added since the last check.
  * @return {void}
@@ -103,7 +103,7 @@ const loadBlocks = ( createdBlocks ) => {
 /**
  * Subscription handler
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @return {void}
  */

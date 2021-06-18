@@ -4,7 +4,7 @@ import { fieldsArrayToObject } from './util';
 /**
  * Default fields object
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @type {Object}
  */

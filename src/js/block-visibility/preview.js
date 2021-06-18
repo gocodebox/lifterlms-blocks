@@ -2,7 +2,7 @@
  * Preview area for visibility settings on the block list
  *
  * @since 1.1.0
- * @version [version]
+ * @version 2.0.0
  */
 
 // WP Deps.
@@ -28,7 +28,7 @@ export default class Preview extends Component {
 	 *
 	 * @since 1.1.0
 	 * @since 1.6.0 Use camelCase `className` in favor of `class`.
-	 * @since [version] Improve the information displayed for a restricted block.
+	 * @since 2.0.0 Improve the information displayed for a restricted block.
 	 *
 	 * @return {Fragment} Component HTML Fragment.
 	 */

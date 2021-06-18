@@ -7,7 +7,7 @@ import { find, isEmpty, merge } from 'lodash';
 /**
  * Retrieve a list of field group blocks
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @return {?Array.<Object>} Array of supporting block objects
  */
@@ -21,7 +21,7 @@ function getSupportingParents() {
 /**
  * Retrieve the field group parent for a given block
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {string} clientId The client ID of an existing block.
  * @return {Object} WP Block object of the parent.
@@ -41,7 +41,7 @@ function getParentFieldGroup( clientId ) {
 /**
  * Retrieve the sibling block for a block in a field group
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {string} clientId The client ID of an existing block.
  * @return {?Object} WP Block object of the sibling.

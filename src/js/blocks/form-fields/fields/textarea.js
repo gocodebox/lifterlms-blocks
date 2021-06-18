@@ -2,7 +2,7 @@
  * BLOCK: llms/form-field-textarea
  *
  * @since 1.6.0
- * @version [version]
+ * @version 2.0.0
  */
 
 // WP Deps.
@@ -32,7 +32,7 @@ export const composed = false;
  * Fill the controls slot with additional controls specific to this field.
  *
  * @since 1.12.0
- * @since [version] Update to use `html_attrs.rows` in favor of `attributes.rows`.
+ * @since 2.0.0 Update to use `html_attrs.rows` in favor of `attributes.rows`.
  *
  * @param {Object}   attributes    Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
@@ -64,7 +64,7 @@ const fillInspectorControls = ( attributes, setAttributes ) => {
  * Block settings
  *
  * @since 1.6.0
- * @since [version] Refactor for 2.0.
+ * @since 2.0.0 Refactor for 2.0.
  *
  * @type {Object}
  */

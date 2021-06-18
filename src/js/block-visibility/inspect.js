@@ -2,7 +2,7 @@
  * Add visibility attribute inspect and preview interfaces to qualifying blocks
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.0.0
  */
 
 // WP Deps.
@@ -208,7 +208,7 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 		 * Save the current posts attribute state.
 		 *
 		 * @since 1.0.0
-		 * @since [version] The post object stored in the block attribute was reduced to
+		 * @since 2.0.0 The post object stored in the block attribute was reduced to
 		 *               include only the minimum required properties.
 		 *
 		 * @return {void}
@@ -225,7 +225,7 @@ export default createHigherOrderComponent( ( BlockEdit ) => {
 				 * By default, the `id`, `title`, and `type` properties are stored, should
 				 * additional object properties be required they may be added here.
 				 *
-				 * @since [version]
+				 * @since 2.0.0
 				 *
 				 * @param {Object} stored Reduced WP_Post object.
 				 * @param {Object} pot    The original WP_Post object.

@@ -4,7 +4,7 @@
  * @see {@link https://developer.wordpress.org/block-editor/tutorials/format-api/}
  *
  * @since 1.6.0
- * @version [version]
+ * @version 2.0.0
  */
 
 // Local deps.

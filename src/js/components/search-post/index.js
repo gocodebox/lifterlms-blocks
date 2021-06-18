@@ -2,7 +2,7 @@
  * Inspector Control to search the WP database for posts
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.0.0
  */
 
 // WP Deps.
@@ -15,13 +15,13 @@ import Search from '../search';
  * Inspector Control to search the WP database for posts of a given type
  *
  * @since 1.0.0
- * @since [version] Updated to remove unnecessary overrides from Search in favor of atomic method usage.
+ * @since 2.0.0 Updated to remove unnecessary overrides from Search in favor of atomic method usage.
  */
 export default class SearchPost extends Search {
 	/**
 	 * Retrieve the default classname for the main Select element
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @return {string} Class name to be used.
 	 */
@@ -33,7 +33,7 @@ export default class SearchPost extends Search {
 	 *
 	 * A custom searchPath can be passed in as a component property.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @return {string} API request path.
 	 */
@@ -43,7 +43,7 @@ export default class SearchPost extends Search {
 	/**
 	 * Format the label displayed in search results.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {Object} result A post response object returned by the search api.
 	 * @return {string} Label displayed for the search result item.

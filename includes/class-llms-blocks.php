@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -24,7 +24,7 @@ class LLMS_Blocks {
 	 * @since 1.3.0 Updated.
 	 * @since 1.5.1 Add `admin_print_scripts` hook to handle outputting dynamic block information.
 	 * @since 1.10.0 Load localization files when running as an independent plugin.
-	 * @since [version] Move action & filter hooks to the the `init()` method.
+	 * @since 2.0.0 Move action & filter hooks to the the `init()` method.
 	 */
 	public function __construct() {
 
@@ -78,7 +78,7 @@ class LLMS_Blocks {
 	 * @link https://github.com/gocodebox/lifterlms-blocks/issues/30
 	 *
 	 * @since 1.5.1
-	 * @since [version] Since WordPress 5.8 blocks are available in widgets and customizer screen too.
+	 * @since 2.0.0 Since WordPress 5.8 blocks are available in widgets and customizer screen too.
 	 *
 	 * @return void
 	 */
@@ -113,7 +113,7 @@ class LLMS_Blocks {
 	/**
 	 * Include all files
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @return void
 	 */
@@ -153,7 +153,7 @@ class LLMS_Blocks {
 	 * @since 1.0.0
 	 * @since 1.4.0 Add status tools class.
 	 * @since 1.9.0 Added course progress block class.
-	 * @since [version] Return early if LifterLMS isn't installed, move file inclusion to `$this->includes()`,
+	 * @since 2.0.0 Return early if LifterLMS isn't installed, move file inclusion to `$this->includes()`,
 	 *              and moved actions and filters from the constructor.
 	 *
 	 * @return  void

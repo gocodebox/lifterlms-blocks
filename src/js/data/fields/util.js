@@ -1,14 +1,14 @@
 /**
  * Redux data store utility functions
  *
- * @since [version]
- * @version [version]
+ * @since 2.0.0
+ * @version 2.0.0
  */
 
 /**
  * Convert an array of user information fields to an object keyed by globally unique `name` attribute.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object[]} fields Array of field objects.
  * @return {Object} Object of field objects.
@@ -28,7 +28,7 @@ export function fieldsArrayToObject( fields ) {
  *
  * Useful for running array functions like filter.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object} fields Object of user information field objects.
  * @return {Object[]} Array of user information field objects.

@@ -4,8 +4,8 @@
  *
  * @package LifterLMS_Blocks/Classes
  *
- * @since [version]
- * @version [version]
+ * @since 2.0.0
+ * @version 2.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -13,14 +13,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Manage customizations to reusable blocks
  *
- * @since [version]
+ * @since 2.0.0
  */
 class LLMS_Blocks_Reusable {
 
 	/**
 	 * Constructor
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @return void
 	 */
@@ -34,7 +34,7 @@ class LLMS_Blocks_Reusable {
 	/**
 	 * Read rest field read callback
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param array           $obj     Associative array representing the `wp_block` post.
 	 * @param WP_REST_Request $request Request object.
@@ -47,7 +47,7 @@ class LLMS_Blocks_Reusable {
 	/**
 	 * Rest field update callback
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param array   $value Post association array.
 	 * @param WP_Post $obj   Post object for the `wp_block` post.
@@ -62,7 +62,7 @@ class LLMS_Blocks_Reusable {
 	/**
 	 * Register custom rest fields
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @return void
 	 */
@@ -89,7 +89,7 @@ class LLMS_Blocks_Reusable {
 	 * + When viewing an `llms_form` post, only blocks that specify `is_llms_field` as 'yes' can be displayed.
 	 * + When viewing any other post, any post with `is_llms_field` of 'yes' is excluded.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @see [Reference]
 	 * @link [URL]
@@ -126,7 +126,7 @@ class LLMS_Blocks_Reusable {
 	/**
 	 * Retrieve a meta query array depending on the post type of the referring rest request
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param boolean $include_fields Whether or not to include form fields.
 	 * @return array
@@ -168,7 +168,7 @@ class LLMS_Blocks_Reusable {
 	 *
 	 * For any other screen we return `false` because we don't care about it.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param string $referer Referring URL for the REST request.
 	 * @return string|boolean Returns the screen name or `false` if we don't care about the screen.

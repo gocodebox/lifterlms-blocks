@@ -1,8 +1,8 @@
 /**
  * Ensure backwards compatibility with WP Core packages we rely on.
  *
- * @since [version]
- * @version [version]
+ * @since 2.0.0
+ * @version 2.0.0
  */
 
 // Import aliased versions of WP Core Packages.

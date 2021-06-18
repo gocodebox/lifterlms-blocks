@@ -656,7 +656,7 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test summary
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @runInSeparateProcess
 	 * @preserveGlobalState disabled

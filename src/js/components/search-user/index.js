@@ -2,7 +2,7 @@
  * Inspector Control to search the WP database for posts
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.0.0
  */
 
 // WP Deps.
@@ -15,7 +15,7 @@ export default class SearchUser extends Search {
 	/**
 	 * Retrieve the default classname for the main Select element
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @return {string} Class name to be used.
 	 */
@@ -26,7 +26,7 @@ export default class SearchUser extends Search {
 	 *
 	 * Merges the searchArgs property with default arguments and the search string.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {string} search Search string, this will be included in the arguments as the `search` property.
 	 * @return {Object} Object of arguments to add to the search API request.
@@ -47,7 +47,7 @@ export default class SearchUser extends Search {
 	 *
 	 * A custom searchPath can be passed in as a component property.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @return {string} API request path.
 	 */
@@ -56,7 +56,7 @@ export default class SearchUser extends Search {
 	/**
 	 * Format the label displayed in search results.
 	 *
-	 * @since [version]
+	 * @since 2.0.0
 	 *
 	 * @param {Object} result A post response object returned by the search api.
 	 * @return {string} Label displayed for the search result item.

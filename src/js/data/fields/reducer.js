@@ -1,8 +1,8 @@
 /**
  * Redux data store reducer
  *
- * @since [version]
- * @version [version]
+ * @since 2.0.0
+ * @version 2.0.0
  */
 
 // WP deps.
@@ -15,7 +15,7 @@ import { fieldsObjectToArray, fieldsArrayToObject } from './util';
 /**
  * Create a new field
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object} fields Current fields object derived from the state tree.
  * @param {Object} field  Field to add.
@@ -35,7 +35,7 @@ function addField( fields, field ) {
  *
  * Note: persisted fields (those stored in the database) should be unloaded instead of deleted.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object} fields       Current fields object derived from the state tree.
  * @param {string} nameToDelete Name of the field to delete.
@@ -53,7 +53,7 @@ function deleteField( fields, nameToDelete ) {
  *
  * Note: the `name` attribute should not be edited, instead use `renameField()` and then `editField()`.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object} fields Current fields object derived from the state tree.
  * @param {string} name   Name of the field to be edited.
@@ -73,7 +73,7 @@ function editField( fields, name, edits ) {
 /**
  * Rename a field
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object} fields  Current fields object derived from the state tree.
  * @param {string} oldName Current/old name of the field.
@@ -94,7 +94,7 @@ function renameField( fields, oldName, newName ) {
 /**
  * Reset fields to the default state.
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @return {Object} Object of field objects.
  */
@@ -105,7 +105,7 @@ function resetFields() {
 /**
  * Fields reducer
  *
- * @since [version]
+ * @since 2.0.0
  *
  * @param {Object} state  Current fields object derived from the state tree.
  * @param {Object} action Dispached action object.
