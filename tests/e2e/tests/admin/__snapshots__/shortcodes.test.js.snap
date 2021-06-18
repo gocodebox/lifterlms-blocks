@@ -50,7 +50,7 @@ Array [
 
 exports[`Admin/Shortcodes should allow custom shortcodes to be used 4`] = `
 "<!-- wp:paragraph -->
-<p>Ipsum<span class=\\"llms-user-sc-wrap\\">[llms-user display_name][llms-user first_name or=\\"friend\\"][llms-user fake or=\\"test\\"]</span></p>
+<p><span class=\\"llms-user-sc-wrap\\">[llms-user fake or=\\"test\\"][llms-user first_name or=\\"friend\\"][llms-user display_name]</span>Ipsum</p>
 <!-- /wp:paragraph -->"
 `;
 
@@ -129,12 +129,12 @@ Array [
 
 exports[`Admin/Shortcodes should insert the shortcode 1`] = `
 "<!-- wp:paragraph -->
-<p>Ipsum<span class=\\"llms-user-sc-wrap\\">[llms-user display_name]</span></p>
+<p><span class=\\"llms-user-sc-wrap\\">[llms-user display_name]</span>Ipsum</p>
 <!-- /wp:paragraph -->"
 `;
 
 exports[`Admin/Shortcodes should insert the shortcode with a default value 1`] = `
 "<!-- wp:paragraph -->
-<p>Ipsum<span class=\\"llms-user-sc-wrap\\">[llms-user display_name][llms-user first_name or=\\"friend\\"]</span></p>
+<p><span class=\\"llms-user-sc-wrap\\">[llms-user first_name or=\\"friend\\"][llms-user display_name]</span>Ipsum</p>
 <!-- /wp:paragraph -->"
 `;

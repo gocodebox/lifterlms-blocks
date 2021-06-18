@@ -8,6 +8,7 @@
 import {
 	clickBlockAppender,
 	getEditedPostContent,
+	showBlockToolbar,
 } from '@wordpress/e2e-test-utils';
 
 import {
@@ -18,6 +19,7 @@ import {
 
 // CSS selectors.
 const TOOLBAR_SELECTOR = '.block-editor-block-contextual-toolbar',
+	DROPDOWN_SELECTOR = '.components-dropdown-menu__menu-item',
 	MODAL_SELCTOR = '.llms-shortcodes-modal';
 
 /**
@@ -104,7 +106,7 @@ describe( 'Admin/Shortcodes', () => {
 		await clickBlockAppender();
 
 		await page.keyboard.type( 'Ipsum' );
-		await page.keyboard.press( 'Tab' );
+		await showBlockToolbar();
 
 	} );
 
@@ -113,7 +115,8 @@ describe( 'Admin/Shortcodes', () => {
 		await page.waitForSelector( TOOLBAR_SELECTOR );
 
 		await click( `${ TOOLBAR_SELECTOR } button.components-dropdown-menu__toggle[aria-label="More"]` );
-		await clickElementByText( 'Shortcodes', '.components-dropdown-menu__menu-item' );
+		await page.waitFor( 500 );
+		await clickElementByText( 'Shortcodes', DROPDOWN_SELECTOR );
 
 		await page.waitForSelector( MODAL_SELCTOR );
 
