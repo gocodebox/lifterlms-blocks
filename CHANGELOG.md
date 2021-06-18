@@ -8,6 +8,7 @@ v2.0.0-rc.2 - 2021-06-18
 + Update version checking method.
 + Fixed typo causing errors on WP 5.6 and earlier.
 + Fix WP 5.7 compatibility issues
++ Fixed issue encountered when using lesson progression blocks outside of a lesson, thanks [@reedhewitt](https://github.com/reedhewitt)!
 
 
 v2.0.0-rc.1 - 2021-06-15
