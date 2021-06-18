@@ -7,7 +7,7 @@
  * @package  LifterLMS_Blocks/Blocks
  *
  * @since 1.0.0
- * @version 1.8.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -56,6 +56,7 @@ class LLMS_Blocks_Lesson_Progression_Block extends LLMS_Blocks_Abstract_Block {
 	 * Output a message when no HTML was rendered
 	 *
 	 * @since 1.7.0
+	 * @since [version] Ensure the queried object is an `LLMS_Lesson` before checking if it's free.
 	 *
 	 * @return string
 	 */
