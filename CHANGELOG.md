@@ -1,6 +1,36 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.0.0 - 2021-06-21
+-------------------
+
+##### Updates
+
++ Adds LifterLMS User Information form building via the block editor.
++ Initially compatibility for WordPress 5.8 (full site editing). Ensures core functionality but doesn't add any exciting features.
++ Improve the visual feedback inside the editor for a block with visibility restrictions.
++ Added reusable block support for form fields.
++ Adds a user information (`[llms-user]`) shortcode inserter to rich text block toolbars.
++ Use rich text `allowedFormats` in favor of deprecated `formattingControls`
++ Improved localization of Javascript files.
+
+##### Bug Fixes
+
++ Fixed issue encountered when using lesson progression blocks outside of a lesson, thanks [@reedhewitt](https://github.com/reedhewitt)!
++ Fixed fatal errors encountered if LifterLMS core isn't active when this plugin is activated.
++ Currently selected instructors are excluded from queries for instructor users.
++ Fixed issue encountered on courses and memberships when attempting to edit instructor information.
+
+##### Backwards Incompatible Changes
+
++ Major refactor of all field-related blocks.
++ The names of many field blocks have changed.
++ Use `getDisallowedBlocks()` in favor of removed `getBlacklist()` in `block-visibility/check`.
++ Blocks restricted to specific posts have had the post object stored on the block attribute reduced to include only the minimum required properties.
++ The `Search`, `SearchPost`, and `SearchUser` components have had major changes to make them more extendable.
++ Don't render InspectorControls since the block doesn't have any actual settings.
+
+
 v2.0.0-rc.2 - 2021-06-18
 ------------------------
 
