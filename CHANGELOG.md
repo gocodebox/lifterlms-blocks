@@ -1,6 +1,15 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.0.0-rc.2 - 2021-06-18
+------------------------
+
++ Only load the plugin if LifterLMS is loaded
++ Update version checking method.
++ Fixed typo causing errors on WP 5.6 and earlier.
++ Fix WP 5.7 compatibility issues
+
+
 v2.0.0-rc.1 - 2021-06-15
 ------------------------
 
