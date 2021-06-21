@@ -9,7 +9,7 @@
 import { snakeCase, kebabCase, uniqueId } from 'lodash';
 
 // WP deps.
-import { getBlockType } from '@wordpress/blocks';
+import { hasBlockSupport, getBlockType } from '@wordpress/blocks';
 import {
 	useBlockProps,
 	InnerBlocks,
@@ -112,7 +112,8 @@ const setupAtts = ( atts, blockAtts, addingField ) => {
  * @return {Object} HTML component fragment.
  */
 export function EditField( props ) {
-	let { attributes } = props;
+	let { attributes } = props,
+		shouldSetupAtts = true;
 
 	const { name } = props,
 		block = getBlockType( name ),
@@ -124,18 +125,46 @@ export function EditField( props ) {
 		{ isDuplicate } = select( fieldsStore ),
 		inFieldGroup = context[ 'llms/fieldGroup/fieldLayout' ] ? true : false,
 		addingField =
-			attributes.name && isDuplicate( attributes.name, clientId );
+			attributes.name && isDuplicate( attributes.name, clientId ),
+		/**
+		 * This identifies when a reusable block containing a multiple=false block is added
+		 *
+		 * @since [version]
+		 *
+		 * @see {@link issuetobefiled}
+		 */
+		isReusableWithMultipleValidationError =
+			! hasBlockSupport( name, 'multiple', true ) && addingField,
+		/**
+		 * Prevent confirmation fields from being copied/pasted into the editor out of their intended context.
+		 *
+		 * It's not pretty but it works.
+		 *
+		 * @see {@link https://github.com/gocodebox/lifterlms-blocks/issues/106}
+		 */
+		isConfirmWhichHasBeenCopied =
+			! inFieldGroup && attributes.isConfirmationField;
 
-	attributes = setupAtts( attributes, block.attributes, addingField );
+	if (
+		isReusableWithMultipleValidationError ||
+		isConfirmWhichHasBeenCopied
+	) {
+		shouldSetupAtts = false;
+	}
 
+	attributes = shouldSetupAtts
+		? setupAtts( attributes, block.attributes, addingField )
+		: attributes;
+
+	// Manage field data for blocks in field groups.
+	if ( inFieldGroup && shouldSetupAtts ) {
+		manageFieldGroupAttributes( props );
+	}
+
+	// Add columns CSS class.
 	const blockProps = useBlockProps( {
 		className: `llms-fields llms-cols-${ attributes.columns }`,
 	} );
-
-	// Manage field data for blocks in field groups.
-	if ( inFieldGroup ) {
-		manageFieldGroupAttributes( props );
-	}
 
 	// We can't disable the variation transformer by context so we'll do it this way which is gross but works.
 	useEffect( () => {
@@ -162,16 +191,23 @@ export function EditField( props ) {
 		}
 	} );
 
-	if ( ! inFieldGroup && attributes.isConfirmationField ) {
-		/**
-		 * Prevent confirmation fields from being copied/pasted into the editor out of their intended context.
-		 *
-		 * It's not pretty but it works.
-		 *
-		 * @see {@link https://github.com/gocodebox/lifterlms-blocks/issues/106}
-		 */
+	if (
+		isReusableWithMultipleValidationError ||
+		isConfirmWhichHasBeenCopied
+	) {
+		let toRemove = null;
+
+		if ( isReusableWithMultipleValidationError ) {
+			const { getBlockHierarchyRootClientId } = select(
+				blockEditorStore
+			);
+			toRemove = getBlockHierarchyRootClientId( clientId );
+		} else if ( isConfirmWhichHasBeenCopied ) {
+			toRemove = clientId;
+		}
+
 		setTimeout( () => {
-			dispatch( blockEditorStore ).removeBlock( clientId );
+			dispatch( blockEditorStore ).removeBlock( toRemove );
 		}, 10 );
 
 		return null;
