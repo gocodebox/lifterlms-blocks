@@ -7,7 +7,7 @@
  * @package  LifterLMS_Blocks/Blocks
  *
  * @since 1.0.0
- * @version 1.8.0
+ * @version 2.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -56,12 +56,13 @@ class LLMS_Blocks_Lesson_Progression_Block extends LLMS_Blocks_Abstract_Block {
 	 * Output a message when no HTML was rendered
 	 *
 	 * @since 1.7.0
+	 * @since 2.0.0 Ensure the queried object is an `LLMS_Lesson` before checking if it's free.
 	 *
 	 * @return string
 	 */
 	public function get_empty_render_message() {
 		$lesson = llms_get_post( get_the_ID() );
-		if ( $lesson && $lesson->is_free() ) {
+		if ( $lesson && is_a( $lesson, 'LLMS_Lesson' ) && $lesson->is_free() ) {
 			return '';
 		}
 		return parent::get_empty_render_message();
