@@ -17,8 +17,10 @@ import {
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { dispatch, select } from '@wordpress/data';
+import { store as noticesStore } from '@wordpress/notices';
 import { PanelBody, Slot, Fill } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 
 // Internal Deps.
 import Field from './field';
@@ -198,10 +200,20 @@ export function EditField( props ) {
 		let toRemove = null;
 
 		if ( isReusableWithMultipleValidationError ) {
-			const { getBlockHierarchyRootClientId } = select(
-				blockEditorStore
-			);
+			const { createErrorNotice } = dispatch( noticesStore ),
+				{ getBlockHierarchyRootClientId } = select( blockEditorStore );
 			toRemove = getBlockHierarchyRootClientId( clientId );
+
+			createErrorNotice(
+				__(
+					'The reusable block cannot be added because it contains one or more blocks which can only be used once per page.',
+					'lifterlms'
+				),
+				{
+					id: `llms-reusable-multiples-err-${ toRemove }`,
+					isDismissible: true,
+				}
+			);
 		} else if ( isConfirmWhichHasBeenCopied ) {
 			toRemove = clientId;
 		}
