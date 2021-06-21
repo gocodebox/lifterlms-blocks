@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.0.1 - 2021-06-21
+-------------------
+
++ Use non-unique error notice IDs for reusable multiple error notice.
+
+
 v2.0.0 - 2021-06-21
 -------------------
 
