@@ -131,16 +131,12 @@ export function EditField( props ) {
 		/**
 		 * This identifies when a reusable block containing a multiple=false block is added
 		 *
-		 * @since [version]
-		 *
-		 * @see {@link issuetobefiled}
+		 * @see {@link https://github.com/WordPress/gutenberg/issues/32863}
 		 */
 		isReusableWithMultipleValidationError =
 			! hasBlockSupport( name, 'multiple', true ) && addingField,
 		/**
 		 * Prevent confirmation fields from being copied/pasted into the editor out of their intended context.
-		 *
-		 * It's not pretty but it works.
 		 *
 		 * @see {@link https://github.com/gocodebox/lifterlms-blocks/issues/106}
 		 */
