@@ -157,5 +157,4 @@ export default () => {
 			registerBlockType( name, settings );
 		}
 	} );
-
 };
