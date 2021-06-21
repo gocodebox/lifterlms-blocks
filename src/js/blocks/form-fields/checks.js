@@ -37,7 +37,7 @@ function filterBlock( block ) {
 		return filterBlocks( block.innerBlocks );
 	}
 
-	// Reusable blocks don't have inner blocks defined so we need to look them up this ay.
+	// Reusable blocks don't have inner blocks defined so we need to look them up this way.
 	if ( 'core/block' === block.name ) {
 		const { blocks } = select( 'core' ).getEditedEntityRecord(
 			'postType',
