@@ -160,7 +160,7 @@ class LLMS_Blocks {
 	 */
 	public function init() {
 
-		if ( ! function_exists( 'llms' ) || ! version_compare( '5.0.0-rc.2', llms()->version, '>=' ) ) {
+		if ( ! function_exists( 'llms' ) || ! version_compare( '5.0.0-rc.2', llms()->version, '<=' ) ) {
 			return;
 		}
 
