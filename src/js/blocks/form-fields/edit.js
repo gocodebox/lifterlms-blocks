@@ -206,7 +206,7 @@ export function EditField( props ) {
 					'lifterlms'
 				),
 				{
-					id: `llms-reusable-multiples-err-${ toRemove }`,
+					id: `llms-reusable-multiples-err`,
 					isDismissible: true,
 				}
 			);
