@@ -2,153 +2,24 @@
  * Instructors Sidebar Plugin
  *
  * @since 1.0.0
- * @version 2.0.0
+ * @version [version]
  */
 
 // WP deps.
-import {
-	BaseControl,
-	Button,
-	IconButton,
-	PanelBody,
-	PanelRow,
-	TextControl,
-	ToggleControl,
-} from '@wordpress/components';
+import { applyFilters } from '@wordpress/hooks';
 import { compose } from '@wordpress/compose';
 import { withDispatch, withSelect } from '@wordpress/data';
 import { Component } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
-import { addQueryArgs } from '@wordpress/url';
+import {
+	PanelBody,
+	PanelRow,
+} from '@wordpress/components';
 
 // Internal Deps.
-import SearchUser from '../../components/search-user';
+import List from './list';
+import Search from './search';
 import './editor.scss';
-
-// External Deps.
-import {
-	arrayMove,
-	SortableContainer,
-	SortableElement,
-	SortableHandle,
-} from 'react-sortable-hoc';
-
-/**
- * Output a Drag Handle.
- *
- * @since 1.0.0
- * @since 1.0.0 Use `className` instead of `class`.
- *
- * @return {Object} HTML Fragment.
- */
-const DragHandle = SortableHandle( () => (
-	<span className="llms-drag-handle">:::</span>
-) );
-
-/**
- * Output a sortable list of instructors
- *
- * @since 1.0.0
- *
- * @return {Object} HTML Fragment.
- */
-const InstructorsList = SortableContainer(
-	( { items, onChange, onRemove } ) => {
-		return (
-			<ul>
-				{ items.map( ( instructor, index ) => (
-					<InstructorsItem
-						key={ `item-${ index }` }
-						index={ index }
-						i={ index }
-						instructor={ instructor }
-						onChange={ onChange }
-						onRemove={ onRemove }
-					/>
-				) ) }
-			</ul>
-		);
-	}
-);
-
-/**
- * Output a single instructor list item.
- *
- * @since 1.0.0
- * @since 1.8.0 Use `className` in favor of `class`.
- *
- * @return {Object} HTML Fragment.
- */
-const InstructorsItem = SortableElement(
-	( { instructor, i, onChange, onRemove } ) => {
-		const visible = 'visible' === instructor.visibility;
-		return (
-			<li className="llms-instructor">
-				<BaseControl>
-					<DragHandle />
-					<strong>
-						{ instructor.name }
-						<a
-							href={ addQueryArgs( '/wp-admin/user-edit.php', {
-								user_id: instructor.id,
-							} ) }
-							target="_blank"
-							rel="noreferrer"
-						>
-							(
-							{ sprintf(
-								// Translators: %d = The user ID.
-								__( 'ID: %d', 'lifterlms' ),
-								instructor.id
-							) }
-							)
-						</a>
-					</strong>
-					<IconButton
-						style={ { float: 'right' } }
-						icon="dismiss"
-						label={ __( 'Remove Instructor', 'lifterlms' ) }
-						onClick={ () => {
-							onRemove( instructor );
-						} }
-					/>
-				</BaseControl>
-				<ToggleControl
-					label={ __( 'Visibility', 'lifterlms' ) }
-					help={
-						visible
-							? __(
-									'Instructor is visible on frontend',
-									'lifterlms'
-							  )
-							: __(
-									'Instructor is hidden on frontend',
-									'lifterlms'
-							  )
-					}
-					checked={ visible }
-					onChange={ ( val ) =>
-						onChange(
-							'visibility',
-							val ? 'visible' : 'hidden',
-							i,
-							instructor
-						)
-					}
-				/>
-				{ visible && (
-					<TextControl
-						label={ __( 'Label', 'lifterlms' ) }
-						value={ instructor.label }
-						onChange={ ( val ) =>
-							onChange( 'label', val, i, instructor )
-						}
-					/>
-				) }
-			</li>
-		);
-	}
-);
 
 /**
  * Instructors Sidebar Plugin Component
@@ -157,6 +28,7 @@ const InstructorsItem = SortableElement(
  * @since 1.7.1 Fix WordPress 5.3 issues with JSON data.
  */
 class Instructors extends Component {
+
 	/**
 	 * Constructor.
 	 *
@@ -188,7 +60,14 @@ class Instructors extends Component {
 	 * @return {Array<string>} Array of user roles.
 	 */
 	getRoles() {
-		return wp.hooks.applyFilters( 'llms_instructor_roles', [
+		/**
+		 * Filters user roles allowed to be listed as an instructor
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param {string[]} roles List of WP User roles.
+		 */
+		return applyFilters( 'llms_instructor_roles', [
 			'administrator',
 			'lms_manager',
 			'instructor',
@@ -220,11 +99,47 @@ class Instructors extends Component {
 	 * @return {Object} Default instructor information.
 	 */
 	getInstructorDefaults() {
-		return wp.hooks.applyFilters( 'llms_instructor_defaults', {
+		/**
+		 * Filters default instructor information
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param {Object} defaults Default instructor information.
+		 */
+		return applyFilters( 'llms_instructor_defaults', {
 			label: __( 'Author', 'lifterlms' ),
 			visibility: 'visible',
 		} );
 	}
+
+	/**
+	 * Update a single instructor by ID
+	 *
+	 * @since [version]
+	 * @param {integer} id   WP_User ID.
+	 * @param {Object}  data Instructor information to update.
+	 * @return {void}
+	 */
+	updateInstructor = ( id, data ) => {
+
+		const { instructors } = this.state;
+
+		const newInstructors = instructors.map( ( instructor ) => {
+
+			if ( id === instructor.id ) {
+				instructor = {
+					...instructor,
+					...data,
+				};
+			}
+
+			return instructor;
+
+		} );
+
+		this.updateInstructors( newInstructors );
+
+	};
 
 	/**
 	 * Update instructors list in the state and persist to the database via WP core data dispatcher.
@@ -249,22 +164,17 @@ class Instructors extends Component {
 	 *
 	 * @return {void}
 	 */
-	addInstructor = () => {
-		const { search } = this.state;
+	addInstructor = ( { id, name } ) => {
+
 		const { instructors } = this.state;
 
-		instructors.push(
-			Object.assign( this.getInstructorDefaults(), {
-				id: search.id,
-				name: search.name,
-			} )
-		);
+		instructors.push( {
+			...this.getInstructorDefaults(),
+			id,
+			name,
+		} );
 
 		this.updateInstructors( instructors );
-
-		this.setState( {
-			search: '',
-		} );
 	};
 
 	/**
@@ -278,45 +188,11 @@ class Instructors extends Component {
 	removeInstructor = ( toRemove ) => {
 		let { instructors } = this.state;
 
-		instructors = instructors.filter( ( instructor ) => {
-			return toRemove.id !== instructor.id;
+		instructors = instructors.filter( ( { id } ) => {
+			return toRemove.id !== id;
 		} );
 
 		this.updateInstructors( instructors );
-	};
-
-	/**
-	 * Change event when an individual instructor property changes.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param {string} key   Property key.
-	 * @param {string} val   Property value.
-	 * @param {number} index Index of the instructor that's being updated.
-	 * @return {void}
-	 */
-	onFieldChange = ( key, val, index ) => {
-		const { instructors } = this.state;
-
-		instructors[ index ][ key ] = val;
-
-		this.updateInstructors( instructors );
-	};
-
-	/**
-	 * Callback function when instructor sortable list finishes being sorted.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param {Object} options
-	 * @param {number} options.oldIndex Previous index.
-	 * @param {number} options.newIndex New index.
-	 * @return {void}
-	 */
-	onSortEnd = ( { oldIndex, newIndex } ) => {
-		this.updateInstructors(
-			arrayMove( this.state.instructors, oldIndex, newIndex )
-		);
 	};
 
 	/**
@@ -324,41 +200,22 @@ class Instructors extends Component {
 	 *
 	 * @since 1.0.0
 	 * @since 2.0.0 Exclude currently selected users from search query.
+	 * @since [version] Reworked to utilize @dndkit in favor of react-sortable-hoc.
 	 *
 	 * @return {Object} HTML Fragment.
 	 */
 	render = () => (
 		<PanelBody title={ __( 'Instructors', 'lifterlms' ) }>
-			<PanelRow>
-				<div style={ { width: '80%' } }>
-					<SearchUser
-						roles={ this.getRoles() }
-						placeholder={ __( 'Search…', 'lifterlms' ) }
-						searchArgs={ {
-							exclude: this.state.instructors.map(
-								( res ) => res.id
-							),
-						} }
-						onChange={ this.onSearchChange }
-					/>
-				</div>
-				<div>
-					<Button
-						isDefault
-						disabled={ ! this.state.search }
-						onClick={ this.addInstructor }
-					>
-						{ __( 'Add', 'lifterlms' ) }
-					</Button>
-				</div>
-			</PanelRow>
-			<InstructorsList
-				items={ this.state.instructors }
-				onSortEnd={ this.onSortEnd }
-				useDragHandle={ true }
-				helperClass={ 'llms-instructor-sort-helper' }
-				onChange={ this.onFieldChange }
-				onRemove={ this.removeInstructor }
+			<Search
+				roles={ this.getRoles() }
+				instructors={ this.state.instructors }
+				addInstructor={ this.addInstructor }
+			/>
+			<List
+				instructors={ this.state.instructors }
+				removeInstructor={ this.removeInstructor }
+				updateInstructors={ this.updateInstructors }
+				updateInstructor={ this.updateInstructor }
 			/>
 		</PanelBody>
 	);
