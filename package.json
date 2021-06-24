@@ -14,8 +14,7 @@
     "@dnd-kit/sortable": "^4.0.0",
     "llmsWPData": "npm:@wordpress/data@^5.1.2",
     "react-select": "^4.1.0",
-    "throttle-debounce": "^2.0.1",
-    "uuid": "^8.3.2"
+    "throttle-debounce": "^2.0.1"
   },
   "devDependencies": {
     "@lifterlms/llms-e2e-test-utils": "^2.2.2",
