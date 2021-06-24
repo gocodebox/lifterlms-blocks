@@ -90,8 +90,10 @@
 }
 
 
-li.llms-field-option {
+.llms-field-option {
 	display: flex;
+	align-items: top;
+	margin-bottom: 4px;
 
 	&.llms-sort-helper {
 		background: #fff;
@@ -99,6 +101,10 @@ li.llms-field-option {
 		height: auto !important;
 		padding: 5px 10px;
 		z-index: 999;
+	}
+
+	.llms-drag-handle {
+		margin-top: 3px;
 	}
 
 	.llms-field-opt-default {
@@ -114,6 +120,19 @@ li.llms-field-option {
 		margin-bottom: 0 !important;
 	}
 
+	.llms-field-opt-db-key {
+		display: flex;
+		margin-top: 2px;
+		.dashicon {
+			margin-top: 5px;
+			color: #5a5a5a;
+		}
+		.components-text-control__input {
+			background: #f5f5f5;
+			font-family: monospace;
+		}
+	}
+
 	.llms-drag-handle {
 		flex: 0.8;
 		padding-top: 6px;
@@ -122,6 +141,7 @@ li.llms-field-option {
 	.llms-field-opt-default-wrap,
 	.llms-del-field-opt-wrap {
 		flex: 1;
+		height: fit-content; // Make sure tooltip isn't out of place when keys are displaying.
 	}
 
 	.llms-del-field-opt-wrap {
@@ -138,6 +158,10 @@ li.llms-field-option {
 		flex: 7;
 	}
 
+}
+
+.llms-field-options--footer {
+	margin-top: 10px;
 }
 
 .llms-cols-12 .llms-field { width: 100%; }
