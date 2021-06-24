@@ -37,35 +37,15 @@ import DragHandle from '../../icons/drag-handle';
  */
 export default function( props ) {
 
-	const { id, instructor, removeInstructor, updateInstructor, isDragging, index } = props,
+	const { id, item: instructor, isDragging, index, setNodeRef, listeners, manageState } = props,
 		{ visibility, name, label } = instructor,
+		{ updateItem: updateInstructor, deleteItem: removeInstructor } = manageState,
 		visible = 'visible' === visibility,
-		{
-			attributes,
-			listeners,
-			setNodeRef,
-			transform,
-			transition,
-		} = useSortable( { id } ),
-		style = {
-			transform: CSS.Transform.toString( transform ),
-			transition,
-		},
-		[ isEditing, setIsEditing ] = useState( false ),
-		isPrimary = 0 === index;
-
-	if ( isDragging && transform && transform.scaleX && transform.scaleY ) {
-		transform.scaleX = 0.9;
-		transform.scaleY = 0.9;
-	}
-
-	let className = 'llms-instructor';
-	if ( isDragging ) {
-		className += ' llms-is-dragging';
-	}
+		isPrimary = 0 === index,
+		[ isEditing, setIsEditing ] = useState( false );
 
 	return (
-		<div style={ style } { ...attributes } className={ className }>
+		<>
 			<div className="llms-instructor--header">
 				<section>
 					<strong>{ name }</strong>
@@ -148,6 +128,6 @@ export default function( props ) {
 					) }
 				</div>
 			) }
-		</div>
+		</>
 	);
 }

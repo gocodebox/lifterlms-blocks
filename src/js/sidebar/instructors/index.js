@@ -17,9 +17,11 @@ import {
 } from '@wordpress/components';
 
 // Internal Deps.
-import List from './list';
+import { SortableList } from '../../components';
+import ListItem from './list-item';
 import Search from './search';
 import './editor.scss';
+
 
 /**
  * Instructors Sidebar Plugin Component
@@ -116,6 +118,7 @@ class Instructors extends Component {
 	 * Update a single instructor by ID
 	 *
 	 * @since [version]
+	 *
 	 * @param {integer} id   WP_User ID.
 	 * @param {Object}  data Instructor information to update.
 	 * @return {void}
@@ -211,11 +214,16 @@ class Instructors extends Component {
 				instructors={ this.state.instructors }
 				addInstructor={ this.addInstructor }
 			/>
-			<List
-				instructors={ this.state.instructors }
-				removeInstructor={ this.removeInstructor }
-				updateInstructors={ this.updateInstructors }
-				updateInstructor={ this.updateInstructor }
+			<SortableList
+				ListItem={ ListItem }
+				items={ this.state.instructors }
+				itemClassName="llms-instructor"
+				manageState={ {
+					createItem: this.addInstructor,
+					deleteItem: this.removeInstructor,
+					updateItem: this.updateInstructor,
+					updateItems: this.updateInstructors,
+				} }
 			/>
 		</PanelBody>
 	);
