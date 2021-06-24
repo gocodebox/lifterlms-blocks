@@ -300,10 +300,7 @@ export default class InspectorFieldOptions extends Component {
 
 		// Pass back to the block (and remove the ID so it isn't stored.
 		setAttributes( {
-			options: options.map( ( opt ) => ( {
-				...opt,
-				id: undefined,
-			} ) ),
+			options: options.map( ( { id, ...rest } ) => rest )
 		} );
 	};
 
