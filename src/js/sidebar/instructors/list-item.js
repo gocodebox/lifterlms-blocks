@@ -5,23 +5,16 @@
  * @version [version]
  */
 
-// External Deps.
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-
 // WP Deps.
 import {
 	Button,
 	Dashicon,
-	IconButton,
-	PanelBody,
-	PanelRow,
 	TextControl,
 	ToggleControl,
 	Tooltip,
 } from '@wordpress/components';
 import { addQueryArgs } from '@wordpress/url';
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
 
 // Internal Deps.
@@ -35,11 +28,20 @@ import DragHandle from '../../icons/drag-handle';
  * @param {Object} props Component properties object.
  * @return {Object} Component fragment.
  */
-export default function( props ) {
-
-	const { id, item: instructor, isDragging, index, setNodeRef, listeners, manageState } = props,
+export default function ( props ) {
+	const {
+			id,
+			item: instructor,
+			index,
+			setNodeRef,
+			listeners,
+			manageState,
+		} = props,
 		{ visibility, name, label } = instructor,
-		{ updateItem: updateInstructor, deleteItem: removeInstructor } = manageState,
+		{
+			updateItem: updateInstructor,
+			deleteItem: removeInstructor,
+		} = manageState,
 		visible = 'visible' === visibility,
 		isPrimary = 0 === index,
 		[ isEditing, setIsEditing ] = useState( false );
@@ -53,7 +55,9 @@ export default function( props ) {
 				</section>
 				<aside>
 					{ isPrimary && (
-						<Tooltip text={ __( 'Primary Instructor', 'lifterlms' ) }>
+						<Tooltip
+							text={ __( 'Primary Instructor', 'lifterlms' ) }
+						>
 							<Dashicon icon="star-filled" />
 						</Tooltip>
 					) }
@@ -91,18 +95,19 @@ export default function( props ) {
 								  )
 						}
 						checked={ visible }
-						onChange={ ( val ) => updateInstructor(
-							id,
-							{
-								'visibility': val ? 'visible' : 'hidden',
-							}
-						) }
+						onChange={ ( val ) =>
+							updateInstructor( id, {
+								visibility: val ? 'visible' : 'hidden',
+							} )
+						}
 					/>
 					{ visible && (
 						<TextControl
 							label={ __( 'Label', 'lifterlms' ) }
 							value={ label }
-							onChange={ ( label ) => updateInstructor( id, { label } ) }
+							onChange={ ( label ) =>
+								updateInstructor( id, { label } )
+							}
 						/>
 					) }
 					<Button
@@ -122,7 +127,7 @@ export default function( props ) {
 						<Button
 							isDestructive
 							onClick={ () => removeInstructor( instructor ) }
-							>
+						>
 							{ __( 'Remove', 'lifterlms' ) }
 						</Button>
 					) }

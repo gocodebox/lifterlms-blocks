@@ -21,7 +21,6 @@ import { Component } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 
 // External Deps.
-import { cloneDeep } from 'lodash';
 import { v4 as uuid } from 'uuid';
 
 // Internal Deps.
@@ -37,14 +36,19 @@ import DragHandle from '../../icons/drag-handle';
  * @param {string}   props.id          Option UUID.
  * @param {Object}   props.item        Full option object.
  * @param {Object}   props.extraProps  Object of extra properties.
- * @param {Integer}  props.index       Option index within the options list.
  * @param {Object}   props.manageState State management object used to CRUD options.
  * @param {Object}   props.listeners   UI event listeners (used for the drag handle).
- * @param {function} props.setNodeRef  Function used to set the reference node (for the drag handle).
+ * @param {Function} props.setNodeRef  Function used to set the reference node (for the drag handle).
  * @return {Object} Component.
  */
-function ListItem( { id, item, extraProps, index, manageState, listeners, setNodeRef } ) {
-
+function ListItem( {
+	id,
+	item,
+	extraProps,
+	manageState,
+	listeners,
+	setNodeRef,
+} ) {
 	const { showKeys, type, optionCount } = extraProps,
 		{ updateItem, deleteItem } = manageState;
 
@@ -52,14 +56,11 @@ function ListItem( { id, item, extraProps, index, manageState, listeners, setNod
 		<CheckboxControl
 			className="llms-field-opt-default"
 			checked={ 'yes' === item.default }
-			onChange={ val => {
-				updateItem(
-					id,
-					{
-						...item,
-						default: true === val ? 'yes' : 'no',
-					}
-				)
+			onChange={ ( val ) => {
+				updateItem( id, {
+					...item,
+					default: true === val ? 'yes' : 'no',
+				} );
 			} }
 			tabIndex="-1"
 		/>
@@ -69,14 +70,11 @@ function ListItem( { id, item, extraProps, index, manageState, listeners, setNod
 		<RadioControl
 			className="llms-field-opt-default"
 			selected={ item.default }
-			onChange={ val => {
-				updateItem(
-					id,
-					{
-						...item,
-						default: val,
-					}
-				)
+			onChange={ ( val ) => {
+				updateItem( id, {
+					...item,
+					default: val,
+				} );
 			} }
 			options={ [ { label: '', value: 'yes' } ] }
 			tabIndex="-1"
@@ -96,8 +94,8 @@ function ListItem( { id, item, extraProps, index, manageState, listeners, setNod
 			/>
 			<Tooltip text={ __( 'Make default', 'lifterlms' ) }>
 				<div className="llms-field-opt-default-wrap">
-					{ 'checkbox' === type && ( <CheckboxOptionControl /> ) }
-					{ 'checkbox' !== type && ( <RadioOptionControl /> ) }
+					{ 'checkbox' === type && <CheckboxOptionControl /> }
+					{ 'checkbox' !== type && <RadioOptionControl /> }
 				</div>
 			</Tooltip>
 			<div className="llms-field-opt-text-wrap">
@@ -109,14 +107,21 @@ function ListItem( { id, item, extraProps, index, manageState, listeners, setNod
 				/>
 				{ showKeys && (
 					<div className="llms-field-opt-db-key">
-						<Tooltip text={ __( 'Database key value', 'lifterlms' ) }>
+						<Tooltip
+							text={ __( 'Database key value', 'lifterlms' ) }
+						>
 							<Dashicon icon="database" />
 						</Tooltip>
 						<TextControl
 							className="llms-field-opt-text "
 							value={ item.key }
-							onChange={ ( key ) => updateItem( id, { ...item, key } ) }
-							placeholder={ __( 'Database key value', 'lifterlms' ) }
+							onChange={ ( key ) =>
+								updateItem( id, { ...item, key } )
+							}
+							placeholder={ __(
+								'Database key value',
+								'lifterlms'
+							) }
 						/>
 					</div>
 				) }
@@ -135,7 +140,6 @@ function ListItem( { id, item, extraProps, index, manageState, listeners, setNod
 			) }
 		</>
 	);
-
 }
 
 /**
@@ -146,7 +150,6 @@ function ListItem( { id, item, extraProps, index, manageState, listeners, setNod
  * @since 1.6.0
  */
 export default class InspectorFieldOptions extends Component {
-
 	/**
 	 * Constructor
 	 *
@@ -163,7 +166,7 @@ export default class InspectorFieldOptions extends Component {
 		this.state = {
 			showKeys: false,
 			// Add an ID to each option for dndkit to work.
-			options: options.map( opt => {
+			options: options.map( ( opt ) => {
 				return {
 					...opt,
 					id: uuid(),
@@ -180,10 +183,7 @@ export default class InspectorFieldOptions extends Component {
 	 * @return {void}
 	 */
 	addOption = () => {
-
-		const { attributes } = this.props,
-			{ options } = this.state,
-			{ field } = attributes,
+		const { options } = this.state,
 			{ length } = options;
 
 		const [ key, optionNumber ] = this.getUniqueKeyNumber( length + 1 ),
@@ -198,7 +198,6 @@ export default class InspectorFieldOptions extends Component {
 		options.push( option );
 
 		this.updateOptions( options );
-
 	};
 
 	/**
@@ -224,18 +223,17 @@ export default class InspectorFieldOptions extends Component {
 	 *
 	 * @since [version]
 	 *
-	 * @param {Integer} optionNum A number.
+	 * @param {number} optionNum A number.
 	 * @return {Array} Array containing a new option key (string) and the number used to generate the key.
 	 */
 	getUniqueKeyNumber = ( optionNum ) => {
-
 		/**
 		 * Test a key against the existing option list for uniqueness
 		 *
 		 * @since [version]
 		 *
 		 * @param {string} newKey Proposed new key to use.
-		 * @return {Boolean} Returns `true` when newKey is unique and `false` otherwise.
+		 * @return {boolean} Returns `true` when newKey is unique and `false` otherwise.
 		 */
 		const isUnique = ( newKey ) => {
 			const { options } = this.state;
@@ -251,9 +249,7 @@ export default class InspectorFieldOptions extends Component {
 		}
 
 		return [ key, optionNum ];
-
 	};
-
 
 	/**
 	 * Update a single options
@@ -265,32 +261,26 @@ export default class InspectorFieldOptions extends Component {
 	 * @return {void}
 	 */
 	updateOption = ( id, data ) => {
-
 		const { options } = this.state,
 			{ field } = this.props.attributes,
-			newDefault = ( 'yes' === data.default && 'checkbox' !== field ),
+			newDefault = 'yes' === data.default && 'checkbox' !== field,
 			newOptions = options.map( ( option ) => {
-
 				if ( id === option.id ) {
-
 					option = {
 						...option,
 						...data,
 					};
-
 				} else if ( newDefault ) {
 					option = {
 						...option,
 						default: 'no',
-					}
+					};
 				}
 
 				return option;
-
 			} );
 
 		this.updateOptions( newOptions );
-
 	};
 
 	/**
@@ -303,22 +293,21 @@ export default class InspectorFieldOptions extends Component {
 	 * @return {void}
 	 */
 	updateOptions = ( options ) => {
-
 		const { setAttributes } = this.props;
 
 		// Set to the state.
 		this.setState( { options } );
 
 		// Pass back to the block (and remove the ID so it isn't stored.
-		setAttributes( { options: options.map( opt => ( {
-			...opt,
-			id: undefined,
-		} ) ) } );
-
+		setAttributes( {
+			options: options.map( ( opt ) => ( {
+				...opt,
+				id: undefined,
+			} ) ),
+		} );
 	};
 
 	removeOption = ( deleteId ) => {
-
 		const { options } = this.state,
 			{ field } = this.props.attributes;
 
@@ -326,7 +315,9 @@ export default class InspectorFieldOptions extends Component {
 
 		// If the deleting option was the default force default back to the first item in the list.
 		if ( 'checkbox' !== field ) {
-			const deletingOption = options.find( ( { id } ) => id === deleteId );
+			const deletingOption = options.find(
+				( { id } ) => id === deleteId
+			);
 			newDefault = 'yes' === deletingOption.default;
 		}
 
@@ -338,13 +329,12 @@ export default class InspectorFieldOptions extends Component {
 						opt = {
 							...opt,
 							default: 'yes',
-						}
+						};
 					}
 					return opt;
 				} )
 		);
-
-	}
+	};
 
 	/**
 	 * Component render
@@ -355,7 +345,6 @@ export default class InspectorFieldOptions extends Component {
 	 * @return {BaseControl} Component HTML fragment.
 	 */
 	render() {
-
 		const { props, state } = this,
 			{ attributes } = props,
 			{ id, field } = attributes,
@@ -364,7 +353,6 @@ export default class InspectorFieldOptions extends Component {
 
 		return (
 			<BaseControl id={ id } label={ __( 'Options', 'lifterlms' ) }>
-
 				<SortableList
 					ListItem={ ListItem }
 					items={ options }
@@ -374,16 +362,15 @@ export default class InspectorFieldOptions extends Component {
 				/>
 
 				<div className="llms-field-options--footer">
-					<Button
-						isSecondary
-						onClick={ this.addOption }
-					>
+					<Button isSecondary onClick={ this.addOption }>
 						{ __( 'Add option', 'lifterlms' ) }
 					</Button>
 
 					<Button
 						isTertiary
-						onClick={ () => this.setState( { showKeys: ! showKeys } ) }
+						onClick={ () =>
+							this.setState( { showKeys: ! showKeys } )
+						}
 					>
 						{ showKeys
 							? __( 'Hide keys', 'lifterlms' )

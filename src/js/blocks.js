@@ -23,5 +23,5 @@ registerBlocks();
 // Import core Components and expose them for 3rd parties to utilize.
 import * as Components from './components/';
 window.llms.components = {
-	...Components
+	...Components,
 };

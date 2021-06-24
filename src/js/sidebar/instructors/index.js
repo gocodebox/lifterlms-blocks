@@ -10,18 +10,14 @@ import { applyFilters } from '@wordpress/hooks';
 import { compose } from '@wordpress/compose';
 import { withDispatch, withSelect } from '@wordpress/data';
 import { Component } from '@wordpress/element';
-import { __, sprintf } from '@wordpress/i18n';
-import {
-	PanelBody,
-	PanelRow,
-} from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+import { PanelBody } from '@wordpress/components';
 
 // Internal Deps.
 import { SortableList } from '../../components';
 import ListItem from './list-item';
 import Search from './search';
 import './editor.scss';
-
 
 /**
  * Instructors Sidebar Plugin Component
@@ -30,7 +26,6 @@ import './editor.scss';
  * @since 1.7.1 Fix WordPress 5.3 issues with JSON data.
  */
 class Instructors extends Component {
-
 	/**
 	 * Constructor.
 	 *
@@ -119,16 +114,14 @@ class Instructors extends Component {
 	 *
 	 * @since [version]
 	 *
-	 * @param {integer} id   WP_User ID.
-	 * @param {Object}  data Instructor information to update.
+	 * @param {number} id   WP_User ID.
+	 * @param {Object} data Instructor information to update.
 	 * @return {void}
 	 */
 	updateInstructor = ( id, data ) => {
-
 		const { instructors } = this.state;
 
 		const newInstructors = instructors.map( ( instructor ) => {
-
 			if ( id === instructor.id ) {
 				instructor = {
 					...instructor,
@@ -137,11 +130,9 @@ class Instructors extends Component {
 			}
 
 			return instructor;
-
 		} );
 
 		this.updateInstructors( newInstructors );
-
 	};
 
 	/**
@@ -165,10 +156,12 @@ class Instructors extends Component {
 	 * @since 1.0.0
 	 * @since 2.0.0 Don't use data from removed `_users` property.
 	 *
+	 * @param {Object} props
+	 * @param {number} props.id   WP_User Id.
+	 * @param {string} props.name WP_User name.
 	 * @return {void}
 	 */
 	addInstructor = ( { id, name } ) => {
-
 		const { instructors } = this.state;
 
 		instructors.push( {
