@@ -9,7 +9,9 @@
 import { __ } from '@wordpress/i18n';
 
 // Internal Deps.
-import SearchUser from '../../components/search-user';
+import { SearchUser } from '../../components';
+
+
 
 /**
  * User search component for searching instructors.
