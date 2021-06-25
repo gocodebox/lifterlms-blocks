@@ -32,7 +32,7 @@
     "lint:css": "wp-scripts lint-style ./src/js",
     "lint:js": "wp-scripts lint-js ./src/js",
     "lint:js:errors": "npm run lint:js -- --quiet",
-    "test": "WP_VERSION=$WP_VERSION wp-scripts test-e2e --config tests/e2e/jest.config.js",
+    "test": "wp-scripts test-e2e --config tests/e2e/jest.config.js",
     "test:dev": "npm run test -- --puppeteer-interactive",
     "start": "wp-scripts start"
   }
