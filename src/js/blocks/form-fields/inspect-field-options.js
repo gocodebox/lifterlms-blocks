@@ -4,13 +4,14 @@
  * Used on Radios, Checkboxes, and Selects
  *
  * @since 1.6.0
- * @since 1.8.0 Updated lodash imports.
+ * @version [version]
  */
 
 // WP Deps.
 import {
 	Button,
 	BaseControl,
+	Dashicon,
 	TextControl,
 	Tooltip,
 	RadioControl,
@@ -20,158 +21,126 @@ import { Component } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 
 // External Deps.
-import {
-	SortableContainer,
-	SortableElement,
-	SortableHandle,
-} from 'react-sortable-hoc';
-import { cloneDeep } from 'lodash';
+import { v4 as uuid } from 'uuid';
+
+// Internal Deps.
+import { SortableList } from '../../components';
+import DragHandle from '../../icons/drag-handle';
 
 /**
- * Move an item's position within an array.
+ * Render a single option within the sortable list.
  *
- * @since 1.6.0
+ * @since [version]
  *
- * @param {Array}   array The array.
- * @param {number} from  Item's original index.
- * @param {number} to    Item's new index.
- * @return {Array} Modified array.
+ * @param {Object}   props
+ * @param {string}   props.id          Option UUID.
+ * @param {Object}   props.item        Full option object.
+ * @param {Object}   props.extraProps  Object of extra properties.
+ * @param {Object}   props.manageState State management object used to CRUD options.
+ * @param {Object}   props.listeners   UI event listeners (used for the drag handle).
+ * @param {Function} props.setNodeRef  Function used to set the reference node (for the drag handle).
+ * @return {Object} Component.
  */
-const arrayMove = ( array, from, to ) => {
-	array = array.slice();
-	array.splice(
-		to < 0 ? array.length + to : to,
-		0,
-		array.splice( from, 1 )[ 0 ]
+function ListItem( {
+	id,
+	item,
+	extraProps,
+	manageState,
+	listeners,
+	setNodeRef,
+} ) {
+	const { showKeys, type, optionCount } = extraProps,
+		{ updateItem, deleteItem } = manageState;
+
+	const CheckboxOptionControl = () => (
+		<CheckboxControl
+			className="llms-field-opt-default"
+			checked={ 'yes' === item.default }
+			onChange={ ( val ) => {
+				updateItem( id, {
+					...item,
+					default: true === val ? 'yes' : 'no',
+				} );
+			} }
+			tabIndex="-1"
+		/>
 	);
-	return array;
-};
 
-/**
- * Drag Handle Component
- *
- * @since 1.6.0
- *
- * @return {Object} Component HTML Fragment.
- */
-const DragHandle = SortableHandle( () => (
-	<span className="llms-drag-handle" style={ { cursor: 'grab' } }>
-		:::
-	</span>
-) );
+	const RadioOptionControl = () => (
+		<RadioControl
+			className="llms-field-opt-default"
+			selected={ item.default }
+			onChange={ ( val ) => {
+				updateItem( id, {
+					...item,
+					default: val,
+				} );
+			} }
+			options={ [ { label: '', value: 'yes' } ] }
+			tabIndex="-1"
+		/>
+	);
 
-/**
- * Sortable container component
- *
- * Holds the list of the field's options.
- *
- * @since 1.6.0
- *
- * @return {Object} Component HTML Fragment.
- */
-const OptionsList = SortableContainer(
-	( { items, onChange, onRemove, showKeys, type } ) => {
-		return (
-			<ul className="llms-field-options">
-				{ items.map( ( option, index ) => (
-					<OptionItem
-						key={ `option-item-${ index }` }
-						index={ index }
-						i={ index } // index isn't passed to the SortableElement for some reason...
-						item={ option }
-						onChange={ onChange }
-						onRemove={ onRemove }
-						showKeys={ showKeys }
-						type={ type }
-					/>
-				) ) }
-			</ul>
-		);
-	}
-);
-
-/**
- * Sortable element component
- *
- * Each element represents a single option.
- *
- * @since 1.6.0
- * @since 1.12.0 Added tooltip for the "Make Default" radio control & updated the icon used for item deletion.
- * @since 2.0.0 Added special treatment for checkboxes.
- *
- * @return {Object} Component HTML Fragment.
- */
-const OptionItem = SortableElement(
-	( { item, i, onChange, onRemove, showKeys, type } ) => {
-		const OptionControl =
-			'checkbox' === type ? (
-				<CheckboxControl
-					className="llms-field-opt-default"
-					checked={ 'yes' === item.default }
-					onChange={ ( val ) => {
-						onChange(
-							{ ...item, default: true === val ? 'yes' : 'no' },
-							i
-						);
-					} }
-					tabIndex="-1"
-				/>
-			) : (
-				<RadioControl
-					className="llms-field-opt-default"
-					selected={ item.default }
-					onChange={ ( val ) => {
-						onChange( { ...item, default: val }, i );
-					} }
-					options={ [ { label: '', value: 'yes' } ] }
-					tabIndex="-1"
-				/>
-			);
-
-		return (
-			<li className="llms-field-option">
-				<DragHandle />
-				<Tooltip text={ __( 'Make default', 'lifterlms' ) }>
-					<div className="llms-field-opt-default-wrap">
-						{ OptionControl }
-					</div>
-				</Tooltip>
-				<div className="llms-field-opt-text-wrap">
-					<TextControl
-						className="llms-field-opt-text"
-						value={ item.text }
-						onChange={ ( val ) =>
-							onChange( { ...item, text: val }, i )
-						}
-						placeholder={ __( 'Option text', 'lifterlms' ) }
-					/>
-					{ showKeys && (
-						<TextControl
-							className="llms-field-opt-text"
-							value={ item.key }
-							onChange={ ( val ) =>
-								onChange( { ...item, key: val }, i )
-							}
-							placeholder={ __( 'Saved value', 'lifterlms' ) }
-						/>
-					) }
+	return (
+		<>
+			<Button
+				isSmall
+				showTooltip
+				label={ __( 'Reorder option', 'lifterlms' ) }
+				icon={ DragHandle }
+				ref={ setNodeRef }
+				className="llms-drag-handle"
+				{ ...listeners }
+			/>
+			<Tooltip text={ __( 'Make default', 'lifterlms' ) }>
+				<div className="llms-field-opt-default-wrap">
+					{ 'checkbox' === type && <CheckboxOptionControl /> }
+					{ 'checkbox' !== type && <RadioOptionControl /> }
 				</div>
+			</Tooltip>
+			<div className="llms-field-opt-text-wrap">
+				<TextControl
+					className="llms-field-opt-text"
+					value={ item.text }
+					onChange={ ( text ) => updateItem( id, { ...item, text } ) }
+					placeholder={ __( 'Option label', 'lifterlms' ) }
+				/>
+				{ showKeys && (
+					<div className="llms-field-opt-db-key">
+						<Tooltip
+							text={ __( 'Database key value', 'lifterlms' ) }
+						>
+							<Dashicon icon="database" />
+						</Tooltip>
+						<TextControl
+							className="llms-field-opt-text "
+							value={ item.key }
+							onChange={ ( key ) =>
+								updateItem( id, { ...item, key } )
+							}
+							placeholder={ __(
+								'Database key value',
+								'lifterlms'
+							) }
+						/>
+					</div>
+				) }
+			</div>
+			{ optionCount > 1 && (
 				<div className="llms-del-field-opt-wrap">
 					<Button
 						style={ { flex: 1 } }
 						icon="trash"
 						label={ __( 'Delete Option', 'lifterlms' ) }
-						onClick={ () => {
-							onRemove( i );
-						} }
+						onClick={ () => deleteItem( id ) }
 						tabIndex="-1"
 						isSmall
 					/>
 				</div>
-			</li>
-		);
-	}
-);
+			) }
+		</>
+	);
+}
 
 /**
  * Inspector "Options" component
@@ -185,6 +154,8 @@ export default class InspectorFieldOptions extends Component {
 	 * Constructor
 	 *
 	 * @since 1.6.0
+	 * @since [version] Rename state.items to state.options & load a unique ID into
+	 *               each option object for compatibility with the SortableList component.
 	 *
 	 * @return {void}
 	 */
@@ -194,28 +165,129 @@ export default class InspectorFieldOptions extends Component {
 		const { options } = this.props.attributes;
 		this.state = {
 			showKeys: false,
-			items: options,
+			// Add an ID to each option for dndkit to work.
+			options: options.map( ( opt ) => {
+				return {
+					...opt,
+					id: uuid(),
+				};
+			} ),
 		};
 	}
 
 	/**
-	 * Called when sorting completes, updates options order.
+	 * Add a new empty option with default values
 	 *
-	 * @since 1.6.0
+	 * @since [version]
 	 *
-	 * @param {number} options
-	 * @param {number} options.oldIndex The option's previous index.
-	 * @param {number} options.newIndex The option's new index.
 	 * @return {void}
 	 */
-	onSortEnd = ( { oldIndex, newIndex } ) => {
-		this.updateOptions( arrayMove( this.state.items, oldIndex, newIndex ) );
+	addOption = () => {
+		const { options } = this.state,
+			{ length } = options;
+
+		const [ key, optionNumber ] = this.getUniqueKeyNumber( length + 1 ),
+			option = {
+				key,
+				id: uuid(),
+				// Translators: %d = Option index in the list of options.
+				text: sprintf( __( 'Option %d', 'lifterlms' ), optionNumber ),
+				default: 'no',
+			};
+
+		options.push( option );
+
+		this.updateOptions( options );
+	};
+
+	/**
+	 * Retrieve the manageState object passed to the SortableList component
+	 *
+	 * @since [version]
+	 *
+	 * @return {Object} An options state management object.
+	 */
+	getManageState = () => ( {
+		createItem: this.addOption,
+		deleteItem: this.removeOption,
+		updateItem: this.updateOption,
+		updateItems: this.updateOptions,
+	} );
+
+	/**
+	 * Retrieves a unique key used when creating a new option
+	 *
+	 * When creating a new option we start with option_{options.length + 1} and
+	 * keep counting up until we've found a unique key. The number used to generate
+	 * the key is also returned to be used when generating the new default label.
+	 *
+	 * @since [version]
+	 *
+	 * @param {number} optionNum A number.
+	 * @return {Array} Array containing a new option key (string) and the number used to generate the key.
+	 */
+	getUniqueKeyNumber = ( optionNum ) => {
+		/**
+		 * Test a key against the existing option list for uniqueness
+		 *
+		 * @since [version]
+		 *
+		 * @param {string} newKey Proposed new key to use.
+		 * @return {boolean} Returns `true` when newKey is unique and `false` otherwise.
+		 */
+		const isUnique = ( newKey ) => {
+			const { options } = this.state;
+			return -1 === options.findIndex( ( { key } ) => key === newKey );
+		};
+
+		// Translators: %d = Option index in the list of options.
+		let key = sprintf( __( 'option_%d', 'lifterlms' ), optionNum );
+
+		// Continue until we get a unique key.
+		while ( ! isUnique( key ) ) {
+			[ key, optionNum ] = this.getUniqueKeyNumber( ++optionNum );
+		}
+
+		return [ key, optionNum ];
+	};
+
+	/**
+	 * Update a single options
+	 *
+	 * @since [version]
+	 *
+	 * @param {string} id   Option ID.
+	 * @param {Object} data Option properties to be updated.
+	 * @return {void}
+	 */
+	updateOption = ( id, data ) => {
+		const { options } = this.state,
+			{ field } = this.props.attributes,
+			newDefault = 'yes' === data.default && 'checkbox' !== field,
+			newOptions = options.map( ( option ) => {
+				if ( id === option.id ) {
+					option = {
+						...option,
+						...data,
+					};
+				} else if ( newDefault ) {
+					option = {
+						...option,
+						default: 'no',
+					};
+				}
+
+				return option;
+			} );
+
+		this.updateOptions( newOptions );
 	};
 
 	/**
 	 * Update options
 	 *
 	 * @since 1.6.0
+	 * @since [version] Refactored.
 	 *
 	 * @param {Object[]} options Options array.
 	 * @return {void}
@@ -223,141 +295,85 @@ export default class InspectorFieldOptions extends Component {
 	updateOptions = ( options ) => {
 		const { setAttributes } = this.props;
 
-		setAttributes( { options } );
-		this.setState( { items: options } );
+		// Set to the state.
+		this.setState( { options } );
+
+		// Pass back to the block (and remove the ID so it isn't stored.
+		setAttributes( {
+			options: options.map( ( { id, ...rest } ) => rest )
+		} );
+	};
+
+	removeOption = ( deleteId ) => {
+		const { options } = this.state,
+			{ field } = this.props.attributes;
+
+		let newDefault = null;
+
+		// If the deleting option was the default force default back to the first item in the list.
+		if ( 'checkbox' !== field ) {
+			const deletingOption = options.find(
+				( { id } ) => id === deleteId
+			);
+			newDefault = 'yes' === deletingOption.default;
+		}
+
+		this.updateOptions(
+			options
+				.filter( ( { id } ) => id !== deleteId )
+				.map( ( opt, index ) => {
+					if ( newDefault && 0 === index ) {
+						opt = {
+							...opt,
+							default: 'yes',
+						};
+					}
+					return opt;
+				} )
+		);
 	};
 
 	/**
 	 * Component render
 	 *
 	 * @since 1.6.0
+	 * @since [version] Refactored to utilize @dndkit in favor of react-sortable-hoc.
 	 *
 	 * @return {BaseControl} Component HTML fragment.
 	 */
 	render() {
-		const { attributes, setAttributes } = this.props,
+		const { props, state } = this,
+			{ attributes } = props,
 			{ id, field } = attributes,
-			{ showKeys } = this.state;
-
-		let { options } = attributes;
-
-		options = cloneDeep( options );
-
-		/**
-		 * Add a new option.
-		 *
-		 * @since 1.6.0
-		 * @since 1.12.0 Newly created options will be the default for radio and selects.
-		 *              Added default text and keys when adding a new option.
-		 *
-		 * @return {void}
-		 */
-		const addOption = () => {
-			const count = options.length;
-
-			let isDefault = 'no';
-			if ( [ 'radio', 'select' ].includes( field ) ) {
-				isDefault = count ? 'no' : 'yes';
-			}
-
-			onOptionChange(
-				{
-					// Translators: %d = Option index in the list of options.
-					text: sprintf( __( 'Option %d', 'lifterlms' ), count + 1 ),
-					// Translators: %d = Option index in the list of options.
-					key: sprintf( __( 'option_%d', 'lifterlms' ), count + 1 ),
-					default: isDefault,
-				},
-				options.length
-			);
-		};
-
-		/**
-		 * Delete an existing option
-		 *
-		 * @since 1.6.0
-		 * @since 1.12.0 When deleting a default option, set the first item as the new default.
-		 *
-		 * @param {number} index Index of the deleted option.
-		 * @return {void}
-		 */
-		const removeOption = ( index ) => {
-			const wasDefault = 'yes' === options[ index ].default,
-				newOptions = options.filter( ( opt, i ) => i !== index );
-
-			// If it was the default option and there's at least one option left make the first item in the list the new default.
-			if ( wasDefault && newOptions.length ) {
-				newOptions[ 0 ].default = 'yes';
-			}
-
-			setAttributes( { options: newOptions } );
-		};
-
-		/**
-		 * Callback when options are changed.
-		 *
-		 * @since 1.6.0
-		 * @since 2.0.0 Pass an id to <BaseControl>
-		 *                  Pass the field type to <OptionsList>
-		 *                  Also allow multiple defaults for checkboxes.
-		 *
-		 * @param {Object}  option Option data.
-		 * @param {number} index  Option index.
-		 * @return {void}
-		 */
-		const onOptionChange = ( option, index ) => {
-			const prevOption = options[ index ] ? options[ index ] : false,
-				{ field } = this.props.attributes;
-
-			options[ index ] = option;
-			this.updateOptions( options );
-
-			// When setting an option as the "default", set all other options to not be the default,
-			// if not a checkbox.
-			if (
-				'checkbox' !== field &&
-				'yes' === option.default &&
-				prevOption &&
-				prevOption.default !== option.default
-			) {
-				options.forEach( ( opt, i ) => {
-					if ( i !== index ) {
-						onOptionChange( { ...opt, default: 'no' }, i );
-					}
-				} );
-			}
-		};
+			{ options, showKeys } = state,
+			{ length: optionCount } = options;
 
 		return (
 			<BaseControl id={ id } label={ __( 'Options', 'lifterlms' ) }>
-				<OptionsList
+				<SortableList
+					ListItem={ ListItem }
 					items={ options }
-					onSortEnd={ this.onSortEnd }
-					useDragHandle={ true }
-					helperClass="llms-sort-helper"
-					onChange={ onOptionChange }
-					onRemove={ removeOption }
-					showKeys={ showKeys }
-					type={ field }
+					itemClassName="llms-field-option"
+					manageState={ this.getManageState() }
+					extraProps={ { type: field, showKeys, optionCount } }
 				/>
 
-				<Button
-					isDefault
-					onClick={ () => {
-						addOption();
-					} }
-				>
-					{ __( 'Add option', 'lifterlms' ) }
-				</Button>
+				<div className="llms-field-options--footer">
+					<Button isSecondary onClick={ this.addOption }>
+						{ __( 'Add option', 'lifterlms' ) }
+					</Button>
 
-				<Button
-					isTertiary
-					onClick={ () => this.setState( { showKeys: ! showKeys } ) }
-				>
-					{ showKeys
-						? __( 'Hide keys', 'lifterlms' )
-						: __( 'Show keys', 'lifterlms' ) }
-				</Button>
+					<Button
+						isTertiary
+						onClick={ () =>
+							this.setState( { showKeys: ! showKeys } )
+						}
+					>
+						{ showKeys
+							? __( 'Hide keys', 'lifterlms' )
+							: __( 'Show keys', 'lifterlms' ) }
+					</Button>
+				</div>
 			</BaseControl>
 		);
 	}
