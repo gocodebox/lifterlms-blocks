@@ -23,6 +23,7 @@ import {
 	publishAndSaveEntities,
 	removeBlockByClientId,
 	visitForm,
+	maybeSkipFormsTests,
 } from '../../util';
 
 async function removeUserEmailBlock() {
@@ -39,6 +40,8 @@ async function getAvailableSidebarPanelTitles() {
 }
 
 describe( 'Admin/FormsReady', () => {
+
+	maybeSkipFormsTests();
 
 	it ( 'should disable the use of the "Draft" button', async () => {
 

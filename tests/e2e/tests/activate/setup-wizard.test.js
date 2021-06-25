@@ -12,9 +12,7 @@ import { runSetupWizard } from '@lifterlms/llms-e2e-test-utils';
 describe( 'SetupWizard', () => {
 
 	it ( 'should load and run the entire setup wizard.', async () => {
-
 		await runSetupWizard();
-
 	} );
 
 } );

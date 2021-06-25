@@ -25,12 +25,16 @@ import {
 	visitForm,
 } from '../../util';
 
+import { maybeSkipFormsTests } from '../../util';
+
 async function getAllBlockNames() {
 	const blocks = await getAllBlocks();
 	return blocks.map( ( { name } ) => name );
 }
 
 describe( 'Admin/FormsDocSidebar', () => {
+
+	maybeSkipFormsTests();
 
 	describe( 'LocationDisplay', () => {
 

@@ -14,6 +14,8 @@ import publishAndSaveEntities from './publish-and-save-entities';
 import removeBlockByClientId from './remove-block-by-client-id';
 import visitForm from './visit-form';
 
+export { maybeSkipFormsTests } from './should-run-tests';
+
 export {
 	blockSnapshotMatcher,
 	clearBlocks,

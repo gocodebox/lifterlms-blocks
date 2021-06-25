@@ -16,6 +16,7 @@ import {
 	blockSnapshotMatcher,
 	clearBlocks,
 	visitForm,
+	maybeSkipFormsTests,
 } from '../../util';
 
 
@@ -269,6 +270,8 @@ const fields = [
 ];
 
 describe( 'Blocks/FormFields', () => {
+
+	maybeSkipFormsTests();
 
 	beforeAll( async () => {
 
