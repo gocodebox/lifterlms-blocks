@@ -14,12 +14,14 @@ import {
 	TextControl,
 	ToggleControl,
 } from '@wordpress/components';
-import { RichText } from '@wordpress/block-editor';
+import { select, dispatch } from '@wordpress/data';
+import { store as blockEditorStore, RichText } from '@wordpress/block-editor';
 import { Fragment } from '@wordpress/element';
 
 // Internal Deps.
 import { settings as baseSettings, postTypes } from './text';
 import { getSettingsFromBase } from '../settings';
+import { getSibling } from '../group-data';
 
 /**
  * Block Name
@@ -30,11 +32,57 @@ export const name = 'llms/form-field-user-password';
 
 export const composed = true;
 
+/**
+ * Utility function to merge minlength into an existing `html_attrs` object
+ *
+ * @since [version]
+ *
+ * @param {Object} html_attrs Existing object.
+ * @param {number} minlength  Min length value.
+ * @return {Object} Merged object.
+ */
+function mergeHtmlAttrs( html_attrs, minlength ) {
+	return {
+		html_attrs: {
+			...html_attrs,
+			minlength,
+		},
+	};
+}
+
+/**
+ * Update the minlength of the confirmation field
+ *
+ * @since [version]
+ *
+ * @param {number} minlength New minlength value.
+ * @return {void}
+ */
+function updateConfirmationFieldMinLength( minlength ) {
+	const { getSelectedBlockClientId } = select( blockEditorStore ),
+		{ updateBlockAttributes } = dispatch( blockEditorStore ),
+		controlBlock = getSelectedBlockClientId(),
+		confirmBlock = getSibling( controlBlock ),
+		{ attributes, clientId } = confirmBlock,
+		{ html_attrs } = attributes;
+
+	updateBlockAttributes( clientId, mergeHtmlAttrs( html_attrs, minlength ) );
+}
+
+/**
+ * Shows an editable password strength meter in the main block editor area
+ *
+ * @since 2.0.0
+ *
+ * @param {Object}   attributes    Block attributes.
+ * @param {Function} setAttributes Block attributes setter.
+ * @return {Object} Component fragment or `null` if the meter is not enabled.
+ */
 const fillEditAfter = ( attributes, setAttributes ) => {
 	const { meter, meter_description } = attributes;
 
 	if ( ! meter ) {
-		return;
+		return null;
 	}
 
 	return (
@@ -73,18 +121,40 @@ const fillEditAfter = ( attributes, setAttributes ) => {
  * Fill the controls slot with additional controls specific to this field.
  *
  * @since 2.0.0
+ * @since [version] Update the minlength value of confirmation field when the control field's value changes.
  *
  * @param {Object} attributes Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
  * @return {Fragment} Component HTML Fragment.
  */
 const fillInspectorControls = ( attributes, setAttributes ) => {
-	const { isConfirmationField, meter, min_strength, html_attrs } = attributes,
+	const {
+			isConfirmationControlField,
+			isConfirmationField,
+			meter,
+			min_strength,
+			html_attrs,
+		} = attributes,
 		{ minlength } = html_attrs;
 
 	if ( isConfirmationField ) {
 		return;
 	}
+
+	/**
+	 * Set the minlength on the field and match it to the confirmation field (if necessary)
+	 *
+	 * @since [version]
+	 *
+	 * @param {number} minlength New minlength value.
+	 * @return {void}
+	 */
+	const setMinLength = ( minlength ) => {
+		setAttributes( mergeHtmlAttrs( html_attrs, minlength ) );
+		if ( isConfirmationControlField ) {
+			updateConfirmationFieldMinLength( minlength );
+		}
+	};
 
 	return (
 		<Fragment>
@@ -125,14 +195,7 @@ const fillInspectorControls = ( attributes, setAttributes ) => {
 				value={ minlength }
 				type="number"
 				min="6"
-				onChange={ ( val ) =>
-					setAttributes( {
-						html_attrs: {
-							...html_attrs,
-							minlength: val * 1,
-						},
-					} )
-				}
+				onChange={ ( val ) => setMinLength( val * 1 ) }
 			/>
 		</Fragment>
 	);

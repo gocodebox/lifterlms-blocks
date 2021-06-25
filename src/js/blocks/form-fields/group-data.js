@@ -22,11 +22,12 @@ function getSupportingParents() {
  * Retrieve the field group parent for a given block
  *
  * @since 2.0.0
+ * @since [version] Export method for use by other components.
  *
  * @param {string} clientId The client ID of an existing block.
  * @return {Object} WP Block object of the parent.
  */
-function getParentFieldGroup( clientId ) {
+export function getParentFieldGroup( clientId ) {
 	const { getBlock, getBlockParentsByBlockName } = select(
 		'core/block-editor'
 	);
@@ -42,11 +43,12 @@ function getParentFieldGroup( clientId ) {
  * Retrieve the sibling block for a block in a field group
  *
  * @since 2.0.0
+ * @since [version] Export method for use by other components.
  *
  * @param {string} clientId The client ID of an existing block.
  * @return {?Object} WP Block object of the sibling.
  */
-function getSibling( clientId ) {
+export function getSibling( clientId ) {
 	const parent = getParentFieldGroup( clientId );
 	return parent && parent.innerBlocks.length
 		? find( parent.innerBlocks, ( block ) => block.clientId !== clientId )
