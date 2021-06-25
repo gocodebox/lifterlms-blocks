@@ -11,7 +11,7 @@
  *
  * @return {boolean} Returns `true` if forms tests should be run, otherwise false.
  */
-function shouldRunTestsForForms() {
+export function shouldRunTestsForForms() {
 
 	const { WP_VERSION } = process.env;
 

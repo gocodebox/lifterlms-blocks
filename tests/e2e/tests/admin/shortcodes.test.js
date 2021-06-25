@@ -17,10 +17,19 @@ import {
 	createPost,
 } from '@lifterlms/llms-e2e-test-utils';
 
-// CSS selectors.
-const TOOLBAR_SELECTOR = '.block-editor-block-contextual-toolbar',
+import compare from 'node-version-compare';
+
+const { WP_VERSION = 999 } = process.env, // If not defined assume local and latest.
+	COMPARISON = compare( WP_VERSION, '5.7.0' ),
+	// CSS selectors.
+	TOOLBAR_SELECTOR = '.block-editor-block-contextual-toolbar',
 	DROPDOWN_SELECTOR = '.components-dropdown-menu__menu-item',
-	MODAL_SELCTOR = '.llms-shortcodes-modal';
+	MODAL_SELCTOR = '.llms-shortcodes-modal',
+	// Aria labels.
+	RICH_TEXT_MORE_LABEL = -1 === COMPARISON ?
+			'More rich text controls' : // < 5.7
+			'More'; // >= 5.7
+
 
 /**
  * Retrieve a list of the titles of all shortcodes in the inserter table.
@@ -114,7 +123,7 @@ describe( 'Admin/Shortcodes', () => {
 
 		await page.waitForSelector( TOOLBAR_SELECTOR );
 
-		await click( `${ TOOLBAR_SELECTOR } button.components-dropdown-menu__toggle[aria-label="More"]` );
+		await click( `${ TOOLBAR_SELECTOR } button.components-dropdown-menu__toggle[aria-label="${ RICH_TEXT_MORE_LABEL }"]` );
 		await page.waitFor( 500 );
 		await clickElementByText( 'Shortcodes', DROPDOWN_SELECTOR );
 

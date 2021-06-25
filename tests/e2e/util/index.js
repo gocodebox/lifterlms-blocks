@@ -4,7 +4,7 @@
  * @package LifterLMS_Blocks/Tests/E2E/Utils
  *
  * @since 1.12.0
- * @version 2.0.0
+ * @version [version]
  */
 
 import blockSnapshotMatcher from './block-snapshot-matcher';
@@ -14,7 +14,7 @@ import publishAndSaveEntities from './publish-and-save-entities';
 import removeBlockByClientId from './remove-block-by-client-id';
 import visitForm from './visit-form';
 
-export { maybeSkipFormsTests } from './should-run-tests';
+export { maybeSkipFormsTests, shouldRunTestsForForms } from './should-run-tests';
 
 export {
 	blockSnapshotMatcher,

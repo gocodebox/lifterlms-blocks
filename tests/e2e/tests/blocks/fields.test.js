@@ -17,6 +17,7 @@ import {
 	clearBlocks,
 	visitForm,
 	maybeSkipFormsTests,
+	shouldRunTestsForForms,
 } from '../../util';
 
 
@@ -269,11 +270,15 @@ const fields = [
 	 */
 ];
 
+const SHOULD_RUN = shouldRunTestsForForms();
+
 describe( 'Blocks/FormFields', () => {
 
-	maybeSkipFormsTests();
-
 	beforeAll( async () => {
+
+		if ( ! SHOULD_RUN ) {
+			return;
+		}
 
 		await visitForm();
 		page.once( 'dialog', async dialog => await dialog.accept() ); // Leave page without saving.
@@ -288,7 +293,14 @@ describe( 'Blocks/FormFields', () => {
 
 		describe( `${ field.name }/Editor`, () => {
 
+			maybeSkipFormsTests();
+
 			beforeAll( async () => {
+
+				if ( ! SHOULD_RUN ) {
+					return;
+				}
+
 				await clearBlocks();
 				await insertBlock( field.name );
 			} );
