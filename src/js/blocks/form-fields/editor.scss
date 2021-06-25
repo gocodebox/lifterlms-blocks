@@ -2,7 +2,7 @@
 // Editor Styles for Admin Panel
 //
 // @since 1.6.0
-// @version 1.6.0
+// @version [version]
 //
 
 .llms-invalid-control {
@@ -103,10 +103,6 @@
 		z-index: 999;
 	}
 
-	.llms-drag-handle {
-		margin-top: 3px;
-	}
-
 	.llms-field-opt-default {
 		margin-top: 6px;
 		.components-radio-control__input {
@@ -134,8 +130,10 @@
 	}
 
 	.llms-drag-handle {
+		cursor: grab;
 		flex: 0.8;
 		padding-top: 6px;
+		margin-top: 3px;
 	}
 
 	.llms-field-opt-default-wrap,
