@@ -47,9 +47,8 @@ function mergeHtmlAttrs( html_attrs, minlength ) {
 			...html_attrs,
 			minlength,
 		},
-	}
+	};
 }
-
 
 /**
  * Update the minlength of the confirmation field
@@ -60,7 +59,6 @@ function mergeHtmlAttrs( html_attrs, minlength ) {
  * @return {void}
  */
 function updateConfirmationFieldMinLength( minlength ) {
-
 	const { getSelectedBlockClientId } = select( blockEditorStore ),
 		{ updateBlockAttributes } = dispatch( blockEditorStore ),
 		controlBlock = getSelectedBlockClientId(),
@@ -69,7 +67,6 @@ function updateConfirmationFieldMinLength( minlength ) {
 		{ html_attrs } = attributes;
 
 	updateBlockAttributes( clientId, mergeHtmlAttrs( html_attrs, minlength ) );
-
 }
 
 /**
@@ -78,7 +75,7 @@ function updateConfirmationFieldMinLength( minlength ) {
  * @since 2.0.0
  *
  * @param {Object}   attributes    Block attributes.
- * @param {function} setAttributes Block attributes setter.
+ * @param {Function} setAttributes Block attributes setter.
  * @return {Object} Component fragment or `null` if the meter is not enabled.
  */
 const fillEditAfter = ( attributes, setAttributes ) => {
@@ -131,7 +128,13 @@ const fillEditAfter = ( attributes, setAttributes ) => {
  * @return {Fragment} Component HTML Fragment.
  */
 const fillInspectorControls = ( attributes, setAttributes ) => {
-	const { isConfirmationControlField, isConfirmationField, meter, min_strength, html_attrs } = attributes,
+	const {
+			isConfirmationControlField,
+			isConfirmationField,
+			meter,
+			min_strength,
+			html_attrs,
+		} = attributes,
 		{ minlength } = html_attrs;
 
 	if ( isConfirmationField ) {
@@ -147,12 +150,10 @@ const fillInspectorControls = ( attributes, setAttributes ) => {
 	 * @return {void}
 	 */
 	const setMinLength = ( minlength ) => {
-
 		setAttributes( mergeHtmlAttrs( html_attrs, minlength ) );
 		if ( isConfirmationControlField ) {
 			updateConfirmationFieldMinLength( minlength );
 		}
-
 	};
 
 	return (
