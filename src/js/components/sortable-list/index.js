@@ -34,10 +34,10 @@ import { useState } from '@wordpress/element';
  * @param {boolean}       props.dragHandle    If `true`, flags that the `ListItem` component will provide it's own drag handle and no innate drag functionality is provided.
  * @param {string}        props.itemClassName CSS classname applied to each ListItem.
  * @param {Object}        props.extraProps    Extra properties passed on to ListItem.
- * @param {string|number} props.id          Item ID.
- * @param {number}        props.index       Index of the item within the items list.
- * @param {Object}        props.item        Current item object.
- * @param {boolean}       props.isDragging  If `true`, the item is being dragged, useful for adding CSS for a different look during a drag event.
+ * @param {string|number} props.id            Item ID.
+ * @param {number}        props.index         Index of the item within the items list.
+ * @param {Object}        props.item          Current item object.
+ * @param {boolean}       props.isDragging    If `true`, the item is being dragged, useful for adding CSS for a different look during a drag event.
  * @return {Object} Component fragment.
  */
 function SortableListItem( {
