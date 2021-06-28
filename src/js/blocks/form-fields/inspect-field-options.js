@@ -25,7 +25,7 @@ import { v4 as uuid } from 'uuid';
 
 // Internal Deps.
 import { SortableList } from '../../components';
-import DragHandle from '../../icons/drag-handle';
+import { SortableDragHandle } from '../../components';
 
 /**
  * Render a single option within the sortable list.
@@ -83,14 +83,10 @@ function ListItem( {
 
 	return (
 		<>
-			<Button
-				isSmall
-				showTooltip
+			<SortableDragHandle
 				label={ __( 'Reorder option', 'lifterlms' ) }
-				icon={ DragHandle }
-				ref={ setNodeRef }
-				className="llms-drag-handle"
-				{ ...listeners }
+				setNodeRef={ setNodeRef }
+				listeners={ listeners }
 			/>
 			<Tooltip text={ __( 'Make default', 'lifterlms' ) }>
 				<div className="llms-field-opt-default-wrap">

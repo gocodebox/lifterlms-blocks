@@ -17,8 +17,7 @@ import { addQueryArgs } from '@wordpress/url';
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
 
-// Internal Deps.
-import DragHandle from '../../icons/drag-handle';
+import { SortableDragHandle } from '../../components';
 
 /**
  * Instructor list item component
@@ -61,14 +60,10 @@ export default function ( props ) {
 							<Dashicon icon="star-filled" />
 						</Tooltip>
 					) }
-					<Button
-						isSmall
-						showTooltip
+					<SortableDragHandle
 						label={ __( 'Reorder instructor', 'lifterlms' ) }
-						icon={ DragHandle }
-						ref={ setNodeRef }
-						className="llms-drag-handle"
-						{ ...listeners }
+						setNodeRef={ setNodeRef }
+						listeners={ listeners }
 					/>
 					<Button
 						isSmall
