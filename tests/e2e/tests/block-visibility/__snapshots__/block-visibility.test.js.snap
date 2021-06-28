@@ -28,7 +28,7 @@ exports[`BlockVisibility should restrict a block to enrolled users 1`] = `
 <!-- /wp:paragraph -->"
 `;
 
-exports[`BlockVisibility should restrict a block to enrolled users 2`] = `"<span class=\\"dashicon dashicons dashicons-visibility\\"></span><span class=\\"llms-block-visibility--msg\\">This block is only visible to enrolled users</span>"`;
+exports[`BlockVisibility should restrict a block to enrolled users 2`] = `"This block is only visible to enrolled users"`;
 
 exports[`BlockVisibility should restrict a block to logged in users 1`] = `
 "<!-- wp:paragraph {\\"llms_visibility\\":\\"logged_in\\",\\"llms_visibility_in\\":\\"any_course\\"} -->
@@ -36,7 +36,7 @@ exports[`BlockVisibility should restrict a block to logged in users 1`] = `
 <!-- /wp:paragraph -->"
 `;
 
-exports[`BlockVisibility should restrict a block to logged in users 2`] = `"<span class=\\"dashicon dashicons dashicons-visibility\\"></span><span class=\\"llms-block-visibility--msg\\">This block is only visible to logged in users</span>"`;
+exports[`BlockVisibility should restrict a block to logged in users 2`] = `"This block is only visible to logged in users"`;
 
 exports[`BlockVisibility should restrict a block to logged out users 1`] = `
 "<!-- wp:paragraph {\\"llms_visibility\\":\\"logged_out\\",\\"llms_visibility_in\\":\\"any_course\\"} -->
@@ -44,7 +44,7 @@ exports[`BlockVisibility should restrict a block to logged out users 1`] = `
 <!-- /wp:paragraph -->"
 `;
 
-exports[`BlockVisibility should restrict a block to logged out users 2`] = `"<span class=\\"dashicon dashicons dashicons-visibility\\"></span><span class=\\"llms-block-visibility--msg\\">This block is only visible to logged out users</span>"`;
+exports[`BlockVisibility should restrict a block to logged out users 2`] = `"This block is only visible to logged out users"`;
 
 exports[`BlockVisibility should restrict a block to non-enrolled users 1`] = `
 "<!-- wp:paragraph {\\"llms_visibility\\":\\"not_enrolled\\",\\"llms_visibility_in\\":\\"any_course\\"} -->
@@ -52,7 +52,7 @@ exports[`BlockVisibility should restrict a block to non-enrolled users 1`] = `
 <!-- /wp:paragraph -->"
 `;
 
-exports[`BlockVisibility should restrict a block to non-enrolled users 2`] = `"<span class=\\"dashicon dashicons dashicons-visibility\\"></span><span class=\\"llms-block-visibility--msg\\">This block is only visible to non-enrolled users or visitors</span>"`;
+exports[`BlockVisibility should restrict a block to non-enrolled users 2`] = `"This block is only visible to non-enrolled users or visitors"`;
 
 exports[`BlockVisibility should restrict a block to users in specific courses and/or memberships 1`] = `
 "<!-- wp:paragraph {\\"llms_visibility\\":\\"enrolled\\",\\"llms_visibility_in\\":\\"list_all\\"} -->
@@ -60,4 +60,4 @@ exports[`BlockVisibility should restrict a block to users in specific courses an
 <!-- /wp:paragraph -->"
 `;
 
-exports[`BlockVisibility should restrict a block to users in specific courses and/or memberships 2`] = `"<span class=\\"dashicon dashicons dashicons-visibility\\"></span><span class=\\"llms-block-visibility--msg\\">This block is only visible to enrolled users</span>"`;
+exports[`BlockVisibility should restrict a block to users in specific courses and/or memberships 2`] = `"This block is only visible to enrolled users"`;

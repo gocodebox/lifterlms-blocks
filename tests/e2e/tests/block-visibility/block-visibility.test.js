@@ -17,12 +17,41 @@ import {
 	fillField,
 } from '@lifterlms/llms-e2e-test-utils';
 
-// import {
-// 	clearBlocks,
-// 	visitForm,
-// } from '../../../util';
+import compare from 'node-version-compare';
 
-const edRootSelector = '.block-editor-block-list__layout.is-root-container';
+const { WP_VERSION = 999 } = process.env, // If not defined assume local and latest.
+	ICON_COMPARISON = compare( WP_VERSION, '5.6.0' ),
+	INDICATOR_ICON_SELECTOR = -1 === ICON_COMPARISON ?
+		'span.dashicons-visibility' : // < 5.6
+		'svg.dashicons-visibility', // >= 5.6
+	EDITOR_ROOT_SELECTOR = '.block-editor-block-list__layout.is-root-container',
+	INDICATOR_SELECTOR = `${ EDITOR_ROOT_SELECTOR } .llms-block-visibility .llms-block-visibility--indicator`;
+
+/**
+ * Retrieve the text of the indicator message
+ *
+ * @since [version]
+ *
+ * @return {string} Indicator message text
+ */
+async function getVisibilityIndicatorMsg() {
+	const SELECTOR = `${ INDICATOR_SELECTOR } .llms-block-visibility--msg`;
+	await page.waitForSelector( SELECTOR );
+	return await page.$eval( SELECTOR, el => el.innerHTML );
+}
+
+/**
+ * Retrieve a boolean indicating whether or not an indicator icon exists within the indicator area
+ *
+ * @since [version]
+ *
+ * @return {Boolean} Returns `true` if the icon is found otherwise false.
+ */
+async function getVisibilityIndicatorIcon() {
+	const SELECTOR = `${ INDICATOR_SELECTOR } ${ INDICATOR_ICON_SELECTOR }`;
+	await page.waitForSelector( SELECTOR );
+	return await page.$eval( SELECTOR, el => el.outerHTML ? true : false );
+}
 
 describe( 'BlockVisibility', () => {
 
@@ -44,7 +73,7 @@ describe( 'BlockVisibility', () => {
 		expect( await getEditedPostContent() ).toMatchSnapshot();
 
 		// The DOM should not be outputting any visibility elements in the preview/editor area.
-		expect( await page.evaluate( ( selector ) => document.querySelector( selector ), `${ edRootSelector } .llms-block-visibility` ) ).toBeNull();
+		expect( await page.evaluate( ( selector ) => document.querySelector( selector ), `${ EDITOR_ROOT_SELECTOR } .llms-block-visibility` ) ).toBeNull();
 
 	} );
 
@@ -56,7 +85,8 @@ describe( 'BlockVisibility', () => {
 		expect( await getEditedPostContent() ).toMatchSnapshot();
 
 		// Indicator is visible in the DOM.
-		expect( await page.$eval( `${ edRootSelector } .llms-block-visibility .llms-block-visibility--indicator`, el => el.innerHTML ) ).toMatchSnapshot();
+		expect( await getVisibilityIndicatorMsg() ).toMatchSnapshot();
+		expect( await getVisibilityIndicatorIcon() ).toBe( true );
 
 	} );
 
@@ -68,7 +98,8 @@ describe( 'BlockVisibility', () => {
 		expect( await getEditedPostContent() ).toMatchSnapshot();
 
 		// Indicator is visible in the DOM.
-		expect( await page.$eval( `${ edRootSelector } .llms-block-visibility .llms-block-visibility--indicator`, el => el.innerHTML ) ).toMatchSnapshot();
+		expect( await getVisibilityIndicatorMsg() ).toMatchSnapshot();
+		expect( await getVisibilityIndicatorIcon() ).toBe( true );
 
 	} );
 
@@ -90,7 +121,8 @@ describe( 'BlockVisibility', () => {
 		expect( await getEditedPostContent() ).toMatchSnapshot();
 
 		// Indicator is visible in the DOM.
-		expect( await page.$eval( `${ edRootSelector } .llms-block-visibility .llms-block-visibility--indicator`, el => el.innerHTML ) ).toMatchSnapshot();
+		expect( await getVisibilityIndicatorMsg() ).toMatchSnapshot();
+		expect( await getVisibilityIndicatorIcon() ).toBe( true );
 
 	} );
 
@@ -102,7 +134,8 @@ describe( 'BlockVisibility', () => {
 		expect( await getEditedPostContent() ).toMatchSnapshot();
 
 		// Indicator is visible in the DOM.
-		expect( await page.$eval( `${ edRootSelector } .llms-block-visibility .llms-block-visibility--indicator`, el => el.innerHTML ) ).toMatchSnapshot();
+		expect( await getVisibilityIndicatorMsg() ).toMatchSnapshot();
+		expect( await getVisibilityIndicatorIcon() ).toBe( true );
 
 	} );
 
@@ -114,7 +147,8 @@ describe( 'BlockVisibility', () => {
 		expect( await getEditedPostContent() ).toMatchSnapshot();
 
 		// Indicator is visible in the DOM.
-		expect( await page.$eval( `${ edRootSelector } .llms-block-visibility .llms-block-visibility--indicator`, el => el.innerHTML ) ).toMatchSnapshot();
+		expect( await getVisibilityIndicatorMsg() ).toMatchSnapshot();
+		expect( await getVisibilityIndicatorIcon() ).toBe( true );
 
 	} );
 
@@ -128,7 +162,7 @@ describe( 'BlockVisibility', () => {
 			expect( await getEditedPostContent() ).toMatchSnapshot();
 
 			// The DOM should not be outputting any visibility elements in the preview/editor area.
-			expect( await page.evaluate( ( selector ) => document.querySelector( selector ), `${ edRootSelector } .llms-block-visibility` ) ).toBeNull();
+			expect( await page.evaluate( ( selector ) => document.querySelector( selector ), `${ EDITOR_ROOT_SELECTOR } .llms-block-visibility` ) ).toBeNull();
 
 		} );
 
@@ -140,7 +174,7 @@ describe( 'BlockVisibility', () => {
 			expect( await getEditedPostContent() ).toMatchSnapshot();
 
 			// The DOM should not be outputting any visibility elements in the preview/editor area.
-			expect( await page.evaluate( ( selector ) => document.querySelector( selector ), `${ edRootSelector } .llms-block-visibility` ) ).toBeNull();
+			expect( await page.evaluate( ( selector ) => document.querySelector( selector ), `${ EDITOR_ROOT_SELECTOR } .llms-block-visibility` ) ).toBeNull();
 
 		} );
 
