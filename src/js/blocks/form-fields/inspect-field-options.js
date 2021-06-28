@@ -24,8 +24,7 @@ import { __, sprintf } from '@wordpress/i18n';
 import { v4 as uuid } from 'uuid';
 
 // Internal Deps.
-import { SortableList } from '../../components';
-import { SortableDragHandle } from '../../components';
+import { SortableList, SortableDragHandle } from '../../components';
 
 /**
  * Render a single option within the sortable list.

@@ -126,7 +126,6 @@ export default function ( {
 	itemClassName = '',
 	extraProps = {},
 } ) {
-
 	const [ isDragging, setIsDragging ] = useState( false ),
 		sensors = useSensors(
 			useSensor( PointerSensor ),
