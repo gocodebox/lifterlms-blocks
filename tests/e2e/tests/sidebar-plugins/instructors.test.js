@@ -58,7 +58,7 @@ describe( 'Sidebar/Plugins/Instructors', () => {
 	test( 'Current user is the default primary instructor', async () => {
 
 		// Admin user is the only instructor.
-		expect( await getInstructorNames()).toMatchSnapshot();
+		expect( await getInstructorNames() ).toMatchSnapshot();
 
 		// Primary instructor star exists.
 		expect( await page.$eval( `${ ITEM_SELECTOR } .dashicons-star-filled`, ( el ) => el.outerHTML ? true : false ) ).toBe( true );
@@ -72,12 +72,18 @@ describe( 'Sidebar/Plugins/Instructors', () => {
 	} );
 
 	test( 'Instructors can be added', async () => {
+
 		await fillField( '.llms-search--user .llms-search__input input[type="text"]', 'Knox' );
+
+		await page.waitFor( 1000 );
+
 		await page.waitForSelector( '.llms-search--user .llms-search__menu' );
 		await page.keyboard.press( 'Enter' );
 
-		// Admin user is the only instructor.
+		await page.waitForSelector( getInstructorIndexSelector( 2 ) );
+
 		expect( await getInstructorNames() ).toMatchSnapshot();
+
 	} );
 
 	test( 'Instructors can be reordered', async () => {

@@ -22,8 +22,8 @@ import compare from 'node-version-compare';
 const { WP_VERSION = 999 } = process.env, // If not defined assume local and latest.
 	ICON_COMPARISON = compare( WP_VERSION, '5.6.0' ),
 	INDICATOR_ICON_SELECTOR = -1 === ICON_COMPARISON ?
-		'span.dashicons-visibility' : // < 5.6
-		'svg.dashicons-visibility', // >= 5.6
+		'svg.dashicons-visibility' : // < 5.6
+		'span.dashicons-visibility', // >= 5.6
 	EDITOR_ROOT_SELECTOR = '.block-editor-block-list__layout.is-root-container',
 	INDICATOR_SELECTOR = `${ EDITOR_ROOT_SELECTOR } .llms-block-visibility .llms-block-visibility--indicator`;
 
