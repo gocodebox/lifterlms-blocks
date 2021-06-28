@@ -24,6 +24,9 @@ import {
 // WP Deps.
 import { useState } from '@wordpress/element';
 
+// Internal deps.
+export { default as DragHandle } from './drag-handle';
+
 /**
  * Sortable List Item Compontent
  *
@@ -76,7 +79,7 @@ function SortableListItem( {
 		<div
 			style={ style }
 			ref={ dragHandle ? undefined : setNodeRef }
-			className={ itemClassName }
+			className={ `llms-sortable-list--item ${ itemClassName }` }
 			{ ...attributes }
 			{ ...( dragHandle ? {} : listeners ) }
 		>
@@ -107,6 +110,7 @@ function SortableListItem( {
  * @param {Object}   props.sortableStrategy Sortable strategy passed to DndContext.
  * @param {Array}    props.ctxModifiers     Context modifieds, passed to DndContext.
  * @param {boolean}  props.dragHandle       If `true`, flags that the `ListItem` component will provide it's own drag handle and no innate drag functionality is provided.
+ * @param {string}   props.listClassName    CSS classname applied to the list wrapper element.
  * @param {string}   props.itemClassName    CSS classname applied to each ListItem.
  * @param {Object}   props.extraProps       Extra properties passed on to ListItem.
  * @return {DndContext} Drag and drop context component.
@@ -118,9 +122,11 @@ export default function ( {
 	sortableStrategy = verticalListSortingStrategy,
 	ctxModifiers = [ restrictToVerticalAxis, restrictToWindowEdges ],
 	dragHandle = true,
+	listClassName = '',
 	itemClassName = '',
 	extraProps = {},
 } ) {
+
 	const [ isDragging, setIsDragging ] = useState( false ),
 		sensors = useSensors(
 			useSensor( PointerSensor ),
@@ -154,22 +160,24 @@ export default function ( {
 			onDragEnd={ handleDragEnd }
 			modifiers={ ctxModifiers }
 		>
-			<SortableContext items={ items } strategy={ sortableStrategy }>
-				{ items.map( ( item, index ) => (
-					<SortableListItem
-						id={ item.id }
-						key={ item.id }
-						index={ index }
-						item={ item }
-						isDragging={ item.id === isDragging }
-						dragHandle={ dragHandle }
-						ListItem={ ListItem }
-						itemClassName={ itemClassName }
-						manageState={ manageState }
-						extraProps={ extraProps }
-					/>
-				) ) }
-			</SortableContext>
+			<div className={ `llms-sortable-list ${ listClassName }` }>
+				<SortableContext items={ items } strategy={ sortableStrategy }>
+					{ items.map( ( item, index ) => (
+						<SortableListItem
+							id={ item.id }
+							key={ item.id }
+							index={ index }
+							item={ item }
+							isDragging={ item.id === isDragging }
+							dragHandle={ dragHandle }
+							ListItem={ ListItem }
+							itemClassName={ itemClassName }
+							manageState={ manageState }
+							extraProps={ extraProps }
+						/>
+					) ) }
+				</SortableContext>
+			</div>
 		</DndContext>
 	);
 }
