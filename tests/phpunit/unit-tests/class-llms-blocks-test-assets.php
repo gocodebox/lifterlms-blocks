@@ -43,7 +43,7 @@ class LLMS_Blocks_Test_Assets extends LLMS_Blocks_Unit_Test_Case {
 		$this->assertTrue( $main->assets->register_script( 'llms-blocks-editor' ) );
 		$this->assertTrue( $main->assets->register_style( 'llms-blocks-editor' ) );
 
-		$this->assertEquals( 999, has_action( 'enqueue_block_editor_assets', array( $main, 'editor_assets' ) ) );
+		$this->assertEquals( 5, has_action( 'enqueue_block_editor_assets', array( $main, 'editor_assets' ) ) );
 
 		$this->deregister_assets();
 
