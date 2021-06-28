@@ -51,7 +51,8 @@
     "env": "\"vendor/bin/llms-env\"",
     "env:setup": [
       "\"vendor/bin/llms-env\" wp plugin install lifterlms --activate",
-      "\"vendor/bin/llms-env\" wp plugin activate lifterlms-blocks"
+      "\"vendor/bin/llms-env\" wp plugin activate lifterlms-blocks",
+      "\"vendor/bin/llms-env\" wp user create instructortester instructor.tester@mock.tld --role=instructor --first_name=Knox --last_name=Harrington"
     ],
     "fix-cs": "\"vendor/bin/phpcbf\"",
     "post-install-cmd": "@config-cs",
