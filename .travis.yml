@@ -10,7 +10,3 @@ jobs:
     env: WP_VERSION="5.6" LLMS_TRAVIS_TESTS=E2E
   - php: "8.0"
     env: WP_VERSION="5.5" LLMS_TRAVIS_TESTS=E2E
-  - php: "7.4"
-    env: WP_VERSION="5.4" LLMS_TRAVIS_TESTS=E2E
-  - php: "7.4"
-    env: WP_VERSION="5.3" LLMS_TRAVIS_TESTS=E2E
