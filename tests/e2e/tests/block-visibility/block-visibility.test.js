@@ -30,7 +30,7 @@ const { WP_VERSION = 999 } = process.env, // If not defined assume local and lat
 /**
  * Retrieve the text of the indicator message
  *
- * @since [version]
+ * @since 2.1.0
  *
  * @return {string} Indicator message text
  */
@@ -43,7 +43,7 @@ async function getVisibilityIndicatorMsg() {
 /**
  * Retrieve a boolean indicating whether or not an indicator icon exists within the indicator area
  *
- * @since [version]
+ * @since 2.1.0
  *
  * @return {Boolean} Returns `true` if the icon is found otherwise false.
  */

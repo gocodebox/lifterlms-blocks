@@ -1,6 +1,20 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.1.0 - 2021-06-28
+-------------------
+
+##### Updates
+
++ Adjusted priority of block editor JS assets to load at priority `5` instead of `999`. Resolves plugin conflicts encountered when using block-level visibility on blocks registered after visibility filters are applied.
++ Removed usage of [react-sortable-hoc](https://github.com/clauderic/react-sortable-hoc) and replaced with [dndkit](https://github.com/clauderic/dnd-kit) for drag and drop UX within the editor.
++ Refactored the instructors sidebar (on courses and memberships) as well as the option shorting (for fields with options) to utilize `dndkit`.
+
+##### Bugfixes
+
++ Fixed an issue encountered on password confirmation fields when adjusting the minimum password length option on the user password block.
+
+
 v2.0.1 - 2021-06-21
 -------------------
 

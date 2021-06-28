@@ -1,8 +1,8 @@
 /**
  * Users search component
  *
- * @since [version]
- * @version [version]
+ * @since 2.1.0
+ * @version 2.1.0
  */
 
 // WP deps.
@@ -14,7 +14,7 @@ import { SearchUser } from '../../components';
 /**
  * User search component for searching instructors.
  *
- * @since [version]
+ * @since 2.1.0
  *
  * @param {Object}   props
  * @param {Object[]} props.instructors   Array of instructor objects.

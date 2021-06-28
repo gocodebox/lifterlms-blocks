@@ -4,7 +4,7 @@
  * Used on Radios, Checkboxes, and Selects
  *
  * @since 1.6.0
- * @version [version]
+ * @version 2.1.0
  */
 
 // WP Deps.
@@ -30,7 +30,7 @@ import { SortableDragHandle } from '../../components';
 /**
  * Render a single option within the sortable list.
  *
- * @since [version]
+ * @since 2.1.0
  *
  * @param {Object}   props
  * @param {string}   props.id          Option UUID.
@@ -150,7 +150,7 @@ export default class InspectorFieldOptions extends Component {
 	 * Constructor
 	 *
 	 * @since 1.6.0
-	 * @since [version] Rename state.items to state.options & load a unique ID into
+	 * @since 2.1.0 Rename state.items to state.options & load a unique ID into
 	 *               each option object for compatibility with the SortableList component.
 	 *
 	 * @return {void}
@@ -174,7 +174,7 @@ export default class InspectorFieldOptions extends Component {
 	/**
 	 * Add a new empty option with default values
 	 *
-	 * @since [version]
+	 * @since 2.1.0
 	 *
 	 * @return {void}
 	 */
@@ -199,7 +199,7 @@ export default class InspectorFieldOptions extends Component {
 	/**
 	 * Retrieve the manageState object passed to the SortableList component
 	 *
-	 * @since [version]
+	 * @since 2.1.0
 	 *
 	 * @return {Object} An options state management object.
 	 */
@@ -217,7 +217,7 @@ export default class InspectorFieldOptions extends Component {
 	 * keep counting up until we've found a unique key. The number used to generate
 	 * the key is also returned to be used when generating the new default label.
 	 *
-	 * @since [version]
+	 * @since 2.1.0
 	 *
 	 * @param {number} optionNum A number.
 	 * @return {Array} Array containing a new option key (string) and the number used to generate the key.
@@ -226,7 +226,7 @@ export default class InspectorFieldOptions extends Component {
 		/**
 		 * Test a key against the existing option list for uniqueness
 		 *
-		 * @since [version]
+		 * @since 2.1.0
 		 *
 		 * @param {string} newKey Proposed new key to use.
 		 * @return {boolean} Returns `true` when newKey is unique and `false` otherwise.
@@ -250,7 +250,7 @@ export default class InspectorFieldOptions extends Component {
 	/**
 	 * Update a single options
 	 *
-	 * @since [version]
+	 * @since 2.1.0
 	 *
 	 * @param {string} id   Option ID.
 	 * @param {Object} data Option properties to be updated.
@@ -283,7 +283,7 @@ export default class InspectorFieldOptions extends Component {
 	 * Update options
 	 *
 	 * @since 1.6.0
-	 * @since [version] Refactored.
+	 * @since 2.1.0 Refactored.
 	 *
 	 * @param {Object[]} options Options array.
 	 * @return {void}
@@ -333,7 +333,7 @@ export default class InspectorFieldOptions extends Component {
 	 * Component render
 	 *
 	 * @since 1.6.0
-	 * @since [version] Refactored to utilize @dndkit in favor of react-sortable-hoc.
+	 * @since 2.1.0 Refactored to utilize @dndkit in favor of react-sortable-hoc.
 	 *
 	 * @return {BaseControl} Component HTML fragment.
 	 */

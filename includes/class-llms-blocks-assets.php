@@ -33,7 +33,7 @@ class LLMS_Blocks_Assets {
 	 * @since 1.8.0 Stop outputting editor CSS on the frontend.
 	 * @since 1.10.0 Load `LLMS_Assets` and define plugin assets.
 	 * @since 2.0.0 Maybe define backwards compatibility script.
-	 * @since [version] Adjust `editor_assets()` priority from 999 to 5.
+	 * @since 2.1.0 Adjust `editor_assets()` priority from 999 to 5.
 	 *
 	 * @return void
 	 */

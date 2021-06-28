@@ -2,7 +2,7 @@
  * Instructors Sidebar Plugin
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.1.0
  */
 
 // WP deps.
@@ -112,7 +112,7 @@ class Instructors extends Component {
 	/**
 	 * Update a single instructor by ID
 	 *
-	 * @since [version]
+	 * @since 2.1.0
 	 *
 	 * @param {number} id   WP_User ID.
 	 * @param {Object} data Instructor information to update.
@@ -196,7 +196,7 @@ class Instructors extends Component {
 	 *
 	 * @since 1.0.0
 	 * @since 2.0.0 Exclude currently selected users from search query.
-	 * @since [version] Reworked to utilize @dndkit in favor of react-sortable-hoc.
+	 * @since 2.1.0 Reworked to utilize @dndkit in favor of react-sortable-hoc.
 	 *
 	 * @return {Object} HTML Fragment.
 	 */

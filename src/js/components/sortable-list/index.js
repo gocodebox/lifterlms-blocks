@@ -30,7 +30,7 @@ export { default as DragHandle } from './drag-handle';
 /**
  * Sortable List Item Compontent
  *
- * @since [version]
+ * @since 2.1.0
  * @param {Object}        props
  * @param {Object}        props.ListItem      Component used to display each item in the sortable list.
  * @param {Object}        props.manageState   An object used to manage the state of the items in the list. Should contain 4 keys referencing functions: createItem, deleteItem, updateItem, updateItems.
@@ -100,7 +100,7 @@ function SortableListItem( {
 /**
  * Component for a rending a sortable list
  *
- * @since [version]
+ * @since 2.1.0
  *
  * @param {Object}   props
  * @param {Object}   props.ListItem         Component used to display each item in the sortable list.

@@ -1,8 +1,8 @@
 /**
  * Single instructor compontent
  *
- * @since [version]
- * @version [version]
+ * @since 2.1.0
+ * @version 2.1.0
  */
 
 // WP Deps.
@@ -22,7 +22,7 @@ import { SortableDragHandle } from '../../components';
 /**
  * Instructor list item component
  *
- * @since [version]
+ * @since 2.1.0
  *
  * @param {Object} props Component properties object.
  * @return {Object} Component fragment.

@@ -22,7 +22,7 @@ function getSupportingParents() {
  * Retrieve the field group parent for a given block
  *
  * @since 2.0.0
- * @since [version] Export method for use by other components.
+ * @since 2.1.0 Export method for use by other components.
  *
  * @param {string} clientId The client ID of an existing block.
  * @return {Object} WP Block object of the parent.
@@ -43,7 +43,7 @@ export function getParentFieldGroup( clientId ) {
  * Retrieve the sibling block for a block in a field group
  *
  * @since 2.0.0
- * @since [version] Export method for use by other components.
+ * @since 2.1.0 Export method for use by other components.
  *
  * @param {string} clientId The client ID of an existing block.
  * @return {?Object} WP Block object of the sibling.

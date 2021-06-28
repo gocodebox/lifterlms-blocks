@@ -3,8 +3,8 @@
  *
  * Lifted from @wordpress/icons but we don't need the whole library so we're just pulling in this one icon this way.
  *
- * @since [version]
- * @version [version]
+ * @since 2.1.0
+ * @version 2.1.0
  */
 
 export default (

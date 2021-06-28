@@ -35,7 +35,7 @@ export const composed = true;
 /**
  * Utility function to merge minlength into an existing `html_attrs` object
  *
- * @since [version]
+ * @since 2.1.0
  *
  * @param {Object} html_attrs Existing object.
  * @param {number} minlength  Min length value.
@@ -53,7 +53,7 @@ function mergeHtmlAttrs( html_attrs, minlength ) {
 /**
  * Update the minlength of the confirmation field
  *
- * @since [version]
+ * @since 2.1.0
  *
  * @param {number} minlength New minlength value.
  * @return {void}
@@ -121,7 +121,7 @@ const fillEditAfter = ( attributes, setAttributes ) => {
  * Fill the controls slot with additional controls specific to this field.
  *
  * @since 2.0.0
- * @since [version] Update the minlength value of confirmation field when the control field's value changes.
+ * @since 2.1.0 Update the minlength value of confirmation field when the control field's value changes.
  *
  * @param {Object} attributes Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
@@ -144,7 +144,7 @@ const fillInspectorControls = ( attributes, setAttributes ) => {
 	/**
 	 * Set the minlength on the field and match it to the confirmation field (if necessary)
 	 *
-	 * @since [version]
+	 * @since 2.1.0
 	 *
 	 * @param {number} minlength New minlength value.
 	 * @return {void}

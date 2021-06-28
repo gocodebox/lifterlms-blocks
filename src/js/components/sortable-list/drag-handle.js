@@ -10,7 +10,7 @@ import DragHandle from '../../icons/drag-handle';
 /**
  * Drag handle button component for use in sortable lists
  *
- * @since [version]
+ * @since 2.1.0
  *
  * @param {Object}   props
  * @param {string}   props.label      Helper text displayed in tooltip.

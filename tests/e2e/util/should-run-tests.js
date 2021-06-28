@@ -7,7 +7,7 @@
  * The WP_VERSION variable is set in the CI environment. Locally it will not be set
  * and tests will run if the version isn't set.
  *
- * @since [version]
+ * @since 2.1.0
  *
  * @return {boolean} Returns `true` if forms tests should be run, otherwise false.
  */
@@ -51,7 +51,7 @@ export function shouldRunTestsForForms() {
  * This will force an empty test to be the only test in the block to run and
  * log a warning message.
  *
- * @since [version]
+ * @since 2.1.0
  *
  * @return {void}
  */
