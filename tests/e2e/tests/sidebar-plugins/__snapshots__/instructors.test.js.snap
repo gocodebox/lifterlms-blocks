@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sidebar/Plugins/Instructors Current user is the default primary instructor 1`] = `
+Array [
+  "admin",
+]
+`;
+
+exports[`Sidebar/Plugins/Instructors Instructors can be added 1`] = `
+Array [
+  "admin",
+  "Knox Harrington",
+]
+`;
+
+exports[`Sidebar/Plugins/Instructors Instructors can be reordered 1`] = `
+Array [
+  "Knox Harrington",
+  "admin",
+]
+`;
+
+exports[`Sidebar/Plugins/Instructors Non-primary instructors can be removed 1`] = `
+Array [
+  "Knox Harrington",
+]
+`;
