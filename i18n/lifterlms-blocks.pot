@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the LifterLMS Blocks plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: LifterLMS Blocks 2.0.1\n"
+"Project-Id-Version: LifterLMS Blocks 2.1.0\n"
 "Report-Msgid-Bugs-To: https://lifterlms.com/my-account/my-tickets\n"
 "Last-Translator: Team LifterLMS <team@lifterlms.com>\n"
 "Language-Team: Team LifterLMS <team@lifterlms.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-06-21T13:59:53-06:00\n"
+"POT-Creation-Date: 2021-06-28T15:33:54-06:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: llms-dev 1.0.0\n"
 "X-Domain: lifterlms\n"
@@ -325,7 +325,7 @@ msgid "Course Syllabus"
 msgstr ""
 
 #: assets/js/llms-blocks.js:3
-#: assets/js/llms-blocks.js:24
+#: assets/js/llms-blocks.js:22
 msgid "Instructors"
 msgstr ""
 
@@ -365,36 +365,52 @@ msgstr ""
 msgid "Add optional placeholder text"
 msgstr ""
 
-#: assets/js/llms-blocks.js:3
+#. Translators: %1$s = User's name; %2$s = User's id.
+#: assets/js/llms-blocks.js:4
+msgctxt "User search result label"
+msgid "%1$s (ID# %2$d)"
+msgstr ""
+
+#. Translators: %1$s = User's name; %2$s = User's id.
+#: assets/js/llms-blocks.js:4
+#: assets/js/llms-blocks.js:22
+msgid "Reorder instructor"
+msgstr ""
+
+#: assets/js/llms-blocks.js:4
+msgid "Reorder option"
+msgstr ""
+
+#: assets/js/llms-blocks.js:4
 msgid "Make default"
 msgstr ""
 
-#: assets/js/llms-blocks.js:3
-msgid "Option text"
+#: assets/js/llms-blocks.js:4
+msgid "Option label"
 msgstr ""
 
-#: assets/js/llms-blocks.js:3
-msgid "Saved value"
+#: assets/js/llms-blocks.js:4
+msgid "Database key value"
 msgstr ""
 
-#: assets/js/llms-blocks.js:3
+#: assets/js/llms-blocks.js:4
 msgid "Delete Option"
 msgstr ""
 
-#: assets/js/llms-blocks.js:3
-msgid "Options"
-msgstr ""
-
 #. Translators: %d = Option index in the list of options.
-#: assets/js/llms-blocks.js:5
+#: assets/js/llms-blocks.js:6
 #: assets/js/llms-blocks.js:19
 msgid "Option %d"
 msgstr ""
 
 #. Translators: %d = Option index in the list of options.
-#: assets/js/llms-blocks.js:7
+#: assets/js/llms-blocks.js:6
 #: assets/js/llms-blocks.js:21
 msgid "option_%d"
+msgstr ""
+
+#: assets/js/llms-blocks.js:7
+msgid "Options"
 msgstr ""
 
 #: assets/js/llms-blocks.js:7
@@ -987,82 +1003,78 @@ msgstr ""
 msgid "Optional text displayed when no information exists or the user is logged out."
 msgstr ""
 
-#. Translators: %1$s = User's name; %2$s = User's id.
-#: assets/js/llms-blocks.js:23
-msgctxt "User search result label"
-msgid "%1$s (ID# %2$d)"
+#: assets/js/llms-blocks.js:22
+msgid "Primary Instructor"
 msgstr ""
 
-#. Translators: %d = The user ID.
-#: assets/js/llms-blocks.js:24
-msgid "ID: %d"
+#: assets/js/llms-blocks.js:22
+msgid "Edit instructor"
 msgstr ""
 
-#. Translators: %d = The user ID.
-#: assets/js/llms-blocks.js:24
-msgid "Remove Instructor"
-msgstr ""
-
-#: assets/js/llms-blocks.js:24
+#: assets/js/llms-blocks.js:22
 msgid "Visibility"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24
+#: assets/js/llms-blocks.js:22
 msgid "Instructor is visible on frontend"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24
+#: assets/js/llms-blocks.js:22
 msgid "Instructor is hidden on frontend"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24
+#: assets/js/llms-blocks.js:22
 msgid "Label"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24
+#: assets/js/llms-blocks.js:22
+msgid "Edit"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Remove"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
 msgid "Search…"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24
-msgid "Add"
-msgstr ""
-
-#: assets/js/llms-blocks.js:24
+#: assets/js/llms-blocks.js:22
 msgid "Author"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24
+#: assets/js/llms-blocks.js:22
 msgid "The form has been restored to the default template."
 msgstr ""
 
-#: assets/js/llms-blocks.js:24
+#: assets/js/llms-blocks.js:22
 msgid "Undo"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24
+#: assets/js/llms-blocks.js:22
 msgid "Form Settings"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24
+#: assets/js/llms-blocks.js:22
 msgid "Location"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24
+#: assets/js/llms-blocks.js:22
 msgid "Display Form Title"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24
+#: assets/js/llms-blocks.js:22
 msgid "Displaying form title."
 msgstr ""
 
-#: assets/js/llms-blocks.js:24
+#: assets/js/llms-blocks.js:22
 msgid "Not displaying form title."
 msgstr ""
 
-#: assets/js/llms-blocks.js:24
+#: assets/js/llms-blocks.js:22
 msgid "Revert to Default"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24
+#: assets/js/llms-blocks.js:22
 msgid "Replace the existing content of the form with the original default content."
 msgstr ""
