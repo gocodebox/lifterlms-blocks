@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.1.1 - 2021-07-08
+-------------------
+
++ Fixed issue causing visibility controls to display for blocks which have no visibility attributes defined.
+
+
 v2.1.0 - 2021-06-28
 -------------------
 

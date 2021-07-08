@@ -2,7 +2,7 @@
  * Add visibility attribute inspect and preview interfaces to qualifying blocks
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.1.1
  */
 
 // WP Deps.
@@ -28,7 +28,7 @@ import { options as visibilityOptions } from './settings';
  * @since 1.6.0 Use `check()` helper to determine if the block supports visibility.
  *              Add "logged in" and "logged out" block visibility options.
  * @since 1.8.0 Fix issue causing visibility attributes to render on blocks that don't support them.
- * @since [version] Fixed issue causing visibility controls shown for blocks which have no visibility attributes defined.
+ * @since 2.1.1 Fixed issue causing visibility controls shown for blocks which have no visibility attributes defined.
  */
 export default createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
