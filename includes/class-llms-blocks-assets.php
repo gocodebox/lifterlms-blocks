@@ -142,6 +142,11 @@ class LLMS_Blocks_Assets {
 	 */
 	public function editor_assets() {
 
+		$screen = get_current_screen();
+		if ( $screen && 'post' !== $screen->base ) {
+			return;
+		}
+
 		if ( $this->use_bc_assets() ) {
 			$this->assets->enqueue_script( 'llms-blocks-editor-bc' );
 		}
