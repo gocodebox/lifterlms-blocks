@@ -50,9 +50,35 @@ class LLMS_Blocks_Test_Assets extends LLMS_Blocks_Unit_Test_Case {
 	}
 
 	/**
+	 * Test editor_assets() on the widgets screen where they shouldn't be loaded.
+	 *
+	 * @since [version]
+	 *
+	 * @return void
+	 */
+	public function test_editor_assets_widgets_screen() {
+
+		$main = new LLMS_Blocks_Assets();
+		$this->deregister_assets();
+
+		$this->assertAssetNotEnqueued( 'script', 'llms-blocks-editor' );
+		$this->assertAssetNotEnqueued( 'style', 'llms-blocks-editor' );
+
+		set_current_screen( 'widgets' );
+		$main->editor_assets();
+
+		$this->assertAssetNotEnqueued( 'script', 'llms-blocks-editor' );
+		$this->assertAssetNotEnqueued( 'style', 'llms-blocks-editor' );
+
+		set_current_screen( 'front' );
+
+	}
+
+	/**
 	 * Test editor_assets()
 	 *
 	 * @since 1.10.0
+	 * @since [version] Set current screen.
 	 *
 	 * @return void
 	 */
@@ -64,10 +90,13 @@ class LLMS_Blocks_Test_Assets extends LLMS_Blocks_Unit_Test_Case {
 		$this->assertAssetNotEnqueued( 'script', 'llms-blocks-editor' );
 		$this->assertAssetNotEnqueued( 'style', 'llms-blocks-editor' );
 
+		set_current_screen( 'post' );
 		$main->editor_assets();
 
 		$this->assertAssetIsEnqueued( 'script', 'llms-blocks-editor' );
 		$this->assertAssetIsEnqueued( 'style', 'llms-blocks-editor' );
+
+		set_current_screen( 'front' );
 
 	}
 
@@ -75,10 +104,13 @@ class LLMS_Blocks_Test_Assets extends LLMS_Blocks_Unit_Test_Case {
 	 * Test backwards compat asset define and enqueue
 	 *
 	 * @since 2.0.0
+	 * @since [version] Set current screen.
 	 *
 	 * @return void
 	 */
 	public function test_backwards_compat_assets() {
+
+		set_current_screen( 'post' );
 
 		wp_dequeue_script( 'llms-blocks-editor-bc' );
 
@@ -102,6 +134,8 @@ class LLMS_Blocks_Test_Assets extends LLMS_Blocks_Unit_Test_Case {
 		$this->assertAssetIsEnqueued( 'script', 'llms-blocks-editor-bc' );
 
 		$wp_version = $temp;
+
+		set_current_screen( 'front' );
 
 	}
 

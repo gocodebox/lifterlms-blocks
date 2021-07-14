@@ -7,7 +7,7 @@
  * @package LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @version 2.0.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -137,10 +137,16 @@ class LLMS_Blocks_Assets {
 	 * @since 1.8.0 Update asset paths and improve script dependencies.
 	 * @since 1.10.0 Use `LLMS_Assets` class methods for asset enqueues.
 	 * @since 2.0.0 Maybe load backwards compatibility script.
+	 * @since [version] Only load assets on post screens.
 	 *
 	 * @return void
 	 */
 	public function editor_assets() {
+
+		$screen = get_current_screen();
+		if ( $screen && 'post' !== $screen->base ) {
+			return;
+		}
 
 		if ( $this->use_bc_assets() ) {
 			$this->assets->enqueue_script( 'llms-blocks-editor-bc' );
