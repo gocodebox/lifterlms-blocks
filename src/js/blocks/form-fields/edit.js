@@ -9,7 +9,7 @@
 import { snakeCase, kebabCase, uniqueId } from 'lodash';
 
 // WP deps.
-import { hasBlockSupport, getBlockType } from '@wordpress/blocks';
+import { getBlockType } from '@wordpress/blocks';
 import {
 	useBlockProps,
 	InnerBlocks,
@@ -17,10 +17,8 @@ import {
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { dispatch, select } from '@wordpress/data';
-import { store as noticesStore } from '@wordpress/notices';
 import { PanelBody, Slot, Fill } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
 
 // Internal Deps.
 import Field from './field';
@@ -182,7 +180,6 @@ export function EditField( props ) {
 	} );
 
 	if ( isConfirmWhichHasBeenCopied ) {
-
 		setTimeout( () => {
 			dispatch( blockEditorStore ).removeBlock( clientId );
 		}, 10 );
