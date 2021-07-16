@@ -1,3 +1,10 @@
+/**
+ * Manage confirm group block data
+ *
+ * @since 2.0.0
+ * @version [version]
+ */
+
 // WP deps.
 import { dispatch, select } from '@wordpress/data';
 
@@ -55,6 +62,18 @@ export function getSibling( clientId ) {
 		: null;
 }
 
+/**
+ * Update children blocks of a confirm group
+ *
+ * @since [version]
+ *
+ * @param {Object}   options
+ * @param {function} options.setAttributes   The setAttributes from the block.
+ * @param {Object}   options.currentUpdates  Object describing updates to the current block attributes.
+ * @param {string}   options.siblingClientId Sibling block client id.
+ * @param {Object}   options.siblingUpdates  Object describing updates to the sibling block attributes.
+ * @return {void}
+ */
 function updateChildren( {
 	setAttributes,
 	currentUpdates,
@@ -68,7 +87,7 @@ function updateChildren( {
 	 *
 	 * The setTimeout is bad but fixes no-op/memory leak.
 	 *
-	 * @see https://github.com/WordPress/gutenberg/issues/21049#issuecomment-632134201
+	 * @link {https://github.com/WordPress/gutenberg/issues/21049#issuecomment-632134201}
 	 */
 	setTimeout( () => {
 		if ( ! isEmpty( currentUpdates ) ) {
@@ -81,22 +100,19 @@ function updateChildren( {
 	} );
 }
 
+/**
+ * Retrieve the updates for fields within the confirm group
+ *
+ * @since 2.0.0
+ * @since [version] Stop setting name, match, and id attribute.
+ *
+ * @param {Object} attributes        Block attributes.
+ * @param {Object} siblingAttributes Sibling block attributes.
+ * @return {Object} Object containing objects describing the required sibling and block attribute updates.
+ */
 function getConfirmGroupUpdates( attributes, siblingAttributes ) {
 	const currentUpdates = {},
 		siblingUpdates = {};
-
-	// Updates matching, id, & name fields.
-	if ( attributes.isConfirmationControlField ) {
-		const { name, id } = attributes,
-			confirmName = `${ name }_confirm`,
-			confirmId = `${ id }_confirm`;
-
-		siblingUpdates.match = id;
-		siblingUpdates.name = confirmName;
-		siblingUpdates.id = confirmId;
-
-		currentUpdates.match = confirmId;
-	}
 
 	// Sync required attribute between grouped fields.
 	if ( attributes.required !== siblingAttributes.required ) {

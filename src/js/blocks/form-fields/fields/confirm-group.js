@@ -2,7 +2,7 @@
  * BLOCK: llms/form-field-confirm-group
  *
  * @since 2.0.0
- * @version 2.0.0
+ * @version [version]
  */
 
 // WP Deps.
@@ -46,13 +46,22 @@ export const composed = true;
  * Retrieve block attributes for a controller block
  *
  * @since 2.0.0
+ * @since [version] Setup match attribute.
  *
  * @param {Object} attributes Existing attributes to merge defaults into.
  * @return {Object} Updated block attributes.
  */
 function getControllerBlockAttrs( attributes = {} ) {
+
+	const { id } = attributes;
+	let { match } = attributes;
+	if ( id && ! match ) {
+		match = `${ id }_confirm`;
+	}
+
 	return {
 		...attributes,
+		match,
 		columns: 6,
 		last_column: false,
 		isConfirmationControlField: true,
@@ -64,13 +73,25 @@ function getControllerBlockAttrs( attributes = {} ) {
  * Retrieve block attributes for a controlled (confirmation) block
  *
  * @since 2.0.0
+ * @since [version] Setup id, name, and match attributes.
  *
  * @param {Object} attributes Existing attributes to merge defaults into.
  * @return {Object} Updated block attributes.
  */
 function getControlledBlockAttrs( attributes = {} ) {
+
+	let { id, name, match } = attributes;
+	if ( id && ! match ) {
+		match = id;
+		id    = `${ id }_confirm`;
+		name  = `${ name }_confirm`;
+	}
+
 	return {
 		...attributes,
+		id,
+		name,
+		match,
 		label: attributes.label
 			? // Translators: %s label of the controller field.
 			  sprintf( __( 'Confirm %s', 'lifterlms' ), attributes.label )
@@ -177,20 +198,27 @@ const transforms = {
  * @return {void}
  */
 allowed.forEach( ( blockName ) => {
+
+	/**
+	 * Transform a single block to a confirmation group
+	 *
+	 * @since 2.0.0
+	 * @since [version] Determine the attributes of both confirm group children before creating any blocks.
+	 */
 	transforms.from.push( {
 		type: 'block',
 		blocks: [ blockName ],
 		transform: ( attributes ) => {
-			const { llms_visibility } = attributes;
 
 			doFieldUnload( attributes.name );
 
+			const { llms_visibility } = attributes,
+				controllerAttrs = getControllerBlockAttrs( attributes ),
+				controlledAttrs  = getControlledBlockAttrs( attributes );
+
 			const children = [
-				createBlock( blockName, getControllerBlockAttrs( attributes ) ),
-				createBlock(
-					'llms/form-field-text',
-					getControlledBlockAttrs( attributes )
-				),
+				createBlock( blockName, controllerAttrs ),
+				createBlock( 'llms/form-field-text', controlledAttrs ),
 			];
 
 			return createBlock(
@@ -201,6 +229,11 @@ allowed.forEach( ( blockName ) => {
 		},
 	} );
 
+	/**
+	 * Transform a confirm group to a single block
+	 *
+	 * @since 2.0.0
+	 */
 	transforms.to.push( {
 		type: 'block',
 		blocks: [ blockName ],
