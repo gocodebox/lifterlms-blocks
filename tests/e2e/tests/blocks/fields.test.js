@@ -281,7 +281,7 @@ async function testFieldColumnsProp() {
  * Test modification of a field's placeholder property.
  *
  * @since Unknown
- * @since [version] Don't run automatic snapshot tests when retrieving the tested block.
+ * @since [version] Don't run automatic snapshot tests when retrieving the tested block and select all input content prior to typing a custom placeholder.
  *
  * @param {Boolean} editable Whether or not the tested block's placeholder is editable.
  * @return {void}
@@ -294,7 +294,9 @@ async function testPlaceholderProp( editable = true ) {
 
 	if ( editable ) {
 
-		await page.type( selector, 'Custom Placeholder' );
+		const input = await page.$( selector );
+		await input.click( { clickCount: 3 } );
+		await input.type( 'Custom Placeholder' );
 		await expectBlockAttribute( 'placeholder' );
 
 	} else {
@@ -439,7 +441,12 @@ async function testDelConfirmationProp( fieldName ) {
 }
 
 
-// List of fields to run tests on.
+/**
+ * List of fields to run tests on.
+ *
+ * @since Unknown
+ * @since [version] Added Voucher block.
+ */
 const fields = [
 	{
 		name: 'User Email',
@@ -475,6 +482,13 @@ const fields = [
 		required: true,
 		placeholder: true,
 		fieldName: 'llms_phone',
+	},
+	{
+		name: 'Voucher Code',
+		confirmation: false,
+		required: true,
+		placeholder: true,
+		fieldName: 'llms_voucher',
 	},
 
 	/**
