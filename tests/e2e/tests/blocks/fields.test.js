@@ -20,8 +20,6 @@ import {
 	clearBlocks,
 	convertBlockToReusable,
 	visitForm,
-	maybeSkipFormsTests,
-	shouldRunTestsForForms,
 	transformBlockTo,
 } from '../../util';
 
@@ -509,15 +507,9 @@ const fields = [
 	},
 ].map( field => Object.assign( field, { toString: () => field.name } ) ); // Add a `toString()` function used by describe.each().
 
-const SHOULD_RUN = shouldRunTestsForForms();
-
 describe( 'Blocks/FormFields', () => {
 
 	beforeAll( async () => {
-
-		if ( ! SHOULD_RUN ) {
-			return;
-		}
 
 		await visitForm();
 		page.once( 'dialog', async dialog => await dialog.accept() ); // Leave page without saving.
@@ -528,15 +520,9 @@ describe( 'Blocks/FormFields', () => {
 
 		beforeAll( async () => {
 
-			if ( ! SHOULD_RUN ) {
-				return;
-			}
-
 			await setupTest( field.name );
 
 		} );
-
-		maybeSkipFormsTests();
 
 		// Basic insertion.
 		it ( 'can be created using the block inserter', async () => {
