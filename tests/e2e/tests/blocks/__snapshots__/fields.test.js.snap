@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Blocks/FormFields User Display Name/Editor can be created using the block inserter 1`] = `
+exports[`Blocks/FormFields User Display Name/Editor can be created using the block inserter: single block 1`] = `
 Object {
   "attributes": Object {
     "columns": 12,
@@ -32,7 +32,319 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Display Name/Editor can be created using the block inserter 2`] = `
+exports[`Blocks/FormFields User Display Name/Editor can be created using the block inserter: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "display_name",
+  "id": "display_name",
+  "isPersisted": true,
+  "label": "Display Name",
+  "name": "display_name",
+}
+`;
+
+exports[`Blocks/FormFields User Display Name/Editor can be transformed to a columns block: column block 1`] = `
+Object {
+  "attributes": Object {
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "width": "100%",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/column",
+}
+`;
+
+exports[`Blocks/FormFields User Display Name/Editor can be transformed to a columns block: columns block 1`] = `
+Object {
+  "attributes": Object {
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/columns",
+}
+`;
+
+exports[`Blocks/FormFields User Display Name/Editor can be transformed to a columns block: single block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "display_name",
+    "description": "",
+    "field": "text",
+    "html_attrs": Object {},
+    "id": "display_name",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Display Name",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "display_name",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-display-name",
+}
+`;
+
+exports[`Blocks/FormFields User Display Name/Editor can be transformed to a columns block: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "display_name",
+  "id": "display_name",
+  "isPersisted": true,
+  "label": "Display Name",
+  "name": "display_name",
+}
+`;
+
+exports[`Blocks/FormFields User Display Name/Editor can be transformed to and from a group block: group block 1`] = `
+Object {
+  "attributes": Object {
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "tagName": "div",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/group",
+}
+`;
+
+exports[`Blocks/FormFields User Display Name/Editor can be transformed to and from a group block: single block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "display_name",
+    "description": "",
+    "field": "text",
+    "html_attrs": Object {},
+    "id": "display_name",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Display Name",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "display_name",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-display-name",
+}
+`;
+
+exports[`Blocks/FormFields User Display Name/Editor can be transformed to and from a group block: single block 2`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "display_name",
+    "description": "",
+    "field": "text",
+    "html_attrs": Object {},
+    "id": "display_name",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Display Name",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "display_name",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-display-name",
+}
+`;
+
+exports[`Blocks/FormFields User Display Name/Editor can be transformed to and from a group block: single block 3`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "display_name",
+    "description": "",
+    "field": "text",
+    "html_attrs": Object {},
+    "id": "display_name",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Display Name",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "display_name",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-display-name",
+}
+`;
+
+exports[`Blocks/FormFields User Display Name/Editor can be transformed to and from a group block: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "display_name",
+  "id": "display_name",
+  "isPersisted": true,
+  "label": "Display Name",
+  "name": "display_name",
+}
+`;
+
+exports[`Blocks/FormFields User Display Name/Editor can be transformed to and from a group block: single field 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "display_name",
+  "id": "display_name",
+  "isPersisted": true,
+  "label": "Display Name",
+  "name": "display_name",
+}
+`;
+
+exports[`Blocks/FormFields User Display Name/Editor can be transformed to and from a reusable block: reusable block 1`] = `
+Object {
+  "attributes": Object {
+    "ref": Any<Number>,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/block",
+}
+`;
+
+exports[`Blocks/FormFields User Display Name/Editor can be transformed to and from a reusable block: single block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "display_name",
+    "description": "",
+    "field": "text",
+    "html_attrs": Object {},
+    "id": "display_name",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Display Name",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "display_name",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-display-name",
+  "originalContent": "",
+  "validationIssues": Array [],
+}
+`;
+
+exports[`Blocks/FormFields User Display Name/Editor can be transformed to and from a reusable block: single block 2`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "display_name",
+    "description": "",
+    "field": "text",
+    "html_attrs": Object {},
+    "id": "display_name",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Display Name",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "display_name",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-display-name",
+  "originalContent": "",
+  "validationIssues": Array [],
+}
+`;
+
+exports[`Blocks/FormFields User Display Name/Editor can be transformed to and from a reusable block: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "display_name",
+  "id": "display_name",
+  "isPersisted": true,
+  "label": "Display Name",
+  "name": "display_name",
+}
+`;
+
+exports[`Blocks/FormFields User Display Name/Editor can be transformed to and from a reusable block: single field 2`] = `
 Object {
   "clientId": Any<String>,
   "data_store": "users",
@@ -50,54 +362,18 @@ exports[`Blocks/FormFields User Display Name/Editor can modify the label 1`] = `
 
 exports[`Blocks/FormFields User Display Name/Editor can modify the placeholder 1`] = `"Custom Placeholder"`;
 
-exports[`Blocks/FormFields User Email/Editor can add a confirmation field 1`] = `
+exports[`Blocks/FormFields User Email/Editor can add a confirmation field: confirm field 1`] = `
 Object {
-  "attributes": Object {
-    "fieldLayout": "columns",
-    "llms_visibility": "all",
-    "llms_visibility_in": "",
-    "llms_visibility_posts": "[]",
-  },
   "clientId": Any<String>,
-  "innerBlocks": Anything,
-  "isValid": true,
-  "name": "llms/form-field-confirm-group",
+  "data_store": false,
+  "data_store_key": false,
+  "id": "email_address_confirm",
+  "label": "Confirm Custom Label Email Address",
+  "name": "email_address_confirm",
 }
 `;
 
-exports[`Blocks/FormFields User Email/Editor can add a confirmation field 2`] = `
-Object {
-  "attributes": Object {
-    "columns": 6,
-    "data_store": "users",
-    "data_store_key": "user_email",
-    "description": "Custom description",
-    "field": "email",
-    "html_attrs": Object {},
-    "id": "email_address",
-    "isConfirmationControlField": true,
-    "isConfirmationField": false,
-    "label": "Custom Label Email Address",
-    "label_show_empty": false,
-    "last_column": false,
-    "llms_visibility": "off",
-    "llms_visibility_in": "",
-    "llms_visibility_posts": "[]",
-    "match": "email_address_confirm",
-    "name": "email_address",
-    "options": Array [],
-    "options_preset": "",
-    "placeholder": "Custom Placeholder",
-    "required": true,
-  },
-  "clientId": Any<String>,
-  "innerBlocks": Anything,
-  "isValid": true,
-  "name": "llms/form-field-user-email",
-}
-`;
-
-exports[`Blocks/FormFields User Email/Editor can add a confirmation field 3`] = `
+exports[`Blocks/FormFields User Email/Editor can add a confirmation field: confirm field block 1`] = `
 Object {
   "attributes": Object {
     "columns": 6,
@@ -129,7 +405,22 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Email/Editor can add a confirmation field 4`] = `
+exports[`Blocks/FormFields User Email/Editor can add a confirmation field: confirm group block 1`] = `
+Object {
+  "attributes": Object {
+    "fieldLayout": "columns",
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-confirm-group",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can add a confirmation field: main field 1`] = `
 Object {
   "clientId": Any<String>,
   "data_store": "users",
@@ -141,18 +432,39 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Email/Editor can add a confirmation field 5`] = `
+exports[`Blocks/FormFields User Email/Editor can add a confirmation field: main field block 1`] = `
 Object {
+  "attributes": Object {
+    "columns": 6,
+    "data_store": "users",
+    "data_store_key": "user_email",
+    "description": "Custom description",
+    "field": "email",
+    "html_attrs": Object {},
+    "id": "email_address",
+    "isConfirmationControlField": true,
+    "isConfirmationField": false,
+    "label": "Custom Label Email Address",
+    "label_show_empty": false,
+    "last_column": false,
+    "llms_visibility": "off",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "email_address_confirm",
+    "name": "email_address",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "Custom Placeholder",
+    "required": true,
+  },
   "clientId": Any<String>,
-  "data_store": false,
-  "data_store_key": false,
-  "id": "email_address_confirm",
-  "label": "Confirm Custom Label Email Address",
-  "name": "email_address_confirm",
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-email",
 }
 `;
 
-exports[`Blocks/FormFields User Email/Editor can be created using the block inserter 1`] = `
+exports[`Blocks/FormFields User Email/Editor can be created using the block inserter: single block 1`] = `
 Object {
   "attributes": Object {
     "columns": 12,
@@ -184,7 +496,319 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Email/Editor can be created using the block inserter 2`] = `
+exports[`Blocks/FormFields User Email/Editor can be created using the block inserter: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_email",
+  "id": "email_address",
+  "isPersisted": true,
+  "label": "Email Address",
+  "name": "email_address",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can be transformed to a columns block: column block 1`] = `
+Object {
+  "attributes": Object {
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "width": "100%",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/column",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can be transformed to a columns block: columns block 1`] = `
+Object {
+  "attributes": Object {
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/columns",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can be transformed to a columns block: single block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_email",
+    "description": "",
+    "field": "email",
+    "html_attrs": Object {},
+    "id": "email_address",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Email Address",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "email_address",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-email",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can be transformed to a columns block: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_email",
+  "id": "email_address",
+  "isPersisted": true,
+  "label": "Email Address",
+  "name": "email_address",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can be transformed to and from a group block: group block 1`] = `
+Object {
+  "attributes": Object {
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "tagName": "div",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/group",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can be transformed to and from a group block: single block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_email",
+    "description": "",
+    "field": "email",
+    "html_attrs": Object {},
+    "id": "email_address",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Email Address",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "email_address",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-email",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can be transformed to and from a group block: single block 2`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_email",
+    "description": "",
+    "field": "email",
+    "html_attrs": Object {},
+    "id": "email_address",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Email Address",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "email_address",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-email",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can be transformed to and from a group block: single block 3`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_email",
+    "description": "",
+    "field": "email",
+    "html_attrs": Object {},
+    "id": "email_address",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Email Address",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "email_address",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-email",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can be transformed to and from a group block: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_email",
+  "id": "email_address",
+  "isPersisted": true,
+  "label": "Email Address",
+  "name": "email_address",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can be transformed to and from a group block: single field 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_email",
+  "id": "email_address",
+  "isPersisted": true,
+  "label": "Email Address",
+  "name": "email_address",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can be transformed to and from a reusable block: reusable block 1`] = `
+Object {
+  "attributes": Object {
+    "ref": Any<Number>,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/block",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can be transformed to and from a reusable block: single block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_email",
+    "description": "",
+    "field": "email",
+    "html_attrs": Object {},
+    "id": "email_address",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Email Address",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "email_address",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-email",
+  "originalContent": "",
+  "validationIssues": Array [],
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can be transformed to and from a reusable block: single block 2`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_email",
+    "description": "",
+    "field": "email",
+    "html_attrs": Object {},
+    "id": "email_address",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Email Address",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "email_address",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-email",
+  "originalContent": "",
+  "validationIssues": Array [],
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can be transformed to and from a reusable block: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_email",
+  "id": "email_address",
+  "isPersisted": true,
+  "label": "Email Address",
+  "name": "email_address",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can be transformed to and from a reusable block: single field 2`] = `
 Object {
   "clientId": Any<String>,
   "data_store": "users",
@@ -202,7 +826,7 @@ exports[`Blocks/FormFields User Email/Editor can modify the label 1`] = `"Custom
 
 exports[`Blocks/FormFields User Email/Editor can modify the placeholder 1`] = `"Custom Placeholder"`;
 
-exports[`Blocks/FormFields User Email/Editor can remove the confirmation field 1`] = `
+exports[`Blocks/FormFields User Email/Editor can remove the confirmation field: single block 1`] = `
 Object {
   "attributes": Object {
     "columns": 12,
@@ -234,7 +858,7 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Email/Editor can remove the confirmation field 2`] = `
+exports[`Blocks/FormFields User Email/Editor can remove the confirmation field: single field 1`] = `
 Object {
   "clientId": Any<String>,
   "data_store": "users",
@@ -246,7 +870,71 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Email/Editor can toggle the group layout 1`] = `
+exports[`Blocks/FormFields User Email/Editor can toggle the group layout: confirm field block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": false,
+    "data_store_key": false,
+    "description": "Custom description",
+    "field": "email",
+    "html_attrs": Object {},
+    "id": "email_address_confirm",
+    "isConfirmationControlField": false,
+    "isConfirmationField": true,
+    "label": "Confirm Custom Label Email Address",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "off",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "email_address",
+    "name": "email_address_confirm",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "Custom Placeholder",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-text",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can toggle the group layout: confirm field block 2`] = `
+Object {
+  "attributes": Object {
+    "columns": 6,
+    "data_store": false,
+    "data_store_key": false,
+    "description": "Custom description",
+    "field": "email",
+    "html_attrs": Object {},
+    "id": "email_address_confirm",
+    "isConfirmationControlField": false,
+    "isConfirmationField": true,
+    "label": "Confirm Custom Label Email Address",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "off",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "email_address",
+    "name": "email_address_confirm",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "Custom Placeholder",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-text",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can toggle the group layout: confirm group 1`] = `
 Object {
   "attributes": Object {
     "fieldLayout": "stacked",
@@ -261,71 +949,7 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Email/Editor can toggle the group layout 2`] = `
-Object {
-  "attributes": Object {
-    "columns": 12,
-    "data_store": "users",
-    "data_store_key": "user_email",
-    "description": "Custom description",
-    "field": "email",
-    "html_attrs": Object {},
-    "id": "email_address",
-    "isConfirmationControlField": true,
-    "isConfirmationField": false,
-    "label": "Custom Label Email Address",
-    "label_show_empty": false,
-    "last_column": true,
-    "llms_visibility": "off",
-    "llms_visibility_in": "",
-    "llms_visibility_posts": "[]",
-    "match": "email_address_confirm",
-    "name": "email_address",
-    "options": Array [],
-    "options_preset": "",
-    "placeholder": "Custom Placeholder",
-    "required": true,
-  },
-  "clientId": Any<String>,
-  "innerBlocks": Anything,
-  "isValid": true,
-  "name": "llms/form-field-user-email",
-}
-`;
-
-exports[`Blocks/FormFields User Email/Editor can toggle the group layout 3`] = `
-Object {
-  "attributes": Object {
-    "columns": 12,
-    "data_store": false,
-    "data_store_key": false,
-    "description": "Custom description",
-    "field": "email",
-    "html_attrs": Object {},
-    "id": "email_address_confirm",
-    "isConfirmationControlField": false,
-    "isConfirmationField": true,
-    "label": "Confirm Custom Label Email Address",
-    "label_show_empty": false,
-    "last_column": true,
-    "llms_visibility": "off",
-    "llms_visibility_in": "",
-    "llms_visibility_posts": "[]",
-    "match": "email_address",
-    "name": "email_address_confirm",
-    "options": Array [],
-    "options_preset": "",
-    "placeholder": "Custom Placeholder",
-    "required": true,
-  },
-  "clientId": Any<String>,
-  "innerBlocks": Anything,
-  "isValid": true,
-  "name": "llms/form-field-text",
-}
-`;
-
-exports[`Blocks/FormFields User Email/Editor can toggle the group layout 4`] = `
+exports[`Blocks/FormFields User Email/Editor can toggle the group layout: confirm group 2`] = `
 Object {
   "attributes": Object {
     "fieldLayout": "columns",
@@ -340,7 +964,39 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Email/Editor can toggle the group layout 5`] = `
+exports[`Blocks/FormFields User Email/Editor can toggle the group layout: main field block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_email",
+    "description": "Custom description",
+    "field": "email",
+    "html_attrs": Object {},
+    "id": "email_address",
+    "isConfirmationControlField": true,
+    "isConfirmationField": false,
+    "label": "Custom Label Email Address",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "off",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "email_address_confirm",
+    "name": "email_address",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "Custom Placeholder",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-email",
+}
+`;
+
+exports[`Blocks/FormFields User Email/Editor can toggle the group layout: main field block 2`] = `
 Object {
   "attributes": Object {
     "columns": 6,
@@ -372,86 +1028,18 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Email/Editor can toggle the group layout 6`] = `
+exports[`Blocks/FormFields User Login/Editor can add a confirmation field: confirm field 1`] = `
 Object {
-  "attributes": Object {
-    "columns": 6,
-    "data_store": false,
-    "data_store_key": false,
-    "description": "Custom description",
-    "field": "email",
-    "html_attrs": Object {},
-    "id": "email_address_confirm",
-    "isConfirmationControlField": false,
-    "isConfirmationField": true,
-    "label": "Confirm Custom Label Email Address",
-    "label_show_empty": false,
-    "last_column": true,
-    "llms_visibility": "off",
-    "llms_visibility_in": "",
-    "llms_visibility_posts": "[]",
-    "match": "email_address",
-    "name": "email_address_confirm",
-    "options": Array [],
-    "options_preset": "",
-    "placeholder": "Custom Placeholder",
-    "required": true,
-  },
   "clientId": Any<String>,
-  "innerBlocks": Anything,
-  "isValid": true,
-  "name": "llms/form-field-text",
+  "data_store": false,
+  "data_store_key": false,
+  "id": "user_login_confirm",
+  "label": "Confirm Custom Label Username",
+  "name": "user_login_confirm",
 }
 `;
 
-exports[`Blocks/FormFields User Login/Editor can add a confirmation field 1`] = `
-Object {
-  "attributes": Object {
-    "fieldLayout": "columns",
-    "llms_visibility": "logged_out",
-    "llms_visibility_in": "",
-    "llms_visibility_posts": "[]",
-  },
-  "clientId": Any<String>,
-  "innerBlocks": Anything,
-  "isValid": true,
-  "name": "llms/form-field-confirm-group",
-}
-`;
-
-exports[`Blocks/FormFields User Login/Editor can add a confirmation field 2`] = `
-Object {
-  "attributes": Object {
-    "columns": 6,
-    "data_store": "users",
-    "data_store_key": "user_login",
-    "description": "Custom description",
-    "field": "text",
-    "html_attrs": Object {},
-    "id": "user_login",
-    "isConfirmationControlField": true,
-    "isConfirmationField": false,
-    "label": "Custom Label Username",
-    "label_show_empty": false,
-    "last_column": false,
-    "llms_visibility": "off",
-    "llms_visibility_in": "",
-    "llms_visibility_posts": "[]",
-    "match": "user_login_confirm",
-    "name": "user_login",
-    "options": Array [],
-    "options_preset": "",
-    "placeholder": "Custom Placeholder",
-    "required": true,
-  },
-  "clientId": Any<String>,
-  "innerBlocks": Anything,
-  "isValid": true,
-  "name": "llms/form-field-user-login",
-}
-`;
-
-exports[`Blocks/FormFields User Login/Editor can add a confirmation field 3`] = `
+exports[`Blocks/FormFields User Login/Editor can add a confirmation field: confirm field block 1`] = `
 Object {
   "attributes": Object {
     "columns": 6,
@@ -483,7 +1071,22 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Login/Editor can add a confirmation field 4`] = `
+exports[`Blocks/FormFields User Login/Editor can add a confirmation field: confirm group block 1`] = `
+Object {
+  "attributes": Object {
+    "fieldLayout": "columns",
+    "llms_visibility": "logged_out",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-confirm-group",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can add a confirmation field: main field 1`] = `
 Object {
   "clientId": Any<String>,
   "data_store": "users",
@@ -495,18 +1098,39 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Login/Editor can add a confirmation field 5`] = `
+exports[`Blocks/FormFields User Login/Editor can add a confirmation field: main field block 1`] = `
 Object {
+  "attributes": Object {
+    "columns": 6,
+    "data_store": "users",
+    "data_store_key": "user_login",
+    "description": "Custom description",
+    "field": "text",
+    "html_attrs": Object {},
+    "id": "user_login",
+    "isConfirmationControlField": true,
+    "isConfirmationField": false,
+    "label": "Custom Label Username",
+    "label_show_empty": false,
+    "last_column": false,
+    "llms_visibility": "off",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "user_login_confirm",
+    "name": "user_login",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "Custom Placeholder",
+    "required": true,
+  },
   "clientId": Any<String>,
-  "data_store": false,
-  "data_store_key": false,
-  "id": "user_login_confirm",
-  "label": "Confirm Custom Label Username",
-  "name": "user_login_confirm",
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-login",
 }
 `;
 
-exports[`Blocks/FormFields User Login/Editor can be created using the block inserter 1`] = `
+exports[`Blocks/FormFields User Login/Editor can be created using the block inserter: single block 1`] = `
 Object {
   "attributes": Object {
     "columns": 12,
@@ -538,7 +1162,319 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Login/Editor can be created using the block inserter 2`] = `
+exports[`Blocks/FormFields User Login/Editor can be created using the block inserter: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_login",
+  "id": "user_login",
+  "isPersisted": true,
+  "label": "Username",
+  "name": "user_login",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can be transformed to a columns block: column block 1`] = `
+Object {
+  "attributes": Object {
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "width": "100%",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/column",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can be transformed to a columns block: columns block 1`] = `
+Object {
+  "attributes": Object {
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/columns",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can be transformed to a columns block: single block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_login",
+    "description": "",
+    "field": "text",
+    "html_attrs": Object {},
+    "id": "user_login",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Username",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "logged_out",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "user_login",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-login",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can be transformed to a columns block: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_login",
+  "id": "user_login",
+  "isPersisted": true,
+  "label": "Username",
+  "name": "user_login",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can be transformed to and from a group block: group block 1`] = `
+Object {
+  "attributes": Object {
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "tagName": "div",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/group",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can be transformed to and from a group block: single block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_login",
+    "description": "",
+    "field": "text",
+    "html_attrs": Object {},
+    "id": "user_login",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Username",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "logged_out",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "user_login",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-login",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can be transformed to and from a group block: single block 2`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_login",
+    "description": "",
+    "field": "text",
+    "html_attrs": Object {},
+    "id": "user_login",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Username",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "logged_out",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "user_login",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-login",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can be transformed to and from a group block: single block 3`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_login",
+    "description": "",
+    "field": "text",
+    "html_attrs": Object {},
+    "id": "user_login",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Username",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "logged_out",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "user_login",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-login",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can be transformed to and from a group block: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_login",
+  "id": "user_login",
+  "isPersisted": true,
+  "label": "Username",
+  "name": "user_login",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can be transformed to and from a group block: single field 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_login",
+  "id": "user_login",
+  "isPersisted": true,
+  "label": "Username",
+  "name": "user_login",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can be transformed to and from a reusable block: reusable block 1`] = `
+Object {
+  "attributes": Object {
+    "ref": Any<Number>,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/block",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can be transformed to and from a reusable block: single block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_login",
+    "description": "",
+    "field": "text",
+    "html_attrs": Object {},
+    "id": "user_login",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Username",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "logged_out",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "user_login",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-login",
+  "originalContent": "",
+  "validationIssues": Array [],
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can be transformed to and from a reusable block: single block 2`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_login",
+    "description": "",
+    "field": "text",
+    "html_attrs": Object {},
+    "id": "user_login",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Username",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "logged_out",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "user_login",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-login",
+  "originalContent": "",
+  "validationIssues": Array [],
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can be transformed to and from a reusable block: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_login",
+  "id": "user_login",
+  "isPersisted": true,
+  "label": "Username",
+  "name": "user_login",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can be transformed to and from a reusable block: single field 2`] = `
 Object {
   "clientId": Any<String>,
   "data_store": "users",
@@ -556,7 +1492,7 @@ exports[`Blocks/FormFields User Login/Editor can modify the label 1`] = `"Custom
 
 exports[`Blocks/FormFields User Login/Editor can modify the placeholder 1`] = `"Custom Placeholder"`;
 
-exports[`Blocks/FormFields User Login/Editor can remove the confirmation field 1`] = `
+exports[`Blocks/FormFields User Login/Editor can remove the confirmation field: single block 1`] = `
 Object {
   "attributes": Object {
     "columns": 12,
@@ -588,7 +1524,7 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Login/Editor can remove the confirmation field 2`] = `
+exports[`Blocks/FormFields User Login/Editor can remove the confirmation field: single field 1`] = `
 Object {
   "clientId": Any<String>,
   "data_store": "users",
@@ -600,54 +1536,7 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Login/Editor can toggle the group layout 1`] = `
-Object {
-  "attributes": Object {
-    "fieldLayout": "stacked",
-    "llms_visibility": "logged_out",
-    "llms_visibility_in": "",
-    "llms_visibility_posts": "[]",
-  },
-  "clientId": Any<String>,
-  "innerBlocks": Anything,
-  "isValid": true,
-  "name": "llms/form-field-confirm-group",
-}
-`;
-
-exports[`Blocks/FormFields User Login/Editor can toggle the group layout 2`] = `
-Object {
-  "attributes": Object {
-    "columns": 12,
-    "data_store": "users",
-    "data_store_key": "user_login",
-    "description": "Custom description",
-    "field": "text",
-    "html_attrs": Object {},
-    "id": "user_login",
-    "isConfirmationControlField": true,
-    "isConfirmationField": false,
-    "label": "Custom Label Username",
-    "label_show_empty": false,
-    "last_column": true,
-    "llms_visibility": "off",
-    "llms_visibility_in": "",
-    "llms_visibility_posts": "[]",
-    "match": "user_login_confirm",
-    "name": "user_login",
-    "options": Array [],
-    "options_preset": "",
-    "placeholder": "Custom Placeholder",
-    "required": true,
-  },
-  "clientId": Any<String>,
-  "innerBlocks": Anything,
-  "isValid": true,
-  "name": "llms/form-field-user-login",
-}
-`;
-
-exports[`Blocks/FormFields User Login/Editor can toggle the group layout 3`] = `
+exports[`Blocks/FormFields User Login/Editor can toggle the group layout: confirm field block 1`] = `
 Object {
   "attributes": Object {
     "columns": 12,
@@ -679,7 +1568,54 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Login/Editor can toggle the group layout 4`] = `
+exports[`Blocks/FormFields User Login/Editor can toggle the group layout: confirm field block 2`] = `
+Object {
+  "attributes": Object {
+    "columns": 6,
+    "data_store": false,
+    "data_store_key": false,
+    "description": "Custom description",
+    "field": "text",
+    "html_attrs": Object {},
+    "id": "user_login_confirm",
+    "isConfirmationControlField": false,
+    "isConfirmationField": true,
+    "label": "Confirm Custom Label Username",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "off",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "user_login",
+    "name": "user_login_confirm",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "Custom Placeholder",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-text",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can toggle the group layout: confirm group 1`] = `
+Object {
+  "attributes": Object {
+    "fieldLayout": "stacked",
+    "llms_visibility": "logged_out",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-confirm-group",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can toggle the group layout: confirm group 2`] = `
 Object {
   "attributes": Object {
     "fieldLayout": "columns",
@@ -694,7 +1630,39 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Login/Editor can toggle the group layout 5`] = `
+exports[`Blocks/FormFields User Login/Editor can toggle the group layout: main field block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_login",
+    "description": "Custom description",
+    "field": "text",
+    "html_attrs": Object {},
+    "id": "user_login",
+    "isConfirmationControlField": true,
+    "isConfirmationField": false,
+    "label": "Custom Label Username",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "off",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "user_login_confirm",
+    "name": "user_login",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "Custom Placeholder",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-login",
+}
+`;
+
+exports[`Blocks/FormFields User Login/Editor can toggle the group layout: main field block 2`] = `
 Object {
   "attributes": Object {
     "columns": 6,
@@ -726,29 +1694,42 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Login/Editor can toggle the group layout 6`] = `
+exports[`Blocks/FormFields User Password/Editor can add a confirmation field: confirm field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": false,
+  "data_store_key": false,
+  "id": "password_confirm",
+  "label": "Confirm Custom Label Password",
+  "name": "password_confirm",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can add a confirmation field: confirm field block 1`] = `
 Object {
   "attributes": Object {
     "columns": 6,
     "data_store": false,
     "data_store_key": false,
     "description": "Custom description",
-    "field": "text",
-    "html_attrs": Object {},
-    "id": "user_login_confirm",
+    "field": "password",
+    "html_attrs": Object {
+      "minlength": 8,
+    },
+    "id": "password_confirm",
     "isConfirmationControlField": false,
     "isConfirmationField": true,
-    "label": "Confirm Custom Label Username",
+    "label": "Confirm Custom Label Password",
     "label_show_empty": false,
     "last_column": true,
     "llms_visibility": "off",
     "llms_visibility_in": "",
     "llms_visibility_posts": "[]",
-    "match": "user_login",
-    "name": "user_login_confirm",
+    "match": "password",
+    "name": "password_confirm",
     "options": Array [],
     "options_preset": "",
-    "placeholder": "Custom Placeholder",
+    "placeholder": "",
     "required": true,
   },
   "clientId": Any<String>,
@@ -758,7 +1739,7 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Password/Editor can add a confirmation field 1`] = `
+exports[`Blocks/FormFields User Password/Editor can add a confirmation field: confirm group block 1`] = `
 Object {
   "attributes": Object {
     "fieldLayout": "columns",
@@ -773,7 +1754,19 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Password/Editor can add a confirmation field 2`] = `
+exports[`Blocks/FormFields User Password/Editor can add a confirmation field: main field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_pass",
+  "id": "password",
+  "isPersisted": true,
+  "label": "Password",
+  "name": "password",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can add a confirmation field: main field block 1`] = `
 Object {
   "attributes": Object {
     "columns": 6,
@@ -810,64 +1803,7 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Password/Editor can add a confirmation field 3`] = `
-Object {
-  "attributes": Object {
-    "columns": 6,
-    "data_store": false,
-    "data_store_key": false,
-    "description": "Custom description",
-    "field": "password",
-    "html_attrs": Object {
-      "minlength": 8,
-    },
-    "id": "password_confirm",
-    "isConfirmationControlField": false,
-    "isConfirmationField": true,
-    "label": "Confirm Custom Label Password",
-    "label_show_empty": false,
-    "last_column": true,
-    "llms_visibility": "off",
-    "llms_visibility_in": "",
-    "llms_visibility_posts": "[]",
-    "match": "password",
-    "name": "password_confirm",
-    "options": Array [],
-    "options_preset": "",
-    "placeholder": "",
-    "required": true,
-  },
-  "clientId": Any<String>,
-  "innerBlocks": Anything,
-  "isValid": true,
-  "name": "llms/form-field-text",
-}
-`;
-
-exports[`Blocks/FormFields User Password/Editor can add a confirmation field 4`] = `
-Object {
-  "clientId": Any<String>,
-  "data_store": "users",
-  "data_store_key": "user_pass",
-  "id": "password",
-  "isPersisted": true,
-  "label": "Password",
-  "name": "password",
-}
-`;
-
-exports[`Blocks/FormFields User Password/Editor can add a confirmation field 5`] = `
-Object {
-  "clientId": Any<String>,
-  "data_store": false,
-  "data_store_key": false,
-  "id": "password_confirm",
-  "label": "Confirm Custom Label Password",
-  "name": "password_confirm",
-}
-`;
-
-exports[`Blocks/FormFields User Password/Editor can be created using the block inserter 1`] = `
+exports[`Blocks/FormFields User Password/Editor can be created using the block inserter: single block 1`] = `
 Object {
   "attributes": Object {
     "columns": 12,
@@ -887,7 +1823,7 @@ Object {
     "llms_visibility": "all",
     "llms_visibility_in": "",
     "llms_visibility_posts": "[]",
-    "match": "password_confirm",
+    "match": "",
     "meter": true,
     "meter_description": "A strong password is required with at least 8 characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.",
     "min_strength": "strong",
@@ -904,7 +1840,349 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Password/Editor can be created using the block inserter 2`] = `
+exports[`Blocks/FormFields User Password/Editor can be created using the block inserter: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_pass",
+  "id": "password",
+  "isPersisted": true,
+  "label": "Password",
+  "name": "password",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can be transformed to a columns block: column block 1`] = `
+Object {
+  "attributes": Object {
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "width": "100%",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/column",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can be transformed to a columns block: columns block 1`] = `
+Object {
+  "attributes": Object {
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/columns",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can be transformed to a columns block: single block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_pass",
+    "description": "",
+    "field": "password",
+    "html_attrs": Object {
+      "minlength": 8,
+    },
+    "id": "password",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Password",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "meter": true,
+    "meter_description": "A strong password is required with at least 8 characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.",
+    "min_strength": "strong",
+    "name": "password",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-password",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can be transformed to a columns block: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_pass",
+  "id": "password",
+  "isPersisted": true,
+  "label": "Password",
+  "name": "password",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can be transformed to and from a group block: group block 1`] = `
+Object {
+  "attributes": Object {
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "tagName": "div",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/group",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can be transformed to and from a group block: single block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_pass",
+    "description": "",
+    "field": "password",
+    "html_attrs": Object {
+      "minlength": 8,
+    },
+    "id": "password",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Password",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "meter": true,
+    "meter_description": "A strong password is required with at least 8 characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.",
+    "min_strength": "strong",
+    "name": "password",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-password",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can be transformed to and from a group block: single block 2`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_pass",
+    "description": "",
+    "field": "password",
+    "html_attrs": Object {
+      "minlength": 8,
+    },
+    "id": "password",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Password",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "meter": true,
+    "meter_description": "A strong password is required with at least 8 characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.",
+    "min_strength": "strong",
+    "name": "password",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-password",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can be transformed to and from a group block: single block 3`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_pass",
+    "description": "",
+    "field": "password",
+    "html_attrs": Object {
+      "minlength": 8,
+    },
+    "id": "password",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Password",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "meter": true,
+    "meter_description": "A strong password is required with at least 8 characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.",
+    "min_strength": "strong",
+    "name": "password",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-password",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can be transformed to and from a group block: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_pass",
+  "id": "password",
+  "isPersisted": true,
+  "label": "Password",
+  "name": "password",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can be transformed to and from a group block: single field 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_pass",
+  "id": "password",
+  "isPersisted": true,
+  "label": "Password",
+  "name": "password",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can be transformed to and from a reusable block: reusable block 1`] = `
+Object {
+  "attributes": Object {
+    "ref": Any<Number>,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/block",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can be transformed to and from a reusable block: single block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_pass",
+    "description": "",
+    "field": "password",
+    "html_attrs": Object {
+      "minlength": 8,
+    },
+    "id": "password",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Password",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "meter": true,
+    "meter_description": "A strong password is required with at least 8 characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.",
+    "min_strength": "strong",
+    "name": "password",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-password",
+  "originalContent": "",
+  "validationIssues": Array [],
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can be transformed to and from a reusable block: single block 2`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "users",
+    "data_store_key": "user_pass",
+    "description": "",
+    "field": "password",
+    "html_attrs": Object {
+      "minlength": 8,
+    },
+    "id": "password",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Password",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "meter": true,
+    "meter_description": "A strong password is required with at least 8 characters. To make it stronger, use both upper and lower case letters, numbers, and symbols.",
+    "min_strength": "strong",
+    "name": "password",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-password",
+  "originalContent": "",
+  "validationIssues": Array [],
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can be transformed to and from a reusable block: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "users",
+  "data_store_key": "user_pass",
+  "id": "password",
+  "isPersisted": true,
+  "label": "Password",
+  "name": "password",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can be transformed to and from a reusable block: single field 2`] = `
 Object {
   "clientId": Any<String>,
   "data_store": "users",
@@ -920,7 +2198,7 @@ exports[`Blocks/FormFields User Password/Editor can modify the description 1`] =
 
 exports[`Blocks/FormFields User Password/Editor can modify the label 1`] = `"Custom Label Password"`;
 
-exports[`Blocks/FormFields User Password/Editor can remove the confirmation field 1`] = `
+exports[`Blocks/FormFields User Password/Editor can remove the confirmation field: single block 1`] = `
 Object {
   "attributes": Object {
     "columns": 12,
@@ -957,7 +2235,7 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Password/Editor can remove the confirmation field 2`] = `
+exports[`Blocks/FormFields User Password/Editor can remove the confirmation field: single field 1`] = `
 Object {
   "clientId": Any<String>,
   "data_store": "users",
@@ -969,7 +2247,75 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Password/Editor can toggle the group layout 1`] = `
+exports[`Blocks/FormFields User Password/Editor can toggle the group layout: confirm field block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": false,
+    "data_store_key": false,
+    "description": "Custom description",
+    "field": "password",
+    "html_attrs": Object {
+      "minlength": 8,
+    },
+    "id": "password_confirm",
+    "isConfirmationControlField": false,
+    "isConfirmationField": true,
+    "label": "Confirm Custom Label Password",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "off",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "password",
+    "name": "password_confirm",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-text",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can toggle the group layout: confirm field block 2`] = `
+Object {
+  "attributes": Object {
+    "columns": 6,
+    "data_store": false,
+    "data_store_key": false,
+    "description": "Custom description",
+    "field": "password",
+    "html_attrs": Object {
+      "minlength": 8,
+    },
+    "id": "password_confirm",
+    "isConfirmationControlField": false,
+    "isConfirmationField": true,
+    "label": "Confirm Custom Label Password",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "off",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "password",
+    "name": "password_confirm",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": true,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-text",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can toggle the group layout: confirm group 1`] = `
 Object {
   "attributes": Object {
     "fieldLayout": "stacked",
@@ -984,7 +2330,22 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Password/Editor can toggle the group layout 2`] = `
+exports[`Blocks/FormFields User Password/Editor can toggle the group layout: confirm group 2`] = `
+Object {
+  "attributes": Object {
+    "fieldLayout": "columns",
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-confirm-group",
+}
+`;
+
+exports[`Blocks/FormFields User Password/Editor can toggle the group layout: main field block 1`] = `
 Object {
   "attributes": Object {
     "columns": 12,
@@ -1021,56 +2382,7 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Password/Editor can toggle the group layout 3`] = `
-Object {
-  "attributes": Object {
-    "columns": 12,
-    "data_store": false,
-    "data_store_key": false,
-    "description": "Custom description",
-    "field": "password",
-    "html_attrs": Object {
-      "minlength": 8,
-    },
-    "id": "password_confirm",
-    "isConfirmationControlField": false,
-    "isConfirmationField": true,
-    "label": "Confirm Custom Label Password",
-    "label_show_empty": false,
-    "last_column": true,
-    "llms_visibility": "off",
-    "llms_visibility_in": "",
-    "llms_visibility_posts": "[]",
-    "match": "password",
-    "name": "password_confirm",
-    "options": Array [],
-    "options_preset": "",
-    "placeholder": "",
-    "required": true,
-  },
-  "clientId": Any<String>,
-  "innerBlocks": Anything,
-  "isValid": true,
-  "name": "llms/form-field-text",
-}
-`;
-
-exports[`Blocks/FormFields User Password/Editor can toggle the group layout 4`] = `
-Object {
-  "attributes": Object {
-    "fieldLayout": "columns",
-    "llms_visibility": "all",
-    "llms_visibility_in": "",
-    "llms_visibility_posts": "[]",
-  },
-  "clientId": Any<String>,
-  "innerBlocks": Anything,
-  "isValid": true,
-  "name": "llms/form-field-confirm-group",
-}
-`;
-
-exports[`Blocks/FormFields User Password/Editor can toggle the group layout 5`] = `
+exports[`Blocks/FormFields User Password/Editor can toggle the group layout: main field block 2`] = `
 Object {
   "attributes": Object {
     "columns": 6,
@@ -1107,41 +2419,7 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Password/Editor can toggle the group layout 6`] = `
-Object {
-  "attributes": Object {
-    "columns": 6,
-    "data_store": false,
-    "data_store_key": false,
-    "description": "Custom description",
-    "field": "password",
-    "html_attrs": Object {
-      "minlength": 8,
-    },
-    "id": "password_confirm",
-    "isConfirmationControlField": false,
-    "isConfirmationField": true,
-    "label": "Confirm Custom Label Password",
-    "label_show_empty": false,
-    "last_column": true,
-    "llms_visibility": "off",
-    "llms_visibility_in": "",
-    "llms_visibility_posts": "[]",
-    "match": "password",
-    "name": "password_confirm",
-    "options": Array [],
-    "options_preset": "",
-    "placeholder": "",
-    "required": true,
-  },
-  "clientId": Any<String>,
-  "innerBlocks": Anything,
-  "isValid": true,
-  "name": "llms/form-field-text",
-}
-`;
-
-exports[`Blocks/FormFields User Phone/Editor can be created using the block inserter 1`] = `
+exports[`Blocks/FormFields User Phone/Editor can be created using the block inserter: single block 1`] = `
 Object {
   "attributes": Object {
     "columns": 12,
@@ -1173,7 +2451,319 @@ Object {
 }
 `;
 
-exports[`Blocks/FormFields User Phone/Editor can be created using the block inserter 2`] = `
+exports[`Blocks/FormFields User Phone/Editor can be created using the block inserter: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "usermeta",
+  "data_store_key": "llms_phone",
+  "id": "llms_phone",
+  "isPersisted": true,
+  "label": "Phone Number",
+  "name": "llms_phone",
+}
+`;
+
+exports[`Blocks/FormFields User Phone/Editor can be transformed to a columns block: column block 1`] = `
+Object {
+  "attributes": Object {
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "width": "100%",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/column",
+}
+`;
+
+exports[`Blocks/FormFields User Phone/Editor can be transformed to a columns block: columns block 1`] = `
+Object {
+  "attributes": Object {
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/columns",
+}
+`;
+
+exports[`Blocks/FormFields User Phone/Editor can be transformed to a columns block: single block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "usermeta",
+    "data_store_key": "llms_phone",
+    "description": "",
+    "field": "tel",
+    "html_attrs": Object {},
+    "id": "llms_phone",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Phone Number",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "llms_phone",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": false,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-phone",
+}
+`;
+
+exports[`Blocks/FormFields User Phone/Editor can be transformed to a columns block: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "usermeta",
+  "data_store_key": "llms_phone",
+  "id": "llms_phone",
+  "isPersisted": true,
+  "label": "Phone Number",
+  "name": "llms_phone",
+}
+`;
+
+exports[`Blocks/FormFields User Phone/Editor can be transformed to and from a group block: group block 1`] = `
+Object {
+  "attributes": Object {
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "tagName": "div",
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/group",
+}
+`;
+
+exports[`Blocks/FormFields User Phone/Editor can be transformed to and from a group block: single block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "usermeta",
+    "data_store_key": "llms_phone",
+    "description": "",
+    "field": "tel",
+    "html_attrs": Object {},
+    "id": "llms_phone",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Phone Number",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "llms_phone",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": false,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-phone",
+}
+`;
+
+exports[`Blocks/FormFields User Phone/Editor can be transformed to and from a group block: single block 2`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "usermeta",
+    "data_store_key": "llms_phone",
+    "description": "",
+    "field": "tel",
+    "html_attrs": Object {},
+    "id": "llms_phone",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Phone Number",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "llms_phone",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": false,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-phone",
+}
+`;
+
+exports[`Blocks/FormFields User Phone/Editor can be transformed to and from a group block: single block 3`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "usermeta",
+    "data_store_key": "llms_phone",
+    "description": "",
+    "field": "tel",
+    "html_attrs": Object {},
+    "id": "llms_phone",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Phone Number",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "llms_phone",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": false,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-phone",
+}
+`;
+
+exports[`Blocks/FormFields User Phone/Editor can be transformed to and from a group block: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "usermeta",
+  "data_store_key": "llms_phone",
+  "id": "llms_phone",
+  "isPersisted": true,
+  "label": "Phone Number",
+  "name": "llms_phone",
+}
+`;
+
+exports[`Blocks/FormFields User Phone/Editor can be transformed to and from a group block: single field 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "usermeta",
+  "data_store_key": "llms_phone",
+  "id": "llms_phone",
+  "isPersisted": true,
+  "label": "Phone Number",
+  "name": "llms_phone",
+}
+`;
+
+exports[`Blocks/FormFields User Phone/Editor can be transformed to and from a reusable block: reusable block 1`] = `
+Object {
+  "attributes": Object {
+    "ref": Any<Number>,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/block",
+}
+`;
+
+exports[`Blocks/FormFields User Phone/Editor can be transformed to and from a reusable block: single block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "usermeta",
+    "data_store_key": "llms_phone",
+    "description": "",
+    "field": "tel",
+    "html_attrs": Object {},
+    "id": "llms_phone",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Phone Number",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "llms_phone",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": false,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-phone",
+  "originalContent": "",
+  "validationIssues": Array [],
+}
+`;
+
+exports[`Blocks/FormFields User Phone/Editor can be transformed to and from a reusable block: single block 2`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": "usermeta",
+    "data_store_key": "llms_phone",
+    "description": "",
+    "field": "tel",
+    "html_attrs": Object {},
+    "id": "llms_phone",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Phone Number",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "llms_phone",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "",
+    "required": false,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-user-phone",
+  "originalContent": "",
+  "validationIssues": Array [],
+}
+`;
+
+exports[`Blocks/FormFields User Phone/Editor can be transformed to and from a reusable block: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": "usermeta",
+  "data_store_key": "llms_phone",
+  "id": "llms_phone",
+  "isPersisted": true,
+  "label": "Phone Number",
+  "name": "llms_phone",
+}
+`;
+
+exports[`Blocks/FormFields User Phone/Editor can be transformed to and from a reusable block: single field 2`] = `
 Object {
   "clientId": Any<String>,
   "data_store": "usermeta",

@@ -1,7 +1,9 @@
 import {
+	clickBlockToolbarButton,
 	getAllBlocks,
 	insertBlock,
 	selectBlockByClientId,
+	showBlockToolbar,
 } from '@wordpress/e2e-test-utils';
 
 import {
@@ -14,15 +16,25 @@ import {
 
 import {
 	blockSnapshotMatcher,
+	clickBlockToolbarOption,
 	clearBlocks,
+	convertBlockToReusable,
 	visitForm,
 	maybeSkipFormsTests,
 	shouldRunTestsForForms,
+	transformBlockTo,
 } from '../../util';
 
 
 const fieldSnapshotMatcher = {
 	clientId: expect.any( String ),
+};
+
+const reusableBlockSnapshotMatcher = {
+	...blockSnapshotMatcher,
+	attributes: {
+		ref: expect.any( Number ),
+	},
 };
 
 /**
@@ -33,12 +45,70 @@ const fieldSnapshotMatcher = {
  * and returns the first one.
  *
  * @since 2.0.0
+ * @since [version] Automatically run a snapshot expectation.
  *
+ * @param {?string} hint    Message to be passed as the toMatchSnapshot hint. If `null`, snapshot is skipped.
+ * @param {Object}  matcher Snapshot matcher, defaults to `blocksSnapshotMatcher`.
  * @return {Object} A WP_Block object.
  */
-async function getTestedBlock() {
-	const blocks = await getAllBlocks();
-	return blocks[0];
+async function getTestedBlock( hint = 'single block', matcher = blockSnapshotMatcher ) {
+
+	const [ testedBlock ] = await getAllBlocks();
+
+	if ( null !== hint ) {
+		expect( testedBlock ).toMatchSnapshot( matcher, hint );
+	}
+
+	return testedBlock;
+}
+
+/**
+ * Clear all blocks and add a fresh copy of the block to be tested
+ *
+ * @since [version]
+ *
+ * @param {string} name Block name.
+ * @return {void}
+ */
+async function setupTest( name ) {
+
+	await clearBlocks();
+	return await insertBlock( name );
+
+}
+
+/**
+ * Run a snapshot expectation against the current tested block for a specific block attribute.
+ *
+ * @since [version]
+ *
+ * @param {string} attributeName Block attribute name / key.
+ * @return {void}
+ */
+async function expectBlockAttribute( attributeName ) {
+
+	const { attributes } = await getTestedBlock( null );
+	expect( attributes[ attributeName ] ).toMatchSnapshot();
+
+
+}
+
+async function getReusableBlockChildren( clientId ) {
+	return await page.evaluate( async( _clientId ) =>
+		wp.data.select( 'core/block-editor' ).getBlocks( _clientId ),
+		clientId
+	);
+}
+
+
+async function expectedField( fieldName, clientId ) {
+
+	await page.waitFor( 500 );
+
+	const field = await getField( fieldName );
+	expect( field ).toMatchSnapshot( fieldSnapshotMatcher, 'single field' );
+	expect( field.clientId ).toBe( clientId );
+
 }
 
 async function getLoadedBlocks() {
@@ -51,58 +121,181 @@ async function getField( name ) {
 	return await page.evaluate( ( _name ) => wp.data.select( 'llms/user-info-fields' ).getField( _name ), name );
 }
 
+
+
+
+
+
+
+/**
+ * Expectations for converting a field to and from a group block.
+ *
+ * @since [version]
+ *
+ * @param {Object} props
+ * @param {string} props.name      Block name.
+ * @param {string} props.fieldName Field name.
+ * @return {void}
+ */
+async function testGroupTransforms( { name, fieldName } ) {
+
+	// To a group.
+	await transformBlockTo( 'Group', fieldName );
+	const groupBlock = await getTestedBlock( 'group block' ),
+		{ innerBlocks } = groupBlock;
+
+	expect( innerBlocks[0] ).toMatchSnapshot( blockSnapshotMatcher, 'single block' );
+	await expectedField( fieldName, innerBlocks[0].clientId );
+
+	// Ungroup.
+	await clickBlockToolbarOption( 'Ungroup' );
+	const testedBlock = await getTestedBlock();
+
+	expect( innerBlocks[0] ).toMatchSnapshot( blockSnapshotMatcher, 'single block' );
+	await expectedField( fieldName, testedBlock.clientId );
+
+}
+
+/**
+ * Expectations for converting a field to a columns block.
+ *
+ * @since [version]
+ *
+ * @param {Object} props
+ * @param {string} props.name      Block name.
+ * @param {string} props.fieldName Field name.
+ * @return {void}
+ */
+async function testTransformToColumns( { name, fieldName } ) {
+
+	// To columns.
+	await transformBlockTo( 'Columns', fieldName );
+	const columnsBlock = await getTestedBlock( 'columns block' ),
+		{ innerBlocks } = columnsBlock,
+		columnBlock = innerBlocks[0],
+		fieldBlock = columnBlock.innerBlocks[0];
+
+	expect( columnBlock ).toMatchSnapshot( blockSnapshotMatcher, 'column block' );
+	expect( fieldBlock ).toMatchSnapshot( blockSnapshotMatcher, 'single block' );
+	await expectedField( fieldName, fieldBlock.clientId );
+
+	// Reset the block (I don't want to figure out how to write a test to move the block out of the column).
+	await setupTest( name );
+
+}
+
+/**
+ * Expectations for converting a field to and from a reusable block.
+ *
+ * @since [version]
+ *
+ * @param {Object} props
+ * @param {string} props.name      Block name.
+ * @param {string} props.fieldName Field name.
+ * @return {void}
+ */
+async function testReusalbeTransforms( { name, fieldName } ) {
+
+	// To a reusable block.
+	await convertBlockToReusable( `Reusable: ${ fieldName }` );
+	const reusableBlock = await getTestedBlock( 'reusable block', reusableBlockSnapshotMatcher );
+
+	await page.waitFor( 1000 );
+
+	const [ testedBlock ] = await getReusableBlockChildren( reusableBlock.clientId );
+	await expectedField( fieldName, testedBlock.clientId );
+	expect( testedBlock ).toMatchSnapshot( blockSnapshotMatcher, 'single block' );
+
+	// Reusable to static.
+	await showBlockToolbar();
+	await clickBlockToolbarButton( 'Convert to regular blocks' );
+
+	await page.waitFor( 1000 );
+
+	const staticBlock = await getTestedBlock( 'single block' );
+	await expectedField( fieldName, staticBlock.clientId );
+
+}
+
+/**
+ * Test modification of a field's label property.
+ *
+ * @since Unknown
+ * @since [version] Don't run automatic snapshot tests when retrieving the tested block & use expectBlockAttribute().
+ *
+ * @return {void}
+ */
 async function testLabelProp() {
 
-	const { clientId } = await getTestedBlock();
+	const { clientId } = await getTestedBlock( null );
 	await page.type( `#block-${ clientId } label.rich-text`, 'Custom Label ' );
-
-	const { attributes } = await getTestedBlock();
-	expect( attributes.label ).toMatchSnapshot();
+	await expectBlockAttribute( 'label' );
 
 }
 
+/**
+ * Test modification of a field's description property.
+ *
+ * @since Unknown
+ * @since [version] Don't run automatic snapshot tests when retrieving the tested block.
+ *
+ * @return {void}
+ */
 async function testDescriptionProp() {
 
-	const { clientId } = await getTestedBlock();
+	const { clientId } = await getTestedBlock( null );
 	await page.type( `#block-${ clientId } span.rich-text`, 'Custom description' );
-
-	const { attributes } = await getTestedBlock();
-	expect( attributes.description ).toMatchSnapshot();
+	await expectBlockAttribute( 'description' );
 
 }
 
-async function testFieldColumns() {
+/**
+ * Test modification of a field's description property.
+ *
+ * @since [version]
+ *
+ * @return {void}
+ */
+async function testFieldColumnsProp() {
 
 	const
-		selector = '.llms-field-width-select select',
-		opts     = await page.$$eval( `${ selector } option`, els => els.map( ( { value } ) => value ) );
+		SELECTOR = '.llms-field-width-select select',
+		OPTS     = await page.$$eval( `${ SELECTOR } option`, els => els.map( ( { value } ) => value ) );
 
 	// Make sure the right options are available.
-	expect( opts ).toEqual( [ '12', '9', '8', '6', '4', '3' ] );
+	expect( OPTS ).toEqual( [ '12', '9', '8', '6', '4', '3' ] );
 
-	for ( let i = opts.length - 1; i >= 0; i-- ) {
+	for ( let i = OPTS.length - 1; i >= 0; i-- ) {
 
-		const cols = opts[ i ];
-		await page.select( selector, cols );
+		const cols = OPTS[ i ];
+		await page.select( SELECTOR, cols );
 
-		const { attributes } = await getTestedBlock();
+		const { attributes } = await getTestedBlock( null );
 		expect( attributes.columns ).toBe( parseInt( cols, 10 ) );
 
 	}
 
 }
 
+/**
+ * Test modification of a field's placeholder property.
+ *
+ * @since Unknown
+ * @since [version] Don't run automatic snapshot tests when retrieving the tested block.
+ *
+ * @param {Boolean} editable Whether or not the tested block's placeholder is editable.
+ * @return {void}
+ */
 async function testPlaceholderProp( editable = true ) {
 
 	const
-		{ clientId } = await getTestedBlock(),
+		{ clientId } = await getTestedBlock( null ),
 		selector     = `#block-${ clientId } input`;
 
 	if ( editable ) {
-		await page.type( selector, 'Custom Placeholder' );
 
-		const { attributes } = await getTestedBlock();
-		expect( attributes.placeholder ).toMatchSnapshot();
+		await page.type( selector, 'Custom Placeholder' );
+		await expectBlockAttribute( 'placeholder' );
 
 	} else {
 
@@ -111,6 +304,45 @@ async function testPlaceholderProp( editable = true ) {
 	}
 }
 
+/**
+ * Test modification of a field's required property.
+ *
+ * @since Unknown
+ * @since [version] Don't run automatic snapshot tests when retrieving the tested block.
+ *
+ * @param {Boolean} editable Whether or not the tested block's placeholder is editable.
+ * @return {void}
+ */
+async function testRequiredProp( editable = true ) {
+
+	if ( editable ) {
+
+		await click( '.llms-required-field-toggle label' );
+		let { attributes } = await getTestedBlock( null );
+		expect( attributes.required ).toBe( true );
+
+		await click( '.llms-required-field-toggle label' );
+		( { attributes } = await getTestedBlock( null ) );
+		expect( attributes.required ).toBe( false );
+
+	} else {
+
+		expect( await page.evaluate( () => document.querySelector( '.llms-required-field-toggle' ) ) ).toBeNull();
+
+	}
+
+}
+
+/**
+ * Test the addition of a confirmation group to a single field block
+ *
+ * @since Unknown
+ * @since [version] Add snapshot matcher hints.
+ *
+ * @param {Boolean} editable  Whether or not the block can be made into a confirm group.
+ * @param {String}  fieldName Field name.
+ * @return {void}
+ */
 async function testAddConfirmationProp( editable = true, fieldName = '' ) {
 
 	if ( editable ) {
@@ -120,29 +352,27 @@ async function testAddConfirmationProp( editable = true, fieldName = '' ) {
 		await page.waitFor( 2000 );
 
 		const
-			block = await getTestedBlock(),
+			block = await getTestedBlock( null ),
 			{ innerBlocks } = block;
 
 		// Group.
-		expect( block ).toMatchSnapshot( blockSnapshotMatcher );
+		expect( block ).toMatchSnapshot( blockSnapshotMatcher, 'confirm group block' );
 
 		// Main field.
-		expect( innerBlocks[0] ).toMatchSnapshot( blockSnapshotMatcher );
+		expect( innerBlocks[0] ).toMatchSnapshot( blockSnapshotMatcher, 'main field block' );
 
 		// Confirm field.
-		expect( innerBlocks[1] ).toMatchSnapshot( blockSnapshotMatcher );
+		expect( innerBlocks[1] ).toMatchSnapshot( blockSnapshotMatcher, 'confirm field block' );
 
 		// Test loading block via the llms/user-info-fields store.
-		await page.waitFor( 1000 ); // Waiting for subscription watcher to catch up.
-
 		// Main field.
 		const loadedField = await getField( fieldName );
-		expect( loadedField ).toMatchSnapshot( fieldSnapshotMatcher );
+		expect( loadedField ).toMatchSnapshot( fieldSnapshotMatcher, 'main field' );
 		expect( loadedField.clientId ).toBe( innerBlocks[0].clientId );
 
 		// Confirm field.
 		const loadedConfirmField = await getField( `${fieldName}_confirm` );
-		expect( loadedConfirmField ).toMatchSnapshot( fieldSnapshotMatcher );
+		expect( loadedConfirmField ).toMatchSnapshot( fieldSnapshotMatcher, 'confirm field' );
 		expect( loadedConfirmField.clientId ).toBe( innerBlocks[1].clientId );
 
 	} else {
@@ -151,31 +381,17 @@ async function testAddConfirmationProp( editable = true, fieldName = '' ) {
 
 }
 
-async function testDelConfirmationProp( fieldName ) {
-
-	await clickElementByText( 'Remove confirmation field' );
-
-	const
-		block = await getTestedBlock(),
-		{ innerBlocks } = block;
-
-	expect( block ).toMatchSnapshot( blockSnapshotMatcher );
-	expect( innerBlocks ).toEqual( [] );
-
-	// Test field data.
-	await page.waitFor( 1000 ); // Waiting for subscription watcher to catch up.
-	const loadedField = await getField( fieldName );
-	expect( loadedField ).toMatchSnapshot( fieldSnapshotMatcher );
-	expect( loadedField.clientId ).toBe( block.clientId );
-
-	// Confirm field is gone.
-	expect( await getField( `${ fieldName }_confirm` ) ).toBeNull();
-
-}
-
+/**
+ * Test confirm group layout options and it's effect on inner blocks
+ *
+ * @since Unknown
+ * @since [version] Add snapshot matcher hints.
+ *
+ * @return {void}
+ */
 async function testGroupLayout() {
 
-	const { clientId } = await getTestedBlock();
+	const { clientId } = await getTestedBlock( null );
 	await selectBlockByClientId( clientId );
 
 	const selections = [ 'Stacked', 'Columns' ];
@@ -185,35 +401,42 @@ async function testGroupLayout() {
 		await clickElementByText( selections[ i ] );
 
 		const
-			block = await getTestedBlock(),
-			{ innerBlocks } = block;
+			block = await getTestedBlock( 'confirm group' ),
+			{ innerBlocks } = block,
+			[ mainBlock, confirmBlock ] = innerBlocks;
 
-		expect( block ).toMatchSnapshot( blockSnapshotMatcher );
+		expect( mainBlock ).toMatchSnapshot( blockSnapshotMatcher, 'main field block' );
+		expect( confirmBlock ).toMatchSnapshot( blockSnapshotMatcher, 'confirm field block' );
 
-		expect( innerBlocks[0] ).toMatchSnapshot( blockSnapshotMatcher );
-		expect( innerBlocks[1] ).toMatchSnapshot( blockSnapshotMatcher );
 	}
 
 }
 
-async function testRequiredProp( editable = true ) {
+/**
+ * Test removal of the confirmation group for a given field
+ *
+ * @since [version]
+ * @since [version] Use helper functions and add snapshot hints.
+ *
+ * @param {string} fieldName Block field name.
+ * @return {void}
+ */
+async function testDelConfirmationProp( fieldName ) {
 
-	if ( editable ) {
+	await clickElementByText( 'Remove confirmation field' );
 
-		await click( '.llms-required-field-toggle label' );
-		let { attributes } = await getTestedBlock();
-		expect( attributes.required ).toBe( true );
+	const
+		block = await getTestedBlock( 'single block' ),
+		{ innerBlocks } = block;
 
-		await click( '.llms-required-field-toggle label' );
-		( { attributes } = await getTestedBlock() );
-		expect( attributes.required ).toBe( false );
+	expect( innerBlocks ).toEqual( [] );
 
-	} else {
-		expect( await page.evaluate( () => document.querySelector( '.llms-required-field-toggle' ) ) ).toBeNull();
-	}
+	await expectedField( fieldName, block.clientId );
+
+	// Confirm field is gone.
+	expect( await getField( `${ fieldName }_confirm` ) ).toBeNull();
 
 }
-
 
 
 // List of fields to run tests on.
@@ -285,7 +508,6 @@ describe( 'Blocks/FormFields', () => {
 
 	} );
 
-
 	let i = 0;
 	while ( i < fields.length ) {
 
@@ -301,46 +523,50 @@ describe( 'Blocks/FormFields', () => {
 					return;
 				}
 
-				await clearBlocks();
-				await insertBlock( field.name );
+				await setupTest( field.name );
+
 			} );
 
+			// Basic insertion.
 			it ( 'can be created using the block inserter', async () => {
 
 				// Test the block itself.
 				const testedBlock = await getTestedBlock();
-				expect( testedBlock ).toMatchSnapshot( blockSnapshotMatcher );
 
 				// Test loading block via the llms/user-info-fields store.
-				await page.waitFor( 1000 ); // Waiting for subscription watcher to catch up.
-				const loadedField = await getField( field.fieldName );
-				expect( loadedField ).toMatchSnapshot( fieldSnapshotMatcher );
-				expect( loadedField.clientId ).toBe( testedBlock.clientId );
+				await expectedField( field.fieldName, testedBlock.clientId );
 
 			} );
 
+			// Transforms.
+			it ( 'can be transformed to and from a group block', async () => await testGroupTransforms( field ) );
+			it ( 'can be transformed to a columns block', async () => await testTransformToColumns( field ) );
+			it ( 'can be transformed to and from a reusable block', async () => await testReusalbeTransforms( field ) );
+
+			// Block attributes.
 			it ( 'can modify the label', async () => await testLabelProp() );
 			it ( 'can modify the description', async () => await testDescriptionProp() );
-			it ( 'can modify the field columns width', async() => await testFieldColumns() )
+			it ( 'can modify the field columns width', async() => await testFieldColumnsProp() )
 
+			// Block attributes that can only be modified by certain blocks.
 			if ( field.placeholder ) {
 				it ( 'can modify the placeholder', async () => await testPlaceholderProp( true ) );
 			} else {
 				it ( 'cannot modify the placeholder', async () => await testPlaceholderProp( false ) );
 			}
+			if ( field.required ) {
+				it ( 'can control the field required attribute', async () => await testRequiredProp( true ) );
+			} else {
+				it ( 'cannot control the required attribute', async () => await testRequiredProp( false ) );
+			}
 
+			// Confirmation group.
 			if ( field.confirmation ) {
 				it ( 'can add a confirmation field', async () => await testAddConfirmationProp( true, field.fieldName ) );
 				it ( 'can toggle the group layout', async() => await testGroupLayout() );
 				it ( 'can remove the confirmation field', async() => await testDelConfirmationProp( field.fieldName ) );
 			} else {
 				it ( 'cannot add a confirmation field', async () => await testAddConfirmationProp( false, field.fieldName ) );
-			}
-
-			if ( field.required ) {
-				it ( 'can control the field required attribute', async () => await testRequiredProp( true ) );
-			} else {
-				it ( 'cannot control the required attribute', async () => await testRequiredProp( false ) );
 			}
 
 		} );
