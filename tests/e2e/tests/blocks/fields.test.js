@@ -37,6 +37,7 @@ const reusableBlockSnapshotMatcher = {
 	},
 };
 
+
 /**
  * Utility function to retrieve the block being tested
  *
@@ -449,6 +450,19 @@ async function testDelConfirmationProp( fieldName ) {
  *
  * @since Unknown
  * @since [version] Added Voucher block.
+ *
+ * @todo Build a set of recursive tests to run all tests against each block within
+ *       a group of blocks.
+ *
+ * Add tests for Name & Address blocks that are made up entirely of innerBlocks
+ *
+ * Additionally the same set of tests for label, description, etc... should be run
+ * against confirmation fields.
+ *
+ * Additional custom tests should be written for custom properties on the password field (meter toggling, length, and meter desc.).
+ *
+ * Additional tests should be run on the frontend too, maybe? Although this maybe redundant, assuming the phpunit tests
+ * properly test output we shouldn't have to additionally write E2E tests to test the output of the field data...
  */
 const fields = [
 	{
@@ -493,22 +507,7 @@ const fields = [
 		placeholder: true,
 		fieldName: 'llms_voucher',
 	},
-
-	/**
-	 * @todo Build a set of recursive tests to run all tests against each block within
-	 *       a group of blocks.
-	 *
-	 * Add tests for Name & Address blocks that are made up entirely of innerBlocks
-	 *
-	 * Additionally the same set of tests for label, description, etc... should be run
-	 * against confirmation fields.
-	 *
-	 * Additional custom tests should be written for custom properties on the password field (meter toggling, length, and meter desc.).
-	 *
-	 * Additional tests should be run on the frontend too, maybe? Although this maybe redundant, assuming the phpunit tests
-	 * properly test output we shouldn't have to additionally write E2E tests to test the output of the field data...
-	 */
-];
+].map( field => Object.assign( field, { toString: () => field.name } ) ); // Add a `toString()` function used by describe.each().
 
 const SHOULD_RUN = shouldRunTestsForForms();
 
@@ -525,70 +524,62 @@ describe( 'Blocks/FormFields', () => {
 
 	} );
 
-	let i = 0;
-	while ( i < fields.length ) {
+	describe.each( fields )( '%s/Editor', ( field ) => {
 
-		const field = fields[i];
+		beforeAll( async () => {
 
-		describe( `${ field.name }/Editor`, () => {
-
-			maybeSkipFormsTests();
-
-			beforeAll( async () => {
-
-				if ( ! SHOULD_RUN ) {
-					return;
-				}
-
-				await setupTest( field.name );
-
-			} );
-
-			// Basic insertion.
-			it ( 'can be created using the block inserter', async () => {
-
-				// Test the block itself.
-				const testedBlock = await getTestedBlock();
-
-				// Test loading block via the llms/user-info-fields store.
-				await expectedField( field.fieldName, testedBlock.clientId );
-
-			} );
-
-			// Transforms.
-			it ( 'can be transformed to and from a group block', async () => await testGroupTransforms( field ) );
-			it ( 'can be transformed to a columns block', async () => await testTransformToColumns( field ) );
-			it ( 'can be transformed to and from a reusable block', async () => await testReusalbeTransforms( field ) );
-
-			// Block attributes.
-			it ( 'can modify the label', async () => await testLabelProp() );
-			it ( 'can modify the description', async () => await testDescriptionProp() );
-			it ( 'can modify the field columns width', async() => await testFieldColumnsProp() )
-
-			// Block attributes that can only be modified by certain blocks.
-			if ( field.placeholder ) {
-				it ( 'can modify the placeholder', async () => await testPlaceholderProp( true ) );
-			} else {
-				it ( 'cannot modify the placeholder', async () => await testPlaceholderProp( false ) );
-			}
-			if ( field.required ) {
-				it ( 'can control the field required attribute', async () => await testRequiredProp( true ) );
-			} else {
-				it ( 'cannot control the required attribute', async () => await testRequiredProp( false ) );
+			if ( ! SHOULD_RUN ) {
+				return;
 			}
 
-			// Confirmation group.
-			if ( field.confirmation ) {
-				it ( 'can add a confirmation field', async () => await testAddConfirmationProp( true, field.fieldName ) );
-				it ( 'can toggle the group layout', async() => await testGroupLayout() );
-				it ( 'can remove the confirmation field', async() => await testDelConfirmationProp( field.fieldName ) );
-			} else {
-				it ( 'cannot add a confirmation field', async () => await testAddConfirmationProp( false, field.fieldName ) );
-			}
+			await setupTest( field.name );
 
 		} );
 
-		++i;
-	}
+		maybeSkipFormsTests();
+
+		// Basic insertion.
+		it ( 'can be created using the block inserter', async () => {
+
+			// Test the block itself.
+			const testedBlock = await getTestedBlock();
+
+			// Test loading block via the llms/user-info-fields store.
+			await expectedField( field.fieldName, testedBlock.clientId );
+
+		} );
+
+		// Transforms.
+		it ( 'can be transformed to and from a group block', async () => await testGroupTransforms( field ) );
+		it ( 'can be transformed to a columns block', async () => await testTransformToColumns( field ) );
+		it ( 'can be transformed to and from a reusable block', async () => await testReusalbeTransforms( field ) );
+
+		// Block attributes.
+		it ( 'can modify the label', async () => await testLabelProp() );
+		it ( 'can modify the description', async () => await testDescriptionProp() );
+		it ( 'can modify the field columns width', async() => await testFieldColumnsProp() )
+
+		// Block attributes that can only be modified by certain blocks.
+		if ( field.placeholder ) {
+			it ( 'can modify the placeholder', async () => await testPlaceholderProp( true ) );
+		} else {
+			it ( 'cannot modify the placeholder', async () => await testPlaceholderProp( false ) );
+		}
+		if ( field.required ) {
+			it ( 'can control the field required attribute', async () => await testRequiredProp( true ) );
+		} else {
+			it ( 'cannot control the required attribute', async () => await testRequiredProp( false ) );
+		}
+
+		// Confirmation group.
+		if ( field.confirmation ) {
+			it ( 'can add a confirmation field', async () => await testAddConfirmationProp( true, field.fieldName ) );
+			it ( 'can toggle the group layout', async() => await testGroupLayout() );
+			it ( 'can remove the confirmation field', async() => await testDelConfirmationProp( field.fieldName ) );
+		} else {
+			it ( 'cannot add a confirmation field', async () => await testAddConfirmationProp( false, field.fieldName ) );
+		}
+
+	} );
 
 } );
