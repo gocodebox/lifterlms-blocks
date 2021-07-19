@@ -44,7 +44,7 @@ const reusableBlockSnapshotMatcher = {
  * and returns the first one.
  *
  * @since 2.0.0
- * @since [version] Automatically run a snapshot expectation.
+ * @since 2.2.0 Automatically run a snapshot expectation.
  *
  * @param {?string} hint    Message to be passed as the toMatchSnapshot hint. If `null`, snapshot is skipped.
  * @param {Object}  matcher Snapshot matcher, defaults to `blocksSnapshotMatcher`.
@@ -64,7 +64,7 @@ async function getTestedBlock( hint = 'single block', matcher = blockSnapshotMat
 /**
  * Clear all blocks and add a fresh copy of the block to be tested
  *
- * @since [version]
+ * @since 2.2.0
  *
  * @param {string} name Block name.
  * @return {void}
@@ -79,7 +79,7 @@ async function setupTest( name ) {
 /**
  * Run a snapshot expectation against the current tested block for a specific block attribute.
  *
- * @since [version]
+ * @since 2.2.0
  *
  * @param {string} attributeName Block attribute name / key.
  * @return {void}
@@ -129,7 +129,7 @@ async function getField( name ) {
 /**
  * Expectations for converting a field to and from a group block.
  *
- * @since [version]
+ * @since 2.2.0
  *
  * @param {Object} props
  * @param {string} props.name      Block name.
@@ -158,7 +158,7 @@ async function testGroupTransforms( { name, fieldName } ) {
 /**
  * Expectations for converting a field to a columns block.
  *
- * @since [version]
+ * @since 2.2.0
  *
  * @param {Object} props
  * @param {string} props.name      Block name.
@@ -186,7 +186,7 @@ async function testTransformToColumns( { name, fieldName } ) {
 /**
  * Expectations for converting a field to and from a reusable block.
  *
- * @since [version]
+ * @since 2.2.0
  *
  * @param {Object} props
  * @param {string} props.name      Block name.
@@ -220,7 +220,7 @@ async function testReusalbeTransforms( { name, fieldName } ) {
  * Test modification of a field's label property.
  *
  * @since Unknown
- * @since [version] Replace existing label instead of adding to it.
+ * @since 2.2.0 Replace existing label instead of adding to it.
  *              Don't run automatic snapshot tests when retrieving the tested block & use expectBlockAttribute().
  *
  * @return {void}
@@ -239,7 +239,7 @@ async function testLabelProp() {
  * Test modification of a field's description property.
  *
  * @since Unknown
- * @since [version] Don't run automatic snapshot tests when retrieving the tested block.
+ * @since 2.2.0 Don't run automatic snapshot tests when retrieving the tested block.
  *
  * @return {void}
  */
@@ -254,7 +254,7 @@ async function testDescriptionProp() {
 /**
  * Test modification of a field's description property.
  *
- * @since [version]
+ * @since 2.2.0
  *
  * @return {void}
  */
@@ -283,7 +283,7 @@ async function testFieldColumnsProp() {
  * Test modification of a field's placeholder property.
  *
  * @since Unknown
- * @since [version] Don't run automatic snapshot tests when retrieving the tested block and select all input content prior to typing a custom placeholder.
+ * @since 2.2.0 Don't run automatic snapshot tests when retrieving the tested block and select all input content prior to typing a custom placeholder.
  *
  * @param {Boolean} editable Whether or not the tested block's placeholder is editable.
  * @return {void}
@@ -312,7 +312,7 @@ async function testPlaceholderProp( editable = true ) {
  * Test modification of a field's required property.
  *
  * @since Unknown
- * @since [version] Don't run automatic snapshot tests when retrieving the tested block.
+ * @since 2.2.0 Don't run automatic snapshot tests when retrieving the tested block.
  *
  * @param {Boolean} editable Whether or not the tested block's placeholder is editable.
  * @return {void}
@@ -341,7 +341,7 @@ async function testRequiredProp( editable = true ) {
  * Test the addition of a confirmation group to a single field block
  *
  * @since Unknown
- * @since [version] Add snapshot matcher hints.
+ * @since 2.2.0 Add snapshot matcher hints.
  *
  * @param {Boolean} editable  Whether or not the block can be made into a confirm group.
  * @param {String}  fieldName Field name.
@@ -389,7 +389,7 @@ async function testAddConfirmationProp( editable = true, fieldName = '' ) {
  * Test confirm group layout options and it's effect on inner blocks
  *
  * @since Unknown
- * @since [version] Add snapshot matcher hints.
+ * @since 2.2.0 Add snapshot matcher hints.
  *
  * @return {void}
  */
@@ -419,8 +419,8 @@ async function testGroupLayout() {
 /**
  * Test removal of the confirmation group for a given field
  *
- * @since [version]
- * @since [version] Use helper functions and add snapshot hints.
+ * @since 2.2.0
+ * @since 2.2.0 Use helper functions and add snapshot hints.
  *
  * @param {string} fieldName Block field name.
  * @return {void}
@@ -447,7 +447,7 @@ async function testDelConfirmationProp( fieldName ) {
  * List of fields to run tests on.
  *
  * @since Unknown
- * @since [version] Added Voucher block.
+ * @since 2.2.0 Added Voucher block.
  *
  * @todo Build a set of recursive tests to run all tests against each block within
  *       a group of blocks.

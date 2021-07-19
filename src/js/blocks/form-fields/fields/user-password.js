@@ -5,7 +5,7 @@
  * @since 1.8.0 Updated lodash imports.
  * @since 1.12.0 Add data store support.
  * @since 2.0.0 Add reusable block support.
- * @since [version] Don't define the `match` attribute.
+ * @since 2.2.0 Don't define the `match` attribute.
  */
 
 // WP Deps.

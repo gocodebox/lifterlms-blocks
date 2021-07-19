@@ -9,7 +9,7 @@ import { showBlockToolbar } from '@wordpress/e2e-test-utils'
  * following `element.scrollIntoVie()` would fail inconsistently. I can't find a way to add a proper
  * callback to wait for the scroll to finish so I'm just adding delays here.
  *
- * @since [version]
+ * @since 2.2.0
  *
  * @link https://github.com/WordPress/gutenberg/blob/trunk/packages/e2e-test-utils/src/transform-block-to.js
  *

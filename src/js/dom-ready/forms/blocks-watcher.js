@@ -2,7 +2,7 @@
  * Watch the blocks tree and sync changes to the llms/user-info-fields data store
  *
  * @since 2.0.0
- * @version [version]
+ * @version 2.2.0
  */
 
 // External deps.
@@ -42,7 +42,7 @@ const fieldBlocksDifferenceBy = ( a, b ) =>
  * Unloads persisted blocks and deletes unpersisted blocks.
  *
  * @since 2.0.0
- * @since [version] Removed setTimeout when unloading/deleting field.
+ * @since 2.2.0 Removed setTimeout when unloading/deleting field.
  *
  * @param {Object[]} deletedBlocks List of blocks that have been deleted since the last check.
  * @return {void}
@@ -70,7 +70,7 @@ const unloadBlocks = ( deletedBlocks ) => {
  * Loads existing fields and creates non-existent fields.
  *
  * @since 2.0.0
- * @since [version] Remove setTimeout() when loading/adding field.
+ * @since 2.2.0 Remove setTimeout() when loading/adding field.
  *
  * @param {Object[]} createdBlocks List of blocks that have been added since the last check.
  * @return {void}
@@ -99,7 +99,7 @@ const loadBlocks = ( createdBlocks ) => {
 /**
  * Signals a check to determine if field blocks should be loaded & unloaded based on the current state of the block list
  *
- * @since [version]
+ * @since 2.2.0
  *
  * @return {void}
  */
@@ -120,7 +120,7 @@ function updateBlocks() {
  * Subscription handler
  *
  * @since 2.0.0
- * @since [version] Don't debounce the subscription method and use `updateBlocks()` instead of anonymous function.
+ * @since 2.2.0 Don't debounce the subscription method and use `updateBlocks()` instead of anonymous function.
  *
  * @return {void}
  */

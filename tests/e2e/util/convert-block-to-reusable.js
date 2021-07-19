@@ -5,7 +5,7 @@ import { clickBlockToolbarOption } from './';
 /**
  * Handle the WP 5.8 & later reusable block creation modal/form
  *
- * @since [version]
+ * @since 2.2.0
  *
  * @param {String} name Title of the reusable block.
  * @return {void}
@@ -29,7 +29,7 @@ async function handleModal( name ) {
 /**
  * Convert a block to a reusable block
  *
- * @since [version]
+ * @since 2.2.0
  *
  * @param {String} name Title of the reusable block.
  * @return {void}

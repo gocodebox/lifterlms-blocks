@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the LifterLMS Blocks plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: LifterLMS Blocks 2.1.1\n"
+"Project-Id-Version: LifterLMS Blocks 2.2.0\n"
 "Report-Msgid-Bugs-To: https://lifterlms.com/my-account/my-tickets\n"
 "Last-Translator: Team LifterLMS <team@lifterlms.com>\n"
 "Language-Team: Team LifterLMS <team@lifterlms.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-07-19T13:09:50-06:00\n"
+"POT-Creation-Date: 2021-07-19T17:22:34-06:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: llms-dev 1.0.0\n"
 "X-Domain: lifterlms\n"
@@ -28,15 +28,8 @@ msgid "WordPress Editor (Gutenberg) blocks for LifterLMS."
 msgstr ""
 
 #. Author of the plugin
-#: assets/js/llms-blocks.js:14590
-#: assets/js/llms-blocks.js:14717
-#: assets/js/llms-blocks.js:15277
-#: assets/js/llms-blocks.js:15409
-#: assets/js/llms-blocks.js:20749
-#: assets/js/llms-blocks.js:21329
-#: assets/js/llms-blocks.js:21417
-#: assets/js/llms-blocks.js:21540
-#: assets/js/llms-blocks.js:21681
+#: assets/js/llms-blocks.js:3
+#: assets/js/llms-blocks.js:17
 msgid "LifterLMS"
 msgstr ""
 
@@ -45,8 +38,7 @@ msgid "https://lifterlms.com/"
 msgstr ""
 
 #: includes/blocks/class-llms-blocks-course-information-block.php:48
-#: assets/js/llms-blocks.js:14711
-#: assets/js/llms-blocks.js:14721
+#: assets/js/llms-blocks.js:3
 msgid "Course Information"
 msgstr ""
 
@@ -104,7 +96,7 @@ msgid "Remove Block Code"
 msgstr ""
 
 #: includes/class-llms-blocks.php:55
-#: assets/js/llms-blocks.js:24142
+#: assets/js/llms-blocks.js:22
 msgid "Custom User Information"
 msgstr ""
 
@@ -112,986 +104,973 @@ msgstr ""
 msgid "User Information"
 msgstr ""
 
-#: assets/js/llms-blocks.js:14096
-msgid "in this course"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14102
-msgid "in any course"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14108
-msgid "in this membership"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14114
-msgid "in any membership"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14117
-msgid "in any course or membership"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14120
-msgid "in all of the selected courses or memberships"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14123
-msgid "in any of the selected courses or memberships"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14139
-msgid "Enrolled In"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14142
-msgid "Not Enrolled In"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14260
-msgid "Enrollment Visibility"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14263
-msgid "Display to"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14280
-msgid "Courses"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14281
-msgid "Search by course title…"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14289
-msgid "Memberships"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14290
-msgid "Search by membership title…"
-msgstr ""
-
-#. Translators: %s = visibility setting label.
-#: assets/js/llms-blocks.js:14403
-msgid "This block is only visible to %s"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14442
+#: assets/js/llms-blocks.js:1
 msgid "everyone"
 msgstr ""
 
-#: assets/js/llms-blocks.js:14443
+#: assets/js/llms-blocks.js:1
 msgid "enrolled users"
 msgstr ""
 
-#: assets/js/llms-blocks.js:14444
+#: assets/js/llms-blocks.js:1
 msgid "non-enrolled users or visitors"
 msgstr ""
 
-#: assets/js/llms-blocks.js:14445
+#: assets/js/llms-blocks.js:1
 msgid "logged in users"
 msgstr ""
 
-#: assets/js/llms-blocks.js:14446
+#: assets/js/llms-blocks.js:1
 msgid "logged out users"
 msgstr ""
 
-#: assets/js/llms-blocks.js:14583
-msgid "Course Continue Button"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14613
-msgid "Continue"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14793
-msgid "Estimated Time"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14796
-msgid "Difficulty"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14800
-msgid "Tracks"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14804
-msgid "Categories"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14808
-msgid "Tags"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14909
-msgid "Course Information Options"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14911
-msgid "Title Headline Size"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14918
-msgid "Headline size for the information title element."
-msgstr ""
-
-#: assets/js/llms-blocks.js:14939
-msgid "Estimated Completion Time"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14946
-msgid "How many hours, days, weeks, etc… should a student expect to spend in order to complete this course."
-msgstr ""
-
-#: assets/js/llms-blocks.js:14948
-msgid "Display Estimated Time"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14955
-msgid "Displaying estimated time"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14955
-msgid "Hiding estimated time"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14957
-msgid "Display Difficulty"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14964
-msgid "Displaying difficulty"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14964
-msgid "Hiding difficulty"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14966
-msgid "Display Tracks"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14973
-msgid "Displaying tracks list"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14973
-msgid "Hiding tracks list"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14975
-msgid "Display Categories"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14982
-msgid "Displaying categories list"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14982
-msgid "Hiding categories list"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14984
-msgid "Display Tags"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14991
-msgid "Displaying tags list"
-msgstr ""
-
-#: assets/js/llms-blocks.js:14991
-msgid "Hiding tags list"
-msgstr ""
-
-#: assets/js/llms-blocks.js:15159
-msgid "Loading…"
-msgstr ""
-
-#: assets/js/llms-blocks.js:15271
-msgid "Course Progress"
-msgstr ""
-
-#: assets/js/llms-blocks.js:15403
-msgid "Course Syllabus"
-msgstr ""
-
-#: assets/js/llms-blocks.js:16066
-#: assets/js/llms-blocks.js:16079
-msgid "Add optional placeholder text"
-msgstr ""
-
-#: assets/js/llms-blocks.js:16181
-msgid "Checkboxes"
-msgstr ""
-
-#: assets/js/llms-blocks.js:16182
-msgid "A single checkbox toggle or a group of multiple checkboxes."
-msgstr ""
-
-#. Translators: %s label of the controller field.
-#: assets/js/llms-blocks.js:16342
-msgid "Confirm %s"
-msgstr ""
-
-#: assets/js/llms-blocks.js:16515
-msgid "Remove confirmation field"
-msgstr ""
-
-#: assets/js/llms-blocks.js:16541
-msgid "Input Confirmation Group"
-msgstr ""
-
-#: assets/js/llms-blocks.js:16542
-msgid "Adds a required confirmation field to an input field."
-msgstr ""
-
-#: assets/js/llms-blocks.js:16661
-msgid "Radio"
-msgstr ""
-
-#: assets/js/llms-blocks.js:16662
-msgid "A group of radio inputs which can be populated with any number of options."
-msgstr ""
-
-#: assets/js/llms-blocks.js:16758
-msgid "Toggleable"
-msgstr ""
-
-#: assets/js/llms-blocks.js:16765
-msgid "Field is revealed when the toggle is clicked."
-msgstr ""
-
-#: assets/js/llms-blocks.js:16765
-msgid "Field is always visible."
-msgstr ""
-
-#: assets/js/llms-blocks.js:16780
-msgid "Voucher Code Redemption"
-msgstr ""
-
-#: assets/js/llms-blocks.js:16781
-msgid "Allows user to redeem a voucher code during account registration."
-msgstr ""
-
-#: assets/js/llms-blocks.js:16803
-msgid "Have a voucher?"
-msgstr ""
-
-#: assets/js/llms-blocks.js:16809
-msgid "Voucher Code"
-msgstr ""
-
-#: assets/js/llms-blocks.js:16900
-msgid "Dropdown"
-msgstr ""
-
-#: assets/js/llms-blocks.js:16901
-msgid "A select field which can be populated with any number of options."
-msgstr ""
-
-#: assets/js/llms-blocks.js:17005
-#: assets/js/llms-blocks.js:17125
-msgid "Text"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17006
-msgid "An input field which accepts any form of text."
-msgstr ""
-
-#: assets/js/llms-blocks.js:17011
-msgid "Email"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17012
-msgid "A text input field which only accepts an email address."
-msgstr ""
-
-#: assets/js/llms-blocks.js:17016
-#: assets/js/llms-blocks.js:18906
-msgid "Password"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17017
-msgid "User password confirmation field."
-msgstr ""
-
-#: assets/js/llms-blocks.js:17022
-msgid "Number"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17023
-msgid "An input field which only accepts numeric input."
-msgstr ""
-
-#: assets/js/llms-blocks.js:17033
-#: assets/js/llms-blocks.js:19022
-msgid "Phone Number"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17034
-msgid "An input field which only accepts phone numbers."
-msgstr ""
-
-#: assets/js/llms-blocks.js:17038
-msgid "Website Address / URL"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17039
-msgid "An input field which only accepts a website address or URL."
-msgstr ""
-
-#: assets/js/llms-blocks.js:17090
-msgid "Minimum Value"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17091
-msgid "Specify the minimum allowed value. Leave blank for no minimum."
-msgstr ""
-
-#: assets/js/llms-blocks.js:17102
-msgid "Maximum Value"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17103
-msgid "Specify the maximum allowed value. Leave blank for no maximum."
-msgstr ""
-
-#: assets/js/llms-blocks.js:17126
-msgid "A simple text input field."
-msgstr ""
-
-#: assets/js/llms-blocks.js:17218
-msgid "Rows"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17219
-msgid "Specify the number of text rows for the textarea input."
-msgstr ""
-
-#: assets/js/llms-blocks.js:17244
-msgid "Textarea"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17245
-msgid "A text field accepting multiple lines of user information."
-msgstr ""
-
-#: assets/js/llms-blocks.js:17350
-msgid "User City"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17351
-msgid "A special field used to collect a user's billing city."
-msgstr ""
-
-#: assets/js/llms-blocks.js:17370
-msgid "City"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17446
-#: assets/js/llms-blocks.js:17727
-msgid "User Country"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17447
-#: assets/js/llms-blocks.js:17728
-msgid "A special field used to collect a user's billing country."
-msgstr ""
-
-#: assets/js/llms-blocks.js:17467
-msgid "Country"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17485
-msgid "Select a Country"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17549
-msgid "User Postal Code"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17550
-msgid "A special field used to collect a user's postal or zip code."
-msgstr ""
-
-#: assets/js/llms-blocks.js:17569
-msgid "Postal / Zip Code"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17649
-#: assets/js/llms-blocks.js:17830
-#: assets/js/llms-blocks.js:18013
-msgid "User Street Address"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17650
-#: assets/js/llms-blocks.js:18014
-msgid "Collect a user's street address."
-msgstr ""
-
-#: assets/js/llms-blocks.js:17747
-msgid "State / Region"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17765
-msgid "Select a State / Region"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17831
-#: assets/js/llms-blocks.js:17926
-msgid "A special field used to collect a user's street address."
-msgstr ""
-
-#: assets/js/llms-blocks.js:17849
-msgid "Address"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17925
-msgid "User Street Address Additional Information"
-msgstr ""
-
-#: assets/js/llms-blocks.js:17935
-msgid "Apartment, suite, etc…"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18094
-msgid "User Address"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18095
-msgid "A group of fields used to collect a user's full address."
-msgstr ""
-
-#: assets/js/llms-blocks.js:18163
-msgid "User Display Name"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18164
-msgid "Allows a user to choose how their name will be displayed publicly on the site."
-msgstr ""
-
-#: assets/js/llms-blocks.js:18186
-msgid "Display Name"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18261
-msgid "User Email"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18262
-msgid "A special field used to collect a user's account email address."
-msgstr ""
-
-#: assets/js/llms-blocks.js:18284
-msgid "Email Address"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18359
-#: assets/js/llms-blocks.js:18382
-msgid "First Name"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18360
-msgid "A special field used to collect a user's first name."
-msgstr ""
-
-#: assets/js/llms-blocks.js:18459
-#: assets/js/llms-blocks.js:18466
-msgid "Last Name"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18460
-msgid "A special field used to collect a user's last name."
-msgstr ""
-
-#: assets/js/llms-blocks.js:18532
-msgid "User Login"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18533
-msgid "Field used to collect a user's account username. If this field is omitted a username will be automatically generated based off their email address. Users can always login using either their email address or username."
-msgstr ""
-
-#: assets/js/llms-blocks.js:18555
-msgid "Username"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18634
-msgid "User name"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18635
-msgid "A special field used to collect a user's first and last name."
-msgstr ""
-
-#: assets/js/llms-blocks.js:18781
-msgid "Very Weak"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18793
-msgid "Password strength meter description"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18794
-msgid "Enter a description for the password strength meter"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18839
-msgid "Password strength meter"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18840
-msgid "Password strength meter is enabled."
-msgstr ""
-
-#: assets/js/llms-blocks.js:18840
-msgid "Password strength meter is disabled."
-msgstr ""
-
-#: assets/js/llms-blocks.js:18848
-msgid "Minimum Password Strength"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18857
-msgid "Strong"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18860
-msgid "Medium"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18863
-msgid "Weak"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18866
-msgid "Minimum Password Length"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18877
-msgid "User Password"
-msgstr ""
-
-#: assets/js/llms-blocks.js:18878
-msgid "A special field used to collect a user's account password."
-msgstr ""
-
-#: assets/js/llms-blocks.js:18927
-msgid "A strong password is required with at least 8 characters. To make it stronger, use both upper and lower case letters, numbers, and symbols."
-msgstr ""
-
-#: assets/js/llms-blocks.js:19000
-msgid "User Phone"
-msgstr ""
-
-#: assets/js/llms-blocks.js:19001
-msgid "A field used to collect a user's phone number."
-msgstr ""
-
-#: assets/js/llms-blocks.js:19303
-msgid "Field Layout"
-msgstr ""
-
-#: assets/js/llms-blocks.js:19314
-msgid "Columns"
-msgstr ""
-
-#: assets/js/llms-blocks.js:19317
-msgid "Stacked"
-msgstr ""
-
-#: assets/js/llms-blocks.js:19614
-msgid "Reorder option"
-msgstr ""
-
-#: assets/js/llms-blocks.js:19618
-msgid "Make default"
-msgstr ""
-
-#: assets/js/llms-blocks.js:19631
-msgid "Option label"
-msgstr ""
-
-#: assets/js/llms-blocks.js:19635
-#: assets/js/llms-blocks.js:19646
-msgid "Database key value"
-msgstr ""
-
-#: assets/js/llms-blocks.js:19654
-msgid "Delete Option"
-msgstr ""
-
-#. Translators: %d = Option index in the list of options.
-#: assets/js/llms-blocks.js:19704
-#: assets/js/llms-blocks.js:20950
-msgid "Option %d"
-msgstr ""
-
-#. Translators: %d = Option index in the list of options.
-#: assets/js/llms-blocks.js:19740
-#: assets/js/llms-blocks.js:20952
-msgid "option_%d"
-msgstr ""
-
-#: assets/js/llms-blocks.js:19864
-msgid "Options"
-msgstr ""
-
-#: assets/js/llms-blocks.js:19880
-msgid "Add option"
-msgstr ""
-
-#: assets/js/llms-blocks.js:19887
-msgid "Hide keys"
-msgstr ""
-
-#: assets/js/llms-blocks.js:19887
-msgid "Show keys"
-msgstr ""
-
-#: assets/js/llms-blocks.js:20034
-msgid "100%"
-msgstr ""
-
-#: assets/js/llms-blocks.js:20040
-msgid "75%"
-msgstr ""
-
-#: assets/js/llms-blocks.js:20043
-msgid "66.66%"
-msgstr ""
-
-#: assets/js/llms-blocks.js:20046
-msgid "50%"
-msgstr ""
-
-#: assets/js/llms-blocks.js:20049
-msgid "33.33%"
-msgstr ""
-
-#: assets/js/llms-blocks.js:20052
-msgid "25%"
-msgstr ""
-
-#: assets/js/llms-blocks.js:20072
-msgid "Select a field"
-msgstr ""
-
-#: assets/js/llms-blocks.js:20185
-msgid "The value cannot be blank."
-msgstr ""
-
-#. Translators: %s = user-submitted value.
-#: assets/js/llms-blocks.js:20188
-msgid "The value \"%s\" contains invalid characters. Only letters, numbers, underscores, and hyphens are allowed."
-msgstr ""
-
-#. Translators: %s = user-submitted value.
-#: assets/js/llms-blocks.js:20193
-msgid "The user meta key \"%s\" is not unique. Please choose a unique value."
-msgstr ""
-
-#. Translators: %s = user-submitted value.
-#: assets/js/llms-blocks.js:20198
-msgid "The ID \"%s\" is not unique. Please choose a unique field ID."
-msgstr ""
-
-#. Translators: %s = user-submitted value.
-#: assets/js/llms-blocks.js:20203
-msgid "The name \"%s\" is not unique. Please choose a globally unique field name."
-msgstr ""
-
-#. Translators: %s = user-submitted value.
-#: assets/js/llms-blocks.js:20208
-msgid "The chosen value \"%s\" is invalid."
-msgstr ""
-
-#: assets/js/llms-blocks.js:20422
-msgid "Required"
-msgstr ""
-
-#: assets/js/llms-blocks.js:20429
-msgid "Field is required."
-msgstr ""
-
-#: assets/js/llms-blocks.js:20429
-msgid "Field is optional."
-msgstr ""
-
-#: assets/js/llms-blocks.js:20432
-msgid "Field Width"
-msgstr ""
-
-#: assets/js/llms-blocks.js:20450
-msgid "Determines the width of the form field."
-msgstr ""
-
-#: assets/js/llms-blocks.js:20457
-msgid "Placeholder"
-msgstr ""
-
-#: assets/js/llms-blocks.js:20464
-msgid "Displays a placeholder option as the selected instead of a default value."
-msgstr ""
-
-#: assets/js/llms-blocks.js:20467
-msgid "Confirmation Field"
-msgstr ""
-
-#: assets/js/llms-blocks.js:20502
-msgid "A Confirmation field is active."
-msgstr ""
-
-#: assets/js/llms-blocks.js:20502
-msgid "No confirmation field."
-msgstr ""
-
-#: assets/js/llms-blocks.js:20506
-msgid "Data Storage"
-msgstr ""
-
-#: assets/js/llms-blocks.js:20510
-msgid "Usermeta Key"
-msgstr ""
-
-#: assets/js/llms-blocks.js:20511
-msgid "Database field key name. Only accepts alphanumeric characters, hyphens, and underscores."
-msgstr ""
-
-#: assets/js/llms-blocks.js:20515
-msgid "Field Name"
-msgstr ""
-
-#: assets/js/llms-blocks.js:20516
-msgid "The field's HTML name attribute."
-msgstr ""
-
-#: assets/js/llms-blocks.js:20520
-msgid "Field ID"
-msgstr ""
-
-#: assets/js/llms-blocks.js:20521
-msgid "The field's HTML id attribute."
-msgstr ""
-
-#: assets/js/llms-blocks.js:21323
-#: assets/js/llms-blocks.js:25245
-msgid "Instructors"
-msgstr ""
-
-#: assets/js/llms-blocks.js:21329
-msgid "Course"
-msgstr ""
-
-#: assets/js/llms-blocks.js:21329
-msgid "Memebership"
-msgstr ""
-
-#: assets/js/llms-blocks.js:21411
-msgid "Lesson Navigation"
-msgstr ""
-
-#: assets/js/llms-blocks.js:21534
-msgid "Lesson Progression (Mark Complete)"
-msgstr ""
-
-#: assets/js/llms-blocks.js:21568
-msgid "Take Quiz"
-msgstr ""
-
-#: assets/js/llms-blocks.js:21571
-msgid "Mark Complete"
-msgstr ""
-
-#: assets/js/llms-blocks.js:21674
-msgid "LifterLMS Pricing Table"
-msgstr ""
-
-#: assets/js/llms-blocks.js:21831
-msgid "Validation errors were encountered while attempting to save your access plans."
+#. Translators: %s = visibility setting label.
+#: assets/js/llms-blocks.js:2
+msgid "This block is only visible to %s"
 msgstr ""
 
 #. Translators: %1$s = Post title; %2$ = post id.
-#: assets/js/llms-blocks.js:21948
+#: assets/js/llms-blocks.js:3
 msgctxt "Search result label"
 msgid "%1$s (ID# %2$d)"
 msgstr ""
 
+#. Translators: %1$s = Post title; %2$ = post id.
+#: assets/js/llms-blocks.js:3
+msgid "in this course"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "in any course"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "in this membership"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "in any membership"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "in any course or membership"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "in all of the selected courses or memberships"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "in any of the selected courses or memberships"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Enrollment Visibility"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Display to"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Enrolled In"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Not Enrolled In"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Courses"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Search by course title…"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Memberships"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Search by membership title…"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "User Email is a required field."
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Restore user email field?"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Course Continue Button"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Continue"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Course Information Options"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Title Headline Size"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Headline size for the information title element."
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Estimated Completion Time"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "How many hours, days, weeks, etc… should a student expect to spend in order to complete this course."
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Display Estimated Time"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Displaying estimated time"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Hiding estimated time"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Display Difficulty"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Displaying difficulty"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Hiding difficulty"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Display Tracks"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Displaying tracks list"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Hiding tracks list"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Display Categories"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Displaying categories list"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Hiding categories list"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Display Tags"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Displaying tags list"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Hiding tags list"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Loading…"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Estimated Time"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Difficulty"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Tracks"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Categories"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Tags"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Course Progress"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Course Syllabus"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+#: assets/js/llms-blocks.js:22
+msgid "Instructors"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Course"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Memebership"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Lesson Navigation"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Lesson Progression (Mark Complete)"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Take Quiz"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Mark Complete"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Validation errors were encountered while attempting to save your access plans."
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "LifterLMS Pricing Table"
+msgstr ""
+
+#: assets/js/llms-blocks.js:3
+msgid "Add optional placeholder text"
+msgstr ""
+
 #. Translators: %1$s = User's name; %2$s = User's id.
-#: assets/js/llms-blocks.js:22040
+#: assets/js/llms-blocks.js:4
 msgctxt "User search result label"
 msgid "%1$s (ID# %2$d)"
 msgstr ""
 
-#: assets/js/llms-blocks.js:22400
-#: assets/js/llms-blocks.js:25460
+#. Translators: %1$s = User's name; %2$s = User's id.
+#: assets/js/llms-blocks.js:4
+#: assets/js/llms-blocks.js:22
 msgid "Reorder instructor"
 msgstr ""
 
-#: assets/js/llms-blocks.js:23671
-msgid "User Email is a required field."
+#: assets/js/llms-blocks.js:4
+msgid "Reorder option"
 msgstr ""
 
-#: assets/js/llms-blocks.js:23675
-msgid "Restore user email field?"
+#: assets/js/llms-blocks.js:4
+msgid "Make default"
 msgstr ""
 
-#: assets/js/llms-blocks.js:23872
-msgid "Shortcodes"
+#: assets/js/llms-blocks.js:4
+msgid "Option label"
 msgstr ""
 
-#: assets/js/llms-blocks.js:23876
-#: assets/js/llms-blocks.js:23943
-msgid "LifterLMS User Information Shortcodes"
+#: assets/js/llms-blocks.js:4
+msgid "Database key value"
 msgstr ""
 
-#: assets/js/llms-blocks.js:23882
-msgid "Filter by label, key, or ID…"
+#: assets/js/llms-blocks.js:4
+msgid "Delete Option"
 msgstr ""
 
-#: assets/js/llms-blocks.js:23887
-msgid "Default value"
+#. Translators: %d = Option index in the list of options.
+#: assets/js/llms-blocks.js:6
+#: assets/js/llms-blocks.js:19
+msgid "Option %d"
 msgstr ""
 
-#: assets/js/llms-blocks.js:23891
-msgid "Optional text displayed when no information exists or the user is logged out."
+#. Translators: %d = Option index in the list of options.
+#: assets/js/llms-blocks.js:6
+#: assets/js/llms-blocks.js:21
+msgid "option_%d"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24038
-msgid "Click to copy."
+#: assets/js/llms-blocks.js:7
+msgid "Options"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24078
-#: assets/js/llms-blocks.js:24165
-msgid "Insert"
+#: assets/js/llms-blocks.js:7
+msgid "Add option"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24163
-msgid "No fields found matching your search but you can use the shortcode below if the meta information exists in the database."
+#: assets/js/llms-blocks.js:7
+msgid "Hide keys"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24165
-msgid "Name"
+#: assets/js/llms-blocks.js:7
+msgid "Show keys"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24165
-msgid "Shortcode"
+#: assets/js/llms-blocks.js:7
+msgid "100%"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24501
-msgid "Catalog & Search Visibility"
+#: assets/js/llms-blocks.js:7
+msgid "75%"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24519
-msgid "Catalog Visibility"
+#: assets/js/llms-blocks.js:7
+msgid "66.66%"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24672
+#: assets/js/llms-blocks.js:7
+msgid "50%"
+msgstr ""
+
+#: assets/js/llms-blocks.js:7
+msgid "33.33%"
+msgstr ""
+
+#: assets/js/llms-blocks.js:7
+msgid "25%"
+msgstr ""
+
+#: assets/js/llms-blocks.js:7
+msgid "Select a field"
+msgstr ""
+
+#. Translators: %s = user-submitted value.
+#: assets/js/llms-blocks.js:9
+msgid "The value \"%s\" contains invalid characters. Only letters, numbers, underscores, and hyphens are allowed."
+msgstr ""
+
+#. Translators: %s = user-submitted value.
+#: assets/js/llms-blocks.js:11
+msgid "The user meta key \"%s\" is not unique. Please choose a unique value."
+msgstr ""
+
+#. Translators: %s = user-submitted value.
+#: assets/js/llms-blocks.js:13
+msgid "The ID \"%s\" is not unique. Please choose a unique field ID."
+msgstr ""
+
+#. Translators: %s = user-submitted value.
+#: assets/js/llms-blocks.js:15
+msgid "The name \"%s\" is not unique. Please choose a globally unique field name."
+msgstr ""
+
+#. Translators: %s = user-submitted value.
+#: assets/js/llms-blocks.js:17
+msgid "The chosen value \"%s\" is invalid."
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "The value cannot be blank."
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "Required"
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "Field is required."
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "Field is optional."
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "Field Width"
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "Determines the width of the form field."
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "Placeholder"
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "Displays a placeholder option as the selected instead of a default value."
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "Confirmation Field"
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "A Confirmation field is active."
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "No confirmation field."
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "Data Storage"
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "Usermeta Key"
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "Database field key name. Only accepts alphanumeric characters, hyphens, and underscores."
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "Field Name"
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "The field's HTML name attribute."
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "Field ID"
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "The field's HTML id attribute."
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "Field Layout"
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "Columns"
+msgstr ""
+
+#: assets/js/llms-blocks.js:17
+msgid "Stacked"
+msgstr ""
+
+#. Translators: %s label of the controller field.
+#: assets/js/llms-blocks.js:22
+msgid "Confirm %s"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Input Confirmation Group"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Adds a required confirmation field to an input field."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Remove confirmation field"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Checkboxes"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "A single checkbox toggle or a group of multiple checkboxes."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Radio"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "A group of radio inputs which can be populated with any number of options."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Dropdown"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "A select field which can be populated with any number of options."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Text"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "An input field which accepts any form of text."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Email"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "A text input field which only accepts an email address."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Password"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "User password confirmation field."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Number"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "An input field which only accepts numeric input."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Phone Number"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "An input field which only accepts phone numbers."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Website Address / URL"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "An input field which only accepts a website address or URL."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "A simple text input field."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Minimum Value"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Specify the minimum allowed value. Leave blank for no minimum."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Maximum Value"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Specify the maximum allowed value. Leave blank for no maximum."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Textarea"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "A text field accepting multiple lines of user information."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Rows"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Specify the number of text rows for the textarea input."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Voucher Code Redemption"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Allows user to redeem a voucher code during account registration."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Have a voucher?"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Voucher Code"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Toggleable"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Field is revealed when the toggle is clicked."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Field is always visible."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "User Display Name"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Allows a user to choose how their name will be displayed publicly on the site."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Display Name"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "User Login"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Field used to collect a user's account username. If this field is omitted a username will be automatically generated based off their email address. Users can always login using either their email address or username."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Username"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "User Email"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "A special field used to collect a user's account email address."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Email Address"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "First Name"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "A special field used to collect a user's first name."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Last Name"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "A special field used to collect a user's last name."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "User name"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "A special field used to collect a user's first and last name."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "User Password"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "A special field used to collect a user's account password."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "A strong password is required with at least 8 characters. To make it stronger, use both upper and lower case letters, numbers, and symbols."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Very Weak"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Password strength meter description"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Enter a description for the password strength meter"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Password strength meter"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Password strength meter is enabled."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Password strength meter is disabled."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Minimum Password Strength"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Strong"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Medium"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Weak"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Minimum Password Length"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "User Address"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "A group of fields used to collect a user's full address."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "User Street Address"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Collect a user's street address."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "A special field used to collect a user's street address."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Address"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "User Street Address Additional Information"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Apartment, suite, etc…"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "User City"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "A special field used to collect a user's billing city."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "City"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "User Country"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "A special field used to collect a user's billing country."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Country"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Select a Country"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "State / Region"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Select a State / Region"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "User Postal Code"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "A special field used to collect a user's postal or zip code."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Postal / Zip Code"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "User Phone"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "A field used to collect a user's phone number."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
 msgid "Visible"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24673
+#: assets/js/llms-blocks.js:22
 msgid "Visible in the catalog and search results."
 msgstr ""
 
-#: assets/js/llms-blocks.js:24676
+#: assets/js/llms-blocks.js:22
 msgid "Catalog only"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24677
+#: assets/js/llms-blocks.js:22
 msgid "Only visible in the catalog."
 msgstr ""
 
-#: assets/js/llms-blocks.js:24680
+#: assets/js/llms-blocks.js:22
 msgid "Search only"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24681
+#: assets/js/llms-blocks.js:22
 msgid "Only visible in search results."
 msgstr ""
 
-#: assets/js/llms-blocks.js:24684
+#: assets/js/llms-blocks.js:22
 msgid "Hidden"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24685
+#: assets/js/llms-blocks.js:22
 msgid "Hidden from catalog and search results."
 msgstr ""
 
-#: assets/js/llms-blocks.js:24853
-msgid "The form has been restored to the default template."
+#: assets/js/llms-blocks.js:22
+msgid "Catalog & Search Visibility"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24856
-msgid "Undo"
+#: assets/js/llms-blocks.js:22
+msgid "Catalog Visibility"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24878
-msgid "Form Settings"
+#: assets/js/llms-blocks.js:22
+msgid "Click to copy."
 msgstr ""
 
-#: assets/js/llms-blocks.js:24881
-msgid "Location"
+#: assets/js/llms-blocks.js:22
+msgid "No fields found matching your search but you can use the shortcode below if the meta information exists in the database."
 msgstr ""
 
-#: assets/js/llms-blocks.js:24888
-msgid "Display Form Title"
+#: assets/js/llms-blocks.js:22
+msgid "Name"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24890
-msgid "Displaying form title."
+#: assets/js/llms-blocks.js:22
+msgid "Shortcode"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24890
-msgid "Not displaying form title."
+#: assets/js/llms-blocks.js:22
+msgid "Insert"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24899
-msgid "Revert to Default"
+#: assets/js/llms-blocks.js:22
+msgid "LifterLMS User Information Shortcodes"
 msgstr ""
 
-#: assets/js/llms-blocks.js:24903
-msgid "Replace the existing content of the form with the original default content."
+#: assets/js/llms-blocks.js:22
+msgid "Shortcodes"
 msgstr ""
 
-#: assets/js/llms-blocks.js:25322
-msgid "Author"
+#: assets/js/llms-blocks.js:22
+msgid "Filter by label, key, or ID…"
 msgstr ""
 
-#: assets/js/llms-blocks.js:25456
+#: assets/js/llms-blocks.js:22
+msgid "Default value"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Optional text displayed when no information exists or the user is logged out."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
 msgid "Primary Instructor"
 msgstr ""
 
-#: assets/js/llms-blocks.js:25466
+#: assets/js/llms-blocks.js:22
 msgid "Edit instructor"
 msgstr ""
 
-#: assets/js/llms-blocks.js:25474
+#: assets/js/llms-blocks.js:22
 msgid "Visibility"
 msgstr ""
 
-#: assets/js/llms-blocks.js:25475
+#: assets/js/llms-blocks.js:22
 msgid "Instructor is visible on frontend"
 msgstr ""
 
-#: assets/js/llms-blocks.js:25475
+#: assets/js/llms-blocks.js:22
 msgid "Instructor is hidden on frontend"
 msgstr ""
 
-#: assets/js/llms-blocks.js:25483
+#: assets/js/llms-blocks.js:22
 msgid "Label"
 msgstr ""
 
-#: assets/js/llms-blocks.js:25501
+#: assets/js/llms-blocks.js:22
 msgid "Edit"
 msgstr ""
 
-#: assets/js/llms-blocks.js:25508
+#: assets/js/llms-blocks.js:22
 msgid "Remove"
 msgstr ""
 
-#: assets/js/llms-blocks.js:25557
+#: assets/js/llms-blocks.js:22
 msgid "Search…"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Author"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "The form has been restored to the default template."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Undo"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Form Settings"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Location"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Display Form Title"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Displaying form title."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Not displaying form title."
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Revert to Default"
+msgstr ""
+
+#: assets/js/llms-blocks.js:22
+msgid "Replace the existing content of the form with the original default content."
 msgstr ""

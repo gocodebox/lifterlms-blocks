@@ -2,7 +2,7 @@
  * BLOCK: llms/form-field-confirm-group
  *
  * @since 2.0.0
- * @version [version]
+ * @version 2.2.0
  */
 
 // WP Deps.
@@ -46,7 +46,7 @@ export const composed = true;
  * Retrieve block attributes for a controller block
  *
  * @since 2.0.0
- * @since [version] Setup match attribute.
+ * @since 2.2.0 Setup match attribute.
  *
  * @param {Object} attributes Existing attributes to merge defaults into.
  * @return {Object} Updated block attributes.
@@ -72,7 +72,7 @@ function getControllerBlockAttrs( attributes = {} ) {
  * Retrieve block attributes for a controlled (confirmation) block
  *
  * @since 2.0.0
- * @since [version] Setup id, name, and match attributes.
+ * @since 2.2.0 Setup id, name, and match attributes.
  *
  * @param {Object} attributes Existing attributes to merge defaults into.
  * @return {Object} Updated block attributes.
@@ -200,7 +200,7 @@ allowed.forEach( ( blockName ) => {
 	 * Transform a single block to a confirmation group
 	 *
 	 * @since 2.0.0
-	 * @since [version] Determine the attributes of both confirm group children before creating any blocks.
+	 * @since 2.2.0 Determine the attributes of both confirm group children before creating any blocks.
 	 */
 	transforms.from.push( {
 		type: 'block',

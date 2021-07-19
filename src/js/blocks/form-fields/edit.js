@@ -2,7 +2,7 @@
  * Edit components
  *
  * @since 2.0.0
- * @version [version]
+ * @version 2.2.0
  */
 
 // External deps.
@@ -108,7 +108,7 @@ const setupAtts = ( atts, blockAtts, addingField ) => {
  *
  * @since 2.0.0
  * @since 2.0.1 Use non-unique error notice IDs for reusable multiple error notice.
- * @since [version] Remove reusable multiple error notice.
+ * @since 2.2.0 Remove reusable multiple error notice.
  *
  * @param {Object} props Component properties.
  * @return {Object} HTML component fragment.

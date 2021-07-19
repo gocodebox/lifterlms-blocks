@@ -52,7 +52,7 @@ class LLMS_Blocks_Test_Assets extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test editor_assets() on the widgets screen where they shouldn't be loaded.
 	 *
-	 * @since [version]
+	 * @since 2.2.0
 	 *
 	 * @return void
 	 */
@@ -78,7 +78,7 @@ class LLMS_Blocks_Test_Assets extends LLMS_Blocks_Unit_Test_Case {
 	 * Test editor_assets()
 	 *
 	 * @since 1.10.0
-	 * @since [version] Set current screen.
+	 * @since 2.2.0 Set current screen.
 	 *
 	 * @return void
 	 */
@@ -104,7 +104,7 @@ class LLMS_Blocks_Test_Assets extends LLMS_Blocks_Unit_Test_Case {
 	 * Test backwards compat asset define and enqueue
 	 *
 	 * @since 2.0.0
-	 * @since [version] Set current screen.
+	 * @since 2.2.0 Set current screen.
 	 *
 	 * @return void
 	 */

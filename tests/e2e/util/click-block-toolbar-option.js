@@ -9,7 +9,7 @@ import {
 /**
  * Click a menu item from the block toolbar "Options" (...) menu.
  *
- * @since [version]
+ * @since 2.2.0
  *
  * @param {string} option Option menu item name. EG: "Group" or "Remove Block".
  * @return {void}

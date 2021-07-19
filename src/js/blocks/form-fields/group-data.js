@@ -2,7 +2,7 @@
  * Manage confirm group block data
  *
  * @since 2.0.0
- * @version [version]
+ * @version 2.2.0
  */
 
 // WP deps.
@@ -65,7 +65,7 @@ export function getSibling( clientId ) {
 /**
  * Update children blocks of a confirm group
  *
- * @since [version]
+ * @since 2.2.0
  *
  * @param {Object}   options
  * @param {Function} options.setAttributes   The setAttributes from the block.
@@ -104,7 +104,7 @@ function updateChildren( {
  * Retrieve the updates for fields within the confirm group
  *
  * @since 2.0.0
- * @since [version] Stop setting name, match, and id attribute.
+ * @since 2.2.0 Stop setting name, match, and id attribute.
  *
  * @param {Object} attributes        Block attributes.
  * @param {Object} siblingAttributes Sibling block attributes.
