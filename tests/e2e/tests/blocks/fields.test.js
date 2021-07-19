@@ -221,18 +221,21 @@ async function testReusalbeTransforms( { name, fieldName } ) {
  * Test modification of a field's label property.
  *
  * @since Unknown
- * @since [version] Don't run automatic snapshot tests when retrieving the tested block & use expectBlockAttribute().
+ * @since [version] Replace existing label instead of adding to it.
+ *              Don't run automatic snapshot tests when retrieving the tested block & use expectBlockAttribute().
  *
  * @return {void}
  */
 async function testLabelProp() {
 
 	const { clientId } = await getTestedBlock( null );
-	await page.type( `#block-${ clientId } label.rich-text`, 'Custom Label ' );
+
+	const input = await page.$( `#block-${ clientId } label.rich-text` );
+	await input.click( { clickCount: 3 } );
+	await input.type( 'Custom Label' );
 	await expectBlockAttribute( 'label' );
 
 }
-
 /**
  * Test modification of a field's description property.
  *
