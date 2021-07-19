@@ -68,7 +68,7 @@ export function getSibling( clientId ) {
  * @since [version]
  *
  * @param {Object}   options
- * @param {function} options.setAttributes   The setAttributes from the block.
+ * @param {Function} options.setAttributes   The setAttributes from the block.
  * @param {Object}   options.currentUpdates  Object describing updates to the current block attributes.
  * @param {string}   options.siblingClientId Sibling block client id.
  * @param {Object}   options.siblingUpdates  Object describing updates to the sibling block attributes.
@@ -87,7 +87,7 @@ function updateChildren( {
 	 *
 	 * The setTimeout is bad but fixes no-op/memory leak.
 	 *
-	 * @link {https://github.com/WordPress/gutenberg/issues/21049#issuecomment-632134201}
+	 * @see {@link https://github.com/WordPress/gutenberg/issues/21049#issuecomment-632134201}
 	 */
 	setTimeout( () => {
 		if ( ! isEmpty( currentUpdates ) ) {

@@ -52,7 +52,6 @@ export const composed = true;
  * @return {Object} Updated block attributes.
  */
 function getControllerBlockAttrs( attributes = {} ) {
-
 	const { id } = attributes;
 	let { match } = attributes;
 	if ( id && ! match ) {
@@ -79,12 +78,11 @@ function getControllerBlockAttrs( attributes = {} ) {
  * @return {Object} Updated block attributes.
  */
 function getControlledBlockAttrs( attributes = {} ) {
-
 	let { id, name, match } = attributes;
 	if ( id && ! match ) {
 		match = id;
-		id    = `${ id }_confirm`;
-		name  = `${ name }_confirm`;
+		id = `${ id }_confirm`;
+		name = `${ name }_confirm`;
 	}
 
 	return {
@@ -198,7 +196,6 @@ const transforms = {
  * @return {void}
  */
 allowed.forEach( ( blockName ) => {
-
 	/**
 	 * Transform a single block to a confirmation group
 	 *
@@ -209,12 +206,11 @@ allowed.forEach( ( blockName ) => {
 		type: 'block',
 		blocks: [ blockName ],
 		transform: ( attributes ) => {
-
 			doFieldUnload( attributes.name );
 
 			const { llms_visibility } = attributes,
 				controllerAttrs = getControllerBlockAttrs( attributes ),
-				controlledAttrs  = getControlledBlockAttrs( attributes );
+				controlledAttrs = getControlledBlockAttrs( attributes );
 
 			const children = [
 				createBlock( blockName, controllerAttrs ),

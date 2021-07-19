@@ -12,7 +12,7 @@ import { differenceBy } from 'lodash';
 import { dispatch, select, subscribe } from '@wordpress/data';
 
 // Internal deps.
-import { flattenBlocks, getBlocksFlat } from '../../util/';
+import { getBlocksFlat } from '../../util/';
 import { store as fieldsStore } from '../../data/fields';
 
 /**
