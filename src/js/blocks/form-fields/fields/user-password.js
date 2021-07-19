@@ -5,6 +5,7 @@
  * @since 1.8.0 Updated lodash imports.
  * @since 1.12.0 Add data store support.
  * @since 2.0.0 Add reusable block support.
+ * @since [version] Don't define the `match` attribute.
  */
 
 // WP Deps.
@@ -242,9 +243,6 @@ export const settings = getSettingsFromBase(
 			},
 			required: {
 				__default: true,
-			},
-			match: {
-				__default: 'password_confirm',
 			},
 			data_store: {
 				__default: 'users',

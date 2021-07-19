@@ -2,14 +2,14 @@
  * Edit components
  *
  * @since 2.0.0
- * @version 2.0.1
+ * @version [version]
  */
 
 // External deps.
 import { snakeCase, kebabCase, uniqueId } from 'lodash';
 
 // WP deps.
-import { hasBlockSupport, getBlockType } from '@wordpress/blocks';
+import { getBlockType } from '@wordpress/blocks';
 import {
 	useBlockProps,
 	InnerBlocks,
@@ -17,10 +17,8 @@ import {
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { dispatch, select } from '@wordpress/data';
-import { store as noticesStore } from '@wordpress/notices';
 import { PanelBody, Slot, Fill } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
 
 // Internal Deps.
 import Field from './field';
@@ -110,6 +108,7 @@ const setupAtts = ( atts, blockAtts, addingField ) => {
  *
  * @since 2.0.0
  * @since 2.0.1 Use non-unique error notice IDs for reusable multiple error notice.
+ * @since [version] Remove reusable multiple error notice.
  *
  * @param {Object} props Component properties.
  * @return {Object} HTML component fragment.
@@ -130,13 +129,6 @@ export function EditField( props ) {
 		addingField =
 			attributes.name && isDuplicate( attributes.name, clientId ),
 		/**
-		 * This identifies when a reusable block containing a multiple=false block is added
-		 *
-		 * @see {@link https://github.com/WordPress/gutenberg/issues/32863}
-		 */
-		isReusableWithMultipleValidationError =
-			! hasBlockSupport( name, 'multiple', true ) && addingField,
-		/**
 		 * Prevent confirmation fields from being copied/pasted into the editor out of their intended context.
 		 *
 		 * @see {@link https://github.com/gocodebox/lifterlms-blocks/issues/106}
@@ -144,10 +136,7 @@ export function EditField( props ) {
 		isConfirmWhichHasBeenCopied =
 			! inFieldGroup && attributes.isConfirmationField;
 
-	if (
-		isReusableWithMultipleValidationError ||
-		isConfirmWhichHasBeenCopied
-	) {
+	if ( isConfirmWhichHasBeenCopied ) {
 		shouldSetupAtts = false;
 	}
 
@@ -190,33 +179,9 @@ export function EditField( props ) {
 		}
 	} );
 
-	if (
-		isReusableWithMultipleValidationError ||
-		isConfirmWhichHasBeenCopied
-	) {
-		let toRemove = null;
-
-		if ( isReusableWithMultipleValidationError ) {
-			const { createErrorNotice } = dispatch( noticesStore ),
-				{ getBlockHierarchyRootClientId } = select( blockEditorStore );
-			toRemove = getBlockHierarchyRootClientId( clientId );
-
-			createErrorNotice(
-				__(
-					'The reusable block cannot be added because it contains one or more blocks which can only be used once per page.',
-					'lifterlms'
-				),
-				{
-					id: `llms-reusable-multiples-err`,
-					isDismissible: true,
-				}
-			);
-		} else if ( isConfirmWhichHasBeenCopied ) {
-			toRemove = clientId;
-		}
-
+	if ( isConfirmWhichHasBeenCopied ) {
 		setTimeout( () => {
-			dispatch( blockEditorStore ).removeBlock( toRemove );
+			dispatch( blockEditorStore ).removeBlock( clientId );
 		}, 10 );
 
 		return null;
