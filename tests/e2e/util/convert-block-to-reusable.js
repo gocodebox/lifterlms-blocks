@@ -7,9 +7,6 @@ import { clickBlockToolbarOption } from './';
  *
  * @since [version]
  *
- * @see [Reference]
- * @link [URL]
- *
  * @param {String} name Title of the reusable block.
  * @return {void}
  */
