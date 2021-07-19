@@ -1,6 +1,23 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.2.0 - 2021-07-19
+-------------------
+
+##### Updates
+
++ **Increases minimum WordPress Core version requirement to version 5.4!**.
++ Tested and compatible with WordPress core 5.8
++ Don't load block editor assets on the "blockified" widgets screen.
++ Remove timeouts and subscription debouncing used by blocks watcher which handles the `llms/user-info-fields` redux store.
++ Stop debouncing the blocks watcher.
+
+##### Bug fixes
+
++ Confirm group blocks now configure the block's id, name, and match attributes instead of being configured in the block render via the `blocks/form-fields/group-data` module.
++ Don't define the `match` attribute during creation of a user password block.
+
+
 v2.1.1 - 2021-07-08
 -------------------
 
