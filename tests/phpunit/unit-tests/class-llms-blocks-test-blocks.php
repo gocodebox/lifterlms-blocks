@@ -7,7 +7,7 @@
  * @since 1.5.1
  * @since 1.6.0 Update `test_add_block_category` test to accommodate form fields cat.
  * @since 1.10.0 Update `test_get_dynamic_block_names` to test against core blocks available in 5.1.
- * @version 2.0.0
+ * @version [version]
  */
 class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 
@@ -158,6 +158,77 @@ class LLMS_Blocks_Test_Blocks extends LLMS_Blocks_Unit_Test_Case {
 
 		}
 
+	}
+
+	/**
+	 * Test that `LLMS_Blocks->init()` adds the correct block category filter.
+	 *
+	 * @since [version]
+	 *
+	 * @return void
+	 */
+	public function test_add_block_category_filter() {
+
+		global $wp_version;
+		$blocks   = new LLMS_Blocks();
+		$callback = array( $blocks, 'add_block_category' );
+
+		# LLMS_Blocks->add_block_category() should not be registered as a filter yet.
+		$this->assertFalse( has_filter( 'block_categories', $callback ) );
+		$this->assertFalse( has_filter( 'block_categories_all', $callback ) );
+
+		# Test WordPress version < 5.8
+		$wp_versions = array(
+			'5.7-alpha-49644-src',
+			'5.7-alpha.1',
+			'5.7-beta1-src',
+			'5.7-beta1',
+			'5.7-beta1-50172-src',
+			'5.7-RC1-src',
+			'5.7-RC1',
+			'5.7-RC1-50425-src',
+			'5.7-src',
+			'5.7',
+			'5.7.1-alpha-50514-src',
+			'5.7.1-src',
+			'5.7.1',
+		);
+		foreach ( $wp_versions as $wp_version ) {
+			$blocks->init();
+			$this->assertNotFalse( has_filter( 'block_categories', $callback ), $wp_version );
+			$this->assertFalse( has_filter( 'block_categories_all', $callback ), $wp_version );
+			remove_filter( 'block_categories', $callback );
+			remove_filter( 'block_categories_all', $callback );
+		}
+
+		# Test WordPress version >= 5.8
+		$wp_versions = array(
+			'5.8-alpha-50427-src',
+			'5.8-alpha.1',
+			'5.8-beta1-src',
+			'5.8-beta1',
+			'5.8-beta1-51132-src',
+			'5.8-RC1-src',
+			'5.8-RC1',
+			'5.8-RC1-51270-src',
+			'5.8-src',
+			'5.8',
+			'5.8.1-src',
+			'5.8.1',
+			'5.10-alpha-8675309-src',
+			'5.10-beta1-8675310-src',
+			'5.10-beta1-8675310',
+			'5.10-RC1-8675311',
+			'5.10-src',
+			'5.10',
+		);
+		foreach ( $wp_versions as $wp_version ) {
+			$blocks->init();
+			$this->assertFalse( has_filter( 'block_categories', $callback ), $wp_version );
+			$this->assertNotFalse( has_filter( 'block_categories_all', $callback ), $wp_version );
+			remove_filter( 'block_categories', $callback );
+			remove_filter( 'block_categories_all', $callback );
+		}
 	}
 
 }
