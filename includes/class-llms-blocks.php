@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version 2.0.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -14,6 +14,7 @@ defined( 'ABSPATH' ) || exit;
  * LLMS_Blocks class
  *
  * @since 1.0.0
+ * @since [version] Handle '-src' in WordPress version numbers in `init()`.
  */
 class LLMS_Blocks {
 
@@ -155,6 +156,7 @@ class LLMS_Blocks {
 	 * @since 1.9.0 Added course progress block class.
 	 * @since 2.0.0 Return early if LifterLMS isn't installed, move file inclusion to `$this->includes()`,
 	 *              and moved actions and filters from the constructor.
+	 * @since [version] Handle '-src' in WordPress version numbers.
 	 *
 	 * @return  void
 	 */
