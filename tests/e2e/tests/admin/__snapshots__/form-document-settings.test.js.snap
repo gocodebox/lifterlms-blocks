@@ -4,7 +4,7 @@ exports[`Admin/FormsDocSidebar LocationDisplay should display the location when 
 
 exports[`Admin/FormsDocSidebar LocationDisplay should display the location with a link when open registration is enabled 1`] = `"Registration(opens in a new tab)"`;
 
-exports[`Admin/FormsDocSidebar TemplateRevert should allow a form to be reverted to the default layout 1`] = `"The form has been restored to the default template.<button type=\\"button\\" class=\\"components-button components-notice__action is-secondary\\">Undo</button>"`;
+exports[`Admin/FormsDocSidebar TemplateRevert should allow a form to be reverted to the default layout 1`] = `"The form has been restored to the default template.Undo"`;
 
 exports[`Admin/FormsDocSidebar TemplateRevert should allow a form to be reverted to the default layout 2`] = `
 Array [

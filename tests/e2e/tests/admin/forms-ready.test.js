@@ -100,7 +100,7 @@ describe( 'Admin/FormsReady', () => {
 		await removeUserEmailBlock();
 		await page.waitForSelector( '.components-notice.is-error' );
 
-		expect( await page.$eval( '.components-notice.is-error .components-notice__content', el => el.innerHTML ) ).toMatchSnapshot();
+		expect( await page.$eval( '.components-notice.is-error .components-notice__content', el => el.textContent ) ).toMatchSnapshot();
 
 		expect( await page.$eval( 'button.editor-post-publish-button', el => el.disabled ) ).toBe( true );
 

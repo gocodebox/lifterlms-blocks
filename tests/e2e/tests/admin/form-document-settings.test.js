@@ -87,7 +87,7 @@ describe( 'Admin/FormsDocSidebar', () => {
 
 			// Notice should display.
 			await page.waitForSelector( '.components-notice.is-success' );
-			expect( await page.$eval( '.components-notice.is-success .components-notice__content', el => el.innerHTML ) ).toMatchSnapshot();
+			expect( await page.$eval( '.components-notice.is-success .components-notice__content', el => el.textContent ) ).toMatchSnapshot();
 
 			// Match block list.
 			expect( await getAllBlockNames() ).toMatchSnapshot();
