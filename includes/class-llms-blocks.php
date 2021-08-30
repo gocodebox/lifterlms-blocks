@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -14,7 +14,6 @@ defined( 'ABSPATH' ) || exit;
  * LLMS_Blocks class
  *
  * @since 1.0.0
- * @since [version] Handle '-src' in WordPress version numbers in `init()`.
  */
 class LLMS_Blocks {
 
@@ -156,7 +155,6 @@ class LLMS_Blocks {
 	 * @since 1.9.0 Added course progress block class.
 	 * @since 2.0.0 Return early if LifterLMS isn't installed, move file inclusion to `$this->includes()`,
 	 *              and moved actions and filters from the constructor.
-	 * @since [version] Handle '-src' in WordPress version numbers.
 	 *
 	 * @return  void
 	 */
@@ -171,7 +169,7 @@ class LLMS_Blocks {
 		add_action( 'add_meta_boxes', array( $this, 'remove_metaboxes' ), 999, 2 );
 
 		global $wp_version;
-		$filter = version_compare( $wp_version, '5.8-src', '>=' ) ? 'block_categories_all' : 'block_categories';
+		$filter = version_compare( $wp_version, '5.8-alpha.1', '>=' ) ? 'block_categories_all' : 'block_categories';
 
 		add_filter( $filter, array( $this, 'add_block_category' ) );
 		add_action( 'admin_print_scripts', array( $this, 'admin_print_scripts' ), 15 );
