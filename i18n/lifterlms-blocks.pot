@@ -1,21 +1,21 @@
 # Copyright (C) 2018-2021 LifterLMS
-# This file is distributed under the same license as the LifterLMS Blocks plugin.
+# This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: LifterLMS Blocks 2.2.0\n"
+"Project-Id-Version: LifterLMS Blocks 2.2.1\n"
 "Report-Msgid-Bugs-To: https://lifterlms.com/my-account/my-tickets\n"
 "Last-Translator: Team LifterLMS <team@lifterlms.com>\n"
 "Language-Team: Team LifterLMS <team@lifterlms.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-07-19T17:22:34-06:00\n"
+"POT-Creation-Date: 2021-09-29T13:24:46-06:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: llms-dev 1.0.0\n"
 "X-Domain: lifterlms\n"
 
 #. Plugin Name of the plugin
-#: includes/class-llms-blocks.php:48
+#: includes/class-llms-blocks.php:49
 msgid "LifterLMS Blocks"
 msgstr ""
 
@@ -95,12 +95,12 @@ msgstr ""
 msgid "Remove Block Code"
 msgstr ""
 
-#: includes/class-llms-blocks.php:55
+#: includes/class-llms-blocks.php:56
 #: assets/js/llms-blocks.js:22
 msgid "Custom User Information"
 msgstr ""
 
-#: includes/class-llms-blocks.php:63
+#: includes/class-llms-blocks.php:64
 msgid "User Information"
 msgstr ""
 
