@@ -1,6 +1,12 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.2.1 - 2021-09-29
+-------------------
+
++ Bugfix: Fixed deprecated filter warning encountered when using certain development versions of the WordPress core.
+
+
 v2.2.0 - 2021-07-19
 -------------------
 
