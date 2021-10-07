@@ -18,8 +18,8 @@ class LLMS_Blocks_Test_Post_Instructors extends LLMS_Blocks_Unit_Test_Case {
 	 *
 	 * @return void
 	 */
-	public function setUp() {
-		parent::setUp();
+	public function set_up() {
+		parent::set_up();
 		$this->instance = new LLMS_Blocks_Post_Instructors();
 	}
 

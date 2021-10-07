@@ -10,9 +10,9 @@
  */
 class LLMS_Blocks_Test_Reusable extends LLMS_Blocks_Unit_Test_Case {
 
-	public function setUp() {
+	public function set_up() {
 
-		parent::setUp();
+		parent::set_up();
 		$this->main = new LLMS_Blocks_Reusable();
 
 	}
