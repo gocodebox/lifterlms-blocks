@@ -3,4 +3,5 @@ node_modules
 tmp
 vendor
 assets/**/*.map
+composer.lock
 

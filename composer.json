@@ -11,11 +11,11 @@
   ],
   "require-dev": {
     "lifterlms/lifterlms-cs": "dev-trunk",
-    "lifterlms/lifterlms-tests": "dev-trunk"
+    "lifterlms/lifterlms-tests": "^3.1.0"
   },
   "minimum-stability": "dev",
   "require": {
-    "php": ">=7.2"
+    "php": ">=7.3"
   },
   "archive": {
     "exclude": [
@@ -66,10 +66,6 @@
       "\"vendor/bin/llms-tests\" install ${TESTS_DB_NAME:-llms_blocks_tests} ${TESTS_DB_USER:-root} \"${TESTS_DB_PASS-password}\" ${TESTS_DB_HOST:-127.0.0.1} ${WP_VERSION:-latest} false \"${WP_TESTS_VERSION}\"",
       "@tests-install-plugins"
     ],
-    "tests-install-php8": [
-      "\"vendor/bin/llms-tests\" install ${TESTS_DB_NAME:-llms_blocks_tests} ${TESTS_DB_USER:-root} \"${TESTS_DB_PASS-password}\" ${TESTS_DB_HOST:-127.0.0.1} ${WP_VERSION:-trunk} false trunk",
-      "@tests-install-plugins"
-    ],
     "tests-install-plugins": [
       "\"vendor/bin/llms-tests\" plugin lifterlms",
       "\"vendor/bin/llms-tests\" plugin classic-editor"
@@ -79,7 +75,6 @@
       "@tests-install"
     ],
     "tests": "\"vendor/bin/phpunit\"",
-    "tests-run": "\"vendor/bin/phpunit\"",
-    "install-php8": "composer install --ignore-platform-reqs"
+    "tests-run": "\"vendor/bin/phpunit\""
   }
 }
