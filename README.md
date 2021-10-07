@@ -1,7 +1,9 @@
 LifterLMS Blocks
 ================
 
-[![Build Status](https://travis-ci.com/gocodebox/lifterlms-blocks.svg?branch=trunk)](https://travis-ci.com/gocodebox/lifterlms-blocks)
+[![Test PHPUnit](https://github.com/gocodebox/lifterlms-blocks/actions/workflows/test-phpunit.yml/badge.svg)](https://github.com/gocodebox/lifterlms-blocks/actions/workflows/test-phpunit.yml)
+[![PHP Code Coverage Report](https://github.com/gocodebox/lifterlms-blocks/actions/workflows/php-test-coverage.yml/badge.svg)](https://github.com/gocodebox/lifterlms-blocks/actions/workflows/php-test-coverage.yml)
+[![Coding Standards](https://github.com/gocodebox/lifterlms-blocks/actions/workflows/coding-standards.yml/badge.svg)](https://github.com/gocodebox/lifterlms-blocks/actions/workflows/coding-standards.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/49df50fa2a04ab1f8e55/maintainability)](https://codeclimate.com/github/gocodebox/lifterlms-blocks/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/49df50fa2a04ab1f8e55/test_coverage)](https://codeclimate.com/github/gocodebox/lifterlms-blocks/test_coverage)
 
