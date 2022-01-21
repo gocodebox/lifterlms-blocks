@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version 2.0.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -215,6 +215,7 @@ class LLMS_Blocks_Visibility {
 	 * WP Core API request.
 	 *
 	 * @since 2.0.0
+	 * @since [version] Don't use deprecated `FILTER_SANITIZE_STRING`.
 	 *
 	 * @link https://developer.wordpress.org/rest-api/reference/rendered-blocks/
 	 *
@@ -228,8 +229,8 @@ class LLMS_Blocks_Visibility {
 
 		if ( llms_is_rest() ) {
 
-			$context = llms_filter_input( INPUT_GET, 'context', FILTER_SANITIZE_STRING );
-			$post_id = llms_filter_input( INPUT_GET, 'post_id', FILTER_SANITIZE_STRING );
+			$context = llms_filter_input( INPUT_GET, 'context' );
+			$post_id = llms_filter_input( INPUT_GET, 'post_id', FILTER_SANITIZE_NUMBER_INT );
 
 			// Always render blocks when a valid user is requesting the block in the edit context.
 			if ( 'edit' === $context && $post_id && current_user_can( 'edit_post', $post_id ) ) {

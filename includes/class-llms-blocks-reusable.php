@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 2.0.0
- * @version 2.0.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -169,6 +169,7 @@ class LLMS_Blocks_Reusable {
 	 * For any other screen we return `false` because we don't care about it.
 	 *
 	 * @since 2.0.0
+	 * @since [version] Don't pass `null` to `basename()`.
 	 *
 	 * @param string $referer Referring URL for the REST request.
 	 * @return string|boolean Returns the screen name or `false` if we don't care about the screen.
@@ -176,7 +177,8 @@ class LLMS_Blocks_Reusable {
 	private function get_screen_from_referer( $referer ) {
 
 		// Blockified widgets screen.
-		if ( 'widgets.php' === basename( wp_parse_url( $referer, PHP_URL_PATH ) ) ) {
+		$url_path = wp_parse_url( $referer, PHP_URL_PATH );
+		if ( $url_path && 'widgets.php' === basename( $url_path ) ) {
 			return 'widgets';
 		}
 
