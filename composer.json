@@ -41,6 +41,11 @@
       "!/i18n/*.json"
     ]
   },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
   "scripts": {
     "check-cs": "\"vendor/bin/phpcs\" --colors",
     "check-cs-errors": "\"vendor/bin/phpcs\" --colors --error-severity=1 --warning-severity=6",
