@@ -2,8 +2,7 @@
  * LifterLMS Block Library.
  *
  * @since 1.7.0
- * @version 2.0.0
- */
+ * @version [version]
 
 /* eslint camelcase: [ "error", { allow: [ "_llms_form_location" ] } ] */
 
@@ -29,6 +28,7 @@ import * as instructors from './instructors/';
 import * as lessonNavigation from './lesson-navigation/';
 import * as lessonProgression from './lesson-progression/';
 import * as pricingTable from './pricing-table/';
+import * as phpTemplate from './php-template/';
 
 // Form Field Blocks.
 import * as formFields from './form-fields/';
@@ -116,6 +116,7 @@ export const deregisterBlocksForForms = () => {
  * @since 1.6.0 Add form field blocks.
  * @since 1.7.3 Move form ready event from domReady to here to ensure blocks are exposed before blocks are parsed.
  * @since 2.0.0 Trigger `llms_form_fields_ready` on `wp_block` posts.
+ * @since [version] Register phpTemplate block.
  */
 export default () => {
 	const postType = getCurrentPostType();
@@ -130,6 +131,7 @@ export default () => {
 		lessonNavigation,
 		lessonProgression,
 		pricingTable,
+		phpTemplate,
 	];
 
 	// Add "composed" form fields to the block registration list.
