@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Initialization.
+ * Plugin Initialization
  *
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version 2.2.1
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -70,7 +70,7 @@ class LLMS_Blocks {
 
 
 	/**
-	 * Print dynamic block information as a JS variable
+	 * Print dynamic block information as a JS variable.
 	 *
 	 * Allows us to ensure we only add visibility attributes to static blocks.
 	 * Prevents an issue causing rest api validation issues during attribute validation
@@ -112,9 +112,10 @@ class LLMS_Blocks {
 	}
 
 	/**
-	 * Include all files
+	 * Include all files.
 	 *
 	 * @since 2.0.0
+	 * @since [version] Include php template block file.
 	 *
 	 * @return void
 	 */
@@ -145,6 +146,7 @@ class LLMS_Blocks {
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-lesson-navigation-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-lesson-progression-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-pricing-table-block.php';
+		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-php-template-block.php';
 
 	}
 
