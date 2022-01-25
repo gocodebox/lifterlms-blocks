@@ -2,7 +2,7 @@
  * Block-level visibility checks
  *
  * @since 1.6.0
- * @version 2.0.0
+ * @version 2.3.0
  */
 
 // WP Deps.
@@ -12,6 +12,7 @@ import { applyFilters } from '@wordpress/hooks';
  * Returns a list of blocks that we've decided should not support block visibility
  *
  * @since 2.0.0
+ * @since 2.3.0 Disallow block visibility for LifterLMS PHP Template block.
  *
  * @return {Array} List of block names.
  */
@@ -30,6 +31,7 @@ const getDisallowedBlocks = () => {
 		 * @see {@link https://github.com/gocodebox/lifterlms-blocks/issues/41}
 		 */
 		'core/freeform',
+		'llms/php-template',
 	] );
 };
 
