@@ -57,7 +57,6 @@ export const settings = {
 	 * @return {Element} Edit component.
 	 */
 	edit: ( props ) => {
-		console.log(LLMS_Block_Templates_l10n);
 		const { attributes } = props;
 		const blockProps = useBlockProps();
 		const title = attributes.title ?
