@@ -126,10 +126,10 @@ class LLMS_Blocks_PHP_Template_Block extends LLMS_Blocks_Abstract_Block {
 		 *
 		 * @since [version]
 		 *
-		 * @param string                          $block_content The block's html.
-		 * @param array                           $attributes    The block's array of attributes.
-		 * @param array                           $template      The template file basename to be rendered.
-		 * @param LLMS_Blocks_Pricing_Table_Block $block         This block object.
+		 * @param string                         $block_content The block's html.
+		 * @param array                          $attributes    The block's array of attributes.
+		 * @param array                          $template      The template file basename to be rendered.
+		 * @param LLMS_Blocks_PHP_Template_Block $block         This block object.
 		 */
 		$block_content = apply_filters( 'llms_blocks_render_php_template_block', $block_content, $attributes, $templates[$attributes['template']], $this );
 
