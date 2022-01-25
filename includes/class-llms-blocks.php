@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.3.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -115,7 +115,7 @@ class LLMS_Blocks {
 	 * Include all files.
 	 *
 	 * @since 2.0.0
-	 * @since [version] Include php template block file.
+	 * @since 2.3.0 Include php template block file.
 	 *
 	 * @return void
 	 */

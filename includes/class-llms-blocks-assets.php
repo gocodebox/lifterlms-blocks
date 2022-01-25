@@ -7,7 +7,7 @@
  * @package LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.3.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -138,7 +138,7 @@ class LLMS_Blocks_Assets {
 	 * @since 1.10.0 Use `LLMS_Assets` class methods for asset enqueues.
 	 * @since 2.0.0 Maybe load backwards compatibility script.
 	 * @since 2.2.0 Only load assets on post screens.
-	 * @since [version] Also load assets on site editor screen.
+	 * @since 2.3.0 Also load assets on site editor screen.
 	 *
 	 * @return void
 	 */
