@@ -1,6 +1,6 @@
 <?php
 /**
- * PHP Template block
+ * PHP Template block class file.
  *
  * @package LifterLMS_Blocks/Blocks
  *
@@ -13,7 +13,7 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * PHP Template block class.
+ * PHP Template block.
  *
  * @since [version]
  */
@@ -122,15 +122,16 @@ class LLMS_Blocks_PHP_Template_Block extends LLMS_Blocks_Abstract_Block {
 		$block_content = ob_get_clean();
 
 		/**
-		 * Filters the block html
+		 * Filters the block html.
 		 *
 		 * @since [version]
 		 *
 		 * @param string                          $block_content The block's html.
 		 * @param array                           $attributes    The block's array of attributes.
+		 * @param array                           $template      The template file basename to be rendered.
 		 * @param LLMS_Blocks_Pricing_Table_Block $block         This block object.
 		 */
-		$block_content = apply_filters( 'llms_blocks_render_php_template_block', $block_content, $attributes, $this );
+		$block_content = apply_filters( 'llms_blocks_render_php_template_block', $block_content, $attributes, $templates[$attributes['template']], $this );
 
 		if ( $block_content ) {
 			echo $block_content;
