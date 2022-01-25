@@ -12,9 +12,67 @@ import { Placeholder } from '@wordpress/components';
 /**
  * Block Name.
  *
- * @type {String}
+ * @type {string}
  */
 export const name = 'llms/php-template';
+
+/**
+ * The edit function describes the structure of your block in the context of the editor.
+ *
+ * This represents what the editor will render when the block is used.
+ * The "edit" property must be a valid function.
+ *
+ * @since [version]
+ *
+ * @param {Object} props Block properties.
+ * @return {Element} Edit component.
+ */
+function Edit( props ) {
+	const { attributes } = props,
+		{ template } = attributes,
+		blockProps = useBlockProps();
+
+	let { title } = attributes;
+
+	if ( ! title ) {
+		const map = window.llmsBlockTemplatesL10n;
+		title = map && map[ template ] ? map[ template ] : template;
+	}
+
+	return (
+		<div { ...blockProps }>
+			<Placeholder
+				label={ title }
+				className="wp-block-liftelrms-php-template__placeholder"
+			>
+				<div className="wp-block-liftelrms-php-template__placeholder-copy">
+					<p className="wp-block-liftelrms-php-template__placeholder-warning">
+						<strong>
+							{ __(
+								'Attention: Do not remove this block!',
+								'lifterlms'
+							) }
+						</strong>{ ' ' }
+						{ __(
+							'Removal will cause unintended effects on your LMS site.',
+							'lifterlms'
+						) }
+					</p>
+					<p>
+						{ sprintf(
+							/* translators: %s is the template title */
+							__(
+								'This is an editor placeholder for the %s. On your site this will be replaced by the relevant template. You can move this placeholder around and add further blocks around it to extend the template.',
+								'lifterlms'
+							),
+							title
+						) }
+					</p>
+				</div>
+			</Placeholder>
+		</div>
+	);
+}
 
 /**
  * Register Block.
@@ -45,59 +103,8 @@ export const settings = {
 		reusable: false,
 		inserter: false,
 	},
-	/**
-	 * The edit function describes the structure of your block in the context of the editor.
-	 *
-	 * This represents what the editor will render when the block is used.
-	 * The "edit" property must be a valid function.
-	 *
-	 * @since [version]
-	 *
-	 * @param {Object} props Block properties.
-	 * @return {Element} Edit component.
-	 */
-	edit: ( props ) => {
-		const { attributes } = props;
-		const blockProps = useBlockProps();
-		const title = attributes.title ?
-			attributes.title
-			:
-			( LLMS_Block_Templates_l10n && LLMS_Block_Templates_l10n.hasOwnProperty( attributes.template ) ? LLMS_Block_Templates_l10n[attributes.template] : attributes.template );
 
-		return (
-			<div { ...blockProps }>
-				<Placeholder
-					label={ title }
-					className="wp-block-liftelrms-php-template__placeholder"
-				>
-					<div className="wp-block-liftelrms-php-template__placeholder-copy">
-						<p className="wp-block-liftelrms-php-template__placeholder-warning">
-							<strong>
-								{ __(
-									'Attention: Do not remove this block!',
-									'lifterlms'
-								) }
-							</strong>{ ' ' }
-							{ __(
-								'Removal will cause unintended effects on your LMS site.',
-								'lifterlms'
-							) }
-						</p>
-						<p>
-							{ sprintf(
-								/* translators: %s is the template title */
-								__(
-									'This is an editor placeholder for the %s. On your site this will be replaced by the relevant template. You can move this placeholder around and add further blocks around it to extend the template.',
-									'lifterlms'
-								),
-								title
-							) }
-						</p>
-					</div>
-			</Placeholder>
-		</div>
-		);
-	},
+	edit: Edit,
 
 	/**
 	 * The save function defines the way in which the different attributes should be combined
