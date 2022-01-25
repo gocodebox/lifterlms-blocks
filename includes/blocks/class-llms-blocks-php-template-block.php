@@ -77,11 +77,11 @@ class LLMS_Blocks_PHP_Template_Block extends LLMS_Blocks_Abstract_Block {
 	 */
 	public function get_attributes() {
 		return array(
-			'template' =>  array(
+			'template' => array(
 				'type'    => 'string',
 				'default' => '',
 			),
-			'title'    =>  array(
+			'title'    => array(
 				'type'    => 'string',
 				'default' => '',
 			),
@@ -131,7 +131,7 @@ class LLMS_Blocks_PHP_Template_Block extends LLMS_Blocks_Abstract_Block {
 		 * @param array                          $template      The template file basename to be rendered.
 		 * @param LLMS_Blocks_PHP_Template_Block $block         This block object.
 		 */
-		$block_content = apply_filters( 'llms_blocks_render_php_template_block', $block_content, $attributes, $templates[$attributes['template']], $this );
+		$block_content = apply_filters( 'llms_blocks_render_php_template_block', $block_content, $attributes, $templates[ $attributes['template'] ], $this );
 
 		if ( $block_content ) {
 			echo $block_content;
