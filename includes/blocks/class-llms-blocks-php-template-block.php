@@ -77,16 +77,16 @@ class LLMS_Blocks_PHP_Template_Block extends LLMS_Blocks_Abstract_Block {
 	 */
 	public function get_attributes() {
 		return array(
-			'template' =>  array(
+			'template'  => array(
 				'type'    => 'string',
 				'default' => '',
 			),
-			'title'    =>  array(
+			'title'     => array(
 				'type'    => 'string',
 				'default' => '',
 			),
 			'hideTitle' => array(
-				'type' => 'boolean',
+				'type'    => 'boolean',
 				'default' => false,
 			),
 		);
