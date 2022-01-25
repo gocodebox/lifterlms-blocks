@@ -1,7 +1,7 @@
 /**
  * BLOCK: llms/php-template
  *
- * @since [version]
+ * @since 2.3.0
  */
 
 // WP deps.
@@ -22,7 +22,7 @@ export const name = 'llms/php-template';
  * This represents what the editor will render when the block is used.
  * The "edit" property must be a valid function.
  *
- * @since [version]
+ * @since 2.3.0
  *
  * @param {Object} props Block properties.
  * @return {Element} Edit component.
@@ -77,7 +77,7 @@ function Edit( props ) {
 /**
  * Register Block.
  *
- * @since [version]
+ * @since 2.3.0
  *
  * @param {string} name     Block name.
  * @param {Object} settings Block settings.
@@ -112,7 +112,7 @@ export const settings = {
 	 *
 	 * The "save" property must be specified and must be a valid function.
 	 *
-	 * @since [version]
+	 * @since 2.3.0
 	 *
 	 * @return {null} Save function disabled for "dynamic" block.
 	 */

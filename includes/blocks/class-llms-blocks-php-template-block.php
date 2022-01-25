@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Blocks
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.3.0
  *
  * @render_hook llms_php-template_render
  */
@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * PHP Template block.
  *
- * @since [version]
+ * @since 2.3.0
  */
 class LLMS_Blocks_PHP_Template_Block extends LLMS_Blocks_Abstract_Block {
 
@@ -54,7 +54,7 @@ class LLMS_Blocks_PHP_Template_Block extends LLMS_Blocks_Abstract_Block {
 	/**
 	 * Add actions attached to the render function action.
 	 *
-	 * @since [version]
+	 * @since 2.3.0
 	 *
 	 * @param array  $attributes Optional. Block attributes. Default empty array.
 	 * @param string $content    Optional. Block content. Default empty string.
@@ -71,7 +71,7 @@ class LLMS_Blocks_PHP_Template_Block extends LLMS_Blocks_Abstract_Block {
 	 *
 	 * Necessary to override when creating ServerSideRender blocks.
 	 *
-	 * @since [version]
+	 * @since 2.3.0
 	 *
 	 * @return array
 	 */
@@ -91,7 +91,7 @@ class LLMS_Blocks_PHP_Template_Block extends LLMS_Blocks_Abstract_Block {
 	/**
 	 * Output the template.
 	 *
-	 * @since [version]
+	 * @since 2.3.0
 	 *
 	 * @param array $attributes Optional. Block attributes. Default empty array.
 	 * @return void
@@ -105,7 +105,7 @@ class LLMS_Blocks_PHP_Template_Block extends LLMS_Blocks_Abstract_Block {
 		/**
 		 * Filters the php templates that can be render via this block.
 		 *
-		 * @since [version]
+		 * @since 2.3.0
 		 *
 		 * @param array $templates Templates map, where the keys are the template attribute value and the values are the php file names (w/o extension).
 		 */
@@ -124,7 +124,7 @@ class LLMS_Blocks_PHP_Template_Block extends LLMS_Blocks_Abstract_Block {
 		/**
 		 * Filters the block html.
 		 *
-		 * @since [version]
+		 * @since 2.3.0
 		 *
 		 * @param string                         $block_content The block's html.
 		 * @param array                          $attributes    The block's array of attributes.

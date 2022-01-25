@@ -1,6 +1,19 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.3.0 - 2022-01-25
+-------------------
+
+##### New Features
+
++ Added the llms/php-template block, used by the Site Editor to load php templates.
+
+##### Updates and Enhancements
+
++ Adds support for WordPress 5.9.
++ The minimum required WordPress version is now 5.5.
+
+
 v2.2.1 - 2021-09-29
 -------------------
 

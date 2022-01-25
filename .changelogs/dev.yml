@@ -1,4 +1,0 @@
-significance: minor
-type: added
-entry: Added the llms/php-template block, used by the Site Editor to load php
-  templates.
