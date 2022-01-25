@@ -16,7 +16,7 @@ import getLabel from './get-label';
 /**
  * Block Name.
  *
- * @type {String}
+ * @type {string}
  */
 export const name = 'llms/php-template';
 
@@ -65,7 +65,6 @@ export const settings = {
 	 * @return {Element} Edit component.
 	 */
 	edit: ( props ) => {
-
 		const { attributes, setAttributes } = props,
 			{ hideTitle, template } = attributes,
 			blockProps = useBlockProps(),
@@ -102,8 +101,8 @@ export const settings = {
 							) }
 						</p>
 					</div>
-			</Placeholder>
-		</div>
+				</Placeholder>
+			</div>
 		);
 	},
 
