@@ -9,6 +9,10 @@ import { __, sprintf } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 import { Placeholder } from '@wordpress/components';
 
+// Internal deps.
+import Inspector from './inspect';
+import getLabel from './get-label';
+
 /**
  * Block Name.
  *
@@ -38,6 +42,10 @@ export const settings = {
 			type: 'string',
 			default: '',
 		},
+		hideTitle: {
+			type: 'boolean',
+			default: false,
+		},
 	},
 	supports: {
 		html: false,
@@ -58,15 +66,16 @@ export const settings = {
 	 */
 	edit: ( props ) => {
 
-		const { attributes } = props;
-		const blockProps = useBlockProps();
-		const title = attributes.title && window.LLMS.l10n.strings.hasOwnProperty(attributes.title) ?
-			window.LLMS.l10n.strings[attributes.title] : ( attributes.title ? attributes.title : attributes.template );
+		const { attributes, setAttributes } = props,
+			{ hideTitle, template } = attributes,
+			blockProps = useBlockProps(),
+			label = getLabel( template );
 
 		return (
 			<div { ...blockProps }>
+				<Inspector { ...{ hideTitle, setAttributes } } />
 				<Placeholder
-					label={ title }
+					label={ label }
 					className="wp-block-liftelrms-php-template__placeholder"
 				>
 					<div className="wp-block-liftelrms-php-template__placeholder-copy">
@@ -89,7 +98,7 @@ export const settings = {
 									'This is an editor placeholder for the %s. On your site this will be replaced by the relevant template. You can move this placeholder around and add further blocks around it to extend the template.',
 									'lifterlms'
 								),
-								title
+								label
 							) }
 						</p>
 					</div>

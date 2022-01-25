@@ -85,6 +85,10 @@ class LLMS_Blocks_PHP_Template_Block extends LLMS_Blocks_Abstract_Block {
 				'type'    => 'string',
 				'default' => '',
 			),
+			'hideTitle' => array(
+				'type' => 'boolean',
+				'default' => false,
+			),
 		);
 	}
 
@@ -115,6 +119,10 @@ class LLMS_Blocks_PHP_Template_Block extends LLMS_Blocks_Abstract_Block {
 			return;
 		}
 
+		if ( true === $attributes['hideTitle'] ) {
+			add_filter( 'lifterlms_show_page_title', '__return_false' );
+		}
+
 		ob_start();
 
 		llms_get_template( "{$templates[$attributes['template']]}.php" );
@@ -134,6 +142,10 @@ class LLMS_Blocks_PHP_Template_Block extends LLMS_Blocks_Abstract_Block {
 
 		if ( $block_content ) {
 			echo $block_content;
+		}
+
+		if ( true === $attributes['hideTitle'] ) {
+			remove_filter( 'lifterlms_show_page_title', '__return_false' );
 		}
 
 	}
