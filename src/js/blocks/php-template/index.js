@@ -57,11 +57,12 @@ export const settings = {
 	 * @return {Element} Edit component.
 	 */
 	edit: ( props ) => {
-
 		const { attributes } = props;
 		const blockProps = useBlockProps();
-		const title = attributes.title && window.LLMS.l10n.strings.hasOwnProperty(attributes.title) ?
-			window.LLMS.l10n.strings[attributes.title] : ( attributes.title ? attributes.title : attributes.template );
+		const title = attributes.title ?
+			attributes.title
+			:
+			( LLMS_Block_Templates_l10n && LLMS_Block_Templates_l10n.hasOwnProperty( attributes.template ) ? LLMS_Block_Templates_l10n[attributes.template] : attributes.template );
 
 		return (
 			<div { ...blockProps }>
