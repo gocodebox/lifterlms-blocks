@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 2.0.0
- * @version [version]
+ * @version 2.3.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -169,7 +169,7 @@ class LLMS_Blocks_Reusable {
 	 * For any other screen we return `false` because we don't care about it.
 	 *
 	 * @since 2.0.0
-	 * @since [version] Don't pass `null` to `basename()`.
+	 * @since 2.3.1 Don't pass `null` to `basename()`.
 	 *
 	 * @param string $referer Referring URL for the REST request.
 	 * @return string|boolean Returns the screen name or `false` if we don't care about the screen.

@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.3.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -215,7 +215,7 @@ class LLMS_Blocks_Visibility {
 	 * WP Core API request.
 	 *
 	 * @since 2.0.0
-	 * @since [version] Don't use deprecated `FILTER_SANITIZE_STRING`.
+	 * @since 2.3.1 Don't use deprecated `FILTER_SANITIZE_STRING`.
 	 *
 	 * @link https://developer.wordpress.org/rest-api/reference/rendered-blocks/
 	 *
