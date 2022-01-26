@@ -1,6 +1,14 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.3.1 - 2022-01-26
+-------------------
+
+##### Updates and Enhancements
+
++ Resolved PHP 8.1 deprecation warnings.
+
+
 v2.3.0 - 2022-01-25
 -------------------
 
