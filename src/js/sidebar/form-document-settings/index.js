@@ -4,7 +4,7 @@
  * Displays only on `llms_form` post types.
  *
  * @since 1.6.0
- * @version 2.0.0
+ * @version [version]
  */
 
 // WP Deps.
@@ -14,6 +14,7 @@ import {
 	ExternalLink,
 	PanelRow,
 	ToggleControl,
+	TextControl,
 } from '@wordpress/components';
 import { compose } from '@wordpress/compose';
 import { dispatch, select, withDispatch, withSelect } from '@wordpress/data';
@@ -44,6 +45,7 @@ class FormDocumentSettings extends Component {
 	 * @since 1.12.0 Add a class name to the document sidebar.
 	 *               Add default template restoration.
 	 * @since 2.0.0 Use default template from location definition in favor of from metadata.
+	 * @since [version] Add control for the checkout's form title for free access plans.
 	 *
 	 * @return {?Fragment} Component HTML fragment or null when not supported.
 	 */
@@ -57,11 +59,11 @@ class FormDocumentSettings extends Component {
 			return null;
 		}
 
-		const { location, link, showTitle, setFormMetas } = this.props,
+		const { location, link, showTitle, freeApTitle, setFormMetas } = this.props,
 			{ formLocations } = window.llms,
 			currentLoc = formLocations[ location ];
 
-		// Set default value.
+		// Set default values.
 		if ( '' === showTitle ) {
 			setFormMetas( { _llms_form_show_title: 'yes' } );
 		}
@@ -196,6 +198,19 @@ class FormDocumentSettings extends Component {
 										} )
 									}
 								/>
+								{ 'checkout' === location &&
+								<TextControl
+									label={ __( 'Free Access Plan Form Title', 'lifterlms' ) }
+									value={ freeApTitle }
+									onChange={ ( value ) =>
+										setFormMetas( { _llms_form_title_free_access_plans: value } )
+									}
+									help={ __(
+										"The form title to be shown for free access plans. Leave it empty if you don't want to show any title for free acces plan checkout forms.",
+										'lifterlms'
+									) }
+								/>
+								}
 								<br />
 								<PanelRow>
 									<Button
@@ -233,6 +248,7 @@ class FormDocumentSettings extends Component {
  * @since 1.7.2 Only modify select when working with an `llms_form` post type.
  * @since 1.12.0 Load the default template meta field.
  * @since 2.0.0 Don't load default template from metadata.
+ * @since [version] Retrieve form title for free access plans meta field.
  */
 const applyWithSelect = withSelect( ( select ) => {
 	const {
@@ -251,6 +267,7 @@ const applyWithSelect = withSelect( ( select ) => {
 		link: getCurrentPost().link,
 		location: meta._llms_form_location,
 		showTitle: meta._llms_form_show_title,
+		freeApTitle: meta._llms_form_title_free_access_plans,
 	};
 } );
 
