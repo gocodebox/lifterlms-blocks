@@ -59,8 +59,14 @@ class FormDocumentSettings extends Component {
 			return null;
 		}
 
-		const { location, link, showTitle, freeApTitle, setFormMetas } = this.props,
-			{ formLocations } = window.llms,
+		const {
+			location,
+			link,
+			showTitle,
+			freeApTitle,
+			setFormMetas,
+		} = this.props;
+		const { formLocations } = window.llms,
 			currentLoc = formLocations[ location ];
 
 		// Set default values.
@@ -198,19 +204,25 @@ class FormDocumentSettings extends Component {
 										} )
 									}
 								/>
-								{ 'checkout' === location && 'yes' === showTitle &&
-								<TextControl
-									label={ __( 'Free Access Plan Form Title', 'lifterlms' ) }
-									value={ freeApTitle }
-									onChange={ ( value ) =>
-										setFormMetas( { _llms_form_title_free_access_plans: value } )
-									}
-									help={ __(
-										"The form title to be shown for free access plans.",
-										'lifterlms'
+								{ 'checkout' === location &&
+									'yes' === showTitle && (
+										<TextControl
+											label={ __(
+												'Free Access Plan Form Title',
+												'lifterlms'
+											) }
+											value={ freeApTitle }
+											onChange={ ( val ) =>
+												setFormMetas( {
+													_llms_form_title_free_access_plans: val,
+												} )
+											}
+											help={ __(
+												'The form title to be shown for free access plans.',
+												'lifterlms'
+											) }
+										/>
 									) }
-								/>
-								}
 								<br />
 								<PanelRow>
 									<Button
