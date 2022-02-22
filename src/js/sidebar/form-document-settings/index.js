@@ -198,7 +198,7 @@ class FormDocumentSettings extends Component {
 										} )
 									}
 								/>
-								{ 'checkout' === location &&
+								{ 'checkout' === location && 'yes' === showTitle &&
 								<TextControl
 									label={ __( 'Free Access Plan Form Title', 'lifterlms' ) }
 									value={ freeApTitle }
