@@ -206,7 +206,7 @@ class FormDocumentSettings extends Component {
 										setFormMetas( { _llms_form_title_free_access_plans: value } )
 									}
 									help={ __(
-										"The form title to be shown for free access plans. Leave it empty if you don't want to show any title for free acces plan checkout forms.",
+										"The form title to be shown for free access plans.",
 										'lifterlms'
 									) }
 								/>
