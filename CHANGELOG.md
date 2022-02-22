@@ -1,6 +1,14 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.3.2 - 2022-02-22
+-------------------
+
+##### Updates and Enhancements
+
++ Added an option to specify a custom checkout form title for free access plans.
+
+
 v2.3.1 - 2022-01-26
 -------------------
 

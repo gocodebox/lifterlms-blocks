@@ -4,7 +4,7 @@
  * Displays only on `llms_form` post types.
  *
  * @since 1.6.0
- * @version [version]
+ * @version 2.3.2
  */
 
 // WP Deps.
@@ -45,7 +45,7 @@ class FormDocumentSettings extends Component {
 	 * @since 1.12.0 Add a class name to the document sidebar.
 	 *               Add default template restoration.
 	 * @since 2.0.0 Use default template from location definition in favor of from metadata.
-	 * @since [version] Add control for the checkout's form title for free access plans.
+	 * @since 2.3.2 Add control for the checkout's form title for free access plans.
 	 *
 	 * @return {?Fragment} Component HTML fragment or null when not supported.
 	 */
@@ -260,7 +260,7 @@ class FormDocumentSettings extends Component {
  * @since 1.7.2 Only modify select when working with an `llms_form` post type.
  * @since 1.12.0 Load the default template meta field.
  * @since 2.0.0 Don't load default template from metadata.
- * @since [version] Retrieve form title for free access plans meta field.
+ * @since 2.3.2 Retrieve form title for free access plans meta field.
  */
 const applyWithSelect = withSelect( ( select ) => {
 	const {
