@@ -2,7 +2,7 @@
  * Main Block editor entry point.
  *
  * @since 1.0.0
- * @version 2.0.0
+ * @version [version]
  */
 
 // SCSS.
@@ -20,8 +20,12 @@ import './data/';
 import registerBlocks from './blocks/';
 registerBlocks();
 
+// Preserve components from `@lifterlms/components`.
+const { components = {} } = window.llms;
+
 // Import core Components and expose them for 3rd parties to utilize.
 import * as Components from './components/';
 window.llms.components = {
+	...components,
 	...Components,
 };
