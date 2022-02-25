@@ -1,0 +1,4 @@
+significance: patch
+type: changed
+entry: Components added to `window.llms.components` are now aware of components
+  added to the object from other sources.
