@@ -5,7 +5,7 @@
  * @package  LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version 1.7.1
+ * @version 2.4.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -122,11 +122,12 @@ class LLMS_Blocks_Post_Instructors {
 	 *
 	 * @since 1.0.0
 	 * @since 1.7.1 Decode JSON prior to saving.
+	 * @since 2.4.0 Fix access to non-existing variable when current user canno edit the course/membership.
 	 *
-	 * @param   string  $value  Instructor data to add to the object (JSON).
-	 * @param   WP_Post $object WP_Post object.
-	 * @param   string  $key    name of the field.
-	 * @return  null|WP_Error
+	 * @param string  $value  Instructor data to add to the object (JSON).
+	 * @param WP_Post $object WP_Post object.
+	 * @param string  $key    Name of the field.
+	 * @return null|WP_Error
 	 */
 	public function update_callback( $value, $object, $key ) {
 
@@ -135,7 +136,7 @@ class LLMS_Blocks_Post_Instructors {
 				'rest_cannot_update',
 				__( 'Sorry, you are not allowed to edit the object instructors.', 'lifterlms' ),
 				array(
-					'key'    => $name,
+					'key'    => $key,
 					'status' => rest_authorization_required_code(),
 				)
 			);

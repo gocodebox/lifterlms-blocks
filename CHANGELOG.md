@@ -1,6 +1,18 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.4.0 - 2022-02-25
+-------------------
+
+##### Updates and Enhancements
+
++ Components added to `window.llms.components` are now aware of components added to the object from other sources.
+
+##### Bug Fixes
+
++ Fixed access to non-existing variable when current user tries to edit course/membership instructors without proper permissions. [#140](https://github.com/gocodebox/lifterlms-blocks#140)
+
+
 v2.3.2 - 2022-02-22
 -------------------
 

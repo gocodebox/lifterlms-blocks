@@ -7,7 +7,8 @@
  * @group post_instructors
  *
  * @since 1.6.0
- * @version 1.6.0
+ * @since 2.4.0 Added tests on `update_callback()` method for users without permissions to set course/membership instructors.
+ * @version 2.4.0
  */
 class LLMS_Blocks_Test_Post_Instructors extends LLMS_Blocks_Unit_Test_Case {
 
@@ -141,4 +142,27 @@ class LLMS_Blocks_Test_Post_Instructors extends LLMS_Blocks_Unit_Test_Case {
 
 	}
 
+	/**
+	 * Test update_callback method whith a user who has no permissions to set instructors.
+	 *
+	 * @since 2.4.0
+	 *
+	 * @return void
+	 */
+	public function test_update_callback_no_permission() {
+
+		foreach ( array( 'course', 'llms_membership' ) as $post_type ) {
+
+			$obj = llms_get_post( $this->factory->post->create( array(
+				'post_type' => $post_type,
+			) ) );
+
+			$res = $this->instance->update_callback( array(), $obj, 'instructors' );
+			$this->assertWPError( $res );
+			$this->assertWPErrorCodeEquals( 'rest_cannot_update', $res );
+			$this->assertSame( 'Sorry, you are not allowed to edit the object instructors.', $res->get_error_message() );
+			$this->assertEquals( array( 'key' => 'instructors', 'status' => 401 ), $res->get_error_data(), $post_type );
+
+		}
+	}
 }
