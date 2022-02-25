@@ -7,8 +7,8 @@
  * @group post_instructors
  *
  * @since 1.6.0
- * @since [version] Added tests on `update_callback()` method for users without permissions to set course/membership instructors.
- * @version [version]
+ * @since 2.4.0 Added tests on `update_callback()` method for users without permissions to set course/membership instructors.
+ * @version 2.4.0
  */
 class LLMS_Blocks_Test_Post_Instructors extends LLMS_Blocks_Unit_Test_Case {
 
@@ -145,7 +145,7 @@ class LLMS_Blocks_Test_Post_Instructors extends LLMS_Blocks_Unit_Test_Case {
 	/**
 	 * Test update_callback method whith a user who has no permissions to set instructors.
 	 *
-	 * @since [version]
+	 * @since 2.4.0
 	 *
 	 * @return void
 	 */

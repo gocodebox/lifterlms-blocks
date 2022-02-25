@@ -1,5 +1,0 @@
-significance: minor
-type: fixed
-links:
-- "#140"
-entry: Fixed access to non-existing variable when current user tries to edit course/membership instructors without proper permissions.

@@ -5,7 +5,7 @@
  * @package  LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.4.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -122,7 +122,7 @@ class LLMS_Blocks_Post_Instructors {
 	 *
 	 * @since 1.0.0
 	 * @since 1.7.1 Decode JSON prior to saving.
-	 * @since [version] Fix access to non-existing variable when current user canno edit the course/membership.
+	 * @since 2.4.0 Fix access to non-existing variable when current user canno edit the course/membership.
 	 *
 	 * @param string  $value  Instructor data to add to the object (JSON).
 	 * @param WP_Post $object WP_Post object.

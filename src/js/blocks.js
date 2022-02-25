@@ -2,7 +2,7 @@
  * Main Block editor entry point.
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.4.0
  */
 
 // SCSS.
