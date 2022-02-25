@@ -25,14 +25,6 @@ WordPress Editor (Gutenberg) blocks for LifterLMS.
 + Activate the plugin
 
 
-## Building
-
-1. Update changelog: `llms-dev log:write`
-2. Update versions: `llms-dev ver:update`
-3. Build assets and remove dev files: `npm run build`
-4. Build dist archive: `llms-dev archive`
-
-
 ## Development
 
 While developing Javascript within this plugin you can watch changes in the assets and (optionally) automatically reload using LiveReload
