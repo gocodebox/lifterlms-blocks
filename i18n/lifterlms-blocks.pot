@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: LifterLMS Blocks 2.3.2\n"
+"Project-Id-Version: LifterLMS Blocks 2.4.0\n"
 "Report-Msgid-Bugs-To: https://lifterlms.com/my-account/my-tickets\n"
 "Last-Translator: Team LifterLMS <team@lifterlms.com>\n"
 "Language-Team: Team LifterLMS <team@lifterlms.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-02-22T11:28:13-07:00\n"
+"POT-Creation-Date: 2022-02-25T08:52:58-07:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: llms/dev 0.0.3\n"
 "X-Domain: lifterlms\n"
@@ -54,7 +54,7 @@ msgstr ""
 msgid "No HTML was returned."
 msgstr ""
 
-#: includes/class-llms-blocks-post-instructors.php:136
+#: includes/class-llms-blocks-post-instructors.php:137
 msgid "Sorry, you are not allowed to edit the object instructors."
 msgstr ""
 
