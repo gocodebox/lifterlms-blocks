@@ -49,7 +49,7 @@ class InstructorsEdit extends Component {
 					block={ name }
 					attributes={ attributes }
 					urlQueryArgs={ {
-						post_id,
+						post_id, // eslint-disable-line camelcase
 					} }
 				/>
 			</Fragment>

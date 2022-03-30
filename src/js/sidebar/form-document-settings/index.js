@@ -190,11 +190,11 @@ class FormDocumentSettings extends Component {
 											? __(
 												'Displaying form title.',
 												'lifterlms'
-											  )
+											)
 											: __(
 												'Not displaying form title.',
 												'lifterlms'
-											  )
+											)
 									}
 									onChange={ ( val ) =>
 										setFormMetas( {

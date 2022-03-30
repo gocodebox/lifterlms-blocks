@@ -63,7 +63,7 @@ export default class Preview extends Component {
 	 *
 	 * @return {void}
 	 */
-	componentWillMount() {
+	componentWillMount() { // eslint-disable-line react/no-deprecated
 		this.getTerms();
 	}
 
@@ -82,7 +82,7 @@ export default class Preview extends Component {
 				{ !! terms
 					? terms.map( ( term, index ) =>
 						this.renderTerm( term, last === index )
-					  )
+					)
 					: __( 'Loading…', 'lifterlms' ) }
 			</Fragment>
 		);

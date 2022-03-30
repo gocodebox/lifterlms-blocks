@@ -83,11 +83,11 @@ export default function( props ) {
 								? __(
 									'Instructor is visible on frontend',
 									'lifterlms'
-								  )
+								)
 								: __(
 									'Instructor is hidden on frontend',
 									'lifterlms'
-								  )
+								)
 						}
 						checked={ visible }
 						onChange={ ( val ) =>

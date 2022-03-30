@@ -248,7 +248,7 @@ export function EditGroup( props ) {
 			'llms/form-field-confirm-group' === block.name
 				? block.innerBlocks[
 					blockType.findControllerBlockIndex( block.innerBlocks )
-				  ]
+				]
 				: null,
 		primaryBlockType = primaryBlock
 			? getBlockType( primaryBlock.name )
@@ -296,7 +296,7 @@ export function EditGroup( props ) {
 								clientId,
 								block,
 								blockType,
-							  } )
+							} )
 							: template
 					}
 					templateLock={ lock }

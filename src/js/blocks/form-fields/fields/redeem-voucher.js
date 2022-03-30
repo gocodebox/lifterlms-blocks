@@ -53,7 +53,7 @@ const fillInspectorControls = ( attributes, setAttributes ) => {
 					? __(
 						'Field is revealed when the toggle is clicked.',
 						'lifterlms'
-					  )
+					)
 					: __( 'Field is always visible.', 'lifterlms' )
 			}
 		/>

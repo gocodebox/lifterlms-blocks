@@ -104,10 +104,10 @@ const fillEditAfter = ( attributes, setAttributes ) => {
 						? __(
 							'Password strength meter description',
 							'lifterlms'
-						  )
+						)
 						: __(
 							'Empty Password strength meter description; start writing to add a label'
-						  )
+						)
 				}
 				placeholder={ __(
 					'Enter a description for the password strength meter',
@@ -166,11 +166,11 @@ const fillInspectorControls = ( attributes, setAttributes ) => {
 						? __(
 							'Password strength meter is enabled.',
 							'lifterlms'
-						  )
+						)
 						: __(
 							'Password strength meter is disabled.',
 							'lifterlms'
-						  )
+						)
 				}
 				checked={ meter }
 				onChange={ () => setAttributes( { meter: ! meter } ) }

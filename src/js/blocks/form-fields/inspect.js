@@ -495,11 +495,11 @@ export default class Inspector extends Component {
 										? __(
 											'Field is required.',
 											'lifterlms'
-											  )
+										)
 										: __(
 											'Field is optional.',
 											'lifterlms'
-											  )
+										)
 								}
 							/>
 						) }
@@ -561,14 +561,14 @@ export default class Inspector extends Component {
 						{ ( canTransformToGroup ||
 							( isConfirmationControlField &&
 								isInAConfirmGroup ) ) && (
-							<ToggleControl
-									className="llms-confirmation-field-toggle"
-									label={ __(
+							<ToggleControl // eslint-disable-line react/jsx-indent
+								className="llms-confirmation-field-toggle"
+								label={ __(
 									'Confirmation Field',
 									'lifterlms'
 								) }
-									checked={ isInAConfirmGroup }
-									onChange={ () => {
+								checked={ isInAConfirmGroup }
+								onChange={ () => {
 									const {
 											replaceBlock,
 											selectBlock,
@@ -584,7 +584,7 @@ export default class Inspector extends Component {
 
 									let replaceClientId = clientId,
 										newBlockType =
-											'llms/form-field-confirm-group',
+												'llms/form-field-confirm-group',
 										blockToSwitch = block,
 										selectBlockId = null;
 
@@ -612,24 +612,24 @@ export default class Inspector extends Component {
 											);
 
 										selectBlockId =
-											innerBlocks[ controllerIndex ]
-												.clientId;
+												innerBlocks[ controllerIndex ]
+													.clientId;
 									} else {
 										selectBlockId = switched[ 0 ].clientId;
 									}
 
 									selectBlock( selectBlockId );
 								} }
-									help={
+								help={
 									isInAConfirmGroup
 										? __(
 											'A Confirmation field is active.',
 											'lifterlms'
-										  )
+										)
 										: __(
 											'No confirmation field.',
 											'lifterlms'
-										  )
+										)
 								}
 							/>
 						) }

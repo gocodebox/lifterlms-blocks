@@ -125,7 +125,7 @@ export default class Inspector extends Component {
 								? __(
 									'Displaying categories list',
 									'lifterlms'
-								  )
+								)
 								: __( 'Hiding categories list', 'lifterlms' )
 						}
 					/>

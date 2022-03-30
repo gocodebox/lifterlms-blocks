@@ -91,8 +91,11 @@ function getControlledBlockAttrs( attributes = {} ) {
 		name,
 		match,
 		label: attributes.label
-			? // Translators: %s label of the controller field.
-			  sprintf( __( 'Confirm %s', 'lifterlms' ), attributes.label )
+			? sprintf(
+				// Translators: %s label of the controller field.
+				__( 'Confirm %s', 'lifterlms' ),
+				attributes.label
+			)
 			: '',
 		columns: 6,
 		last_column: true,

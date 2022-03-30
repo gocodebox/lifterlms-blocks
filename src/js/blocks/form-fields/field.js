@@ -109,7 +109,7 @@ export default class Field extends Component {
 									? __( 'Field label' )
 									: __(
 										'Empty field label; start writing to add a label'
-									  )
+									)
 							}
 							placeholder={ __( 'Enter a label' ) }
 						/>
@@ -169,7 +169,7 @@ export default class Field extends Component {
 								? __( 'Optional field description' )
 								: __(
 									'Empty field description; start writing to add a description'
-								  )
+								)
 						}
 						placeholder={ __( 'Add optional description text' ) }
 						style={ { color: '#808285', fontStyle: 'italic' } }
