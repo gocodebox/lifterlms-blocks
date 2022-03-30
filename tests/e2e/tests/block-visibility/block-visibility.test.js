@@ -63,8 +63,6 @@ describe( 'BlockVisibility', () => {
 		await clickBlockAppender();
 		await page.keyboard.type( 'Lorem ipsum' );
 
-		page.once( 'dialog', async dialog => await dialog.accept() ); // Leave page without saving.
-
 	} );
 
 	it ( 'should do nothing with default values', async () => {
