@@ -2,7 +2,7 @@
  * Form Field related checks
  *
  * @since Unknown
- * @version 2.0.0
+ * @version 2.4.1
  */
 
 // External Deps.
@@ -97,10 +97,11 @@ export const getFieldBlocks = ( blocks = [] ) => {
 };
 
 /**
- * Ensure field attributes are unique in the requested context
+ * Ensure field attributes are unique in the requested context.
  *
  * @since Unknown
  * @since 2.0.0 Added `context` parameter and use data from the llms/user-info-fields store.
+ * @since 2.4.1 Fixed order of `getFieldBy()` parameters.
  *
  * @param {string} key     Attribute key name.
  * @param {string} val     String to check for uniqueness.
@@ -110,5 +111,5 @@ export const getFieldBlocks = ( blocks = [] ) => {
  */
 export const isUnique = ( key, val, context = 'global' ) => {
 	const { getFieldBy } = select( fieldsStore );
-	return getFieldBy( key, val, context ) ? false : true;
+	return getFieldBy( val, key, context ) ? false : true;
 };

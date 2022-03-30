@@ -1,6 +1,14 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.4.1 - 2022-03-30
+-------------------
+
+##### Bug Fixes
+
++ Fixed issue when adding two custom fields of the same type resulting in the first changing its usermeta key. [#160](https://github.com/gocodebox/lifterlms-blocks/issues/160)
+
+
 v2.4.0 - 2022-02-25
 -------------------
 
