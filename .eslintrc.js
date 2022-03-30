@@ -1,15 +1,9 @@
-module.exports = {
+const config = require( '@lifterlms/scripts/config/.eslintrc.js' );
 
-	extends: [
-	 'plugin:@wordpress/eslint-plugin/recommended',
-	],
+module.exports = {
+	...config,
+	// @TODO Clean these up.
 	rules: {
-		/**
-		 * For the time being display warnings for these but leave them alone
-		 *
-		 * @todo Clean these up.
-		 */
 		'no-shadow': [ 1 ],
 	}
-
 };
