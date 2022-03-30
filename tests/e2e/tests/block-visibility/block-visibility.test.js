@@ -36,7 +36,7 @@ const { WP_VERSION = 999 } = process.env, // If not defined assume local and lat
  */
 async function getVisibilityIndicatorMsg() {
 	const SELECTOR = `${ INDICATOR_SELECTOR } .llms-block-visibility--msg`;
-	await page.waitForSelector( SELECTOR );
+	await page.waitForTimeoutSelector( SELECTOR );
 	return await page.$eval( SELECTOR, el => el.innerHTML );
 }
 
@@ -49,7 +49,7 @@ async function getVisibilityIndicatorMsg() {
  */
 async function getVisibilityIndicatorIcon() {
 	const SELECTOR = `${ INDICATOR_SELECTOR } ${ INDICATOR_ICON_SELECTOR }`;
-	await page.waitForSelector( SELECTOR );
+	await page.waitForTimeoutSelector( SELECTOR );
 	return await page.$eval( SELECTOR, el => el.outerHTML ? true : false );
 }
 
@@ -108,14 +108,14 @@ describe( 'BlockVisibility', () => {
 		await page.select( '.llms-visibility-select select', 'enrolled' );
 
 
-		await page.waitForSelector( '.llms-visibility-select--in select' );
+		await page.waitForTimeoutSelector( '.llms-visibility-select--in select' );
 		await page.select( '.llms-visibility-select--in select', 'list_all' );
 
 		await fillField( '.llms-search--course .llms-search__input input[type="text"]', 'Quickstart' );
-		await page.waitForSelector( '.llms-search--course .llms-search__menu' );
+		await page.waitForTimeoutSelector( '.llms-search--course .llms-search__menu' );
 		await page.keyboard.press( 'Enter' );
 
-		await page.waitFor( 1000 );
+		await page.waitForTimeout( 1000 );
 
 		// Attributes added to the post content.
 		expect( await getEditedPostContent() ).toMatchSnapshot();

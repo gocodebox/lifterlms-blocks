@@ -26,7 +26,7 @@ async function getInstructorNames() {
 async function toggleEdit( nthChild ) {
 	const INDEX_SELECTOR = getInstructorIndexSelector( nthChild );
 	await click(`${ INDEX_SELECTOR } button[aria-label="Edit instructor"]`);
-	return page.waitFor( 500 );
+	return page.waitForTimeout( 500 );
 }
 
 async function reorderInstructor( draggingNthChild, droppingNthChild ) {
@@ -36,7 +36,7 @@ async function reorderInstructor( draggingNthChild, droppingNthChild ) {
 	await dragAndDrop(
 		`${ getInstructorIndexSelector( draggingNthChild ) } ${ BUTTON_SELECTOR }`,
 		`${ getInstructorIndexSelector( droppingNthChild ) } ${ BUTTON_SELECTOR }` );
-	await page.waitFor( 500 );
+	await page.waitForTimeout( 500 );
 
 }
 
@@ -75,12 +75,12 @@ describe( 'Sidebar/Plugins/Instructors', () => {
 
 		await fillField( '.llms-search--user .llms-search__input input[type="text"]', 'Knox' );
 
-		await page.waitFor( 1000 );
+		await page.waitForTimeout( 1000 );
 
-		await page.waitForSelector( '.llms-search--user .llms-search__menu' );
+		await page.waitForTimeoutSelector( '.llms-search--user .llms-search__menu' );
 		await page.keyboard.press( 'Enter' );
 
-		await page.waitForSelector( getInstructorIndexSelector( 2 ) );
+		await page.waitForTimeoutSelector( getInstructorIndexSelector( 2 ) );
 
 		expect( await getInstructorNames() ).toMatchSnapshot();
 
@@ -96,9 +96,9 @@ describe( 'Sidebar/Plugins/Instructors', () => {
 		const BUTTON_SELECTOR = `${ getInstructorIndexSelector( 2 ) } button.is-destructive`;
 
 		await toggleEdit( 2 );
-		await page.waitFor( BUTTON_SELECTOR );
+		await page.waitForTimeout( BUTTON_SELECTOR );
 		await click( BUTTON_SELECTOR );
-		await page.waitFor( 500 );
+		await page.waitForTimeout( 500 );
 
 		expect( await getInstructorNames() ).toMatchSnapshot();
 

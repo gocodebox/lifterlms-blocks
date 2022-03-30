@@ -102,7 +102,7 @@ async function getReusableBlockChildren( clientId ) {
 
 async function expectedField( fieldName, clientId ) {
 
-	await page.waitFor( 500 );
+	await page.waitForTimeout( 500 );
 
 	const field = await getField( fieldName );
 	expect( field ).toMatchSnapshot( fieldSnapshotMatcher, 'single field' );
@@ -199,7 +199,7 @@ async function testReusalbeTransforms( { name, fieldName } ) {
 	await convertBlockToReusable( `Reusable: ${ fieldName }` );
 	const reusableBlock = await getTestedBlock( 'reusable block', reusableBlockSnapshotMatcher );
 
-	await page.waitFor( 1000 );
+	await page.waitForTimeout( 1000 );
 
 	const [ testedBlock ] = await getReusableBlockChildren( reusableBlock.clientId );
 	await expectedField( fieldName, testedBlock.clientId );
@@ -209,7 +209,7 @@ async function testReusalbeTransforms( { name, fieldName } ) {
 	await showBlockToolbar();
 	await clickBlockToolbarButton( 'Convert to regular blocks' );
 
-	await page.waitFor( 1000 );
+	await page.waitForTimeout( 1000 );
 
 	const staticBlock = await getTestedBlock( 'single block' );
 	await expectedField( fieldName, staticBlock.clientId );
@@ -353,7 +353,7 @@ async function testAddConfirmationProp( editable = true, fieldName = '' ) {
 
 		await clickElementByText( 'Confirmation Field' );
 
-		await page.waitFor( 2000 );
+		await page.waitForTimeout( 2000 );
 
 		const
 			block = await getTestedBlock( null ),

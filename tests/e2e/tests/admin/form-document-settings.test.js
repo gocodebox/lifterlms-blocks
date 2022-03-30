@@ -86,7 +86,7 @@ describe( 'Admin/FormsDocSidebar', () => {
 			await clickElementByText( 'Revert to Default', '.components-panel .components-button' );
 
 			// Notice should display.
-			await page.waitForSelector( '.components-notice.is-success' );
+			await page.waitForTimeoutSelector( '.components-notice.is-success' );
 			expect( await page.$eval( '.components-notice.is-success .components-notice__content', el => el.textContent ) ).toMatchSnapshot();
 
 			// Match block list.
@@ -98,7 +98,7 @@ describe( 'Admin/FormsDocSidebar', () => {
 			// Notice gets removed
 			expect( await page.evaluate( () => document.querySelector( '.components-notice.is-success' ) ) ).toBeNull();
 
-			await page.waitFor( 1000 );
+			await page.waitForTimeout( 1000 );
 
 			// Changes before the revert should be found.
 			expect( await getAllBlockNames() ).toMatchSnapshot();

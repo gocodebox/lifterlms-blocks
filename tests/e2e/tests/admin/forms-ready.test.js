@@ -50,23 +50,23 @@ describe( 'Admin/FormsReady', () => {
 		await visitForm();
 
 		// On page load.
-		await page.waitFor( 5 );
+		await page.waitForTimeout( 5 );
 		expect( await page.$eval( draftBtnSelector, el => el.style.display ) ).toBe( 'none' );
 
 		// Add a block.
 		await insertBlock( 'Paragraph' );
-		await page.waitFor( 5 );
+		await page.waitForTimeout( 5 );
 		expect( await page.$eval( draftBtnSelector, el => el.style.display ) ).toBe( 'none' );
 
 		// After updating.
 		await publishAndSaveEntities();
-		await page.waitFor( 500 );
+		await page.waitForTimeout( 500 );
 		expect( await page.$eval( draftBtnSelector, el => el.style.display ) ).toBe( 'none' );
 
 		// Revert the form so future snapshots don't fail.
 		await openFormSettingsPanel();
 		await clickElementByText( 'Revert to Default', '.components-panel .components-button' );
-		await page.waitForSelector( '.components-notice.is-success' );
+		await page.waitForTimeoutSelector( '.components-notice.is-success' );
 		await publishAndSaveEntities();
 
 	} );
@@ -76,17 +76,17 @@ describe( 'Admin/FormsReady', () => {
 		await visitForm();
 
 		// On page load.
-		await page.waitFor( 5 );
+		await page.waitForTimeout( 5 );
 		expect( await page.$eval( '.edit-post-layout .components-panel__body.edit-post-post-status', el => el.style.display ) ).toBe( 'none' );
 
 		// Open Sidebar
 		await openDocumentSettingsSidebar();
-		await page.waitFor( 5 );
+		await page.waitForTimeout( 5 );
 		expect( await page.$eval( '.edit-post-layout .components-panel__body.edit-post-post-status', el => el.style.display ) ).toBe( 'none' );
 
 		// Close & Open again.
 		await openDocumentSettingsSidebar();
-		await page.waitFor( 5 );
+		await page.waitForTimeout( 5 );
 		await openDocumentSettingsSidebar();
 		expect( await page.$eval( '.edit-post-layout .components-panel__body.edit-post-post-status', el => el.style.display ) ).toBe( 'none' );
 
@@ -98,7 +98,7 @@ describe( 'Admin/FormsReady', () => {
 
 		await visitForm();
 		await removeUserEmailBlock();
-		await page.waitForSelector( '.components-notice.is-error' );
+		await page.waitForTimeoutSelector( '.components-notice.is-error' );
 
 		expect( await page.$eval( '.components-notice.is-error .components-notice__content', el => el.textContent ) ).toMatchSnapshot();
 
@@ -110,12 +110,12 @@ describe( 'Admin/FormsReady', () => {
 
 		await visitForm();
 		await removeUserEmailBlock();
-		await page.waitForSelector( '.components-notice.is-error' );
+		await page.waitForTimeoutSelector( '.components-notice.is-error' );
 
 		await click( '.components-notice.is-error .components-notice__content button' );
 
 		// Notice gets removed
-		await page.waitFor( 2000 );
+		await page.waitForTimeout( 2000 );
 		expect( await page.evaluate( () => document.querySelector( '.components-notice.is-error' ) ) ).toBeNull();
 		const blocks = await getAllBlocks();
 		expect( blocks[0].name ).toBe( 'llms/form-field-user-email' );
@@ -189,7 +189,7 @@ describe( 'Admin/FormsReady', () => {
 
 			await page.click( '.block-editor-block-list__layout .wp-block-llms-form-field-user-phone .llms-field > label' );
 
-			await page.waitFor( 500 );
+			await page.waitForTimeout( 500 );
 
 			const titles = await getAvailableSidebarPanelTitles();
 			expect( titles.includes( 'Enrollment Visibility' ) ).toStrictEqual( forms[ form ] );
