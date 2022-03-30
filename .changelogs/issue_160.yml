@@ -1,6 +1,0 @@
-significance: patch
-type: fixed
-links:
-  - "#160"
-entry: Fixed issue when adding two custom fields of the same type resulting
-  in the first changing its usermeta key.
