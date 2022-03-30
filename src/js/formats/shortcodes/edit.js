@@ -23,7 +23,7 @@ import { RichTextToolbarButton } from '@wordpress/block-editor';
  * @param {Object} props Properties from registerFormatType().
  * @return {Object} Component fragment.
  */
-export default function ( props ) {
+export default function( props ) {
 	const [ isOpen, setOpen ] = useState( false ),
 		[ searchQuery, setSearchQuery ] = useState( '' ),
 		[ defaultValue, setDefaultValue ] = useState( '' ),

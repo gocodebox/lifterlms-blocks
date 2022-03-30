@@ -102,11 +102,11 @@ const fillEditAfter = ( attributes, setAttributes ) => {
 				aria-label={
 					meter_description
 						? __(
-								'Password strength meter description',
-								'lifterlms'
+							'Password strength meter description',
+							'lifterlms'
 						  )
 						: __(
-								'Empty Password strength meter description; start writing to add a label'
+							'Empty Password strength meter description; start writing to add a label'
 						  )
 				}
 				placeholder={ __(
@@ -124,7 +124,7 @@ const fillEditAfter = ( attributes, setAttributes ) => {
  * @since 2.0.0
  * @since 2.1.0 Update the minlength value of confirmation field when the control field's value changes.
  *
- * @param {Object} attributes Block attributes.
+ * @param {Object}   attributes    Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
  * @return {Fragment} Component HTML Fragment.
  */
@@ -164,12 +164,12 @@ const fillInspectorControls = ( attributes, setAttributes ) => {
 				help={
 					meter
 						? __(
-								'Password strength meter is enabled.',
-								'lifterlms'
+							'Password strength meter is enabled.',
+							'lifterlms'
 						  )
 						: __(
-								'Password strength meter is disabled.',
-								'lifterlms'
+							'Password strength meter is disabled.',
+							'lifterlms'
 						  )
 				}
 				checked={ meter }

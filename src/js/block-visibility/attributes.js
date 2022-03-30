@@ -46,7 +46,7 @@ const setAttribute = ( attributes, attributeName, defaults ) => {
  * @since 1.8.0 Merge default values into block settings.
  *
  * @param {Object} settings Block settings object.
- * @param {string} name Block name, eg "core/paragraph".
+ * @param {string} name     Block name, eg "core/paragraph".
  * @return {Object} Block settings object.
  */
 export default function visibilityAttributes( settings, name ) {

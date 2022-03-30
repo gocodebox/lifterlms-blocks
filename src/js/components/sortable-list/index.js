@@ -115,7 +115,7 @@ function SortableListItem( {
  * @param {Object}   props.extraProps       Extra properties passed on to ListItem.
  * @return {DndContext} Drag and drop context component.
  */
-export default function ( {
+export default function( {
 	ListItem,
 	manageState,
 	items = [],

@@ -123,8 +123,8 @@ export default class Inspector extends Component {
 						help={
 							!! show_cats
 								? __(
-										'Displaying categories list',
-										'lifterlms'
+									'Displaying categories list',
+									'lifterlms'
 								  )
 								: __( 'Hiding categories list', 'lifterlms' )
 						}

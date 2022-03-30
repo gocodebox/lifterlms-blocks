@@ -124,6 +124,6 @@ function updateBlocks() {
  *
  * @return {void}
  */
-export default function () {
+export default function() {
 	subscribe( updateBlocks );
 }

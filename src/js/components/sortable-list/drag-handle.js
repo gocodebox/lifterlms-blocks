@@ -16,7 +16,7 @@ import DragHandle from '../../icons/drag-handle';
  * @param {Array}    props.listeners  Listener array, passed via dndkit.
  * @return {Button} Draghandle button component.
  */
-export default function ( { label, setNodeRef, listeners } ) {
+export default function( { label, setNodeRef, listeners } ) {
 	label = label || __( 'Reorder instructor', 'lifterlms' );
 
 	return (

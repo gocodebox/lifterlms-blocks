@@ -15,7 +15,7 @@ const { Fill, Slot } = createSlotFill( 'LLMSFormDocSettings' ),
 	 *
 	 * @since 1.6.0
 	 *
-	 * @param {Object} options
+	 * @param {Object}        options
 	 * @param {Array<Object>} options.children Children components.
 	 * @return {Fill} Fill component
 	 */

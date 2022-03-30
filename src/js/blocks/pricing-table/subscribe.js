@@ -52,7 +52,7 @@ subscribe( () => {
 	 *
 	 * @return {boolean} Returns `true` if the button is currently disabled.
 	 */
-	const isBtnDisabled = function () {
+	const isBtnDisabled = function() {
 		return 'disabled' === $btn.attr( 'disabled' );
 	};
 
@@ -63,7 +63,7 @@ subscribe( () => {
 	 *
 	 * @return {boolean} Returns `true` if the revision ID has changed.
 	 */
-	const hasRevisionChanged = function () {
+	const hasRevisionChanged = function() {
 		return lastRevision !== getCurrentPostLastRevisionId();
 	};
 
@@ -79,7 +79,7 @@ subscribe( () => {
 } );
 
 // Throw an error mesage when validation issues are encountered.
-$( document ).on( 'llms-access-plan-validation-errors', function () {
+$( document ).on( 'llms-access-plan-validation-errors', function() {
 	dispatch( 'core/notices' ).createErrorNotice(
 		__(
 			'Validation errors were encountered while attempting to save your access plans.',

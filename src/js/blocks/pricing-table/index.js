@@ -78,7 +78,7 @@ export const settings = {
 		const { attributes } = props;
 
 		// Reload when changes are made to access plans.
-		$( document ).one( 'llms-access-plans-updated', function () {
+		$( document ).one( 'llms-access-plans-updated', function() {
 			// Replacing the block with a duplicate of itself so we can reload the block from the server.
 			dispatch( 'core/editor' ).replaceBlock(
 				props.clientId,
@@ -88,7 +88,7 @@ export const settings = {
 			// This will save the updates to the post content that appear as a result of the replacement.
 			// Since I can't seem to figure out how to prevent the change from being triggered we have to duplicate a save.
 			// which is gross. I know it's gross. It works though....
-			setTimeout( function () {
+			setTimeout( function() {
 				dispatch( 'core/editor' ).savePost();
 			}, 500 );
 		} );

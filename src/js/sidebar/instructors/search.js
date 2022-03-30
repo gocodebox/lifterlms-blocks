@@ -22,7 +22,7 @@ import { SearchUser } from '../../components';
  * @param {Function} props.addInstructor Callback function to add a selected instructor to the parent component's state.
  * @return {SearchUser} User search component.
  */
-export default function ( { instructors, roles, addInstructor } ) {
+export default function( { instructors, roles, addInstructor } ) {
 	return (
 		<SearchUser
 			roles={ roles }

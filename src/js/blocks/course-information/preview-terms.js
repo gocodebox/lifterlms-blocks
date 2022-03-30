@@ -44,7 +44,7 @@ export default class Preview extends Component {
 	 *
 	 * @since Unknown
 	 *
-	 * @param {Object} lastProps  Last known properties object.
+	 * @param {Object} lastProps Last known properties object.
 	 * @return {void}
 	 */
 	componentDidUpdate( lastProps ) {
@@ -81,7 +81,7 @@ export default class Preview extends Component {
 			<Fragment>
 				{ !! terms
 					? terms.map( ( term, index ) =>
-							this.renderTerm( term, last === index )
+						this.renderTerm( term, last === index )
 					  )
 					: __( 'Loading…', 'lifterlms' ) }
 			</Fragment>

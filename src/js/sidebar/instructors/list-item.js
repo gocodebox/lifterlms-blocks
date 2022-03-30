@@ -27,7 +27,7 @@ import { SortableDragHandle } from '../../components';
  * @param {Object} props Component properties object.
  * @return {Object} Component fragment.
  */
-export default function ( props ) {
+export default function( props ) {
 	const {
 			id,
 			item: instructor,
@@ -81,12 +81,12 @@ export default function ( props ) {
 						help={
 							visible
 								? __(
-										'Instructor is visible on frontend',
-										'lifterlms'
+									'Instructor is visible on frontend',
+									'lifterlms'
 								  )
 								: __(
-										'Instructor is hidden on frontend',
-										'lifterlms'
+									'Instructor is hidden on frontend',
+									'lifterlms'
 								  )
 						}
 						checked={ visible }

@@ -143,7 +143,7 @@ variations.forEach( ( variation ) => {
  *
  * @since 2.0.0
  *
- * @param {Object} attributes Block attributes.
+ * @param {Object}   attributes    Block attributes.
  * @param {Function} setAttributes Reference to the block's setAttributes() function.
  * @return {Fragment} Component HTML Fragment.
  */

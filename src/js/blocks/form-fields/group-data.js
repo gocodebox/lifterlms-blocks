@@ -130,7 +130,7 @@ function getConfirmGroupUpdates( attributes, siblingAttributes ) {
 	};
 }
 
-export default function ( { attributes, clientId, setAttributes } = {} ) {
+export default function( { attributes, clientId, setAttributes } = {} ) {
 	const sibling = getSibling( clientId );
 
 	let currentUpdates = {},

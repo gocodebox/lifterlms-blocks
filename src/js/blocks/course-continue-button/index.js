@@ -29,8 +29,8 @@ export const postTypes = [ 'course' ];
  *
  * @since   1.0.0
  *
- * @param  {string}   name     Block name.
- * @param  {Object}   settings Block settings.
+ * @param {string} name     Block name.
+ * @param {Object} settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully, registered; otherwise `undefined`.
  */
 export const settings = {

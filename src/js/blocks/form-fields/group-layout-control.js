@@ -41,7 +41,7 @@ function onChange( { fieldLayout, setAttributes, innerBlocks } ) {
 	} );
 }
 
-export default function ( props ) {
+export default function( props ) {
 	const { attributes, block, setAttributes } = props,
 		{ fieldLayout } = attributes,
 		{ innerBlocks } = block;

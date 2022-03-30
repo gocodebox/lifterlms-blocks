@@ -151,16 +151,16 @@ function matchesSearchQuery(
  *
  * @since [version
  *
- * @param {Object} options
- * @param {Function} options.closeModal Function to close the containing modal.
- * @param {boolean} options.isActive    Whether or not the format is active by user selection/cursor location.
- * @param {Function} options.onChange   Change function for the current rich text editor.
- * @param {string} options.searchQuery  User submitted search query.
- * @param {Object} options.value        Rich text value object.
- * @param {string} options.defaultValue User submitted default value.
+ * @param {Object}   options
+ * @param {Function} options.closeModal   Function to close the containing modal.
+ * @param {boolean}  options.isActive     Whether or not the format is active by user selection/cursor location.
+ * @param {Function} options.onChange     Change function for the current rich text editor.
+ * @param {string}   options.searchQuery  User submitted search query.
+ * @param {Object}   options.value        Rich text value object.
+ * @param {string}   options.defaultValue User submitted default value.
  * @return {Object} Component fragment.
  */
-export default function ( {
+export default function( {
 	closeModal,
 	isActive,
 	onChange,
