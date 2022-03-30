@@ -121,13 +121,13 @@ describe( 'Admin/Shortcodes', () => {
 
 	beforeEach( async () => {
 
-		await page.waitForTimeoutSelector( TOOLBAR_SELECTOR );
+		await page.waitForSelector( TOOLBAR_SELECTOR );
 
 		await click( `${ TOOLBAR_SELECTOR } button.components-dropdown-menu__toggle[aria-label="${ RICH_TEXT_MORE_LABEL }"]` );
 		await page.waitForTimeout( 500 );
 		await clickElementByText( 'Shortcodes', DROPDOWN_SELECTOR );
 
-		await page.waitForTimeoutSelector( MODAL_SELCTOR );
+		await page.waitForSelector( MODAL_SELCTOR );
 
 	} );
 

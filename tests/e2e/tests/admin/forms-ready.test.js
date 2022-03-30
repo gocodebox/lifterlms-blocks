@@ -66,7 +66,7 @@ describe( 'Admin/FormsReady', () => {
 		// Revert the form so future snapshots don't fail.
 		await openFormSettingsPanel();
 		await clickElementByText( 'Revert to Default', '.components-panel .components-button' );
-		await page.waitForTimeoutSelector( '.components-notice.is-success' );
+		await page.waitForSelector( '.components-notice.is-success' );
 		await publishAndSaveEntities();
 
 	} );
@@ -98,7 +98,7 @@ describe( 'Admin/FormsReady', () => {
 
 		await visitForm();
 		await removeUserEmailBlock();
-		await page.waitForTimeoutSelector( '.components-notice.is-error' );
+		await page.waitForSelector( '.components-notice.is-error' );
 
 		expect( await page.$eval( '.components-notice.is-error .components-notice__content', el => el.textContent ) ).toMatchSnapshot();
 
@@ -110,7 +110,7 @@ describe( 'Admin/FormsReady', () => {
 
 		await visitForm();
 		await removeUserEmailBlock();
-		await page.waitForTimeoutSelector( '.components-notice.is-error' );
+		await page.waitForSelector( '.components-notice.is-error' );
 
 		await click( '.components-notice.is-error .components-notice__content button' );
 

@@ -86,7 +86,7 @@ describe( 'Admin/FormsDocSidebar', () => {
 			await clickElementByText( 'Revert to Default', '.components-panel .components-button' );
 
 			// Notice should display.
-			await page.waitForTimeoutSelector( '.components-notice.is-success' );
+			await page.waitForSelector( '.components-notice.is-success' );
 			expect( await page.$eval( '.components-notice.is-success .components-notice__content', el => el.textContent ) ).toMatchSnapshot();
 
 			// Match block list.

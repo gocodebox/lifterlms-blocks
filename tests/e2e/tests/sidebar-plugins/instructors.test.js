@@ -77,10 +77,10 @@ describe( 'Sidebar/Plugins/Instructors', () => {
 
 		await page.waitForTimeout( 1000 );
 
-		await page.waitForTimeoutSelector( '.llms-search--user .llms-search__menu' );
+		await page.waitForSelector( '.llms-search--user .llms-search__menu' );
 		await page.keyboard.press( 'Enter' );
 
-		await page.waitForTimeoutSelector( getInstructorIndexSelector( 2 ) );
+		await page.waitForSelector( getInstructorIndexSelector( 2 ) );
 
 		expect( await getInstructorNames() ).toMatchSnapshot();
 
