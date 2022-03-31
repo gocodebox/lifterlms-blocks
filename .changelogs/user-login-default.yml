@@ -1,0 +1,4 @@
+significance: patch
+type: fixed
+links: https://github.com/gocodebox/lifterlms/issues/2071
+entry: Fixed issue where the `user_login` field block was shown to logged-in users.
