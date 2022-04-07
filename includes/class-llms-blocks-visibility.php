@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version 2.3.1
+ * @version 2.4.2
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -114,6 +114,7 @@ class LLMS_Blocks_Visibility {
 	 * @since 1.0.0
 	 * @since 1.6.0 Add logic for `logged_in` and `logged_out` block visibility options.
 	 * @since 2.0.0 Added a conditional prior to checking the block's visibility attributes.
+	 * @since 2.4.2 Set the `user_login` field block's visibility to its default 'logged_out' if not set.
 	 *
 	 * @param string $content Block inner content.
 	 * @param array  $block   Block data array.
@@ -126,7 +127,14 @@ class LLMS_Blocks_Visibility {
 			return $content;
 		}
 
-		// No attributes or no llms visibility settings (visibile to "all").
+		// Set the `user_login` field block's visibility to its default 'logged_out' if not set.
+		// The WordPress serializer `getCommentAttributes()` function removes the attribute before being
+		// serialized into `post_content` if the attribute can have only one value and it's the default.
+		if ( 'llms/form-field-user-login' === $block['blockName'] && empty( $block['attrs']['llms_visibility'] ) ) {
+			$block['attrs']['llms_visibility'] = 'logged_out';
+		}
+
+		// No attributes or no llms visibility settings (visible to "all").
 		if ( empty( $block['attrs'] ) || empty( $block['attrs']['llms_visibility'] ) ) {
 			return $content;
 		}
