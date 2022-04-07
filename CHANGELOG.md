@@ -1,6 +1,14 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.4.2 - 2022-04-07
+-------------------
+
+##### Bug Fixes
+
++ Fixed issue where the User Login form field was shown to logged-in users. [gocodebox/lifterlms#2071](https://github.com/gocodebox/lifterlms#2071)
+
+
 v2.4.1 - 2022-03-30
 -------------------
 

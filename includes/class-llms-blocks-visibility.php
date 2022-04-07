@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.4.2
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -114,7 +114,7 @@ class LLMS_Blocks_Visibility {
 	 * @since 1.0.0
 	 * @since 1.6.0 Add logic for `logged_in` and `logged_out` block visibility options.
 	 * @since 2.0.0 Added a conditional prior to checking the block's visibility attributes.
-	 * @since [version] Set the `user_login` field block's visibility to its default 'logged_out' if not set.
+	 * @since 2.4.2 Set the `user_login` field block's visibility to its default 'logged_out' if not set.
 	 *
 	 * @param string $content Block inner content.
 	 * @param array  $block   Block data array.
