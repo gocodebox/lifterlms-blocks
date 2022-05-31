@@ -2,7 +2,7 @@
 // Editor Styles for Admin Panel
 //
 // @since 1.6.0
-// @version 2.1.0
+// @version [version]
 //
 
 .llms-invalid-control {
@@ -40,8 +40,11 @@
 	}
 }
 
-.llms-fields {
+.llms-field-group .block-editor-block-list__layout * {
+	box-sizing: border-box;
+}
 
+.llms-fields {
 	input,
 	textarea {
 		border: 1px solid #999;
