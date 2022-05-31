@@ -1,0 +1,3 @@
+significance: patch
+type: fixed
+entry: Fix field columns sizing in the block editor.

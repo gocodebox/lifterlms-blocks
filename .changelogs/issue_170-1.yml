@@ -1,0 +1,6 @@
+significance: patch
+type: fixed
+links:
+  - "#170"
+entry: Fixed an issue that prevented to edit confirmation fields when running
+  WordPress 6.0.
