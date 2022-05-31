@@ -109,7 +109,7 @@ const setupAtts = ( atts, blockAtts, addingField ) => {
  * @since 2.0.0
  * @since 2.0.1 Use non-unique error notice IDs for reusable multiple error notice.
  * @since 2.2.0 Remove reusable multiple error notice.
- * @since [version] Exclude default LifterLMS user fields when computing `addingField` {link https://github.com/gocodebox/lifterlms-blocks/issues/169}.
+ * @since [version] Exclude LifterLMS preset fields when computing `addingField`.
  *
  * @param {Object} props Component properties.
  * @return {Object} HTML component fragment.
@@ -130,7 +130,11 @@ export function EditField( props ) {
 		addingField =
 			attributes.name &&
 			isDuplicate( attributes.name, clientId ) &&
-			// Fixed an issue when duplicating a LifterLMS preset form field.
+			/**
+			 * Allow LifterLMS preset fields to be duplicated without altering their id and name attributes.
+			 *
+			 * @see {@link https://github.com/gocodebox/lifterlms-blocks/issues/169}
+			 */
 			0 !== name.indexOf( 'llms/form-field-user-' ),
 		/**
 		 * Prevent confirmation fields from being copied/pasted into the editor out of their intended context.
