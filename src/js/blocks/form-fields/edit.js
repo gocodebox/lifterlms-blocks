@@ -2,7 +2,7 @@
  * Edit components
  *
  * @since 2.0.0
- * @version 2.2.0
+ * @version [version]
  */
 
 // External deps.
@@ -66,6 +66,7 @@ const generateId = ( name ) => {
  * @return {Object} Attribute object suitable for use when registering the block.
  */
 const setupAtts = ( atts, blockAtts, addingField ) => {
+
 	// Merge configured defaults into the block attributes.
 	Object.keys( blockAtts ).forEach( ( key ) => {
 		const defaultValue = blockAtts[ key ].__default;
@@ -109,6 +110,7 @@ const setupAtts = ( atts, blockAtts, addingField ) => {
  * @since 2.0.0
  * @since 2.0.1 Use non-unique error notice IDs for reusable multiple error notice.
  * @since 2.2.0 Remove reusable multiple error notice.
+ * @since [version] Exclude default LifterLMS user fields when computing `addingField` {link https://github.com/gocodebox/lifterlms-blocks/issues/169}.
  *
  * @param {Object} props Component properties.
  * @return {Object} HTML component fragment.
@@ -127,7 +129,9 @@ export function EditField( props ) {
 		{ isDuplicate } = select( fieldsStore ),
 		inFieldGroup = context[ 'llms/fieldGroup/fieldLayout' ] ? true : false,
 		addingField =
-			attributes.name && isDuplicate( attributes.name, clientId ),
+			attributes.name && isDuplicate( attributes.name, clientId )
+				// Skip default llms user fields.
+				&&  0 !== name.indexOf( 'llms/form-field-user-' ),
 		/**
 		 * Prevent confirmation fields from being copied/pasted into the editor out of their intended context.
 		 *
