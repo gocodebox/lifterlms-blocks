@@ -7,7 +7,7 @@
  * @package LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @version 2.3.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -139,6 +139,7 @@ class LLMS_Blocks_Assets {
 	 * @since 2.0.0 Maybe load backwards compatibility script.
 	 * @since 2.2.0 Only load assets on post screens.
 	 * @since 2.3.0 Also load assets on site editor screen.
+	 * @since [version] Added script localization.
 	 *
 	 * @return void
 	 */
@@ -155,6 +156,14 @@ class LLMS_Blocks_Assets {
 
 		$this->assets->enqueue_script( 'llms-blocks-editor' );
 		$this->assets->enqueue_style( 'llms-blocks-editor' );
+
+		wp_localize_script(
+			'llms-blocks-editor',
+			'llmsBlocks',
+			array(
+				'variationIconCanBeObject' => self::can_variation_transform_icon_be_an_object(),
+			)
+		);
 
 	}
 
@@ -184,6 +193,19 @@ class LLMS_Blocks_Assets {
 		);
 	}
 
+	/**
+	 * Can a variation transform icon be an object.
+	 *
+	 * @since [version]
+	 *
+	 * @return boolean
+	 */
+	private static function can_variation_transform_icon_be_an_object() {
+		// https://github.com/gocodebox/lifterlms-blocks/issues/170.
+		global $wp_version;
+		return version_compare( $wp_version, '6.0-src', '<' ) && ! defined( 'GUTENBERG_VERSION' )
+				|| ( defined( 'GUTENBERG_VERSION' ) && version_compare( GUTENBERG_VERSION, '13.0', '<' ) );
+	}
 
 }
 
