@@ -198,10 +198,11 @@ class LLMS_Blocks_Assets {
 	 *
 	 * @since [version]
 	 *
+	 * @link https://github.com/gocodebox/lifterlms-blocks/issues/170
+	 *
 	 * @return boolean
 	 */
 	private static function can_variation_transform_icon_be_an_object() {
-		// https://github.com/gocodebox/lifterlms-blocks/issues/170.
 		global $wp_version;
 		return version_compare( $wp_version, '6.0-src', '<' ) && ! defined( 'GUTENBERG_VERSION' )
 				|| ( defined( 'GUTENBERG_VERSION' ) && version_compare( GUTENBERG_VERSION, '13.0', '<' ) );
