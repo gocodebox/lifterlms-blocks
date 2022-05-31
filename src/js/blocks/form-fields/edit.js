@@ -66,7 +66,6 @@ const generateId = ( name ) => {
  * @return {Object} Attribute object suitable for use when registering the block.
  */
 const setupAtts = ( atts, blockAtts, addingField ) => {
-
 	// Merge configured defaults into the block attributes.
 	Object.keys( blockAtts ).forEach( ( key ) => {
 		const defaultValue = blockAtts[ key ].__default;
@@ -129,9 +128,10 @@ export function EditField( props ) {
 		{ isDuplicate } = select( fieldsStore ),
 		inFieldGroup = context[ 'llms/fieldGroup/fieldLayout' ] ? true : false,
 		addingField =
-			attributes.name && isDuplicate( attributes.name, clientId )
-				// Skip default llms user fields.
-				&&  0 !== name.indexOf( 'llms/form-field-user-' ),
+			attributes.name &&
+			isDuplicate( attributes.name, clientId ) &&
+			// Fixed an issue when duplicating a LifterLMS preset form field.
+			0 !== name.indexOf( 'llms/form-field-user-' ),
 		/**
 		 * Prevent confirmation fields from being copied/pasted into the editor out of their intended context.
 		 *
