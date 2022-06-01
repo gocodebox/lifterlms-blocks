@@ -2,7 +2,7 @@
  * Test formsReady() events run on domReady()
  *
  * @since 1.12.0
- * @version 1.12.0
+ * @version [version]
  */
 
 import {
@@ -93,8 +93,6 @@ describe( 'Admin/FormsReady', () => {
 	} );
 
 	it ( 'should add a notice and disable post updating when user email field is deleted', async () => {
-
-		page.on( 'dialog', dialog => dialog.accept() ); // Leave page without saving.
 
 		await visitForm();
 		await removeUserEmailBlock();

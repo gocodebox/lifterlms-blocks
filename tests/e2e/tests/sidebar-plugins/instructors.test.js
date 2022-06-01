@@ -2,7 +2,7 @@
  * Test the instructors sidebar plugin
  *
  * @since 2.1.0
- * @version 2.1.0
+ * @version [version]
  */
 
 import { createNewPost } from "@wordpress/e2e-test-utils";
@@ -43,8 +43,6 @@ async function reorderInstructor( draggingNthChild, droppingNthChild ) {
 describe( 'Sidebar/Plugins/Instructors', () => {
 
 	beforeAll( async () => {
-
-		page.once( 'dialog', async dialog => await dialog.accept() )
 
 		const CLOSE_SELECTOR =
 			'.editor-post-publish-panel button[aria-label="Close panel"]';

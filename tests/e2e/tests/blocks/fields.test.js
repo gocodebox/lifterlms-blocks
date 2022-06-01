@@ -512,7 +512,6 @@ describe( 'Blocks/FormFields', () => {
 	beforeAll( async () => {
 
 		await visitForm();
-		page.once( 'dialog', async dialog => await dialog.accept() ); // Leave page without saving.
 
 	} );
 

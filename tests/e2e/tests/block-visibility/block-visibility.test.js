@@ -2,7 +2,7 @@
  * Test formsReady() events run on domReady()
  *
  * @since 1.12.0
- * @version 1.12.0
+ * @version [version]
  */
 
 import {
@@ -62,8 +62,6 @@ describe( 'BlockVisibility', () => {
 		// Add a paragraph to test.
 		await clickBlockAppender();
 		await page.keyboard.type( 'Lorem ipsum' );
-
-		page.once( 'dialog', async dialog => await dialog.accept() ); // Leave page without saving.
 
 	} );
 
