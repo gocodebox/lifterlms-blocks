@@ -119,6 +119,11 @@ describe( 'Admin/Shortcodes', () => {
 		await clickBlockAppender();
 
 		await page.keyboard.type( 'Ipsum' );
+		/**
+		 * Place the cursor at the beginning of the text input to prepare for the next test.
+		 * Prior to WP 5.9, in headless mode, this was the default behavior.
+		 */
+		await page.keyboard.down( 'Home' );
 		await showBlockToolbar();
 
 	} );
@@ -173,6 +178,8 @@ describe( 'Admin/Shortcodes', () => {
 		await click( `${ MODAL_SELECTOR } .llms-table tbody tr:first-child td:nth-child(3) button` );
 
 		expect( await getEditedPostContent() ).toMatchSnapshot();
+		// Place the cursor at the beginning of the text input to prepare for the next test.
+		await page.keyboard.down( 'Home' );
 
 	} );
 
@@ -183,6 +190,8 @@ describe( 'Admin/Shortcodes', () => {
 		await click( `${ MODAL_SELECTOR } .llms-table tbody tr:first-child td:nth-child(3) button` );
 
 		expect( await getEditedPostContent() ).toMatchSnapshot();
+		// Place the cursor at the beginning of the text input to prepare for the next test.
+		await page.keyboard.down( 'Home' );
 
 	} );
 
@@ -201,7 +210,10 @@ describe( 'Admin/Shortcodes', () => {
 
 		// Inserted.
 		await click( `${ MODAL_SELECTOR } .llms-table tbody tr:first-child td:nth-child(3) button` );
+
 		expect( await getEditedPostContent() ).toMatchSnapshot();
+		// Place the cursor at the beginning of the text input to prepare for the next test.
+		await page.keyboard.down( 'Home' );
 
 	} );
 
