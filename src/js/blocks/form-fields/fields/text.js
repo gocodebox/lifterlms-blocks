@@ -113,6 +113,7 @@ const variations = [
  * Add information to each variation
  *
  * @since 2.0.0
+ * @since [version] Temporary skip merging foreground color for certain block editor versions.
  *
  * @param {Object} variation A block variation object.
  * @return {Object[]} Update block variations array.
@@ -121,11 +122,17 @@ variations.forEach( ( variation ) => {
 	// Setup scope.
 	variation.scope = variation.scope || [ 'block', 'inserter', 'transform' ];
 
-	// Update the icon (add the default foreground color.
-	variation.icon = {
-		...baseSettings.icon,
-		src: variation.icon,
-	};
+	/**
+	 * Temporary skip merging foreground color for certain block editor versions.
+	 * See https://github.com/gocodebox/lifterlms-blocks/issues/170
+	 */
+	if ( window.llmsBlocks.variationIconCanBeObject ) {
+		// Update the icon (add the default foreground color.
+		variation.icon = {
+			...baseSettings.icon,
+			src: variation.icon,
+		};
+	}
 
 	// Add a "field" attribute based off the variation name.
 	if ( ! variation.attributes ) {
