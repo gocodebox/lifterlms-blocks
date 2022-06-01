@@ -1,5 +1,5 @@
 /**
- * Determine if form-related tests can be run
+ * Determine if form-related tests can be run.
  *
  * Since WP 5.7 or later is required to manage the forms UI we'll conditionally
  * skip E2E tests on 5.6 or earlier.
@@ -8,6 +8,7 @@
  * and tests will run if the version isn't set.
  *
  * @since 2.1.0
+ * @since [version] Updated to run tests on WP 6.0+. 
  *
  * @return {boolean} Returns `true` if forms tests should be run, otherwise false.
  */
@@ -27,6 +28,11 @@ export function shouldRunTestsForForms() {
 
 	const [ major, minor ] = WP_VERSION.split( '.' ).map( number => number ? number * 1 : null );
 
+	// Run on WP 6.0+.
+	if ( major >= 6 ) {
+		return true;
+	}
+	
 	// Versions earlier than 5 are certainly a no go.
 	if ( major < 5 ) {
 		return false;
