@@ -2,7 +2,7 @@
  * Test shortcode inserter
  *
  * @since 2.0.0
- * @version 2.0.0
+ * @version [version]
  */
 
 import {
@@ -20,13 +20,17 @@ import {
 import compare from 'node-version-compare';
 
 const { WP_VERSION = 999 } = process.env, // If not defined assume local and latest.
-	COMPARISON = compare( WP_VERSION, '5.7.0' ),
+	WP_5_7_COMPARISON = compare( WP_VERSION, '5.7.0' ),
+	WP_5_9_COMPARISON = compare( WP_VERSION, '5.9.0' ),
 	// CSS selectors.
 	TOOLBAR_SELECTOR = '.block-editor-block-contextual-toolbar',
+	TOOLBAR_DROPDOWN_BUTTON_SELECTOR = -1 === WP_5_9_COMPARISON ?
+		'button.components-dropdown-menu__toggle' : // < 5.9
+		'.components-dropdown-menu button.components-button', // >= 5.9
 	DROPDOWN_SELECTOR = '.components-dropdown-menu__menu-item',
-	MODAL_SELCTOR = '.llms-shortcodes-modal',
+	MODAL_SELECTOR = '.llms-shortcodes-modal',
 	// Aria labels.
-	RICH_TEXT_MORE_LABEL = -1 === COMPARISON ?
+	RICH_TEXT_MORE_LABEL = -1 === WP_5_7_COMPARISON ?
 			'More rich text controls' : // < 5.7
 			'More'; // >= 5.7
 
@@ -39,7 +43,7 @@ const { WP_VERSION = 999 } = process.env, // If not defined assume local and lat
  * @return {string[]} List of shortcode titles.
  */
 async function getVisibleTitles() {
-	return await page.$$eval( `${ MODAL_SELCTOR } .llms-table tbody tr td:first-child`, els => els.map( ( { textContent } ) => textContent ) );
+	return await page.$$eval( `${ MODAL_SELECTOR } .llms-table tbody tr td:first-child`, els => els.map( ( { textContent } ) => textContent ) );
 }
 
 /**
@@ -50,7 +54,7 @@ async function getVisibleTitles() {
  * @return {string[]} List of shortcodes.
  */
 async function getVisibleCodes() {
-	return await page.$$eval( `${ MODAL_SELCTOR } .llms-table tbody tr td:nth-child(2)`, els => els.map( ( { textContent } ) => textContent ) );
+	return await page.$$eval( `${ MODAL_SELECTOR } .llms-table tbody tr td:nth-child(2)`, els => els.map( ( { textContent } ) => textContent ) );
 }
 
 /**
@@ -78,7 +82,7 @@ async function clearSearch( length ) {
  * @return {void}
  */
 async function filterList( query ) {
-	await clickElementByText( 'Filter by label', `${ MODAL_SELCTOR } label` );
+	await clickElementByText( 'Filter by label', `${ MODAL_SELECTOR } label` );
 	await page.keyboard.type( query );
 }
 
@@ -91,7 +95,7 @@ async function filterList( query ) {
  * @return {void}
  */
 async function addDefaultValue( val ) {
-	await clickElementByText( 'Default value', `${ MODAL_SELCTOR } label` );
+	await clickElementByText( 'Default value', `${ MODAL_SELECTOR } label` );
 	await page.keyboard.type( val );
 }
 
@@ -103,7 +107,7 @@ async function addDefaultValue( val ) {
  * @return {void}
  */
 async function closeModal() {
-	await click( `${ MODAL_SELCTOR } button[aria-label="Close dialog"]` );
+	await click( `${ MODAL_SELECTOR } button[aria-label="Close dialog"]` );
 }
 
 describe( 'Admin/Shortcodes', () => {
@@ -123,11 +127,11 @@ describe( 'Admin/Shortcodes', () => {
 
 		await page.waitForSelector( TOOLBAR_SELECTOR );
 
-		await click( `${ TOOLBAR_SELECTOR } button.components-dropdown-menu__toggle[aria-label="${ RICH_TEXT_MORE_LABEL }"]` );
+		await click( `${ TOOLBAR_SELECTOR } ${ TOOLBAR_DROPDOWN_BUTTON_SELECTOR }[aria-label="${ RICH_TEXT_MORE_LABEL }"]` );
 		await page.waitFor( 500 );
 		await clickElementByText( 'Shortcodes', DROPDOWN_SELECTOR );
 
-		await page.waitForSelector( MODAL_SELCTOR );
+		await page.waitForSelector( MODAL_SELECTOR );
 
 	} );
 
@@ -166,7 +170,7 @@ describe( 'Admin/Shortcodes', () => {
 	it ( 'should insert the shortcode', async() => {
 
 		await filterList( 'display' );
-		await click( `${ MODAL_SELCTOR } .llms-table tbody tr:first-child td:nth-child(3) button` );
+		await click( `${ MODAL_SELECTOR } .llms-table tbody tr:first-child td:nth-child(3) button` );
 
 		expect( await getEditedPostContent() ).toMatchSnapshot();
 
@@ -176,7 +180,7 @@ describe( 'Admin/Shortcodes', () => {
 
 		await filterList( 'first' );
 		await addDefaultValue( 'friend' );
-		await click( `${ MODAL_SELCTOR } .llms-table tbody tr:first-child td:nth-child(3) button` );
+		await click( `${ MODAL_SELECTOR } .llms-table tbody tr:first-child td:nth-child(3) button` );
 
 		expect( await getEditedPostContent() ).toMatchSnapshot();
 
@@ -189,14 +193,14 @@ describe( 'Admin/Shortcodes', () => {
 		await addDefaultValue( 'test' );
 
 		// Shows the warning message.
-		expect( await page.$eval( `${ MODAL_SELCTOR } .llms-error`, ( { textContent }) => textContent ) ).toMatchSnapshot();
+		expect( await page.$eval( `${ MODAL_SELECTOR } .llms-error`, ( { textContent }) => textContent ) ).toMatchSnapshot();
 
 		// Added to the list.
 		expect( await getVisibleTitles() ).toMatchSnapshot();
 		expect( await getVisibleCodes() ).toMatchSnapshot();
 
 		// Inserted.
-		await click( `${ MODAL_SELCTOR } .llms-table tbody tr:first-child td:nth-child(3) button` );
+		await click( `${ MODAL_SELECTOR } .llms-table tbody tr:first-child td:nth-child(3) button` );
 		expect( await getEditedPostContent() ).toMatchSnapshot();
 
 	} );
