@@ -23,6 +23,29 @@ Array [
 ]
 `;
 
+exports[`Admin/FormsReady should deregister most WP core blocks 6_0 1`] = `
+Array [
+  "Columns",
+  "Custom HTML",
+  "Group",
+  "Heading",
+  "Image",
+  "Paragraph",
+  "Row",
+  "Separator",
+  "Spacer",
+  "Stack",
+  "User Address",
+  "User Display Name",
+  "User Email",
+  "User Login",
+  "User Password",
+  "User Phone",
+  "User name",
+  "Voucher Code Redemption",
+]
+`;
+
 exports[`Admin/FormsReady should deregister user login block on account edit forms 1`] = `
 Array [
   "Columns",
@@ -83,6 +106,72 @@ Array [
 ]
 `;
 
+exports[`Admin/FormsReady should deregister user login block on account edit forms 6_0 1`] = `
+Array [
+  "Columns",
+  "Custom HTML",
+  "Group",
+  "Heading",
+  "Image",
+  "Paragraph",
+  "Row",
+  "Separator",
+  "Spacer",
+  "Stack",
+  "User Address",
+  "User Display Name",
+  "User Email",
+  "User Login",
+  "User Password",
+  "User Phone",
+  "User name",
+  "Voucher Code Redemption",
+]
+`;
+
+exports[`Admin/FormsReady should deregister user login block on account edit forms 6_0 2`] = `
+Array [
+  "Columns",
+  "Custom HTML",
+  "Group",
+  "Heading",
+  "Image",
+  "Paragraph",
+  "Row",
+  "Separator",
+  "Spacer",
+  "Stack",
+  "User Address",
+  "User Display Name",
+  "User Email",
+  "User Password",
+  "User Phone",
+  "User name",
+]
+`;
+
+exports[`Admin/FormsReady should deregister user login block on account edit forms 6_0 3`] = `
+Array [
+  "Columns",
+  "Custom HTML",
+  "Group",
+  "Heading",
+  "Image",
+  "Paragraph",
+  "Row",
+  "Separator",
+  "Spacer",
+  "Stack",
+  "User Address",
+  "User Display Name",
+  "User Email",
+  "User Login",
+  "User Password",
+  "User Phone",
+  "User name",
+]
+`;
+
 exports[`Admin/FormsReady should deregister voucher block on checkout and account edit forms 1`] = `
 Array [
   "Columns",
@@ -133,6 +222,72 @@ Array [
   "Paragraph",
   "Separator",
   "Spacer",
+  "User Address",
+  "User Display Name",
+  "User Email",
+  "User Login",
+  "User Password",
+  "User Phone",
+  "User name",
+]
+`;
+
+exports[`Admin/FormsReady should deregister voucher block on checkout and account edit forms 6_0 1`] = `
+Array [
+  "Columns",
+  "Custom HTML",
+  "Group",
+  "Heading",
+  "Image",
+  "Paragraph",
+  "Row",
+  "Separator",
+  "Spacer",
+  "Stack",
+  "User Address",
+  "User Display Name",
+  "User Email",
+  "User Login",
+  "User Password",
+  "User Phone",
+  "User name",
+  "Voucher Code Redemption",
+]
+`;
+
+exports[`Admin/FormsReady should deregister voucher block on checkout and account edit forms 6_0 2`] = `
+Array [
+  "Columns",
+  "Custom HTML",
+  "Group",
+  "Heading",
+  "Image",
+  "Paragraph",
+  "Row",
+  "Separator",
+  "Spacer",
+  "Stack",
+  "User Address",
+  "User Display Name",
+  "User Email",
+  "User Password",
+  "User Phone",
+  "User name",
+]
+`;
+
+exports[`Admin/FormsReady should deregister voucher block on checkout and account edit forms 6_0 3`] = `
+Array [
+  "Columns",
+  "Custom HTML",
+  "Group",
+  "Heading",
+  "Image",
+  "Paragraph",
+  "Row",
+  "Separator",
+  "Spacer",
+  "Stack",
   "User Address",
   "User Display Name",
   "User Email",

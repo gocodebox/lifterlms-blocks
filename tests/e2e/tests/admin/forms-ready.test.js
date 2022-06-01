@@ -16,6 +16,7 @@ import {
 import {
 	click,
 	clickElementByText,
+	wpVersionCompare
 } from '@lifterlms/llms-e2e-test-utils';
 
 import {
@@ -123,7 +124,7 @@ describe( 'Admin/FormsReady', () => {
 
 	} );
 
-	it ( 'should deregister most WP core blocks', async () => {
+	testIf( wpVersionCompare( '5.9', '<' ) )( 'should deregister most WP core blocks', async () => {
 
 		await visitForm();
 
@@ -132,7 +133,25 @@ describe( 'Admin/FormsReady', () => {
 
 	} );
 
-	it ( 'should deregister voucher block on checkout and account edit forms', async () => {
+	testIf( wpVersionCompare( '5.9' ) && wpVersionCompare( '6.0', '<' ) )( 'should deregister most WP core blocks 5_9', async () => {
+
+		await visitForm();
+
+		await openGlobalBlockInserter();
+		expect( await getAllBlockInserterItemTitles() ).toMatchSnapshot();
+
+	} );
+
+	testIf( wpVersionCompare( '6.0' ) )( 'should deregister most WP core blocks 6_0', async () => {
+
+		await visitForm();
+
+		await openGlobalBlockInserter();
+		expect( await getAllBlockInserterItemTitles() ).toMatchSnapshot();
+
+	} );
+
+	testIf( wpVersionCompare( '5.9', '<' ) )( 'should deregister voucher block on checkout and account edit forms', async () => {
 
 		const forms = {
 			'Register': false,
@@ -151,7 +170,45 @@ describe( 'Admin/FormsReady', () => {
 
 	} );
 
-	it ( 'should deregister user login block on account edit forms', async () => {
+	testIf( wpVersionCompare( '5.9' ) && wpVersionCompare( '6.0', '<' ) )( 'should deregister voucher block on checkout and account edit forms 5_9', async () => {
+
+		const forms = {
+			'Register': false,
+			'Edit Account Information': false,
+			'Billing Information': true,
+		};
+
+		for ( let form in forms ) {
+
+			await visitForm( form );
+
+			await openGlobalBlockInserter();
+			expect( await getAllBlockInserterItemTitles() ).toMatchSnapshot();
+
+		}
+
+	} );
+
+	testIf( wpVersionCompare( '6.0' ) )( 'should deregister voucher block on checkout and account edit forms 6_0', async () => {
+
+		const forms = {
+			'Register': false,
+			'Edit Account Information': false,
+			'Billing Information': true,
+		};
+
+		for ( let form in forms ) {
+
+			await visitForm( form );
+
+			await openGlobalBlockInserter();
+			expect( await getAllBlockInserterItemTitles() ).toMatchSnapshot();
+
+		}
+
+	} );
+
+	testIf( wpVersionCompare( '5.9', '<' ) )( 'should deregister user login block on account edit forms', async () => {
 
 		const forms = {
 			'Register': true,
@@ -170,6 +227,43 @@ describe( 'Admin/FormsReady', () => {
 
 	} );
 
+	testIf( wpVersionCompare( '5.9' ) && wpVersionCompare( '6.0', '<' ) )( 'should deregister user login block on account edit forms 5_9', async () => {
+
+		const forms = {
+			'Register': true,
+			'Edit Account Information': false,
+			'Billing Information': true,
+		};
+
+		for ( let form in forms ) {
+
+			await visitForm( form );
+
+			await openGlobalBlockInserter();
+			expect( await getAllBlockInserterItemTitles() ).toMatchSnapshot();
+
+		}
+
+	} );
+
+	testIf( wpVersionCompare( '6.0' ) )( 'should deregister user login block on account edit forms 6_0', async () => {
+
+		const forms = {
+			'Register': true,
+			'Edit Account Information': false,
+			'Billing Information': true,
+		};
+
+		for ( let form in forms ) {
+
+			await visitForm( form );
+
+			await openGlobalBlockInserter();
+			expect( await getAllBlockInserterItemTitles() ).toMatchSnapshot();
+
+		}
+
+	} );
 
 	const forms = {
 		'Register': false,
