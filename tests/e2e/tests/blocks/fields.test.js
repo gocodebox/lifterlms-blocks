@@ -50,7 +50,7 @@ const reusableBlockSnapshotMatcher = {
 	// On 5.8- snapshots fail because isStackedOnMobile didn't exist.
 	if ( wpVersionCompare( '5.9', '<' ) ) {
 		if ( 'core/columns' === block.name ) {
-			block.attributes.isStackedOnMobile = false;
+			block.attributes.isStackedOnMobile = true;
 		}
 	}
 
@@ -67,6 +67,7 @@ const reusableBlockSnapshotMatcher = {
  *
  * @since 2.0.0
  * @since 2.2.0 Automatically run a snapshot expectation.
+ * @since [version] Account for columns new attributes introduced in 5.9.
  *
  * @param {?string} hint    Message to be passed as the toMatchSnapshot hint. If `null`, snapshot is skipped.
  * @param {Object}  matcher Snapshot matcher, defaults to `blocksSnapshotMatcher`.
@@ -77,7 +78,7 @@ async function getTestedBlock( hint = 'single block', matcher = blockSnapshotMat
 	const [ testedBlock ] = await getAllBlocks();
 
 	if ( null !== hint ) {
-		expect( testedBlock ).toMatchSnapshot( matcher, hint );
+		expect( backportColumnAttrs( testedBlock ) ).toMatchSnapshot( matcher, hint );
 	}
 
 	return testedBlock;
@@ -128,8 +129,8 @@ async function expectedField( fieldName, clientId, wp_59_compat = false ) {
 
 	const field = await getField( fieldName );
 	if ( wp_59_compat ) {
-		field.attributes['data-store'] = false;
-		field.attributes['data-store-key'] = false;
+		delete( field.attributes.data_store );
+		delete( field.attributes.data_store_key );
 	}
 	expect( field ).toMatchSnapshot( fieldSnapshotMatcher, 'single field' );
 	expect( field.clientId ).toBe( clientId );
@@ -200,7 +201,7 @@ async function testTransformToColumns( { name, fieldName } ) {
 		columnBlock = innerBlocks[0],
 		fieldBlock = columnBlock.innerBlocks[0];
 
-	expect( backportColumnAttrs( columnBlock ) ).toMatchSnapshot( blockSnapshotMatcher, 'column block' );
+	expect( columnBlock ).toMatchSnapshot( blockSnapshotMatcher, 'column block' );
 	expect( fieldBlock ).toMatchSnapshot( blockSnapshotMatcher, 'single block' );
 	await expectedField( fieldName, fieldBlock.clientId );
 
