@@ -537,10 +537,11 @@ describe( 'Blocks/FormFields', () => {
 
 		// Transforms.
 		it ( 'can be transformed to and from a group block', async () => await testGroupTransforms( field ) );
-		testIf( wpVersionCompare( '5.9', '<') )( 'can be transformed to a columns block', async () => await testTransformToColumns( field ) );
+		//testIf( wpVersionCompare( '5.9', '<') )( 'can be transformed to a columns block', async () => await testTransformToColumns( field ) );
 		testIf( wpVersionCompare( '5.9' ) )( 'can be transformed to a columns block 5_9+', async () => await testTransformToColumns( field ) );
 
-		it ( 'can be transformed to and from a reusable block', async () => await testReusalbeTransforms( field ) );
+		testIf( wpVersionCompare( '5.9', '<') || 'Voucher Code' !== field.name )( 'can be transformed to and from a reusable block', async () => await testReusalbeTransforms( field ) );
+		testIf( wpVersionCompare( '5.9' ) && 'Voucher Code' === field.name )( 'can be transformed to and from a reusable block voucher_5_9+', async () => await testReusalbeTransforms( field ) );
 
 		// Block attributes.
 		it ( 'can modify the label', async () => await testLabelProp() );

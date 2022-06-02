@@ -3483,6 +3483,108 @@ Object {
 }
 `;
 
+exports[`Blocks/FormFields Voucher Code/Editor can be transformed to and from a reusable block voucher_5_9+: reusable block 1`] = `
+Object {
+  "attributes": Object {
+    "ref": Any<Number>,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "core/block",
+}
+`;
+
+exports[`Blocks/FormFields Voucher Code/Editor can be transformed to and from a reusable block voucher_5_9+: single block 1`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": false,
+    "data_store_key": false,
+    "description": "",
+    "field": "text",
+    "html_attrs": Object {},
+    "id": "llms_voucher",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Have a voucher?",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "llms_voucher",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "Voucher Code",
+    "required": false,
+    "toggleable": false,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-redeem-voucher",
+  "originalContent": "",
+  "validationIssues": Array [],
+}
+`;
+
+exports[`Blocks/FormFields Voucher Code/Editor can be transformed to and from a reusable block voucher_5_9+: single block 2`] = `
+Object {
+  "attributes": Object {
+    "columns": 12,
+    "data_store": false,
+    "data_store_key": false,
+    "description": "",
+    "field": "text",
+    "html_attrs": Object {},
+    "id": "llms_voucher",
+    "isConfirmationControlField": false,
+    "isConfirmationField": false,
+    "label": "Have a voucher?",
+    "label_show_empty": false,
+    "last_column": true,
+    "llms_visibility": "all",
+    "llms_visibility_in": "",
+    "llms_visibility_posts": "[]",
+    "match": "",
+    "name": "llms_voucher",
+    "options": Array [],
+    "options_preset": "",
+    "placeholder": "Voucher Code",
+    "required": false,
+    "toggleable": false,
+  },
+  "clientId": Any<String>,
+  "innerBlocks": Anything,
+  "isValid": true,
+  "name": "llms/form-field-redeem-voucher",
+  "originalContent": "",
+  "validationIssues": Array [],
+}
+`;
+
+exports[`Blocks/FormFields Voucher Code/Editor can be transformed to and from a reusable block voucher_5_9+: single field 1`] = `
+Object {
+  "clientId": Any<String>,
+  "id": "llms_voucher",
+  "label": "Have a voucher?",
+  "name": "llms_voucher",
+}
+`;
+
+exports[`Blocks/FormFields Voucher Code/Editor can be transformed to and from a reusable block voucher_5_9+: single field 2`] = `
+Object {
+  "clientId": Any<String>,
+  "data_store": false,
+  "data_store_key": false,
+  "id": "llms_voucher",
+  "label": "Have a voucher?",
+  "name": "llms_voucher",
+}
+`;
+
 exports[`Blocks/FormFields Voucher Code/Editor can be transformed to and from a reusable block: reusable block 1`] = `
 Object {
   "attributes": Object {
