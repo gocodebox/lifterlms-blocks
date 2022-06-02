@@ -129,8 +129,8 @@ async function expectedField( fieldName, clientId, wp_59_compat = false ) {
 
 	const field = await getField( fieldName );
 	if ( wp_59_compat ) {
-		delete( field.attributes.data_store );
-		delete( field.attributes.data_store_key );
+		field.data_store = false;
+		field.data_store_key = false;
 	}
 	expect( field ).toMatchSnapshot( fieldSnapshotMatcher, 'single field' );
 	expect( field.clientId ).toBe( clientId );
