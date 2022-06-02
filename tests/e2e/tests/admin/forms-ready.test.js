@@ -279,8 +279,11 @@ describe( 'Admin/FormsReady', () => {
 
 			await visitForm( form );
 
-			await page.click( '.block-editor-block-list__layout .wp-block-llms-form-field-user-phone .llms-field > label' );
-
+			await page.click( '.block-editor-block-list__layout .wp-block-llms-form-field-user-phone .llms-field > input' );
+			// Click twice, in wp 5.9+, if it's in a reusable block the first click selects the reusable block.
+			if ( wpVersionCompare( '5.9' ) ) {
+				await page.click( '.block-editor-block-list__layout .wp-block-llms-form-field-user-phone .llms-field > input' );
+			}
 			await page.waitFor( 500 );
 
 			const titles = await getAvailableSidebarPanelTitles();
