@@ -4,7 +4,7 @@
  * @package LifterLMS_Blocks/Scripts/Dev
  *
  * @since 1.8.0
- * @version 1.10.0
+ * @version [version]
  */
 
 const
@@ -17,7 +17,7 @@ const
 config.module.rules.forEach( rule => {
 
 	if ( '\\.(sc|sa)ss$' === rule.test.source ) {
-		rule.use[ 3 ].options.prependData = '@import "./src/scss/_vars.scss";\n';
+		rule.use[ 3 ].options.additionalData = '@import "./src/scss/_vars.scss";\n';
 	}
 
 } );
