@@ -1,6 +1,15 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.4.3 - 2022-06-09
+-------------------
+
+##### Bug Fixes
+
++ Fixed an issue that prevented editing form confirmation fields when running WordPress 6.0. [#170](https://github.com/gocodebox/lifterlms-blocks#170)
++ Fixed field columns sizing in the block editor.
+
+
 v2.4.2 - 2022-04-07
 -------------------
 

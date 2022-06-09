@@ -1,7 +1,7 @@
 /**
  * Bootstraps E2E Tests.
  *
- * @since [version]
+ * @since 2.4.3
  */
 
  import { activateTheme, runSetupWizard } from '@lifterlms/llms-e2e-test-utils';

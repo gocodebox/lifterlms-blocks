@@ -40,7 +40,7 @@ const reusableBlockSnapshotMatcher = {
  * Adds isStackedOnMobile block attribute to blocks on WP 5.8 so our snapshots can
  * be taken for 5.9 and later.
  *
- * @since [version]
+ * @since 2.4.3
  *
  * @param {Object} WP_Block objects.
  * @return {Object} Updated block.
@@ -67,7 +67,7 @@ const reusableBlockSnapshotMatcher = {
  *
  * @since 2.0.0
  * @since 2.2.0 Automatically run a snapshot expectation.
- * @since [version] Account for columns new attributes introduced in 5.9.
+ * @since 2.4.3 Account for columns new attributes introduced in 5.9.
  *
  * @param {?string} hint    Message to be passed as the toMatchSnapshot hint. If `null`, snapshot is skipped.
  * @param {Object}  matcher Snapshot matcher, defaults to `blocksSnapshotMatcher`.
@@ -214,7 +214,7 @@ async function testTransformToColumns( { name, fieldName } ) {
  * Expectations for converting a field to and from a reusable block.
  *
  * @since 2.2.0
- * @since [version] Account for Voucher Code special case in WP 5.9+.
+ * @since 2.4.3 Account for Voucher Code special case in WP 5.9+.
  *
  * @param {Object} props
  * @param {string} props.name      Block name.

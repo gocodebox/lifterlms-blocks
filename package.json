@@ -1,12 +1,16 @@
 {
   "name": "lifterlms-blocks",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "blocks",
   "author": "LifterLMS",
   "homepage": "https://lifterlms.com/",
   "repository": {
     "type": "git",
     "url": "https://github.com/gocodebox/lifterlms-blocks.git"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
   },
   "dependencies": {
     "@dnd-kit/core": "^3.1.1",
@@ -21,6 +25,9 @@
     "@lifterlms/dev": "^0.0.4-alpha.0",
     "@lifterlms/llms-e2e-test-utils": "^4.0.0",
     "@lifterlms/scripts": "^3.1.0",
+    "jest": "^27.4.5",
+    "jest-dev-server": "^6.0.2",
+    "jest-environment-node": "^27.4.4",
     "node-version-compare": "^1.0.3"
   },
   "scripts": {

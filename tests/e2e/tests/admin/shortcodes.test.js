@@ -2,7 +2,7 @@
  * Test shortcode inserter
  *
  * @since 2.0.0
- * @version [version]
+ * @version 2.4.3
  */
 
 import {

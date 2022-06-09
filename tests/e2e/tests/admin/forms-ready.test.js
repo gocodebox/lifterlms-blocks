@@ -2,7 +2,7 @@
  * Test formsReady() events run on domReady()
  *
  * @since 1.12.0
- * @version [version]
+ * @version 2.4.3
  */
 
 import {

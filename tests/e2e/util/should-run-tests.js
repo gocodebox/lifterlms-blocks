@@ -8,7 +8,7 @@
  * and tests will run if the version isn't set.
  *
  * @since 2.1.0
- * @since [version] Updated to run tests on WP 6.0+. 
+ * @since 2.4.3 Updated to run tests on WP 6.0+. 
  *
  * @return {boolean} Returns `true` if forms tests should be run, otherwise false.
  */
