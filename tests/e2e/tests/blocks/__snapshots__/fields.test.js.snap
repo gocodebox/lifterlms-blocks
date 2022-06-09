@@ -62,6 +62,7 @@ Object {
 exports[`Blocks/FormFields User Display Name/Editor can be transformed to a columns block: columns block 1`] = `
 Object {
   "attributes": Object {
+    "isStackedOnMobile": true,
     "llms_visibility": "all",
     "llms_visibility_in": "",
     "llms_visibility_posts": "[]",
@@ -526,6 +527,7 @@ Object {
 exports[`Blocks/FormFields User Email/Editor can be transformed to a columns block: columns block 1`] = `
 Object {
   "attributes": Object {
+    "isStackedOnMobile": true,
     "llms_visibility": "all",
     "llms_visibility_in": "",
     "llms_visibility_posts": "[]",
@@ -1192,6 +1194,7 @@ Object {
 exports[`Blocks/FormFields User Login/Editor can be transformed to a columns block: columns block 1`] = `
 Object {
   "attributes": Object {
+    "isStackedOnMobile": true,
     "llms_visibility": "all",
     "llms_visibility_in": "",
     "llms_visibility_posts": "[]",
@@ -1870,6 +1873,7 @@ Object {
 exports[`Blocks/FormFields User Password/Editor can be transformed to a columns block: columns block 1`] = `
 Object {
   "attributes": Object {
+    "isStackedOnMobile": true,
     "llms_visibility": "all",
     "llms_visibility_in": "",
     "llms_visibility_posts": "[]",
@@ -2481,6 +2485,7 @@ Object {
 exports[`Blocks/FormFields User Phone/Editor can be transformed to a columns block: columns block 1`] = `
 Object {
   "attributes": Object {
+    "isStackedOnMobile": true,
     "llms_visibility": "all",
     "llms_visibility_in": "",
     "llms_visibility_posts": "[]",
@@ -2843,6 +2848,7 @@ Object {
 exports[`Blocks/FormFields Voucher Code/Editor can be transformed to a columns block: columns block 1`] = `
 Object {
   "attributes": Object {
+    "isStackedOnMobile": true,
     "llms_visibility": "all",
     "llms_visibility_in": "",
     "llms_visibility_posts": "[]",

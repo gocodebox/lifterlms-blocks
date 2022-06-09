@@ -2,7 +2,7 @@
  * Test Form post document sidebar
  *
  * @since 1.12.0
- * @version 1.12.0
+ * @version 2.4.3
  */
 
 import {
@@ -42,8 +42,6 @@ describe( 'Admin/FormsDocSidebar', () => {
 
 			await toggleOpenRegistration( false );
 
-			page.once( 'dialog', async dialog => await dialog.accept() ); // Leave page without saving.
-
 			await visitForm( 'Register' );
 			await openFormSettingsPanel();
 
@@ -54,8 +52,6 @@ describe( 'Admin/FormsDocSidebar', () => {
 		it ( 'should display the location with a link when open registration is enabled', async () => {
 
 			await toggleOpenRegistration( true );
-
-			page.on( 'dialog', async dialog => await dialog.accept() ); // Leave page without saving.
 
 			await visitForm( 'Register' );
 			await openFormSettingsPanel();
