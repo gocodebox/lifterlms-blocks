@@ -12,6 +12,7 @@ import {
 	logoutUser,
 	toggleOpenRegistration,
 	visitPage,
+	wpVersionCompare
 } from '@lifterlms/llms-e2e-test-utils';
 
 import {
@@ -35,6 +36,27 @@ const reusableBlockSnapshotMatcher = {
 	},
 };
 
+/**
+ * Adds isStackedOnMobile block attribute to blocks on WP 5.8 so our snapshots can
+ * be taken for 5.9 and later.
+ *
+ * @since [version]
+ *
+ * @param {Object} WP_Block objects.
+ * @return {Object} Updated block.
+ */
+ function backportColumnAttrs( block ) {
+
+	// On 5.8- snapshots fail because isStackedOnMobile didn't exist.
+	if ( wpVersionCompare( '5.9', '<' ) ) {
+		if ( 'core/columns' === block.name ) {
+			block.attributes.isStackedOnMobile = true;
+		}
+	}
+
+	return block;
+
+}
 
 /**
  * Utility function to retrieve the block being tested
@@ -45,6 +67,7 @@ const reusableBlockSnapshotMatcher = {
  *
  * @since 2.0.0
  * @since 2.2.0 Automatically run a snapshot expectation.
+ * @since [version] Account for columns new attributes introduced in 5.9.
  *
  * @param {?string} hint    Message to be passed as the toMatchSnapshot hint. If `null`, snapshot is skipped.
  * @param {Object}  matcher Snapshot matcher, defaults to `blocksSnapshotMatcher`.
@@ -55,7 +78,7 @@ async function getTestedBlock( hint = 'single block', matcher = blockSnapshotMat
 	const [ testedBlock ] = await getAllBlocks();
 
 	if ( null !== hint ) {
-		expect( testedBlock ).toMatchSnapshot( matcher, hint );
+		expect( backportColumnAttrs( testedBlock ) ).toMatchSnapshot( matcher, hint );
 	}
 
 	return testedBlock;
@@ -100,11 +123,15 @@ async function getReusableBlockChildren( clientId ) {
 }
 
 
-async function expectedField( fieldName, clientId ) {
+async function expectedField( fieldName, clientId, wp_59_compat = false ) {
 
 	await page.waitFor( 500 );
 
 	const field = await getField( fieldName );
+	if ( wp_59_compat ) {
+		field.data_store = false;
+		field.data_store_key = false;
+	}
 	expect( field ).toMatchSnapshot( fieldSnapshotMatcher, 'single field' );
 	expect( field.clientId ).toBe( clientId );
 
@@ -187,13 +214,14 @@ async function testTransformToColumns( { name, fieldName } ) {
  * Expectations for converting a field to and from a reusable block.
  *
  * @since 2.2.0
+ * @since [version] Account for Voucher Code special case in WP 5.9+.
  *
  * @param {Object} props
  * @param {string} props.name      Block name.
  * @param {string} props.fieldName Field name.
  * @return {void}
  */
-async function testReusalbeTransforms( { name, fieldName } ) {
+async function testReusableTransforms( { name, fieldName } ) {
 
 	// To a reusable block.
 	await convertBlockToReusable( `Reusable: ${ fieldName }` );
@@ -202,7 +230,8 @@ async function testReusalbeTransforms( { name, fieldName } ) {
 	await page.waitFor( 1000 );
 
 	const [ testedBlock ] = await getReusableBlockChildren( reusableBlock.clientId );
-	await expectedField( fieldName, testedBlock.clientId );
+
+	await expectedField( fieldName, testedBlock.clientId, ( wpVersionCompare( 5.9 ) && 'Voucher Code' === name )  )
 	expect( testedBlock ).toMatchSnapshot( blockSnapshotMatcher, 'single block' );
 
 	// Reusable to static.
@@ -512,7 +541,6 @@ describe( 'Blocks/FormFields', () => {
 	beforeAll( async () => {
 
 		await visitForm();
-		page.once( 'dialog', async dialog => await dialog.accept() ); // Leave page without saving.
 
 	} );
 
@@ -538,7 +566,7 @@ describe( 'Blocks/FormFields', () => {
 		// Transforms.
 		it ( 'can be transformed to and from a group block', async () => await testGroupTransforms( field ) );
 		it ( 'can be transformed to a columns block', async () => await testTransformToColumns( field ) );
-		it ( 'can be transformed to and from a reusable block', async () => await testReusalbeTransforms( field ) );
+		it( 'can be transformed to and from a reusable block', async () => await testReusableTransforms( field ) );
 
 		// Block attributes.
 		it ( 'can modify the label', async () => await testLabelProp() );

@@ -17,6 +17,11 @@ function shouldRunTestsForForms() {
 
 	const [ major, minor ] = WP_VERSION.split( '.' ).map( number => number ? number * 1 : null );
 
+	// Run on WP 6.0+.
+	if ( major >= 6 ) {
+		return true;
+	}
+	
 	// Versions earlier than 5 are certainly a no go.
 	if ( major < 5 ) {
 		return false;
