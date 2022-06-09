@@ -113,7 +113,7 @@ const variations = [
  * Add information to each variation
  *
  * @since 2.0.0
- * @since [version] Temporary skip merging foreground color for certain block editor versions.
+ * @since 2.4.3 Temporary skip merging foreground color for certain block editor versions.
  *
  * @param {Object} variation A block variation object.
  * @return {Object[]} Update block variations array.

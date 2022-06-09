@@ -2,7 +2,7 @@
  * Test Form post document sidebar
  *
  * @since 1.12.0
- * @version [version]
+ * @version 2.4.3
  */
 
 import {

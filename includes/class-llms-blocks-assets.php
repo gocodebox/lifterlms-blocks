@@ -7,7 +7,7 @@
  * @package LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.4.3
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -139,7 +139,7 @@ class LLMS_Blocks_Assets {
 	 * @since 2.0.0 Maybe load backwards compatibility script.
 	 * @since 2.2.0 Only load assets on post screens.
 	 * @since 2.3.0 Also load assets on site editor screen.
-	 * @since [version] Added script localization.
+	 * @since 2.4.3 Added script localization.
 	 *
 	 * @return void
 	 */
@@ -196,7 +196,7 @@ class LLMS_Blocks_Assets {
 	/**
 	 * Can a variation transform icon be an object.
 	 *
-	 * @since [version]
+	 * @since 2.4.3
 	 *
 	 * @link https://github.com/gocodebox/lifterlms-blocks/issues/170
 	 *

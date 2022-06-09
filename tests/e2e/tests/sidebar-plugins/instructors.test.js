@@ -2,7 +2,7 @@
  * Test the instructors sidebar plugin
  *
  * @since 2.1.0
- * @version [version]
+ * @version 2.4.3
  */
 
 import { createNewPost } from "@wordpress/e2e-test-utils";
