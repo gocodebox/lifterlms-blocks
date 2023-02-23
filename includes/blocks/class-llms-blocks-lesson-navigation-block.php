@@ -13,7 +13,7 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Course syllabus block class.
+ * Course lesson navigation block class.
  */
 class LLMS_Blocks_Lesson_Navigation_Block extends LLMS_Blocks_Abstract_Block {
 

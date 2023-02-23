@@ -13,7 +13,7 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Course syllabus block class
+ * Course pricing table block class
  *
  * @since 1.0.0
  * @since 1.3.7 Unknown.
