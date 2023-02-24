@@ -126,7 +126,6 @@ export default () => {
 		courseContinueButton,
 		courseInfo,
 		courseProgress,
-		courseSyllabus,
 		instructors,
 		lessonNavigation,
 		lessonProgression,
