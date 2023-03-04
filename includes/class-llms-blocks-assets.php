@@ -4,9 +4,9 @@
  *
  * Enqueue CSS/JS of all the blocks.
  *
+ * @since   1.0.0
  * @package LifterLMS_Blocks/Main
  *
- * @since 1.0.0
  * @version 2.4.3
  */
 
@@ -162,6 +162,7 @@ class LLMS_Blocks_Assets {
 			'llmsBlocks',
 			array(
 				'variationIconCanBeObject' => self::can_variation_transform_icon_be_an_object(),
+				'courseId'                 => self::get_course_id(),
 			)
 		);
 
@@ -176,20 +177,21 @@ class LLMS_Blocks_Assets {
 	 */
 	private function use_bc_assets() {
 		return ( ! LLMS_Forms::instance()->are_requirements_met() &&
-			/**
-			 * Filter allowing opt-out of block editor backwards compatibility scripts.
-			 *
-			 * @since 2.0.0
-			 *
-			 * @example
-			 * ```
-			 * // Disable backwards compatibility scripts.
-			 * add_filter( 'llms_blocks_load_bc_scripts', '__return_false' );
-			 * ```
-			 *
-			 * @param boolean $load_scripts Whether or not to load the scripts.
-			 */
-			apply_filters( 'llms_blocks_load_bc_scripts', true )
+				 /**
+				  * Filter allowing opt-out of block editor backwards compatibility scripts.
+				  *
+				  * @since 2.0.0
+				  *
+				  * @param boolean $load_scripts Whether or not to load the scripts.
+				  *
+				  * @example
+				  *        ```
+				  *        // Disable backwards compatibility scripts.
+				  *        add_filter( 'llms_blocks_load_bc_scripts', '__return_false' );
+				  *        ```
+				  *
+				  */
+				 apply_filters( 'llms_blocks_load_bc_scripts', true )
 		);
 	}
 
@@ -198,14 +200,33 @@ class LLMS_Blocks_Assets {
 	 *
 	 * @since 2.4.3
 	 *
-	 * @link https://github.com/gocodebox/lifterlms-blocks/issues/170
+	 * @return bool
+	 * @link  https://github.com/gocodebox/lifterlms-blocks/issues/170
 	 *
-	 * @return boolean
 	 */
-	private static function can_variation_transform_icon_be_an_object() {
+	private static function can_variation_transform_icon_be_an_object(): bool {
 		global $wp_version;
+
 		return version_compare( $wp_version, '6.0-src', '<' ) && ! defined( 'GUTENBERG_VERSION' )
-				|| ( defined( 'GUTENBERG_VERSION' ) && version_compare( GUTENBERG_VERSION, '13.0', '<' ) );
+			   || ( defined( 'GUTENBERG_VERSION' ) && version_compare( GUTENBERG_VERSION, '13.0', '<' ) );
+	}
+
+	/**
+	 * Returns the current course or lesson's parent course ID.
+	 *
+	 * @since 2.4.4
+	 *
+	 * @return int
+	 */
+	private static function get_course_id(): int {
+		$post_type = get_post_type();
+		$post_id   = get_the_ID() ?? 0;
+
+		if ( 'lesson' === $post_type ) {
+			$post_id = llms_get_post_parent_course( $post_id )->get( 'id' ) ?? 0;
+		}
+
+		return $post_id;
 	}
 
 }
