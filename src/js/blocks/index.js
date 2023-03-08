@@ -2,6 +2,7 @@
  * LifterLMS Block Library.
  *
  * @since 1.7.0
+ * @since [version] Remove course syllabus block.
  * @version 2.3.0
  */
 
@@ -24,7 +25,6 @@ import { getCurrentPostType } from '../util/';
 import * as courseContinueButton from './course-continue-button/';
 import * as courseInfo from './course-information/';
 import * as courseProgress from './course-progress/';
-import * as courseSyllabus from './course-syllabus/';
 import * as instructors from './instructors/';
 import * as lessonNavigation from './lesson-navigation/';
 import * as lessonProgression from './lesson-progression/';
@@ -127,7 +127,6 @@ export default () => {
 		courseContinueButton,
 		courseInfo,
 		courseProgress,
-		courseSyllabus,
 		instructors,
 		lessonNavigation,
 		lessonProgression,

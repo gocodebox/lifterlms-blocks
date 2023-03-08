@@ -6,7 +6,11 @@
  * @since 1.5.0 Add supported post type settings.
  * @since 1.8.0 Use imports in favor of "wp." variables.
  *              Use @wordpress/server-side-render in favor of wp.components.ServerSideRender.
+<<<<<<< HEAD
  * @version [version]
+=======
+ * @since [version] Correct block name in docblock.
+>>>>>>> a507ade (Remove course syllabus block)
  */
 
 // External deps.
@@ -39,7 +43,7 @@ export const name = 'llms/pricing-table';
 export const postTypes = [ 'course', 'llms_membership' ];
 
 /**
- * Register Course Syllabus Block
+ * Register Pricing Table Block
  *
  * @since 1.0.0
  * @since 1.3.6 Unknown.

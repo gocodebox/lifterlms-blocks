@@ -5,6 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
+ * @since [version] Remove course syllabus block from includes.
  * @version 2.3.0
  */
 
@@ -140,7 +141,6 @@ class LLMS_Blocks {
 
 		// Dynamic Blocks.
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-course-information-block.php';
-		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-course-syllabus-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-course-progress-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-instructors-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-lesson-navigation-block.php';
