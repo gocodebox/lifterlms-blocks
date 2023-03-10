@@ -118,6 +118,7 @@ export const deregisterBlocksForForms = () => {
  * @since 1.7.3 Move form ready event from domReady to here to ensure blocks are exposed before blocks are parsed.
  * @since 2.0.0 Trigger `llms_form_fields_ready` on `wp_block` posts.
  * @since 2.3.0 Register phpTemplate block.
+ * @since [version] Remove course syllabus block.
  */
 export default () => {
 	const postType = getCurrentPostType();
