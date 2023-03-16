@@ -2,7 +2,7 @@
  * Editor Sidebar Plugins
  *
  * @since 1.0.0
- * @version 1.6.0
+ * @version [version]
  */
 
 // WP Deps.
@@ -23,6 +23,7 @@ import './course-builder/sidebar-launch-button.jsx';
  * Registers the sidebar plugin for Courses and Memberships
  *
  * @since 1.0.0
+ * @since [version] Added toolbar launch button for the course builder.
  *
  * @return {?Fragment} Component fragment or null when instructors aren't supported for the given post type.
  */
