@@ -4,10 +4,10 @@
  *
  * Enqueue CSS/JS of all the blocks.
  *
- * @since   1.0.0
  * @package LifterLMS_Blocks/Main
  *
- * @version 2.4.3
+ * @since 1.0.0
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -140,6 +140,7 @@ class LLMS_Blocks_Assets {
 	 * @since 2.2.0 Only load assets on post screens.
 	 * @since 2.3.0 Also load assets on site editor screen.
 	 * @since 2.4.3 Added script localization.
+	 * @since [version] Add courseId to script localization.
 	 *
 	 * @return void
 	 */
@@ -177,38 +178,36 @@ class LLMS_Blocks_Assets {
 	 */
 	private function use_bc_assets() {
 		return ( ! LLMS_Forms::instance()->are_requirements_met() &&
-				 /**
-				  * Filter allowing opt-out of block editor backwards compatibility scripts.
-				  *
-				  * @since 2.0.0
-				  *
-				  * @param boolean $load_scripts Whether or not to load the scripts.
-				  *
-				  * @example
-				  *        ```
-				  *        // Disable backwards compatibility scripts.
-				  *        add_filter( 'llms_blocks_load_bc_scripts', '__return_false' );
-				  *        ```
-				  *
-				  */
-				 apply_filters( 'llms_blocks_load_bc_scripts', true )
+			/**
+			 * Filter allowing opt-out of block editor backwards compatibility scripts.
+			 *
+			 * @since 2.0.0
+			 *
+			 * @param boolean $load_scripts Whether or not to load the scripts.
+			 *
+			 * @example
+			 *        ```
+			 *        // Disable backwards compatibility scripts.
+			 *        add_filter( 'llms_blocks_load_bc_scripts', '__return_false' );
+			 *        ```
+			 */
+			apply_filters( 'llms_blocks_load_bc_scripts', true )
 		);
 	}
 
 	/**
 	 * Can a variation transform icon be an object.
 	 *
+	 * @link https://github.com/gocodebox/lifterlms-blocks/issues/170
+	 *
 	 * @since 2.4.3
-	 *
 	 * @return bool
-	 * @link  https://github.com/gocodebox/lifterlms-blocks/issues/170
-	 *
 	 */
 	private static function can_variation_transform_icon_be_an_object(): bool {
 		global $wp_version;
 
 		return version_compare( $wp_version, '6.0-src', '<' ) && ! defined( 'GUTENBERG_VERSION' )
-			   || ( defined( 'GUTENBERG_VERSION' ) && version_compare( GUTENBERG_VERSION, '13.0', '<' ) );
+			|| ( defined( 'GUTENBERG_VERSION' ) && version_compare( GUTENBERG_VERSION, '13.0', '<' ) );
 	}
 
 	/**
