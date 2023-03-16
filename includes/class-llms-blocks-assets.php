@@ -183,13 +183,13 @@ class LLMS_Blocks_Assets {
 			 *
 			 * @since 2.0.0
 			 *
-			 * @param boolean $load_scripts Whether or not to load the scripts.
-			 *
 			 * @example
-			 *        ```
-			 *        // Disable backwards compatibility scripts.
-			 *        add_filter( 'llms_blocks_load_bc_scripts', '__return_false' );
-			 *        ```
+			 * ```
+			 * // Disable backwards compatibility scripts.
+			 * add_filter( 'llms_blocks_load_bc_scripts', '__return_false' );
+			 * ```
+			 *
+			 * @param boolean $load_scripts Whether or not to load the scripts.
 			 */
 			apply_filters( 'llms_blocks_load_bc_scripts', true )
 		);
