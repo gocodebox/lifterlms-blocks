@@ -201,6 +201,7 @@ class LLMS_Blocks_Assets {
 	 * @link https://github.com/gocodebox/lifterlms-blocks/issues/170
 	 *
 	 * @since 2.4.3
+	 *
 	 * @return bool
 	 */
 	private static function can_variation_transform_icon_be_an_object(): bool {
