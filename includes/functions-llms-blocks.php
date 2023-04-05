@@ -4,7 +4,7 @@
  *
  * @package  LifterLMS_Blocks/Functions
  * @since    1.3.0
- * @version  1.3.3
+ * @version  [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -12,10 +12,10 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Determine if the Classic Editor is enabled for a given post.
  *
+ * @since 1.3.0
+ *
  * @param   mixed $post WP_Post or WP_Post ID.
  * @return  boolean
- * @since   1.3.0
- * @version 1.3.3
  */
 function llms_blocks_is_classic_enabled_for_post( $post ) {
 
@@ -45,12 +45,13 @@ function llms_blocks_is_classic_enabled_for_post( $post ) {
 }
 
 /**
- * Determine if a post is migrated
+ * Determine if a post is migrated.
+ *
+ * @since 1.3.1
+ * @since [version] Added condition for checking if the post is an auto-draft and the Classic Editor is not active when postmeta is not generated.
  *
  * @param   mixed $post WP_Post or WP_Post ID.
  * @return  boolean
- * @since   1.3.1
- * @version 1.3.1
  */
 function llms_blocks_is_post_migrated( $post ) {
 
@@ -66,7 +67,12 @@ function llms_blocks_is_post_migrated( $post ) {
 		if ( llms_blocks_is_classic_enabled_for_post( $post_id ) ) {
 			$ret = false;
 		} else {
-			$ret = llms_parse_bool( get_post_meta( $post_id, '_llms_blocks_migrated', true ) );
+			// Checking if the post is an auto-draft (new post without any postmeta) and the Classic Editor is not active.
+			if ( ! wp_is_post_revision( $post_id ) && 'auto-draft' === get_post_status( $post_id ) && ! class_exists( 'Classic_Editor' ) ) {
+				$ret = true;
+			} else {
+				$ret = llms_parse_bool( get_post_meta( $post_id, '_llms_blocks_migrated', true ) );
+			}
 		}
 	}
 
