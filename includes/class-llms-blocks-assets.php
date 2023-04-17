@@ -214,7 +214,7 @@ class LLMS_Blocks_Assets {
 	/**
 	 * Returns the current course or lesson's parent course ID.
 	 *
-	 * @since 2.4.4
+	 * @since [version]
 	 *
 	 * @return int
 	 */
@@ -223,7 +223,11 @@ class LLMS_Blocks_Assets {
 		$post_id   = get_the_ID() ?? 0;
 
 		if ( 'lesson' === $post_type ) {
-			$post_id = llms_get_post_parent_course( $post_id )->get( 'id' ) ?? 0;
+			$parent = llms_get_post_parent_course( $post_id );
+
+			if ( $parent ) {
+				$post_id = $parent->get( 'id' );
+			}
 		}
 
 		return $post_id;
