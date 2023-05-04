@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Blocks
  *
  * @since 1.0.0
- * @version 1.1.0
+ * @version [version]
  * @deprecated [version]
  */
 
@@ -43,7 +43,7 @@ class LLMS_Blocks_Course_Syllabus_Block extends LLMS_Blocks_Abstract_Block {
 	 * @return void
 	 */
 	public function add_hooks( $attributes = array(), $content = '' ) {
-		llms_deprecated_function( __METHOD__, '[version]', __CLASS__ . '::add_hooks()' );
+		llms_deprecated_function( __METHOD__, '[version]' );
 
 		add_action( $this->get_render_hook(), 'lifterlms_template_single_syllabus', 10 );
 	}
@@ -58,7 +58,7 @@ class LLMS_Blocks_Course_Syllabus_Block extends LLMS_Blocks_Abstract_Block {
 	 * @return array
 	 */
 	public function get_attributes() {
-		llms_deprecated_function( __METHOD__, '[version]', __CLASS__ . '::get_attributes()' );
+		llms_deprecated_function( __METHOD__, '[version]' );
 
 		return array_merge(
 			parent::get_attributes(),
@@ -80,7 +80,7 @@ class LLMS_Blocks_Course_Syllabus_Block extends LLMS_Blocks_Abstract_Block {
 	 * @return string
 	 */
 	public function get_block_id() {
-		llms_deprecated_function( __METHOD__, '[version]', __CLASS__ . '::get_block_id()' );
+		llms_deprecated_function( __METHOD__, '[version]' );
 
 		return sprintf( '%1$s/%2$s', $this->vendor, $this->id );
 	}
@@ -95,7 +95,7 @@ class LLMS_Blocks_Course_Syllabus_Block extends LLMS_Blocks_Abstract_Block {
 	 * @return string
 	 */
 	public function get_empty_render_message() {
-		llms_deprecated_function( __METHOD__, '[version]', __CLASS__ . '::get_empty_render_message()' );
+		llms_deprecated_function( __METHOD__, '[version]' );
 
 		if ( ! is_admin() ) {
 			return '';
@@ -113,7 +113,7 @@ class LLMS_Blocks_Course_Syllabus_Block extends LLMS_Blocks_Abstract_Block {
 	 * @return string
 	 */
 	public function get_render_hook() {
-		llms_deprecated_function( __METHOD__, '[version]', __CLASS__ . '::get_render_hook()' );
+		llms_deprecated_function( __METHOD__, '[version]' );
 
 		return sprintf( '%1$s_%2$s_block_render', $this->vendor, $this->id );
 	}
@@ -128,7 +128,7 @@ class LLMS_Blocks_Course_Syllabus_Block extends LLMS_Blocks_Abstract_Block {
 	 * @return void
 	 */
 	public function remove_hooks() {
-		llms_deprecated_function( __METHOD__, '[version]', __CLASS__ . '::remove_hooks()' );
+		llms_deprecated_function( __METHOD__, '[version]' );
 	}
 
 	/**
@@ -142,7 +142,7 @@ class LLMS_Blocks_Course_Syllabus_Block extends LLMS_Blocks_Abstract_Block {
 	 * @return string
 	 */
 	public function render_callback( $attributes = array(), $content = '' ) {
-		llms_deprecated_function( __METHOD__, '[version]', __CLASS__ . '::render_callback()' );
+		llms_deprecated_function( __METHOD__, '[version]' );
 
 		$this->add_hooks( $attributes, $content );
 
@@ -170,7 +170,7 @@ class LLMS_Blocks_Course_Syllabus_Block extends LLMS_Blocks_Abstract_Block {
 	 * @return void
 	 */
 	public function register_meta() {
-		llms_deprecated_function( __METHOD__, '[version]', __CLASS__ . '::register_meta()' );
+		llms_deprecated_function( __METHOD__, '[version]' );
 	}
 }
 
