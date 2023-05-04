@@ -76,7 +76,7 @@ class PostVisibility extends Component {
 													onUpdateVisibility( value )
 												}
 												checked={
-													handlers[ value ].checked
+													value === visibility
 												}
 												id={ `editor-post-${ value }-${ instanceId }` }
 												aria-describedby={ `editor-post-${ value }-${ instanceId }-description` }
@@ -124,6 +124,7 @@ export default compose( [
 
 		return {
 			onUpdateVisibility( visibility ) {
+				console.log('from onUpdateVisiblity', visibility)
 				editPost( { visibility } );
 			},
 		};
