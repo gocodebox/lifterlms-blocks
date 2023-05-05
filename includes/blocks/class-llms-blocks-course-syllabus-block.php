@@ -173,5 +173,3 @@ class LLMS_Blocks_Course_Syllabus_Block extends LLMS_Blocks_Abstract_Block {
 		llms_deprecated_function( __METHOD__, '[version]' );
 	}
 }
-
-return new LLMS_Blocks_Course_Syllabus_Block();
