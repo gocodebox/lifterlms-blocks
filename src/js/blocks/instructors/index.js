@@ -39,7 +39,7 @@ export const postTypes = [ 'course', 'llms_membership' ];
 export const settings = {
 	title: __( 'Instructors', 'lifterlms' ),
 	icon: {
-		foreground: '#2295ff',
+		foreground: 'currentColor',
 		src: 'groups',
 	},
 	category: 'llms-blocks',

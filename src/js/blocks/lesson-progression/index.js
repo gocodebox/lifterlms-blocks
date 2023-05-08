@@ -39,7 +39,7 @@ export const postTypes = [ 'lesson' ];
 export const settings = {
 	title: __( 'Lesson Progression (Mark Complete)', 'lifterlms' ),
 	icon: {
-		foreground: '#2295ff',
+		foreground: 'currentColor',
 		src: 'yes',
 	},
 	category: 'llms-blocks',

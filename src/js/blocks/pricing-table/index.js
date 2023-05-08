@@ -49,7 +49,7 @@ export const postTypes = [ 'course', 'llms_membership' ];
 export const settings = {
 	title: __( 'LifterLMS Pricing Table', 'lifterlms' ),
 	icon: {
-		foreground: '#2295ff',
+		foreground: 'currentColor',
 		src: 'cart',
 	},
 	category: 'llms-blocks', // common, formatting, layout widgets, embed. see https://wordpress.org/gutenberg/handbook/block-api/#category.

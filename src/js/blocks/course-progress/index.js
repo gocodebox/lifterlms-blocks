@@ -38,7 +38,7 @@ export const name = 'llms/course-progress';
 export const settings = {
 	title: __( 'Course Progress', 'lifterlms' ),
 	icon: {
-		foreground: '#2295ff',
+		foreground: 'currentColor',
 		src: 'chart-area',
 	},
 	category: 'llms-blocks',

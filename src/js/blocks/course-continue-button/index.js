@@ -36,7 +36,7 @@ export const postTypes = [ 'course' ];
 export const settings = {
 	title: __( 'Course Continue Button', 'lifterlms' ),
 	icon: {
-		foreground: '#2295ff',
+		foreground: 'currentColor',
 		src: 'migrate',
 	},
 	category: 'llms-blocks', // common, formatting, layout widgets, embed. see https://wordpress.org/gutenberg/handbook/block-api/#category.
