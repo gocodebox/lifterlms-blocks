@@ -2,7 +2,7 @@
  * Course Information Block.
  *
  * @since 1.0.0
- * @version 2.0.0
+ * @version [version]
  */
 
 // Import CSS.
@@ -35,6 +35,8 @@ export const postTypes = [ 'course' ];
 
 /**
  * Register: Course Information Block
+ *
+ * @since [version] Update icon color to `currentColor`.
  *
  * @type {Object}
  */

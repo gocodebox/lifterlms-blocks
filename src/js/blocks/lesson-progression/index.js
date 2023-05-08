@@ -5,6 +5,7 @@
  * @since 1.5.0 Add supported post type settings.
  * @since 1.8.0 Use imports in favor of "wp." variables.
  *              Convert "edit" function from using ServerSideRender.
+ * @version [version]
  */
 
 // WP Deps.
@@ -33,6 +34,8 @@ export const postTypes = [ 'lesson' ];
 
 /**
  * Register Block
+ *
+ * @since [version] Update icon color to `currentColor`.
  *
  * @type {Object}
  */

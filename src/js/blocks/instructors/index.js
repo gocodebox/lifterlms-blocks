@@ -6,6 +6,7 @@
  * @since 1.0.0
  * @since 1.5.0 Add supported post type settings.
  * @since 1.11.0 Add membership to supported post types settings.
+ * @version [version]
  */
 
 // WP Deps.
@@ -33,6 +34,7 @@ export const postTypes = [ 'course', 'llms_membership' ];
  * Register Block.
  *
  * @since 1.0.0
+ * @since [version] Update icon color to `currentColor`.
  *
  * @type {Object}
  */

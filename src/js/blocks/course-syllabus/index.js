@@ -4,7 +4,7 @@
  * Renders a course syllabus
  *
  * @since 1.0.0
- * @version 2.0.0
+ * @version [version]
  */
 
 // WP Deps.
@@ -33,6 +33,7 @@ export const postTypes = [ 'course' ];
  * Register Course Syllabus Block
  *
  * @since 1.0.0
+ * @since [version] Update icon color to `currentColor`.
  */
 export const settings = {
 	title: __( 'Course Syllabus', 'lifterlms' ),

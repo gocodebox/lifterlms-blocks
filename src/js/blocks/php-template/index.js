@@ -2,6 +2,7 @@
  * BLOCK: llms/php-template
  *
  * @since 2.3.0
+ * @version [version]
  */
 
 // WP deps.
@@ -78,6 +79,7 @@ function Edit( props ) {
  * Register Block.
  *
  * @since 2.3.0
+ * @since [version] Update icon color to `currentColor`.
  *
  * @param {string} name     Block name.
  * @param {Object} settings Block settings.

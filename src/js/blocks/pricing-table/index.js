@@ -6,6 +6,7 @@
  * @since 1.5.0 Add supported post type settings.
  * @since 1.8.0 Use imports in favor of "wp." variables.
  *              Use @wordpress/server-side-render in favor of wp.components.ServerSideRender.
+ * @version [version]
  */
 
 // External deps.
@@ -41,6 +42,7 @@ export const postTypes = [ 'course', 'llms_membership' ];
  *
  * @since 1.0.0
  * @since 1.3.6 Unknown.
+ * @since [version] Update icon color to `currentColor`.
  *
  * @param {string} name     Block name.
  * @param {Object} settings Block settings.
