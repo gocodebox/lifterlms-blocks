@@ -2,7 +2,7 @@
  * Post Visibility setting component for courses & memberships
  *
  * @since    1.3.0
- * @version  1.3.0
+ * @version  [version]
  */
 
 // WP Deps.
@@ -109,7 +109,6 @@ export default compose( [
 
 		return {
 			onUpdateVisibility( visibility ) {
-				console.log('from onUpdateVisiblity', visibility)
 				editPost( { visibility } );
 			},
 		};
