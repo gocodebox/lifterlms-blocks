@@ -21,21 +21,6 @@ class PostVisibility extends Component {
 	render() {
 		const { onUpdateVisibility, instanceId, visibility } = this.props;
 
-		const handlers = {
-			catalog_search: {
-				checked: visibility === 'catalog_search',
-			},
-			catalog: {
-				checked: visibility === 'catalog',
-			},
-			search: {
-				checked: visibility === 'search',
-			},
-			hidden: {
-				checked: visibility === 'hidden',
-			},
-		};
-
 		return (
 			<PluginPostStatusInfo className="llms-post-visibility">
 				<span>

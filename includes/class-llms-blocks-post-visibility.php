@@ -1,6 +1,6 @@
 <?php
 /**
- * Handle course & membership catalog visibility data data.
+ * Handle course & membership catalog visibility data.
  *
  * @package  LifterLMS_Blocks/Classes
  * @since    1.3.0
