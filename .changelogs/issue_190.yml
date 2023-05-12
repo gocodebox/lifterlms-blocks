@@ -2,6 +2,4 @@ significance: patch
 type: fixed
 links:
   - "#190"
-attributions:
-  - "@seothemes"
-entry: Fixed conflict when values are added via filter in Visiblity Options.
+entry: Fixed conflict when values are added via filter in Visibility Options.
