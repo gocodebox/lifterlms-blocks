@@ -14,6 +14,7 @@ import {
 	getSettingsFromBase,
 	getDefaultPostTypes,
 } from '../settings';
+import icon from '../../../icons/user';
 
 /**
  * Block Name
@@ -49,9 +50,7 @@ export const settings = getSettingsFromBase( getDefaultSettings( 'group' ), {
 		"A special field used to collect a user's first and last name.",
 		'lifterlms'
 	),
-	icon: {
-		src: 'admin-users',
-	},
+	icon: icon,
 	supports: {
 		inserter: true,
 		multiple: false,

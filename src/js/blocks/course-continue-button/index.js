@@ -11,6 +11,9 @@
 import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
 
+// Internal dependencies.
+import icon from '../../icons/forward';
+
 /**
  * Block Name
  *
@@ -37,10 +40,7 @@ export const postTypes = [ 'course' ];
  */
 export const settings = {
 	title: __( 'Course Continue Button', 'lifterlms' ),
-	icon: {
-		foreground: 'currentColor',
-		src: 'migrate',
-	},
+	icon: icon,
 	category: 'llms-blocks', // common, formatting, layout widgets, embed. see https://wordpress.org/gutenberg/handbook/block-api/#category.
 	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 

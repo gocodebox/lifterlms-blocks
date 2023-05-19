@@ -23,6 +23,7 @@ import { Fragment } from '@wordpress/element';
 import { settings as baseSettings, postTypes } from './text';
 import { getSettingsFromBase } from '../settings';
 import { getSibling } from '../group-data';
+import icon from '../../../icons/lock';
 
 /**
  * Block Name
@@ -210,9 +211,7 @@ export const settings = getSettingsFromBase(
 			"A special field used to collect a user's account password.",
 			'lifterlms'
 		),
-		icon: {
-			src: 'lock',
-		},
+		icon: icon,
 		supports: {
 			inserter: true,
 			multiple: false, // Can only have a single user password field.

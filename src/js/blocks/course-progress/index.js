@@ -14,6 +14,9 @@
 // WP deps.
 import { __ } from '@wordpress/i18n';
 
+// Internal dependencies.
+import icon from '../../icons/chart-line';
+
 // CSS.
 import './editor.scss';
 
@@ -40,10 +43,7 @@ export const name = 'llms/course-progress';
  */
 export const settings = {
 	title: __( 'Course Progress', 'lifterlms' ),
-	icon: {
-		foreground: 'currentColor',
-		src: 'chart-area',
-	},
+	icon: icon,
 	category: 'llms-blocks',
 	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 	supports: {

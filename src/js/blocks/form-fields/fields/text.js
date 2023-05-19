@@ -16,8 +16,12 @@ import {
 	getSettingsFromBase,
 	getDefaultPostTypes,
 } from '../settings';
-import defaultIcon from '../../../icons/field-text';
-import numberIcon from '../../../icons/field-number';
+import defaultIcon from '../../../icons/text';
+import hashtagIcon from '../../../icons/hashtag';
+import envelopeIcon from '../../../icons/envelope';
+import lockIcon from '../../../icons/lock';
+import phoneIcon from '../../../icons/phone';
+import linkIcon from '../../../icons/link';
 
 const baseSettings = getDefaultSettings();
 
@@ -65,13 +69,13 @@ const variations = [
 			'A text input field which only accepts an email address.',
 			'lifterlms'
 		),
-		icon: 'email-alt',
+		icon: envelopeIcon,
 	},
 	{
 		name: 'password',
 		title: __( 'Password', 'lifterlms' ),
 		description: __( 'User password confirmation field.', 'lifterlms' ),
-		icon: 'lock',
+		icon: lockIcon,
 		scope: [],
 	},
 	{
@@ -81,7 +85,7 @@ const variations = [
 			'An input field which only accepts numeric input.',
 			'lifterlms'
 		),
-		icon: numberIcon,
+		icon: hashtagIcon,
 		attributes: {
 			html_attrs: {
 				min: '',
@@ -96,7 +100,7 @@ const variations = [
 			'An input field which only accepts phone numbers.',
 			'lifterlms'
 		),
-		icon: 'phone',
+		icon: phoneIcon,
 	},
 	{
 		name: 'url',
@@ -105,7 +109,7 @@ const variations = [
 			'An input field which only accepts a website address or URL.',
 			'lifterlms'
 		),
-		icon: 'admin-links',
+		icon: linkIcon,
 	},
 ];
 
@@ -205,9 +209,7 @@ const fillInspectorControls = ( attributes, setAttributes ) => {
 export const settings = getSettingsFromBase( baseSettings, {
 	title: __( 'Text', 'lifterlms' ),
 	description: __( 'A simple text input field.', 'lifterlms' ),
-	icon: {
-		src: defaultIcon,
-	},
+	icon: defaultIcon,
 	usesContext: [ 'llms/fieldGroup/fieldLayout' ],
 	supports: {
 		inserter: false,

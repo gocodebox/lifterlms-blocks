@@ -15,6 +15,9 @@ import { applyFilters } from '@wordpress/hooks';
 import { Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
+// Internal dependencies.
+import icon from '../../icons/circle-check';
+
 // CSS.
 import './editor.scss';
 
@@ -41,10 +44,7 @@ export const postTypes = [ 'lesson' ];
  */
 export const settings = {
 	title: __( 'Lesson Progression (Mark Complete)', 'lifterlms' ),
-	icon: {
-		foreground: 'currentColor',
-		src: 'yes',
-	},
+	icon: icon,
 	category: 'llms-blocks',
 	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 	supports: {

@@ -13,6 +13,7 @@ import { __ } from '@wordpress/i18n';
 // Internal Deps.
 import { settings as baseSettings, postTypes } from './text';
 import { getSettingsFromBase } from '../settings';
+import icon from '../../../icons/paragraph';
 
 /**
  * Block Name
@@ -76,9 +77,7 @@ export const settings = getSettingsFromBase(
 			'A text field accepting multiple lines of user information.',
 			'lifterlms'
 		),
-		icon: {
-			src: 'editor-paragraph',
-		},
+		icon: icon,
 		category: 'llms-custom-fields',
 		supports: {
 			inserter: true,

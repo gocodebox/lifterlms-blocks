@@ -12,7 +12,8 @@
 // WP Deps.
 import { __ } from '@wordpress/i18n';
 
-// Internal Deps.
+// Internal dependencies.
+import icon from '../../icons/person-chalkboard';
 import edit from './edit';
 import './editor.scss';
 
@@ -40,10 +41,7 @@ export const postTypes = [ 'course', 'llms_membership' ];
  */
 export const settings = {
 	title: __( 'Instructors', 'lifterlms' ),
-	icon: {
-		foreground: 'currentColor',
-		src: 'groups',
-	},
+	icon: icon,
 	category: 'llms-blocks',
 	keywords: [
 		__( 'LifterLMS', 'lifterlms' ),

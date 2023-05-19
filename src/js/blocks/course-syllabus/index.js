@@ -12,7 +12,8 @@ import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
 import ServerSideRender from '@wordpress/server-side-render';
 
-// Internal Deps.
+// Internal dependencies.
+import icon from '../../icons/table-cells-large';
 import './editor.scss';
 
 /**
@@ -37,10 +38,7 @@ export const postTypes = [ 'course' ];
  */
 export const settings = {
 	title: __( 'Course Syllabus', 'lifterlms' ),
-	icon: {
-		foreground: 'currentColor',
-		src: 'grid-view',
-	},
+	icon: icon,
 	category: 'llms-blocks',
 	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 	attributes: {

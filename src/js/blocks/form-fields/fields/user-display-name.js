@@ -11,6 +11,7 @@ import { __ } from '@wordpress/i18n';
 // Internal Deps.
 import { settings as baseSettings, postTypes } from './text';
 import { getSettingsFromBase } from '../settings';
+import icon from '../../../icons/clipboard-user';
 
 /**
  * Block Name
@@ -41,9 +42,7 @@ export const settings = getSettingsFromBase(
 			'Allows a user to choose how their name will be displayed publicly on the site.',
 			'lifterlms'
 		),
-		icon: {
-			src: 'nametag',
-		},
+		icon: icon,
 		supports: {
 			inserter: true,
 			multiple: false,

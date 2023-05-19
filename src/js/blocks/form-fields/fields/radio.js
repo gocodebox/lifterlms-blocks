@@ -15,7 +15,7 @@ import {
 	getDefaultPostTypes,
 	getDefaultOptionsArray,
 } from '../settings';
-import icon from '../../../icons/field-radio';
+import icon from '../../../icons/circle-dot';
 import { settings as baseSettings } from './checkboxes';
 
 /**
@@ -54,9 +54,7 @@ export const settings = getSettingsFromBase( baseSettings, {
 		'A group of radio inputs which can be populated with any number of options.',
 		'lifterlms'
 	),
-	icon: {
-		src: icon,
-	},
+	icon: icon,
 	attributes: {
 		field: {
 			__default: 'radio',

@@ -19,6 +19,9 @@ import { RichText } from '@wordpress/block-editor';
 import { Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
+// Internal dependencies.
+import icon from '../../icons/table-list';
+
 /**
  * Block Name
  *
@@ -42,10 +45,7 @@ export const postTypes = [ 'course' ];
  */
 export const settings = {
 	title: __( 'Course Information', 'lifterlms' ),
-	icon: {
-		foreground: 'currentColor',
-		src: 'list-view',
-	},
+	icon: icon,
 	category: 'llms-blocks',
 	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 

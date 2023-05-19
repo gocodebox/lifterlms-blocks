@@ -11,6 +11,7 @@ import { __ } from '@wordpress/i18n';
 // Internal Deps.
 import { settings as baseSettings, postTypes } from './text';
 import { getSettingsFromBase } from '../settings';
+import icon from '../../../icons/envelope';
 
 /**
  * Block Name
@@ -44,9 +45,7 @@ export const settings = getSettingsFromBase(
 			"A special field used to collect a user's account email address.",
 			'lifterlms'
 		),
-		icon: {
-			src: 'email-alt',
-		},
+		icon: icon,
 		supports: {
 			inserter: true,
 			multiple: false,

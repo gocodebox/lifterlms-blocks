@@ -19,7 +19,8 @@ import { Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import ServerSideRender from '@wordpress/server-side-render';
 
-// Internal deps.
+// Internal dependencies.
+import icon from '../../icons/money-check-dollar';
 import './editor.scss';
 import './subscribe';
 
@@ -50,10 +51,7 @@ export const postTypes = [ 'course', 'llms_membership' ];
  */
 export const settings = {
 	title: __( 'LifterLMS Pricing Table', 'lifterlms' ),
-	icon: {
-		foreground: 'currentColor',
-		src: 'cart',
-	},
+	icon: icon,
 	category: 'llms-blocks', // common, formatting, layout widgets, embed. see https://wordpress.org/gutenberg/handbook/block-api/#category.
 	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 	attributes: {

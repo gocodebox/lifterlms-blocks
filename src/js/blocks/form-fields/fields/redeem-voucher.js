@@ -12,6 +12,7 @@ import { __ } from '@wordpress/i18n';
 // Internal Deps.
 import { settings as baseSettings, postTypes } from './text';
 import { getSettingsFromBase } from '../settings';
+import icon from "../../../icons/ticket";
 
 /**
  * Block Name
@@ -77,9 +78,7 @@ export const settings = getSettingsFromBase(
 			'Allows user to redeem a voucher code during account registration.',
 			'lifterlms'
 		),
-		icon: {
-			src: 'tickets-alt',
-		},
+		icon: icon,
 		supports: {
 			inserter: true,
 			multiple: false,

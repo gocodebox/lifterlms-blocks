@@ -10,6 +10,9 @@ import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
 import ServerSideRender from '@wordpress/server-side-render';
 
+// Internal dependencies.
+import icon from '../../icons/arrows-left-right-to-line';
+
 /**
  * Block Name
  *
@@ -36,10 +39,7 @@ export const postTypes = [ 'lesson' ];
  */
 export const settings = {
 	title: __( 'Lesson Navigation', 'lifterlms' ),
-	icon: {
-		foreground: 'currentColor',
-		src: 'leftright',
-	},
+	icon: icon,
 	category: 'llms-blocks',
 	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 

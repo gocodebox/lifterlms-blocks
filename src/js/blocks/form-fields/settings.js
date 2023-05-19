@@ -21,7 +21,7 @@ const settingsBase = {
 	apiVersion: 2,
 
 	icon: {
-		foreground: '#466dd8',
+		foreground: 'currentColor',
 	},
 
 	category: 'llms-user-info-fields',

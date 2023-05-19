@@ -11,6 +11,7 @@ import { __ } from '@wordpress/i18n';
 // Internal Deps.
 import { settings as baseSettings, postTypes } from './text';
 import { getSettingsFromBase } from '../settings';
+import icon from '../../../icons/circle-user';
 
 /**
  * Block Name
@@ -41,9 +42,7 @@ export const settings = getSettingsFromBase(
 			"Field used to collect a user's account username. If this field is omitted a username will be automatically generated based off their email address. Users can always login using either their email address or username.",
 			'lifterlms'
 		),
-		icon: {
-			src: 'admin-users',
-		},
+		icon: icon,
 		supports: {
 			inserter: true,
 			multiple: false,
