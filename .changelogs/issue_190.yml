@@ -1,0 +1,5 @@
+significance: patch
+type: fixed
+links:
+  - "#190"
+entry: Fixed conflict when values are added via filter in Visibility Options.

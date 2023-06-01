@@ -2,7 +2,7 @@
  * Post Visibility setting component for courses & memberships
  *
  * @since    1.3.0
- * @version  1.3.0
+ * @version  [version]
  */
 
 // WP Deps.
@@ -20,21 +20,6 @@ import { default as PostVisibilityLabel } from './label';
 class PostVisibility extends Component {
 	render() {
 		const { onUpdateVisibility, instanceId, visibility } = this.props;
-
-		const handlers = {
-			catalog_search: {
-				checked: visibility === 'catalog_search',
-			},
-			catalog: {
-				checked: visibility === 'catalog',
-			},
-			search: {
-				checked: visibility === 'search',
-			},
-			hidden: {
-				checked: visibility === 'hidden',
-			},
-		};
 
 		return (
 			<PluginPostStatusInfo className="llms-post-visibility">
@@ -76,7 +61,7 @@ class PostVisibility extends Component {
 													onUpdateVisibility( value )
 												}
 												checked={
-													handlers[ value ].checked
+													value === visibility
 												}
 												id={ `editor-post-${ value }-${ instanceId }` }
 												aria-describedby={ `editor-post-${ value }-${ instanceId }-description` }
