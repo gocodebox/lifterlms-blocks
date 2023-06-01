@@ -1,0 +1,4 @@
+significance: minor
+type: dev
+entry: Deprecated LLMS_Blocks_Course_Syllabus_Block class. The Syllabus Block is
+  now implemented in the LifterLMS core plugin.

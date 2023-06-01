@@ -39,7 +39,7 @@ export const name = 'llms/pricing-table';
 export const postTypes = [ 'course', 'llms_membership' ];
 
 /**
- * Register Course Syllabus Block
+ * Register Pricing Table Block
  *
  * @since 1.0.0
  * @since 1.3.6 Unknown.
