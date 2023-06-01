@@ -8,10 +8,14 @@
  *              Set shortcode attribute check_enrollment to true(1) so to display the progress to enrolled users only.
  *              Do not support llms_visibility.
  * @since 1.9.0 Turned into a dynamic block.
+ * @version [version]
  */
 
 // WP deps.
 import { __ } from '@wordpress/i18n';
+
+// Internal dependencies.
+import icon from '../../icons/chart-line';
 
 // CSS.
 import './editor.scss';
@@ -33,14 +37,13 @@ export const name = 'llms/course-progress';
 /**
  * Register: Course Progress Block
  *
+ * @since [version] Update icon color to `currentColor`.
+ *
  * @type {Object}
  */
 export const settings = {
 	title: __( 'Course Progress', 'lifterlms' ),
-	icon: {
-		foreground: '#2295ff',
-		src: 'chart-area',
-	},
+	icon: icon,
 	category: 'llms-blocks',
 	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 	supports: {

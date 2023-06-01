@@ -1,0 +1,3 @@
+significance: minor
+type: changed
+entry: Update default icon color to `currentColor`.

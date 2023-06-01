@@ -11,6 +11,7 @@ import { __ } from '@wordpress/i18n';
 // Internal Deps.
 import { settings as baseSettings, postTypes } from './text';
 import { getSettingsFromBase } from '../settings';
+import icon from '../../../icons/user';
 
 /**
  * Block Name
@@ -44,9 +45,7 @@ export const settings = getSettingsFromBase(
 			"A special field used to collect a user's first name.",
 			'lifterlms'
 		),
-		icon: {
-			src: 'admin-users',
-		},
+		icon: icon,
 		supports: {
 			multiple: false, // Can only have a single email address field.
 			llms_field_inspector: {

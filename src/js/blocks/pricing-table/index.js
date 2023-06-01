@@ -6,6 +6,7 @@
  * @since 1.5.0 Add supported post type settings.
  * @since 1.8.0 Use imports in favor of "wp." variables.
  *              Use @wordpress/server-side-render in favor of wp.components.ServerSideRender.
+ * @version [version]
  */
 
 // External deps.
@@ -18,7 +19,8 @@ import { Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import ServerSideRender from '@wordpress/server-side-render';
 
-// Internal deps.
+// Internal dependencies.
+import icon from '../../icons/money-check-dollar';
 import './editor.scss';
 import './subscribe';
 
@@ -41,6 +43,7 @@ export const postTypes = [ 'course', 'llms_membership' ];
  *
  * @since 1.0.0
  * @since 1.3.6 Unknown.
+ * @since [version] Update icon color to `currentColor`.
  *
  * @param {string} name     Block name.
  * @param {Object} settings Block settings.
@@ -48,10 +51,7 @@ export const postTypes = [ 'course', 'llms_membership' ];
  */
 export const settings = {
 	title: __( 'LifterLMS Pricing Table', 'lifterlms' ),
-	icon: {
-		foreground: '#2295ff',
-		src: 'cart',
-	},
+	icon: icon,
 	category: 'llms-blocks', // common, formatting, layout widgets, embed. see https://wordpress.org/gutenberg/handbook/block-api/#category.
 	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 	attributes: {

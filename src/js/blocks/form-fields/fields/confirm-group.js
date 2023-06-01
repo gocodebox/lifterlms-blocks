@@ -18,7 +18,7 @@ import {
 	getSettingsFromBase,
 	getDefaultPostTypes,
 } from '../settings';
-
+import icon from "../../../icons/grip-lines";
 import { store as fieldsStore } from '../../../data/fields';
 
 /**
@@ -305,9 +305,7 @@ export const settings = getSettingsFromBase( getDefaultSettings( 'group' ), {
 		'Adds a required confirmation field to an input field.',
 		'lifterlms'
 	),
-	icon: {
-		src: 'controls-repeat',
-	},
+	icon: icon,
 	category: 'llms-custom-fields',
 	transforms,
 	fillInspectorControls,

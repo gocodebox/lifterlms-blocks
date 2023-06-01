@@ -16,7 +16,7 @@ import {
 	getDefaultPostTypes,
 	getDefaultOptionsArray,
 } from '../settings';
-import icon from '../../../icons/field-checkbox';
+import icon from '../../../icons/square-check';
 
 /**
  * Block Name
@@ -53,9 +53,7 @@ export const settings = getSettingsFromBase( getDefaultSettings(), {
 		'A single checkbox toggle or a group of multiple checkboxes.',
 		'lifterlms'
 	),
-	icon: {
-		src: icon,
-	},
+	icon: icon,
 	category: 'llms-custom-fields',
 	supports: {
 		llms_field_inspector: {

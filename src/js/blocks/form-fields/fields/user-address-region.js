@@ -14,6 +14,7 @@ import {
 	getSettingsFromBase,
 	getDefaultPostTypes,
 } from '../settings';
+import icon from '../../../icons/address-card';
 
 /**
  * Block Name
@@ -49,7 +50,7 @@ export const settings = getSettingsFromBase( getDefaultSettings( 'group' ), {
 	title: __( 'User Street Address', 'lifterlms' ),
 	description: __( "Collect a user's street address.", 'lifterlms' ),
 	icon: {
-		src: 'id-alt',
+		src: icon,
 	},
 	supports: {
 		multiple: false,

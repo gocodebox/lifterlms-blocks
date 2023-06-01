@@ -11,7 +11,7 @@ import { createBlock } from '@wordpress/blocks';
 
 // Internal Deps.
 import { getSettingsFromBase, getDefaultPostTypes } from '../settings';
-import icon from '../../../icons/field-select';
+import icon from '../../../icons/square-caret-down';
 import { settings as baseSettings } from './radio';
 
 /**
@@ -50,9 +50,7 @@ export const settings = getSettingsFromBase( baseSettings, {
 		'A select field which can be populated with any number of options.',
 		'lifterlms'
 	),
-	icon: {
-		src: icon,
-	},
+	icon: icon,
 	attributes: {
 		field: {
 			__default: 'select',

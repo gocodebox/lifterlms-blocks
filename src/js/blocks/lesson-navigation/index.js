@@ -2,13 +2,16 @@
  * BLOCK: llms/lesson-navigation
  *
  * @since 1.0.0
- * @version 2.0.0
+ * @version [version]
  */
 
 // WP Deps.
 import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
 import ServerSideRender from '@wordpress/server-side-render';
+
+// Internal dependencies.
+import icon from '../../icons/arrows-left-right-to-line';
 
 /**
  * Block Name
@@ -27,7 +30,8 @@ export const postTypes = [ 'lesson' ];
 /**
  * Register Block
  *
- * @since   1.0.0
+ * @since 1.0.0
+ * @since [version] Update icon color to `currentColor`.
  *
  * @param {string} name     Block name.
  * @param {Object} settings Block settings.
@@ -35,10 +39,7 @@ export const postTypes = [ 'lesson' ];
  */
 export const settings = {
 	title: __( 'Lesson Navigation', 'lifterlms' ),
-	icon: {
-		foreground: '#2295ff',
-		src: 'leftright',
-	},
+	icon: icon,
 	category: 'llms-blocks',
 	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 

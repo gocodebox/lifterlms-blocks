@@ -4,7 +4,7 @@
  * Renders a course syllabus
  *
  * @since 1.0.0
- * @version 2.0.0
+ * @version [version]
  */
 
 // WP Deps.
@@ -12,7 +12,8 @@ import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
 import ServerSideRender from '@wordpress/server-side-render';
 
-// Internal Deps.
+// Internal dependencies.
+import icon from '../../icons/table-cells-large';
 import './editor.scss';
 
 /**
@@ -33,13 +34,11 @@ export const postTypes = [ 'course' ];
  * Register Course Syllabus Block
  *
  * @since 1.0.0
+ * @since [version] Update icon color to `currentColor`.
  */
 export const settings = {
 	title: __( 'Course Syllabus', 'lifterlms' ),
-	icon: {
-		foreground: '#2295ff',
-		src: 'grid-view',
-	},
+	icon: icon,
 	category: 'llms-blocks',
 	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 	attributes: {
