@@ -7,7 +7,7 @@
  * @package LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @version 2.4.3
+ * @version [version]
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -140,6 +140,7 @@ class LLMS_Blocks_Assets {
 	 * @since 2.2.0 Only load assets on post screens.
 	 * @since 2.3.0 Also load assets on site editor screen.
 	 * @since 2.4.3 Added script localization.
+	 * @since [version] Add courseId to script localization.
 	 *
 	 * @return void
 	 */
@@ -162,6 +163,7 @@ class LLMS_Blocks_Assets {
 			'llmsBlocks',
 			array(
 				'variationIconCanBeObject' => self::can_variation_transform_icon_be_an_object(),
+				'courseId'                 => self::get_course_id(),
 			)
 		);
 
@@ -196,16 +198,39 @@ class LLMS_Blocks_Assets {
 	/**
 	 * Can a variation transform icon be an object.
 	 *
-	 * @since 2.4.3
-	 *
 	 * @link https://github.com/gocodebox/lifterlms-blocks/issues/170
 	 *
-	 * @return boolean
+	 * @since 2.4.3
+	 *
+	 * @return bool
 	 */
-	private static function can_variation_transform_icon_be_an_object() {
+	private static function can_variation_transform_icon_be_an_object(): bool {
 		global $wp_version;
+
 		return version_compare( $wp_version, '6.0-src', '<' ) && ! defined( 'GUTENBERG_VERSION' )
-				|| ( defined( 'GUTENBERG_VERSION' ) && version_compare( GUTENBERG_VERSION, '13.0', '<' ) );
+			|| ( defined( 'GUTENBERG_VERSION' ) && version_compare( GUTENBERG_VERSION, '13.0', '<' ) );
+	}
+
+	/**
+	 * Returns the current course or lesson's parent course ID.
+	 *
+	 * @since [version]
+	 *
+	 * @return int
+	 */
+	private static function get_course_id(): int {
+		$post_type = get_post_type();
+		$post_id   = get_the_ID() ?? 0;
+
+		if ( 'lesson' === $post_type ) {
+			$parent = llms_get_post_parent_course( $post_id );
+
+			if ( $parent ) {
+				$post_id = $parent->get( 'id' );
+			}
+		}
+
+		return $post_id;
 	}
 
 }

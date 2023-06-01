@@ -2,11 +2,11 @@
  * Editor Sidebar Plugins
  *
  * @since 1.0.0
- * @version 1.6.0
+ * @version [version]
  */
 
 // WP Deps.
-import { select } from '@wordpress/data';
+import { select, subscribe } from '@wordpress/data';
 import { PluginSidebar, PluginSidebarMoreMenuItem } from '@wordpress/edit-post';
 import { Fragment } from '@wordpress/element';
 import { registerPlugin } from '@wordpress/plugins';
@@ -15,37 +15,43 @@ import { registerPlugin } from '@wordpress/plugins';
 import Instructors from './instructors';
 import FormDocumentSettings from './form-document-settings';
 import LifterLMSIcon from '../icons/lifterlms-icon';
+import { CourseBuilderPanel } from './course-builder/course-builder-panel.jsx';
+import { addToolbarLaunchButton } from './course-builder/toolbar-launch-button.jsx';
+import './course-builder/sidebar-launch-button.jsx';
 
 /**
  * Registers the sidebar plugin for Courses and Memberships
  *
  * @since 1.0.0
+ * @since [version] Added toolbar launch button for the course builder.
  *
  * @return {?Fragment} Component fragment or null when instructors aren't supported for the given post type.
  */
 const Sidebar = () => {
-	if (
-		-1 !==
-		[ 'course', 'llms_membership' ].indexOf(
-			select( 'core/editor' ).getCurrentPostType()
-		)
-	) {
-		return (
-			<Fragment>
-				<PluginSidebarMoreMenuItem
-					target="llms-sidebar"
-					icon={ <LifterLMSIcon /> }
-				>
-					LifterLMS
-				</PluginSidebarMoreMenuItem>
-				<PluginSidebar name="llms-sidebar" title="LifterLMS">
-					<Instructors />
-				</PluginSidebar>
-			</Fragment>
-		);
+	const postType = select( 'core/editor' ).getCurrentPostType();
+
+	if ( ! [ 'course', 'lesson', 'llms_membership' ].includes( postType ) ) {
+		return null;
 	}
-	return null;
+
+	if ( [ 'course', 'lesson' ].includes( postType ) ) {
+		subscribe( addToolbarLaunchButton );
+	}
+
+	return <>
+		<PluginSidebarMoreMenuItem
+			target="llms-sidebar"
+			icon={ <LifterLMSIcon /> }
+		>
+			{ 'LifterLMS' }
+		</PluginSidebarMoreMenuItem>
+		<PluginSidebar name="llms-sidebar" title="LifterLMS">
+			{ [ 'course', 'lesson' ].includes( postType ) && <CourseBuilderPanel /> }
+			{ [ 'course', 'llms_membership' ].includes( postType ) && <Instructors /> }
+		</PluginSidebar>
+	</>;
 };
+
 registerPlugin( 'llms', {
 	render: Sidebar,
 	icon: <LifterLMSIcon />,
