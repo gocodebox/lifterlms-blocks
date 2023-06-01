@@ -39,7 +39,7 @@ class LLMS_Blocks_Course_Syllabus_Block extends LLMS_Blocks_Abstract_Block {
 	 * @deprecated [version]
 	 *
 	 * @param array  $attributes Optional. Block attributes. Default empty array.
-	 * @param string $content Optional. Block content. Default empty string.
+	 * @param string $content    Optional. Block content. Default empty string.
 	 * @return void
 	 */
 	public function add_hooks( $attributes = array(), $content = '' ) {
@@ -120,6 +120,7 @@ class LLMS_Blocks_Course_Syllabus_Block extends LLMS_Blocks_Abstract_Block {
 
 	/**
 	 * Removed hooks stub.
+	 *
 	 * Extending classes can use this class to remove hooks attached to the render function action.
 	 *
 	 * @since 1.0.0
@@ -138,7 +139,7 @@ class LLMS_Blocks_Course_Syllabus_Block extends LLMS_Blocks_Abstract_Block {
 	 * @deprecated [version]
 	 *
 	 * @param array  $attributes Optional. Block attributes. Default empty array.
-	 * @param string $content Optional. Block content. Default empty string.
+	 * @param string $content    Optional. Block content. Default empty string.
 	 * @return string
 	 */
 	public function render_callback( $attributes = array(), $content = '' ) {
