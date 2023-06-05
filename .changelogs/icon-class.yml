@@ -1,0 +1,3 @@
+significance: minor
+type: added
+entry: Added `llms-block-icon` class to block SVG icons.
