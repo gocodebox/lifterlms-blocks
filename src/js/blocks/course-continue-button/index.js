@@ -4,7 +4,7 @@
  * @since 1.0.0
  * @since 1.5.0 Add supported post type settings.
  * @since 1.8.0 Use imports in favor of "wp." variables.
- * @version [version]
+ * @version 2.5.0
  */
 
 // WP Deps.
@@ -32,7 +32,7 @@ export const postTypes = [ 'course' ];
  * Register: Course Continue Button Block
  *
  * @since 1.0.0
- * @since [version] Update icon color to `currentColor`.
+ * @since 2.5.0 Update icon color to `currentColor`.
  *
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
