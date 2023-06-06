@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version 2.3.0
+ * @version 2.5.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,6 +17,15 @@ defined( 'ABSPATH' ) || exit;
  * @since 2.2.1 Handle '-src' in WordPress version numbers in `init()`.
  */
 class LLMS_Blocks {
+
+	/**
+	 * Minimum LifterLMS core version required to run as a plugin.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @var string
+	 */
+	const MIN_CORE_VERSION = '7.2.0';
 
 	/**
 	 * Constructor.
@@ -159,12 +168,13 @@ class LLMS_Blocks {
 	 * @since 2.0.0 Return early if LifterLMS isn't installed, move file inclusion to `$this->includes()`,
 	 *              and moved actions and filters from the constructor.
 	 * @since 2.2.1 Handle '-src' in WordPress version numbers.
+	 * @since 2.5.0 Updated minimum LifterLMS core version to 7.2.0.
 	 *
 	 * @return  void
 	 */
 	public function init() {
 
-		if ( ! function_exists( 'llms' ) || ! version_compare( '5.0.0-rc.2', llms()->version, '<=' ) ) {
+		if ( ! function_exists( 'llms' ) || ! version_compare( self::MIN_CORE_VERSION, llms()->version, '<=' ) ) {
 			return;
 		}
 
