@@ -2,7 +2,7 @@
  * Course Information Block.
  *
  * @since 1.0.0
- * @version 2.0.0
+ * @version 2.5.0
  */
 
 // Import CSS.
@@ -18,6 +18,9 @@ import PreviewTerms from './preview-terms';
 import { RichText } from '@wordpress/block-editor';
 import { Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+
+// Internal dependencies.
+import icon from '../../icons/table-list';
 
 /**
  * Block Name
@@ -36,14 +39,13 @@ export const postTypes = [ 'course' ];
 /**
  * Register: Course Information Block
  *
+ * @since 2.5.0 Update icon color to `currentColor`.
+ *
  * @type {Object}
  */
 export const settings = {
 	title: __( 'Course Information', 'lifterlms' ),
-	icon: {
-		foreground: '#2295ff',
-		src: 'list-view',
-	},
+	icon: icon,
 	category: 'llms-blocks',
 	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 

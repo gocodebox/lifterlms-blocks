@@ -1,6 +1,28 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.5.0 - 2023-06-06
+-------------------
+
+##### New Features
+
++ Replaced font-based block icons with SVG icons.
+
+##### Updates and Enhancements
+
++ Changes to Launch Course Builder buttons and Course Builder meta-box.
++ Update default icon color to `currentColor`.
++ Updated minimum LifterLMS core version to 7.2.0.
+
+##### Bug Fixes
+
++ Fixed issue when new Course/Membership visibility options were added via JS filter hook. [#190](https://github.com/gocodebox/lifterlms-blocks#190)
+
+##### Developer Notes
+
++ Deprecated LLMS_Blocks_Course_Syllabus_Block class. The Syllabus Block is now implemented in the LifterLMS core plugin.
+
+
 v2.4.3 - 2022-06-09
 -------------------
 

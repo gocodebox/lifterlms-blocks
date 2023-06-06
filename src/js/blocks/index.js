@@ -2,6 +2,7 @@
  * LifterLMS Block Library.
  *
  * @since 1.7.0
+ * @since 2.5.0 Remove course syllabus block.
  * @version 2.3.0
  */
 
@@ -24,7 +25,6 @@ import { getCurrentPostType } from '../util/';
 import * as courseContinueButton from './course-continue-button/';
 import * as courseInfo from './course-information/';
 import * as courseProgress from './course-progress/';
-import * as courseSyllabus from './course-syllabus/';
 import * as instructors from './instructors/';
 import * as lessonNavigation from './lesson-navigation/';
 import * as lessonProgression from './lesson-progression/';
@@ -118,6 +118,7 @@ export const deregisterBlocksForForms = () => {
  * @since 1.7.3 Move form ready event from domReady to here to ensure blocks are exposed before blocks are parsed.
  * @since 2.0.0 Trigger `llms_form_fields_ready` on `wp_block` posts.
  * @since 2.3.0 Register phpTemplate block.
+ * @since 2.5.0 Remove course syllabus block.
  */
 export default () => {
 	const postType = getCurrentPostType();
@@ -127,7 +128,6 @@ export default () => {
 		courseContinueButton,
 		courseInfo,
 		courseProgress,
-		courseSyllabus,
 		instructors,
 		lessonNavigation,
 		lessonProgression,

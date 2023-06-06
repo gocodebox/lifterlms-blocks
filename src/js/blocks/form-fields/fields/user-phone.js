@@ -11,6 +11,7 @@ import { __ } from '@wordpress/i18n';
 // Internal Deps.
 import { settings as baseSettings, postTypes } from './text';
 import { getSettingsFromBase } from '../settings';
+import icon from '../../../icons/phone';
 
 /**
  * Block Name
@@ -43,9 +44,7 @@ export const settings = getSettingsFromBase(
 			"A field used to collect a user's phone number.",
 			'lifterlms'
 		),
-		icon: {
-			src: 'phone',
-		},
+		icon: icon,
 		supports: {
 			inserter: true,
 			multiple: false,

@@ -11,6 +11,7 @@ import { __ } from '@wordpress/i18n';
 // Internal Deps.
 import { settings as baseSettings, postTypes } from './text';
 import { getSettingsFromBase } from '../settings';
+import icon from '../../../icons/map-location-dot';
 
 /**
  * Block Name
@@ -44,9 +45,7 @@ export const settings = getSettingsFromBase(
 			"A special field used to collect a user's billing city.",
 			'lifterlms'
 		),
-		icon: {
-			src: 'location-alt',
-		},
+		icon: icon,
 		supports: {
 			multiple: false,
 			llms_field_inspector: {

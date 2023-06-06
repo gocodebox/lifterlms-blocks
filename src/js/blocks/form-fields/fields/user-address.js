@@ -14,6 +14,7 @@ import {
 	getSettingsFromBase,
 	getDefaultPostTypes,
 } from '../settings';
+import icon from '../../../icons/address-card';
 
 /**
  * Block Name
@@ -53,9 +54,7 @@ export const settings = getSettingsFromBase(
 			"A group of fields used to collect a user's full address.",
 			'lifterlms'
 		),
-		icon: {
-			src: 'id-alt',
-		},
+		icon: icon,
 		supports: {
 			inserter: true,
 			multiple: false,

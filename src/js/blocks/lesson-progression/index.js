@@ -5,6 +5,7 @@
  * @since 1.5.0 Add supported post type settings.
  * @since 1.8.0 Use imports in favor of "wp." variables.
  *              Convert "edit" function from using ServerSideRender.
+ * @version 2.5.0
  */
 
 // WP Deps.
@@ -13,6 +14,9 @@ import { select } from '@wordpress/data';
 import { applyFilters } from '@wordpress/hooks';
 import { Fragment } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+
+// Internal dependencies.
+import icon from '../../icons/circle-check';
 
 // CSS.
 import './editor.scss';
@@ -34,14 +38,13 @@ export const postTypes = [ 'lesson' ];
 /**
  * Register Block
  *
+ * @since 2.5.0 Update icon color to `currentColor`.
+ *
  * @type {Object}
  */
 export const settings = {
 	title: __( 'Lesson Progression (Mark Complete)', 'lifterlms' ),
-	icon: {
-		foreground: '#2295ff',
-		src: 'yes',
-	},
+	icon: icon,
 	category: 'llms-blocks',
 	keywords: [ __( 'LifterLMS', 'lifterlms' ) ],
 	supports: {
