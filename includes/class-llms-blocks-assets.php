@@ -7,7 +7,7 @@
  * @package LifterLMS_Blocks/Main
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.5.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -140,7 +140,7 @@ class LLMS_Blocks_Assets {
 	 * @since 2.2.0 Only load assets on post screens.
 	 * @since 2.3.0 Also load assets on site editor screen.
 	 * @since 2.4.3 Added script localization.
-	 * @since [version] Add courseId to script localization.
+	 * @since 2.5.0 Add courseId to script localization.
 	 *
 	 * @return void
 	 */
@@ -214,7 +214,7 @@ class LLMS_Blocks_Assets {
 	/**
 	 * Returns the current course or lesson's parent course ID.
 	 *
-	 * @since [version]
+	 * @since 2.5.0
 	 *
 	 * @return int
 	 */

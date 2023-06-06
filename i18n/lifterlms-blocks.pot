@@ -1,21 +1,21 @@
-# Copyright (C) 2018-2022 LifterLMS
+# Copyright (C) 2018-2023 LifterLMS
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: LifterLMS Blocks 2.4.3\n"
+"Project-Id-Version: LifterLMS Blocks 2.5.0\n"
 "Report-Msgid-Bugs-To: https://lifterlms.com/my-account/my-tickets\n"
 "Last-Translator: Team LifterLMS <team@lifterlms.com>\n"
 "Language-Team: Team LifterLMS <team@lifterlms.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-06-09T16:01:33+00:00\n"
+"POT-Creation-Date: 2023-06-06T09:04:56+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: llms/dev 0.0.4-alpha.0\n"
 "X-Domain: lifterlms\n"
 
 #. Plugin Name of the plugin
-#: includes/class-llms-blocks.php:49
+#: includes/class-llms-blocks.php:58
 msgid "LifterLMS Blocks"
 msgstr ""
 
@@ -42,16 +42,17 @@ msgstr ""
 msgid "Course Information"
 msgstr ""
 
+#: includes/blocks/class-llms-blocks-course-syllabus-block.php:104
+#: includes/class-llms-blocks-abstract-block.php:113
+msgid "No HTML was returned."
+msgstr ""
+
 #: includes/blocks/class-llms-blocks-instructors-block.php:96
 msgid "No visible instructors were found."
 msgstr ""
 
 #: includes/blocks/class-llms-blocks-pricing-table-block.php:94
 msgid "No access plans found."
-msgstr ""
-
-#: includes/class-llms-blocks-abstract-block.php:113
-msgid "No HTML was returned."
 msgstr ""
 
 #: includes/class-llms-blocks-post-instructors.php:137
@@ -95,12 +96,12 @@ msgstr ""
 msgid "Remove Block Code"
 msgstr ""
 
-#: includes/class-llms-blocks.php:56
+#: includes/class-llms-blocks.php:65
 #: assets/js/llms-blocks.js:24
 msgid "Custom User Information"
 msgstr ""
 
-#: includes/class-llms-blocks.php:64
+#: includes/class-llms-blocks.php:73
 msgid "User Information"
 msgstr ""
 
@@ -317,10 +318,6 @@ msgstr ""
 
 #: assets/js/llms-blocks.js:3
 msgid "Course Progress"
-msgstr ""
-
-#: assets/js/llms-blocks.js:3
-msgid "Course Syllabus"
 msgstr ""
 
 #: assets/js/llms-blocks.js:3
@@ -1096,4 +1093,12 @@ msgstr ""
 
 #: assets/js/llms-blocks.js:24
 msgid "Replace the existing content of the form with the original default content."
+msgstr ""
+
+#: assets/js/llms-blocks.js:24
+msgid "Course Builder"
+msgstr ""
+
+#: assets/js/llms-blocks.js:24
+msgid "Launch Course Builder"
 msgstr ""

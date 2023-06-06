@@ -3,8 +3,8 @@
  *
  * @since 1.0.0
  * @since 1.6.0 Pass style rules as camelCase.
- * @since [version] Use WordPress primitives and remove unnecessary Fragment.
- * @version [version]
+ * @since 2.5.0 Use WordPress primitives and remove unnecessary Fragment.
+ * @version 2.5.0
  */
 
 // WordPress dependencies.

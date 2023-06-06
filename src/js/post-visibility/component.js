@@ -2,7 +2,7 @@
  * Post Visibility setting component for courses & memberships
  *
  * @since    1.3.0
- * @version  [version]
+ * @version  2.5.0
  */
 
 // WP Deps.

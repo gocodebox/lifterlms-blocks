@@ -5,7 +5,7 @@
  * @package LifterLMS_Blocks/Classes
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.5.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -21,7 +21,7 @@ class LLMS_Blocks {
 	/**
 	 * Minimum LifterLMS core version required to run as a plugin.
 	 *
-	 * @since [version]
+	 * @since 2.5.0
 	 *
 	 * @var string
 	 */
@@ -168,7 +168,7 @@ class LLMS_Blocks {
 	 * @since 2.0.0 Return early if LifterLMS isn't installed, move file inclusion to `$this->includes()`,
 	 *              and moved actions and filters from the constructor.
 	 * @since 2.2.1 Handle '-src' in WordPress version numbers.
-	 * @since [version] Updated minimum LifterLMS core version to 7.2.0.
+	 * @since 2.5.0 Updated minimum LifterLMS core version to 7.2.0.
 	 *
 	 * @return  void
 	 */

@@ -2,7 +2,7 @@
  * BLOCK: llms/lesson-navigation
  *
  * @since 1.0.0
- * @version [version]
+ * @version 2.5.0
  */
 
 // WP Deps.
@@ -31,7 +31,7 @@ export const postTypes = [ 'lesson' ];
  * Register Block
  *
  * @since 1.0.0
- * @since [version] Update icon color to `currentColor`.
+ * @since 2.5.0 Update icon color to `currentColor`.
  *
  * @param {string} name     Block name.
  * @param {Object} settings Block settings.
