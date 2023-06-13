@@ -2,7 +2,7 @@
  * Tooblar launch button.
  *
  * @since 2.5.0
- * @version [version]
+ * @version 2.5.1
  */
 
 import { select } from '@wordpress/data';
@@ -14,7 +14,7 @@ const buttonId = 'llms-launch-course-builder-top-button';
  * Toolbar launch button component.
  *
  * @since 2.5.0
- * @since [version] Fix button link using localized admin url so to avoid issues when
+ * @since 2.5.1 Fix button link using localized admin url so to avoid issues when
  *               WordPress is installed in a subdirectory.
  */
 export const addToolbarLaunchButton = () => {

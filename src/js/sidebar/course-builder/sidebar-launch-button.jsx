@@ -2,7 +2,7 @@
  * Sidebar launch button.
  *
  * @since 2.5.0
- * @version [version]
+ * @version 2.5.1
  */
 
 import { __ } from '@wordpress/i18n';
@@ -17,7 +17,7 @@ import './editor.scss';
  * Sidebar launch button component.
  *
  * @since 2.5.0
- * @since [version] Fix button link using localized admin url so to avoid issues when
+ * @since 2.5.1 Fix button link using localized admin url so to avoid issues when
  *               WordPress is installed in a subdirectory.
  */
 const SidebarLaunchButton = () => {
