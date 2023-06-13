@@ -1,6 +1,14 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.5.1 - 2023-06-13
+-------------------
+
+##### Bug Fixes
+
++ Fixes Launch Course Builder buttons not working when WordPress was installed in a subdirectory.
+
+
 v2.5.0 - 2023-06-06
 -------------------
 
