@@ -1,3 +1,10 @@
+/**
+ * Sidebar launch button.
+ *
+ * @since 2.5.0
+ * @version 2.5.1
+ */
+
 import { __ } from '@wordpress/i18n';
 import { select } from '@wordpress/data';
 import { registerPlugin } from '@wordpress/plugins';
@@ -6,6 +13,13 @@ import { Button } from '@wordpress/components';
 
 import './editor.scss';
 
+/**
+ * Sidebar launch button component.
+ *
+ * @since 2.5.0
+ * @since 2.5.1 Fix button link using localized admin url so to avoid issues when
+ *               WordPress is installed in a subdirectory.
+ */
 const SidebarLaunchButton = () => {
 	const postType = select( 'core/editor' )?.getCurrentPostType() ?? '';
 
@@ -19,7 +33,7 @@ const SidebarLaunchButton = () => {
 		className={ 'llms-launch-course-builder' }
 	>
 		<Button
-			href={ '/wp-admin/admin.php?page=llms-course-builder&course_id=' + courseId }
+			href={ window.llms.admin_url + 'admin.php?page=llms-course-builder&course_id=' + courseId }
 			className={ 'llms-button-primary' }
 		>
 			{ __( 'Launch Course Builder', 'lifterlms' ) }
