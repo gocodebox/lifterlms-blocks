@@ -6,6 +6,7 @@
  *
  * @since 1.9.0
  * @version 1.9.0
+ * @deprecated [version]
  *
  * @render_hook llms_course-progress_block_render
  */
@@ -14,6 +15,9 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Course progress block class.
+ *
+ * @since Unknown
+ * @deprecated [version]
  */
 class LLMS_Blocks_Course_Progress_Block extends LLMS_Blocks_Abstract_Block {
 
@@ -35,12 +39,14 @@ class LLMS_Blocks_Course_Progress_Block extends LLMS_Blocks_Abstract_Block {
 	 * Add actions attached to the render function action.
 	 *
 	 * @since 1.9.0
+	 * @deprecated [version]
 	 *
 	 * @param array  $attributes Optional. Block attributes. Default empty array.
 	 * @param string $content    Optional. Block content. Default empty string.
 	 * @return void
 	 */
 	public function add_hooks( $attributes = array(), $content = '' ) {
+		llms_deprecated_function( __METHOD__, '[version]' );
 
 		add_action( $this->get_render_hook(), array( $this, 'output' ), 10 );
 
@@ -50,11 +56,13 @@ class LLMS_Blocks_Course_Progress_Block extends LLMS_Blocks_Abstract_Block {
 	 * Output the course progress bar
 	 *
 	 * @since 1.9.0
+	 * @deprecated [version]
 	 *
 	 * @param array $attributes Optional. Block attributes. Default empty array.
 	 * @return void
 	 */
 	public function output( $attributes = array() ) {
+		llms_deprecated_function( __METHOD__, '[version]' );
 
 		$block_content = '';
 		$progress      = do_shortcode( '[lifterlms_course_progress check_enrollment=1]' );
@@ -75,12 +83,18 @@ class LLMS_Blocks_Course_Progress_Block extends LLMS_Blocks_Abstract_Block {
 		 * Filters the block html
 		 *
 		 * @since 1.9.0
+		 * @deprecated [version]
 		 *
-		 * @param string                            $block_content The block's html.
-		 * @param array                             $attributes    The block's array of attributes.
-		 * @param LLMS_Blocks_Course_Progress_Block $block         This block object.
+		 * @param string $block_content The block's html.
+		 * @param array  $attributes    The block's array of attributes.
+		 * @param self   $block         This block object.
 		 */
-		$block_content = apply_filters( 'llms_blocks_render_course_progress_block', $block_content, $attributes, $this );
+		$block_content = apply_filters_deprecated(
+			'llms_blocks_render_course_progress_block',
+			array( $block_content, $attributes, $this ),
+			'[version]',
+			'render_block_llms/course-progress'
+		);
 
 		if ( $block_content ) {
 			echo $block_content;
@@ -88,5 +102,3 @@ class LLMS_Blocks_Course_Progress_Block extends LLMS_Blocks_Abstract_Block {
 
 	}
 }
-
-return new LLMS_Blocks_Course_Progress_Block();
