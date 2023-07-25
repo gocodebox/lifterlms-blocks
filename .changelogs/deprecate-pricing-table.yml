@@ -1,0 +1,5 @@
+significance: minor
+type: deprecated
+links:
+  - "#197"
+entry: Deprecated course continue button, course progress and pricing table blocks.
