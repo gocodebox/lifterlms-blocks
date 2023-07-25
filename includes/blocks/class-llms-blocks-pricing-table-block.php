@@ -6,6 +6,7 @@
  *
  * @since 1.0.0
  * @version 1.9.0
+ * @deprecated [version]
  *
  * @render_hook llms_pricing-table-block_render
  */
@@ -13,11 +14,12 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Course syllabus block class
+ * Pricing Table block class.
  *
  * @since 1.0.0
  * @since 1.3.7 Unknown.
  * @since 1.9.0 Added `llms_blocks_render_pricing_table_block` filter.
+ * @deprecated [version]
  */
 class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 
@@ -40,12 +42,14 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 	 *
 	 * @since 1.0.0
 	 * @since 1.1.0 Unknown.
+	 * @deprecated [version]
 	 *
 	 * @param array  $attributes Optional. Block attributes. Default empty array.
 	 * @param string $content    Optional. Block content. Default empty string.
 	 * @return void
 	 */
 	public function add_hooks( $attributes = array(), $content = '' ) {
+		llms_deprecated_function( __METHOD__, '[version]' );
 
 		add_action( $this->get_render_hook(), array( $this, 'output' ), 10 );
 
@@ -58,10 +62,13 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 	 *
 	 * @since 1.0.0
 	 * @since 1.3.6 Unknown.
+	 * @deprecated [version]
 	 *
 	 * @return array
 	 */
 	public function get_attributes() {
+		llms_deprecated_function( __METHOD__, '[version]' );
+
 		return array_merge(
 			parent::get_attributes(),
 			array(
@@ -79,11 +86,13 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 	 * @since 1.0.0
 	 * @since 1.3.7 Unknown.
 	 * @since 1.9.0 Added `llms_blocks_render_pricing_table_block` filter.
+	 * @deprecated [version]
 	 *
 	 * @param array $attributes Optional. Block attributes. Default empty array.
 	 * @return void
 	 */
 	public function output( $attributes = array() ) {
+		llms_deprecated_function( __METHOD__, '[version]' );
 
 		ob_start();
 		if ( 'edit' === filter_input( INPUT_GET, 'context' ) ) {
@@ -95,7 +104,7 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 				}
 			}
 
-			// force display of the table on the admin panel.
+			// Force display of the table on the admin panel.
 			add_filter( 'llms_product_pricing_table_enrollment_status', '__return_false' );
 			add_filter( 'llms_product_is_purchasable', '__return_true' );
 
@@ -106,15 +115,21 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 		$block_content = ob_get_clean();
 
 		/**
-		 * Filters the block html
+		 * Filters the block html.
 		 *
 		 * @since 1.9.0
+		 * @deprecated [version]
 		 *
-		 * @param string                          $block_content The block's html.
-		 * @param array                           $attributes    The block's array of attributes.
-		 * @param LLMS_Blocks_Pricing_Table_Block $block         This block object.
+		 * @param string $block_content The block's html.
+		 * @param array  $attributes    The block's array of attributes.
+		 * @param self   $block         This block object.
 		 */
-		$block_content = apply_filters( 'llms_blocks_render_pricing_table_block', $block_content, $attributes, $this );
+		$block_content = apply_filters_deprecated(
+			'llms_blocks_pricing_table_block_render',
+			array( $block_content, $attributes, $this ),
+			'[version]',
+			'render_block_llms/pricing-table'
+		);
 
 		remove_filter( 'llms_product_pricing_table_enrollment_status', '__return_false' );
 		remove_filter( 'llms_product_is_purchasable', '__return_true' );
@@ -125,5 +140,3 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 
 	}
 }
-
-return new LLMS_Blocks_Pricing_Table_Block();
