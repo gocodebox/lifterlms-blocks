@@ -1,0 +1,5 @@
+significance: minor
+type: removed
+links:
+  - "#197"
+entry: Removed Course Continue block (moved to core plugin).

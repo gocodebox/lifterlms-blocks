@@ -2,4 +2,4 @@ significance: minor
 type: deprecated
 links:
   - "#197"
-entry: Deprecated course continue button, course progress and pricing table blocks.
+entry: Deprecated `LLMS_Blocks_Course_Progress_Block` and `LLMS_Blocks_Pricing_Table_Block`.
