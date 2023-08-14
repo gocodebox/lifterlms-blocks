@@ -163,8 +163,6 @@ class LLMS_Blocks_Migrate {
 			<?php endif; ?>
 
 <!-- wp:llms/course-continue-button -->
-<div class="wp-block-llms-course-continue-button" style="text-align:center">[lifterlms_course_continue_button]</div>
-<!-- /wp:llms/course-continue-button -->
 
 <!-- wp:llms/course-syllabus /-->
 			<?php
