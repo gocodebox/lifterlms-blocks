@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: LifterLMS Blocks 2.5.1\n"
+"Project-Id-Version: LifterLMS Blocks 2.5.2\n"
 "Report-Msgid-Bugs-To: https://lifterlms.com/my-account/my-tickets\n"
 "Last-Translator: Team LifterLMS <team@lifterlms.com>\n"
 "Language-Team: Team LifterLMS <team@lifterlms.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-06-13T14:50:27+00:00\n"
+"POT-Creation-Date: 2023-11-01T11:11:34+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: llms/dev 0.0.4-alpha.0\n"
 "X-Domain: lifterlms\n"
@@ -37,7 +37,7 @@ msgstr ""
 msgid "https://lifterlms.com/"
 msgstr ""
 
-#: includes/blocks/class-llms-blocks-course-information-block.php:48
+#: includes/blocks/class-llms-blocks-course-information-block.php:62
 #: assets/js/llms-blocks.js:3
 msgid "Course Information"
 msgstr ""
