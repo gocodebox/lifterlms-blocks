@@ -32,6 +32,20 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 	protected $is_dynamic = true;
 
 	/**
+	 * Displayed title of the block.
+	 *
+	 * @var string
+	 */
+	public $title;
+
+	/**
+	 * Size of the title.
+	 *
+	 * @var string
+	 */
+	public $title_size;
+
+	/**
 	 * Add actions attached to the render function action.
 	 *
 	 * @param   array  $attributes Optional. Block attributes. Default empty array.
