@@ -1,5 +1,0 @@
-significance: patch
-type: fixed
-links:
-  - "#169"
-entry: Fixed an issue when duplicating a LifterLMS preset form field.
