@@ -1,6 +1,18 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.5.2 - 2023-11-01
+-------------------
+
+##### Bug Fixes
+
++ Fixed an issue when duplicating a LifterLMS preset form field. [#169](https://github.com/gocodebox/lifterlms-blocks#169)
+
+##### Developer Notes
+
++ Improved compatibility with PHP 8.2.
+
+
 v2.5.1 - 2023-06-13
 -------------------
 
