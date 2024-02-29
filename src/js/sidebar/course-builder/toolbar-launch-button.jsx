@@ -44,9 +44,11 @@ export const addToolbarLaunchButton = () => {
 		button.style.marginLeft = '16px';
 		button.innerHTML = __( 'Launch Course Builder', 'lifterlms' );
 		button.addEventListener( 'click', ( event ) => {
-			event.preventDefault();
-			console.log('Element clicked!');
-			console.log('hasUnsaved: ', hasUnsavedChanges);
+			if (hasUnsavedChanges) {
+				event.preventDefault();
+
+				alert( __( 'You have unsaved changes. Please save your changes before launching the course builder.', 'lifterlms' ) );
+			}
 		} );
 
 		editPostHeaderToolbarLeft.appendChild( button );
