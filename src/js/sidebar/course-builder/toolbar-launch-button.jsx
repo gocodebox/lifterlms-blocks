@@ -5,7 +5,7 @@
  * @version 2.5.1
  */
 
-import { select } from '@wordpress/data';
+import { select, subscribe } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 const buttonId = 'llms-launch-course-builder-top-button';
@@ -18,6 +18,7 @@ const buttonId = 'llms-launch-course-builder-top-button';
  *               WordPress is installed in a subdirectory.
  */
 export const addToolbarLaunchButton = () => {
+	let hasUnsavedChanges = false;
 	const editPostHeaderToolbarLeft = document.getElementsByClassName(
 		'edit-post-header-toolbar__left'
 	)[ 0 ];
@@ -42,8 +43,23 @@ export const addToolbarLaunchButton = () => {
 		button.className = 'llms-button-primary';
 		button.style.marginLeft = '16px';
 		button.innerHTML = __( 'Launch Course Builder', 'lifterlms' );
+		button.addEventListener( 'click', ( event ) => {
+			event.preventDefault();
+			console.log('Element clicked!');
+			console.log('hasUnsaved: ', hasUnsavedChanges);
+		} );
 
 		editPostHeaderToolbarLeft.appendChild( button );
 	}, 1 );
+
+	subscribe(() => {
+		const postEdits = select('core/editor').getPostEdits();
+
+		if (Object.keys(postEdits).length) {
+			hasUnsavedChanges = true;
+		} else {
+			hasUnsavedChanges = false;
+		}
+	});
 };
 
