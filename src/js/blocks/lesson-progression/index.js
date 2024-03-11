@@ -77,18 +77,22 @@ export const settings = {
 		);
 
 		return (
+			<>
+			<div className="llms-lesson-button-wrapper">
 			<Fragment>
 				{ !! quiz && (
-					<Button className="llms-prog-btn--quiz" isPrimary>
-						{ __( 'Take Quiz', 'lifterlms' ) }
+					<Button className="llms-prog-btn--quiz llms-button-action auto button">
+						{__('Take Quiz', 'lifterlms')}
 					</Button>
 				) }
 				{ showMainBtn && (
-					<Button className="llms-prog-btn--complete" isPrimary>
-						{ __( 'Mark Complete', 'lifterlms' ) }
+					<Button className="llms-prog-btn--complete llms-field-button llms-button-primary auto button">
+						{__('Mark Complete', 'lifterlms')}
 					</Button>
 				) }
 			</Fragment>
+			</div>
+			</>
 		);
 	},
 
