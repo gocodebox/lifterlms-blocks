@@ -15,20 +15,17 @@ import {
 	unregisterBlockType,
 } from '@wordpress/blocks';
 import { store as editorStore } from '@wordpress/editor';
-import { doAction, applyFilters } from '@wordpress/hooks';
+import { applyFilters, doAction } from '@wordpress/hooks';
 import { select } from '@wordpress/data';
 
 // Internal Deps.
 import { getCurrentPostType } from '../util/';
 
 // Standard Blocks.
-import * as courseContinueButton from './course-continue-button/';
 import * as courseInfo from './course-information/';
-import * as courseProgress from './course-progress/';
 import * as instructors from './instructors/';
 import * as lessonNavigation from './lesson-navigation/';
 import * as lessonProgression from './lesson-progression/';
-import * as pricingTable from './pricing-table/';
 import * as phpTemplate from './php-template/';
 
 // Form Field Blocks.
@@ -125,13 +122,10 @@ export default () => {
 
 	// Blocks to register.
 	const blocks = [
-		courseContinueButton,
 		courseInfo,
-		courseProgress,
 		instructors,
 		lessonNavigation,
 		lessonProgression,
-		pricingTable,
 		phpTemplate,
 	];
 
