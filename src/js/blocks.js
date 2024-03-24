@@ -8,6 +8,9 @@
 // SCSS.
 import '../scss/blocks.scss';
 
+// Icon for Block Category.
+import LifterLMSIcon from './icons/lifterlms-icon';
+
 // Internal Deps.
 import './block-visibility/';
 import './dom-ready/';
@@ -29,3 +32,12 @@ window.llms.components = {
 	...components,
 	...Components,
 };
+
+/**
+ * Add our SVG icon to the LifterLMS blocks category.
+ *
+ * @since TBD
+ */
+( function() {
+	wp.blocks.updateCategory( 'llms-blocks', { icon: LifterLMSIcon } );
+} )();
