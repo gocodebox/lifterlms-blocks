@@ -48,7 +48,6 @@ class LLMS_Blocks_Post_Types {
 		add_filter( 'lifterlms_register_post_type_course', array( $this, 'add_course_template' ), 5 );
 		add_filter( 'lifterlms_register_post_type_membership', array( $this, 'add_membership_template' ), 5 );
 		add_filter( 'lifterlms_register_post_type_lesson', array( $this, 'add_lesson_template' ), 5 );
-
 	}
 
 	/**
@@ -67,7 +66,6 @@ class LLMS_Blocks_Post_Types {
 		}
 
 		return $data;
-
 	}
 
 	/**
@@ -96,7 +94,6 @@ class LLMS_Blocks_Post_Types {
 		);
 
 		return $post_type;
-
 	}
 
 	/**
@@ -122,7 +119,6 @@ class LLMS_Blocks_Post_Types {
 		);
 
 		return $post_type;
-
 	}
 
 	/**
@@ -147,9 +143,7 @@ class LLMS_Blocks_Post_Types {
 		);
 
 		return $post_type;
-
 	}
-
 }
 
 return new LLMS_Blocks_Post_Types();

@@ -36,7 +36,6 @@ class LLMS_Blocks_Migrate {
 		add_action( 'llms_blocks_unmigrate_posts', array( $this, 'unmigrate_posts' ) );
 
 		add_filter( 'llms_blocks_is_post_migrated', array( __CLASS__, 'check_sales_page' ), 15, 2 );
-
 	}
 
 	/**
@@ -57,7 +56,6 @@ class LLMS_Blocks_Migrate {
 		}
 
 		return false;
-
 	}
 
 	/**
@@ -81,7 +79,6 @@ class LLMS_Blocks_Migrate {
 		}
 
 		return $ret;
-
 	}
 
 	/**
@@ -127,7 +124,6 @@ class LLMS_Blocks_Migrate {
 				)
 			)
 		);
-
 	}
 
 	/**
@@ -195,7 +191,6 @@ class LLMS_Blocks_Migrate {
 		}
 
 		return '';
-
 	}
 
 	/**
@@ -246,7 +241,6 @@ class LLMS_Blocks_Migrate {
 			)
 		);
 		exit;
-
 	}
 
 	/**
@@ -278,7 +272,6 @@ class LLMS_Blocks_Migrate {
 		}
 
 		return false;
-
 	}
 
 	/**
@@ -322,7 +315,6 @@ class LLMS_Blocks_Migrate {
 		// Pricing Table.
 		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_pricing_table', 60 );
 		remove_action( 'lifterlms_single_membership_after_summary', 'lifterlms_template_pricing_table', 10 );
-
 	}
 
 	/**
@@ -363,7 +355,6 @@ class LLMS_Blocks_Migrate {
 		 * @param int  $post_id WP_Post ID.
 		 */
 		return apply_filters( 'llms_blocks_should_migrate_post', $ret, $post_id );
-
 	}
 
 	/**
@@ -382,7 +373,6 @@ class LLMS_Blocks_Migrate {
 				$this->remove_template_from_post( $post );
 			}
 		}
-
 	}
 
 	/**
@@ -423,9 +413,7 @@ class LLMS_Blocks_Migrate {
 		); // db no-cache okay.
 
 		return false === $update ? false : true;
-
 	}
-
 }
 
 global $llms_blocks_migrate;

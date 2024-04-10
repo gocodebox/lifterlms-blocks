@@ -23,7 +23,6 @@ class LLMS_Blocks_Post_Visibility {
 	public function __construct() {
 
 		add_action( 'init', array( $this, 'register_meta' ) );
-
 	}
 
 	/**
@@ -61,7 +60,6 @@ class LLMS_Blocks_Post_Visibility {
 			$ret = $obj->get_catalog_visibility();
 		}
 		return $ret;
-
 	}
 
 	/**
@@ -126,9 +124,7 @@ class LLMS_Blocks_Post_Visibility {
 			);
 
 		}
-
 	}
-
 }
 
 return new LLMS_Blocks_Post_Visibility();

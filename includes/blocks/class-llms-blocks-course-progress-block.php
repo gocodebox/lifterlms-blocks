@@ -43,7 +43,6 @@ class LLMS_Blocks_Course_Progress_Block extends LLMS_Blocks_Abstract_Block {
 	public function add_hooks( $attributes = array(), $content = '' ) {
 
 		add_action( $this->get_render_hook(), array( $this, 'output' ), 10 );
-
 	}
 
 	/**
@@ -85,7 +84,6 @@ class LLMS_Blocks_Course_Progress_Block extends LLMS_Blocks_Abstract_Block {
 		if ( $block_content ) {
 			echo $block_content;
 		}
-
 	}
 }
 

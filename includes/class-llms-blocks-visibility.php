@@ -84,7 +84,6 @@ class LLMS_Blocks_Visibility {
 		}
 
 		return $found;
-
 	}
 
 	/**
@@ -105,7 +104,6 @@ class LLMS_Blocks_Visibility {
 		}
 
 		return $ids;
-
 	}
 
 	/**
@@ -209,7 +207,6 @@ class LLMS_Blocks_Visibility {
 		 * @param array  $block   Block data array.
 		 */
 		return apply_filters( 'llms_blocks_visibility_render_block', $content, $block );
-
 	}
 
 	/**
@@ -258,9 +255,7 @@ class LLMS_Blocks_Visibility {
 		 * @param array   $block         Block data array.
 		 */
 		return apply_filters( 'llms_blocks_visibility_should_filter_block', $should_filter, $block );
-
 	}
-
 }
 
 return new LLMS_Blocks_Visibility();

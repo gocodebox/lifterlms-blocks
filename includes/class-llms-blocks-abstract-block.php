@@ -60,7 +60,6 @@ abstract class LLMS_Blocks_Abstract_Block {
 		}
 
 		$this->register_meta();
-
 	}
 
 	/**
@@ -158,7 +157,6 @@ abstract class LLMS_Blocks_Abstract_Block {
 		}
 
 		return $ret;
-
 	}
 
 	/**
@@ -171,5 +169,4 @@ abstract class LLMS_Blocks_Abstract_Block {
 	 * @version 1.0.0
 	 */
 	public function register_meta() {}
-
 }

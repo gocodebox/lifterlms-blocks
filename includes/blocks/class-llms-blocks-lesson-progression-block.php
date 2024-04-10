@@ -49,7 +49,6 @@ class LLMS_Blocks_Lesson_Progression_Block extends LLMS_Blocks_Abstract_Block {
 	public function add_hooks( $attributes = array(), $content = '' ) {
 
 		add_action( $this->get_render_hook(), 'lifterlms_template_complete_lesson_link', 10 );
-
 	}
 
 	/**
@@ -112,9 +111,7 @@ class LLMS_Blocks_Lesson_Progression_Block extends LLMS_Blocks_Abstract_Block {
 				'show_in_rest'      => true,
 			)
 		);
-
 	}
-
 }
 
 return new LLMS_Blocks_Lesson_Progression_Block();

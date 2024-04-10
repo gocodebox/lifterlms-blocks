@@ -38,7 +38,6 @@ class LLMS_Blocks_Post_Instructors {
 		add_action( 'init', array( $this, 'register_meta' ) );
 		add_action( 'save_post_course', array( $this, 'maybe_set_default_instructor' ), 50, 3 );
 		add_action( 'save_post_llms_membership', array( $this, 'maybe_set_default_instructor' ), 50, 3 );
-
 	}
 
 	/**
@@ -84,7 +83,6 @@ class LLMS_Blocks_Post_Instructors {
 			}
 		}
 		return $ret;
-
 	}
 
 	/**
@@ -114,7 +112,6 @@ class LLMS_Blocks_Post_Instructors {
 		$obj->instructors()->set_instructors( array( array( 'id' => $post->post_author ) ) );
 
 		return true;
-
 	}
 
 	/**
@@ -176,9 +173,7 @@ class LLMS_Blocks_Post_Instructors {
 			);
 
 		}
-
 	}
-
 }
 
 return new LLMS_Blocks_Post_Instructors();

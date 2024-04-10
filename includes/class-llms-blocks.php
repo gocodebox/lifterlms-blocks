@@ -39,7 +39,6 @@ class LLMS_Blocks {
 	public function __construct() {
 
 		add_action( 'plugins_loaded', array( $this, 'init' ) );
-
 	}
 
 	/**
@@ -100,7 +99,6 @@ class LLMS_Blocks {
 		}
 
 		echo '<script>window.llms.dynamic_blocks = ' . wp_json_encode( $this->get_dynamic_block_names() ) . ';</script>';
-
 	}
 
 	/**
@@ -156,7 +154,6 @@ class LLMS_Blocks {
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-lesson-progression-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-pricing-table-block.php';
 		require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/blocks/class-llms-blocks-php-template-block.php';
-
 	}
 
 	/**
@@ -196,7 +193,6 @@ class LLMS_Blocks {
 		if ( ! defined( 'LLMS_BLOCKS_LIB' ) || ! LLMS_BLOCKS_LIB ) {
 			add_action( 'init', array( $this, 'load_textdomain' ), 0 );
 		}
-
 	}
 
 	/**
@@ -233,7 +229,6 @@ class LLMS_Blocks {
 
 		// Load from the plugin's language file directory.
 		load_textdomain( 'lifterlms', LLMS_BLOCKS_PLUGIN_DIR . '/i18n/lifterlms-blocks-' . $locale . '.mo' );
-
 	}
 
 	/**
@@ -254,9 +249,7 @@ class LLMS_Blocks {
 			remove_meta_box( 'llms-instructors', 'llms_membership', 'normal' );
 
 		}
-
 	}
-
 }
 
 return new LLMS_Blocks();

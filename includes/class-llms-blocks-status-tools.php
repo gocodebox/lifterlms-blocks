@@ -30,7 +30,6 @@ class LLMS_Blocks_Status_Tools {
 			add_action( 'llms_status_tool', array( $this, 'maybe_toggle_mode' ) );
 
 		}
-
 	}
 
 	/**
@@ -62,7 +61,6 @@ class LLMS_Blocks_Status_Tools {
 		}
 
 		return $tools;
-
 	}
 
 	/**
@@ -80,9 +78,7 @@ class LLMS_Blocks_Status_Tools {
 		}
 
 		do_action( 'llms_blocks_unmigrate_posts' );
-
 	}
-
 }
 
 return new LLMS_Blocks_Status_Tools();

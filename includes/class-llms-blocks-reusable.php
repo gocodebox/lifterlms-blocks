@@ -28,7 +28,6 @@ class LLMS_Blocks_Reusable {
 
 		add_action( 'rest_api_init', array( $this, 'rest_register_fields' ) );
 		add_filter( 'rest_wp_block_query', array( $this, 'mod_wp_block_query' ), 20, 2 );
-
 	}
 
 	/**
@@ -76,7 +75,6 @@ class LLMS_Blocks_Reusable {
 				'update_callback' => array( $this, 'rest_callback_update' ),
 			)
 		);
-
 	}
 
 	/**
@@ -120,7 +118,6 @@ class LLMS_Blocks_Reusable {
 		$args['meta_query'][] = $this->get_meta_query( $include_fields );
 
 		return $args;
-
 	}
 
 	/**
@@ -133,7 +130,7 @@ class LLMS_Blocks_Reusable {
 	 */
 	private function get_meta_query( $include_fields ) {
 
-		// Default 	query when including fields.
+		// Default  query when including fields.
 		$meta_query = array(
 			'key'   => '_is_llms_field',
 			'value' => 'yes',
@@ -158,7 +155,6 @@ class LLMS_Blocks_Reusable {
 		}
 
 		return $meta_query;
-
 	}
 
 	/**
@@ -192,9 +188,7 @@ class LLMS_Blocks_Reusable {
 
 		// Block editor for a WP_Post.
 		return get_post_type( $query_args['post'] );
-
 	}
-
 }
 
 return new LLMS_Blocks_Reusable();

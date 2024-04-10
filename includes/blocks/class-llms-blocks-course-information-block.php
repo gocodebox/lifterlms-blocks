@@ -108,7 +108,6 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 			add_action( $this->get_render_hook(), 'lifterlms_template_single_meta_wrapper_end', 50 );
 
 		}
-
 	}
 
 	/**
@@ -158,7 +157,6 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 				'show_in_rest'      => true,
 			)
 		);
-
 	}
 
 	/**
@@ -177,7 +175,6 @@ class LLMS_Blocks_Course_Information_Block extends LLMS_Blocks_Abstract_Block {
 	public function meta_auth_callback( $allowed, $meta_key, $object_id, $user_id, $cap, $caps ) {
 		return true;
 	}
-
 }
 
 return new LLMS_Blocks_Course_Information_Block();

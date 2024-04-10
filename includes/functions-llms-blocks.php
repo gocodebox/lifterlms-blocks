@@ -41,7 +41,6 @@ function llms_blocks_is_classic_enabled_for_post( $post ) {
 	}
 
 	return apply_filters( 'llms_blocks_is_classic_enabled_for_post', $ret, $post );
-
 }
 
 /**
@@ -71,5 +70,4 @@ function llms_blocks_is_post_migrated( $post ) {
 	}
 
 	return apply_filters( 'llms_blocks_is_post_migrated', $ret, $post_id );
-
 }

@@ -23,7 +23,6 @@ class LLMS_Blocks_Page_Builders {
 	public static function init() {
 
 		add_action( 'init', array( __CLASS__, 'add_filters' ) );
-
 	}
 
 	/**
@@ -43,7 +42,6 @@ class LLMS_Blocks_Page_Builders {
 			add_filter( 'llms_blocks_is_classic_enabled_for_post', array( __CLASS__, 'check_for_divi_classic' ), 15, 2 );
 			add_filter( 'llms_blocks_is_post_migrated', array( __CLASS__, 'check_for_divi' ), 15, 2 );
 		}
-
 	}
 
 	/**
@@ -64,7 +62,6 @@ class LLMS_Blocks_Page_Builders {
 		}
 
 		return $val;
-
 	}
 
 	/**
@@ -85,7 +82,6 @@ class LLMS_Blocks_Page_Builders {
 		}
 
 		return $val;
-
 	}
 
 	/**
@@ -106,7 +102,6 @@ class LLMS_Blocks_Page_Builders {
 		}
 
 		return $val;
-
 	}
 
 	/**
@@ -125,9 +120,7 @@ class LLMS_Blocks_Page_Builders {
 		}
 
 		return $val;
-
 	}
-
 }
 
 return LLMS_Blocks_Page_Builders::init();

@@ -63,7 +63,6 @@ class LLMS_Blocks_Assets {
 
 		// Enqueue editor assets.
 		add_action( 'enqueue_block_editor_assets', array( $this, 'editor_assets' ), 5 );
-
 	}
 
 	/**
@@ -98,7 +97,6 @@ class LLMS_Blocks_Assets {
 				),
 			)
 		);
-
 	}
 
 	/**
@@ -126,7 +124,6 @@ class LLMS_Blocks_Assets {
 				),
 			)
 		);
-
 	}
 
 	/**
@@ -166,7 +163,6 @@ class LLMS_Blocks_Assets {
 				'courseId'                 => self::get_course_id(),
 			)
 		);
-
 	}
 
 	/**
@@ -232,7 +228,6 @@ class LLMS_Blocks_Assets {
 
 		return $post_id;
 	}
-
 }
 
 return new LLMS_Blocks_Assets();
