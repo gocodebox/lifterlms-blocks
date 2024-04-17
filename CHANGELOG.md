@@ -1,6 +1,18 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.5.3 - 2024-04-17
+-------------------
+
+##### New Features
+
++ Added LifterLMS icon to LifterLMS Blocks block category.
+
+##### Bug Fixes
+
++ Fixed Lesson Progression (Mark Complete) button appearance in editor.
+
+
 v2.5.2 - 2023-11-01
 -------------------
 
