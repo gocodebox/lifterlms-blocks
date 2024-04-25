@@ -1,6 +1,14 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.5.4 - 2024-04-25
+-------------------
+
+##### Bug Fixes
+
++ Re-adds the Launch Course Builder button to the top of the Course Edit page. [#220](https://github.com/gocodebox/lifterlms-blocks/issues/220)
+
+
 v2.5.3 - 2024-04-17
 -------------------
 
