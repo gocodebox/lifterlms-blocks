@@ -279,14 +279,20 @@ class LLMS_Blocks_Migrate {
 	}
 
 	/**
-	 * Removes core template action hooks from posts which have been migrated to the block editor
+	 * Removes core template action hooks from posts which have been migrated to the block editor,
+	 * or have been migrated into an Elementor edited course.
 	 *
 	 * @since 1.3.2 Unknown.
+	 * @since [version] Added check for Elementor.
 	 *
 	 * @return void
 	 * @since 1.1.0
 	 */
 	public function remove_template_hooks() {
+
+		if ( llms_is_elementor_post() ) {
+			return;
+		}
 
 		if ( ! llms_blocks_is_post_migrated( get_the_ID() ) ) {
 			return;
