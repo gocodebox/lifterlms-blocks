@@ -222,119 +222,133 @@ class LLMS_Blocks_Migrate {
 			}
 
 			$content = get_post_meta( $post_id, '_elementor_data', true );
-			if ( $content ) {
-				$content = json_decode( $content, true );
-				if ( ! is_array( $content ) ) {
-					return;
-				}
-
-				$content[] = array(
-					'id'       => uniqid(),
-					'elType'   => 'container',
-					'settings' => array(),
-					'elements' => array(
-						array(
-							'id'         => uniqid(),
-							'elType'     => 'widget',
-							'settings'   => array(
-								'title'       => esc_attr__( 'Course Information', 'lifterlms' ),
-								'header_size' => 'h3',
-							),
-							'elements'   => array(),
-							'widgetType' => 'heading',
-						),
-					),
-					'isInner'  => false,
-				);
-				$content[] = array(
-					'id'       => uniqid(),
-					'elType'   => 'container',
-					'settings' => array(),
-					'elements' => array(
-						array(
-							'id'         => uniqid(),
-							'elType'     => 'widget',
-							'settings'   => array(
-								'shortcode' => '[lifterlms_course_meta_info]',
-							),
-							'elements'   => array(),
-							'widgetType' => 'shortcode',
-						),
-					),
-					'isInner'  => false,
-				);
-				$content[] = array(
-					'id'       => uniqid(),
-					'elType'   => 'container',
-					'settings' => array(),
-					'elements' => array(
-						array(
-							'id'         => uniqid(),
-							'elType'     => 'widget',
-							'settings'   => array(
-								'shortcode' => '[lifterlms_course_author]',
-							),
-							'elements'   => array(),
-							'widgetType' => 'shortcode',
-						),
-					),
-					'isInner'  => false,
-				);
-				$content[] = array(
-					'id'       => uniqid(),
-					'elType'   => 'container',
-					'settings' => array(),
-					'elements' => array(
-						array(
-							'id'         => uniqid(),
-							'elType'     => 'widget',
-							'settings'   => array(
-								'shortcode' => '[lifterlms_pricing_table]',
-							),
-							'elements'   => array(),
-							'widgetType' => 'shortcode',
-						),
-					),
-					'isInner'  => false,
-				);
-				$content[] = array(
-					'id'       => uniqid(),
-					'elType'   => 'container',
-					'settings' => array(),
-					'elements' => array(
-						array(
-							'id'         => uniqid(),
-							'elType'     => 'widget',
-							'settings'   => array(
-								'shortcode' => '[lifterlms_course_progress]',
-							),
-							'elements'   => array(),
-							'widgetType' => 'shortcode',
-						),
-					),
-					'isInner'  => false,
-				);
-				$content[] = array(
-					'id'       => uniqid(),
-					'elType'   => 'container',
-					'settings' => array(),
-					'elements' => array(
-						array(
-							'id'         => uniqid(),
-							'elType'     => 'widget',
-							'settings'   => array(
-								'shortcode' => '[lifterlms_course_continue_button]',
-							),
-							'elements'   => array(),
-							'widgetType' => 'shortcode',
-						),
-					),
-					'isInner'  => false,
-				);
-
-				update_post_meta( $post_id, '_elementor_data', trim( wp_json_encode( $content ), '"' ) );
-				update_post_meta( $post_id, '_llms_elementor_migrated', 'yes' );
+			if ( ! is_array( $content ) ) {
+				return;
 			}
+
+			$content[] = array(
+				'id'       => uniqid(),
+				'elType'   => 'container',
+				'settings' => array(),
+				'elements' => array(
+					array(
+						'id'         => uniqid(),
+						'elType'     => 'widget',
+						'settings'   => array(
+							'title'       => esc_attr__( 'Course Information', 'lifterlms' ),
+							'header_size' => 'h3',
+						),
+						'elements'   => array(),
+						'widgetType' => 'heading',
+					),
+				),
+				'isInner'  => false,
+			);
+			$content[] = array(
+				'id'       => uniqid(),
+				'elType'   => 'container',
+				'settings' => array(),
+				'elements' => array(
+					array(
+						'id'         => uniqid(),
+						'elType'     => 'widget',
+						'settings'   => array(
+							'shortcode' => '[lifterlms_course_meta_info]',
+						),
+						'elements'   => array(),
+						'widgetType' => 'shortcode',
+					),
+				),
+				'isInner'  => false,
+			);
+			$content[] = array(
+				'id'       => uniqid(),
+				'elType'   => 'container',
+				'settings' => array(),
+				'elements' => array(
+					array(
+						'id'         => uniqid(),
+						'elType'     => 'widget',
+						'settings'   => array(
+							'shortcode' => '[lifterlms_course_author]',
+						),
+						'elements'   => array(),
+						'widgetType' => 'shortcode',
+					),
+				),
+				'isInner'  => false,
+			);
+			$content[] = array(
+				'id'       => uniqid(),
+				'elType'   => 'container',
+				'settings' => array(),
+				'elements' => array(
+					array(
+						'id'         => uniqid(),
+						'elType'     => 'widget',
+						'settings'   => array(
+							'shortcode' => '[lifterlms_pricing_table]',
+						),
+						'elements'   => array(),
+						'widgetType' => 'shortcode',
+					),
+				),
+				'isInner'  => false,
+			);
+			$content[] = array(
+				'id'       => uniqid(),
+				'elType'   => 'container',
+				'settings' => array(),
+				'elements' => array(
+					array(
+						'id'         => uniqid(),
+						'elType'     => 'widget',
+						'settings'   => array(
+							'shortcode' => '[lifterlms_course_progress]',
+						),
+						'elements'   => array(),
+						'widgetType' => 'shortcode',
+					),
+				),
+				'isInner'  => false,
+			);
+			$content[] = array(
+				'id'       => uniqid(),
+				'elType'   => 'container',
+				'settings' => array(),
+				'elements' => array(
+					array(
+						'id'         => uniqid(),
+						'elType'     => 'widget',
+						'settings'   => array(
+							'shortcode' => '[lifterlms_course_continue_button]',
+						),
+						'elements'   => array(),
+						'widgetType' => 'shortcode',
+					),
+				),
+				'isInner'  => false,
+			);
+			$content[] = array(
+				'id'       => uniqid(),
+				'elType'   => 'container',
+				'settings' => array(),
+				'elements' => array(
+					array(
+						'id'         => uniqid(),
+						'elType'     => 'widget',
+						'settings'   => array(
+							'shortcode' => '[lifterlms_course_syllabus]',
+						),
+						'elements'   => array(),
+						'widgetType' => 'shortcode',
+					),
+				),
+				'isInner'  => false,
+			);
+
+			update_post_meta( $post_id, '_elementor_data', trim( wp_json_encode( $content ), '"' ) );
+			update_post_meta( $post_id, '_llms_elementor_migrated', 'yes' );
 			return;
 		}
 
