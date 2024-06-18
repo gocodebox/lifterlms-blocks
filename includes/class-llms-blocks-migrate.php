@@ -290,11 +290,7 @@ class LLMS_Blocks_Migrate {
 	 */
 	public function remove_template_hooks() {
 
-		if ( llms_is_elementor_post() ) {
-			return;
-		}
-
-		if ( ! llms_blocks_is_post_migrated( get_the_ID() ) ) {
+		if ( ! llms_blocks_is_post_migrated( get_the_ID() ) && ( ! function_exists( 'llms_is_elementor_post' ) || ! llms_is_elementor_post() ) ) {
 			return;
 		}
 
