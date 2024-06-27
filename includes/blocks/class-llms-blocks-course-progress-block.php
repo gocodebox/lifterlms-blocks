@@ -43,7 +43,6 @@ class LLMS_Blocks_Course_Progress_Block extends LLMS_Blocks_Abstract_Block {
 	public function add_hooks( $attributes = array(), $content = '' ) {
 
 		add_action( $this->get_render_hook(), array( $this, 'output' ), 10 );
-
 	}
 
 	/**
@@ -83,9 +82,8 @@ class LLMS_Blocks_Course_Progress_Block extends LLMS_Blocks_Abstract_Block {
 		$block_content = apply_filters( 'llms_blocks_render_course_progress_block', $block_content, $attributes, $this );
 
 		if ( $block_content ) {
-			echo $block_content;
+			echo wp_kses_post( $block_content );
 		}
-
 	}
 }
 
