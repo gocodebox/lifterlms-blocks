@@ -63,7 +63,6 @@ class LLMS_Blocks_PHP_Template_Block extends LLMS_Blocks_Abstract_Block {
 	public function add_hooks( $attributes = array(), $content = '' ) {
 
 		add_action( $this->get_render_hook(), array( $this, 'output' ), 10 );
-
 	}
 
 	/**
@@ -134,11 +133,9 @@ class LLMS_Blocks_PHP_Template_Block extends LLMS_Blocks_Abstract_Block {
 		$block_content = apply_filters( 'llms_blocks_render_php_template_block', $block_content, $attributes, $templates[ $attributes['template'] ], $this );
 
 		if ( $block_content ) {
-			echo $block_content;
+			echo wp_kses_post( $block_content );
 		}
-
 	}
-
 }
 
 return new LLMS_Blocks_PHP_Template_Block();
