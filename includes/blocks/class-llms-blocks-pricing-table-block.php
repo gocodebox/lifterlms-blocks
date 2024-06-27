@@ -90,7 +90,7 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 			if ( $id ) {
 				$product = new LLMS_Product( $id );
 				if ( ! $product->get_access_plans() ) {
-					echo '<p>' . __( 'No access plans found.', 'lifterlms' ) . '</p>';
+					echo '<p>' . esc_html__( 'No access plans found.', 'lifterlms' ) . '</p>';
 				}
 			}
 
