@@ -119,7 +119,7 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 		remove_filter( 'llms_product_is_purchasable', '__return_true' );
 
 		if ( $block_content ) {
-			echo wp_kses_post( $block_content );
+			echo wp_kses( $block_content, LLMS_ALLOWED_HTML_FORM_FIELDS );
 		}
 	}
 }
