@@ -1,6 +1,14 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.5.6 - 2024-07-30
+-------------------
+
+##### Bug Fixes
+
++ Avoids breaking the output of certain blocks that contain forms.
+
+
 v2.5.5 - 2024-07-09
 -------------------
 

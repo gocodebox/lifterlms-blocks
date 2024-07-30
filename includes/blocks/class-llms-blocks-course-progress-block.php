@@ -82,7 +82,7 @@ class LLMS_Blocks_Course_Progress_Block extends LLMS_Blocks_Abstract_Block {
 		$block_content = apply_filters( 'llms_blocks_render_course_progress_block', $block_content, $attributes, $this );
 
 		if ( $block_content ) {
-			echo wp_kses_post( $block_content );
+			echo wp_kses( $block_content, LLMS_ALLOWED_HTML_FORM_FIELDS );
 		}
 	}
 }
