@@ -3,5 +3,7 @@ node_modules
 tmp
 vendor
 assets/**/*.map
+assets/js/llms-blocks*
+i18n/*
 composer.lock
 
