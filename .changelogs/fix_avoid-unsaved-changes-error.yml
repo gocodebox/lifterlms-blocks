@@ -1,0 +1,5 @@
+significance: patch
+type: fixed
+links:
+  - "#232"
+entry: Avoid an unsaved error prompt after saving the details of an access plan.
