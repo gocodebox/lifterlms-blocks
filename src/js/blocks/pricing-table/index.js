@@ -13,9 +13,8 @@
 import $ from 'jquery';
 
 // WP deps.
-import { createBlock } from '@wordpress/blocks';
-import { dispatch, select } from '@wordpress/data';
-import { Fragment } from '@wordpress/element';
+import { select } from '@wordpress/data';
+import { Fragment, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import ServerSideRender from '@wordpress/server-side-render';
 
@@ -77,20 +76,15 @@ export const settings = {
 	edit: ( props ) => {
 		const { attributes } = props;
 
+		const [refreshKey, setRefreshKey] = useState(0); // Add useState here
+
+
 		// Reload when changes are made to access plans.
 		$( document ).one( 'llms-access-plans-updated', function () {
-			// Replacing the block with a duplicate of itself so we can reload the block from the server.
-			dispatch( 'core/editor' ).replaceBlock(
-				props.clientId,
-				createBlock( name )
-			);
 
-			// This will save the updates to the post content that appear as a result of the replacement.
-			// Since I can't seem to figure out how to prevent the change from being triggered we have to duplicate a save.
-			// which is gross. I know it's gross. It works though....
-			setTimeout( function () {
-				dispatch( 'core/editor' ).savePost();
-			}, 500 );
+			// Update a key tracked internally (vs attributes) to force a re-render of the block without a save prompt on refresh.
+			setRefreshKey( ( prevKey ) => prevKey + 1 );
+
 		} );
 
 		return (
@@ -101,6 +95,7 @@ export const settings = {
 					urlQueryArgs={ {
 						post_id: select( 'core/editor' ).getCurrentPostId(),
 					} }
+					key={ refreshKey }
 				/>
 			</Fragment>
 		);
