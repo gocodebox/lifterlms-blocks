@@ -1,6 +1,14 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.5.8 - 2024-09-13
+-------------------
+
+##### Bug Fixes
+
++ Avoid an unsaved error prompt after saving the details of an access plan. [#232](https://github.com/gocodebox/lifterlms-blocks/issues/232)
+
+
 v2.5.7 - 2024-08-09
 -------------------
 
