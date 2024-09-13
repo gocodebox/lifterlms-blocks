@@ -25,7 +25,7 @@ export const addToolbarLaunchButton = () => {
 	if ( ! editPostHeaderToolbarLeft ) {
 		// Post WP 6.5 area
 		editPostHeaderToolbarLeft = document.getElementsByClassName(
-			'editor-document-tools__left'
+			'edit-post-header-toolbar'
 		)[ 0 ];
 	}
 
@@ -42,6 +42,8 @@ export const addToolbarLaunchButton = () => {
 			return;
 		}
 
+		const buttonDiv = document.createElement( 'div' );
+
 		const button = document.createElement( 'a' );
 
 		button.id = buttonId;
@@ -50,7 +52,9 @@ export const addToolbarLaunchButton = () => {
 		button.style.marginLeft = '16px';
 		button.innerHTML = __( 'Launch Course Builder', 'lifterlms' );
 
-		editPostHeaderToolbarLeft.appendChild( button );
+		buttonDiv.appendChild( button );
+
+		editPostHeaderToolbarLeft.appendChild( buttonDiv );
 	}, 1 );
 };
 
