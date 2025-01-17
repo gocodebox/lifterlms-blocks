@@ -1,6 +1,18 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.5.9 - 2025-01-17
+-------------------
+
+##### Updates and Enhancements
+
++ Changing default heading for Course Information block for accessibility.
+
+##### Bug Fixes
+
++ Fixes unchecking the "Confirmation Field" toggle on a Password block. [#243](https://github.com/gocodebox/lifterlms-blocks/issues/243)
+
+
 v2.5.8 - 2024-09-13
 -------------------
 
