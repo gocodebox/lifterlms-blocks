@@ -56,7 +56,7 @@ export const settings = {
 		},
 		title_size: {
 			type: 'string',
-			default: 'h3',
+			default: 'h2',
 		},
 		length: {
 			type: 'string',
