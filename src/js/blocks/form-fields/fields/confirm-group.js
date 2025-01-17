@@ -234,13 +234,18 @@ allowed.forEach( ( blockName ) => {
 		type: 'block',
 		blocks: [ blockName ],
 		isMatch: () => {
-			const { getSelectedBlock } = select( blockEditorStore ),
-				{ innerBlocks } = getSelectedBlock(),
-				controllerBlock =
-					innerBlocks[ findControllerBlockIndex( innerBlocks ) ],
-				{ name } = controllerBlock || {};
+			const { getSelectedBlock, getBlockParentsByBlockName } = select( blockEditorStore ),
+            selectedBlock = getSelectedBlock();
 
-			return name === blockName;
+			// Case 1: Confirm group itself is selected.
+			if (selectedBlock.name === name) {
+				const controllerBlock = selectedBlock.innerBlocks[findControllerBlockIndex(selectedBlock.innerBlocks)];
+				return controllerBlock?.name === blockName;
+			}
+
+			// Case 2: Inner block is selected.
+			const confirmGroupParents = getBlockParentsByBlockName(selectedBlock.clientId, name);
+			return confirmGroupParents.length > 0 && selectedBlock.name === blockName;
 		},
 		transform: ( groupAttributes, innerBlocks ) => {
 			const { llms_visibility } = groupAttributes,
