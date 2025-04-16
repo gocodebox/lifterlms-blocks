@@ -1,0 +1,4 @@
+significance: patch
+type: fixed
+entry: Hide gutenberg lifterlms blocks from rendering if the post or page was
+  edited using Elementor.
