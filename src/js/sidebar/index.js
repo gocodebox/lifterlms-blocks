@@ -47,7 +47,6 @@ const Sidebar = () => {
 		</PluginSidebarMoreMenuItem>
 		<PluginSidebar name="llms-sidebar" title="LifterLMS">
 			{ [ 'course', 'lesson' ].includes( postType ) && <CourseBuilderPanel /> }
-			{ [ 'course', 'llms_membership' ].includes( postType ) && <Instructors /> }
 		</PluginSidebar>
 	</>;
 };
