@@ -40,41 +40,6 @@ export const name = 'llms/course-information';
 export const postTypes = [ 'course' ];
 
 /**
- * Refresh the post entity after a legacy meta-box save.
- */
-function useRefreshAfterMetaboxSave() {
-	const metaSaving = useSelect(
-		( select ) => select( 'core/edit-post' ).isSavingMetaBoxes(),
-		[]
-	);
-
-	const { invalidateResolution } = useDispatch( 'core' );
-
-	const postType = useSelect(
-		( select ) => select( 'core/editor' ).getCurrentPostType(),
-		[]
-	);
-	const postId = useSelect(
-		( select ) => select( 'core/editor' ).getCurrentPostId(),
-		[]
-	);
-
-	// remember previous value so we can detect the "falling edge".
-	const wasSavingRef = useRef( metaSaving );
-
-	useEffect( () => {
-		if ( wasSavingRef.current && ! metaSaving ) {
-			// legacy save just finished → bust the cache, forcing a fresh REST fetch.
-			invalidateResolution(
-				'getEntityRecord',
-				[ 'postType', postType, postId ]
-			);
-		}
-		wasSavingRef.current = metaSaving;
-	}, [ metaSaving, invalidateResolution, postType, postId ] );
-}
-
-/**
  * Register: Course Information Block
  *
  * @since 2.5.0 Update icon color to `currentColor`.
@@ -138,8 +103,6 @@ export const settings = {
 	 * @return {Fragment} Component HTML Fragment.
 	 */
 	edit: ( props ) => {
-		useRefreshAfterMetaboxSave();
-
 		const [ meta ] = useEntityProp( 'postType', 'course', 'meta' );
 		const length = meta?._llms_length || '';
 
