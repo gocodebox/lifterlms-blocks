@@ -73,11 +73,11 @@ export const settings = {
 	],
 	attributes: {
 		post_id: {
-			type: 'int',
+			type: 'integer',
 			default: 0,
 		},
 		_refresh: {
-			type: 'int',
+			type: 'integer',
 			default: 0,
 		}
 	},
