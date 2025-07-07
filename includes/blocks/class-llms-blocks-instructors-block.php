@@ -76,11 +76,11 @@ class LLMS_Blocks_Instructors_Block extends LLMS_Blocks_Abstract_Block {
 			parent::get_attributes(),
 			array(
 				'post_id'  => array(
-					'type'    => 'int',
+					'type'    => 'integer',
 					'default' => 0,
 				),
 				'_refresh' => array(
-					'type'    => 'int',
+					'type'    => 'integer',
 					'default' => 0,
 				),
 			)
