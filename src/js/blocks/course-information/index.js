@@ -18,8 +18,6 @@ import PreviewTerms from './preview-terms';
 import { RichText } from '@wordpress/block-editor';
 import { Fragment } from '@wordpress/element';
 import { useEntityProp } from '@wordpress/core-data';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useEffect, useRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 // Internal dependencies.
