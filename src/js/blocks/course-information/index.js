@@ -17,6 +17,7 @@ import PreviewTerms from './preview-terms';
 // External Deps.
 import { RichText } from '@wordpress/block-editor';
 import { Fragment } from '@wordpress/element';
+import { useEntityProp } from '@wordpress/core-data';
 import { __ } from '@wordpress/i18n';
 
 // Internal dependencies.
@@ -100,9 +101,11 @@ export const settings = {
 	 * @return {Fragment} Component HTML Fragment.
 	 */
 	edit: ( props ) => {
+		const [ meta ] = useEntityProp( 'postType', 'course', 'meta' );
+		const length = meta?._llms_length || '';
+
 		const { attributes, setAttributes } = props;
 		const {
-			length,
 			show_cats,
 			show_difficulty,
 			show_length,

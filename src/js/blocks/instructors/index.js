@@ -17,6 +17,8 @@ import icon from '../../icons/person-chalkboard';
 import edit from './edit';
 import './editor.scss';
 
+import { subscribe, select, dispatch } from '@wordpress/data';
+
 /**
  * Block Name
  *
@@ -31,6 +33,27 @@ export const name = 'llms/instructors';
  */
 export const postTypes = [ 'course', 'llms_membership' ];
 
+let wasSaving = false;
+
+subscribe( () => {
+	const isSaving = select( 'core/edit-post' ).isSavingMetaBoxes();
+
+	if ( wasSaving && ! isSaving ) {
+		wasSaving = isSaving;
+
+		select( 'core/block-editor' )
+			.getBlocks()
+			.filter( ( b ) => b.name === name )
+			.forEach( ( b ) =>
+				dispatch( 'core/block-editor' ).updateBlockAttributes(
+					b.clientId,
+					{ _refresh: Date.now() }
+				)
+			);
+	} else {
+		wasSaving = isSaving;
+	}
+} );
 /**
  * Register Block.
  *
@@ -50,9 +73,13 @@ export const settings = {
 	],
 	attributes: {
 		post_id: {
-			type: 'int',
+			type: 'integer',
 			default: 0,
 		},
+		_refresh: {
+			type: 'integer',
+			default: 0,
+		}
 	},
 
 	edit,

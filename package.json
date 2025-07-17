@@ -1,6 +1,6 @@
 {
   "name": "lifterlms-blocks",
-  "version": "2.5.9",
+  "version": "2.6.0",
   "description": "blocks",
   "author": "LifterLMS",
   "homepage": "https://lifterlms.com/",
@@ -22,7 +22,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@lifterlms/dev": "^0.0.4-alpha.0",
+    "@lifterlms/dev": "^0.2.2",
     "@lifterlms/llms-e2e-test-utils": "^4.0.0",
     "@lifterlms/scripts": "^3.1.0",
     "jest": "^27.4.5",
