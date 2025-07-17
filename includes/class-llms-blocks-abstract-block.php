@@ -60,7 +60,6 @@ abstract class LLMS_Blocks_Abstract_Block {
 		}
 
 		$this->register_meta();
-
 	}
 
 	/**
@@ -145,6 +144,10 @@ abstract class LLMS_Blocks_Abstract_Block {
 	 */
 	public function render_callback( $attributes = array(), $content = '' ) {
 
+		if ( ! apply_filters( 'llms_render_block', true, $this ) ) {
+			return '';
+		}
+
 		$this->add_hooks( $attributes, $content );
 
 		ob_start();
@@ -158,7 +161,6 @@ abstract class LLMS_Blocks_Abstract_Block {
 		}
 
 		return $ret;
-
 	}
 
 	/**
@@ -171,5 +173,4 @@ abstract class LLMS_Blocks_Abstract_Block {
 	 * @version 1.0.0
 	 */
 	public function register_meta() {}
-
 }

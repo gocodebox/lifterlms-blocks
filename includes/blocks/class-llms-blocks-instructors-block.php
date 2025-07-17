@@ -60,7 +60,6 @@ class LLMS_Blocks_Instructors_Block extends LLMS_Blocks_Abstract_Block {
 		}
 
 		add_action( $this->get_render_hook(), $func, 10 );
-
 	}
 
 	/**
@@ -76,8 +75,12 @@ class LLMS_Blocks_Instructors_Block extends LLMS_Blocks_Abstract_Block {
 		return array_merge(
 			parent::get_attributes(),
 			array(
-				'post_id' => array(
-					'type'    => 'int',
+				'post_id'  => array(
+					'type'    => 'integer',
+					'default' => 0,
+				),
+				'_refresh' => array(
+					'type'    => 'integer',
 					'default' => 0,
 				),
 			)
@@ -95,7 +98,6 @@ class LLMS_Blocks_Instructors_Block extends LLMS_Blocks_Abstract_Block {
 	public function get_empty_render_message() {
 		return __( 'No visible instructors were found.', 'lifterlms' );
 	}
-
 }
 
 return new LLMS_Blocks_Instructors_Block();
