@@ -22,7 +22,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@lifterlms/dev": "^0.0.4-alpha.0",
+    "@lifterlms/dev": "^0.2.2",
     "@lifterlms/llms-e2e-test-utils": "^4.0.0",
     "@lifterlms/scripts": "^3.1.0",
     "jest": "^27.4.5",
