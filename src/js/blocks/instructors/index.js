@@ -33,27 +33,6 @@ export const name = 'llms/instructors';
  */
 export const postTypes = [ 'course', 'llms_membership' ];
 
-let wasSaving = false;
-
-subscribe( () => {
-	const isSaving = select( 'core/edit-post' ).isSavingMetaBoxes();
-
-	if ( wasSaving && ! isSaving ) {
-		wasSaving = isSaving;
-
-		select( 'core/block-editor' )
-			.getBlocks()
-			.filter( ( b ) => b.name === name )
-			.forEach( ( b ) =>
-				dispatch( 'core/block-editor' ).updateBlockAttributes(
-					b.clientId,
-					{ _refresh: Date.now() }
-				)
-			);
-	} else {
-		wasSaving = isSaving;
-	}
-} );
 /**
  * Register Block.
  *
@@ -73,10 +52,6 @@ export const settings = {
 	],
 	attributes: {
 		post_id: {
-			type: 'integer',
-			default: 0,
-		},
-		_refresh: {
 			type: 'integer',
 			default: 0,
 		}
