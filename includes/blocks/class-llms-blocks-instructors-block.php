@@ -75,11 +75,7 @@ class LLMS_Blocks_Instructors_Block extends LLMS_Blocks_Abstract_Block {
 		return array_merge(
 			parent::get_attributes(),
 			array(
-				'post_id'  => array(
-					'type'    => 'integer',
-					'default' => 0,
-				),
-				'_refresh' => array(
+				'post_id' => array(
 					'type'    => 'integer',
 					'default' => 0,
 				),
