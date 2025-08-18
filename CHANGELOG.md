@@ -1,6 +1,14 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.6.1 - 2025-08-18
+-------------------
+
+##### Bug Fixes
+
++ Avoid unsaved changes warning with the course instructors block.
+
+
 v2.6.0 - 2025-07-17
 -------------------
 
