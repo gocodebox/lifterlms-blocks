@@ -30,7 +30,21 @@ class InstructorsEdit extends Component {
 
 		this.state = {
 			instructors: this.props.instructors,
+			// Used to force a remount of <ServerSideRender /> after a save finishes.
+			ssrNonce: 0,
 		};
+	}
+
+	/**
+	 * When a save transitions from "saving" -> "not saving", bump the nonce
+	 * so the SSR component remounts and refetches fresh HTML.
+	 *
+	 * @param {Object} prevProps
+	 */
+	componentDidUpdate( prevProps ) {
+		if ( prevProps.isSavingPost && ! this.props.isSavingPost ) {
+			this.setState( { ssrNonce: Date.now() } );
+		}
 	}
 
 	/**
@@ -42,15 +56,15 @@ class InstructorsEdit extends Component {
 	 */
 	render = () => {
 		const { name, attributes, post_id } = this.props; // eslint-disable-line camelcase
+		const { ssrNonce } = this.state;
 
 		return (
 			<Fragment>
 				<ServerSideRender
+					key={ ssrNonce } // remount -> refetch on save complete
 					block={ name }
 					attributes={ attributes }
-					urlQueryArgs={ {
-						post_id,
-					} }
+					urlQueryArgs={ { post_id } }
 				/>
 			</Fragment>
 		);
@@ -66,12 +80,13 @@ class InstructorsEdit extends Component {
  */
 export default compose( [
 	withSelect( ( select ) => {
-		const { getEditedPostAttribute, getCurrentPostId } = select(
-			'core/editor'
-		);
+		const { getEditedPostAttribute, getCurrentPostId, isSavingPost } =
+			select( 'core/editor' );
+
 		return {
 			post_id: getCurrentPostId(),
 			instructors: getEditedPostAttribute( 'instructors' ),
+			isSavingPost: isSavingPost(),
 		};
 	} ),
 ] )( InstructorsEdit );
