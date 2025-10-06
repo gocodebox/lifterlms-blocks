@@ -1,6 +1,14 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.6.2 - 2025-10-06
+-------------------
+
+##### Bug Fixes
+
++ Avoid "user email required" warning when editing a pattern. [#246](https://github.com/gocodebox/lifterlms-blocks/issues/246)
+
+
 v2.6.1 - 2025-08-18
 -------------------
 
