@@ -192,6 +192,11 @@ function ensureEmailFieldExists() {
 
 	subscribe(
 		debounce( () => {
+			// Skip this check if we're editing a pattern.
+			if ( 'wp_block' === select( 'core/editor' ).getCurrentPostType() ) {
+				return;
+			}
+
 			const post = select( 'core/editor' ).getCurrentPost(),
 				blocks = getBlocksFlat().map( ( block ) => block.name );
 
