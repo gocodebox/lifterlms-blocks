@@ -1,5 +1,0 @@
-significance: patch
-type: fixed
-links:
-  - "#246"
-entry: Avoid "user email required" warning when editing a pattern.
