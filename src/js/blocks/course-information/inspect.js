@@ -61,18 +61,6 @@ export default class Inspector extends Component {
 						] }
 					/>
 
-					<TextControl
-						label={ __( 'Estimated Completion Time', 'lifterlms' ) }
-						value={ length }
-						onChange={ ( value ) =>
-							setAttributes( { length: value } )
-						}
-						help={ __(
-							'How many hours, days, weeks, etc… should a student expect to spend in order to complete this course.',
-							'lifterlms'
-						) }
-					/>
-
 					<ToggleControl
 						label={ __( 'Display Estimated Time', 'lifterlms' ) }
 						checked={ !! show_length }
