@@ -1,4 +1,0 @@
-significance: minor
-type: removed
-entry: Removing "Estimated Completion Time" from the Course Inforamtion block,
-  as it was moved to General course options tab.

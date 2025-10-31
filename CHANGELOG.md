@@ -1,6 +1,14 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.7.0 - 2025-10-31
+-------------------
+
+##### Breaking Changes
+
++ Removing "Estimated Completion Time" from the Course Inforamtion block, as it was moved to General course options tab.
+
+
 v2.6.2 - 2025-10-06
 -------------------
 
