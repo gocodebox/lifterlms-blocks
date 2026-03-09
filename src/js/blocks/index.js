@@ -28,6 +28,7 @@ import * as courseProgress from './course-progress/';
 import * as instructors from './instructors/';
 import * as lessonNavigation from './lesson-navigation/';
 import * as lessonProgression from './lesson-progression/';
+import * as parentCourse from './parent-course/';
 import * as pricingTable from './pricing-table/';
 import * as phpTemplate from './php-template/';
 
@@ -131,6 +132,7 @@ export default () => {
 		instructors,
 		lessonNavigation,
 		lessonProgression,
+		parentCourse,
 		pricingTable,
 		phpTemplate,
 	];
