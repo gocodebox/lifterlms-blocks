@@ -11,7 +11,7 @@ import { Fragment } from '@wordpress/element';
 import ServerSideRender from '@wordpress/server-side-render';
 
 // Internal dependencies.
-	import icon from '../../icons/arrow-left';
+	import icon from '../../icons/house';
 
 /**
  * Block Name
