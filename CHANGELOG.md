@@ -1,6 +1,26 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.7.2 - 2026-04-09
+-------------------
+
+##### Bug Fixes
+
++ Avoid "Launch Course Builder" showing on orphaned lessons.
+
+
+v2.7.1 - 2026-04-07
+-------------------
+
+##### New Features
+
++ Adding actions for add-ons to insert additional blocks when a post is migrated to the block editor.
+
+##### Bug Fixes
+
++ Avoid "block not found" error in the theme template editor.
+
+
 v2.7.0 - 2025-10-31
 -------------------
 

@@ -227,6 +227,8 @@ class LLMS_Blocks_Assets {
 
 			if ( $parent ) {
 				$post_id = $parent->get( 'id' );
+			} else {
+				return 0;
 			}
 		}
 
