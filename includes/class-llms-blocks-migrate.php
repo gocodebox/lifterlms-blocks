@@ -36,7 +36,6 @@ class LLMS_Blocks_Migrate {
 		add_action( 'llms_blocks_unmigrate_posts', array( $this, 'unmigrate_posts' ) );
 
 		add_filter( 'llms_blocks_is_post_migrated', array( __CLASS__, 'check_sales_page' ), 15, 2 );
-
 	}
 
 	/**
@@ -57,7 +56,6 @@ class LLMS_Blocks_Migrate {
 		}
 
 		return false;
-
 	}
 
 	/**
@@ -81,7 +79,6 @@ class LLMS_Blocks_Migrate {
 		}
 
 		return $ret;
-
 	}
 
 	/**
@@ -127,7 +124,6 @@ class LLMS_Blocks_Migrate {
 				)
 			)
 		);
-
 	}
 
 	/**
@@ -146,6 +142,15 @@ class LLMS_Blocks_Migrate {
 
 		if ( 'course' === $post_type ) {
 			ob_start();
+
+			/**
+			 * Fires at the start of the course migration template.
+			 *
+			 * Use this to inject additional block markup before the default course blocks.
+			 *
+			 * @since 2.7.1
+			 */
+			do_action( 'llms_blocks_migrate_course_template_before' );
 
 			?><!-- wp:llms/course-information /-->
 
@@ -169,17 +174,45 @@ class LLMS_Blocks_Migrate {
 <!-- wp:llms/course-syllabus /-->
 			<?php
 
+			/**
+			 * Fires at the end of the course migration template.
+			 *
+			 * Use this to inject additional block markup after the default course blocks.
+			 *
+			 * @since 2.7.1
+			 */
+			do_action( 'llms_blocks_migrate_course_template_after' );
+
 			return ob_get_clean();
 
 		}
 
 		if ( 'lesson' === $post_type ) {
 			ob_start();
+
+			/**
+			 * Fires at the start of the lesson migration template.
+			 *
+			 * Use this to inject additional block markup before the default lesson blocks.
+			 *
+			 * @since 2.7.1
+			 */
+			do_action( 'llms_blocks_migrate_lesson_template_before' );
+
 			?>
 			<!-- wp:llms/lesson-progression /-->
 
 <!-- wp:llms/lesson-navigation /-->
 			<?php
+
+			/**
+			 * Fires at the end of the lesson migration template.
+			 *
+			 * Use this to inject additional block markup after the default lesson blocks.
+			 *
+			 * @since 2.7.1
+			 */
+			do_action( 'llms_blocks_migrate_lesson_template_after' );
 
 			return ob_get_clean();
 		}
@@ -187,15 +220,34 @@ class LLMS_Blocks_Migrate {
 		if ( 'llms_membership' ) {
 
 			ob_start();
+
+			/**
+			 * Fires at the start of the membership migration template.
+			 *
+			 * Use this to inject additional block markup before the default membership blocks.
+			 *
+			 * @since 2.7.1
+			 */
+			do_action( 'llms_blocks_migrate_membership_template_before' );
+
 			?>
 			<!-- wp:llms/pricing-table /-->
 			<?php
+
+			/**
+			 * Fires at the end of the membership migration template.
+			 *
+			 * Use this to inject additional block markup after the default membership blocks.
+			 *
+			 * @since 2.7.1
+			 */
+			do_action( 'llms_blocks_migrate_membership_template_after' );
+
 			return ob_get_clean();
 
 		}
 
 		return '';
-
 	}
 
 	/**
@@ -246,7 +298,6 @@ class LLMS_Blocks_Migrate {
 			)
 		);
 		exit;
-
 	}
 
 	/**
@@ -278,7 +329,6 @@ class LLMS_Blocks_Migrate {
 		}
 
 		return false;
-
 	}
 
 	/**
@@ -322,7 +372,6 @@ class LLMS_Blocks_Migrate {
 		// Pricing Table.
 		remove_action( 'lifterlms_single_course_after_summary', 'lifterlms_template_pricing_table', 60 );
 		remove_action( 'lifterlms_single_membership_after_summary', 'lifterlms_template_pricing_table', 10 );
-
 	}
 
 	/**
@@ -363,7 +412,6 @@ class LLMS_Blocks_Migrate {
 		 * @param int  $post_id WP_Post ID.
 		 */
 		return apply_filters( 'llms_blocks_should_migrate_post', $ret, $post_id );
-
 	}
 
 	/**
@@ -382,7 +430,6 @@ class LLMS_Blocks_Migrate {
 				$this->remove_template_from_post( $post );
 			}
 		}
-
 	}
 
 	/**
@@ -423,9 +470,7 @@ class LLMS_Blocks_Migrate {
 		); // db no-cache okay.
 
 		return false === $update ? false : true;
-
 	}
-
 }
 
 global $llms_blocks_migrate;
