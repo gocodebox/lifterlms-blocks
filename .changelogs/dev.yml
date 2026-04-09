@@ -1,0 +1,3 @@
+significance: patch
+type: fixed
+entry: Avoid "Launch Course Builder" showing on orphaned lessons.
