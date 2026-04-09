@@ -27,7 +27,11 @@ const SidebarLaunchButton = () => {
 		return null;
 	}
 
-	const courseId = window?.llmsBlocks?.courseId ?? select( 'core/editor' )?.getCurrentPostId() ?? 0;
+	const courseId = Number( window?.llmsBlocks?.courseId ?? select( 'core/editor' )?.getCurrentPostId() ?? 0 );
+
+	if ( ! courseId ) {
+		return null;
+	}
 
 	return <PluginPostStatusInfo
 		className={ 'llms-launch-course-builder' }
