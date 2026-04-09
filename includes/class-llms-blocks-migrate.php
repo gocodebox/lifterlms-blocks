@@ -148,7 +148,7 @@ class LLMS_Blocks_Migrate {
 			 *
 			 * Use this to inject additional block markup before the default course blocks.
 			 *
-			 * @since [version]
+			 * @since 2.7.1
 			 */
 			do_action( 'llms_blocks_migrate_course_template_before' );
 
@@ -179,7 +179,7 @@ class LLMS_Blocks_Migrate {
 			 *
 			 * Use this to inject additional block markup after the default course blocks.
 			 *
-			 * @since [version]
+			 * @since 2.7.1
 			 */
 			do_action( 'llms_blocks_migrate_course_template_after' );
 
@@ -195,7 +195,7 @@ class LLMS_Blocks_Migrate {
 			 *
 			 * Use this to inject additional block markup before the default lesson blocks.
 			 *
-			 * @since [version]
+			 * @since 2.7.1
 			 */
 			do_action( 'llms_blocks_migrate_lesson_template_before' );
 
@@ -210,7 +210,7 @@ class LLMS_Blocks_Migrate {
 			 *
 			 * Use this to inject additional block markup after the default lesson blocks.
 			 *
-			 * @since [version]
+			 * @since 2.7.1
 			 */
 			do_action( 'llms_blocks_migrate_lesson_template_after' );
 
@@ -226,7 +226,7 @@ class LLMS_Blocks_Migrate {
 			 *
 			 * Use this to inject additional block markup before the default membership blocks.
 			 *
-			 * @since [version]
+			 * @since 2.7.1
 			 */
 			do_action( 'llms_blocks_migrate_membership_template_before' );
 
@@ -239,7 +239,7 @@ class LLMS_Blocks_Migrate {
 			 *
 			 * Use this to inject additional block markup after the default membership blocks.
 			 *
-			 * @since [version]
+			 * @since 2.7.1
 			 */
 			do_action( 'llms_blocks_migrate_membership_template_after' );
 
