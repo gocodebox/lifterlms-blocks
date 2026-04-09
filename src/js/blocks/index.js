@@ -156,7 +156,7 @@ export default () => {
 
 	blocks.forEach( ( block ) => {
 		const { name, postTypes, settings } = block;
-		if ( ! postTypes || -1 !== postTypes.indexOf( postType ) ) {
+		if ( ! postTypes || ! postType || -1 !== postTypes.indexOf( postType ) ) {
 			registerBlockType( name, settings );
 		}
 	} );

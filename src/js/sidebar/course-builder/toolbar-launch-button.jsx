@@ -33,7 +33,11 @@ export const addToolbarLaunchButton = () => {
 		return;
 	}
 
-	const courseId = window?.llmsBlocks?.courseId ?? select( 'core/editor' )?.getCurrentPostId() ?? 0;
+	const courseId = Number( window?.llmsBlocks?.courseId ?? select( 'core/editor' )?.getCurrentPostId() ?? 0 );
+
+	if ( ! courseId ) {
+		return;
+	}
 
 	setTimeout( () => {
 		const existingButton = document.getElementById( buttonId );
