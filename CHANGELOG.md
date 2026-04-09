@@ -1,6 +1,14 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.7.2 - 2026-04-09
+-------------------
+
+##### Bug Fixes
+
++ Avoid "Launch Course Builder" showing on orphaned lessons.
+
+
 v2.7.1 - 2026-04-07
 -------------------
 
