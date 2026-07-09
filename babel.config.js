@@ -9,6 +9,6 @@
 
 const
 	presets = [ "@wordpress/default" ],
-	plugins = [ "@babel/plugin-proposal-class-properties" ];
+	plugins = [ "@babel/plugin-transform-class-properties" ];
 
 module.exports = { plugins, presets };

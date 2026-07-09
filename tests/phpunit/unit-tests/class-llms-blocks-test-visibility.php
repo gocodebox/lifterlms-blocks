@@ -33,7 +33,10 @@ class LLMS_Blocks_Test_Visibility extends LLMS_Blocks_Unit_Test_Case {
 	 * @return string
 	 */
 	private function clean_content( $content ) {
-		return trim( preg_replace( '/<!--(.|\s)*?-->/', '', $content ) );
+		$content = preg_replace( '/<!--(.|\s)*?-->/', '', $content );
+		// WP 6.9+ adds a `wp-block-paragraph` class when rendering core paragraph blocks; normalize it away so stored vs. rendered markup compare equal.
+		$content = preg_replace( '/\sclass="wp-block-paragraph"/', '', $content );
+		return trim( $content );
 	}
 
 	/**
