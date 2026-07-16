@@ -1,6 +1,14 @@
 LifterLMS Blocks Changelog
 ==========================
 
+v2.8.0 - 2026-07-16
+-------------------
+
+##### Updates and Enhancements
+
++ The Pricing Table block is now provided by LifterLMS core.
+
+
 v2.7.2 - 2026-04-09
 -------------------
 

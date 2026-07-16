@@ -5,7 +5,8 @@
  * @package LifterLMS_Blocks/Blocks
  *
  * @since 1.0.0
- * @version 1.9.0
+ * @version 2.8.0
+ * @deprecated 2.8.0
  *
  * @render_hook llms_pricing-table-block_render
  */
@@ -13,11 +14,12 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Course syllabus block class
+ * Course pricing table block class
  *
  * @since 1.0.0
  * @since 1.3.7 Unknown.
  * @since 1.9.0 Added `llms_blocks_render_pricing_table_block` filter.
+ * @deprecated 2.8.0 Block is now provided by LifterLMS core.
  */
 class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 
@@ -31,21 +33,25 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 	/**
 	 * Is block dynamic (rendered in PHP).
 	 *
+	 * @since 2.8.0 Changed to `false` to prevent the block from being registered.
+	 *
 	 * @var bool
 	 */
-	protected $is_dynamic = true;
+	protected $is_dynamic = false;
 
 	/**
 	 * Add actions attached to the render function action.
 	 *
 	 * @since 1.0.0
 	 * @since 1.1.0 Unknown.
+	 * @deprecated 2.8.0
 	 *
 	 * @param array  $attributes Optional. Block attributes. Default empty array.
 	 * @param string $content    Optional. Block content. Default empty string.
 	 * @return void
 	 */
 	public function add_hooks( $attributes = array(), $content = '' ) {
+		llms_deprecated_function( __METHOD__, '2.8.0' );
 
 		add_action( $this->get_render_hook(), array( $this, 'output' ), 10 );
 	}
@@ -57,10 +63,13 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 	 *
 	 * @since 1.0.0
 	 * @since 1.3.6 Unknown.
+	 * @deprecated 2.8.0
 	 *
 	 * @return array
 	 */
 	public function get_attributes() {
+		llms_deprecated_function( __METHOD__, '2.8.0' );
+
 		return array_merge(
 			parent::get_attributes(),
 			array(
@@ -78,11 +87,13 @@ class LLMS_Blocks_Pricing_Table_Block extends LLMS_Blocks_Abstract_Block {
 	 * @since 1.0.0
 	 * @since 1.3.7 Unknown.
 	 * @since 1.9.0 Added `llms_blocks_render_pricing_table_block` filter.
+	 * @deprecated 2.8.0
 	 *
 	 * @param array $attributes Optional. Block attributes. Default empty array.
 	 * @return void
 	 */
 	public function output( $attributes = array() ) {
+		llms_deprecated_function( __METHOD__, '2.8.0' );
 
 		ob_start();
 		if ( 'edit' === filter_input( INPUT_GET, 'context' ) ) {
