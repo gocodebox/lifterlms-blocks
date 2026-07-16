@@ -3,7 +3,8 @@
  *
  * @since 1.7.0
  * @since 2.5.0 Remove course syllabus block.
- * @version 2.3.0
+ * @since [version] Remove pricing table block, now provided by LifterLMS core.
+ * @version [version]
  */
 
 /* eslint camelcase: [ "error", { allow: [ "_llms_form_location" ] } ] */
@@ -28,7 +29,6 @@ import * as courseProgress from './course-progress/';
 import * as instructors from './instructors/';
 import * as lessonNavigation from './lesson-navigation/';
 import * as lessonProgression from './lesson-progression/';
-import * as pricingTable from './pricing-table/';
 import * as phpTemplate from './php-template/';
 
 // Form Field Blocks.
@@ -119,6 +119,7 @@ export const deregisterBlocksForForms = () => {
  * @since 2.0.0 Trigger `llms_form_fields_ready` on `wp_block` posts.
  * @since 2.3.0 Register phpTemplate block.
  * @since 2.5.0 Remove course syllabus block.
+ * @since [version] Remove pricing table block, now provided by LifterLMS core.
  */
 export default () => {
 	const postType = getCurrentPostType();
@@ -131,7 +132,6 @@ export default () => {
 		instructors,
 		lessonNavigation,
 		lessonProgression,
-		pricingTable,
 		phpTemplate,
 	];
 
